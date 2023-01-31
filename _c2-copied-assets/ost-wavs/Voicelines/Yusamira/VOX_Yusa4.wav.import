@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/VOX_Yusa4.wav-36c4a351abb61e89a015fa4c1e3bb524.sample"
+
+[deps]
+
+source_file="res://_c2-copied-assets/ost-wavs/Voicelines/Yusamira/VOX_Yusa4.wav"
+dest_files=[ "res://.import/VOX_Yusa4.wav-36c4a351abb61e89a015fa4c1e3bb524.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
