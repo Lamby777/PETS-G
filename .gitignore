@@ -1,0 +1,14 @@
+# Krita backup files
+*.kra~
+*.png~
+*.jpg~
+
+
+# Godot-specific ignores
+.import/
+export.cfg
+export_presets.cfg
+
+# Mono-specific ignores
+.mono/
+build/
