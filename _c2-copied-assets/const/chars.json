@@ -1,0 +1,25 @@
+{
+	"Ethan": {
+		"PSICapable":		true,
+		"PSISkillset":		"Ethan"
+	},
+	
+	"Siva": {
+		"PSICapable":		true,
+		"PSISkillset":		"Siva"
+	},
+	
+	"Terra": {
+		"ExplosiveCapable":	true
+	},
+	
+	"Porky": {
+		"SniffCapable":		true
+	},
+	
+	"Dylan": {},
+	
+	"Mira":	{
+		"DebugCapable":		true
+	}
+}

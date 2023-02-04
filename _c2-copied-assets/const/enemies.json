@@ -1,0 +1,107 @@
+{
+	"AnonM": {
+		"HP":			25,
+		"Music":		"Secretive",
+		
+		"Board": {
+			"Hue":	10,
+			"Sat":	30,
+			"Val":	100
+		},
+		
+		"Background": {
+			"WaterSpeed":		2,
+			"WaterAngle":		7,
+			"WaterIntensity":	3,
+			"WaterFrequency":	1,
+			"WaterDepth":		60,
+			"WaterDistortion":	80,
+			"Wavy":				true,
+			"Bulge":			-10
+		}
+	},
+	
+	"MCrow": {
+		"HP":			30,
+		"Music":		"Sorrowful"
+	},
+	
+	"XLR8": {
+		"HP":			60,
+		"Music":		"Precisio"
+	},
+	
+	"XLR16": {
+		"HP":			140,
+		"Music":		"Slick"
+	},
+	
+	"XLR32": {
+		"HP":			240,
+		"Music":		"SerialNo"
+	},
+	
+	"Amogus1": {
+		"HP":			210,
+		"Music":		"Suspicious"
+	},
+	
+	"Mantle": {
+		"HP":			9000,
+		"Music":		"ReduxBliss"
+	},
+	
+	"PlantC": {
+		"HP":			300,
+		"Music":		"SylverHabanera"
+	},
+	
+	"PlantG": {
+		"HP":			300,
+		"Music":		"BogusBeat"
+	},
+	
+	"PlantP": {
+		"HP":			300,
+		"Music":		"GoodInside"
+	},
+	
+	"PlantS": {
+		"HP":			300,
+		"Music":		"Bounce"
+	},
+	
+	"ShoeC": {
+		"HP":			30,
+		"Music":		"Serio",
+		
+		"Board": {
+			"Hue":	60,
+			"Sat":	30,
+			"Val":	100
+		},
+		
+		"Background": {
+			"VideoDrug":		"BlueC",
+			"WaterSpeed":		2,
+			"WaterAngle":		90,
+			"WaterIntensity":	3,
+			"WaterFrequency":	1,
+			"WaterDepth":		60,
+			"WaterDistortion":	80,
+			"Wavy":				true,
+			"Bulge":			-10
+		}
+	},
+	
+	"Rockyt": {
+		"HP":			300,
+		"Music":		"TroublesomeModifications",
+		
+		"Background": {
+			"VideoDrug":		"ForestBoss",
+			"Wavy":				1,
+			"Bulge":			20
+		}
+	}
+}
