@@ -9,34 +9,34 @@
 [ext_resource path="res://scenes/props/Flower.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/props/MushroomSmall.tscn" type="PackedScene" id=9]
-[ext_resource path="res://textures/props/puddle_big.png" type="Texture" id=10]
-[ext_resource path="res://textures/props/puddle_small.png" type="Texture" id=11]
+[ext_resource path="res://textures/props/puddle_big.png" type="Texture2D" id=10]
+[ext_resource path="res://textures/props/puddle_small.png" type="Texture2D" id=11]
 [ext_resource path="res://scenes/items/Item.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/characters/Npc.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/misc/Quest.tscn" type="PackedScene" id=14]
 
 [node name="Outside" type="Node"]
 
-[node name="puddle_big" type="Sprite" parent="."]
+[node name="puddle_big" type="Sprite2D" parent="."]
 position = Vector2( 661.445, 950.947 )
 texture = ExtResource( 10 )
 
-[node name="puddle_small" type="Sprite" parent="."]
+[node name="puddle_small" type="Sprite2D" parent="."]
 position = Vector2( 1329.08, 687.921 )
 scale = Vector2( 0.995735, 0.995735 )
 texture = ExtResource( 11 )
 
-[node name="puddle_small2" type="Sprite" parent="."]
+[node name="puddle_small2" type="Sprite2D" parent="."]
 position = Vector2( 441.76, 1575.24 )
 scale = Vector2( 0.995735, 0.995735 )
 texture = ExtResource( 11 )
 
-[node name="puddle_big2" type="Sprite" parent="."]
+[node name="puddle_big2" type="Sprite2D" parent="."]
 position = Vector2( 1782.78, 1096.72 )
 scale = Vector2( 1.97507, 1.97507 )
 texture = ExtResource( 10 )
 
-[node name="level" type="YSort" parent="."]
+[node name="level" type="Node2D" parent="."]
 position = Vector2( 208.024, -128.355 )
 
 [node name="Jorgito" parent="level" instance=ExtResource( 13 )]
@@ -56,7 +56,7 @@ position = Vector2( 1509.86, 2579.34 )
 position = Vector2( 908.151, 406.509 )
 to_scene = "res://scenes/levels/HouseInside.tscn"
 
-[node name="house_outside" type="Position2D" parent="level/house" groups=[
+[node name="house_outside" type="Marker2D" parent="level/house" groups=[
 "spawnpoints",
 ]]
 position = Vector2( -2.12201, 173.199 )
