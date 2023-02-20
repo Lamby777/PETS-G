@@ -3,8 +3,8 @@ extends Node2D
 
 
 func _ready():
-	Dialogs.connect("dialog_started", self, "_on_dialog_started")
-	Dialogs.connect("dialog_ended", self, "_on_dialog_ended")
+	Dialogs.connect("dialog_started",Callable(self,"_on_dialog_started"))
+	Dialogs.connect("dialog_ended",Callable(self,"_on_dialog_ended"))
 	pass # Replace with function body.
 
 func _on_dialog_started():
