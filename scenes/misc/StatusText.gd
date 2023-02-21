@@ -1,7 +1,7 @@
 extends Label
 
 """
-Connects to the inventory and quest systems and will show a message checked screen
+Connects to the inventory and quest systems and will show a message on screen
 for every change in either
 """
 
@@ -10,8 +10,8 @@ var messages = []
 
 func _ready():
 	hide()
-	Quest.connect("quest_changed",Callable(self,"_questlog_updated"))
-	Inventory.connect("item_changed",Callable(self,"_inventory_updated"))
+	Quest.connect("quest_changed", self, "_questlog_updated")
+	Inventory.connect("item_changed", self, "_inventory_updated")
 	pass # Replace with function body.
 
 func _questlog_updated(quest_name, status):
@@ -41,7 +41,7 @@ func _queue_message(text):
 	pass
 	
 func _play_next():
-	if messages.is_empty():
+	if messages.empty():
 		return
 	else:
 		text = messages.pop_front()

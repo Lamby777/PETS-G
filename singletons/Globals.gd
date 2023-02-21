@@ -5,7 +5,7 @@ var spawnpoint = ""
 var current_level = ""
 
 func _ready():
-	RenderingServer.set_default_clear_color(ColorN("white"))
+	VisualServer.set_default_clear_color(ColorN("white"))
 
 """
 Really simple save file implementation. Just saving some variables to a dictionary
@@ -18,7 +18,7 @@ func save_game():
 	save_dict.current_level = current_level
 	save_dict.inventory = Inventory.list()
 	save_dict.quests = Quest.get_quest_list()
-	save_game.store_line(JSON.new().stringify(save_dict))
+	save_game.store_line(to_json(save_dict))
 	save_game.close()
 	pass
 
@@ -34,9 +34,7 @@ func load_game(check_only=false):
 	
 	save_game.open("user://savegame.save", File.READ)
 	
-	var test_json_conv = JSON.new()
-	test_json_conv.parse(save_game.get_line())
-	var save_dict = test_json_conv.get_data()
+	var save_dict = parse_json(save_game.get_line())
 	if typeof(save_dict) != TYPE_DICTIONARY:
 		return false
 	if not check_only:
