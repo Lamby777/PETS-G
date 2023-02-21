@@ -8,23 +8,23 @@ text Quest.process() returns
 
 var active = false
 
-@export var character_name: String = "Nameless NPC"
-@export var dialogs = ["..."] # (Array, String, MULTILINE)
+export(String) var character_name = "Nameless NPC"
+export(Array, String, MULTILINE) var dialogs = ["..."]
 var current_dialog = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 	# warning-ignore:return_value_discarded
-	connect("body_entered",Callable(self,"_on_body_entered"))
+	connect("body_entered", self, "_on_body_entered")
 	# warning-ignore:return_value_discarded
-	connect("body_exited",Callable(self,"_on_body_exited"))
+	connect("body_exited", self, "_on_body_exited")
 	pass # Replace with function body.
 
 func _input(event):
 	if (
 			active and not
-			dialogs.is_empty() and
+			dialogs.empty() and
 			event.is_action_pressed("interact") and not
 			Dialogs.active
 		):

@@ -1,10 +1,10 @@
 extends Area2D
 
-@export var item_type: String = "Generic Item"
-@export var amount: int = 1
+export(String) var item_type = "Generic Item"
+export(int) var amount = 1
 
 func _ready():
-	connect("body_entered",Callable(self,"_on_Item_body_entered"))
+	connect("body_entered", self, "_on_Item_body_entered")
 	pass
 
 func _on_Item_body_entered(body):

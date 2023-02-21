@@ -11,7 +11,7 @@ as soon as the level loads
 # Declare member variables here. Examples:
 # var a = 2
 # var b = \"text\"
-@export var music_track = \"\" # (String, FILE, \"*.ogg\")
+export(String, FILE, \"*.ogg\") var music_track = \"\"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
