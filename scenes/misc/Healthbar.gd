@@ -11,12 +11,12 @@ func _ready():
 	# Try to get the player node. If null wait till next frame, rinse, repeat.
 	while (player == null):
 		var player_group = get_tree().get_nodes_in_group("player")
-		if not player_group.is_empty():
+		if not player_group.empty():
 			player = player_group.pop_front()
 		else:
-			await get_tree().idle_frame
+			yield(get_tree(), "idle_frame")
 	
-	player.connect("health_changed",Callable(self,"_on_health_changed"))
+	player.connect("health_changed", self, "_on_health_changed")
 	_on_health_changed(player.hitpoints)
 	pass # Replace with function body.
 
@@ -26,6 +26,6 @@ func _on_health_changed(new_hp):
 	for child in get_children():
 		child.queue_free()
 	for i in new_hp:
-		var heart = heart_scene.instantiate()
+		var heart = heart_scene.instance()
 		add_child(heart)
 	

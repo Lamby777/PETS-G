@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends KinematicBody2D
 
 class_name Player
 
@@ -8,16 +8,16 @@ in the AssetLib if you want to make something more complex. Also it shares code 
 and probably both should extend some parent script
 """
 
-@export var WALK_SPEED: int = 350 # pixels per second
-@export var ROLL_SPEED: int = 1000 # pixels per second
-@export var hitpoints: int = 3
+export(int) var WALK_SPEED = 350 # pixels per second
+export(int) var ROLL_SPEED = 1000 # pixels per second
+export(int) var hitpoints = 3
 
 var linear_vel = Vector2()
 var roll_direction = Vector2.DOWN
 
 signal health_changed(current_hp)
 
-@export var facing = "down" # (String, "up", "down", "left", "right")
+export(String, "up", "down", "left", "right") var facing = "down"
 
 var despawn_fx = preload("res://scenes/misc/DespawnFX.tscn")
 
@@ -36,8 +36,8 @@ func _ready():
 			global_position = spawnpoint.global_position
 			break
 	if not (
-			Dialogs.connect("dialog_started",Callable(self,"_on_dialog_started")) == OK and
-			Dialogs.connect("dialog_ended",Callable(self,"_on_dialog_ended")) == OK ):
+			Dialogs.connect("dialog_started", self, "_on_dialog_started") == OK and
+			Dialogs.connect("dialog_ended", self, "_on_dialog_ended") == OK ):
 		printerr("Error connecting to dialog system")
 	pass
 
@@ -74,9 +74,7 @@ func _physics_process(_delta):
 			if Input.is_action_just_pressed("roll"):
 				state = STATE_ROLL
 			
-			set_velocity(linear_vel)
-			move_and_slide()
-			linear_vel = velocity
+			linear_vel = move_and_slide(linear_vel)
 			
 			var target_speed = Vector2()
 			
@@ -90,7 +88,7 @@ func _physics_process(_delta):
 				target_speed += Vector2.UP
 			
 			target_speed *= WALK_SPEED
-			#linear_vel = linear_vel.lerp(target_speed, 0.9)
+			#linear_vel = linear_vel.linear_interpolate(target_speed, 0.9)
 			linear_vel = target_speed
 			roll_direction = linear_vel.normalized()
 			
@@ -108,13 +106,11 @@ func _physics_process(_delta):
 			if roll_direction == Vector2.ZERO:
 				state = STATE_IDLE
 			else:
-				set_velocity(linear_vel)
-				move_and_slide()
-				linear_vel = velocity
+				linear_vel = move_and_slide(linear_vel)
 				var target_speed = Vector2()
 				target_speed = roll_direction
 				target_speed *= ROLL_SPEED
-				#linear_vel = linear_vel.lerp(target_speed, 0.9)
+				#linear_vel = linear_vel.linear_interpolate(target_speed, 0.9)
 				linear_vel = target_speed
 				new_anim = "roll"
 		STATE_DIE:
@@ -155,11 +151,11 @@ func _update_facing():
 
 
 func despawn():
-	var despawn_particles = despawn_fx.instantiate()
+	var despawn_particles = despawn_fx.instance()
 	get_parent().add_child(despawn_particles)
 	despawn_particles.global_position = global_position
 	hide()
-	await get_tree().create_timer(5.0).timeout
+	yield(get_tree().create_timer(5.0), "timeout")
 	get_tree().reload_current_scene()
 	pass
 
@@ -169,8 +165,7 @@ func _on_hurtbox_area_entered(area):
 		hitpoints -= 1
 		emit_signal("health_changed", hitpoints)
 		var pushback_direction = (global_position - area.global_position).normalized()
-		set_velocity(pushback_direction * 5000)
-		move_and_slide()
+		move_and_slide( pushback_direction * 5000)
 		state = STATE_HURT
 		if hitpoints <= 0:
 			state = STATE_DIE

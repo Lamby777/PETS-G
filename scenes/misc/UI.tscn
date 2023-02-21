@@ -4,13 +4,13 @@
 [ext_resource path="res://scenes/misc/Stats.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/misc/StatusText.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/misc/Healthbar.tscn" type="PackedScene" id=4]
-[ext_resource path="res://textures/misc/btn-roll.png" type="Texture2D" id=5]
-[ext_resource path="res://textures/misc/btn-interact.png" type="Texture2D" id=6]
+[ext_resource path="res://textures/misc/btn-roll.png" type="Texture" id=5]
+[ext_resource path="res://textures/misc/btn-interact.png" type="Texture" id=6]
 [ext_resource path="res://scenes/misc/TouchInterface.gd" type="Script" id=7]
 [ext_resource path="res://textures/misc/btn-mask.png" type="BitMap" id=8]
-[ext_resource path="res://textures/misc/btn-slash.png" type="Texture2D" id=9]
-[ext_resource path="res://textures/misc/arrow.png" type="Texture2D" id=10]
-[ext_resource path="res://textures/misc/btn-stats.png" type="Texture2D" id=11]
+[ext_resource path="res://textures/misc/btn-slash.png" type="Texture" id=9]
+[ext_resource path="res://textures/misc/arrow.png" type="Texture" id=10]
+[ext_resource path="res://textures/misc/btn-stats.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 100 )
@@ -25,7 +25,7 @@ extents = Vector2( 30, 100 )
 visible = false
 
 [node name="Healthbar" parent="." instance=ExtResource( 4 )]
-offset_right = 14.0
+margin_right = 14.0
 
 [node name="TouchInterface" type="Node2D" parent="."]
 modulate = Color( 1, 1, 1, 0.501961 )
@@ -39,7 +39,7 @@ action = "interact"
 visibility_mode = 1
 
 [node name="stats" type="TouchScreenButton" parent="TouchInterface"]
-process_mode = 2
+pause_mode = 2
 position = Vector2( 912.494, 3.77242 )
 normal = ExtResource( 11 )
 bitmask = ExtResource( 8 )
