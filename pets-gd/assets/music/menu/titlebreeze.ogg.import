@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/titlebreeze.ogg-93b8e151ae377850bad49eab0a5f4c11.oggstr"
+
+[deps]
+
+source_file="res://assets/music/menu/titlebreeze.ogg"
+dest_files=[ "res://.import/titlebreeze.ogg-93b8e151ae377850bad49eab0a5f4c11.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
