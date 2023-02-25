@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/VOX_Ethan4.wav-24b95ef3e7c62f543ba3c20582fcb8ca.sample"
+
+[deps]
+
+source_file="res://assets/sounds/vox/Ethan/VOX_Ethan4.wav"
+dest_files=[ "res://.import/VOX_Ethan4.wav-24b95ef3e7c62f543ba3c20582fcb8ca.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
