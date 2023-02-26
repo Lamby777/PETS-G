@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/310-world-map-loop.ogg-fa8af774974601bba140300cd86df130.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cptbih8g1cf1v"
+path="res://.godot/imported/310-world-map-loop.ogg-fa8af774974601bba140300cd86df130.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/music/310-world-map-loop.ogg"
-dest_files=[ "res://.import/310-world-map-loop.ogg-fa8af774974601bba140300cd86df130.oggstr" ]
+dest_files=["res://.godot/imported/310-world-map-loop.ogg-fa8af774974601bba140300cd86df130.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

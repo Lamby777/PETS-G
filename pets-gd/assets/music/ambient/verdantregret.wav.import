@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/verdantregret.wav-45ab9fd48c90ac9fa18738337a79f2b1.sample"
+type="AudioStreamWAV"
+uid="uid://cd0ppiwtei78o"
+path="res://.godot/imported/verdantregret.wav-45ab9fd48c90ac9fa18738337a79f2b1.sample"
 
 [deps]
 
 source_file="res://assets/music/ambient/verdantregret.wav"
-dest_files=[ "res://.import/verdantregret.wav-45ab9fd48c90ac9fa18738337a79f2b1.sample" ]
+dest_files=["res://.godot/imported/verdantregret.wav-45ab9fd48c90ac9fa18738337a79f2b1.sample"]
 
 [params]
 

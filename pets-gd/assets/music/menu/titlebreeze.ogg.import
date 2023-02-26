@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/titlebreeze.ogg-93b8e151ae377850bad49eab0a5f4c11.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d2aoggc1lcsl3"
+path="res://.godot/imported/titlebreeze.ogg-93b8e151ae377850bad49eab0a5f4c11.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/music/menu/titlebreeze.ogg"
-dest_files=[ "res://.import/titlebreeze.ogg-93b8e151ae377850bad49eab0a5f4c11.oggstr" ]
+dest_files=["res://.godot/imported/titlebreeze.ogg-93b8e151ae377850bad49eab0a5f4c11.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

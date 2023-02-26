@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/serialno.wav-03d5a38cfea42d6f9d85d1a523498a82.sample"
+type="AudioStreamWAV"
+uid="uid://dkpx2ve6xk88w"
+path="res://.godot/imported/serialno.wav-03d5a38cfea42d6f9d85d1a523498a82.sample"
 
 [deps]
 
 source_file="res://assets/music/battle/serialno.wav"
-dest_files=[ "res://.import/serialno.wav-03d5a38cfea42d6f9d85d1a523498a82.sample" ]
+dest_files=["res://.godot/imported/serialno.wav-03d5a38cfea42d6f9d85d1a523498a82.sample"]
 
 [params]
 

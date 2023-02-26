@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/VOX_Mom3.wav-3f15eb9d319b79c8a4f8d8da51089f42.sample"
+type="AudioStreamWAV"
+uid="uid://1y6vy0ptr60k"
+path="res://.godot/imported/VOX_Mom3.wav-3f15eb9d319b79c8a4f8d8da51089f42.sample"
 
 [deps]
 
 source_file="res://assets/sounds/vox/Mom/VOX_Mom3.wav"
-dest_files=[ "res://.import/VOX_Mom3.wav-3f15eb9d319b79c8a4f8d8da51089f42.sample" ]
+dest_files=["res://.godot/imported/VOX_Mom3.wav-3f15eb9d319b79c8a4f8d8da51089f42.sample"]
 
 [params]
 

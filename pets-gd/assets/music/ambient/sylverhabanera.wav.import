@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/sylverhabanera.wav-9908bdc1dbc44bd17f5674a3e5afc3f2.sample"
+type="AudioStreamWAV"
+uid="uid://8lq0h3olka1t"
+path="res://.godot/imported/sylverhabanera.wav-9908bdc1dbc44bd17f5674a3e5afc3f2.sample"
 
 [deps]
 
 source_file="res://assets/music/ambient/sylverhabanera.wav"
-dest_files=[ "res://.import/sylverhabanera.wav-9908bdc1dbc44bd17f5674a3e5afc3f2.sample" ]
+dest_files=["res://.godot/imported/sylverhabanera.wav-9908bdc1dbc44bd17f5674a3e5afc3f2.sample"]
 
 [params]
 
