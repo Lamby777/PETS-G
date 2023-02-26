@@ -1,9 +1,7 @@
 extends Node
 
-"""
-Minimal inventory system implementation. 
-It's just a dictionary where items are identified by a string key and hold an int amount
-"""
+## Minimal inventory system implementation. 
+## It's just a dictionary where items are identified by a string key and hold an int amount
 
 # action can be 'added' some amount of some items is added and 'removed' when some amount
 # of some item is removed
@@ -16,7 +14,6 @@ func get_item(type:String) -> int:
 		return inventory[type]
 	else:
 		return 0
-	pass
 	
 func add_item(type:String, amount:int) -> bool:
 	if inventory.has(type):
@@ -37,7 +34,6 @@ func remove_item(type:String, amount:int) -> bool:
 		return true
 	else:
 		return false
-	pass
 	
 func list() -> Dictionary:
 	return inventory.duplicate()

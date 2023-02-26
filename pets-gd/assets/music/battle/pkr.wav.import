@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/pkr.wav-6d2726c3db9d10799dee10b71aa288ac.sample"
+type="AudioStreamWAV"
+uid="uid://ydtnjj1m637"
+path="res://.godot/imported/pkr.wav-6d2726c3db9d10799dee10b71aa288ac.sample"
 
 [deps]
 
 source_file="res://assets/music/battle/pkr.wav"
-dest_files=[ "res://.import/pkr.wav-6d2726c3db9d10799dee10b71aa288ac.sample" ]
+dest_files=["res://.godot/imported/pkr.wav-6d2726c3db9d10799dee10b71aa288ac.sample"]
 
 [params]
 

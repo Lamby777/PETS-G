@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/betsyredux.wav-7653e2bdee69b8459bd39d25b87ddcff.sample"
+type="AudioStreamWAV"
+uid="uid://yofubuygnown"
+path="res://.godot/imported/betsyredux.wav-7653e2bdee69b8459bd39d25b87ddcff.sample"
 
 [deps]
 
 source_file="res://assets/music/battle/betsyredux.wav"
-dest_files=[ "res://.import/betsyredux.wav-7653e2bdee69b8459bd39d25b87ddcff.sample" ]
+dest_files=["res://.godot/imported/betsyredux.wav-7653e2bdee69b8459bd39d25b87ddcff.sample"]
 
 [params]
 

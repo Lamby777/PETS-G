@@ -1,10 +1,8 @@
 extends Node
 
-"""
-Minimal quest system implementation.
-
-A dictionary where each string key represents a quest and an int value represanting a status
-"""
+## Minimal quest system implementation.
+##
+## A dictionary where each string key represents a quest and an int value represanting a status
 
 enum STATUS { NONEXISTENT, STARTED, COMPLETE, FAILED }
 

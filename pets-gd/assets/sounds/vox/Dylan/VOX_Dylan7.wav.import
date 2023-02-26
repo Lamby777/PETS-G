@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/VOX_Dylan7.wav-b540a99d36270f8b192a6a0de4607e59.sample"
+type="AudioStreamWAV"
+uid="uid://cxxxl3p670b0p"
+path="res://.godot/imported/VOX_Dylan7.wav-b540a99d36270f8b192a6a0de4607e59.sample"
 
 [deps]
 
 source_file="res://assets/sounds/vox/Dylan/VOX_Dylan7.wav"
-dest_files=[ "res://.import/VOX_Dylan7.wav-b540a99d36270f8b192a6a0de4607e59.sample" ]
+dest_files=["res://.godot/imported/VOX_Dylan7.wav-b540a99d36270f8b192a6a0de4607e59.sample"]
 
 [params]
 

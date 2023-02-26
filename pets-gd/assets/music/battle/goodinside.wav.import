@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/goodinside.wav-68d5cf9b05a26f2a701c068aea759edd.sample"
+type="AudioStreamWAV"
+uid="uid://813tjelknhep"
+path="res://.godot/imported/goodinside.wav-68d5cf9b05a26f2a701c068aea759edd.sample"
 
 [deps]
 
 source_file="res://assets/music/battle/goodinside.wav"
-dest_files=[ "res://.import/goodinside.wav-68d5cf9b05a26f2a701c068aea759edd.sample" ]
+dest_files=["res://.godot/imported/goodinside.wav-68d5cf9b05a26f2a701c068aea759edd.sample"]
 
 [params]
 
