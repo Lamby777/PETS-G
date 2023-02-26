@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/troublesomemodifications.wav-863d9ea4893965b4eebb843914d41e63.sample"
+type="AudioStreamWAV"
+uid="uid://2jsm7228gqvn"
+path="res://.godot/imported/troublesomemodifications.wav-863d9ea4893965b4eebb843914d41e63.sample"
 
 [deps]
 
 source_file="res://assets/music/battle/troublesomemodifications.wav"
-dest_files=[ "res://.import/troublesomemodifications.wav-863d9ea4893965b4eebb843914d41e63.sample" ]
+dest_files=["res://.godot/imported/troublesomemodifications.wav-863d9ea4893965b4eebb843914d41e63.sample"]
 
 [params]
 

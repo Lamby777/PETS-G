@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/bogusbeat.wav-e9e8be000f9cf1de08cb4175fea7eca3.sample"
+type="AudioStreamWAV"
+uid="uid://klkg5m1vewu8"
+path="res://.godot/imported/bogusbeat.wav-e9e8be000f9cf1de08cb4175fea7eca3.sample"
 
 [deps]
 
 source_file="res://assets/music/battle/bogusbeat.wav"
-dest_files=[ "res://.import/bogusbeat.wav-e9e8be000f9cf1de08cb4175fea7eca3.sample" ]
+dest_files=["res://.godot/imported/bogusbeat.wav-e9e8be000f9cf1de08cb4175fea7eca3.sample"]
 
 [params]
 

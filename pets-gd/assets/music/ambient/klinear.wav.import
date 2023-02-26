@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/klinear.wav-980b37d32ed12f999c8141bc3872cf96.sample"
+type="AudioStreamWAV"
+uid="uid://ccx2cguevf5qu"
+path="res://.godot/imported/klinear.wav-980b37d32ed12f999c8141bc3872cf96.sample"
 
 [deps]
 
 source_file="res://assets/music/ambient/klinear.wav"
-dest_files=[ "res://.import/klinear.wav-980b37d32ed12f999c8141bc3872cf96.sample" ]
+dest_files=["res://.godot/imported/klinear.wav-980b37d32ed12f999c8141bc3872cf96.sample"]
 
 [params]
 

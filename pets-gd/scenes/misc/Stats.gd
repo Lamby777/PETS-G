@@ -32,7 +32,7 @@ func _update_quest_listing():
 func _update_item_listing():
 	var text = ""
 	var inventory = Inventory.list()
-	if inventory.empty():
+	if inventory.is_empty():
 		text += "[Empty]"
 	for item in inventory:
 		text += "%s x %s\n" % [item, inventory[item]]

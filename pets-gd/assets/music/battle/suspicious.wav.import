@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/suspicious.wav-10f089ead44f323c87e8ca6ce2e372bd.sample"
+type="AudioStreamWAV"
+uid="uid://ty3o3lbyte5g"
+path="res://.godot/imported/suspicious.wav-10f089ead44f323c87e8ca6ce2e372bd.sample"
 
 [deps]
 
 source_file="res://assets/music/battle/suspicious.wav"
-dest_files=[ "res://.import/suspicious.wav-10f089ead44f323c87e8ca6ce2e372bd.sample" ]
+dest_files=["res://.godot/imported/suspicious.wav-10f089ead44f323c87e8ca6ce2e372bd.sample"]
 
 [params]
 

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/VOX_Ethan11.wav-402997e13166b67dd47de57860dd429e.sample"
+type="AudioStreamWAV"
+uid="uid://ddjsb5snr7w3i"
+path="res://.godot/imported/VOX_Ethan11.wav-402997e13166b67dd47de57860dd429e.sample"
 
 [deps]
 
 source_file="res://assets/sounds/vox/Ethan/VOX_Ethan11.wav"
-dest_files=[ "res://.import/VOX_Ethan11.wav-402997e13166b67dd47de57860dd429e.sample" ]
+dest_files=["res://.godot/imported/VOX_Ethan11.wav-402997e13166b67dd47de57860dd429e.sample"]
 
 [params]
 

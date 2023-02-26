@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/VOX_Yusa7.wav-2f02450243153e5c5e1c12022b97be1a.sample"
+type="AudioStreamWAV"
+uid="uid://dp6dsqjun4qgi"
+path="res://.godot/imported/VOX_Yusa7.wav-2f02450243153e5c5e1c12022b97be1a.sample"
 
 [deps]
 
 source_file="res://assets/sounds/vox/Yusamira/VOX_Yusa7.wav"
-dest_files=[ "res://.import/VOX_Yusa7.wav-2f02450243153e5c5e1c12022b97be1a.sample" ]
+dest_files=["res://.godot/imported/VOX_Yusa7.wav-2f02450243153e5c5e1c12022b97be1a.sample"]
 
 [params]
 
