@@ -1,6 +1,0 @@
-res://default_bus_layout.tres
-res://scenes/levels/Intro.tscn
-res://singletons/Inventory.gd
-res://scenes/levels/Menu.tscn
-res://singletons/Quest.gd
-res://singletons/Globals.gd
