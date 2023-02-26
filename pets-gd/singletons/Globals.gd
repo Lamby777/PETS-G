@@ -9,15 +9,13 @@ func _ready():
 
 ## Really simple save file implementation. Just saving some variables to a dictionary
 func save_game(): 
-	var save_game = FileAccess.open("user://savegame.save", FileAccess.WRITE)
+	var file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
 	var save_dict = {}
 	save_dict.spawnpoint = spawnpoint
 	save_dict.current_level = current_level
 	save_dict.inventory = Inventory.list()
 	save_dict.quests = Quest.get_quest_list()
-	save_game.store_line(JSON.new().stringify(save_dict))
-	save_game.close()
-	pass
+	file.store_line(JSON.stringify(save_dict))
 
 
 ## If check_only is true it will only check for a valid save file and return true or false without
@@ -27,10 +25,10 @@ func load_game(check_only=false):
 	if not FileAccess.file_exists("user://savegame.save"):
 		return false
 	
-	var save_game = FileAccess.open("user://savegame.save", FileAccess.READ)
+	var file = FileAccess.open("user://savegame.save", FileAccess.READ)
 	
 	var test_json_conv = JSON.new()
-	test_json_conv.parse(save_game.get_line())
+	test_json_conv.parse(file.get_line())
 	var save_dict = test_json_conv.get_data()
 	if typeof(save_dict) != TYPE_DICTIONARY:
 		return false
