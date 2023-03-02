@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdkt4ln568maa"
-path="res://.godot/imported/Dylan.png-34710b4ecd5ac46e1ab7b9a24535e0f9.ctex"
+uid="uid://chr12jncorljr"
+path="res://.godot/imported/BattlePortraits.png-5f2e31dccb7b0efdf77b2549ecfde05d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/Dylan.png"
-dest_files=["res://.godot/imported/Dylan.png-34710b4ecd5ac46e1ab7b9a24535e0f9.ctex"]
+source_file="res://assets/textures/misc/BattlePortraits.png"
+dest_files=["res://.godot/imported/BattlePortraits.png-5f2e31dccb7b0efdf77b2549ecfde05d.ctex"]
 
 [params]
 

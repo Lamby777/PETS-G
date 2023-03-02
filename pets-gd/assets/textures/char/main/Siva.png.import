@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://prtljbfllxt5"
-path="res://.godot/imported/SpritesMisc.png-3ac324bf9333578b0706241c5be01286.ctex"
+uid="uid://ciurawgpv2g88"
+path="res://.godot/imported/Siva.png-50f79024f65584a47d46329d5337a759.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/SpritesMisc.png"
-dest_files=["res://.godot/imported/SpritesMisc.png-3ac324bf9333578b0706241c5be01286.ctex"]
+source_file="res://assets/textures/char/main/Siva.png"
+dest_files=["res://.godot/imported/Siva.png-50f79024f65584a47d46329d5337a759.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bknrbq0pbbokr"
-path="res://.godot/imported/AkaMantoTPR.png-906e7f6ea7b5cd11fa71503c3b319c19.ctex"
+uid="uid://cyo1nw1ohmvab"
+path="res://.godot/imported/AkaMantoTPB.png-6e5dab8f8798be114023888ae837a339.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/AkaMantoTPR.png"
-dest_files=["res://.godot/imported/AkaMantoTPR.png-906e7f6ea7b5cd11fa71503c3b319c19.ctex"]
+source_file="res://assets/textures/bb-attacks/AkaMantoTPB.png"
+dest_files=["res://.godot/imported/AkaMantoTPB.png-6e5dab8f8798be114023888ae837a339.ctex"]
 
 [params]
 

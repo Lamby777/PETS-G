@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckevm0iwhu0q2"
-path="res://.godot/imported/Yusamira.png-986ea6bbd5815426d65fe59def560932.ctex"
+uid="uid://bknrbq0pbbokr"
+path="res://.godot/imported/AkaMantoTPR.png-0c3d8fb4482d3ce906dcd867f55470ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/Yusamira.png"
-dest_files=["res://.godot/imported/Yusamira.png-986ea6bbd5815426d65fe59def560932.ctex"]
+source_file="res://assets/textures/bb-attacks/AkaMantoTPR.png"
+dest_files=["res://.godot/imported/AkaMantoTPR.png-0c3d8fb4482d3ce906dcd867f55470ff.ctex"]
 
 [params]
 
