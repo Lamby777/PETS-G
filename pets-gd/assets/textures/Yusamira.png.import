@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fgiwal2rahaw"
-path="res://.godot/imported/alert_banner.png-204b6eccaf46ed1f009d9afd9613d7e4.ctex"
+uid="uid://ckevm0iwhu0q2"
+path="res://.godot/imported/Yusamira.png-986ea6bbd5815426d65fe59def560932.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/builds/signs/alert_banner.png"
-dest_files=["res://.godot/imported/alert_banner.png-204b6eccaf46ed1f009d9afd9613d7e4.ctex"]
+source_file="res://assets/textures/Yusamira.png"
+dest_files=["res://.godot/imported/Yusamira.png-986ea6bbd5815426d65fe59def560932.ctex"]
 
 [params]
 

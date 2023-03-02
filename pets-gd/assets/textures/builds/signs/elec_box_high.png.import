@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/elec_box_high.png-b7ad9a4aa6ce0dd48c1a2c064eb
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

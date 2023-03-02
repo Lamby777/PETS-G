@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/Dylan.png-34710b4ecd5ac46e1ab7b9a24535e0f9.ct
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false
