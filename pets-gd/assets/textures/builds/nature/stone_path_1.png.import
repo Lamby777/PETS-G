@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/stone_path_1.png-930d7b87b9f7798be4d4da201c55
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false
