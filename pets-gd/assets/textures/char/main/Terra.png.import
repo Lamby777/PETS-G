@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chr12jncorljr"
-path="res://.godot/imported/BattlePortraits.png-1070456bf0b6d5de44d34a1ae8869c63.ctex"
+uid="uid://bu8yhsiu4q5ul"
+path="res://.godot/imported/Terra.png-f0bcaa56190bfe450af4bb8f6d80c0fd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/BattlePortraits.png"
-dest_files=["res://.godot/imported/BattlePortraits.png-1070456bf0b6d5de44d34a1ae8869c63.ctex"]
+source_file="res://assets/textures/char/main/Terra.png"
+dest_files=["res://.godot/imported/Terra.png-f0bcaa56190bfe450af4bb8f6d80c0fd.ctex"]
 
 [params]
 

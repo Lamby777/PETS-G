@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bu8yhsiu4q5ul"
-path="res://.godot/imported/Terra.png-76e9762356fcae381d86d4e8ff15f026.ctex"
+uid="uid://he44mug8lejt"
+path="res://.godot/imported/BattleIcons.png-58a8792b24a1335fce6bae296bddd411.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/Terra.png"
-dest_files=["res://.godot/imported/Terra.png-76e9762356fcae381d86d4e8ff15f026.ctex"]
+source_file="res://assets/textures/misc/BattleIcons.png"
+dest_files=["res://.godot/imported/BattleIcons.png-58a8792b24a1335fce6bae296bddd411.ctex"]
 
 [params]
 

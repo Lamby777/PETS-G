@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cleq8xk2yowe6"
-path="res://.godot/imported/EthanMom2.png-cd8c77be792db97d54fb01e6826a05ad.ctex"
+uid="uid://cdkt4ln568maa"
+path="res://.godot/imported/Dylan.png-950f0dca2120ed7dbeb095e4ab97e3ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/EthanMom2.png"
-dest_files=["res://.godot/imported/EthanMom2.png-cd8c77be792db97d54fb01e6826a05ad.ctex"]
+source_file="res://assets/textures/char/nats/Dylan.png"
+dest_files=["res://.godot/imported/Dylan.png-950f0dca2120ed7dbeb095e4ab97e3ce.ctex"]
 
 [params]
 

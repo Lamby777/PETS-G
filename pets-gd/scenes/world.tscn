@@ -1,3 +1,17 @@
-[gd_scene format=3 uid="uid://cr3gwbndl33b5"]
+[gd_scene load_steps=3 format=3 uid="uid://cr3gwbndl33b5"]
+
+[ext_resource type="Texture2D" uid="uid://c50r4vfhgssms" path="res://assets/textures/builds/nature/bush_long.png" id="1_ni1cj"]
+[ext_resource type="Texture2D" uid="uid://d8m1gigeptqj" path="res://assets/textures/char/main/Ethan.png" id="2_81n1t"]
 
 [node name="World" type="Node2D"]
+
+[node name="BushLong" type="Sprite2D" parent="."]
+position = Vector2(44, 42)
+texture = ExtResource("1_ni1cj")
+
+[node name="PlayerCB" type="CharacterBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerCB"]
+texture = ExtResource("2_81n1t")
+hframes = 8
+vframes = 8

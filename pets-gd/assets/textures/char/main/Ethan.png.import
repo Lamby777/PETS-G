@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ciurawgpv2g88"
-path="res://.godot/imported/Siva.png-a5c9ad0b335c8822cb3d8ecd7ba3bc7c.ctex"
+uid="uid://d8m1gigeptqj"
+path="res://.godot/imported/Ethan.png-b34f260c0d9b0d9155ddf6a53ef1c0c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/Siva.png"
-dest_files=["res://.godot/imported/Siva.png-a5c9ad0b335c8822cb3d8ecd7ba3bc7c.ctex"]
+source_file="res://assets/textures/char/main/Ethan.png"
+dest_files=["res://.godot/imported/Ethan.png-b34f260c0d9b0d9155ddf6a53ef1c0c4.ctex"]
 
 [params]
 
