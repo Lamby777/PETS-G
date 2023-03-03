@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cr3gwbndl33b5"]
+[gd_scene load_steps=4 format=3 uid="uid://cr3gwbndl33b5"]
 
 [ext_resource type="Texture2D" uid="uid://c50r4vfhgssms" path="res://assets/textures/builds/nature/bush_long.png" id="1_ni1cj"]
 [ext_resource type="Texture2D" uid="uid://d8m1gigeptqj" path="res://assets/textures/char/main/Ethan.png" id="2_81n1t"]
+[ext_resource type="Script" path="res://scenes/PlayerCB.gd" id="2_std2c"]
 
 [node name="World" type="Node2D"]
 
@@ -10,6 +11,7 @@ position = Vector2(44, 42)
 texture = ExtResource("1_ni1cj")
 
 [node name="PlayerCB" type="CharacterBody2D" parent="."]
+script = ExtResource("2_std2c")
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerCB"]
 texture = ExtResource("2_81n1t")
