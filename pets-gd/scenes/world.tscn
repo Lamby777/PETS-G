@@ -7,13 +7,16 @@
 [node name="World" type="Node2D"]
 
 [node name="BushLong" type="Sprite2D" parent="."]
-position = Vector2(44, 42)
+position = Vector2(213, 184)
+scale = Vector2(6, 6)
 texture = ExtResource("1_ni1cj")
 
 [node name="PlayerCB" type="CharacterBody2D" parent="."]
+motion_mode = 1
 script = ExtResource("2_std2c")
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerCB"]
+scale = Vector2(6, 6)
 texture = ExtResource("2_81n1t")
 hframes = 8
 vframes = 8

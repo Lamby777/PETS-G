@@ -13,12 +13,14 @@ config_version=5
 config/name="P/E/T/S"
 run/main_scene="res://scenes/world.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://icon.png"
 config/icon="res://icon.png"
 
 [display]
 
-window/size/viewport_width=320
-window/size/viewport_height=180
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/mode=4
 window/size/borderless=true
 window/stretch/mode="viewport"
