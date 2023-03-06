@@ -1,16 +1,23 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+const SPEED = 80.0
 
 func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("ui_left", "ui_right")
+	######### ^^^^^^^^ IMPORTANT, do this later
+	var dirs_xy = [
+		Input.get_axis("ui_left", "ui_right"),
+		Input.get_axis("ui_up", "ui_down")
+	]
 	
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
+	for i in range(2):
+		var axis = ["x", "y"][i]
+		
+		if dirs_xy[i]:
+			velocity[axis] = dirs_xy[i] * SPEED
+		else:
+			velocity[axis] = move_toward(velocity[axis], 0, SPEED)
+	
 	move_and_slide()
