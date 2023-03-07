@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0rlrppekv4vg"]
+
+[ext_resource type="Script" path="res://scenes/PlayerCB.gd" id="1_c77sw"]
+[ext_resource type="Texture2D" uid="uid://d8m1gigeptqj" path="res://assets/textures/char/main/Ethan.png" id="2_4vlar"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c223s"]
+radius = 27.0
+height = 64.0
+
+[node name="PlayerCB" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_c77sw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 9.53674e-07)
+scale = Vector2(4, 4)
+texture = ExtResource("2_4vlar")
+hframes = 8
+vframes = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16)
+scale = Vector2(0.666667, 0.666667)
+shape = SubResource("CapsuleShape2D_c223s")
