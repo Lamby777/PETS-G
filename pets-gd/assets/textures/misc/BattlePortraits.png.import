@@ -3,22 +3,22 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://chr12jncorljr"
-path="res://.godot/imported/BattlePortraits.png-1070456bf0b6d5de44d34a1ae8869c63.ctex"
+path="res://.godot/imported/BattlePortraits.png-5f2e31dccb7b0efdf77b2549ecfde05d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/BattlePortraits.png"
-dest_files=["res://.godot/imported/BattlePortraits.png-1070456bf0b6d5de44d34a1ae8869c63.ctex"]
+source_file="res://assets/textures/misc/BattlePortraits.png"
+dest_files=["res://.godot/imported/BattlePortraits.png-5f2e31dccb7b0efdf77b2549ecfde05d.ctex"]
 
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

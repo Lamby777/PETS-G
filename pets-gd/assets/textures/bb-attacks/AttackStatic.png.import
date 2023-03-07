@@ -2,23 +2,23 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdkt4ln568maa"
-path="res://.godot/imported/Dylan.png-34710b4ecd5ac46e1ab7b9a24535e0f9.ctex"
+uid="uid://c1xc0w34kp5sk"
+path="res://.godot/imported/AttackStatic.png-b593c7082dd6dfe50573917b73780c7d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/Dylan.png"
-dest_files=["res://.godot/imported/Dylan.png-34710b4ecd5ac46e1ab7b9a24535e0f9.ctex"]
+source_file="res://assets/textures/bb-attacks/AttackStatic.png"
+dest_files=["res://.godot/imported/AttackStatic.png-b593c7082dd6dfe50573917b73780c7d.ctex"]
 
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

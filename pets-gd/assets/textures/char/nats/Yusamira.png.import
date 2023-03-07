@@ -2,23 +2,23 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyo1nw1ohmvab"
-path="res://.godot/imported/AkaMantoTPB.png-705e7a8729ac461d38de618aaeefeaf5.ctex"
+uid="uid://ckevm0iwhu0q2"
+path="res://.godot/imported/Yusamira.png-bdfa427942291e54a3a2d759c1bdb31d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/AkaMantoTPB.png"
-dest_files=["res://.godot/imported/AkaMantoTPB.png-705e7a8729ac461d38de618aaeefeaf5.ctex"]
+source_file="res://assets/textures/char/nats/Yusamira.png"
+dest_files=["res://.godot/imported/Yusamira.png-bdfa427942291e54a3a2d759c1bdb31d.ctex"]
 
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

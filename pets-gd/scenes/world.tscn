@@ -1,3 +1,12 @@
-[gd_scene format=3 uid="uid://cr3gwbndl33b5"]
+[gd_scene load_steps=3 format=3 uid="uid://p2uymvf88jt7"]
+
+[ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/bush_long.tscn" id="2_87c4u"]
+[ext_resource type="PackedScene" uid="uid://b0rlrppekv4vg" path="res://scenes/player_cb.tscn" id="2_r6tgb"]
 
 [node name="World" type="Node2D"]
+y_sort_enabled = true
+
+[node name="PlayerCB" parent="." instance=ExtResource("2_r6tgb")]
+
+[node name="BushLong" parent="." instance=ExtResource("2_87c4u")]
+position = Vector2(200, 160)
