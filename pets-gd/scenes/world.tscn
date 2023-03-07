@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b0rlrppekv4vg" path="res://scenes/player_cb.tscn" id="2_r6tgb"]
 
 [node name="World" type="Node2D"]
+y_sort_enabled = true
 
 [node name="PlayerCB" parent="." instance=ExtResource("2_r6tgb")]
 

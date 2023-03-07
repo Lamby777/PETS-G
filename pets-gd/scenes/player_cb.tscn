@@ -4,10 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://d8m1gigeptqj" path="res://assets/textures/char/main/Ethan.png" id="2_4vlar"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c223s"]
-radius = 27.0
-height = 64.0
+radius = 12.0
+height = 48.0
 
 [node name="PlayerCB" type="CharacterBody2D"]
+position = Vector2(0, -24)
 motion_mode = 1
 script = ExtResource("1_c77sw")
 
@@ -19,6 +20,7 @@ hframes = 8
 vframes = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 16)
+position = Vector2(0, 32)
+rotation = 1.57079
 scale = Vector2(0.666667, 0.666667)
 shape = SubResource("CapsuleShape2D_c223s")
