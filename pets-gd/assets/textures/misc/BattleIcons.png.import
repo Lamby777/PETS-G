@@ -2,23 +2,23 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://prtljbfllxt5"
-path="res://.godot/imported/SpritesMisc.png-3ac324bf9333578b0706241c5be01286.ctex"
+uid="uid://he44mug8lejt"
+path="res://.godot/imported/BattleIcons.png-58a8792b24a1335fce6bae296bddd411.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/SpritesMisc.png"
-dest_files=["res://.godot/imported/SpritesMisc.png-3ac324bf9333578b0706241c5be01286.ctex"]
+source_file="res://assets/textures/misc/BattleIcons.png"
+dest_files=["res://.godot/imported/BattleIcons.png-58a8792b24a1335fce6bae296bddd411.ctex"]
 
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false
