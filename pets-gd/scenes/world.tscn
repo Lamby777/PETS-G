@@ -4,9 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://b0rlrppekv4vg" path="res://scenes/player_cb.tscn" id="2_r6tgb"]
 
 [node name="World" type="Node2D"]
+
+[node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="PlayerCB" parent="." instance=ExtResource("2_r6tgb")]
-
-[node name="BushLong" parent="." instance=ExtResource("2_87c4u")]
+[node name="BushLong" parent="YSort" instance=ExtResource("2_87c4u")]
 position = Vector2(200, 160)
+
+[node name="PlayerCB" parent="YSort" instance=ExtResource("2_r6tgb")]
