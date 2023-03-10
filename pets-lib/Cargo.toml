@@ -1,0 +1,12 @@
+[package]
+name = "pets-lib"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+godot = { git = "https://github.com/godot-rust/gdextension", branch = "master" }
+rand = "0.8.5"
