@@ -11,7 +11,7 @@ mod main_scene;
 mod mob;
 mod player;
 
-struct DodgeTheCreeps;
+struct PETS;
 
 #[gdextension]
-unsafe impl ExtensionLibrary for DodgeTheCreeps {}
+unsafe impl ExtensionLibrary for PETS {}
