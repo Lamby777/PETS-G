@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://p2uymvf88jt7"]
+[gd_scene load_steps=4 format=3 uid="uid://p2uymvf88jt7"]
 
 [ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/bush_long.tscn" id="2_87c4u"]
 [ext_resource type="PackedScene" uid="uid://b0rlrppekv4vg" path="res://scenes/player_cb.tscn" id="2_r6tgb"]
+[ext_resource type="TileSet" uid="uid://dtft48lqhsjgr" path="res://assets/tilesets/cliff-dirt/tileset_cliff-dirt.tres" id="3_14512"]
 
 [node name="World" type="Node2D"]
 
@@ -12,3 +13,9 @@ y_sort_enabled = true
 position = Vector2(200, 160)
 
 [node name="PlayerCB" parent="YSort" instance=ExtResource("2_r6tgb")]
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(4, 4)
+tile_set = ExtResource("3_14512")
+format = 2
+layer_0/tile_data = PackedInt32Array(458757, 3, 2, 458758, 65539, 2, 393222, 65539, 1, 393221, 3, 1, 327685, 3, 0, 327686, 393219, 2, 393223, 327683, 1, 458759, 131075, 2, 327687, 65539, 1, 327688, 65539, 1, 393224, 65539, 2, 393225, 131075, 2, 327689, 327683, 1, 262153, 65539, 1, 262152, 393219, 2, 262151, 65539, 0, 262150, 3, 0, 196616, 3, 0, 196617, 65539, 0, 196618, 65539, 0, 196619, 131075, 0, 262154, 65539, 1, 327690, 65539, 2, 327691, 131075, 2, 262155, 131075, 1)
