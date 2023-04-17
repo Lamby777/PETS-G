@@ -432,7 +432,7 @@ frame = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 28)
 rotation = 1.57079
-scale = Vector2(0.566138, 1.63187)
+scale = Vector2(0.766139, 2.19187)
 shape = SubResource("RectangleShape2D_ubtmb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
