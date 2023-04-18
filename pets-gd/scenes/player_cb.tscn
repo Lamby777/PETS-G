@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d8m1gigeptqj" path="res://assets/textures/char/main/Ethan.png" id="2_4vlar"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubtmb"]
+size = Vector2(24, 48)
 
 [sub_resource type="Animation" id="Animation_6g0wi"]
 resource_name = "IdleD"
@@ -418,7 +419,6 @@ transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_j
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_xiytu"]
 
 [node name="PlayerCB" type="CharacterBody2D"]
-position = Vector2(0, -24)
 motion_mode = 1
 script = ExtResource("1_c77sw")
 
@@ -430,9 +430,8 @@ vframes = 8
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 28)
+position = Vector2(2.50975e-05, 28)
 rotation = 1.57079
-scale = Vector2(0.766139, 2.19187)
 shape = SubResource("RectangleShape2D_ubtmb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
