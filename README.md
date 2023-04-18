@@ -1,14 +1,12 @@
 # P/E/T/S (Rewritten)
-So as it turns out, Construct 2 wasn't exactly a good idea for this game.
+So as it turns out, using C2 wasn't exactly a good idea for this game.
 Rewriting the whole game in Godot now, which will probably take a while,
-but it's alright because someone made an RPG template as a starting point!
-For the original P/E/T/S on C2, I had to write the scripts to make dialog
-boxes, doors, enemies, etc. all on my own, but it's kinda nice that I don't
-have to redo all that work because someone else already made it for free here.
+since Godot 4 is pretty new...
 
-Template's currently all GDScript, but the project will probably include C# at
-some point, and maybe even Rust too, if it isn't too complicated to get that set up. 🦀
+Probably gonna use [godot-rust/gdextension](https://github.com/godot-rust/gdextension)
+at some point, but it's unstable right now, and constantly releasing breaking
+changes so yea-no thanks we're not doing that yet. 🦀
 
 Feel free to submit PRs and whatever, but I can't guarantee I'll be too active.
 
-This game is... well, obviously... open-source software.
+This game is... well, obviously... free and open-source software!
