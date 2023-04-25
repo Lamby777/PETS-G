@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0rlrppekv4vg"]
+[gd_scene load_steps=3 format=3 uid="uid://b0rlrppekv4vg"]
 
 [ext_resource type="Script" path="res://scenes/PlayerCB.gd" id="1_c77sw"]
-[ext_resource type="PackedScene" uid="uid://c5u0mbdwpts7k" path="res://scenes/agents/ch_agent_e.tscn" id="2_om6nc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubtmb"]
 size = Vector2(24, 48)
@@ -14,5 +13,3 @@ script = ExtResource("1_c77sw")
 position = Vector2(2.50975e-05, 28)
 rotation = 1.57079
 shape = SubResource("RectangleShape2D_ubtmb")
-
-[node name="CH_AgentE" parent="." instance=ExtResource("2_om6nc")]
