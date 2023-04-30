@@ -8,6 +8,9 @@ const MAX_SPEED		:= 320
 @onready var anim_tree = $AnimationTree
 @onready var anim_state = anim_tree.get("parameters/playback")
 
+func _ready():
+	anim_tree.active = true
+
 func _physics_process(delta):
 	var input_vector := Input.get_vector("left", "right", "up", "down").normalized()
 	var moving := input_vector != Vector2.ZERO
