@@ -1,9 +1,10 @@
 class_name Character
-extends Node
+extends Node2D
 
-@onready var anim_player = $AnimationPlayer
-@onready var anim_tree = $AnimationTree
-@onready var anim_state = anim_tree.get("parameters/playback")
+@onready var sprite			= $Sprite2D
+@onready var anim_player	= $AnimationPlayer
+@onready var anim_tree		= $AnimationTree
+@onready var anim_state		= anim_tree.get("parameters/playback")
 
 func _ready():
 	anim_tree.active = true
