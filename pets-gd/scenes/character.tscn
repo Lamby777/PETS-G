@@ -1,12 +1,7 @@
-[gd_scene load_steps=48 format=3 uid="uid://b0rlrppekv4vg"]
+[gd_scene load_steps=44 format=3 uid="uid://cke4n0ctvas74"]
 
-[ext_resource type="Script" path="res://scenes/PlayerCB.gd" id="1_c77sw"]
-[ext_resource type="Script" path="res://classes/char.gd" id="2_a8l53"]
-[ext_resource type="Texture2D" uid="uid://d8m1gigeptqj" path="res://assets/textures/char/main/Ethan.png" id="3_vda6a"]
-[ext_resource type="Texture2D" uid="uid://ciurawgpv2g88" path="res://assets/textures/char/main/Siva.png" id="4_aefop"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubtmb"]
-size = Vector2(24, 48)
+[ext_resource type="Script" path="res://classes/char.gd" id="1_0wuyr"]
+[ext_resource type="Texture2D" uid="uid://d8m1gigeptqj" path="res://assets/textures/char/main/Ethan.png" id="2_7m1xj"]
 
 [sub_resource type="Animation" id="Animation_6g0wi"]
 resource_name = "IdleD"
@@ -410,7 +405,7 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_boay5"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ty6r4"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pu8y6"]
 resource_local_to_scene = true
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_p4qdk")
 states/Idle/position = Vector2(393, 100)
@@ -420,63 +415,27 @@ states/Start/position = Vector2(186, 177)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji4br"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_iv5kx"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_boay5")]
 graph_offset = Vector2(-79, 13)
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_rrw3l"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_2u3ik"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_dcx46"]
+[node name="Character" type="Node2D"]
+script = ExtResource("1_0wuyr")
 
-[node name="PlayerCB" type="CharacterBody2D"]
-y_sort_enabled = true
-motion_mode = 1
-script = ExtResource("1_c77sw")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.50975e-05, 28)
-rotation = 1.57079
-shape = SubResource("RectangleShape2D_ubtmb")
-
-[node name="AgentE" type="Node2D" parent="."]
-script = ExtResource("2_a8l53")
-
-[node name="Sprite2D" type="Sprite2D" parent="AgentE"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
-texture = ExtResource("3_vda6a")
+texture = ExtResource("2_7m1xj")
 hframes = 8
 vframes = 8
 frame = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AgentE"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_ih35l")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="AgentE"]
-tree_root = SubResource("AnimationNodeStateMachine_ty6r4")
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_pu8y6")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_rrw3l")
-parameters/Idle/blend_position = Vector2(0, 0)
-parameters/Run/blend_position = Vector2(0, 0)
-
-[node name="AgentS" type="Node2D" parent="."]
-script = ExtResource("2_a8l53")
-
-[node name="Sprite2D" type="Sprite2D" parent="AgentS"]
-position = Vector2(0, -12)
-scale = Vector2(4, 4)
-texture = ExtResource("4_aefop")
-hframes = 9
-vframes = 6
-frame = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AgentS"]
-libraries = {
-"": SubResource("AnimationLibrary_ih35l")
-}
-
-[node name="AnimationTree" type="AnimationTree" parent="AgentS"]
-tree_root = SubResource("AnimationNodeStateMachine_ty6r4")
-anim_player = NodePath("../AnimationPlayer")
-active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_dcx46")
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_2u3ik")
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
