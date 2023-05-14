@@ -15,11 +15,13 @@ const MAX_SPEED		:= 320
 # Distance between party members
 const PERSONAL_SPACE := 300
 
-@onready var test = $Character
+@onready var agentE = $AgentE
+@onready var agentS = $AgentS
 
 var pastPositions := LimitedQueue.new(2000)
 @onready var party: Array[PChar] = [
-	test
+	agentE,
+	agentS,
 ]
 
 func _physics_process(delta):
