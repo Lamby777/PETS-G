@@ -7,12 +7,17 @@ party members as scenes, and this script does stuff like
 running animations on those nodes too.
 """
 
+# Movement physics stuff
 const ACCELERATION	:= 3000
 const FRICTION		:= 2500
 const MAX_SPEED		:= 320
 
-# For i in members, position is (distance * i)th element of queue
-var pastPositions = LimitedQueue.new(2000)
+# Distance between party members
+const PERSONAL_SPACE := 300
+
+
+var pastPositions := LimitedQueue.new(2000)
+var party: Array[Character] = []
 
 func _physics_process(delta):
 	var input_vector := Input.get_vector("left", "right", "up", "down").normalized()
@@ -27,9 +32,11 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	if oldPos != position:
-		pastPositions.push_front(position)
+		pastPositions.push_front(global_position)
 	
 	move_chars()
 
 func move_chars():
-	pass
+	for i in party.size():
+		var ch := party[i]
+		ch.global_position = pastPositions.get_at(i * PERSONAL_SPACE)
