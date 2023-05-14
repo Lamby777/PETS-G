@@ -425,6 +425,7 @@ graph_offset = Vector2(-79, 13)
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_dcx46"]
 
 [node name="PlayerCB" type="CharacterBody2D"]
+y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_c77sw")
 
