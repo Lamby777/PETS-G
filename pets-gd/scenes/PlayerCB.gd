@@ -43,7 +43,12 @@ func _physics_process(delta):
 	
 	if posUpdated:
 		pastPositions.push_front(global_position)
-		pastRotations.push_front(input_vector)
+		# don't push new input vector if slowing down
+		pastRotations.push_front(
+			input_vector
+			if moving else
+			pastRotations.get_first_or(Vector2(0, 0))
+		)
 	
 	move_chars(moving)
 
