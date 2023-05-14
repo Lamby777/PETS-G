@@ -460,6 +460,7 @@ parameters/Run/blend_position = Vector2(0, 0)
 script = ExtResource("2_a8l53")
 
 [node name="Sprite2D" type="Sprite2D" parent="AgentS"]
+position = Vector2(0, -12)
 scale = Vector2(4, 4)
 texture = ExtResource("4_aefop")
 hframes = 9
