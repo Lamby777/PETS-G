@@ -10,9 +10,9 @@ func _ready():
 	anim_tree.active = true
 
 func anim_move(moving: bool, inputs: Vector2):
-	anim_tree.set("parameters/Idle/blend_position", inputs)
 	
 	if moving:
+		anim_tree.set("parameters/Idle/blend_position", inputs)
 		anim_tree.set("parameters/Run/blend_position", inputs)
 		anim_state.travel("Run")
 	else:
