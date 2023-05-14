@@ -25,3 +25,8 @@ func push_front(v):
 
 func get_len() -> int:
 	return len(queue)
+
+func get_or_last(i):
+	return queue[
+		min(i, len(queue)-1)
+	]
