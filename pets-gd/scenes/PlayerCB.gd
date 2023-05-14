@@ -15,14 +15,16 @@ const MAX_SPEED		:= 320
 # Distance between party members
 const PERSONAL_SPACE := 300
 
+@onready var test = $Character
 
 var pastPositions := LimitedQueue.new(2000)
-var party: Array[Character] = []
+@onready var party: Array[PChar] = [
+	test
+]
 
 func _physics_process(delta):
 	var input_vector := Input.get_vector("left", "right", "up", "down").normalized()
 	var moving := input_vector != Vector2.ZERO
-	var oldPos = position
 	
 	if moving:
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, delta * ACCELERATION)
@@ -31,9 +33,10 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-	if oldPos != position:
+	if (pastPositions.get_len() == 0) or (pastPositions.get_at(0) != position):
 		pastPositions.push_front(global_position)
-	
+
+func _process(_delta):
 	move_chars()
 
 func move_chars():
