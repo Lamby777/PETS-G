@@ -23,5 +23,5 @@ func push_front(v):
 	while len(queue) > capacity:
 		queue.pop_back()
 
-func get_len():
+func get_len() -> int:
 	return len(queue)
