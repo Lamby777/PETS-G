@@ -33,13 +33,16 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-	if (pastPositions.get_len() == 0) or (pastPositions.get_at(0) != position):
+	if moving:
 		pastPositions.push_front(global_position)
+	
+	move_chars(moving, input_vector)
 
-func _process(_delta):
-	move_chars()
-
-func move_chars():
+func move_chars(moving: bool, input_vector: Vector2):
 	for i in party.size():
 		var ch := party[i]
-		ch.global_position = pastPositions.get_at(i * PERSONAL_SPACE)
+		
+		if moving:
+			ch.global_position = pastPositions.get_at(i * PERSONAL_SPACE)
+		
+		ch.anim_move(moving, input_vector)
