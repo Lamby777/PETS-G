@@ -36,8 +36,12 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-	#var posUpdated := 
-	if moving:
+	var posUpdated: bool = (
+		(pastPositions.get_len() == 0) or
+		(pastPositions.get_at(0) != position)
+	)
+	
+	if posUpdated:
 		pastPositions.push_front(global_position)
 		pastRotations.push_front(input_vector)
 	
