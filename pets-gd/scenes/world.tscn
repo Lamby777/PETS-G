@@ -26,3 +26,4 @@ layer_0/tile_data = PackedInt32Array(524293, 131075, 1, 524292, 65539, 1, 524291
 [node name="MusicZones" type="Node" parent="."]
 
 [node name="CV_Outdoors" type="Polygon2D" parent="MusicZones"]
+metadata/music = &"routingout"
