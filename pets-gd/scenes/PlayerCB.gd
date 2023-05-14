@@ -13,7 +13,7 @@ const FRICTION		:= 2500
 const MAX_SPEED		:= 320
 
 # Distance between party members
-const PERSONAL_SPACE := 300
+const PERSONAL_SPACE := 30
 
 @onready var agentE = $AgentE
 @onready var agentS = $AgentS
@@ -45,6 +45,11 @@ func move_chars(moving: bool, input_vector: Vector2):
 		var ch := party[i]
 		
 		if moving:
-			ch.global_position = pastPositions.get_at(i * PERSONAL_SPACE)
+			ch.global_position = pastPositions.get_at(
+				min(
+					i * PERSONAL_SPACE,
+					pastPositions.get_len()-1
+				)
+			)
 		
 		ch.anim_move(moving, input_vector)
