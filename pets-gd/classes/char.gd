@@ -1,4 +1,4 @@
-class_name Character
+class_name PChar
 extends Node2D
 
 @onready var sprite			= $Sprite2D

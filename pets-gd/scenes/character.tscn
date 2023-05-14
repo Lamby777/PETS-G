@@ -311,89 +311,89 @@ _data = {
 "RunUR": SubResource("Animation_0bgwk")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jtw33"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r24ka"]
 animation = &"IdleL"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jsptd"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3lgta"]
 animation = &"IdleD"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0ch8x"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_exebo"]
 animation = &"IdleR"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_67ruu"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5vuld"]
 animation = &"IdleU"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1wf6m"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0wj1c"]
 animation = &"IdleDR"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yendp"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wwxso"]
 animation = &"IdleUR"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_32xnl"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fn6bb"]
 animation = &"IdleUL"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3jyrn"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xl44w"]
 animation = &"IdleDL"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_p4qdk"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_jtw33")
+blend_point_0/node = SubResource("AnimationNodeAnimation_r24ka")
 blend_point_0/pos = Vector2(-0.9, 0)
-blend_point_1/node = SubResource("AnimationNodeAnimation_jsptd")
+blend_point_1/node = SubResource("AnimationNodeAnimation_3lgta")
 blend_point_1/pos = Vector2(0, 0.9)
-blend_point_2/node = SubResource("AnimationNodeAnimation_0ch8x")
+blend_point_2/node = SubResource("AnimationNodeAnimation_exebo")
 blend_point_2/pos = Vector2(0.9, 0)
-blend_point_3/node = SubResource("AnimationNodeAnimation_67ruu")
+blend_point_3/node = SubResource("AnimationNodeAnimation_5vuld")
 blend_point_3/pos = Vector2(0, -0.9)
-blend_point_4/node = SubResource("AnimationNodeAnimation_1wf6m")
+blend_point_4/node = SubResource("AnimationNodeAnimation_0wj1c")
 blend_point_4/pos = Vector2(0.5, 0.6)
-blend_point_5/node = SubResource("AnimationNodeAnimation_yendp")
+blend_point_5/node = SubResource("AnimationNodeAnimation_wwxso")
 blend_point_5/pos = Vector2(0.5, -0.7)
-blend_point_6/node = SubResource("AnimationNodeAnimation_32xnl")
+blend_point_6/node = SubResource("AnimationNodeAnimation_fn6bb")
 blend_point_6/pos = Vector2(-0.6, -0.7)
-blend_point_7/node = SubResource("AnimationNodeAnimation_3jyrn")
+blend_point_7/node = SubResource("AnimationNodeAnimation_xl44w")
 blend_point_7/pos = Vector2(-0.6, 0.6)
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j30r8"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l0mc7"]
 animation = &"RunL"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7lfnj"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y8q25"]
 animation = &"RunD"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fkrme"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uqgsv"]
 animation = &"RunU"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5u7ud"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rynug"]
 animation = &"RunR"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bned1"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qot7g"]
 animation = &"RunDR"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i1osr"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ah4bh"]
 animation = &"RunUR"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y0rsg"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bmxps"]
 animation = &"RunUL"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cogpc"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7k2u3"]
 animation = &"RunDL"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_ptivh"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_j30r8")
+blend_point_0/node = SubResource("AnimationNodeAnimation_l0mc7")
 blend_point_0/pos = Vector2(-0.9, 0)
-blend_point_1/node = SubResource("AnimationNodeAnimation_7lfnj")
+blend_point_1/node = SubResource("AnimationNodeAnimation_y8q25")
 blend_point_1/pos = Vector2(0, 0.9)
-blend_point_2/node = SubResource("AnimationNodeAnimation_fkrme")
+blend_point_2/node = SubResource("AnimationNodeAnimation_uqgsv")
 blend_point_2/pos = Vector2(0, -0.9)
-blend_point_3/node = SubResource("AnimationNodeAnimation_5u7ud")
+blend_point_3/node = SubResource("AnimationNodeAnimation_rynug")
 blend_point_3/pos = Vector2(0.9, 0)
-blend_point_4/node = SubResource("AnimationNodeAnimation_bned1")
+blend_point_4/node = SubResource("AnimationNodeAnimation_qot7g")
 blend_point_4/pos = Vector2(0.6, 0.6)
-blend_point_5/node = SubResource("AnimationNodeAnimation_i1osr")
+blend_point_5/node = SubResource("AnimationNodeAnimation_ah4bh")
 blend_point_5/pos = Vector2(0.6, -0.6)
-blend_point_6/node = SubResource("AnimationNodeAnimation_y0rsg")
+blend_point_6/node = SubResource("AnimationNodeAnimation_bmxps")
 blend_point_6/pos = Vector2(-0.6, -0.6)
-blend_point_7/node = SubResource("AnimationNodeAnimation_cogpc")
+blend_point_7/node = SubResource("AnimationNodeAnimation_7k2u3")
 blend_point_7/pos = Vector2(-0.6, 0.6)
 blend_mode = 1
 
@@ -425,7 +425,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_7m1xj")
 hframes = 8
 vframes = 8
-frame = 22
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
