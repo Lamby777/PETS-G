@@ -19,6 +19,7 @@ const PERSONAL_SPACE := 30
 @onready var agentS = $AgentS
 
 var pastPositions := LimitedQueue.new(2000)
+var pastRotations := LimitedQueue.new(2000)
 @onready var party: Array[PChar] = [
 	agentE,
 	agentS,
@@ -37,19 +38,23 @@ func _physics_process(delta):
 	
 	if moving:
 		pastPositions.push_front(global_position)
+		pastRotations.push_front(input_vector)
 	
-	move_chars(moving, input_vector)
+	move_chars(moving)
 
-func move_chars(moving: bool, input_vector: Vector2):
+func move_chars(moving: bool):
+	var limq_len	:= pastPositions.get_len()
+	if limq_len == 0: return
+	
+	var limq_last_i	:= limq_len - 1
+	
 	for i in party.size():
 		var ch := party[i]
 		
-		if moving:
-			ch.global_position = pastPositions.get_at(
-				min(
-					i * PERSONAL_SPACE,
-					pastPositions.get_len()-1
-				)
-			)
+		var limq_i = min(
+			limq_last_i,
+			i * PERSONAL_SPACE,
+		)
 		
-		ch.anim_move(moving, input_vector)
+		ch.global_position = pastPositions.get_at(limq_i)
+		ch.anim_move(moving, pastRotations.get_at(limq_i))
