@@ -19,7 +19,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-World="*res://singletons/world.gd"
+World="*res://singletons/globals.gd"
 
 [display]
 
