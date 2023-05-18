@@ -26,4 +26,6 @@ layer_0/tile_data = PackedInt32Array(524293, 131075, 1, 524292, 65539, 1, 524291
 [node name="MusicZones" type="Node" parent="."]
 
 [node name="CV_Outdoors" type="Polygon2D" parent="MusicZones"]
+color = Color(0.827451, 0, 0.239216, 0.184314)
+polygon = PackedVector2Array(0, 0, 1336, 8, 1344, 704, 8, 712)
 metadata/music = &"routingout"
