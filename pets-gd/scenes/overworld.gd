@@ -24,13 +24,13 @@ func check_musiczones():
 		
 		# if leaving current zone
 		if zone == current_mz and not is_in_zone:
-			crossfade_za_between(current_mz.music, null)
+			crossfade_za_into(null)
 			current_mz = null
 		
 		# if entering a new zone
 		if not zone == current_mz and is_in_zone:
 			print("Entering new MusicZone: " + zone.name)
-			crossfade_za_between(current_mz.music, zone.music)
+			crossfade_za_into(zone.music)
 			current_mz = zone
 			
 			# not able to break anymore, since might skip current zone
@@ -39,10 +39,7 @@ func check_musiczones():
 			# update: fade out is gonna freak out if this doesn't break,
 			# so we prob should make it break again...
 
-func crossfade_za_between(
-	old_audio: AudioStream,
-	new_audio: AudioStream
-):
-	za_fade.stream		= old_audio
+func crossfade_za_into(new_audio: AudioStream):
+	za_fade.stream		= za_active.stream
 	za_active.stream	= new_audio
 	za_anim.play("crossfade")
