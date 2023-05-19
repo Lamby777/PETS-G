@@ -18,9 +18,10 @@ func check_musiczones():
 	
 	# check if entering new zone
 	for zone in mzones.get_children():
+		zone = zone as MusicZone # type hinting uwu
+		
 		if Geometry2D.is_point_in_polygon(player.position, zone.polygon):
-			print("In zone!" + zone.name)
-			var new_music = zone.get_meta("music")
-			zoneaudio.stream = new_music
+			print("Entering new MusicZone: " + zone.name)
+			zoneaudio.stream = zone.music
 			zoneaudio.play()
 			break
