@@ -18,8 +18,6 @@ const PERSONAL_SPACE := 15
 @onready var agentE = $AgentE
 @onready var agentS = $AgentS
 @onready var agentT = $AgentT
-@onready var scene	= get_tree().current_scene
-@onready var mzones	= scene.get_node("MusicZones")
 
 var current_music_zone: Polygon2D
 
@@ -69,17 +67,3 @@ func move_chars(moving: bool):
 		
 		ch.global_position = pastPositions.get_or_last(nth)
 		ch.anim_move(moving, pastRotations.get_or_last(nth))
-
-func check_musiczones():
-	# check if leaving current zone
-	#
-	#
-	#
-	#
-	
-	# check if entering new zone
-	for zone in mzones.get_children():
-		if Geometry2D.is_point_in_polygon(position, zone.polygon):
-			current_music_zone = zone
-			scene.world_music = zone.get_meta("music")
-			break
