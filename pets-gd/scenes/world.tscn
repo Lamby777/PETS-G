@@ -38,3 +38,5 @@ music = ExtResource("5_x7nbf")
 metadata/music = ExtResource("5_x7nbf")
 
 [node name="ZoneAudio" type="AudioStreamPlayer" parent="."]
+
+[node name="ZoneAudioFade" type="AudioStreamPlayer" parent="."]
