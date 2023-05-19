@@ -13,16 +13,20 @@ const FRICTION		:= 2500
 const MAX_SPEED		:= 320
 
 # Distance between party members
-const PERSONAL_SPACE := 30
+const PERSONAL_SPACE := 15
 
 @onready var agentE = $AgentE
 @onready var agentS = $AgentS
+@onready var agentT = $AgentT
+
+var current_music_zone: Polygon2D
 
 var pastPositions := LimitedQueue.new(2000)
 var pastRotations := LimitedQueue.new(2000)
 @onready var party: Array[PChar] = [
 	agentE,
 	agentS,
+	agentT,
 ]
 
 func _physics_process(delta):
