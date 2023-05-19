@@ -22,13 +22,13 @@ func check_musiczones():
 		if zone == current_mzone and not is_in_zone:
 			fade_out_current_mz()
 		
-		# if entering new zone
+		# if entering a new zone
 		if not zone == current_mzone and is_in_zone:
 			print("Entering new MusicZone: " + zone.name)
 			current_mzone = zone
 			za_active.stream = zone.music
 			za_active.play()
-			# not able to break anymore, since might skin current zone
+			# not able to break anymore, since might skip current zone
 			# maybe forego readability here later for performance reasons?
 
 func fade_out_current_mz():
