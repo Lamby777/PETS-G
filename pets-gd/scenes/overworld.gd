@@ -42,7 +42,11 @@ func crossfade_za_into(new_audio: AudioStream):
 
 	za_fade.stream		= za_active.stream
 	za_active.stream	= new_audio
-		
+	
+	# just for testing
+	# use a value provided by the mz later on...
+	za_anim.speed_scale = 0.2
+	
 	za_anim.play("crossfade")
 	
 	za_active.playing = true
