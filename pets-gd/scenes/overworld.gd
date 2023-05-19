@@ -8,6 +8,10 @@ extends Node2D
 
 var current_mzone: MusicZone = null
 
+func _ready():
+	za_active.play()
+	za_fade.play()
+
 func _process(_delta):
 	check_musiczones()
 
@@ -20,17 +24,25 @@ func check_musiczones():
 		
 		# if leaving current zone
 		if zone == current_mzone and not is_in_zone:
-			fade_out_current_mz()
+			crossfade_za_between(current_mzone.music, null)
+			current_mzone = null
 		
 		# if entering a new zone
 		if not zone == current_mzone and is_in_zone:
 			print("Entering new MusicZone: " + zone.name)
+			crossfade_za_between(current_mzone.music, zone.music)
 			current_mzone = zone
-			za_active.stream = zone.music
-			za_active.play()
+			
 			# not able to break anymore, since might skip current zone
 			# maybe forego readability here later for performance reasons?
+			
+			# update: fade out is gonna freak out if this doesn't break,
+			# so we prob should make it break again...
 
-func fade_out_current_mz():
-	current_mzone = null
-	#zoneaudio.
+func crossfade_za_between(
+	old_audio: AudioStream,
+	new_audio: AudioStream
+):
+	za_fade.stream		= old_audio
+	za_active.stream	= new_audio
+	za_anim.play("crossfade")
