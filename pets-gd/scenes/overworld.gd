@@ -6,7 +6,7 @@ extends Node2D
 @onready var za_anim	= $ZoneAudio/AnimationPlayer
 @onready var player		= $YSort/PlayerCB
 
-var current_mzone: MusicZone = null
+var current_mz: MusicZone = null
 
 func _ready():
 	za_active.play()
@@ -23,15 +23,15 @@ func check_musiczones():
 		var is_in_zone = Geometry2D.is_point_in_polygon(player.position, zone.polygon)
 		
 		# if leaving current zone
-		if zone == current_mzone and not is_in_zone:
-			crossfade_za_between(current_mzone.music, null)
-			current_mzone = null
+		if zone == current_mz and not is_in_zone:
+			crossfade_za_between(current_mz.music, null)
+			current_mz = null
 		
 		# if entering a new zone
-		if not zone == current_mzone and is_in_zone:
+		if not zone == current_mz and is_in_zone:
 			print("Entering new MusicZone: " + zone.name)
-			crossfade_za_between(current_mzone.music, zone.music)
-			current_mzone = zone
+			crossfade_za_between(current_mz.music, zone.music)
+			current_mz = zone
 			
 			# not able to break anymore, since might skip current zone
 			# maybe forego readability here later for performance reasons?
