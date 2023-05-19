@@ -100,6 +100,7 @@ metadata/music = ExtResource("5_x7nbf")
 [node name="ZoneAudio" type="Node" parent="."]
 
 [node name="FadeOut" type="AudioStreamPlayer" parent="ZoneAudio"]
+autoplay = true
 
 [node name="Active" type="AudioStreamPlayer" parent="ZoneAudio"]
 
