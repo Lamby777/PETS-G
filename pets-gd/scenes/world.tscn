@@ -37,6 +37,10 @@ script = ExtResource("5_skv18")
 music = ExtResource("5_x7nbf")
 metadata/music = ExtResource("5_x7nbf")
 
-[node name="ZoneAudio" type="AudioStreamPlayer" parent="."]
+[node name="ZoneAudio" type="Node" parent="."]
 
-[node name="ZoneAudioFade" type="AudioStreamPlayer" parent="."]
+[node name="FadeOut" type="AudioStreamPlayer" parent="ZoneAudio"]
+
+[node name="Active" type="AudioStreamPlayer" parent="ZoneAudio"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ZoneAudio"]

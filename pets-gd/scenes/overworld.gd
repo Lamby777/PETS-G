@@ -1,11 +1,10 @@
 extends Node2D
 
-@export var world_music	:= ""
-
-@onready var mzones			= $MusicZones
-@onready var zoneaudio		= $ZoneAudio
-@onready var zoneaudiofade	= $ZoneAudioFade
-@onready var player			= $YSort/PlayerCB
+@onready var mzones		= $MusicZones
+@onready var za_active	= $ZoneAudio/Active
+@onready var za_fade	= $ZoneAudio/FadeOut
+@onready var za_anim	= $ZoneAudio/AnimationPlayer
+@onready var player		= $YSort/PlayerCB
 
 var current_mzone: MusicZone = null
 
@@ -27,8 +26,8 @@ func check_musiczones():
 		if not zone == current_mzone and is_in_zone:
 			print("Entering new MusicZone: " + zone.name)
 			current_mzone = zone
-			zoneaudio.stream = zone.music
-			zoneaudio.play()
+			za_active.stream = zone.music
+			za_active.play()
 			# not able to break anymore, since might skin current zone
 			# maybe forego readability here later for performance reasons?
 
