@@ -8,10 +8,6 @@ extends Node2D
 
 var current_mz: MusicZone = null
 
-func _ready():
-	za_active.play()
-	za_fade.play()
-
 func _process(_delta):
 	check_musiczones()
 
@@ -40,6 +36,14 @@ func check_musiczones():
 			# so we prob should make it break again...
 
 func crossfade_za_into(new_audio: AudioStream):
+	# before assigning a new stream, keep track of where
+	# the old one ended on, to assign the fadeout's pos to that
+	var fadeout_at		= za_active.get_playback_position()
+
 	za_fade.stream		= za_active.stream
 	za_active.stream	= new_audio
+		
 	za_anim.play("crossfade")
+	
+	za_active.playing = true
+	za_fade.play(fadeout_at)
