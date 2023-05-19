@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://p2uymvf88jt7"]
+[gd_scene load_steps=7 format=3 uid="uid://p2uymvf88jt7"]
 
 [ext_resource type="Script" path="res://scenes/overworld.gd" id="1_bs1lv"]
 [ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/bush_long.tscn" id="2_87c4u"]
 [ext_resource type="PackedScene" uid="uid://b0rlrppekv4vg" path="res://scenes/player_cb.tscn" id="2_r6tgb"]
 [ext_resource type="TileSet" uid="uid://dtft48lqhsjgr" path="res://assets/tilesets/cliff-dirt/tileset_cliff-dirt.tres" id="3_14512"]
+[ext_resource type="Script" path="res://classes/musiczone.gd" id="5_skv18"]
 [ext_resource type="AudioStream" uid="uid://b83wws3dajmi5" path="res://assets/music/zone/routingout.ogg" id="5_x7nbf"]
 
 [node name="Overworld" type="Node2D"]
@@ -32,6 +33,8 @@ layer_0/tile_data = PackedInt32Array(524293, 131075, 1, 524292, 65539, 1, 524291
 scale = Vector2(0.857143, 1)
 color = Color(0.827451, 0, 0.239216, 0.184314)
 polygon = PackedVector2Array(74.6667, 64, 1336, 8, 1568, 712, 8, 712)
+script = ExtResource("5_skv18")
+music = ExtResource("5_x7nbf")
 metadata/music = ExtResource("5_x7nbf")
 
 [node name="ZoneAudio" type="AudioStreamPlayer" parent="."]
