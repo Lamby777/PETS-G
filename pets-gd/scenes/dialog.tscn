@@ -1,22 +1,19 @@
 [gd_scene load_steps=2 format=3 uid="uid://wkelk3y4bkcj"]
 
-[sub_resource type="Theme" id="Theme_hx3e6"]
+[ext_resource type="Theme" uid="uid://cc8cl7a24wn5y" path="res://themes/theme_deft.tres" id="1_jbfs2"]
 
-[node name="Dialog" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-theme = SubResource("Theme_hx3e6")
-
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="DialogBox" type="Panel"]
 offset_left = 256.0
 offset_top = 608.0
 offset_right = 1664.0
 offset_bottom = 1048.0
+theme = ExtResource("1_jbfs2")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+[node name="SpeakerName" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 1376.0
-offset_bottom = 96.0
-text = "TEST NAME"
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 1392.0
+offset_bottom = 112.0
+theme_override_font_sizes/normal_font_size = 60
+text = "<NPC Name>"
