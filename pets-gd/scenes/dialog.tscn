@@ -14,6 +14,13 @@ layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 1392.0
-offset_bottom = 112.0
-theme_override_font_sizes/normal_font_size = 60
+offset_bottom = 96.0
+theme_override_font_sizes/normal_font_size = 56
+text = "<NPC Name>"
+
+[node name="Content" type="RichTextLabel" parent="."]
+offset_left = 16.0
+offset_top = 96.0
+offset_right = 1392.0
+offset_bottom = 176.0
 text = "<NPC Name>"
