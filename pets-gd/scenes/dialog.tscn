@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://wkelk3y4bkcj"]
+
+[sub_resource type="Theme" id="Theme_hx3e6"]
+
+[node name="Dialog" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+theme = SubResource("Theme_hx3e6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 256.0
+offset_top = 608.0
+offset_right = 1664.0
+offset_bottom = 1048.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 1376.0
+offset_bottom = 96.0
+text = "TEST NAME"
