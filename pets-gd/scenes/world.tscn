@@ -83,6 +83,7 @@ y_sort_enabled = true
 scale = Vector2(4, 4)
 tile_set = ExtResource("3_14512")
 format = 2
+layer_0/name = "Cliffs"
 layer_0/y_sort_enabled = true
 layer_0/y_sort_origin = -10
 
