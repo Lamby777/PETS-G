@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://p2uymvf88jt7"]
+[gd_scene load_steps=10 format=3 uid="uid://dxcmbwof8bxe6"]
 
 [ext_resource type="Script" path="res://scenes/overworld.gd" id="1_bs1lv"]
 [ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/bush_long.tscn" id="2_87c4u"]
 [ext_resource type="PackedScene" uid="uid://b0rlrppekv4vg" path="res://scenes/player_cb.tscn" id="2_r6tgb"]
-[ext_resource type="TileSet" uid="uid://dtft48lqhsjgr" path="res://assets/tilesets/cliff-dirt/tileset_cliff-dirt.tres" id="3_14512"]
+[ext_resource type="TileSet" uid="uid://yyt0fvdaknnc" path="res://assets/tilesets/cliff/tileset_cliff-dirt.tres" id="4_dih03"]
 [ext_resource type="Script" path="res://classes/musiczone.gd" id="5_skv18"]
 [ext_resource type="AudioStream" uid="uid://b83wws3dajmi5" path="res://assets/music/zone/routingout.ogg" id="5_x7nbf"]
 
@@ -81,7 +81,7 @@ position = Vector2(568, 552)
 [node name="TileMap" type="TileMap" parent="YSort"]
 y_sort_enabled = true
 scale = Vector2(4, 4)
-tile_set = ExtResource("3_14512")
+tile_set = ExtResource("4_dih03")
 format = 2
 layer_0/name = "Cliffs"
 layer_0/y_sort_enabled = true
