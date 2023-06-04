@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dj7f15q6mya5q"
-path="res://.godot/imported/tileset_cliff-dirt.png-14fa43bc2cf9572ba7e6f98430d1cca9.ctex"
+path="res://.godot/imported/tileset_cliff-dirt.png-70d81822632b2797e5e76a1fe29ec133.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/cliff/tileset_cliff-dirt.png"
-dest_files=["res://.godot/imported/tileset_cliff-dirt.png-14fa43bc2cf9572ba7e6f98430d1cca9.ctex"]
+source_file="res://assets/tilesets/cliff-dirt/tileset_cliff-dirt.png"
+dest_files=["res://.godot/imported/tileset_cliff-dirt.png-70d81822632b2797e5e76a1fe29ec133.ctex"]
 
 [params]
 
