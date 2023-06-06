@@ -87,16 +87,6 @@ layer_0/name = "Cliffs"
 layer_0/y_sort_enabled = true
 layer_0/y_sort_origin = -10
 
-[node name="MusicZones" type="Node" parent="."]
-
-[node name="CV_Outdoors" type="Polygon2D" parent="MusicZones"]
-scale = Vector2(0.857143, 1)
-color = Color(0.827451, 0, 0.239216, 0.184314)
-polygon = PackedVector2Array(74.6667, 64, 1336, 8, 1568, 712, 8, 712)
-script = ExtResource("5_skv18")
-music = ExtResource("5_x7nbf")
-metadata/music = ExtResource("5_x7nbf")
-
 [node name="ZoneAudio" type="Node" parent="."]
 
 [node name="FadeOut" type="AudioStreamPlayer" parent="ZoneAudio"]
@@ -108,3 +98,12 @@ autoplay = true
 libraries = {
 "": SubResource("AnimationLibrary_fv7du")
 }
+
+[node name="MusicZones" type="Area2D" parent="."]
+
+[node name="CV_Outdoors" type="CollisionPolygon2D" parent="MusicZones"]
+position = Vector2(120, 32)
+polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+script = ExtResource("5_skv18")
+music = ExtResource("5_x7nbf")
+metadata/music = ExtResource("5_x7nbf")
