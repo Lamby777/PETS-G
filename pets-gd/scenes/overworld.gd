@@ -14,8 +14,8 @@ func _ready():
 		zone = zone as Area2D # type hinting uwu
 		
 		var enter_lambda = func(area):
-			if area.name != "PlayerCB":
-				print("Entered: " + area.name)
+			if area.get_parent().name != "PlayerCB":
+				print("Entered: " + area.get_parent().name)
 				return
 			entering_mz(zone)
 		
