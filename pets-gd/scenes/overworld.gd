@@ -13,25 +13,26 @@ func _ready():
 	for zone in mzones.get_children():
 		zone = zone as MusicZone # type hinting uwu
 		
-		var enter_lambda = func(area):
-			if area.get_parent().name != "PlayerCB":
-				print("Entered: " + area.get_parent().name)
-				return
+		var enter_lambda = func(area: Area2D):
+			if area.get_parent().name != "PlayerCB": return
 			entering_mz(zone)
 		
 		#var exit_lambda = func(): _on_mz_entered(zone)
 		zone.connect("area_entered", enter_lambda)
 		zone.connect("area_exited", leaving_mz)
-		print("Connected " + zone.name)
 
-func leaving_mz():
-	crossfade_za_into(null)
-	current_mz = null
+func leaving_mz(area: Area2D):
+	if area.get_parent().name != "PlayerCB": return
+	crossfade_za_into_null()
 
 func entering_mz(zone: MusicZone):
 	print("Entering new MusicZone: " + zone.name)
 	crossfade_za_into(zone.music)
 	current_mz = zone
+
+func crossfade_za_into_null():
+	crossfade_za_into(null)
+	current_mz = null
 
 func crossfade_za_into(new_audio: AudioStream):
 	# before assigning a new stream, keep track of where
