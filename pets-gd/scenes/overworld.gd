@@ -6,12 +6,12 @@ extends Node2D
 @onready var za_anim	= $ZoneAudio/AnimationPlayer
 @onready var player		= $YSort/PlayerCB
 
-var current_mz: Area2D = null
+var current_mz: MusicZone = null
 
 func _ready():
 	# check if entering new zone
 	for zone in mzones.get_children():
-		zone = zone as Area2D # type hinting uwu
+		zone = zone as MusicZone # type hinting uwu
 		
 		var enter_lambda = func(area):
 			if area.get_parent().name != "PlayerCB":
@@ -28,7 +28,7 @@ func leaving_mz():
 	crossfade_za_into(null)
 	current_mz = null
 
-func entering_mz(zone: Area2D):
+func entering_mz(zone: MusicZone):
 	print("Entering new MusicZone: " + zone.name)
 	crossfade_za_into(zone.music)
 	current_mz = zone
