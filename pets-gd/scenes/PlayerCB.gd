@@ -1,3 +1,4 @@
+class_name PlayerCB
 extends CharacterBody2D
 
 """
