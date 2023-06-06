@@ -4,4 +4,5 @@ extends CollisionPolygon2D
 @export var music: AudioStream
 
 func _ready():
-	visible = false
+#	visible = false
+	pass
