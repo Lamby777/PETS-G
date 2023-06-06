@@ -8,32 +8,31 @@ extends Node2D
 
 var current_mz: MusicZone = null
 
-func _process(_delta):
-	check_musiczones()
-
-func check_musiczones():
+func _ready():
 	# check if entering new zone
 	for zone in mzones.get_children():
 		zone = zone as MusicZone # type hinting uwu
 		
-		var is_in_zone = Geometry2D.is_point_in_polygon(player.position, zone.polygon)
+		var enter_lambda = func(area: Area2D):
+			if area.get_parent().name != "PlayerCB": return
+			entering_mz(zone)
 		
-		# if leaving current zone
-		if zone == current_mz and not is_in_zone:
-			crossfade_za_into(null)
-			current_mz = null
-		
-		# if entering a new zone
-		if not zone == current_mz and is_in_zone:
-			print("Entering new MusicZone: " + zone.name)
-			crossfade_za_into(zone.music)
-			current_mz = zone
-			
-			# not able to break anymore, since might skip current zone
-			# maybe forego readability here later for performance reasons?
-			
-			# update: fade out is gonna freak out if this doesn't break,
-			# so we prob should make it break again...
+		#var exit_lambda = func(): _on_mz_entered(zone)
+		zone.connect("area_entered", enter_lambda)
+		zone.connect("area_exited", leaving_mz)
+
+func leaving_mz(area: Area2D):
+	if area.get_parent().name != "PlayerCB": return
+	crossfade_za_into_null()
+
+func entering_mz(zone: MusicZone):
+	print("Entering new MusicZone: " + zone.name)
+	crossfade_za_into(zone.music)
+	current_mz = zone
+
+func crossfade_za_into_null():
+	crossfade_za_into(null)
+	current_mz = null
 
 func crossfade_za_into(new_audio: AudioStream):
 	# before assigning a new stream, keep track of where
