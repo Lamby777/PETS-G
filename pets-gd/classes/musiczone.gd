@@ -1,5 +1,5 @@
 class_name MusicZone
-extends Polygon2D
+extends CollisionPolygon2D
 
 @export var music: AudioStream
 
