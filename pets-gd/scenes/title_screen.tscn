@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ben252ibtpchc"]
+[gd_scene load_steps=6 format=3 uid="uid://ben252ibtpchc"]
 
 [ext_resource type="AudioStream" uid="uid://bu1akc5wvo0wo" path="res://assets/music/menu/titlebreeze.ogg" id="1_06t4m"]
 [ext_resource type="Theme" uid="uid://cc8cl7a24wn5y" path="res://themes/theme_deft.tres" id="1_174tb"]
+[ext_resource type="Script" path="res://scenes/title_screen.gd" id="2_l6ini"]
+[ext_resource type="AudioStream" uid="uid://4puxvjdkmpho" path="res://assets/sounds/petsgamestart.wav" id="4_1uee5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3rtb"]
 bg_color = Color(0.0666667, 0.0666667, 0.105882, 1)
@@ -10,11 +12,16 @@ bg_color = Color(0.0666667, 0.0666667, 0.105882, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 2160.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_174tb")
 theme_override_styles/panel = SubResource("StyleBoxFlat_o3rtb")
+script = ExtResource("2_l6ini")
 
 [node name="TitleScreenMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_06t4m")
 autoplay = true
+
+[node name="StartSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_1uee5")
