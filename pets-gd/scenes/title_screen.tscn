@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://cc8cl7a24wn5y" path="res://themes/theme_deft.tres" id="1_174tb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3rtb"]
-bg_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
+bg_color = Color(0.0666667, 0.0666667, 0.105882, 1)
 
 [node name="TitleScreen" type="PanelContainer"]
 anchors_preset = 15
