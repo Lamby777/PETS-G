@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://b0rlrppekv4vg"]
+[gd_scene load_steps=47 format=3 uid="uid://b0rlrppekv4vg"]
 
 [ext_resource type="Script" path="res://scenes/PlayerCB.gd" id="1_c77sw"]
 [ext_resource type="Script" path="res://classes/char.gd" id="2_a8l53"]
@@ -414,18 +414,12 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ty6r4"]
 resource_local_to_scene = true
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_p4qdk")
-states/Idle/position = Vector2(393, 100)
+states/Idle/position = Vector2(381, 100)
 states/Run/node = SubResource("AnimationNodeBlendSpace2D_ptivh")
 states/Run/position = Vector2(580, 100)
 states/Start/position = Vector2(186, 177)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji4br"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_iv5kx"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_boay5")]
 graph_offset = Vector2(-79, 13)
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_rrw3l"]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_dcx46"]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_imw74"]
 
 [node name="PlayerCB" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -456,11 +450,11 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_ty6r4")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_rrw3l")
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
 
 [node name="AgentS" type="Node2D" parent="."]
+visible = false
 script = ExtResource("2_a8l53")
 
 [node name="Sprite2D" type="Sprite2D" parent="AgentS"]
@@ -480,11 +474,11 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_ty6r4")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_dcx46")
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
 
 [node name="AgentT" type="Node2D" parent="."]
+visible = false
 script = ExtResource("2_a8l53")
 
 [node name="Sprite2D" type="Sprite2D" parent="AgentT"]
@@ -504,7 +498,6 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_ty6r4")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_imw74")
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
 
