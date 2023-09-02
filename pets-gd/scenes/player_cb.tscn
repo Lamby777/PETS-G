@@ -351,11 +351,11 @@ blend_point_2/pos = Vector2(0.9, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_5vuld")
 blend_point_3/pos = Vector2(0, -0.9)
 blend_point_4/node = SubResource("AnimationNodeAnimation_0wj1c")
-blend_point_4/pos = Vector2(0.5, 0.6)
+blend_point_4/pos = Vector2(0.6, 0.6)
 blend_point_5/node = SubResource("AnimationNodeAnimation_wwxso")
-blend_point_5/pos = Vector2(0.5, -0.7)
+blend_point_5/pos = Vector2(0.6, -0.6)
 blend_point_6/node = SubResource("AnimationNodeAnimation_fn6bb")
-blend_point_6/pos = Vector2(-0.6, -0.7)
+blend_point_6/pos = Vector2(-0.6, -0.6)
 blend_point_7/node = SubResource("AnimationNodeAnimation_xl44w")
 blend_point_7/pos = Vector2(-0.6, 0.6)
 blend_mode = 1
@@ -405,11 +405,10 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ji4br"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iv5kx"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_boay5"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q0w5r"]
 advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hpdl1"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ty6r4"]
 resource_local_to_scene = true
@@ -417,8 +416,8 @@ states/Idle/node = SubResource("AnimationNodeBlendSpace2D_p4qdk")
 states/Idle/position = Vector2(381, 100)
 states/Run/node = SubResource("AnimationNodeBlendSpace2D_ptivh")
 states/Run/position = Vector2(580, 100)
-states/Start/position = Vector2(186, 177)
-transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji4br"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_iv5kx"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_boay5")]
+states/Start/position = Vector2(127, 109)
+transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji4br"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_q0w5r"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_hpdl1")]
 graph_offset = Vector2(-79, 13)
 
 [node name="PlayerCB" type="CharacterBody2D"]
@@ -449,7 +448,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="AgentE"]
 tree_root = SubResource("AnimationNodeStateMachine_ty6r4")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
 
