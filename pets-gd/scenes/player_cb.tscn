@@ -12,6 +12,7 @@ size = Vector2(24, 48)
 [sub_resource type="Animation" id="Animation_6g0wi"]
 resource_name = "IdleD"
 length = 0.1
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -350,11 +351,11 @@ blend_point_2/pos = Vector2(0.9, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_5vuld")
 blend_point_3/pos = Vector2(0, -0.9)
 blend_point_4/node = SubResource("AnimationNodeAnimation_0wj1c")
-blend_point_4/pos = Vector2(0.5, 0.6)
+blend_point_4/pos = Vector2(0.6, 0.6)
 blend_point_5/node = SubResource("AnimationNodeAnimation_wwxso")
-blend_point_5/pos = Vector2(0.5, -0.7)
+blend_point_5/pos = Vector2(0.6, -0.6)
 blend_point_6/node = SubResource("AnimationNodeAnimation_fn6bb")
-blend_point_6/pos = Vector2(-0.6, -0.7)
+blend_point_6/pos = Vector2(-0.6, -0.6)
 blend_point_7/node = SubResource("AnimationNodeAnimation_xl44w")
 blend_point_7/pos = Vector2(-0.6, 0.6)
 blend_mode = 1
@@ -448,7 +449,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="AgentE"]
 tree_root = SubResource("AnimationNodeStateMachine_ty6r4")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
 
