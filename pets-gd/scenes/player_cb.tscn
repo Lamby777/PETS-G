@@ -452,7 +452,6 @@ parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
 
 [node name="AgentS" type="Node2D" parent="."]
-visible = false
 script = ExtResource("2_a8l53")
 
 [node name="Sprite2D" type="Sprite2D" parent="AgentS"]
@@ -476,7 +475,6 @@ parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
 
 [node name="AgentT" type="Node2D" parent="."]
-visible = false
 script = ExtResource("2_a8l53")
 
 [node name="Sprite2D" type="Sprite2D" parent="AgentT"]

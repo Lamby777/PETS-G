@@ -1,7 +1,4 @@
-/*
- * Test
- */
-
+use godot::prelude::*;
 use libdx::Result;
 
 fn main() -> Result<()> {
@@ -11,12 +8,10 @@ fn main() -> Result<()> {
 type DialogueOptions = Vec<DialogueNode>;
 
 struct DialogueNode {
-    text:       String,
-    options:    DialogueOptions,
+    text: String,
+    options: DialogueOptions,
 }
 
-#[cfg(test)]
 fn dialogue_yes_no() {
     unimplemented!();
 }
-
