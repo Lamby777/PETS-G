@@ -13,6 +13,7 @@
 use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
+mod battle_engine;
 mod dialogue;
 // use dialogue::*;
 
@@ -20,19 +21,3 @@ struct MyExtension;
 
 #[gdextension]
 unsafe impl ExtensionLibrary for MyExtension {}
-
-#[derive(GodotClass)]
-#[class(base=Node2D)]
-struct BattleEngine {
-    #[base]
-    node: Base<Node2D>,
-}
-
-#[godot_api]
-impl Node2DVirtual for BattleEngine {
-    fn init(node: Base<Node2D>) -> Self {
-        // Prints to the Godot console
-        godot_print!("Hello, world!");
-        Self { node }
-    }
-}
