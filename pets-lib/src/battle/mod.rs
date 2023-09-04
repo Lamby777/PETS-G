@@ -1,6 +1,7 @@
 use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
+mod player;
 mod rhythm;
 
 #[derive(GodotClass)]
