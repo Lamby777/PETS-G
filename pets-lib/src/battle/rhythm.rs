@@ -1,9 +1,9 @@
-/*
- * Rhythms for the battle system...
- *
- * Maybe this file could be imported and used for
- * developing a tool that helps automate the marking process?
- *
- * TODO add a way to deserialize from file, to allow for
- * custom rhythms and modding.
- */
+//!
+//! Rhythms for the battle system...
+//!
+//! These type defs will probably also be used for
+//! developing an open-source P/E/T/S rhythm editor.
+//!
+
+// TODO add a way to deserialize from file, to allow for
+// custom rhythms and modding.

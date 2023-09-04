@@ -1,3 +1,8 @@
+//!
+//! This module contains pretty much everything on
+//! the GDExtension side that runs during battles.
+//!
+
 use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
