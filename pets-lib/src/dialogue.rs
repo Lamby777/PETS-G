@@ -36,7 +36,9 @@ struct DialogueOption {
 
 struct DialogueNode {
     text: Vec<StringSegment>,
+
     speaker: String,
+    vox: String,
 
     options: Vec<DialogueOption>,
 }
@@ -49,6 +51,13 @@ struct StringSegment {
     color: Color,
     font: Font,
 
-    /// if None, the voice will not be changed
+    /// stuff like in Omori/Celeste where the
+    /// dialogue text shakes or moves around.
+    // movement: DialogueTextMovement,
+
+    /// if Some, this will override the default
+    /// voice if inside a dialogue tree.
+    // TODO maybe be a newtype? is this level of
+    // control over voicelines even necessary?
     vox: Option<String>,
 }
