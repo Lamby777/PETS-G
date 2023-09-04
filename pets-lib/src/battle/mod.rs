@@ -1,6 +1,8 @@
 use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
+mod rhythm;
+
 #[derive(GodotClass)]
 #[class(base=Node2D)]
 struct BattleEngine {

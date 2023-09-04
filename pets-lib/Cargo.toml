@@ -9,3 +9,4 @@ crate-type = ["cdylib"]
 [dependencies]
 libdx = "0.3.0"
 godot = { git = "https://github.com/godot-rust/gdext", branch = "master" }
+bitvec = "1.0.1"

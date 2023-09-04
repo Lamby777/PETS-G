@@ -9,7 +9,7 @@
 
 use godot::prelude::*;
 
-mod battle_engine;
+mod battle;
 mod dialogue;
 mod player;
 
