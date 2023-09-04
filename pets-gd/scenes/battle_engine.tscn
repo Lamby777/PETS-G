@@ -1,3 +1,14 @@
 [gd_scene format=3 uid="uid://kgl5788x405y"]
 
 [node name="BattleEngine" type="BattleEngine"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="Player" type="Player" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+offset_right = 10.0
+offset_bottom = 10.0
