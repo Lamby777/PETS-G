@@ -1,6 +1,6 @@
-/*
-    Dialogue system for the game.
-*/
+//!
+//! Dialogue system for the game's menus.
+//!
 
 #![allow(dead_code)]
 

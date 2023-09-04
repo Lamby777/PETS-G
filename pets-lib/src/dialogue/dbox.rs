@@ -1,3 +1,3 @@
-/*
- * Dialog box class for menus and dialogue text
- */
+//!
+//! Dialog box class for menus and dialogue text
+//!

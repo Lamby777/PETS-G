@@ -1,3 +1,7 @@
+//!
+//! Player icon that moves around n shit during battles
+//!
+
 use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
