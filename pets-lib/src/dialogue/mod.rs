@@ -7,6 +7,8 @@
 use godot::engine::Font;
 use godot::prelude::*;
 
+mod dbox;
+
 /// Possible outcomes of picking a dialogue option.
 ///
 /// Damn, we're really calling it this?
