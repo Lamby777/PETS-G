@@ -1,24 +1,22 @@
-use godot::engine::{Node2D, Node2DVirtual, Sprite2D};
+use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
 const SPEED: f32 = 200.0;
 
 #[derive(GodotClass)]
 #[class(base=Node2D)]
-struct Player {
+struct BattleIcon {
     #[base]
     node: Base<Node2D>,
 }
 
 #[godot_api]
-impl Node2DVirtual for Player {
+impl Node2DVirtual for BattleIcon {
     fn init(node: Base<Node2D>) -> Self {
         Self { node }
     }
 
     fn process(&mut self, delta: f64) {
-        // let mut ply = self.node.get_node_as::<Sprite2D>("Sprite2D");
-
         let input = Input::singleton();
         let mut velocity = Vector2::new(0.0, 0.0);
 
