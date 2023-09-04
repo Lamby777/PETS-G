@@ -7,15 +7,11 @@
  * - Cherry 9/2/2023 | <3
  */
 
-// suppress unused warnings
-#![allow(unused)]
-
-use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
 mod battle_engine;
 mod dialogue;
-// use dialogue::*;
+mod player;
 
 struct MyExtension;
 

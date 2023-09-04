@@ -16,7 +16,7 @@ impl Node2DVirtual for BattleEngine {
         Self { node }
     }
 
-    fn process(&mut self, delta: f64) {
-        // godot_print!("Hello, world!");
-    }
+    // fn process(&mut self, _delta: f64) {
+    //     godot_print!("Hello, world!");
+    // }
 }
