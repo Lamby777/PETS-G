@@ -6,7 +6,7 @@
 
 enum DialogueOptionResult {
     // can either load to another node
-    NextNode(Box<DialogueNode>),
+    NextNode(DialogueNode),
 
     // or could also be a function pointer
     Action(fn()),
