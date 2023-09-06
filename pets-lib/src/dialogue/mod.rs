@@ -31,7 +31,7 @@ enum DialogueOptionResult {
 }
 
 struct DialogueOption {
-    label: String,
+    label: StringSegment,
     available: bool,
     leads_to: DialogueOptionResult,
 }
