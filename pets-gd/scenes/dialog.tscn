@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://cc8cl7a24wn5y" path="res://themes/theme_deft.tres" id="1_jbfs2"]
 
-[node name="DialogBox" type="Panel"]
+[node name="DialogBox" type="DialogBox"]
 offset_left = 256.0
 offset_top = 608.0
 offset_right = 1664.0
