@@ -15,8 +15,12 @@ enum RhythmEvent {
     Note {
         /// Delay after this note, before going on to the
         /// next one (delay is in notes, not seconds)
-        length: u8,
+        length: f64,
     },
+
+    /// A note that deals extra damage when played
+    /// (potentially more difficult timing, too?)
+    PowerChord { length: f64, multiplier: f64 },
 }
 
 /// "Parts" of a track. Tracks can switch tempo
