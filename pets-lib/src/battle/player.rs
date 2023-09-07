@@ -42,9 +42,9 @@ impl Node2DVirtual for BattleIcon {
         Self {
             node,
 
-            speed: 120.0,
-            acceleration: 0.2,
-            friction: 0.2,
+            speed: 400.0,
+            acceleration: 80.0,
+            friction: 0.96,
 
             velocity: Vector2::new(0.0, 0.0),
         }
@@ -52,19 +52,21 @@ impl Node2DVirtual for BattleIcon {
 
     fn process(&mut self, delta: f64) {
         let input = Input::singleton();
-        let mut accel_amt = Vector2::new(0.0, 0.0);
+        let mut input_vector = Vector2::new(0.0, 0.0);
 
         self.velocity *= self.friction;
 
         for (k, v) in BATTLE_DIRECTIONS.into_iter() {
             if input.is_action_pressed(k.into()) {
-                accel_amt += v * self.acceleration;
+                input_vector += v;
             }
         }
 
-        // if self.velocity.length() > 0.0 {
-        self.velocity += accel_amt;
-        self.velocity = self.velocity.normalized() * self.speed;
+        self.velocity += self.acceleration * input_vector;
+
+        if self.velocity.length() > self.speed {
+            self.velocity = self.velocity.normalized() * self.speed;
+        }
 
         let change = self.velocity * real::from_f64(delta);
         let position = self.node.get_global_position() + change;
