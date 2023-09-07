@@ -12,8 +12,8 @@ color = Color(0, 0, 0, 1)
 [node name="BattleIcon" type="BattleIcon" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="BattleIcon"]
-offset_right = 10.0
-offset_bottom = 10.0
+offset_right = 64.0
+offset_bottom = 64.0
 
 [node name="BattleMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_uwjym")
