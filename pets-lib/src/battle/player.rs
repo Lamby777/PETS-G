@@ -42,20 +42,28 @@ impl Node2DVirtual for BattleIcon {
         Self {
             node,
 
+            /// Maximum speed of player icon
             speed: 400.0,
+
+            /// Acceleration amount per tick held
             acceleration: 80.0,
+
+            /// Coefficient of deceleration
             friction: 0.96,
 
+            /// Current velocity of player icon
+            /// NOT normalized, but still limited by speed.
             velocity: Vector2::new(0.0, 0.0),
         }
     }
 
     fn process(&mut self, delta: f64) {
         let input = Input::singleton();
-        let mut input_vector = Vector2::new(0.0, 0.0);
 
         self.velocity *= self.friction;
 
+        // check inputs
+        let mut input_vector = Vector2::new(0.0, 0.0);
         for (k, v) in BATTLE_DIRECTIONS.into_iter() {
             if input.is_action_pressed(k.into()) {
                 input_vector += v;
@@ -70,7 +78,6 @@ impl Node2DVirtual for BattleIcon {
 
         let change = self.velocity * real::from_f64(delta);
         let position = self.node.get_global_position() + change;
-        let position = Vector2::new(position.x.clamp(0.0, 1920.0), position.y.clamp(0.0, 1080.0));
         self.node.set_global_position(position);
     }
 }
