@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://kgl5788x405y"]
+[gd_scene load_steps=2 format=3 uid="uid://kgl5788x405y"]
+
+[ext_resource type="AudioStream" uid="uid://bobf56v1g63p4" path="res://assets/music/battle/alright.ogg" id="1_uwjym"]
 
 [node name="BattleEngine" type="BattleEngine"]
 
@@ -12,3 +14,7 @@ color = Color(0, 0, 0, 1)
 [node name="ColorRect" type="ColorRect" parent="BattleIcon"]
 offset_right = 10.0
 offset_bottom = 10.0
+
+[node name="BattleMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_uwjym")
+autoplay = true

@@ -20,7 +20,6 @@ struct BattleEngine {
 impl Node2DVirtual for BattleEngine {
     fn init(node: Base<Node2D>) -> Self {
         // Prints to the Godot console
-        godot_print!("Hello, world!");
         Self { node }
     }
 
