@@ -21,7 +21,7 @@ pub struct CharData {
     conditions: HashSet<StatusConditions>,
 
     /// Items this character is holding
-    inventory: Vec<items::Item>,
+    inventory: Vec<crate::items::Item>,
 }
 
 pub struct CharStateful {
@@ -35,7 +35,6 @@ pub struct CharStateful {
 
 pub struct CharStats {
     max_hp: u16,
-    max_mana: u16,
     max_energy: u16,
 
     attack: u16,
@@ -47,7 +46,12 @@ pub struct CharStats {
     // can't pick a good name for em yet
     delta: u16,
     epsilon: u16,
-    lambda: u16, // might keep this one's name tho, baa :)
+
+    // Exclusive to certain characters
+    // NOTE maybe use traits for this?
+    // idk the overhead of dynamic dispatch might not be worth it
+    lambda: Option<u16>,
+    max_mana: Option<u16>,
 }
 
 pub enum StatusConditions {
