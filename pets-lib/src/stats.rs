@@ -45,21 +45,20 @@ pub struct CharStats {
 }
 
 pub enum StatusConditions {
-    Sleeping,
-    Paralysis,
-    Crying,
+    Sleeping,    // Can't move, but recover 20% energy on wakeup
+    Paralysis,   // ^^^ No movement, no energy recovery, but still has PK. Almost no combos
+    Crying,      // Oops, all your attacks missed! Sowwy :<
+    LightHeaded, // Like uncontrollable crying + also affects PK, but lower miss rate overall
 
-    ShortBreath,
-    Dizziness,
-    Blinded,
+    ShortBreath, // No attacks, painfully slow movement
+    Dizziness,   // "Disoriented", auditory flashbang + harder combos
+    Blinded,     // Battle board turns black
 
-    // maybe refactor this part (bruh moment)
-    Heatstroke,
-    Frostbite,
-    Bleeding,
-    Poison,
-    PoisonR,
+    Heatstroke, // Damage over time
+    Frostbite,  // More damage, introduced later in the game
+    Bleeding,   // ^^^ HP meter biased towards rolling down faster
+    Poison,     // ^^^ no PK
+    PoisonR,    // ^^^ no PK, completely unable to fight (basically dead)
 
-    Tired,
-    LightHeaded,
+    Tired, // Less lenient music timing. Get some rest, dumbass! Don't emulate my bad habits.
 }
