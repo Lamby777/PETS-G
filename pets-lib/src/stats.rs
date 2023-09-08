@@ -34,6 +34,9 @@ pub struct CharStats {
     max_hp: u16,
     max_mana: u16,
     max_energy: u16,
+
+    attack: u16,
+    defense: u16,
     speed: u16,
     stability: u16,
 
