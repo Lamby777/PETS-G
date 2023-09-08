@@ -11,6 +11,7 @@ use godot::prelude::*;
 
 mod battle;
 mod dialogue;
+mod items;
 mod stats;
 
 struct MyExtension;

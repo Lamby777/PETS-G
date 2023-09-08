@@ -19,6 +19,9 @@ pub struct CharData {
 
     /// Status conditions the character has
     conditions: HashSet<StatusConditions>,
+
+    /// Items this character is holding
+    inventory: Vec<items::Item>,
 }
 
 pub struct CharStateful {
