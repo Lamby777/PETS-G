@@ -7,6 +7,7 @@
 //! - Cherry 9/2/2023 | <3
 //!
 
+#![allow(dead_code)]
 use godot::prelude::*;
 
 mod battle;
