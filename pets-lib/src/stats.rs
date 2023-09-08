@@ -4,6 +4,8 @@
 
 use std::collections::HashSet;
 
+type IntegralStat = i16;
+
 pub struct CharData {
     /// Name of the character
     name: String,
@@ -26,32 +28,32 @@ pub struct CharData {
 
 pub struct CharStateful {
     /// Current HP
-    hp: u16,
+    hp: IntegralStat,
 
     /// Current energy level
-    energy: u16,
+    energy: IntegralStat,
     // mana starts at 0 each battle
 }
 
 pub struct CharStats {
-    max_hp: u16,
-    max_energy: u16,
+    max_hp: IntegralStat,
+    max_energy: IntegralStat,
 
-    attack: u16,
-    defense: u16,
-    speed: u16,
-    stability: u16,
+    attack: IntegralStat,
+    defense: IntegralStat,
+    speed: IntegralStat,
+    stability: IntegralStat,
 
     // refer to google doc for what these do...
     // can't pick a good name for em yet
-    delta: u16,
-    epsilon: u16,
+    delta: IntegralStat,
+    epsilon: IntegralStat,
 
     // Exclusive to certain characters
     // NOTE maybe use traits for this?
     // idk the overhead of dynamic dispatch might not be worth it
-    lambda: Option<u16>,
-    max_mana: Option<u16>,
+    lambda: Option<IntegralStat>,
+    max_mana: Option<IntegralStat>,
 }
 
 pub enum StatusConditions {
