@@ -19,11 +19,6 @@ struct BattleEngine {
 #[godot_api]
 impl Node2DVirtual for BattleEngine {
     fn init(node: Base<Node2D>) -> Self {
-        // Prints to the Godot console
         Self { node }
     }
-
-    // fn process(&mut self, _delta: f64) {
-    //     godot_print!("Hello, world!");
-    // }
 }
