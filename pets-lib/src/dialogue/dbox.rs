@@ -19,10 +19,8 @@ impl PanelVirtual for DialogBox {
     }
 
     fn ready(&mut self) {
-        let node = &mut self.node;
-
-        let mut spk_txt = node.get_node_as::<RichTextLabel>("SpeakerName");
-        let mut msg_txt = node.get_node_as::<RichTextLabel>("Content");
+        let mut spk_txt = self.node.get_node_as::<RichTextLabel>("SpeakerName");
+        let mut msg_txt = self.node.get_node_as::<RichTextLabel>("Content");
 
         spk_txt.set_text("Cherry".into());
         msg_txt.set_text("Hello, World!".into());

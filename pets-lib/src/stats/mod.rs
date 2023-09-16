@@ -4,6 +4,8 @@
 
 use std::collections::HashSet;
 
+pub mod state;
+
 type IntegralStat = i16;
 
 pub struct CharData {
