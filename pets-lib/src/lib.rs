@@ -8,6 +8,7 @@
 //!
 
 #![allow(dead_code)]
+use godot::engine::Engine;
 use godot::prelude::*;
 
 mod battle;
@@ -18,4 +19,15 @@ mod stats;
 struct MyExtension;
 
 #[gdextension]
-unsafe impl ExtensionLibrary for MyExtension {}
+unsafe impl ExtensionLibrary for MyExtension {
+    fn on_level_init(level: InitLevel) {
+        if level == InitLevel::Core {
+            use stats::state::StatsInterface;
+
+            let gd: Gd<StatsInterface> = Gd::new_default();
+            let object = gd.share().upcast::<Object>();
+
+            Engine::singleton().register_singleton("Stats".into(), object);
+        }
+    }
+}
