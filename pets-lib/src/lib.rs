@@ -16,18 +16,24 @@ mod dialogue;
 mod items;
 mod stats;
 
-struct MyExtension;
+struct PetsLib;
 
 #[gdextension]
-unsafe impl ExtensionLibrary for MyExtension {
+unsafe impl ExtensionLibrary for PetsLib {
     fn on_level_init(level: InitLevel) {
-        if level == InitLevel::Core {
+        if level == InitLevel::Scene {
             use stats::state::StatsInterface;
 
             let gd: Gd<StatsInterface> = Gd::new_default();
             let object = gd.share().upcast::<Object>();
 
             Engine::singleton().register_singleton("Stats".into(), object);
+        }
+    }
+
+    fn on_level_deinit(level: InitLevel) {
+        if level == InitLevel::Scene {
+            Engine::singleton().unregister_singleton("Stats".into());
         }
     }
 }
