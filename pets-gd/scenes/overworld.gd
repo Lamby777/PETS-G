@@ -8,7 +8,11 @@ extends Node2D
 
 var current_mz: MusicZone = null
 
-func _ready():  # check if entering new zone
+func _ready():  
+  Stats.get_amogus()
+  Stats.set_amogus()
+
+  # check if entering new zone
   for zone in mzones.get_children():
     zone = zone as MusicZone # type hinting uwu
     

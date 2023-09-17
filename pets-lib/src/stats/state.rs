@@ -10,17 +10,26 @@ use godot::prelude::*;
 pub struct StatsInterface {
     #[base]
     node: Base<Node2D>,
+
+    amogus: i32,
 }
 
+#[godot_api]
 impl StatsInterface {
-    // pub fn new() -> Self {
-    //     Self { node: Base::new() }
-    // }
+    #[func]
+    pub fn get_amogus(&self) -> i32 {
+        self.amogus
+    }
+
+    #[func]
+    pub fn set_amogus(&mut self) {
+        self.amogus += 1;
+    }
 }
 
 #[godot_api]
 impl Node2DVirtual for StatsInterface {
     fn init(node: Base<Node2D>) -> Self {
-        Self { node }
+        Self { node, amogus: 0 }
     }
 }
