@@ -2,6 +2,7 @@
 //! Dialog box class for menus and dialogue text
 //!
 
+use godot::engine::global::*;
 use godot::engine::{Engine, Panel, PanelVirtual, RichTextLabel};
 use godot::prelude::*;
 
@@ -42,7 +43,8 @@ impl PanelVirtual for DialogBox {
         let input = Input::singleton();
 
         // check inputs
-        if input.is_action_pressed("battle_move_up".into()) {
+        // if input.is_action_pressed("battle_move_up".into()) {
+        if input.is_key_pressed(Key::KEY_SPACE) {
             si.set_amogus();
         }
     }
