@@ -4,16 +4,31 @@
 
 use std::collections::HashSet;
 
+use crate::items::Item;
+
+pub mod pchars;
 pub mod state;
 
 type IntegralStat = i16;
 
+/// All the information the game needs to know about a character
+#[derive(Debug)]
 pub struct CharData {
     /// Name of the character
     name: String,
 
+    // TODO following the "YAGNI" principle, I'm gonna stop adding
+    // more complicated shit here. Later on, we should prob have
+    // a way to make "base" stats affect the regular stat increase
+    // levels in both linear and constant ways. Maybe a whole separate
+    // impl for getting a stat, where the functions just do all
+    // the math under the hood? Sounds like a lot of boilerplate...
+    /// "Base" stats... Some characters are just better at some
+    /// things than others, right?
+    base_stats: CharStats,
+
     /// The character's long-term stats
-    /// "Base" stats and maximums, pretty much
+    /// "Core" stats and maximums, pretty much
     stats: CharStats,
 
     /// The character's short-term stats
@@ -25,9 +40,10 @@ pub struct CharData {
     conditions: HashSet<StatusConditions>,
 
     /// Items this character is holding
-    inventory: Vec<crate::items::Item>,
+    inventory: Vec<Item>,
 }
 
+#[derive(Debug)]
 pub struct CharStateful {
     /// Current HP
     hp: IntegralStat,
@@ -37,6 +53,7 @@ pub struct CharStateful {
     // mana starts at 0 each battle
 }
 
+#[derive(Debug)]
 pub struct CharStats {
     max_hp: IntegralStat,
     max_energy: IntegralStat,
@@ -58,6 +75,7 @@ pub struct CharStats {
     max_mana: Option<IntegralStat>,
 }
 
+#[derive(Debug)]
 pub enum StatusConditions {
     Sleeping,    // Can't move, but recover 20% energy on wakeup
     Paralysis,   // ^^^ No movement, no energy recovery, but still has PK. Almost no combos

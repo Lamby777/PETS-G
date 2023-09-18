@@ -2,8 +2,14 @@
 //! Singleton for accessing player stats in GDScript.
 //!
 
+use std::collections::HashMap;
+
 use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
+use std::cell::RefCell;
+use std::rc::Rc;
+
+use super::CharData;
 
 #[derive(GodotClass)]
 #[class(base=Node2D)]
@@ -11,25 +17,25 @@ pub struct StatsInterface {
     #[base]
     node: Base<Node2D>,
 
-    amogus: i32,
+    characters: HashMap<String, Rc<RefCell<CharData>>>,
 }
 
 #[godot_api]
 impl StatsInterface {
-    #[func]
-    pub fn get_amogus(&self) -> i32 {
-        self.amogus
-    }
+    // #[func]
+    pub fn get_character(&self, ch: String) -> Rc<RefCell<CharData>> {
+        let rc = self.characters.get(&ch).expect("No such character!");
 
-    #[func]
-    pub fn set_amogus(&mut self) {
-        self.amogus += 1;
+        rc.clone()
     }
 }
 
 #[godot_api]
 impl Node2DVirtual for StatsInterface {
     fn init(node: Base<Node2D>) -> Self {
-        Self { node, amogus: 0 }
+        Self {
+            node,
+            characters: HashMap::new(),
+        }
     }
 }

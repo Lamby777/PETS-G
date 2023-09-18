@@ -5,6 +5,7 @@
 
 use crate::stats::CharStats;
 
+#[derive(Debug)]
 pub struct Item {
     categories: Vec<ItemCategory>,
 
@@ -12,6 +13,7 @@ pub struct Item {
     equip_offset: CharStats,
 }
 
+#[derive(Debug)]
 pub enum ItemCategory {
     Weapon,
     Armor,
