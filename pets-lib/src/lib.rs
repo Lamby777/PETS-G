@@ -25,7 +25,7 @@ unsafe impl ExtensionLibrary for PetsLib {
             use stats::state::StatsInterface;
 
             let gd: Gd<StatsInterface> = Gd::new_default();
-            let object = gd.share().upcast::<Object>();
+            let object = gd.clone().upcast::<Object>();
 
             Engine::singleton().register_singleton("Stats".into(), object);
         }
