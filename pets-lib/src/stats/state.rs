@@ -17,6 +17,7 @@ pub struct StatsInterface {
     #[base]
     node: Base<Node2D>,
 
+    /// Hash map of info on all the different characters in the game.
     characters: HashMap<String, Rc<RefCell<CharData>>>,
 }
 
@@ -24,9 +25,10 @@ pub struct StatsInterface {
 impl StatsInterface {
     // #[func]
     pub fn get_character(&self, ch: String) -> Rc<RefCell<CharData>> {
-        let rc = self.characters.get(&ch).expect("No such character!");
-
-        rc.clone()
+        self.characters
+            .get(&ch)
+            .expect("key should be a valid PChar name")
+            .clone()
     }
 }
 
