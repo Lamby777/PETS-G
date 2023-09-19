@@ -10,6 +10,7 @@
 #![allow(dead_code)]
 use godot::engine::Engine;
 use godot::prelude::*;
+use stats::state::StatsInterface;
 
 mod battle;
 mod dialogue;
@@ -22,8 +23,6 @@ struct PetsLib;
 unsafe impl ExtensionLibrary for PetsLib {
     fn on_level_init(level: InitLevel) {
         if level == InitLevel::Scene {
-            use stats::state::StatsInterface;
-
             let gd: Gd<StatsInterface> = Gd::new_default();
             let object = gd.clone().upcast::<Object>();
 
