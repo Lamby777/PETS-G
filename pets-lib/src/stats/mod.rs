@@ -7,6 +7,7 @@ use std::collections::HashSet;
 use crate::items::Item;
 
 pub mod pchars;
+pub mod savefiles;
 pub mod state;
 
 type IntegralStat = i16;
