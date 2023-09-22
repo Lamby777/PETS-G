@@ -4,18 +4,14 @@
 
 use std::collections::HashMap;
 
-use godot::engine::file_access::ModeFlags;
-use godot::engine::{FileAccess, Node2D, Node2DVirtual};
+use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 use std::cell::RefCell;
 use std::rc::Rc;
 
-use super::CharData;
+use super::{CharData, CharMap};
 
-type CharMap = HashMap<String, Rc<RefCell<CharData>>>;
-
-fn load_charmap() -> Option<CharMap> {
-    let file = FileAccess::open("user://".into(), ModeFlags::READ);
+fn load_charmap(save_slot: u8) -> Option<CharMap> {
     todo!()
 }
 
@@ -43,7 +39,7 @@ impl StatsInterface {
 #[godot_api]
 impl Node2DVirtual for StatsInterface {
     fn init(node: Base<Node2D>) -> Self {
-        let charmap = load_charmap().unwrap_or_else(|| todo!());
+        let charmap = load_charmap(1).unwrap_or_else(|| todo!());
 
         Self {
             node,
