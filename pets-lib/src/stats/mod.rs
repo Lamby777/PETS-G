@@ -2,7 +2,13 @@
 //! This module is for character/enemy stat type definitions
 //!
 
-use std::collections::HashSet;
+use std::{
+    cell::RefCell,
+    collections::{HashMap, HashSet},
+    rc::Rc,
+};
+
+use serde::{Deserialize, Serialize};
 
 use crate::items::Item;
 
@@ -10,10 +16,11 @@ pub mod pchars;
 pub mod savefiles;
 pub mod state;
 
-type IntegralStat = i16;
+pub type CharMap = HashMap<String, Rc<RefCell<CharData>>>;
+pub type IntegralStat = i16;
 
 /// All the information the game needs to know about a character
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct CharData {
     /// Name of the character
     name: String,
@@ -44,7 +51,7 @@ pub struct CharData {
     inventory: Vec<Item>,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct CharStateful {
     /// Current HP
     hp: IntegralStat,
@@ -54,7 +61,7 @@ pub struct CharStateful {
     // mana starts at 0 each battle
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct CharStats {
     max_hp: IntegralStat,
     max_energy: IntegralStat,
@@ -76,7 +83,7 @@ pub struct CharStats {
     max_mana: Option<IntegralStat>,
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum StatusConditions {
     Sleeping,    // Can't move, but recover 20% energy on wakeup
     Paralysis,   // ^^^ No movement, no energy recovery, but still has PK. Almost no combos
