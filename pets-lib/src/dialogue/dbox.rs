@@ -42,7 +42,7 @@ impl PanelVirtual for DialogBox {
     fn init(node: Base<Panel>) -> Self {
         Self {
             node,
-            si: StatsInterface::share(),
+            si: StatsInterface::singleton(),
         }
     }
 

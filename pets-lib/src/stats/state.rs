@@ -23,7 +23,7 @@ pub struct StatsInterface {
 #[godot_api]
 impl StatsInterface {
     /// Get a shared ref to the singleton to store in other node structs
-    pub fn share() -> Gd<StatsInterface> {
+    pub fn singleton() -> Gd<StatsInterface> {
         Engine::singleton()
             .get_singleton("Stats".into())
             .unwrap()

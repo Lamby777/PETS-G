@@ -56,7 +56,7 @@ impl Node2DVirtual for BattleIcon {
             friction: 0.96,
             velocity: Vector2::new(0.0, 0.0),
 
-            si: StatsInterface::share(),
+            si: StatsInterface::singleton(),
         }
     }
 
