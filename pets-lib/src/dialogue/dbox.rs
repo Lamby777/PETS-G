@@ -13,6 +13,8 @@ struct DialogBox {
     #[base]
     node: Base<Panel>,
 
+    // Stat Interface reference-counted
+    // This is fine to keep a ref to cuz they won't be dropped anyway
     si: Gd<StatsInterface>,
 }
 
@@ -24,10 +26,12 @@ impl DialogBox {
         self.msg_txt().set_text("Hello, World!".into());
     }
 
+    /// Get the speaker name label
     fn spk_txt(&self) -> Gd<RichTextLabel> {
         self.node.get_node_as::<RichTextLabel>("SpeakerName")
     }
 
+    /// Get the message text label
     fn msg_txt(&self) -> Gd<RichTextLabel> {
         self.node.get_node_as::<RichTextLabel>("Content")
     }
