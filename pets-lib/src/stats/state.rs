@@ -35,7 +35,8 @@ impl StatsInterface {
 #[godot_api]
 impl Node2DVirtual for StatsInterface {
     fn init(node: Base<Node2D>) -> Self {
-        // start empty, load other if the player picks a save file instead of "new"
+        // start empty, load other if the player
+        // picks a save file instead of "new"
         let charmap = SaveFile::new_empty();
 
         Self {
