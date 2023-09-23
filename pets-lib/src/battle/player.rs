@@ -5,6 +5,8 @@
 use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
+use crate::stats::state::StatsInterface;
+
 type DirectionalInputNames = [(&'static str, Vector2); 4];
 
 // I spent legit 2 hours trying to find a
@@ -27,13 +29,20 @@ struct BattleIcon {
     #[base]
     node: Base<Node2D>,
 
-    /// Speed of player icon
+    /// Maximum speed of player icon
     speed: f32,
+
+    /// Acceleration amount per tick held
     acceleration: f32,
+
+    /// Coefficient of deceleration
     friction: f32,
 
     /// Current velocity of player icon
+    /// NOT normalized, but still limited by speed.
     velocity: Vector2,
+
+    si: Gd<StatsInterface>,
 }
 
 #[godot_api]
@@ -42,19 +51,17 @@ impl Node2DVirtual for BattleIcon {
         Self {
             node,
 
-            /// Maximum speed of player icon
             speed: 400.0,
-
-            /// Acceleration amount per tick held
             acceleration: 80.0,
-
-            /// Coefficient of deceleration
             friction: 0.96,
-
-            /// Current velocity of player icon
-            /// NOT normalized, but still limited by speed.
             velocity: Vector2::new(0.0, 0.0),
+
+            si: StatsInterface::share(),
         }
+    }
+
+    fn ready(&mut self) {
+        self.speed = self.speed * 5.0;
     }
 
     fn process(&mut self, delta: f64) {

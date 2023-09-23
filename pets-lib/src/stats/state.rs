@@ -2,7 +2,7 @@
 //! Singleton for accessing player stats in GDScript.
 //!
 
-use godot::engine::{Node2D, Node2DVirtual};
+use godot::engine::{Engine, Node2D, Node2DVirtual};
 use godot::prelude::*;
 use std::cell::RefCell;
 use std::rc::Rc;
@@ -22,6 +22,14 @@ pub struct StatsInterface {
 
 #[godot_api]
 impl StatsInterface {
+    /// Get a shared ref to the singleton to store in other node structs
+    pub fn share() -> Gd<StatsInterface> {
+        Engine::singleton()
+            .get_singleton("Stats".into())
+            .unwrap()
+            .cast()
+    }
+
     // #[func]
     pub fn get_character(&self, ch: String) -> Rc<RefCell<CharData>> {
         self.save

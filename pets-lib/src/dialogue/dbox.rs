@@ -2,7 +2,7 @@
 //! Dialog box class for menus and dialogue text
 //!
 
-use godot::engine::{Engine, Panel, PanelVirtual, RichTextLabel};
+use godot::engine::{Panel, PanelVirtual, RichTextLabel};
 use godot::prelude::*;
 
 use crate::stats::state::StatsInterface;
@@ -40,12 +40,10 @@ impl DialogBox {
 #[godot_api]
 impl PanelVirtual for DialogBox {
     fn init(node: Base<Panel>) -> Self {
-        let si = Engine::singleton()
-            .get_singleton("Stats".into())
-            .unwrap()
-            .cast::<StatsInterface>();
-
-        Self { node, si }
+        Self {
+            node,
+            si: StatsInterface::share(),
+        }
     }
 
     fn ready(&mut self) {
