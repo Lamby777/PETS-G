@@ -2,7 +2,7 @@
 //! Singleton for accessing player stats in GDScript.
 //!
 
-use godot::engine::{Engine, Node2D, Node2DVirtual};
+use godot::engine::Engine;
 use godot::prelude::*;
 use std::cell::RefCell;
 use std::rc::Rc;
@@ -11,10 +11,10 @@ use super::savefiles::SaveFile;
 use super::CharData;
 
 #[derive(GodotClass)]
-#[class(base=Node2D)]
+#[class(base=RefCounted)]
 pub struct StatsInterface {
     #[base]
-    node: Base<Node2D>,
+    node: Base<RefCounted>,
 
     /// Hash map of info on all the different characters in the game.
     save: SaveFile,
@@ -41,8 +41,8 @@ impl StatsInterface {
 }
 
 #[godot_api]
-impl Node2DVirtual for StatsInterface {
-    fn init(node: Base<Node2D>) -> Self {
+impl RefCountedVirtual for StatsInterface {
+    fn init(node: Base<RefCounted>) -> Self {
         // start empty, load other if the player
         // picks a save file instead of "new"
         let charmap = SaveFile::new_empty();
