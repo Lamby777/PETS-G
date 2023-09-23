@@ -14,16 +14,22 @@ struct DialogBox {
     node: Base<Panel>,
 
     si: Gd<StatsInterface>,
-    spk_txt: Gd<RichTextLabel>,
-    msg_txt: Gd<RichTextLabel>,
 }
 
 #[godot_api]
 impl DialogBox {
     #[func]
     fn do_draw(&mut self) {
-        self.spk_txt.set_text("Cherry".into());
-        self.msg_txt.set_text("Hello, World!".into());
+        self.spk_txt().set_text("Cherry".into());
+        self.msg_txt().set_text("Hello, World!".into());
+    }
+
+    fn spk_txt(&self) -> Gd<RichTextLabel> {
+        self.node.get_node_as::<RichTextLabel>("SpeakerName")
+    }
+
+    fn msg_txt(&self) -> Gd<RichTextLabel> {
+        self.node.get_node_as::<RichTextLabel>("Content")
     }
 }
 
@@ -35,15 +41,7 @@ impl PanelVirtual for DialogBox {
             .unwrap()
             .cast::<StatsInterface>();
 
-        let spk_txt = node.get_node_as::<RichTextLabel>("SpeakerName");
-        let msg_txt = node.get_node_as::<RichTextLabel>("Content");
-
-        Self {
-            node,
-            si,
-            spk_txt,
-            msg_txt,
-        }
+        Self { node, si }
     }
 
     fn ready(&mut self) {
