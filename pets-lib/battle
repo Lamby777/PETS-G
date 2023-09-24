@@ -1,2 +1,2 @@
 #!/bin/bash
-./run.sh ../pets-gd/scenes/battle_engine.tscn
+./run ../pets-gd/scenes/battle_engine.tscn
