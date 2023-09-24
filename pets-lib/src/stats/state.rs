@@ -11,10 +11,10 @@ use super::savefiles::SaveFile;
 use super::CharData;
 
 #[derive(GodotClass)]
-#[class(base=RefCounted)]
+#[class(base=Object)]
 pub struct StatsInterface {
     #[base]
-    node: Base<RefCounted>,
+    node: Base<Object>,
 
     /// Hash map of info on all the different characters in the game.
     save: SaveFile,
@@ -31,18 +31,18 @@ impl StatsInterface {
     }
 
     // #[func]
-    pub fn get_character(&self, ch: String) -> Rc<RefCell<CharData>> {
+    pub fn get_character(&self, ch: &str) -> Rc<RefCell<CharData>> {
         self.save
             .chars
-            .get(&ch)
+            .get(ch)
             .expect("key should be a valid PChar name")
             .clone()
     }
 }
 
 #[godot_api]
-impl RefCountedVirtual for StatsInterface {
-    fn init(node: Base<RefCounted>) -> Self {
+impl ObjectVirtual for StatsInterface {
+    fn init(node: Base<Object>) -> Self {
         // start empty, load other if the player
         // picks a save file instead of "new"
         let charmap = SaveFile::new_empty();

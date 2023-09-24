@@ -23,7 +23,7 @@ pub type IntegralStat = i16;
 #[derive(Debug, Serialize, Deserialize)]
 pub struct CharData {
     /// Name of the character
-    name: String,
+    pub name: String,
 
     // TODO following the "YAGNI" principle, I'm gonna stop adding
     // more complicated shit here. Later on, we should prob have
@@ -33,54 +33,54 @@ pub struct CharData {
     // the math under the hood? Sounds like a lot of boilerplate...
     /// "Base" stats... Some characters are just better at some
     /// things than others, right?
-    base_stats: CharStats,
+    pub base_stats: CharStats,
 
     /// The character's long-term stats
     /// "Core" stats and maximums, pretty much
-    stats: CharStats,
+    pub stats: CharStats,
 
     /// The character's short-term stats
     /// Stuff like how full a bar is, etc.
     // seriously hope this won't cause a typo later
-    state: CharStateful,
+    pub state: CharStateful,
 
     /// Status conditions the character has
-    conditions: HashSet<StatusConditions>,
+    pub conditions: HashSet<StatusConditions>,
 
     /// Items this character is holding
-    inventory: Vec<Item>,
+    pub inventory: Vec<Item>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct CharStateful {
     /// Current HP
-    hp: IntegralStat,
+    pub hp: IntegralStat,
 
     /// Current energy level
-    energy: IntegralStat,
+    pub energy: IntegralStat,
     // mana starts at 0 each battle
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct CharStats {
-    max_hp: IntegralStat,
-    max_energy: IntegralStat,
+    pub max_hp: IntegralStat,
+    pub max_energy: IntegralStat,
 
-    attack: IntegralStat,
-    defense: IntegralStat,
-    speed: IntegralStat,
-    stability: IntegralStat,
+    pub attack: IntegralStat,
+    pub defense: IntegralStat,
+    pub speed: IntegralStat,
+    pub stability: IntegralStat,
 
     // refer to google doc for what these do...
     // can't pick a good name for em yet
-    delta: IntegralStat,
-    epsilon: IntegralStat,
+    pub delta: IntegralStat,
+    pub epsilon: IntegralStat,
 
     // Exclusive to certain characters
     // NOTE maybe use traits for this?
     // idk the overhead of dynamic dispatch might not be worth it
-    lambda: Option<IntegralStat>,
-    max_mana: Option<IntegralStat>,
+    pub lambda: Option<IntegralStat>,
+    pub max_mana: Option<IntegralStat>,
 }
 
 #[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
