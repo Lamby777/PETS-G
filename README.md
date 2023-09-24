@@ -1,18 +1,20 @@
 # P/E/T/S (Rewritten)
 
-So as it turns out, using C2 wasn't exactly a good idea for this game. Rewriting
-the whole game in Godot now, which will probably take a while, since Godot 4 is
-fairly new...
+Rewriting my game I started back in 2019, except actually finishing it this time
+because I picked a good game engine that doesn't make basic programming and
+control of your own hardware overly complicated... and is also open-source! <3
 
 ---
-
-Feel free to submit PRs and whatever, but I can't guarantee I'll be too active.
 
 Using [godot-rust/gdext](https://github.com/godot-rust/gdextension) for complex
 parts because compile-time type safety go brrrr. Prefer GDScript for the simple
 parts of the game's code, though.
 
-Using Godot version 4.1.1
+Using Godot version 4.1.1.
+
+Godot 4.2 is coming out soon, and I don't see any reason not to update yet, so
+unless some major shit goes down in terms of compatibility, I'll probably update
+to that too. (Updating from 4.0 -> 4.1 was kind of a massive waste of my time)
 
 ---
 
@@ -21,3 +23,27 @@ This game is... well, obviously... free and open-source software! Yay! 🎉
 Many of my favorite games are either entirely free (no microtransactions) OR
 open-source / respect your digital freedoms. Be the change you wish to see in
 the world, right?
+
+---
+
+## (Recommended...?) Workflow
+
+You're probably gonna want to spend most of your time in the `pets-lib` folder.
+This is where the Rust side of the codebase is in. The `pets-gd` folder has the
+Godot project, but that's edited with the actual Godot editor.
+
+There are 2 quickstart scripts in `pets-lib` for my CLI text editor bois. The
+`run` script just opens the main scene with whatever arguments you give. The
+`battle` one similarly just opens the battle scene. This is pretty nice for
+testing purposes, but I think hot reloading GDExtension Rust libraries might
+have support now...? (Not entirely sure... I changed a string once and it
+updated on next startup, but idk about entire classes/nodes. Those probably need
+restarts.)
+
+Refer to
+[this wiki page](https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html)
+for arguments n stuff to pass into these scripts. One useful argument is `-e`,
+which opens the editor instead of running the scene as a game.
+
+When you finish making changes, build the library and start the game. Pretty
+self-explanatory from there.
