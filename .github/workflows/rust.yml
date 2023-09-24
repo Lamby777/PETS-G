@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: dtolnay/rust-toolchain@stable
+    - uses: dtolnay/rust-toolchain@nightly
     - name: Build
       working-directory: pets-lib
       run: cargo build --verbose
