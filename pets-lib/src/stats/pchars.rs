@@ -8,36 +8,44 @@
 /// tl;dr get used to it.
 pub struct PChar;
 
+macro_rules! pchar_names {
+    ($($name:ident),*) => {
+        $(pub const $name: &'static str = stringify!($name);)*
+    };
+}
+
 impl PChar {
-    // ------------------------------------------------------------
-    // the "chosen ones"... :)
-    // ------------------------------------------------------------
-    pub const PORKY: &str = "Porky";
-    pub const ETHAN: &str = "Ethan";
-    pub const TERRA: &str = "Terra";
-    pub const SIVA: &str = "Siva";
+    pchar_names! {
+        // --------------------------------------------------------
+        // the "chosen ones"... :)
+        // --------------------------------------------------------
+        PORKY,
+        ETHAN,
+        TERRA,
+        SIVA,
 
-    // ------------------------------------------------------------
-    // These guys will definitely be playable in the main storyline.
-    // ------------------------------------------------------------
-    pub const DYLAN: &str = "Dylan";
-    pub const MIRA: &str = "Mira";
+        // --------------------------------------------------------
+        // These guys will def be playable in the main storyline.
+        // --------------------------------------------------------
+        DYLAN,
+        MIRA,
 
-    // ------------------------------------------------------------
-    // not sure if these guys are gonna be playable in the main game...
-    // either way, they still have side-stories so they still need PChars
-    // ------------------------------------------------------------
-    pub const FUZZY: &str = "Fuzzy";
-    pub const LEO: &str = "Leo";
-    pub const LYEMBO: &str = "L'yembo";
+        // --------------------------------------------------------
+        // not sure if these guys will be playable in the main game,
+        // but they still have side-stories so they'd still need PChars
+        // --------------------------------------------------------
+        FUZZY,
+        LEO,
+        LYEMBO,
 
-    // ------------------------------------------------------------
-    // These guys MIGHT be playable at some point...
-    // ------------------------------------------------------------
-    pub const WINTHRUS: &str = "Winthrus";
-    pub const JUNO: &str = "Juno";
-    pub const HASSAN: &str = "Hassan";
-    pub const NYX: &str = "Nyx";
-    pub const QUOLO: &str = "Quolo";
-    pub const BOBBY: &str = "Bobby";
+        // --------------------------------------------------------
+        // These guys MIGHT be playable at some point...
+        // --------------------------------------------------------
+        WINTHRUS,
+        JUNO,
+        HASSAN,
+        NYX,
+        QUOLO,
+        BOBBY
+    }
 }
