@@ -9,13 +9,7 @@ use crate::prelude::*;
 
 type DirectionalInputNames = [(&'static str, Vector2); 4];
 
-// I spent legit 2 hours trying to find a
-// good way to do this at compile-time without
-// repetition or leaking as static...
-//
-// hopefully this'll be fixed later but it's
-// still better than running format!() once every
-// time process() is called.
+// TODO make this comptime... code smell lol
 const BATTLE_DIRECTIONS: DirectionalInputNames = [
     ("battle_move_up", Vector2::UP),
     ("battle_move_down", Vector2::DOWN),

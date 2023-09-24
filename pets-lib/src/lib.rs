@@ -18,7 +18,7 @@ mod items;
 mod stats;
 
 mod prelude {
-    // probably put dialog box opener method here later
+    // TODO probably put dialog box opener method here later
 
     // item stuff, probably useful everywhere
     pub use crate::items::*;
@@ -37,7 +37,7 @@ unsafe impl ExtensionLibrary for PetsLib {
     fn on_level_init(level: InitLevel) {
         if level == InitLevel::Scene {
             let gd: Gd<StatsInterface> = Gd::new_default();
-            let object = gd.clone().upcast::<Object>();
+            let object = gd.upcast::<Object>();
 
             Engine::singleton().register_singleton("Stats".into(), object);
         }
