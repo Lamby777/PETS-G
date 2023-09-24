@@ -5,15 +5,11 @@
 use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
+use crate::prelude::*;
+
 type DirectionalInputNames = [(&'static str, Vector2); 4];
 
-// I spent legit 2 hours trying to find a
-// good way to do this at compile-time without
-// repetition or leaking as static...
-//
-// hopefully this'll be fixed later but it's
-// still better than running format!() once every
-// time process() is called.
+// TODO make this comptime... code smell lol
 const BATTLE_DIRECTIONS: DirectionalInputNames = [
     ("battle_move_up", Vector2::UP),
     ("battle_move_down", Vector2::DOWN),
@@ -27,13 +23,20 @@ struct BattleIcon {
     #[base]
     node: Base<Node2D>,
 
-    /// Speed of player icon
+    /// Maximum speed of player icon
     speed: f32,
+
+    /// Acceleration amount per tick held
     acceleration: f32,
+
+    /// Coefficient of deceleration
     friction: f32,
 
     /// Current velocity of player icon
+    /// NOT normalized, but still limited by speed.
     velocity: Vector2,
+
+    si: Gd<StatsInterface>,
 }
 
 #[godot_api]
@@ -42,19 +45,20 @@ impl Node2DVirtual for BattleIcon {
         Self {
             node,
 
-            /// Maximum speed of player icon
             speed: 400.0,
-
-            /// Acceleration amount per tick held
             acceleration: 80.0,
-
-            /// Coefficient of deceleration
             friction: 0.96,
-
-            /// Current velocity of player icon
-            /// NOT normalized, but still limited by speed.
             velocity: Vector2::new(0.0, 0.0),
+
+            si: StatsInterface::singleton(),
         }
+    }
+
+    fn ready(&mut self) {
+        let ch = self.si.bind().get_character("Test");
+        let ch_speed = ch.borrow().base_stats.speed;
+
+        self.speed = ch_speed.into();
     }
 
     fn process(&mut self, delta: f64) {

@@ -1,6 +1,12 @@
 class_name Globals
 extends Node
 
+func _process(_delta):
+  if Input.is_key_pressed(KEY_0):
+    get_tree().change_scene_to_file("res://scenes/world.tscn")
+  elif Input.is_key_pressed(KEY_1):
+    get_tree().change_scene_to_file("res://scenes/dialog.tscn")
+
 func _ready():
   discord_rich_presence()
 
