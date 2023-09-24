@@ -10,7 +10,7 @@ use std::{
 
 use serde::{Deserialize, Serialize};
 
-use crate::items::Item;
+use crate::prelude::*;
 
 pub mod pchars;
 pub mod savefiles;

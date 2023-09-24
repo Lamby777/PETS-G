@@ -3,7 +3,7 @@
 //! For inventory-related types, check out `inv.rs`
 //!
 
-use crate::stats::CharStats;
+use crate::prelude::*;
 use serde::{Deserialize, Serialize};
 
 /// A single item definition, stored in item hashtable for lookup.

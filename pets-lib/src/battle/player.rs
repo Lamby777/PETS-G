@@ -5,7 +5,7 @@
 use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
-use crate::stats::state::StatsInterface;
+use crate::prelude::*;
 
 type DirectionalInputNames = [(&'static str, Vector2); 4];
 

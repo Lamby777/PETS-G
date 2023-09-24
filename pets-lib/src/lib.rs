@@ -17,6 +17,19 @@ mod dialogue;
 mod items;
 mod stats;
 
+mod prelude {
+    // probably put dialog box opener method here later
+
+    // item stuff, probably useful everywhere
+    pub use crate::items::*;
+
+    // stats stuff
+    pub use crate::stats::pchars::PChar;
+    pub use crate::stats::savefiles::SaveFile;
+    pub use crate::stats::state::StatsInterface;
+    pub use crate::stats::*;
+}
+
 struct PetsLib;
 
 #[gdextension]
