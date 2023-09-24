@@ -61,7 +61,10 @@ impl Node2DVirtual for BattleIcon {
     }
 
     fn ready(&mut self) {
-        self.speed = self.speed * 5.0;
+        let ch = self.si.bind().get_character("Test");
+        let ch_speed = ch.borrow().base_stats.speed;
+
+        self.speed = ch_speed.into();
     }
 
     fn process(&mut self, delta: f64) {
