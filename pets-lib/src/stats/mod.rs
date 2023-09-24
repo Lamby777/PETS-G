@@ -41,8 +41,7 @@ pub struct CharData {
 
     /// The character's short-term stats
     /// Stuff like how full a bar is, etc.
-    // seriously hope this won't cause a typo later
-    pub state: CharStateful,
+    pub state: CharStatsStateful,
 
     /// Status conditions the character has
     pub conditions: HashSet<StatusConditions>,
@@ -52,7 +51,7 @@ pub struct CharData {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct CharStateful {
+pub struct CharStatsStateful {
     /// Current HP
     pub hp: IntegralStat,
 
