@@ -7,8 +7,7 @@ use godot::prelude::*;
 use std::cell::RefCell;
 use std::rc::Rc;
 
-use super::savefiles::SaveFile;
-use super::CharData;
+use crate::prelude::*;
 
 #[derive(GodotClass)]
 #[class(base=Object)]

@@ -2,7 +2,7 @@
 //! This file is for saving/loading the game.
 //!
 
-use super::CharMap;
+use crate::prelude::*;
 use godot::engine::{file_access::ModeFlags, FileAccess};
 use serde::{Deserialize, Serialize};
 

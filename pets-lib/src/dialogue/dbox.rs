@@ -5,7 +5,7 @@
 use godot::engine::{Panel, PanelVirtual, RichTextLabel};
 use godot::prelude::*;
 
-use crate::stats::state::StatsInterface;
+use crate::prelude::*;
 
 #[derive(GodotClass)]
 #[class(base=Panel)]
