@@ -2,11 +2,10 @@
 //! Player icon that moves around n shit during battles
 //!
 
-const SPEED_STAT_MULTIPLIER: IntegralStat = 300;
-
 use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
+use super::stat_translation::to_battle;
 use crate::prelude::*;
 
 type DirectionalInputNames = [(&'static str, Vector2); 4];
@@ -26,13 +25,13 @@ struct BattleIcon {
     node: Base<Node2D>,
 
     /// Maximum speed of player icon
-    speed: f32,
+    speed: FloatStat,
 
     /// Acceleration amount per tick held
-    acceleration: f32,
+    acceleration: FloatStat,
 
     /// Coefficient of deceleration
-    friction: f32,
+    friction: FloatStat,
 
     /// Current velocity of player icon
     /// NOT normalized, but still limited by speed.
@@ -60,7 +59,7 @@ impl Node2DVirtual for BattleIcon {
         let ch = self.si.bind().get_character(PChar::ETHAN);
         let ch_speed = ch.borrow().base_stats.speed;
 
-        self.speed = (ch_speed * SPEED_STAT_MULTIPLIER).into();
+        self.speed = to_battle::speed(ch_speed);
     }
 
     fn process(&mut self, delta: f64) {

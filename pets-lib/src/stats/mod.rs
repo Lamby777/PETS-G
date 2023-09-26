@@ -18,6 +18,7 @@ pub mod state;
 
 pub type CharMap = HashMap<String, Rc<RefCell<CharData>>>;
 pub type IntegralStat = i16;
+pub type FloatStat = f32;
 
 /// All the information the game needs to know about a character
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -80,8 +81,8 @@ impl Default for CharData {
             delta: 0,
             epsilon: 0,
 
-            max_mana: None,
-            lambda: None,
+            max_mana: Some(0),
+            lambda: Some(0),
         };
 
         let state = CharStatsStateful {

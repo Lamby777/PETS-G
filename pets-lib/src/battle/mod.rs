@@ -8,6 +8,7 @@ use godot::prelude::*;
 
 mod player;
 mod rhythm;
+mod stat_translation;
 
 #[derive(GodotClass)]
 #[class(base=Node2D)]
