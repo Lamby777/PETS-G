@@ -2,6 +2,8 @@
 //! Player icon that moves around n shit during battles
 //!
 
+const SPEED_STAT_MULTIPLIER: IntegralStat = 300;
+
 use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
@@ -55,10 +57,10 @@ impl Node2DVirtual for BattleIcon {
     }
 
     fn ready(&mut self) {
-        let ch = self.si.bind().get_character("Test");
+        let ch = self.si.bind().get_character(PChar::ETHAN);
         let ch_speed = ch.borrow().base_stats.speed;
 
-        self.speed = ch_speed.into();
+        self.speed = (ch_speed * SPEED_STAT_MULTIPLIER).into();
     }
 
     fn process(&mut self, delta: f64) {

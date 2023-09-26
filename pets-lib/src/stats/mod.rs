@@ -20,7 +20,7 @@ pub type CharMap = HashMap<String, Rc<RefCell<CharData>>>;
 pub type IntegralStat = i16;
 
 /// All the information the game needs to know about a character
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct CharData {
     /// Name of the character
     pub name: String,
@@ -50,7 +50,57 @@ pub struct CharData {
     pub inventory: Vec<Item>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+impl Default for CharData {
+    fn default() -> Self {
+        // This part is a bit ugly...
+
+        let base_stats = CharStats {
+            max_hp: 20,
+            max_energy: 10,
+
+            attack: 1,
+            defense: 0,
+            speed: 1,
+            stability: 40,
+            delta: 0,
+            epsilon: 1,
+
+            max_mana: None,
+            lambda: None,
+        };
+
+        let stats = CharStats {
+            max_hp: 0,
+            max_energy: 0,
+
+            attack: 0,
+            defense: 0,
+            speed: 0,
+            stability: 0,
+            delta: 0,
+            epsilon: 0,
+
+            max_mana: None,
+            lambda: None,
+        };
+
+        let state = CharStatsStateful {
+            hp: base_stats.max_hp,
+            energy: base_stats.max_energy,
+        };
+
+        CharData {
+            name: "Chicken Nugget".to_owned(),
+            base_stats,
+            stats,
+            state,
+            conditions: HashSet::new(),
+            inventory: vec![],
+        }
+    }
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct CharStatsStateful {
     /// Current HP
     pub hp: IntegralStat,
@@ -60,7 +110,7 @@ pub struct CharStatsStateful {
     // mana starts at 0 each battle
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct CharStats {
     pub max_hp: IntegralStat,
     pub max_energy: IntegralStat,
@@ -82,7 +132,7 @@ pub struct CharStats {
     pub max_mana: Option<IntegralStat>,
 }
 
-#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Clone)]
 pub enum StatusConditions {
     Sleeping,    // Can't move, but recover 20% energy on wakeup
     Paralysis,   // ^^^ No movement, no energy recovery, but still has PK. Almost no combos

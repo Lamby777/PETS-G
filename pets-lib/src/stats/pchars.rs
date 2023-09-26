@@ -11,6 +11,8 @@ pub struct PChar;
 macro_rules! pchar_names {
     ($($name:ident),*) => {
         $(pub const $name: &'static str = stringify!($name);)*
+
+        pub const ALL: &'static [&'static str] = &[$(stringify!($name)),*];
     };
 }
 
