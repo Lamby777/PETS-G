@@ -19,6 +19,19 @@ fn default_charmap() -> CharMap {
         res.insert(chname.to_string(), Rc::new(RefCell::new(cloned)));
     }
 
+    // Ethan's special stuff
+    res.entry(PChar::ETHAN.to_owned()).and_modify(|pchar| {
+        let mut pchar = pchar.borrow_mut();
+        pchar.base_stats.lambda = Some(1);
+        pchar.base_stats.max_mana = Some(20);
+    });
+
+    // Siva's special stuff
+    res.entry(PChar::SIVA.to_owned()).and_modify(|pchar| {
+        let mut pchar = pchar.borrow_mut();
+        pchar.base_stats.max_mana = Some(20);
+    });
+
     res
 }
 
