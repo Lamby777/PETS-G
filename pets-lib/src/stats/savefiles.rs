@@ -2,9 +2,25 @@
 //! This file is for saving/loading the game.
 //!
 
+use std::{cell::RefCell, rc::Rc};
+
 use crate::prelude::*;
 use godot::engine::{file_access::ModeFlags, FileAccess};
 use serde::{Deserialize, Serialize};
+
+fn default_charmap() -> CharMap {
+    let mut res = CharMap::new();
+
+    let deft_stats = CharData::default();
+
+    // add chars from registry
+    for chname in PChar::ALL.iter() {
+        let cloned = deft_stats.clone();
+        res.insert(chname.to_string(), Rc::new(RefCell::new(cloned)));
+    }
+
+    res
+}
 
 /// All the data saved to one of the save file slots
 #[derive(Serialize, Deserialize)]
@@ -16,6 +32,12 @@ impl SaveFile {
     pub fn new_empty() -> Self {
         Self {
             chars: CharMap::new(),
+        }
+    }
+
+    pub fn new_default() -> Self {
+        Self {
+            chars: default_charmap(),
         }
     }
 

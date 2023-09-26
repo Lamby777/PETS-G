@@ -44,7 +44,7 @@ impl ObjectVirtual for StatsInterface {
     fn init(node: Base<Object>) -> Self {
         // start empty, load other if the player
         // picks a save file instead of "new"
-        let charmap = SaveFile::new_empty();
+        let charmap = SaveFile::new_default();
 
         Self {
             node,

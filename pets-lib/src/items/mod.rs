@@ -10,7 +10,7 @@ use serde::{Deserialize, Serialize};
 // Or maybe just in a vector... and there can be a function
 // that looks up the item by searching the vector for an Item
 // with the correct `name` property?
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Item {
     categories: Vec<ItemCategory>,
 
@@ -22,7 +22,7 @@ pub struct Item {
 }
 
 // are you serious m8
-#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Clone)]
 pub enum ItemCategory {
     Weapon,
     Armor,
