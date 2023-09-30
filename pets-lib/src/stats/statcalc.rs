@@ -4,7 +4,7 @@ use super::IntegralStat;
 use std::{collections::HashMap, rc::Rc};
 
 // function that returns the same type it takes in
-pub type StatCalcFn<T> = fn(T) -> T;
+pub type StatCalcFn<T> = Option<fn(T) -> T>;
 
 // no refcell necessary because they're just functions
 pub type CharStatCalcs = HashMap<String, Rc<StatCalcList>>;
