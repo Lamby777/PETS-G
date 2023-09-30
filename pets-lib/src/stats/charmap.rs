@@ -2,14 +2,31 @@ use std::{cell::RefCell, rc::Rc};
 
 use crate::prelude::*;
 
+use super::statcalc::{CharStatCalcs, StatCalcList};
+
 /// CharMap with all characters having the same exact stats
 pub fn uniform_charmap() -> CharMap {
     let mut res = CharMap::new();
 
     // add chars from registry
     for chname in PChar::ALL.iter() {
-        let cloned = CharData::default();
-        res.insert(chname.to_string(), Rc::new(RefCell::new(cloned)));
+        res.insert(
+            chname.to_string(),
+            Rc::new(RefCell::new(CharData::default())),
+        );
+    }
+
+    res
+}
+
+/// The default stat calculation functions for all characters
+pub fn uniform_statcalcmap() -> CharStatCalcs {
+    let mut res = CharStatCalcs::new();
+    let default = Rc::new(StatCalcList::default());
+
+    for chname in PChar::ALL.iter() {
+        let cloned = default.clone();
+        res.insert(chname.to_string(), cloned);
     }
 
     res
@@ -33,14 +50,15 @@ macro_rules! ch_unique {
 
 /// CharMap at the start of the game
 /// Most characters have unique base stats
-pub fn default_charmap() -> CharMap {
-    let mut res = uniform_charmap();
+pub fn default_charmap() -> (CharMap, CharStatCalcs) {
+    let mut res_map = uniform_charmap();
+    let res_calcs = uniform_statcalcmap();
 
     // max_hp, max_energy, attack, defense, speed,
     // stability, delta, epsilon, lambda, max_mana,
 
     ch_unique! {
-        res,
+        res_map,
 
         ETHAN {
             display_name = "Ethan".to_string(),
@@ -61,7 +79,7 @@ pub fn default_charmap() -> CharMap {
         }
     }
 
-    res
+    (res_map, res_calcs)
 }
 
 #[cfg(test)]

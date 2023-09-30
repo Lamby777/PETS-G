@@ -5,13 +5,12 @@
 use godot::engine::Engine;
 use godot::prelude::*;
 use std::cell::RefCell;
-use std::collections::HashMap;
 use std::rc::Rc;
 
 use crate::prelude::*;
 
 use super::charmap::default_charmap;
-use super::statcalc::CharStatCalcs;
+use super::statcalc::{CharStatCalcs, StatCalcList};
 
 #[derive(GodotClass)]
 #[class(base=Object)]
@@ -23,7 +22,7 @@ pub struct StatsInterface {
     save: SaveFile,
 
     /// Hash map of function pointers for calculating stats
-    statcalcs: HashMap<String, CharStatCalcs>,
+    statcalcs: CharStatCalcs,
 }
 
 #[godot_api]
@@ -45,7 +44,7 @@ impl StatsInterface {
             .clone()
     }
 
-    pub fn get_statcalc(&self, ch: &str) -> CharStatCalcs {
+    pub fn get_statcalc(&self, ch: &str) -> Rc<StatCalcList> {
         self.statcalcs
             .get(ch)
             .expect("key should be a valid PChar name")
@@ -58,13 +57,13 @@ impl ObjectVirtual for StatsInterface {
     fn init(node: Base<Object>) -> Self {
         // start an empty save file, but load other if the player
         // picks a save file instead of "new"
-        let charmap = default_charmap();
+        let (charmap, statcalcs) = default_charmap();
         let save = SaveFile { chars: charmap };
 
         Self {
             node,
             save,
-            statcalcs: todo!(),
+            statcalcs,
         }
     }
 }

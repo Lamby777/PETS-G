@@ -1,14 +1,17 @@
 /// Function that calculates a stat for a character
 /// Basically just "base stats" as a function
 use super::IntegralStat;
+use std::{collections::HashMap, rc::Rc};
 
+// function that returns the same type it takes in
 pub type StatCalcFn<T> = fn(T) -> T;
 
+// no refcell necessary because they're just functions
+pub type CharStatCalcs = HashMap<String, Rc<StatCalcList>>;
+
 /// A list of stat calculation functions for ONE CHARACTER
-/// I've probably made this same mistake of thinking this is
-/// for all characters MANY times now. It is only for one.
 #[derive(Debug, Clone)]
-pub struct CharStatCalcs {
+pub struct StatCalcList {
     pub max_hp: StatCalcFn<IntegralStat>,
     pub max_energy: StatCalcFn<IntegralStat>,
 
@@ -27,4 +30,10 @@ pub struct CharStatCalcs {
     // idk the overhead of dynamic dispatch might not be worth it
     pub lambda: StatCalcFn<Option<IntegralStat>>,
     pub max_mana: StatCalcFn<Option<IntegralStat>>,
+}
+
+impl Default for StatCalcList {
+    fn default() -> Self {
+        todo!()
+    }
 }
