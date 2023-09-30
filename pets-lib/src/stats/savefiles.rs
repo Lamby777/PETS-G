@@ -6,8 +6,6 @@ use crate::prelude::*;
 use godot::engine::{file_access::ModeFlags, FileAccess};
 use serde::{Deserialize, Serialize};
 
-use super::charmap::default_charmap;
-
 /// All the data saved to one of the save file slots
 #[derive(Serialize, Deserialize)]
 pub struct SaveFile {
@@ -18,12 +16,6 @@ impl SaveFile {
     pub fn new_empty() -> Self {
         Self {
             chars: CharMap::new(),
-        }
-    }
-
-    pub fn new_default() -> Self {
-        Self {
-            chars: default_charmap(),
         }
     }
 
