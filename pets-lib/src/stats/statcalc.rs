@@ -10,7 +10,7 @@ pub type StatCalcFn<T> = Option<fn(T) -> T>;
 pub type CharStatCalcs = HashMap<String, Rc<StatCalcList>>;
 
 /// A list of stat calculation functions for ONE CHARACTER
-#[derive(Debug, Clone)]
+#[derive(Default, Debug, Clone)]
 pub struct StatCalcList {
     pub max_hp: StatCalcFn<IntegralStat>,
     pub max_energy: StatCalcFn<IntegralStat>,
@@ -30,10 +30,4 @@ pub struct StatCalcList {
     // idk the overhead of dynamic dispatch might not be worth it
     pub lambda: StatCalcFn<Option<IntegralStat>>,
     pub max_mana: StatCalcFn<Option<IntegralStat>>,
-}
-
-impl Default for StatCalcList {
-    fn default() -> Self {
-        todo!()
-    }
 }
