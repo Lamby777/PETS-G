@@ -35,7 +35,10 @@ pub fn uniform_statcalcmap() -> CharStatCalcs {
 /// "Jat Chippity goes hard"
 /// Makes it easier to write custom base stats and stuff
 macro_rules! ch_unique {
-    ($map:expr, $($character:ident {$($field:ident $(.$property:ident)? = $value:expr),*}),*) => {
+    ($map:expr, $calcs:expr, $($character:ident {
+        $($field:ident $(.$property:ident)? = $value:expr,)*
+        $(;$base:ident => $base_fn:expr),*
+    }),*) => {
         $(
             let character = PChar::$character;
             $map.entry(character.to_owned()).and_modify(|pchar| {
@@ -43,6 +46,17 @@ macro_rules! ch_unique {
                 $(
                     pchar.$field$(.$property)? = $value;
                 )*
+            });
+
+            $calcs.insert(character.to_owned(), {
+                let calcs = StatCalcList {
+                    $(
+                        $base: $base_fn,
+                    )*
+                    ..Default::default()
+                };
+
+                Rc::new(calcs)
             });
         )*
     };
@@ -52,30 +66,31 @@ macro_rules! ch_unique {
 /// Most characters have unique base stats
 pub fn default_charmap() -> (CharMap, CharStatCalcs) {
     let mut res_map = uniform_charmap();
-    let res_calcs = uniform_statcalcmap();
+    let mut res_calcs = uniform_statcalcmap();
 
     // max_hp, max_energy, attack, defense, speed,
     // stability, delta, epsilon, lambda, max_mana,
 
     ch_unique! {
         res_map,
+        res_calcs,
 
         ETHAN {
             display_name = "Ethan".to_string(),
             base_stats.max_hp = 12,
             base_stats.max_mana = Some(1),
-            base_stats.lambda = Some(1)
+            base_stats.lambda = Some(1),
         },
 
         SIVA {
             display_name = "Siva".to_string(),
             base_stats.max_hp = 18,
-            base_stats.max_mana = Some(1)
+            base_stats.max_mana = Some(1),
         },
 
         TERRA {
             display_name = "Terra".to_string(),
-            base_stats.max_hp = 26
+            base_stats.max_hp = 26,
         }
     }
 
@@ -88,24 +103,7 @@ mod tests {
 
     #[test]
     fn ch_unique_macro_works() {
-        let mut charmap = uniform_charmap();
-
-        ch_unique! {
-            charmap,
-
-            ETHAN {
-                display_name = "Ethan".to_string(),
-                base_stats.max_hp = 12,
-                base_stats.lambda = Some(1),
-                base_stats.max_mana = Some(1)
-            },
-
-            SIVA {
-                display_name = "Siva".to_string(),
-                base_stats.max_hp = 18,
-                base_stats.max_mana = Some(1)
-            }
-        }
+        let (charmap, _statcalcs) = default_charmap();
 
         let ethan = charmap.get(&PChar::ETHAN.to_string()).unwrap();
         let ethan = ethan.borrow();
