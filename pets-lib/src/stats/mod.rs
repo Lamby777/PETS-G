@@ -24,8 +24,9 @@ pub type FloatStat = f32;
 /// All the information the game needs to know about a character
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct CharData {
-    /// Name of the character
-    pub name: String,
+    /// Name of the character, as picked by the user
+    /// ⚠️⚠️⚠️ See <https://github.com/Lamby777/PETS-G/issues/23>
+    pub display_name: String,
 
     // TODO following the "YAGNI" principle, I'm gonna stop adding
     // more complicated shit here. Later on, we should prob have
@@ -92,7 +93,7 @@ impl Default for CharData {
         };
 
         CharData {
-            name: "Chicken Nugget".to_owned(),
+            display_name: "Chicken Nugget".to_owned(),
             base_stats,
             stats,
             state,
@@ -120,12 +121,12 @@ pub struct CharStats {
     pub attack: IntegralStat,
     pub defense: IntegralStat,
     pub speed: IntegralStat,
-    pub stability: IntegralStat,
+    pub stability: IntegralStat, // PK defense
 
     // refer to google doc for what these do...
     // can't pick a good name for em yet
-    pub delta: IntegralStat,
-    pub epsilon: IntegralStat,
+    pub delta: IntegralStat,   // "the crit one"
+    pub epsilon: IntegralStat, // "the combo one"
 
     // Exclusive to certain characters
     // NOTE maybe use traits for this?
