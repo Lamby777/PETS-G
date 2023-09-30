@@ -12,6 +12,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::prelude::*;
 
+pub mod charmap;
 pub mod pchars;
 pub mod savefiles;
 pub mod state;
