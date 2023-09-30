@@ -22,11 +22,9 @@ pub fn uniform_charmap() -> CharMap {
 /// The default stat calculation functions for all characters
 pub fn uniform_statcalcmap() -> CharStatCalcs {
     let mut res = CharStatCalcs::new();
-    let default = Rc::new(StatCalcList::standard());
 
     for chname in PChar::ALL.iter() {
-        let cloned = default.clone();
-        res.insert(chname.to_string(), cloned);
+        res.insert(chname.to_string(), StatCalcList::default());
     }
 
     res
@@ -56,7 +54,7 @@ macro_rules! ch_unique {
                     ..Default::default()
                 };
 
-                Rc::new(calcs)
+                calcs
             });
         )*
     };
