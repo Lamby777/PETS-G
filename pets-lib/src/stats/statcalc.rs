@@ -31,3 +31,59 @@ pub struct StatCalcList {
     pub lambda: StatCalcFn<Option<IntegralStat>>,
     pub max_mana: StatCalcFn<Option<IntegralStat>>,
 }
+
+macro_rules! use_standard {
+    ($($stat:ident),*) => {
+        Self {
+            $($stat: Some(standard_calcs::$stat)),*
+        }
+    };
+}
+
+impl StatCalcList {
+    /// Not to be confused with `default()` from the
+    /// `Default` trait, this function returns a calc list
+    /// that should be referenced whenever a character's
+    /// calc list shows "None"
+    pub fn standard() -> Self {
+        use_standard! {
+            max_hp,
+            max_energy,
+            attack,
+            defense,
+            speed,
+            stability,
+            delta,
+            epsilon,
+            lambda,
+            max_mana
+        }
+    }
+}
+
+mod standard_calcs {
+    use crate::prelude::IntegralStat;
+
+    macro_rules! identities {
+        ($($ty:ty | $name:ident),*) => {
+            $(
+                pub fn $name(x: $ty) -> $ty {
+                    x
+                }
+            )*
+        };
+    }
+
+    identities! {
+        IntegralStat | max_hp,
+        IntegralStat | max_energy,
+        IntegralStat | attack,
+        IntegralStat | defense,
+        IntegralStat | speed,
+        IntegralStat | stability,
+        IntegralStat | delta,
+        IntegralStat | epsilon,
+        Option<IntegralStat> | lambda,
+        Option<IntegralStat> | max_mana
+    }
+}
