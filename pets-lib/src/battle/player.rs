@@ -57,7 +57,9 @@ impl Node2DVirtual for BattleIcon {
 
     fn ready(&mut self) {
         let ch = self.si.bind().get_character(PChar::ETHAN);
-        let ch_speed = ch.borrow().base_stats.speed;
+
+        // TODO character stat calculator function
+        let ch_speed = ch.borrow().stats.speed;
 
         self.speed = to_battle::speed(ch_speed);
     }
