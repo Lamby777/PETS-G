@@ -45,8 +45,8 @@ pub fn default_charmap() -> CharMap {
         ETHAN {
             display_name = "Ethan".to_string(),
             base_stats.max_hp = 12,
-            base_stats.lambda = Some(1),
-            base_stats.max_mana = Some(1)
+            base_stats.max_mana = Some(1),
+            base_stats.lambda = Some(1)
         },
 
         SIVA {
