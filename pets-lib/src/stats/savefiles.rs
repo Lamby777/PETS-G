@@ -4,7 +4,6 @@
 
 use crate::prelude::*;
 use godot::engine::{file_access::ModeFlags, FileAccess};
-use serde::{Deserialize, Serialize};
 
 /// All the data saved to one of the save file slots
 #[derive(Serialize, Deserialize)]

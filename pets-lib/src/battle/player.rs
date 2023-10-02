@@ -5,11 +5,11 @@
 use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
+use super::stat_translation::to_battle;
 use crate::prelude::*;
 
 type DirectionalInputNames = [(&'static str, Vector2); 4];
 
-// TODO make this comptime... code smell lol
 const BATTLE_DIRECTIONS: DirectionalInputNames = [
     ("battle_move_up", Vector2::UP),
     ("battle_move_down", Vector2::DOWN),
@@ -24,13 +24,13 @@ struct BattleIcon {
     node: Base<Node2D>,
 
     /// Maximum speed of player icon
-    speed: f32,
+    speed: FloatStat,
 
     /// Acceleration amount per tick held
-    acceleration: f32,
+    acceleration: FloatStat,
 
     /// Coefficient of deceleration
-    friction: f32,
+    friction: FloatStat,
 
     /// Current velocity of player icon
     /// NOT normalized, but still limited by speed.
@@ -55,10 +55,8 @@ impl Node2DVirtual for BattleIcon {
     }
 
     fn ready(&mut self) {
-        let ch = self.si.bind().get_character("Test");
-        let ch_speed = ch.borrow().base_stats.speed;
-
-        self.speed = ch_speed.into();
+        let ch_speed = self.si.bind().natural_speed_of(PChar::ETHAN);
+        self.speed = to_battle::speed(ch_speed);
     }
 
     fn process(&mut self, delta: f64) {
