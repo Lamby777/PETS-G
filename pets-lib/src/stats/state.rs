@@ -21,6 +21,43 @@ pub struct StatsInterface {
     statcalcs: CharStatCalcs,
 }
 
+/// name the function `x_of`, where `x` is the stat name
+/// for example, `si.speed_of(PChars::ETHAN)`
+macro_rules! impl_stat_getters_on_si {
+    ($($stat:ident),*) => {
+        impl StatsInterface {$(
+            concat_idents::concat_idents!(fn_name = $stat, _of {
+                /// Get the stat of a given character
+                pub fn fn_name(&self, pchar: &str) -> IntegralStat {
+                    // get character level
+                    let ch = self.get_character(pchar);
+                    let lv = ch.borrow().level;
+
+                    // get calculation fn for character
+                    let calcs = self.get_statcalc(pchar);
+
+                    // calculate the stat
+                    (*calcs.speed)(lv)
+                }
+            });
+        )*}
+    };
+}
+
+// generate getters for character stats
+impl_stat_getters_on_si! {
+    max_hp,
+    max_energy,
+    attack,
+    defense,
+    speed,
+    stability,
+    delta,
+    epsilon,
+    lambda,
+    max_mana
+}
+
 #[godot_api]
 impl StatsInterface {
     /// Get a shared ref to the singleton to store in other node structs
@@ -46,19 +83,6 @@ impl StatsInterface {
             .get(ch)
             .expect("key should be a valid PChar name")
             .clone()
-    }
-
-    // stat-related stuff
-    pub fn speed_of(&self, pchar: &str) -> IntegralStat {
-        // get character level
-        let ch = self.get_character(pchar);
-        let lv = ch.borrow().level;
-
-        // get calculation fn for character
-        let calcs = self.get_statcalc(pchar);
-
-        // calculate the stat
-        (*calcs.speed)(lv)
     }
 }
 

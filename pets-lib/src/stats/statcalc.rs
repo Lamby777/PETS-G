@@ -70,6 +70,7 @@ impl Default for StatCalcList {
 mod standard_calcs {
     use crate::prelude::IntegralStat;
 
+    // TODO write actual default formulas instead of this crap
     macro_rules! identities {
         ($($ty:ty | $name:ident),*) => {
             $(
