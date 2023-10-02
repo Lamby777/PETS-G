@@ -24,7 +24,8 @@ pub fn uniform_statcalcmap() -> CharStatCalcs {
     let mut res = CharStatCalcs::new();
 
     for chname in PChar::ALL.iter() {
-        res.insert(chname.to_string(), StatCalcList::default());
+        let calcs = StatCalcList::default();
+        res.insert(chname.to_string(), Rc::new(calcs));
     }
 
     res
@@ -54,7 +55,7 @@ macro_rules! ch_unique {
                     ..Default::default()
                 };
 
-                calcs
+                Rc::new(calcs)
             });
         )*
     };
