@@ -40,11 +40,25 @@ impl StatsInterface {
             .clone()
     }
 
+    /// Get the list of stat calculation functions for a given character
     pub fn get_statcalc(&self, ch: &str) -> Rc<StatCalcList> {
         self.statcalcs
             .get(ch)
             .expect("key should be a valid PChar name")
             .clone()
+    }
+
+    // stat-related stuff
+    pub fn speed_of(&self, pchar: &str) -> IntegralStat {
+        // get character level
+        let ch = self.get_character(pchar);
+        let lv = ch.borrow().level;
+
+        // get calculation fn for character
+        let calcs = self.get_statcalc(pchar);
+
+        // calculate the stat
+        (*calcs.speed)(lv)
     }
 }
 
