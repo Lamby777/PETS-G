@@ -1,10 +1,9 @@
 use crate::prelude::*;
-const SPEED_STAT_MULTIPLIER: FloatStat = 20.0;
-const SPEED_STAT_Y_INT: FloatStat = 200.0;
+const SPEED_STAT_MULTIPLIER: FloatStat = 200.0;
 
 /// player stats -> battle icon stats
 pub mod to_battle {
-    use super::{SPEED_STAT_MULTIPLIER, SPEED_STAT_Y_INT};
+    use super::SPEED_STAT_MULTIPLIER;
     use crate::prelude::*;
 
     pub fn speed(speed: IntegralStat) -> FloatStat {
@@ -12,6 +11,6 @@ pub mod to_battle {
         // TODO maybe use logarithms, refer to that one graph i made a while ago
         // ofc,, past me didn't know about the "units" in godot, so values might
         // need to be adjusted for speed and similar implementation-heavy stats
-        ((speed as FloatStat) * SPEED_STAT_MULTIPLIER) + SPEED_STAT_Y_INT
+        (speed as FloatStat) * SPEED_STAT_MULTIPLIER
     }
 }

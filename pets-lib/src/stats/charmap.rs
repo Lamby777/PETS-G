@@ -33,7 +33,7 @@ pub fn uniform_statcalcmap() -> CharStatCalcs {
 
 /// "Jat Chippity goes hard"
 /// Makes it easier to write custom base stats and stuff
-macro_rules! ch_unique {
+macro_rules! ch_unique_registry {
     ($map:expr, $calcs:expr, $($character:ident {
         $($field:ident $(.$property:ident)? = $value:expr,)*
         $(;$base:ident => $base_fn:expr),*
@@ -70,26 +70,27 @@ pub fn default_charmap() -> (CharMap, CharStatCalcs) {
     // max_hp, max_energy, attack, defense, speed,
     // stability, delta, epsilon, lambda, max_mana,
 
-    ch_unique! {
+    ch_unique_registry! {
         res_map,
         res_calcs,
 
         ETHAN {
-            display_name = "Ethan".to_string(),
+            display_name = "Ethan".to_owned(),
 
             ;max_hp => |lvl| lvl - 6,
-            ;max_mana => |lvl| Some(lvl + 1)
+            ;max_mana => |lvl| Some(lvl + 1),
+            ;speed => |_| 400
         },
 
         SIVA {
-            display_name = "Siva".to_string(),
+            display_name = "Siva".to_owned(),
 
             ;max_hp => |lvl| lvl - 2,
             ;max_mana => |lvl| Some(lvl + 1)
         },
 
         TERRA {
-            display_name = "Terra".to_string(),
+            display_name = "Terra".to_owned(),
 
             ;max_hp => |lvl| lvl + 6
         }
