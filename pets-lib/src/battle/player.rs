@@ -10,7 +10,6 @@ use crate::prelude::*;
 
 type DirectionalInputNames = [(&'static str, Vector2); 4];
 
-// TODO make this comptime... code smell lol
 const BATTLE_DIRECTIONS: DirectionalInputNames = [
     ("battle_move_up", Vector2::UP),
     ("battle_move_down", Vector2::DOWN),
