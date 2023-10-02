@@ -55,12 +55,7 @@ impl Node2DVirtual for BattleIcon {
     }
 
     fn ready(&mut self) {
-        let ch = self.si.bind().get_character(PChar::ETHAN);
-
-        let ch_speed_fn = self.si.bind().get_statcalc(PChar::ETHAN);
-        let ch_speed = (*ch_speed_fn.speed)(ch.borrow().level);
-        godot_print!("{}", ch_speed);
-
+        let ch_speed = self.si.bind().speed_of(PChar::ETHAN);
         self.speed = to_battle::speed(ch_speed);
     }
 
