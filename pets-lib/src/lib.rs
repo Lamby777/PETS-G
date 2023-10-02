@@ -26,8 +26,18 @@ mod prelude {
     // stats stuff
     pub use crate::stats::pchars::PChar;
     pub use crate::stats::savefiles::SaveFile;
+    pub use crate::stats::statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
     pub use crate::stats::state::StatsInterface;
     pub use crate::stats::*;
+
+    // is this bad practice? no clue and idc honestly
+    // it's convenient with no real caveat, therefore...
+    pub use serde::{Deserialize, Serialize};
+    pub use std::cell::RefCell;
+    pub use std::collections::{HashMap, HashSet};
+    pub use std::fmt::{Debug, Display};
+    pub use std::ops::Deref;
+    pub use std::rc::Rc;
 }
 
 struct PetsLib;

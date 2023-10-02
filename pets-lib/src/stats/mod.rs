@@ -2,41 +2,30 @@
 //! This module is for character/enemy stat type definitions
 //!
 
-use std::{
-    cell::RefCell,
-    collections::{HashMap, HashSet},
-    rc::Rc,
-};
-
-use serde::{Deserialize, Serialize};
-
 use crate::prelude::*;
 
+pub mod charmap;
 pub mod pchars;
 pub mod savefiles;
+pub mod statcalc;
 pub mod state;
 
 pub type CharMap = HashMap<String, Rc<RefCell<CharData>>>;
 pub type IntegralStat = i16;
+pub type FloatStat = f32;
 
 /// All the information the game needs to know about a character
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct CharData {
-    /// Name of the character
-    pub name: String,
+    /// Name of the character, as picked by the user
+    /// ⚠️⚠️⚠️ See <https://github.com/Lamby777/PETS-G/issues/23>
+    pub display_name: String,
 
-    // TODO following the "YAGNI" principle, I'm gonna stop adding
-    // more complicated shit here. Later on, we should prob have
-    // a way to make "base" stats affect the regular stat increase
-    // levels in both linear and constant ways. Maybe a whole separate
-    // impl for getting a stat, where the functions just do all
-    // the math under the hood? Sounds like a lot of boilerplate...
-    /// "Base" stats... Some characters are just better at some
-    /// things than others, right?
-    pub base_stats: CharStats,
+    /// Level of the character
+    pub level: IntegralStat,
 
-    /// The character's long-term stats
-    /// "Core" stats and maximums, pretty much
+    /// The character's long-term stat offsets
+    /// Stuff like using a consumable with permanent boosts...
     pub stats: CharStats,
 
     /// The character's short-term stats
@@ -50,7 +39,47 @@ pub struct CharData {
     pub inventory: Vec<Item>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+impl Default for CharData {
+    fn default() -> Self {
+        // This part is a bit ugly...
+        let stats = CharStats {
+            max_hp: 0,
+            max_energy: 0,
+
+            attack: 0,
+            defense: 0,
+            speed: 0,
+            stability: 0,
+            delta: 0,
+            epsilon: 0,
+
+            max_mana: Some(0),
+            lambda: Some(0),
+        };
+
+        // will be dropped after this function...
+        // just need it to see default values and prevent
+        // repeating the same numbers everywhere
+        let calc = StatCalcList::default();
+        let level = 1;
+
+        let state = CharStatsStateful {
+            hp: (*calc.max_hp)(level),
+            energy: (*calc.max_energy)(level),
+        };
+
+        CharData {
+            display_name: "Chicken Nugget".to_owned(),
+            level,
+            stats,
+            state,
+            conditions: HashSet::new(),
+            inventory: vec![],
+        }
+    }
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct CharStatsStateful {
     /// Current HP
     pub hp: IntegralStat,
@@ -60,7 +89,7 @@ pub struct CharStatsStateful {
     // mana starts at 0 each battle
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct CharStats {
     pub max_hp: IntegralStat,
     pub max_energy: IntegralStat,
@@ -68,12 +97,12 @@ pub struct CharStats {
     pub attack: IntegralStat,
     pub defense: IntegralStat,
     pub speed: IntegralStat,
-    pub stability: IntegralStat,
+    pub stability: IntegralStat, // PK defense
 
     // refer to google doc for what these do...
     // can't pick a good name for em yet
-    pub delta: IntegralStat,
-    pub epsilon: IntegralStat,
+    pub delta: IntegralStat,   // "the crit one"
+    pub epsilon: IntegralStat, // "the combo one"
 
     // Exclusive to certain characters
     // NOTE maybe use traits for this?
@@ -82,7 +111,7 @@ pub struct CharStats {
     pub max_mana: Option<IntegralStat>,
 }
 
-#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Clone)]
 pub enum StatusConditions {
     Sleeping,    // Can't move, but recover 20% energy on wakeup
     Paralysis,   // ^^^ No movement, no energy recovery, but still has PK. Almost no combos
