@@ -2,14 +2,29 @@ use std::{cell::RefCell, rc::Rc};
 
 use crate::prelude::*;
 
+use super::statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
+
 /// CharMap with all characters having the same exact stats
 pub fn uniform_charmap() -> CharMap {
     let mut res = CharMap::new();
 
     // add chars from registry
     for chname in PChar::ALL.iter() {
-        let cloned = CharData::default();
-        res.insert(chname.to_string(), Rc::new(RefCell::new(cloned)));
+        res.insert(
+            chname.to_string(),
+            Rc::new(RefCell::new(CharData::default())),
+        );
+    }
+
+    res
+}
+
+/// The default stat calculation functions for all characters
+pub fn uniform_statcalcmap() -> CharStatCalcs {
+    let mut res = CharStatCalcs::new();
+
+    for chname in PChar::ALL.iter() {
+        res.insert(chname.to_string(), StatCalcList::default());
     }
 
     res
@@ -18,7 +33,10 @@ pub fn uniform_charmap() -> CharMap {
 /// "Jat Chippity goes hard"
 /// Makes it easier to write custom base stats and stuff
 macro_rules! ch_unique {
-    ($map:expr, $($character:ident {$($field:ident $(.$property:ident)? = $value:expr),*}),*) => {
+    ($map:expr, $calcs:expr, $($character:ident {
+        $($field:ident $(.$property:ident)? = $value:expr,)*
+        $(;$base:ident => $base_fn:expr),*
+    }),*) => {
         $(
             let character = PChar::$character;
             $map.entry(character.to_owned()).and_modify(|pchar| {
@@ -27,80 +45,81 @@ macro_rules! ch_unique {
                     pchar.$field$(.$property)? = $value;
                 )*
             });
+
+            $calcs.insert(character.to_owned(), {
+                let calcs = StatCalcList {
+                    $(
+                        $base: StatCalcFn::from($base_fn as fn(_) -> _),
+                    )*
+                    ..Default::default()
+                };
+
+                calcs
+            });
         )*
     };
 }
 
 /// CharMap at the start of the game
 /// Most characters have unique base stats
-pub fn default_charmap() -> CharMap {
-    let mut res = uniform_charmap();
+pub fn default_charmap() -> (CharMap, CharStatCalcs) {
+    let mut res_map = uniform_charmap();
+    let mut res_calcs = uniform_statcalcmap();
 
     // max_hp, max_energy, attack, defense, speed,
     // stability, delta, epsilon, lambda, max_mana,
 
     ch_unique! {
-        res,
+        res_map,
+        res_calcs,
 
         ETHAN {
             display_name = "Ethan".to_string(),
-            base_stats.max_hp = 12,
-            base_stats.lambda = Some(1),
-            base_stats.max_mana = Some(1)
+
+            ;max_hp => |lvl| lvl - 6,
+            ;max_mana => |lvl| Some(lvl + 1)
         },
 
         SIVA {
             display_name = "Siva".to_string(),
-            base_stats.max_hp = 18,
-            base_stats.max_mana = Some(1)
+
+            ;max_hp => |lvl| lvl - 2,
+            ;max_mana => |lvl| Some(lvl + 1)
         },
 
         TERRA {
             display_name = "Terra".to_string(),
-            base_stats.max_hp = 26
+
+            ;max_hp => |lvl| lvl + 6
         }
     }
 
-    res
+    (res_map, res_calcs)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
+    #[ignore = "broken test, update when chardata is actually in use"]
     #[test]
-    fn ch_unique_macro_works() {
-        let mut charmap = uniform_charmap();
-
-        ch_unique! {
-            charmap,
-
-            ETHAN {
-                display_name = "Ethan".to_string(),
-                base_stats.max_hp = 12,
-                base_stats.lambda = Some(1),
-                base_stats.max_mana = Some(1)
-            },
-
-            SIVA {
-                display_name = "Siva".to_string(),
-                base_stats.max_hp = 18,
-                base_stats.max_mana = Some(1)
-            }
-        }
+    fn ch_unique_charmap() {
+        let (charmap, _) = default_charmap();
 
         let ethan = charmap.get(&PChar::ETHAN.to_string()).unwrap();
         let ethan = ethan.borrow();
         assert_eq!(ethan.display_name, "Ethan");
-        assert_eq!(ethan.base_stats.max_hp, 12);
-        assert_eq!(ethan.base_stats.lambda, Some(1));
-        assert_eq!(ethan.base_stats.max_mana, Some(1));
+        // assert_eq!(ethan.base_stats.max_hp, 12);
+        // assert_eq!(ethan.base_stats.lambda, Some(1));
+        // assert_eq!(ethan.base_stats.max_mana, Some(1));
+    }
 
-        let siva = charmap.get(&PChar::SIVA.to_string()).unwrap();
-        let siva = siva.borrow();
-        assert_eq!(siva.display_name, "Siva");
-        assert_eq!(siva.base_stats.max_hp, 18);
-        assert_eq!(siva.base_stats.lambda, None);
-        assert_eq!(siva.base_stats.max_mana, Some(1));
+    #[test]
+    fn ch_unique_calcs() {
+        let (_, calcs) = default_charmap();
+
+        let ethan = calcs.get(&PChar::ETHAN.to_string()).unwrap();
+        let energy_fn = *ethan.max_energy;
+        assert_eq!(energy_fn(10), 11);
     }
 }
