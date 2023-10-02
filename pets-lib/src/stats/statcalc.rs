@@ -53,6 +53,7 @@ macro_rules! use_standard {
 impl Default for StatCalcList {
     fn default() -> Self {
         use_standard! {
+            // TODO required experience for next level
             max_hp,
             max_energy,
             attack,
@@ -68,29 +69,49 @@ impl Default for StatCalcList {
 }
 
 mod standard_calcs {
-    use crate::prelude::IntegralStat;
+    use crate::prelude::{FloatStat, IntegralStat};
 
-    // TODO write actual default formulas instead of this crap
-    macro_rules! identities {
-        ($($ty:ty | $name:ident),*) => {
-            $(
-                pub fn $name(x: IntegralStat) -> $ty {
-                    x.into()
-                }
-            )*
-        };
+    pub fn max_hp(lvl: IntegralStat) -> IntegralStat {
+        // f(x) = floor(5 * log_1.4_(x)) + 0.5x + 40
+        let p1 = FloatStat::floor(5.0 * (lvl as FloatStat).log(1.4));
+        let p2 = (0.5 * lvl as FloatStat) + 40.0;
+
+        (p1 + p2) as IntegralStat
     }
 
-    identities! {
-        IntegralStat | max_hp,
-        IntegralStat | max_energy,
-        IntegralStat | attack,
-        IntegralStat | defense,
-        IntegralStat | speed,
-        IntegralStat | stability,
-        IntegralStat | delta,
-        IntegralStat | epsilon,
-        Option<IntegralStat> | lambda,
-        Option<IntegralStat> | max_mana
+    pub fn max_energy(_lvl: IntegralStat) -> IntegralStat {
+        todo!()
+    }
+
+    pub fn attack(_lvl: IntegralStat) -> IntegralStat {
+        todo!()
+    }
+
+    pub fn defense(_lvl: IntegralStat) -> IntegralStat {
+        todo!()
+    }
+
+    pub fn speed(_lvl: IntegralStat) -> IntegralStat {
+        todo!()
+    }
+
+    pub fn stability(_lvl: IntegralStat) -> IntegralStat {
+        todo!()
+    }
+
+    pub fn delta(_lvl: IntegralStat) -> IntegralStat {
+        todo!()
+    }
+
+    pub fn epsilon(_lvl: IntegralStat) -> IntegralStat {
+        todo!()
+    }
+
+    pub fn lambda(_lvl: IntegralStat) -> Option<IntegralStat> {
+        todo!()
+    }
+
+    pub fn max_mana(_lvl: IntegralStat) -> Option<IntegralStat> {
+        todo!()
     }
 }
