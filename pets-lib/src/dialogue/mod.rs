@@ -59,7 +59,6 @@ struct StringSegment {
 
     /// if Some, this will override the default
     /// voice if inside a dialogue tree.
-    // TODO maybe be a newtype? is this level of
-    // control over voicelines even necessary?
+    // TODO reconsider this typing choice
     vox: Option<String>,
 }
