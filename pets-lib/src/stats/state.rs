@@ -4,13 +4,9 @@
 
 use godot::engine::Engine;
 use godot::prelude::*;
-use std::cell::RefCell;
-use std::rc::Rc;
-
-use crate::prelude::*;
 
 use super::charmap::default_charmap;
-use super::statcalc::{CharStatCalcs, StatCalcList};
+use crate::prelude::*;
 
 #[derive(GodotClass)]
 #[class(base=Object)]
