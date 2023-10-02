@@ -1,8 +1,4 @@
-use std::{cell::RefCell, rc::Rc};
-
 use crate::prelude::*;
-
-use super::statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
 
 /// CharMap with all characters having the same exact stats
 pub fn uniform_charmap() -> CharMap {

@@ -4,7 +4,6 @@
 //!
 
 use crate::prelude::*;
-use serde::{Deserialize, Serialize};
 
 /// A single item definition, stored in item hashtable for lookup.
 // Or maybe just in a vector... and there can be a function

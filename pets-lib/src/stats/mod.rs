@@ -2,17 +2,7 @@
 //! This module is for character/enemy stat type definitions
 //!
 
-use std::{
-    cell::RefCell,
-    collections::{HashMap, HashSet},
-    rc::Rc,
-};
-
-use serde::{Deserialize, Serialize};
-
 use crate::prelude::*;
-
-use self::statcalc::StatCalcList;
 
 pub mod charmap;
 pub mod pchars;

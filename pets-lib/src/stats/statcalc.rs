@@ -1,7 +1,6 @@
 /// Function that calculates a stat for a character
 /// Basically just "base stats" as a function
-use super::IntegralStat;
-use std::{collections::HashMap, ops::Deref, rc::Rc};
+use crate::prelude::*;
 
 pub type CharStatCalcs = HashMap<String, Rc<StatCalcList>>;
 
