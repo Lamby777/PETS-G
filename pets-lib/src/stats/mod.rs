@@ -12,9 +12,12 @@ use serde::{Deserialize, Serialize};
 
 use crate::prelude::*;
 
+use self::statcalc::StatCalcList;
+
 pub mod charmap;
 pub mod pchars;
 pub mod savefiles;
+pub mod statcalc;
 pub mod state;
 
 pub type CharMap = HashMap<String, Rc<RefCell<CharData>>>;
@@ -28,18 +31,11 @@ pub struct CharData {
     /// ⚠️⚠️⚠️ See <https://github.com/Lamby777/PETS-G/issues/23>
     pub display_name: String,
 
-    // TODO following the "YAGNI" principle, I'm gonna stop adding
-    // more complicated shit here. Later on, we should prob have
-    // a way to make "base" stats affect the regular stat increase
-    // levels in both linear and constant ways. Maybe a whole separate
-    // impl for getting a stat, where the functions just do all
-    // the math under the hood? Sounds like a lot of boilerplate...
-    /// "Base" stats... Some characters are just better at some
-    /// things than others, right?
-    pub base_stats: CharStats,
+    /// Level of the character
+    pub level: IntegralStat,
 
-    /// The character's long-term stats
-    /// "Core" stats and maximums, pretty much
+    /// The character's long-term stat offsets
+    /// Stuff like using a consumable with permanent boosts...
     pub stats: CharStats,
 
     /// The character's short-term stats
@@ -56,22 +52,6 @@ pub struct CharData {
 impl Default for CharData {
     fn default() -> Self {
         // This part is a bit ugly...
-
-        let base_stats = CharStats {
-            max_hp: 20,
-            max_energy: 10,
-
-            attack: 1,
-            defense: 0,
-            speed: 1,
-            stability: 40,
-            delta: 0,
-            epsilon: 1,
-
-            max_mana: None,
-            lambda: None,
-        };
-
         let stats = CharStats {
             max_hp: 0,
             max_energy: 0,
@@ -87,14 +67,20 @@ impl Default for CharData {
             lambda: Some(0),
         };
 
+        // will be dropped after this function...
+        // just need it to see default values and prevent
+        // repeating the same numbers everywhere
+        let calc = StatCalcList::default();
+        let level = 1;
+
         let state = CharStatsStateful {
-            hp: base_stats.max_hp,
-            energy: base_stats.max_energy,
+            hp: (*calc.max_hp)(level),
+            energy: (*calc.max_energy)(level),
         };
 
         CharData {
             display_name: "Chicken Nugget".to_owned(),
-            base_stats,
+            level,
             stats,
             state,
             conditions: HashSet::new(),
