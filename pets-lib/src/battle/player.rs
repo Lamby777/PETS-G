@@ -55,7 +55,7 @@ impl Node2DVirtual for BattleIcon {
     }
 
     fn ready(&mut self) {
-        let ch_speed = self.si.bind().speed_of(PChar::ETHAN);
+        let ch_speed = self.si.bind().natural_speed_of(PChar::ETHAN);
         self.speed = to_battle::speed(ch_speed);
     }
 

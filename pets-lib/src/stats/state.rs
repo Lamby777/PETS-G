@@ -22,12 +22,13 @@ pub struct StatsInterface {
 }
 
 /// name the function `x_of`, where `x` is the stat name
-/// for example, `si.speed_of(PChars::ETHAN)`
+/// for example, `si.natural_speed_of(PChars::ETHAN)`
 macro_rules! impl_stat_getters_on_si {
     ($($stat:ident),*) => {
         impl StatsInterface {$(
-            concat_idents::concat_idents!(fn_name = $stat, _of {
-                /// Get the stat of a given character
+            concat_idents::concat_idents!(fn_name = natural_, $stat, _of {
+                /// Get the stat of a given character at a level,
+                /// not including equips or consumables
                 pub fn fn_name(&self, pchar: &str) -> IntegralStat {
                     // get character level
                     let ch = self.get_character(pchar);
