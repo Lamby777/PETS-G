@@ -1,2 +1,4 @@
 #!/bin/bash
-godot --path ../pets-gd/ "$@"
+
+# will not run if your code doesn't compile :)
+cargo build && godot --path ../pets-gd/ "$@"
