@@ -1,9 +1,9 @@
 /// Function that calculates a stat for a character
 /// Basically just "base stats" as a function
 use super::IntegralStat;
-use std::{collections::HashMap, ops::Deref};
+use std::{collections::HashMap, ops::Deref, rc::Rc};
 
-// type Identity<T> = T;
+pub type CharStatCalcs = HashMap<String, Rc<StatCalcList>>;
 
 // function that returns the same type it takes in
 #[derive(Debug, Clone)]
@@ -24,8 +24,6 @@ impl<T> From<fn(IntegralStat) -> T> for StatCalcFn<T> {
         Self { calc }
     }
 }
-
-pub type CharStatCalcs = HashMap<String, StatCalcList>;
 
 /// A list of stat calculation functions for ONE CHARACTER
 #[derive(Debug, Clone)]

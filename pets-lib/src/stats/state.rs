@@ -44,7 +44,7 @@ impl StatsInterface {
             .clone()
     }
 
-    pub fn get_statcalc(&self, ch: &str) -> StatCalcList {
+    pub fn get_statcalc(&self, ch: &str) -> Rc<StatCalcList> {
         self.statcalcs
             .get(ch)
             .expect("key should be a valid PChar name")
