@@ -2,7 +2,7 @@ use std::{cell::RefCell, rc::Rc};
 
 use crate::prelude::*;
 
-use super::statcalc::{CharStatCalcs, StatCalcList};
+use super::statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
 
 /// CharMap with all characters having the same exact stats
 pub fn uniform_charmap() -> CharMap {
@@ -49,7 +49,7 @@ macro_rules! ch_unique {
             $calcs.insert(character.to_owned(), {
                 let calcs = StatCalcList {
                     $(
-                        $base: Some($base_fn),
+                        $base: StatCalcFn::from($base_fn as fn(_) -> _),
                     )*
                     ..Default::default()
                 };
@@ -77,14 +77,14 @@ pub fn default_charmap() -> (CharMap, CharStatCalcs) {
             display_name = "Ethan".to_string(),
 
             ;max_hp => |lvl| lvl - 6,
-            ;max_mana => |lvl| Some(lvl.unwrap() + 1)
+            ;max_mana => |lvl| Some(lvl + 1)
         },
 
         SIVA {
             display_name = "Siva".to_string(),
 
             ;max_hp => |lvl| lvl - 2,
-            ;max_mana => |lvl| Some(lvl.unwrap() + 1)
+            ;max_mana => |lvl| Some(lvl + 1)
         },
 
         TERRA {
@@ -119,7 +119,7 @@ mod tests {
         let (_, calcs) = default_charmap();
 
         let ethan = calcs.get(&PChar::ETHAN.to_string()).unwrap();
-        let energy_fn = ethan.max_energy.unwrap();
+        let energy_fn = *ethan.max_energy;
         assert_eq!(energy_fn(10), 11);
     }
 }

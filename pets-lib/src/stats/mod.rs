@@ -12,6 +12,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::prelude::*;
 
+use self::statcalc::StatCalcList;
+
 pub mod charmap;
 pub mod pchars;
 pub mod savefiles;
@@ -28,6 +30,9 @@ pub struct CharData {
     /// Name of the character, as picked by the user
     /// ⚠️⚠️⚠️ See <https://github.com/Lamby777/PETS-G/issues/23>
     pub display_name: String,
+
+    /// Level of the character
+    pub level: IntegralStat,
 
     /// The character's long-term stat offsets
     /// Stuff like using a consumable with permanent boosts...
@@ -62,13 +67,20 @@ impl Default for CharData {
             lambda: Some(0),
         };
 
+        // will be dropped after this function...
+        // just need it to see default values and prevent
+        // repeating the same numbers everywhere
+        let calc = StatCalcList::default();
+        let level = 1;
+
         let state = CharStatsStateful {
-            hp: todo!(),
-            energy: todo!(),
+            hp: (*calc.max_hp)(level),
+            energy: (*calc.max_energy)(level),
         };
 
         CharData {
             display_name: "Chicken Nugget".to_owned(),
+            level,
             stats,
             state,
             conditions: HashSet::new(),
