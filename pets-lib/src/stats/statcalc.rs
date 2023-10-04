@@ -79,8 +79,12 @@ mod standard_calcs {
         (p1 + p2) as IntegralStat
     }
 
-    pub fn max_energy(_lvl: IntegralStat) -> IntegralStat {
-        todo!()
+    pub fn max_energy(lvl: IntegralStat) -> IntegralStat {
+        // f(x) = 10 + (floor(x/10) * 10)
+
+        // for this, we don't need floor in practice because
+        // rust's integer division does that for us
+        10 + ((lvl / 10) * 10)
     }
 
     pub fn attack(_lvl: IntegralStat) -> IntegralStat {
