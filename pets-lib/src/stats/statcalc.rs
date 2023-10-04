@@ -77,6 +77,7 @@ mod standard_calcs {
     //! For all these functions, the doc comment is the
     //! mathematical function. The variable `x` represents
     //! the variable `lvl` in our code.
+    // TODO stop using `as` to cast... somewhat unsafe`
 
     use crate::prelude::{FloatStat, IntegralStat};
 
@@ -94,11 +95,12 @@ mod standard_calcs {
     }
 
     /// floor(5 * log_1.4_(x)) + 0.5x + 40
+    // TODO idk what i was thinking... maybe use sqrt growth instead of log
     pub fn max_hp(lvl: IntegralStat) -> IntegralStat {
-        let p1 = FloatStat::floor(5.0 * (lvl as FloatStat).log(1.4));
-        let p2 = (0.5 * lvl as FloatStat) + 40.0;
+        let p1 = (5.0 * (lvl as FloatStat).log(1.4)) as IntegralStat;
+        let p2 = (lvl / 2) + 40;
 
-        (p1 + p2) as IntegralStat
+        p1 + p2
     }
 
     /// 10 + (floor(x/10) * 10)
@@ -108,36 +110,57 @@ mod standard_calcs {
         10 + ((lvl / 10) * 10)
     }
 
-    pub fn attack(_lvl: IntegralStat) -> IntegralStat {
-        todo!()
+    pub fn attack(lvl: IntegralStat) -> IntegralStat {
+        // TODO think of a better formula
+        // (not listed in desmos link)
+        lvl
     }
 
-    pub fn defense(_lvl: IntegralStat) -> IntegralStat {
-        todo!()
+    pub fn defense(lvl: IntegralStat) -> IntegralStat {
+        // TODO think of a better formula
+        // (not listed in desmos link)
+        lvl
     }
 
     /// floor(25 * ln(x))
     pub fn speed(lvl: IntegralStat) -> IntegralStat {
-        FloatStat::floor(25.0 * (lvl as FloatStat).ln()) as IntegralStat
+        (25.0 * (lvl as FloatStat).ln()) as IntegralStat
     }
 
-    pub fn stability(_lvl: IntegralStat) -> IntegralStat {
-        todo!()
+    /// ceil(  -((x-60)/14)^2  ) + 110
+    pub fn stability(lvl: IntegralStat) -> IntegralStat {
+        let p1 = lvl as FloatStat - 60.0 / 14.0;
+        let p1 = -p1.powi(2);
+
+        110 + p1 as IntegralStat
     }
 
-    pub fn delta(_lvl: IntegralStat) -> IntegralStat {
-        todo!()
+    /// floor(10 * sqrt(x))
+    pub fn delta(lvl: IntegralStat) -> IntegralStat {
+        (10.0 * (lvl as FloatStat).sqrt()) as IntegralStat
     }
 
     pub fn epsilon(_lvl: IntegralStat) -> IntegralStat {
-        todo!()
+        // NOTE this one is mostly upgraded manually,
+        // but should still improve somewhat with levels...
+        //
+        // TODO prob needs its own dedicated calculation function
+        // in a separate file... but for now let's just leave it
+        // as always returning 1
+        1
     }
 
+    // -----------------------------------------------------
+    // Characters don't have the following stats by default,
+    // -----------------------------------------------------
+
     pub fn lambda(_lvl: IntegralStat) -> Option<IntegralStat> {
-        todo!()
+        None
     }
 
     pub fn max_mana(_lvl: IntegralStat) -> Option<IntegralStat> {
-        todo!()
+        // NOTE use floor( (z/12)^2.5 ) to calculate for characters
+        // that DO have PK abilities... but this is the default so nah
+        None
     }
 }
