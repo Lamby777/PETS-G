@@ -99,11 +99,10 @@ pub fn default_charmap() -> (CharMap, CharStatCalcs) {
 mod tests {
     use super::*;
 
-    #[ignore = "broken test, update when chardata is actually in use"]
+    #[ignore = "broken test"] // update when chardata is actually in use
     #[test]
-    fn ch_unique_charmap() {
+    fn ch_unique_charmap_works() {
         let (charmap, _) = default_charmap();
-
         let ethan = charmap.get(&PChar::ETHAN.to_string()).unwrap();
         let ethan = ethan.borrow();
         assert_eq!(ethan.display_name, "Ethan");
@@ -113,11 +112,27 @@ mod tests {
     }
 
     #[test]
-    fn ch_unique_calcs() {
-        let (_, calcs) = default_charmap();
+    fn ch_unique_calcs_works() {
+        let mut charmap = uniform_charmap();
+        let mut calcs = uniform_statcalcmap();
+
+        ch_unique_registry! {
+            charmap,
+            calcs,
+
+            ETHAN {
+                display_name = "Ethan".to_owned(),
+
+                ;max_hp => |lvl| lvl - 6,
+                ;max_mana => |lvl| Some(lvl + 1),
+                ;speed => |_| 400
+            }
+        }
 
         let ethan = calcs.get(&PChar::ETHAN.to_string()).unwrap();
-        let energy_fn = *ethan.max_energy;
-        assert_eq!(energy_fn(10), 11);
+        let hp_fn = *ethan.max_hp;
+        let mana_fn = *ethan.max_mana;
+        assert_eq!(hp_fn(20), 14);
+        assert_eq!(mana_fn(40), Some(41));
     }
 }
