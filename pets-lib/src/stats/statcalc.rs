@@ -74,15 +74,14 @@ mod standard_calcs {
     //! (warning: link may be outdated)
     //! <https://www.desmos.com/calculator/2lpxhqyj7l>
     //!
-    //! For all these functions, the first line is the
+    //! For all these functions, the doc comment is the
     //! mathematical function. The variable `x` represents
     //! the variable `lvl` in our code.
 
     use crate::prelude::{FloatStat, IntegralStat};
 
+    /// floor(    ( (log(x) + x^3) / 16 )   + x )
     pub fn xp_requirement(lvl: IntegralStat) -> IntegralStat {
-        // f(x) = floor(  (( log(x) + x^3 ) / 16) + x )
-
         // NOTE x is the level which reaching this amount of xp
         // will get you to, and NOT the level you're currently at
         let p1 = (lvl as FloatStat).log10() + (lvl.pow(3) as FloatStat);
@@ -94,18 +93,16 @@ mod standard_calcs {
         quotient + lvl
     }
 
+    /// floor(5 * log_1.4_(x)) + 0.5x + 40
     pub fn max_hp(lvl: IntegralStat) -> IntegralStat {
-        // f(x) = floor(5 * log_1.4_(x)) + 0.5x + 40
-
         let p1 = FloatStat::floor(5.0 * (lvl as FloatStat).log(1.4));
         let p2 = (0.5 * lvl as FloatStat) + 40.0;
 
         (p1 + p2) as IntegralStat
     }
 
+    /// 10 + (floor(x/10) * 10)
     pub fn max_energy(lvl: IntegralStat) -> IntegralStat {
-        // f(x) = 10 + (floor(x/10) * 10)
-
         // for this, we don't need floor in practice because
         // rust's integer division does that for us
         10 + ((lvl / 10) * 10)
@@ -119,8 +116,9 @@ mod standard_calcs {
         todo!()
     }
 
-    pub fn speed(_lvl: IntegralStat) -> IntegralStat {
-        todo!()
+    /// floor(25 * ln(x))
+    pub fn speed(lvl: IntegralStat) -> IntegralStat {
+        FloatStat::floor(25.0 * (lvl as FloatStat).ln()) as IntegralStat
     }
 
     pub fn stability(_lvl: IntegralStat) -> IntegralStat {
