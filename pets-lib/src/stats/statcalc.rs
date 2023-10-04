@@ -27,6 +27,8 @@ impl<T> From<fn(IntegralStat) -> T> for StatCalcFn<T> {
 /// A list of stat calculation functions for ONE CHARACTER
 #[derive(Debug, Clone)]
 pub struct StatCalcList {
+    pub xp_requirement: StatCalcFn<IntegralStat>,
+
     pub max_hp: StatCalcFn<IntegralStat>,
     pub max_energy: StatCalcFn<IntegralStat>,
 
@@ -53,7 +55,7 @@ macro_rules! use_standard {
 impl Default for StatCalcList {
     fn default() -> Self {
         use_standard! {
-            // TODO required experience for next level
+            xp_requirement,
             max_hp,
             max_energy,
             attack,
@@ -69,10 +71,32 @@ impl Default for StatCalcList {
 }
 
 mod standard_calcs {
+    //! (warning: link may be outdated)
+    //! <https://www.desmos.com/calculator/2lpxhqyj7l>
+    //!
+    //! For all these functions, the first line is the
+    //! mathematical function. The variable `x` represents
+    //! the variable `lvl` in our code.
+
     use crate::prelude::{FloatStat, IntegralStat};
+
+    pub fn xp_requirement(lvl: IntegralStat) -> IntegralStat {
+        // f(x) = floor(  (( log(x) + x^3 ) / 16) + x )
+
+        // NOTE x is the level which reaching this amount of xp
+        // will get you to, and NOT the level you're currently at
+        let p1 = (lvl as FloatStat).log10() + (lvl.pow(3) as FloatStat);
+
+        // division is done after floor, because it
+        // would have been floored anyway (i think)
+        let quotient = FloatStat::floor(p1) as IntegralStat / 16;
+
+        quotient + lvl
+    }
 
     pub fn max_hp(lvl: IntegralStat) -> IntegralStat {
         // f(x) = floor(5 * log_1.4_(x)) + 0.5x + 40
+
         let p1 = FloatStat::floor(5.0 * (lvl as FloatStat).log(1.4));
         let p2 = (0.5 * lvl as FloatStat) + 40.0;
 
