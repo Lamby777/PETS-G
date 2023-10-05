@@ -1,0 +1,14 @@
+[configuration]
+entry_symbol = "gdext_rust_init"
+compatibility_minimum = 4.1
+
+[libraries]
+linux.debug.x86_64 = "res://../pets-lib/target/debug/libpets_lib.so"
+linux.release.x86_64 = "res://../pets-lib/target/release/libpets_lib.so"
+windows.debug.x86_64 = "res://../pets-lib/target/debug/pets-lib.dll"
+windows.release.x86_64 = "res://../pets-lib/target/release/pets-lib.dll"
+macos.debug = "res://../pets-lib/target/debug/libpets_lib.dylib"
+macos.release = "res://../pets-lib/target/release/libpets_lib.dylib"
+macos.debug.arm64 = "res://../pets-lib/target/debug/libpets_lib.dylib"
+macos.release.arm64 = "res://../pets-lib/target/release/libpets_lib.dylib"
+
