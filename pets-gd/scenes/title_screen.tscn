@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/title_screen.gd" id="2_l6ini"]
 [ext_resource type="AudioStream" uid="uid://4puxvjdkmpho" path="res://assets/sounds/petsgamestart.wav" id="4_1uee5"]
 
-[node name="TitleScreen" type="Node2D"]
+[node name="TitleScreen" type="TitleScreen"]
 script = ExtResource("2_l6ini")
 
 [node name="TitleScreenMusic" type="AudioStreamPlayer" parent="."]

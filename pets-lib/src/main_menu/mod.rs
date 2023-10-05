@@ -13,14 +13,14 @@ use crate::prelude::*;
 
 #[derive(GodotClass)]
 #[class(base=Node2D)]
-struct DialogBox {
+struct TitleScreen {
     #[base]
     node: Base<Node2D>,
     si: Gd<StatsInterface>,
 }
 
 #[godot_api]
-impl DialogBox {
+impl TitleScreen {
     // #[func]
     // fn do_draw(&mut self) {
     //     self.spk_txt().set_text("Cherry".into());
@@ -33,7 +33,7 @@ impl DialogBox {
 }
 
 #[godot_api]
-impl Node2DVirtual for DialogBox {
+impl Node2DVirtual for TitleScreen {
     fn init(node: Base<Node2D>) -> Self {
         Self {
             node,
