@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=3 format=3 uid="uid://b4to5dpqntd2r"]
 
-[ext_resource type="FontFile" uid="uid://d2tpnvqhi45w7" path="res://assets/fonts/Candy Demo.ttf" id="1_78tl3"]
+[ext_resource type="FontFile" uid="uid://0vkr7mnpb6tm" path="res://assets/fonts/Renogare-Regular.otf" id="1_buwdt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kct0x"]
 bg_color = Color(0.141176, 0.152941, 0.227451, 1)
@@ -18,4 +18,4 @@ shadow_size = 16
 [resource]
 Panel/styles/panel = SubResource("StyleBoxFlat_kct0x")
 RichTextLabel/colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-RichTextLabel/fonts/normal_font = ExtResource("1_78tl3")
+RichTextLabel/fonts/normal_font = ExtResource("1_buwdt")
