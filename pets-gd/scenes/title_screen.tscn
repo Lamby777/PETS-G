@@ -1,11 +1,23 @@
 [gd_scene load_steps=4 format=3 uid="uid://ben252ibtpchc"]
 
 [ext_resource type="AudioStream" uid="uid://bu1akc5wvo0wo" path="res://assets/music/menu/titlebreeze.ogg" id="1_06t4m"]
-[ext_resource type="Script" path="res://scenes/title_screen.gd" id="2_l6ini"]
 [ext_resource type="AudioStream" uid="uid://4puxvjdkmpho" path="res://assets/sounds/petsgamestart.wav" id="4_1uee5"]
 
+[sub_resource type="GDScript" id="GDScript_dle5c"]
+script/source = "extends Node2D
+
+@onready var start_sound = $StartSound
+
+func _ready():
+  #start_sound.play()
+  pass
+
+func _process(_delta):
+  pass
+"
+
 [node name="TitleScreen" type="TitleScreen"]
-script = ExtResource("2_l6ini")
+script = SubResource("GDScript_dle5c")
 
 [node name="TitleScreenMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_06t4m")
