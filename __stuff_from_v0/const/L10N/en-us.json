@@ -1,0 +1,235 @@
+{
+	"cn": {
+		"Mom":				{
+			"d":			"Mom"
+		},
+		
+		"Porky":			{
+			"d":			"Porky"
+		},
+		
+		"Ethan":			{
+			"d":			"Ethan",
+			"full":			"Ethan Cadóri"
+		},
+		
+		"Siva":				{
+			"d":			"Siva",
+			"formal":		"Sylvia",
+			"full":			"Sylvia Tulivae"
+		},
+		
+		"Terra":			{
+			"d":			"Terra",
+			"formal":		"Tuvo",
+			"full":			"Tuvo Requiem"
+		},
+		
+		"Lyembo":			{
+			"d":			"L'yembo",
+			"full":			"L'yembo Richter"
+		},
+		
+		"Quolo":			{
+			"d":			"Quolo",
+			"full":			"Quolo Torviní"
+		},
+		
+		"Cass":				{
+			"d":			"Cassander",
+			"full":			"Cassander Distantó"
+		},
+		
+		"Bobby":			{
+			"d":			"Bobby",
+			"full":			"Bobby Tables",
+			"formal":		"Robert",
+			"formalfull":	"Robert Sequiella",
+			"tables":		"Tables"
+		},
+		
+		"Mira":				{
+			"d":			"Mira",
+			"formal":		"Yúsamira",
+			"full":			"Yúsamira L'yasu"
+		},
+		
+		"Leo":				{
+			"d":			"Leo",
+			"formal":		"Leonardo",
+			"full":			"Leonardo Q'sani",
+			"yoyo":			"Yo-yo"
+		},
+		
+		"Dylan":			{
+			"d":			"Dylan",
+			"full":			"Dylan Spamboni",
+			"dubs":			"Dubs"
+		}
+	},
+	
+	"items": {
+		"StarterStick": {
+			"name":	"Stick",
+			"desc":	"Put ya stick away, Waltuh..."
+		},
+		
+		"T17": {
+			"name":	"T17 Combat Knife",
+			"desc":	"A gift from a guardian angel.\nStay safe!"
+		},
+		
+		"TrustyRusty": {
+			"name":	"Trusty Rusty Pistol",
+			"desc":	"Not as safe as your memory recalls...\nAt least it gets the job done!"
+		},
+		
+		"GrenadeLow": {
+			"name":	"Low Potency Grenade",
+			"desc":	"Deals immediate blast damage to an enemy.\nThen again, it could be a dud, right?"
+		}
+	},
+	
+	"enemies": {
+		"GummyD":			"Gummy Dummy",
+		"GummyG":			"Gelatin Gangster",
+		
+		"TWrecks":			"T. Wrecks",
+		
+		"PMPuppy":			"Puppy Mâché",
+		"PMPuppier":		"Puppier Mâché",
+		"PMBigDawg":		"Big Dawg Mâché",
+		
+		"Porkalo1":			"Porkalo",
+		"Porkalo2":			"Porkalicious",
+		"PorkaloP":			"Pirate Porkalo",
+		
+		"AnonM":			"A. Nonny Mouse",
+		"AnonYman":			"Mr. Yman",
+		"AnonTin":			"Sir Tinpursenn",
+		"AnonHax":			"U. Surname",
+		"AnonPirate":		"Arrr-bitrary Marooner",
+		"AnonMask":			"Incognito Insurgent",
+		"AnonUni":			"Uni-Dentified",
+		
+		"MCrow":			"Copper Crow",
+		"MGoose":			"Golden Goose",
+		"MRobin":			"Ruby Robin",
+		"MCardinal":		"Carbon Cardinal",
+		"MPheasant":		"Platinum Pheasant",
+		"MTesia":			"Tanzanite Tesia",
+		"MPigeon":			"Pigeonado",
+		"MSparrow":			"Sapphire Sparrow",
+		"MEagle":			"Emerald Eagle",
+		"MDuck":			"Diamond Duck",
+		"MIbis":			"Iridescent Ibis",
+		"MRaven":			"Radioactive Raven",
+		
+		"CarbonKit":		"Carbon Kitten",
+		"CarbonCat":		"Carbon Cat",
+		
+		"MilkC1":			"Milk Carton",
+		"MilkC2":			"Milk Crate",
+		
+		"ElecBunny":		"Drum Bunny",
+		"ElecToy":			"2-Watt Willy",
+		"ElecFrog1":		"Low Amp-Phibian",
+		"ElecZap":			"Short Circuit Zap",
+		"ElecFrog2":		"High Amp-phibian",
+		
+		"SleepPillow":		"Snoozer",
+		"SleepSheep":		"Shleep",
+		"SleepDozer":		"Dozer",
+		
+		"KickNote1":		"Kick Me Note",
+		"KickNote2":		"Kick You Note",
+		
+		"LostN":			"Lost Hat",
+		"LostP":			"Lost Ribbon",
+		"LostJ":			"Lost Rocket",
+		"LostP":			"Floatin' Fez",
+		"ShoeC":			"Shoe Snake",
+		"ShoeK":			"Princess Rainboots",
+		"ShoeD":			"Thief Kicks",
+		"ShoeM":			"Enforcer's Boots",
+		
+		"CCupJava":			"Scalding Cup o' Java",
+		"CCupEspr":			"Depresso Espresso",
+		
+		"PlantC":			"Chicksanthemum",
+		"PlantG":			"Goat'enrod",
+		"PlantP":			"Pigtunia",
+		"PlantS":			"Sheepsta Daisy",
+		
+		"HMSitar":			"Sneaky Sitar",
+		"HMFiddle":			"Freaky Fiddle",
+		"HMViolin":			"Violent Violin",
+		"HMViola":			"Vicious Viola",
+		"HMCello":			"Crazed Cello",
+		"HMBass":			"Broken Bass",
+		"HMHarp":			"Harmful Harp",
+		
+		"GoobTroll":		"Trackin' Troll",
+		"GoobSpyware":		"Spyware Warrior",
+		"GoobSniper":		"Trajectory Tracer",
+		
+		"XLR8":				"XLR-8",
+		"XLR16":			"XLR-16",
+		"XLR32":			"XLR-32",
+		"XLR64":			"XLR-64",
+		"XLR128":			"XLR-128",
+		"XLR256":			"XLR-256",
+		"XLR512":			"XLR-512",
+		
+		"Rockyt":			"The Rocket Raccoon",
+		"Amogus1":			"Suspicious Fish",
+		"Mantle":			"Red Cloaked Spirit",
+		"DeusVolt":			"Deus Volt",
+		"XLRAndo":			"XLR-Ando",
+		"StudioCam":		"Cameron Mann",
+		"StudioMic":		"Michael Rophone",
+		"StudioCom":		"Commander Peuter",
+		"StudioSpk":		"Monika Etor",
+		"BoogieMan":		"The Boogie Man",
+		"RumbleWBoss":		"Rumble's Serpent"
+	},
+	
+	"battlehud": {
+		"goodtiming":		"Good Timing!",
+		"missedbeat":		"Missed beat...",
+		"badtiming":		"Bad timing.",
+		"alreadyclicked":	"Already clicked!",
+		"versus":			" vs. "
+	},
+	
+	"music": {
+		"battle": {
+			"Zin":								"Zin",
+			"Bounce":							"Bounce",
+			"PKR":								"PKR",
+			"PKWTF":							"PKWTF",
+			"TroublesomeModifications":			"Trb. Mods",
+			"SylverHabanera":					"Sylver Habanera",
+			"Slick":							"Slick",
+			"Sorrowful":						"Sorrowful",
+			"Secretive":						"Secretive",
+			"BogusBeat":						"Bogus Beat",
+			"Suspicious":						"Suspicious",
+			"Spiteful":							"Spiteful",
+			"GoodInside":						"Still Good Inside",
+			"Undisputed Revenge":				"Undisp. Revenge",
+			"ReduxBliss":						"Redux<Bliss>",
+			"Serio":							"Serio",
+			"Precisio":							"Precisio",
+			"Seriobotic":						"Seriobotic",
+			"SerialNo":							"Serial No.",
+			"SeriouslySerio":					"Seriously Serio"
+		}
+	},
+	
+	"cs": {
+		"GameIntro": {
+			"mom1":	"Come on, check out your room, %%cn.Ethan.d%%! We're unpacking your stuff!"
+		}
+	}
+}
