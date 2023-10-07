@@ -11,15 +11,20 @@ use godot::prelude::*;
 
 use crate::prelude::*;
 
-use field_count::FieldCount;
+use num_derive::FromPrimitive;
+use strum::IntoEnumIterator;
+use strum_macros::{EnumIter, IntoStaticStr};
 
-#[derive(FieldCount)]
-struct Choices {
-    play: Gd<RichTextLabel>,
-    options: Gd<RichTextLabel>,
-    credits: Gd<RichTextLabel>,
-    quit: Gd<RichTextLabel>,
+#[derive(EnumIter, IntoStaticStr, Debug, FromPrimitive)]
+enum MainMenuChoice {
+    Play = 0,
+    Options,
+    Credits,
+    Quit,
 }
+
+const CHOICES_COUNT: usize = std::mem::variant_count::<MainMenuChoice>();
+pub type Choices = [Gd<RichTextLabel>; CHOICES_COUNT];
 
 #[derive(GodotClass)]
 #[class(base=Node2D)]
@@ -40,9 +45,7 @@ impl TitleScreen {
         let old_choice = self.current_choice;
 
         let res = if let Some(n) = old_choice {
-            let n = n as i16;
-            let total_choices = Choices::field_count() as i16;
-            (n + diff).rem_euclid(total_choices)
+            (n as i16 + diff).rem_euclid(CHOICES_COUNT as i16)
         } else {
             0
         };
@@ -78,12 +81,9 @@ impl Node2DVirtual for TitleScreen {
         // all the main menu options you can pick
         let cont = self.node.get_node_as::<Control>("Background/MenuChoices");
 
-        let choices = Choices {
-            play: cont.get_node_as("Play"),
-            options: cont.get_node_as("Options"),
-            credits: cont.get_node_as("Credits"),
-            quit: cont.get_node_as("Quit"),
-        };
+        let choices: Choices = MainMenuChoice::iter()
+            .map(|v| cont.get_node_as::<RichTextLabel>(v.into()))
+            .collect();
 
         self.choices = Some(choices);
     }
