@@ -3,6 +3,7 @@
 //! the GDExtension side that runs during battles.
 //!
 
+use godot::engine::global::Key;
 use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
@@ -21,5 +22,15 @@ struct BattleEngine {
 impl Node2DVirtual for BattleEngine {
     fn init(node: Base<Node2D>) -> Self {
         Self { node }
+    }
+
+    fn process(&mut self, _delta: f64) {
+        let input = Input::singleton();
+
+        // if q pressed, quit (dev shit)
+        if input.is_key_pressed(Key::KEY_Q) {
+            let mut tree = self.node.get_tree().unwrap();
+            tree.quit();
+        }
     }
 }

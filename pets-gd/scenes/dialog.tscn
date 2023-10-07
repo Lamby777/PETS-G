@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://wkelk3y4bkcj"]
 
-[ext_resource type="Theme" uid="uid://cc8cl7a24wn5y" path="res://themes/theme_deft.tres" id="1_jbfs2"]
+[ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_jbfs2"]
 
 [node name="DialogBox" type="DialogBox"]
 offset_left = 256.0
@@ -24,5 +24,6 @@ offset_left = 16.0
 offset_top = 96.0
 offset_right = 1392.0
 offset_bottom = 424.0
-text = "Test test words wordsy word word noises among us wordy word sentence go brr also more words and maybe some even more i guess Test test words wordsy word word noises among us wordy word sentence go brr also more words and maybe some even more i guess Test test words wordsy word word noises among us wordy word sentence go brr also more words and maybe some even more i guess Test test words wordsy word word noises among us wordy word sentence go brr also more words and maybe some even more i guess "
+theme_override_font_sizes/normal_font_size = 44
+text = "Test test words wordsy word word noises among us wordy word sentence go brr also more words and maybe some even more i guess Test test words wordsy word word noises among us wordy word sentence go brr also more words and maybe some even more i guess Test test words wordsy word word noises among us wordy word."
 fit_content = true
