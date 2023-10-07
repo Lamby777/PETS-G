@@ -18,4 +18,5 @@ shadow_size = 16
 [resource]
 Panel/styles/panel = SubResource("StyleBoxFlat_kct0x")
 RichTextLabel/colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+RichTextLabel/font_sizes/normal_font_size = 44
 RichTextLabel/fonts/normal_font = ExtResource("1_buwdt")
