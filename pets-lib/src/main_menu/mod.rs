@@ -12,10 +12,8 @@ use godot::prelude::*;
 use crate::prelude::*;
 
 use num_derive::FromPrimitive;
-use strum::IntoEnumIterator;
-use strum_macros::{EnumIter, IntoStaticStr};
 
-#[derive(EnumIter, IntoStaticStr, Debug, FromPrimitive)]
+#[derive(FromPrimitive)]
 enum MainMenuChoice {
     Play = 0,
     Options,
@@ -81,9 +79,12 @@ impl Node2DVirtual for TitleScreen {
         // all the main menu options you can pick
         let cont = self.node.get_node_as::<Control>("Background/MenuChoices");
 
-        let choices: Choices = MainMenuChoice::iter()
-            .map(|v| cont.get_node_as::<RichTextLabel>(v.into()))
-            .collect();
+        let choices = [
+            cont.get_node_as("Play"),
+            cont.get_node_as("Options"),
+            cont.get_node_as("Credits"),
+            cont.get_node_as("Quit"),
+        ];
 
         self.choices = Some(choices);
     }
