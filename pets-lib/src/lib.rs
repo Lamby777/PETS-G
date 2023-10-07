@@ -9,6 +9,7 @@
 
 // TODO remove this soon
 #![allow(dead_code)]
+#![feature(variant_count)]
 
 use godot::engine::Engine;
 use godot::prelude::*;
