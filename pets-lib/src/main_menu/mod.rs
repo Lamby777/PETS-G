@@ -12,8 +12,9 @@ use godot::prelude::*;
 use crate::prelude::*;
 
 use num_derive::FromPrimitive;
+use num_traits::FromPrimitive;
 
-#[derive(FromPrimitive)]
+#[derive(Debug, FromPrimitive)]
 enum MainMenuChoice {
     Play = 0,
     Options,
@@ -38,6 +39,7 @@ struct TitleScreen {
     current_choice: Option<u8>,
 }
 
+#[godot_api]
 impl TitleScreen {
     fn change_menu_choice(&mut self, diff: i16) {
         let old_choice = self.current_choice;
@@ -49,6 +51,17 @@ impl TitleScreen {
         };
 
         self.current_choice = Some(res as u8);
+    }
+
+    fn pick_choice(&mut self, choice: MainMenuChoice) {
+        use MainMenuChoice::*;
+
+        match choice {
+            Play => todo!(),
+            Options => todo!(),
+            Credits => todo!(),
+            Quit => todo!(),
+        }
     }
 }
 
@@ -71,6 +84,16 @@ impl Node2DVirtual for TitleScreen {
             self.change_menu_choice(1);
         } else if input.is_action_just_pressed("ui_up".into()) {
             self.change_menu_choice(-1);
+        }
+
+        if input.is_action_just_pressed("ui_accept".into()) {
+            let choice = self.current_choice;
+
+            if let Some(choice) = choice {
+                let choice = MainMenuChoice::from_u8(choice).unwrap();
+
+                self.pick_choice(choice);
+            }
         }
     }
 
