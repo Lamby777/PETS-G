@@ -2,8 +2,6 @@
 //! Dialogue system for the game's menus.
 //!
 
-#![allow(dead_code)]
-
 use godot::engine::Font;
 use godot::prelude::*;
 

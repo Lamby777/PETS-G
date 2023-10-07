@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://ben252ibtpchc"]
+
+[ext_resource type="AudioStream" uid="uid://bu1akc5wvo0wo" path="res://assets/music/menu/titlebreeze.ogg" id="1_06t4m"]
+[ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="3_gc66u"]
+[ext_resource type="AudioStream" uid="uid://4puxvjdkmpho" path="res://assets/sounds/petsgamestart.wav" id="4_1uee5"]
+
+[sub_resource type="GDScript" id="GDScript_dle5c"]
+script/source = "extends Node2D
+
+@onready var start_sound = $StartSound
+
+func _ready():
+  #start_sound.play()
+  pass
+
+func _process(_delta):
+  pass
+"
+
+[node name="TitleScreen" type="TitleScreen"]
+script = SubResource("GDScript_dle5c")
+
+[node name="TitleScreenMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_06t4m")
+autoplay = true
+
+[node name="StartSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_1uee5")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_gc66u")
+color = Color(0.0666667, 0.0666667, 0.105882, 1)
+metadata/_edit_lock_ = true
+
+[node name="TopLine" type="Panel" parent="Background"]
+layout_mode = 0
+offset_left = -64.0
+offset_top = -72.0
+offset_right = 1984.0
+offset_bottom = 56.0
+
+[node name="StatusLine" type="Panel" parent="Background"]
+layout_mode = 0
+offset_left = -64.0
+offset_top = 1024.0
+offset_right = 1984.0
+offset_bottom = 1152.0
+
+[node name="StatusLine2" type="Panel" parent="Background"]
+layout_mode = 0
+offset_left = 1024.0
+offset_top = 320.0
+offset_right = 1216.0
+offset_bottom = 512.0
+
+[node name="SlashPanel" type="Panel" parent="Background"]
+layout_mode = 0
+offset_left = -210.0
+offset_top = 1066.0
+offset_right = 1036.0
+offset_bottom = 1689.0
+rotation = -1.39589

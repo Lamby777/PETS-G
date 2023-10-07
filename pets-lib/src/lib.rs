@@ -7,7 +7,9 @@
 //! - Cherry 9/2/2023 | <3
 //!
 
+// TODO remove this soon
 #![allow(dead_code)]
+
 use godot::engine::Engine;
 use godot::prelude::*;
 use stats::state::StatsInterface;
@@ -15,6 +17,7 @@ use stats::state::StatsInterface;
 mod battle;
 mod dialogue;
 mod items;
+mod main_menu;
 mod stats;
 
 mod prelude {
