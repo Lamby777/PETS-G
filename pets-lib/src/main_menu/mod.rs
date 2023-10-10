@@ -6,6 +6,7 @@
 //! - Cherry, 2:54 AM, 10/5/2023 | <3
 //!
 
+use godot::engine::tween::TransitionType;
 use godot::engine::{Control, Node2D, Node2DVirtual, RichTextLabel};
 use godot::prelude::*;
 
@@ -13,6 +14,9 @@ use crate::prelude::*;
 
 use num_derive::FromPrimitive;
 use num_traits::FromPrimitive;
+
+const MENU_TWEEN_TIME: f64 = 0.1;
+const MENU_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
 
 #[derive(Debug, FromPrimitive)]
 enum MainMenuChoice {
@@ -44,13 +48,36 @@ impl TitleScreen {
     fn change_menu_choice(&mut self, diff: i16) {
         let old_choice = self.current_choice;
 
-        let res = if let Some(n) = old_choice {
-            (n as i16 + diff).rem_euclid(CHOICES_COUNT as i16)
+        let res: u8 = if let Some(n) = old_choice {
+            (n as i16 + diff).rem_euclid(CHOICES_COUNT as i16) as u8
         } else {
             0
         };
 
-        self.current_choice = Some(res as u8);
+        if let Some(old_choice) = old_choice {
+            self.tween_choice_to(false, old_choice);
+        }
+
+        self.tween_choice_to(true, res);
+        self.current_choice = Some(res);
+    }
+
+    fn tween_choice_to(&mut self, is_picked: bool, choice: u8) {
+        let target_x = if is_picked { 64.0 } else { 0.0 };
+
+        // assume choices is not null
+        let choices = self.choices.as_mut().unwrap();
+        let node = &mut choices[choice as usize];
+
+        let mut tw = node.create_tween().unwrap();
+        tw.tween_property(
+            node.clone().upcast(),
+            "position:x".into(),
+            Variant::from(target_x),
+            MENU_TWEEN_TIME,
+        )
+        .unwrap()
+        .set_trans(MENU_TWEEN_TRANS);
     }
 
     fn pick_choice(&mut self, choice: MainMenuChoice) {
@@ -80,20 +107,25 @@ impl Node2DVirtual for TitleScreen {
     fn process(&mut self, _delta: f64) {
         let input = Input::singleton();
 
-        if input.is_action_just_pressed("ui_down".into()) {
-            self.change_menu_choice(1);
-        } else if input.is_action_just_pressed("ui_up".into()) {
-            self.change_menu_choice(-1);
-        }
+        let going_down = input.is_action_just_pressed("ui_down".into());
+        let going_up = input.is_action_just_pressed("ui_up".into());
+        let submitting = input.is_action_just_pressed("ui_accept".into());
 
-        if input.is_action_just_pressed("ui_accept".into()) {
+        if submitting {
             let choice = self.current_choice;
 
             if let Some(choice) = choice {
                 let choice = MainMenuChoice::from_u8(choice).unwrap();
 
                 self.pick_choice(choice);
+                return;
             }
+        }
+
+        if going_down {
+            self.change_menu_choice(1);
+        } else if going_up {
+            self.change_menu_choice(-1);
         }
     }
 
