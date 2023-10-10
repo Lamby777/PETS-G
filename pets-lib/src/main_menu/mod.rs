@@ -87,7 +87,10 @@ impl TitleScreen {
             Play => todo!(),
             Options => todo!(),
             Credits => todo!(),
-            Quit => todo!(),
+            Quit => {
+                let mut tree = self.node.get_tree().unwrap();
+                tree.quit();
+            }
         }
     }
 }
