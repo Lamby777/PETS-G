@@ -7,7 +7,7 @@
 //!
 
 use godot::engine::tween::TransitionType;
-use godot::engine::{Control, Node2D, Node2DVirtual, RichTextLabel};
+use godot::engine::{Control, Node2D, Node2DVirtual, RichTextLabel, Theme};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -69,15 +69,34 @@ impl TitleScreen {
         let choices = self.choices.as_mut().unwrap();
         let node = &mut choices[choice as usize];
 
-        let mut tw = node.create_tween().unwrap();
-        tw.tween_property(
-            node.clone().upcast(),
-            "position:x".into(),
-            Variant::from(target_x),
-            MENU_TWEEN_TIME,
-        )
-        .unwrap()
-        .set_trans(MENU_TWEEN_TRANS);
+        let theme = load::<Theme>("res://themes/theme_deft.tres");
+        let target_col = if is_picked {
+            theme.get_color("font_selected_color".into(), "RichTextLabel".into())
+        } else {
+            theme.get_color("default_color".into(), "RichTextLabel".into())
+        };
+
+        let mut x_tween = node.create_tween().unwrap();
+        x_tween
+            .tween_property(
+                node.clone().upcast(),
+                "position:x".into(),
+                Variant::from(target_x),
+                MENU_TWEEN_TIME,
+            )
+            .unwrap()
+            .set_trans(MENU_TWEEN_TRANS);
+
+        let mut color_tween = node.create_tween().unwrap();
+        color_tween
+            .tween_property(
+                node.clone().upcast(),
+                "theme_override_colors/default_color".into(),
+                Variant::from(target_col),
+                MENU_TWEEN_TIME,
+            )
+            .unwrap()
+            .set_trans(MENU_TWEEN_TRANS);
     }
 
     fn pick_choice(&mut self, choice: MainMenuChoice) {
