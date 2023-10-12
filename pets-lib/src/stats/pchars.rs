@@ -37,6 +37,7 @@ impl PChar {
         // These guys MIGHT be playable at some point...
         WINTHRUS,
         JUNO,
+        COLT,
         HASSAN,
         NYX,
         QUOLO,
