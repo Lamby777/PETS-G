@@ -24,6 +24,5 @@ offset_left = 16.0
 offset_top = 96.0
 offset_right = 1392.0
 offset_bottom = 424.0
-theme_override_font_sizes/normal_font_size = 44
 text = "Test test words wordsy word word noises among us wordy word sentence go brr also more words and maybe some even more i guess Test test words wordsy word word noises among us wordy word sentence go brr also more words and maybe some even more i guess Test test words wordsy word word noises among us wordy word."
 fit_content = true
