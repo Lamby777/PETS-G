@@ -103,10 +103,27 @@ impl TitleScreen {
         use MainMenuChoice::*;
 
         match choice {
-            Play => todo!(),
-            Options => todo!(),
-            Credits => todo!(),
+            Play => {
+                // TODO should animate the menu boxes flying
+                // off into the right, and the camera goes left
+                self.node
+                    .get_tree()
+                    .unwrap()
+                    .change_scene_to_file("res://scenes/world.tscn".into());
+            }
+
+            Options => {
+                // TODO scroll right into the options menu
+                // leaving this empty so it won't panic
+            }
+
+            Credits => {
+                // TODO tween the credits box
+                // leaving this empty so it won't panic
+            }
+
             Quit => {
+                godot_print!("Quitting via main menu");
                 let mut tree = self.node.get_tree().unwrap();
                 tree.quit();
             }
