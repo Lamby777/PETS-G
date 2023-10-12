@@ -18,6 +18,7 @@ use stats::state::StatsInterface;
 mod battle;
 mod dialogue;
 mod items;
+mod macros;
 mod main_menu;
 mod stats;
 
@@ -42,6 +43,8 @@ mod prelude {
     pub use std::fmt::{Debug, Display};
     pub use std::ops::Deref;
     pub use std::rc::Rc;
+
+    pub use crate::uninit;
 }
 
 struct PetsLib;
