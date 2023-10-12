@@ -43,8 +43,6 @@ mod prelude {
     pub use std::fmt::{Debug, Display};
     pub use std::ops::Deref;
     pub use std::rc::Rc;
-
-    pub use crate::uninit;
 }
 
 struct PetsLib;

@@ -37,7 +37,7 @@ struct TitleScreen {
     si: Gd<StatsInterface>,
 
     // Option because not init til _ready()
-    choices: Choices,
+    choices: Option<Choices>,
 
     // null if game just started (no choice hovered)
     current_choice: Option<u8>,
@@ -66,7 +66,7 @@ impl TitleScreen {
         let target_x = if is_picked { 64.0 } else { 0.0 };
 
         // assume choices is not null
-        let choices = self.choices.as_mut();
+        let choices = self.choices.as_mut().unwrap();
         let node = &mut choices[choice as usize];
 
         let theme = load::<Theme>("res://themes/theme_deft.tres");
@@ -121,7 +121,7 @@ impl Node2DVirtual for TitleScreen {
             node,
             si: StatsInterface::singleton(),
 
-            choices: uninit!(Choices),
+            choices: None,
             current_choice: None,
         }
     }
@@ -156,11 +156,11 @@ impl Node2DVirtual for TitleScreen {
         // all the main menu options you can pick
         let cont = self.node.get_node_as::<Control>("Background/MenuChoices");
 
-        self.choices = [
+        self.choices = Some([
             cont.get_node_as("Play"),
             cont.get_node_as("Options"),
             cont.get_node_as("Credits"),
             cont.get_node_as("Quit"),
-        ];
+        ]);
     }
 }
