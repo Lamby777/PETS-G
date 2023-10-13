@@ -17,6 +17,7 @@ use num_traits::FromPrimitive;
 
 const MENU_TWEEN_TIME: f64 = 0.1;
 const MENU_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
+const MENU_WAVE_BBCODE: &str = "[wave amp=100 freq=-6]";
 
 #[derive(Debug, FromPrimitive)]
 enum MainMenuChoice {
@@ -97,6 +98,19 @@ impl TitleScreen {
             )
             .unwrap()
             .set_trans(MENU_TWEEN_TRANS);
+
+        // set bbcode
+        // extremely ugly and hacky solution, but...
+        // how else could you work with in-band formatting? :P
+        let old_text = node.get_text();
+        let new_text = if is_picked {
+            format!("{}{}", MENU_WAVE_BBCODE, old_text)
+        } else {
+            let st: String = old_text.into();
+            st[MENU_WAVE_BBCODE.len()..].to_owned()
+        };
+
+        node.set_text(new_text.into());
     }
 
     fn pick_choice(&mut self, choice: MainMenuChoice) {
