@@ -2,10 +2,14 @@
 //! Dialog box class for menus and dialogue text
 //!
 
+use godot::engine::tween::TransitionType;
 use godot::engine::{PanelContainer, PanelContainerVirtual, RichTextLabel};
 use godot::prelude::*;
 
 use crate::prelude::*;
+
+const DBOX_TWEEN_TIME: f64 = 1.0;
+const DBOX_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
 
 #[derive(GodotClass)]
 #[class(base=PanelContainer)]
@@ -36,6 +40,23 @@ impl DialogBox {
     fn msg_txt(&self) -> Gd<RichTextLabel> {
         self.node.get_node_as::<RichTextLabel>("VSplit/Content")
     }
+
+    fn tween_into_view(&mut self) {
+        let node = &mut self.node;
+
+        let mut y_tween = node.create_tween().unwrap();
+        y_tween
+            .tween_property(
+                node.clone().upcast(),
+                "position:y".into(),
+                Variant::from(1080.0 - node.get_size().y),
+                DBOX_TWEEN_TIME,
+            )
+            .unwrap()
+            .from(Variant::from(1080))
+            .unwrap()
+            .set_trans(DBOX_TWEEN_TRANS);
+    }
 }
 
 #[godot_api]
@@ -48,6 +69,7 @@ impl PanelContainerVirtual for DialogBox {
     }
 
     fn ready(&mut self) {
+        self.tween_into_view();
         self.do_draw();
     }
 }
