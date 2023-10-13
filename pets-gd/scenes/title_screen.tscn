@@ -288,38 +288,46 @@ offset_right = 104.0
 offset_bottom = 360.0
 
 [node name="Play" type="RichTextLabel" parent="Background/MenuChoices"]
+clip_contents = false
 layout_mode = 0
 offset_right = 456.0
 offset_bottom = 136.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
-text = "PLAY"
+bbcode_enabled = true
+text = "Play"
 
 [node name="Options" type="RichTextLabel" parent="Background/MenuChoices"]
+clip_contents = false
 layout_mode = 0
 offset_top = 128.0
 offset_right = 456.0
 offset_bottom = 264.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
 text = "Options"
 
 [node name="Credits" type="RichTextLabel" parent="Background/MenuChoices"]
+clip_contents = false
 layout_mode = 0
 offset_top = 256.0
 offset_right = 456.0
 offset_bottom = 392.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
 text = "Credits"
 
 [node name="Quit" type="RichTextLabel" parent="Background/MenuChoices"]
+clip_contents = false
 layout_mode = 0
 offset_top = 384.0
 offset_right = 456.0
 offset_bottom = 520.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
 text = "Quit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
