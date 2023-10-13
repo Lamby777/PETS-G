@@ -43,17 +43,18 @@ impl DialogBox {
 
     fn tween_into_view(&mut self) {
         let node = &mut self.node;
+        let viewport_y = node.get_viewport_rect().size.y;
 
         let mut y_tween = node.create_tween().unwrap();
         y_tween
             .tween_property(
                 node.clone().upcast(),
                 "position:y".into(),
-                Variant::from(1080.0 - node.get_size().y),
+                Variant::from(viewport_y - node.get_size().y),
                 DBOX_TWEEN_TIME,
             )
             .unwrap()
-            .from(Variant::from(1080))
+            .from(Variant::from(viewport_y))
             .unwrap()
             .set_trans(DBOX_TWEEN_TRANS);
     }
