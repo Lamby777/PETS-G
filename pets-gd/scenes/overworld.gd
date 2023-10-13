@@ -11,21 +11,16 @@ var current_mz: MusicZone = null
 func _ready():  
   # check if entering new zone
   for zone in mzones.get_children():
-    zone = zone as MusicZone # type hinting uwu
-    
-    var enter_lambda = func(cb: CharacterBody2D):
-      if not (cb is PlayerCB): return
-      entering_mz(zone)
-    
-    #var exit_lambda = func(): _on_mz_entered(zone)
-    zone.connect("body_entered", enter_lambda)
-    zone.connect("body_exited", leaving_mz)
+    zone.body_entered.connect(entering_mz.bind(zone))
+    zone.body_exited.connect(leaving_mz)
 
-func leaving_mz(cb: CharacterBody2D):
+func leaving_mz(cb):
   if not (cb is PlayerCB): return
   crossfade_za_into_null()
 
-func entering_mz(zone: MusicZone):
+func entering_mz(cb, zone):
+  if not (cb is PlayerCB): return
+
   print("Entering new MusicZone: " + zone.name)
   crossfade_za_into(zone.music)
   current_mz = zone
