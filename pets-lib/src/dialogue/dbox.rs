@@ -23,7 +23,8 @@ impl DialogBox {
     #[func]
     fn do_draw(&mut self) {
         self.spk_txt().set_text("Cherry".into());
-        self.msg_txt().set_text("Hello, World!".into());
+        self.msg_txt()
+            .set_text("[wave amp=50 freq=6]Hello, World![/wave]".into());
     }
 
     /// Get the speaker name label

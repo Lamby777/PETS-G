@@ -34,6 +34,7 @@ struct DialogueOption {
 struct DialogueNode {
     text: Vec<String>,
 
+    // TODO replace with &str with lifetime
     speaker: String,
     vox: String,
 
