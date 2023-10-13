@@ -1,22 +1,11 @@
 [gd_resource type="Theme" load_steps=3 format=3 uid="uid://b4to5dpqntd2r"]
 
+[ext_resource type="StyleBox" uid="uid://d0gx7x3tj2b01" path="res://themes/container_stylebox.tres" id="1_7au1f"]
 [ext_resource type="FontFile" uid="uid://0vkr7mnpb6tm" path="res://assets/fonts/Renogare-Regular.otf" id="1_buwdt"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kct0x"]
-bg_color = Color(0.141176, 0.152941, 0.227451, 1)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-shadow_color = Color(1, 1, 1, 0.239216)
-shadow_size = 16
-
 [resource]
-Panel/styles/panel = SubResource("StyleBoxFlat_kct0x")
+Panel/styles/panel = ExtResource("1_7au1f")
+PanelContainer/styles/panel = ExtResource("1_7au1f")
 RichTextLabel/colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 RichTextLabel/colors/font_selected_color = Color(0.87451, 0.556863, 0.113725, 1)
 RichTextLabel/font_sizes/normal_font_size = 44

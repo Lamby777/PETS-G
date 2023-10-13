@@ -9,21 +9,23 @@ offset_right = 1664.0
 offset_bottom = 1048.0
 theme = ExtResource("1_jbfs2")
 
-[node name="SpeakerName" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 1392.0
-offset_bottom = 96.0
+[node name="SpeakerName" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="Text" type="RichTextLabel" parent="SpeakerName"]
+layout_mode = 2
 theme_override_font_sizes/normal_font_size = 56
 text = "<NPC Name>"
 
-[node name="Content" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 96.0
-offset_right = 1392.0
-offset_bottom = 424.0
+[node name="Content" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = -16
+theme_override_constants/margin_top = -16
+theme_override_constants/margin_right = -16
+theme_override_constants/margin_bottom = -16
+
+[node name="Text" type="RichTextLabel" parent="Content"]
+layout_mode = 2
 bbcode_enabled = true
 text = "Test test words wordsy word word noises among us wordy word sentence go brr also more words and maybe some even more i guess Test test words wordsy word word noises among us wordy word sentence go brr also more words and maybe some even more i guess Test test words wordsy word word noises among us wordy word."
 fit_content = true

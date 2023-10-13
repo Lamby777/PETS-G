@@ -2,16 +2,16 @@
 //! Dialog box class for menus and dialogue text
 //!
 
-use godot::engine::{Panel, PanelVirtual, RichTextLabel};
+use godot::engine::{PanelContainer, PanelContainerVirtual, RichTextLabel};
 use godot::prelude::*;
 
 use crate::prelude::*;
 
 #[derive(GodotClass)]
-#[class(base=Panel)]
+#[class(base=PanelContainer)]
 struct DialogBox {
     #[base]
-    node: Base<Panel>,
+    node: Base<PanelContainer>,
 
     // Stat Interface reference-counted
     // This is fine to keep a ref to cuz they won't be dropped anyway
@@ -29,18 +29,18 @@ impl DialogBox {
 
     /// Get the speaker name label
     fn spk_txt(&self) -> Gd<RichTextLabel> {
-        self.node.get_node_as::<RichTextLabel>("SpeakerName")
+        self.node.get_node_as::<RichTextLabel>("SpeakerName/Text")
     }
 
     /// Get the message text label
     fn msg_txt(&self) -> Gd<RichTextLabel> {
-        self.node.get_node_as::<RichTextLabel>("Content")
+        self.node.get_node_as::<RichTextLabel>("Content/Text")
     }
 }
 
 #[godot_api]
-impl PanelVirtual for DialogBox {
-    fn init(node: Base<Panel>) -> Self {
+impl PanelContainerVirtual for DialogBox {
+    fn init(node: Base<PanelContainer>) -> Self {
         Self {
             node,
             si: StatsInterface::singleton(),
