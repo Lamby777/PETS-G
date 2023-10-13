@@ -2,9 +2,6 @@
 //! Dialogue system for the game's menus.
 //!
 
-use godot::engine::Font;
-use godot::prelude::*;
-
 mod dbox;
 
 /// Possible outcomes of picking a dialogue option.
@@ -29,34 +26,16 @@ enum DialogueOptionResult {
 }
 
 struct DialogueOption {
-    label: StringSegment,
+    label: String,
     available: bool,
     leads_to: DialogueOptionResult,
 }
 
 struct DialogueNode {
-    text: Vec<StringSegment>,
+    text: Vec<String>,
 
     speaker: String,
     vox: String,
 
     options: Vec<DialogueOption>,
-}
-
-/// Part of a string, meant to be joined
-/// with other parts to have partially
-/// formatted sections in a single message
-struct StringSegment {
-    text: String,
-    color: Color,
-    font: Font,
-
-    /// stuff like in Omori/Celeste where the
-    /// dialogue text shakes or moves around.
-    // movement: DialogueTextMovement,
-
-    /// if Some, this will override the default
-    /// voice if inside a dialogue tree.
-    // TODO reconsider this typing choice
-    vox: Option<String>,
 }
