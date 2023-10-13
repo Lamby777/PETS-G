@@ -29,12 +29,12 @@ impl DialogBox {
 
     /// Get the speaker name label
     fn spk_txt(&self) -> Gd<RichTextLabel> {
-        self.node.get_node_as::<RichTextLabel>("SpeakerName/Text")
+        self.node.get_node_as::<RichTextLabel>("VSplit/SpeakerName")
     }
 
     /// Get the message text label
     fn msg_txt(&self) -> Gd<RichTextLabel> {
-        self.node.get_node_as::<RichTextLabel>("Content/Text")
+        self.node.get_node_as::<RichTextLabel>("VSplit/Content")
     }
 }
 
