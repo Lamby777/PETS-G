@@ -74,7 +74,7 @@ script = ExtResource("1_bs1lv")
 y_sort_enabled = true
 
 [node name="BushLong" parent="YSort" instance=ExtResource("2_87c4u")]
-position = Vector2(568, 552)
+position = Vector2(-900, 1300)
 
 [node name="PlayerCB" parent="YSort" instance=ExtResource("2_r6tgb")]
 
@@ -87,6 +87,74 @@ layer_0/name = "Cliffs"
 layer_0/y_sort_enabled = true
 layer_0/y_sort_origin = -10
 layer_0/tile_data = PackedInt32Array(196610, 65539, 0, 262146, 65539, 2, 262147, 65539, 2, 262148, 65539, 2, 196612, 65539, 0, 196611, 65539, 0, 196613, 393219, 2, 196614, 131075, 1, 262150, 131075, 2, 262149, 65539, 2, 131078, 131075, 1, 65542, 131075, 1, 65541, 3, 1, 131077, 3, 1, 262145, 3, 2, 196609, 3, 0, 327678, 131075, 2, 262142, 131075, 0, 262141, 65539, 0, 262140, 65539, 0, 327676, 65539, 2, 327677, 65539, 2, 196602, 131075, 1, 262138, 327683, 2, 327674, 65539, 2, 327675, 65539, 2, 262139, 65539, 0, 262137, 3, 1, 327673, 3, 2, 196601, 3, 1, 131065, 3, 1, 131066, 131075, 1, 65530, 131075, 1, -6, 131075, 1, -65542, 131075, 1, -65543, 3, 1, -7, 3, 1, 65529, 3, 1, 6, 131075, 1, -65530, 131075, 1, -131066, 131075, 1, -196602, 131075, 1, -262138, 131075, 1, 5, 3, 1, -65531, 3, 1, -131067, 3, 1, -196603, 393219, 1, -262139, 65539, 1, -327674, 131075, 0, -327675, 65539, 0, -196604, 65539, 2, -262140, 65539, 1, -327676, 65539, 0, -196605, 65539, 2, -262141, 65539, 1, -327677, 65539, 0, -196606, 65539, 2, -262142, 65539, 1, -327678, 65539, 0, -196607, 65539, 2, -262143, 65539, 1, -327679, 65539, 0, -196608, 65539, 2, -262144, 65539, 1, -327680, 65539, 0, -131073, 65539, 2, -196609, 65539, 1, -262145, 65539, 0, -131074, 65539, 2, -196610, 65539, 1, -262146, 65539, 0, -131075, 65539, 2, -196611, 65539, 1, -262147, 65539, 0, -131076, 65539, 2, -196612, 65539, 1, -262148, 65539, 0, -131077, 65539, 2, -196613, 65539, 1, -262149, 65539, 0, -131078, 327683, 1, -196614, 65539, 1, -262150, 65539, 0, -131079, 3, 1, -196615, 3, 1, -262151, 3, 0)
+
+[node name="BushLong2" parent="YSort" instance=ExtResource("2_87c4u")]
+position = Vector2(900, 1300)
+
+[node name="bush triangle" parent="YSort" instance=ExtResource("2_87c4u")]
+position = Vector2(0, 900)
+
+[node name="BushLong4" parent="YSort/bush triangle" instance=ExtResource("2_87c4u")]
+position = Vector2(-150, -200)
+
+[node name="BushLong5" parent="YSort/bush triangle" instance=ExtResource("2_87c4u")]
+position = Vector2(150, -200)
+
+[node name="BushLong6" parent="YSort/bush triangle" instance=ExtResource("2_87c4u")]
+position = Vector2(300, -400)
+
+[node name="BushLong7" parent="YSort/bush triangle" instance=ExtResource("2_87c4u")]
+position = Vector2(-300, -400)
+
+[node name="<3" parent="YSort" instance=ExtResource("2_87c4u")]
+position = Vector2(0, 1800)
+
+[node name="BushLong4" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+position = Vector2(150, -200)
+
+[node name="BushLong5" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+position = Vector2(-150, -200)
+
+[node name="BushLong6" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+position = Vector2(300, -340)
+
+[node name="BushLong7" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+position = Vector2(-300, -340)
+
+[node name="BushLong8" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+position = Vector2(450, -200)
+
+[node name="BushLong9" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+position = Vector2(-450, -200)
+
+[node name="BushLong10" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+position = Vector2(540, 0)
+
+[node name="BushLong11" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+position = Vector2(-540, 0)
+
+[node name="BushLong12" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+position = Vector2(450, 200)
+
+[node name="BushLong13" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+position = Vector2(-450, 200)
+
+[node name="BushLong14" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+position = Vector2(270, 400)
+
+[node name="BushLong15" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+position = Vector2(-270, 400)
+
+[node name="BushLong16" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+visible = false
+position = Vector2(150, 500)
+
+[node name="BushLong17" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+visible = false
+position = Vector2(-150, 500)
+
+[node name="BushLong18" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+position = Vector2(0, 540)
 
 [node name="ZoneAudio" type="Node" parent="."]
 
