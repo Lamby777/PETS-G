@@ -6,6 +6,7 @@ use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
 use super::stat_translation::to_battle;
+use crate::dialogue::dbox::DialogBox;
 use crate::prelude::*;
 
 type DirectionalInputNames = [(&'static str, Vector2); 4];
@@ -40,26 +41,8 @@ struct BattleIcon {
 }
 
 #[godot_api]
-impl Node2DVirtual for BattleIcon {
-    fn init(node: Base<Node2D>) -> Self {
-        Self {
-            node,
-
-            speed: 400.0,
-            acceleration: 80.0,
-            friction: 0.96,
-            velocity: Vector2::new(0.0, 0.0),
-
-            si: StatsInterface::singleton(),
-        }
-    }
-
-    fn ready(&mut self) {
-        let ch_speed = self.si.bind().natural_speed_of(PChar::ETHAN);
-        self.speed = to_battle::speed(ch_speed);
-    }
-
-    fn process(&mut self, delta: f64) {
+impl BattleIcon {
+    fn process_movement(&mut self, delta: f64) {
         let input = Input::singleton();
 
         self.velocity *= self.friction;
@@ -81,5 +64,44 @@ impl Node2DVirtual for BattleIcon {
         let change = self.velocity * real::from_f64(delta);
         let position = self.node.get_global_position() + change;
         self.node.set_global_position(position);
+    }
+}
+
+#[godot_api]
+impl Node2DVirtual for BattleIcon {
+    fn init(node: Base<Node2D>) -> Self {
+        Self {
+            node,
+
+            speed: 400.0,
+            acceleration: 80.0,
+            friction: 0.96,
+            velocity: Vector2::new(0.0, 0.0),
+
+            si: StatsInterface::singleton(),
+        }
+    }
+
+    fn ready(&mut self) {
+        let ch_speed = self.si.bind().natural_speed_of(PChar::ETHAN);
+        self.speed = to_battle::speed(ch_speed);
+    }
+
+    fn process(&mut self, delta: f64) {
+        self.process_movement(delta);
+
+        let input = Input::singleton();
+        let dummy = input.is_action_just_pressed("ui_accept".into());
+
+        if dummy {
+            let mut dbox = DialogBox::with(PChar::ETHAN.into(), "Hello, world!".into());
+            dbox.set_name("Beesechurger".into());
+            godot_print!("is init");
+            self.node
+                .get_window()
+                .unwrap()
+                .add_child(dbox.clone().upcast());
+            godot_print!("is init2");
+        }
     }
 }

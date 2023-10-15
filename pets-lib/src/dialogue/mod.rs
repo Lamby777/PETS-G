@@ -2,7 +2,7 @@
 //! Dialogue system for the game's menus.
 //!
 
-mod dbox;
+pub mod dbox;
 
 /// Possible outcomes of picking a dialogue option.
 ///
@@ -25,18 +25,17 @@ enum DialogueOptionResult {
     End,
 }
 
-struct DialogueOption {
+pub struct DialogueOption {
     label: String,
     available: bool,
     leads_to: DialogueOptionResult,
 }
 
-struct DialogueNode {
-    text: Vec<String>,
-
-    // TODO replace with &str with lifetime
+pub struct DialogueNode {
+    // TODO replace with &'a str
     speaker: String,
     vox: String,
 
+    text: String,
     options: Vec<DialogueOption>,
 }
