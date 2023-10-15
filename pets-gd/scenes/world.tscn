@@ -94,66 +94,58 @@ position = Vector2(900, 1300)
 [node name="bush triangle" parent="YSort" instance=ExtResource("2_87c4u")]
 position = Vector2(0, 900)
 
-[node name="BushLong4" parent="YSort/bush triangle" instance=ExtResource("2_87c4u")]
+[node name="Bush1" parent="YSort/bush triangle" instance=ExtResource("2_87c4u")]
 position = Vector2(-150, -200)
 
-[node name="BushLong5" parent="YSort/bush triangle" instance=ExtResource("2_87c4u")]
+[node name="Bush2" parent="YSort/bush triangle" instance=ExtResource("2_87c4u")]
 position = Vector2(150, -200)
 
-[node name="BushLong6" parent="YSort/bush triangle" instance=ExtResource("2_87c4u")]
+[node name="Bush3" parent="YSort/bush triangle" instance=ExtResource("2_87c4u")]
 position = Vector2(300, -400)
 
-[node name="BushLong7" parent="YSort/bush triangle" instance=ExtResource("2_87c4u")]
+[node name="Bush4" parent="YSort/bush triangle" instance=ExtResource("2_87c4u")]
 position = Vector2(-300, -400)
 
 [node name="<3" parent="YSort" instance=ExtResource("2_87c4u")]
 position = Vector2(0, 1800)
 
-[node name="BushLong4" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+[node name="Bush1" parent="YSort/<3" instance=ExtResource("2_87c4u")]
 position = Vector2(150, -200)
 
-[node name="BushLong5" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+[node name="Bush2" parent="YSort/<3" instance=ExtResource("2_87c4u")]
 position = Vector2(-150, -200)
 
-[node name="BushLong6" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+[node name="Bush3" parent="YSort/<3" instance=ExtResource("2_87c4u")]
 position = Vector2(300, -340)
 
-[node name="BushLong7" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+[node name="Bush4" parent="YSort/<3" instance=ExtResource("2_87c4u")]
 position = Vector2(-300, -340)
 
-[node name="BushLong8" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+[node name="Bush5" parent="YSort/<3" instance=ExtResource("2_87c4u")]
 position = Vector2(450, -200)
 
-[node name="BushLong9" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+[node name="Bush6" parent="YSort/<3" instance=ExtResource("2_87c4u")]
 position = Vector2(-450, -200)
 
-[node name="BushLong10" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+[node name="Bush7" parent="YSort/<3" instance=ExtResource("2_87c4u")]
 position = Vector2(540, 0)
 
-[node name="BushLong11" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+[node name="Bush8" parent="YSort/<3" instance=ExtResource("2_87c4u")]
 position = Vector2(-540, 0)
 
-[node name="BushLong12" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+[node name="Bush9" parent="YSort/<3" instance=ExtResource("2_87c4u")]
 position = Vector2(450, 200)
 
-[node name="BushLong13" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+[node name="Bush10" parent="YSort/<3" instance=ExtResource("2_87c4u")]
 position = Vector2(-450, 200)
 
-[node name="BushLong14" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+[node name="Bush11" parent="YSort/<3" instance=ExtResource("2_87c4u")]
 position = Vector2(270, 400)
 
-[node name="BushLong15" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+[node name="Bush12" parent="YSort/<3" instance=ExtResource("2_87c4u")]
 position = Vector2(-270, 400)
 
-[node name="BushLong16" parent="YSort/<3" instance=ExtResource("2_87c4u")]
-visible = false
-position = Vector2(150, 500)
-
-[node name="BushLong17" parent="YSort/<3" instance=ExtResource("2_87c4u")]
-visible = false
-position = Vector2(-150, 500)
-
-[node name="BushLong18" parent="YSort/<3" instance=ExtResource("2_87c4u")]
+[node name="Bush18" parent="YSort/<3" instance=ExtResource("2_87c4u")]
 position = Vector2(0, 540)
 
 [node name="ZoneAudio" type="Node" parent="."]
@@ -176,6 +168,6 @@ music = ExtResource("5_x7nbf")
 
 [node name="MusicZone" type="CollisionPolygon2D" parent="MusicZones/CV_Outdoors"]
 visible = false
-position = Vector2(-104.8, -139.8)
-scale = Vector2(16.6484, 10.584)
+position = Vector2(-104.8, 1300)
+scale = Vector2(36.178, 23)
 polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
