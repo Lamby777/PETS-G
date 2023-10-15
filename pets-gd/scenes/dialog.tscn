@@ -14,21 +14,13 @@ grow_horizontal = 2
 pivot_offset = Vector2(704, 220)
 theme = ExtResource("1_jbfs2")
 
-[node name="VSplit" type="VSplitContainer" parent="."]
+[node name="SpeakerName" type="RichTextLabel" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="SpeakerName" type="RichTextLabel" parent="VSplit"]
-layout_mode = 2
-size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 56
 bbcode_enabled = true
 text = "<NPC Name>"
 
-[node name="Content" type="RichTextLabel" parent="VSplit"]
+[node name="Content" type="RichTextLabel" parent="."]
 layout_mode = 2
-size_flags_vertical = 2
-size_flags_stretch_ratio = 4.0
-bbcode_enabled = true
-text = "Test test words wordsy word word noises among us wordy word sentence go brr also more words and maybe some even more i guess Test test words wordsy word word noises among us wordy word sentence go brr also more words and maybe some even more i guess "
+text = "Test test words wordsy word word noises among us wordy word sentence go brr also more words and maybe some even more i guess Test test words wordsy word word noises among us wordy word sentence go brr also more words and maybe some even more i guess Test test words wordsy word word noises among us wordy word."
 fit_content = true
