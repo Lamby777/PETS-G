@@ -167,7 +167,6 @@ script = ExtResource("5_skv18")
 music = ExtResource("5_x7nbf")
 
 [node name="MusicZone" type="CollisionPolygon2D" parent="MusicZones/CV_Outdoors"]
-visible = false
-position = Vector2(-104.8, 1300)
-scale = Vector2(36.178, 23)
+position = Vector2(0, 960)
+scale = Vector2(26, 26)
 polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
