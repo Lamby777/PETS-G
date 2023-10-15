@@ -92,6 +92,7 @@ layer_0/tile_data = PackedInt32Array(196610, 65539, 0, 262146, 65539, 2, 262147,
 position = Vector2(900, 1300)
 
 [node name="bush triangle" parent="YSort" instance=ExtResource("2_87c4u")]
+y_sort_enabled = true
 position = Vector2(0, 900)
 
 [node name="Bush1" parent="YSort/bush triangle" instance=ExtResource("2_87c4u")]
@@ -107,6 +108,7 @@ position = Vector2(300, -400)
 position = Vector2(-300, -400)
 
 [node name="<3" parent="YSort" instance=ExtResource("2_87c4u")]
+y_sort_enabled = true
 position = Vector2(0, 1800)
 
 [node name="Bush1" parent="YSort/<3" instance=ExtResource("2_87c4u")]
@@ -167,6 +169,7 @@ script = ExtResource("5_skv18")
 music = ExtResource("5_x7nbf")
 
 [node name="MusicZone" type="CollisionPolygon2D" parent="MusicZones/CV_Outdoors"]
+visible = false
 position = Vector2(0, 960)
 scale = Vector2(26, 26)
 polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
