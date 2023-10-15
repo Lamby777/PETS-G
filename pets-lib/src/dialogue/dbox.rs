@@ -35,14 +35,10 @@ impl DialogBox {
     }
 
     /// init new with speaker and contents provided
-    pub fn with(speaker: GodotString, content: GodotString) -> Gd<Self> {
-        Gd::with_base(|node| Self {
-            node,
-            si: StatsInterface::singleton(),
-
-            speaker,
-            content,
-        })
+    #[func]
+    pub fn set_txts(&mut self, speaker: GodotString, content: GodotString) {
+        self.speaker = speaker;
+        self.content = content;
     }
 
     #[func]
@@ -78,11 +74,11 @@ impl DialogBox {
             .tween_property(
                 node.clone().upcast(),
                 "position:y".into(),
-                Variant::from(tw_start),
+                Variant::from(tw_end),
                 DBOX_TWEEN_TIME,
             )
             .unwrap()
-            .from(Variant::from(tw_end))
+            .from(Variant::from(tw_start))
             .unwrap()
             .set_trans(DBOX_TWEEN_TRANS);
     }

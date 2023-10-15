@@ -23,6 +23,8 @@ const BATTLE_DIRECTIONS: DirectionalInputNames = [
 struct BattleIcon {
     #[base]
     node: Base<Node2D>,
+    si: Gd<StatsInterface>,
+    dbox_scene: Gd<PackedScene>,
 
     /// Maximum speed of player icon
     speed: FloatStat,
@@ -36,8 +38,6 @@ struct BattleIcon {
     /// Current velocity of player icon
     /// NOT normalized, but still limited by speed.
     velocity: Vector2,
-
-    si: Gd<StatsInterface>,
 }
 
 #[godot_api]
@@ -72,13 +72,13 @@ impl Node2DVirtual for BattleIcon {
     fn init(node: Base<Node2D>) -> Self {
         Self {
             node,
+            si: StatsInterface::singleton(),
+            dbox_scene: load::<PackedScene>("res://scenes/dialog.tscn"),
 
             speed: 400.0,
             acceleration: 80.0,
             friction: 0.96,
             velocity: Vector2::new(0.0, 0.0),
-
-            si: StatsInterface::singleton(),
         }
     }
 
@@ -94,14 +94,20 @@ impl Node2DVirtual for BattleIcon {
         let dummy = input.is_action_just_pressed("ui_accept".into());
 
         if dummy {
-            let mut dbox = DialogBox::with(PChar::ETHAN.into(), "Hello, world!".into());
-            dbox.set_name("Beesechurger".into());
-            godot_print!("is init");
+            let mut dbox_gd = self.dbox_scene.instantiate_as::<DialogBox>();
+
+            dbox_gd.set_name("Beesechurger".into());
             self.node
                 .get_window()
                 .unwrap()
-                .add_child(dbox.clone().upcast());
-            godot_print!("is init2");
+                .add_child(dbox_gd.clone().upcast());
+
+            // simple stuff like this is why I love this language
+            {
+                let mut dbox = dbox_gd.bind_mut();
+                dbox.set_txts(PChar::ETHAN.into(), "Hello, world!".into());
+                dbox.pop_up()
+            }
         }
     }
 }
