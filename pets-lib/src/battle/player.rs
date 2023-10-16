@@ -6,7 +6,6 @@ use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
 use super::stat_translation::to_battle;
-use crate::dialogue::dbox::DialogBox;
 use crate::prelude::*;
 
 type DirectionalInputNames = [(&'static str, Vector2); 4];
@@ -24,7 +23,6 @@ struct BattleIcon {
     #[base]
     node: Base<Node2D>,
     si: Gd<StatsInterface>,
-    dbox_scene: Gd<PackedScene>,
 
     /// Maximum speed of player icon
     speed: FloatStat,
@@ -73,7 +71,6 @@ impl Node2DVirtual for BattleIcon {
         Self {
             node,
             si: StatsInterface::singleton(),
-            dbox_scene: load::<PackedScene>("res://scenes/dialog.tscn"),
 
             speed: 400.0,
             acceleration: 80.0,
@@ -89,25 +86,5 @@ impl Node2DVirtual for BattleIcon {
 
     fn process(&mut self, delta: f64) {
         self.process_movement(delta);
-
-        let input = Input::singleton();
-        let dummy = input.is_action_just_pressed("ui_accept".into());
-
-        if dummy {
-            let mut dbox_gd = self.dbox_scene.instantiate_as::<DialogBox>();
-
-            dbox_gd.set_name("Beesechurger".into());
-            self.node
-                .get_window()
-                .unwrap()
-                .add_child(dbox_gd.clone().upcast());
-
-            // simple stuff like this is why I love this language
-            {
-                let mut dbox = dbox_gd.bind_mut();
-                dbox.set_txts(PChar::ETHAN.into(), "Hello, world!".into());
-                dbox.pop_up()
-            }
-        }
     }
 }
