@@ -11,6 +11,7 @@
 #![allow(dead_code)]
 #![feature(variant_count)]
 
+use dialogue::autoload::DBoxInterface;
 use godot::engine::Engine;
 use godot::prelude::*;
 use stats::state::StatsInterface;
@@ -51,16 +52,22 @@ struct PetsLib;
 unsafe impl ExtensionLibrary for PetsLib {
     fn on_level_init(level: InitLevel) {
         if level == InitLevel::Scene {
-            let gd: Gd<StatsInterface> = Gd::new_default();
-            let object = gd.upcast::<Object>();
+            let mut engine = Engine::singleton();
 
-            Engine::singleton().register_singleton("Stats".into(), object);
+            let gd: Gd<StatsInterface> = Gd::new_default();
+            engine.register_singleton("Stats".into(), gd.upcast());
+
+            let gd: Gd<DBoxInterface> = Gd::new_default();
+            engine.register_singleton("DBox".into(), gd.upcast());
         }
     }
 
     fn on_level_deinit(level: InitLevel) {
         if level == InitLevel::Scene {
-            Engine::singleton().unregister_singleton("Stats".into());
+            let mut engine = Engine::singleton();
+            for autoload_name in ["Stats", "DBox"] {
+                engine.unregister_singleton(autoload_name.into());
+            }
         }
     }
 }
