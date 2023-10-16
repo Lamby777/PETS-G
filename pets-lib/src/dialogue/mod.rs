@@ -2,6 +2,7 @@
 //! Dialogue system for the game's menus.
 //!
 
+pub mod autoload;
 pub mod dbox;
 
 /// Possible outcomes of picking a dialogue option.
