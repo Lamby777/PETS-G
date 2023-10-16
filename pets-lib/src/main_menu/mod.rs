@@ -25,6 +25,7 @@ enum MainMenuChoice {
     Options,
     Credits,
     Quit,
+    DebugBattle,
 }
 
 const CHOICES_COUNT: usize = std::mem::variant_count::<MainMenuChoice>();
@@ -141,6 +142,13 @@ impl TitleScreen {
                 let mut tree = self.node.get_tree().unwrap();
                 tree.quit();
             }
+
+            DebugBattle => {
+                self.node
+                    .get_tree()
+                    .unwrap()
+                    .change_scene_to_file("res://scenes/battle_engine.tscn".into());
+            }
         }
     }
 }
@@ -192,6 +200,7 @@ impl Node2DVirtual for TitleScreen {
             cont.get_node_as("Options"),
             cont.get_node_as("Credits"),
             cont.get_node_as("Quit"),
+            cont.get_node_as("DebugBattle"),
         ]);
     }
 }
