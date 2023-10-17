@@ -18,6 +18,9 @@ macro_rules! pchar_names {
 
 impl PChar {
     pchar_names! {
+        // Debugging purposes
+        CHERRY,
+
         // the "chosen ones"... :)
         PORKY,
         ETHAN,

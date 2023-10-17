@@ -6,7 +6,7 @@ use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
 use super::stat_translation::to_battle;
-use crate::prelude::*;
+use crate::{prelude::*, show_dialog};
 
 type DirectionalInputNames = [(&'static str, Vector2); 4];
 
@@ -86,5 +86,12 @@ impl Node2DVirtual for BattleIcon {
 
     fn process(&mut self, delta: f64) {
         self.process_movement(delta);
+
+        let input = Input::singleton();
+        let dummy = input.is_action_just_pressed("ui_accept".into());
+
+        if dummy {
+            show_dialog!(self.node, PChar::CHERRY, "Speed: {}", self.speed);
+        }
     }
 }

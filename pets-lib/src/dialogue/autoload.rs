@@ -5,8 +5,6 @@
 use godot::engine::Engine;
 use godot::prelude::*;
 
-use crate::prelude::*;
-
 use super::dbox::DialogBox;
 
 /// Autoload class for easy management of dialog boxes
@@ -16,6 +14,19 @@ pub struct DBoxInterface {
     #[base]
     node: Base<Node2D>,
     dbox_scene: Gd<PackedScene>,
+}
+
+#[macro_export]
+macro_rules! show_dialog {
+    ($any_node:expr, $speaker:expr, $($t:tt)*) => {{
+        let msg = format!($($t)*);
+
+        // as long as the node is in the scene, this will work
+        let root = $any_node.get_tree().unwrap().get_root().unwrap();
+
+        let dbox = crate::dialogue::autoload::DBoxInterface::singleton();
+        dbox.bind().show_dialog(root.upcast(), $speaker.into(), msg.into());
+    }};
 }
 
 #[godot_api]
@@ -28,25 +39,18 @@ impl DBoxInterface {
             .cast()
     }
 
-    pub fn show_dialog(&self) {
-        let input = Input::singleton();
-        let dummy = input.is_action_just_pressed("ui_accept".into());
+    #[func]
+    pub fn show_dialog(&self, mut tree: Gd<Node>, spk: GodotString, msg: GodotString) {
+        let mut dbox_gd = self.dbox_scene.instantiate_as::<DialogBox>();
 
-        if dummy {
-            let mut dbox_gd = self.dbox_scene.instantiate_as::<DialogBox>();
+        dbox_gd.set_name("Dialog".into());
+        tree.add_child(dbox_gd.clone().upcast());
 
-            dbox_gd.set_name("Beesechurger".into());
-            self.node
-                .get_window()
-                .unwrap()
-                .add_child(dbox_gd.clone().upcast());
-
-            // simple stuff like this is why I love this language
-            {
-                let mut dbox = dbox_gd.bind_mut();
-                dbox.set_txts(PChar::ETHAN.into(), "Hello, world!".into());
-                dbox.pop_up()
-            }
+        // simple stuff like this is why I love this language
+        {
+            let mut dbox = dbox_gd.bind_mut();
+            dbox.set_txts(spk, msg);
+            dbox.pop_up()
         }
     }
 }
