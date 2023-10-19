@@ -34,7 +34,6 @@ impl DialogBox {
         self.node.get_node_as::<RichTextLabel>("VSplit/Content")
     }
 
-    /// init new with speaker and contents provided
     #[func]
     pub fn set_txts(&mut self, speaker: GodotString, content: GodotString) {
         self.speaker = speaker;

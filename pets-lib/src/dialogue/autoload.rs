@@ -50,6 +50,7 @@ impl DBoxInterface {
         {
             let mut dbox = dbox_gd.bind_mut();
             dbox.set_txts(spk, msg);
+            dbox.do_draw();
             dbox.pop_up()
         }
     }
