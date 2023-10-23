@@ -41,6 +41,7 @@ impl PlayerCB {
             let nth = i * PERSONAL_SPACE as usize;
 
             ch.set_global_position(*self.past_positions.get_or_last(nth));
+
             {
                 let mut ch = ch.bind_mut();
                 ch.anim_move(moving, *self.past_rotations.get_or_last(nth));
