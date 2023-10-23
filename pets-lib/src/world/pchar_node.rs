@@ -32,11 +32,13 @@ impl PCharNode {
 }
 
 #[macro_export]
-macro_rules! load_pchar_scene {
-    ($name:expr) => {{
+macro_rules! load_pchar_scene_under {
+    ($parent:expr, $name:expr) => {{
         let path = concat!("res://scenes/char/", $name, ".tscn");
         let packed = load::<PackedScene>(path);
-        packed.instantiate_as::<PCharNode>()
+        let inst = packed.instantiate_as::<PCharNode>();
+        $parent.node.add_child(inst.clone().upcast());
+        inst
     }};
 }
 
