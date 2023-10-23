@@ -2,8 +2,10 @@
 //! Limited Queue
 //!
 
+use std::collections::VecDeque;
+
 pub struct LimiQ<T> {
-    buffer: Vec<T>,
+    buffer: VecDeque<T>,
     capacity: usize,
 }
 
@@ -11,16 +13,16 @@ impl<T> LimiQ<T> {
     pub fn new(capacity: usize) -> Self {
         Self {
             capacity,
-            buffer: Vec::with_capacity(capacity),
+            buffer: VecDeque::with_capacity(capacity),
         }
     }
 
     pub fn push(&mut self, item: T) {
         if self.buffer.len() >= self.capacity {
-            self.buffer.remove(0);
+            self.buffer.pop_front();
         }
 
-        self.buffer.push(item);
+        self.buffer.push_back(item);
     }
 
     // TODO impl deref to vec to reduce boilerplate crap
@@ -45,11 +47,11 @@ impl<T> LimiQ<T> {
     }
 
     pub fn get_last(&self) -> Option<&T> {
-        self.buffer.last()
+        self.buffer.back()
     }
 
     pub fn get_last_mut(&mut self) -> Option<&mut T> {
-        self.buffer.last_mut()
+        self.buffer.back_mut()
     }
 
     /// get the ith item, or the last item if i is out of bounds
