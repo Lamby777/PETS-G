@@ -57,6 +57,7 @@ impl CharacterBody2DVirtual for PlayerCB {
             node,
             si: StatsInterface::singleton(),
             velocity: Vector2::ZERO,
+
             party: vec![],
             past_positions: LimiQ::new(2000),
             past_rotations: LimiQ::new(2000),
