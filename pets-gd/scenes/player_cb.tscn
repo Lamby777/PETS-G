@@ -418,7 +418,7 @@ states/Start/position = Vector2(127, 109)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji4br"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_q0w5r"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_hpdl1")]
 graph_offset = Vector2(-79, 13)
 
-[node name="PlayerCB" type="CharacterBody2D"]
+[node name="PlayerCB" type="PlayerCB"]
 y_sort_enabled = true
 motion_mode = 1
 
@@ -427,7 +427,7 @@ position = Vector2(2.50975e-05, 28)
 rotation = 1.57079
 shape = SubResource("RectangleShape2D_ubtmb")
 
-[node name="AgentE" type="Node2D" parent="."]
+[node name="AgentE" type="PCharNode" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="AgentE"]
 scale = Vector2(4, 4)
@@ -447,7 +447,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
 
-[node name="AgentS" type="Node2D" parent="."]
+[node name="AgentS" type="PCharNode" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="AgentS"]
 position = Vector2(0, -12)
@@ -469,7 +469,7 @@ active = true
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
 
-[node name="AgentT" type="Node2D" parent="."]
+[node name="AgentT" type="PCharNode" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="AgentT"]
 position = Vector2(0, -12)
