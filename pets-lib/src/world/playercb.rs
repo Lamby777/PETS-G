@@ -23,7 +23,6 @@ struct PlayerCB {
     #[base]
     node: Base<CharacterBody2D>,
     si: Gd<StatsInterface>,
-    velocity: Vector2,
 
     party: Vec<Gd<PCharNode>>,
     past_positions: LimiQ<Vector2>,
@@ -56,7 +55,6 @@ impl CharacterBody2DVirtual for PlayerCB {
         Self {
             node,
             si: StatsInterface::singleton(),
-            velocity: Vector2::ZERO,
 
             party: vec![],
             past_positions: LimiQ::new(2000),
@@ -91,7 +89,9 @@ impl CharacterBody2DVirtual for PlayerCB {
             (Vector2::ZERO, (delta * FRICTION))
         };
 
-        self.velocity = self.velocity.move_toward(toward, deltatimes as f32);
+        let velocity = self.node.get_velocity();
+        self.node
+            .set_velocity(velocity.move_toward(toward, deltatimes as f32));
 
         self.node.move_and_slide();
 
