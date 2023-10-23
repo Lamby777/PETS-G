@@ -3,7 +3,6 @@
 //! an interaction when within range
 //!
 
-use crate::prelude::*;
 use godot::prelude::*;
 
 use godot::engine::{Area2D, Area2DVirtual};
@@ -13,16 +12,12 @@ use godot::engine::{Area2D, Area2DVirtual};
 struct InteractionZone {
     #[base]
     node: Base<Area2D>,
-    si: Gd<StatsInterface>,
 }
 
 #[godot_api]
 impl Area2DVirtual for InteractionZone {
     fn init(node: Base<Area2D>) -> Self {
-        Self {
-            node,
-            si: StatsInterface::singleton(),
-        }
+        Self { node }
     }
 
     // fn ready(&mut self) {}
