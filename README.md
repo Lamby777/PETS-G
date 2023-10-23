@@ -10,7 +10,7 @@ Using [godot-rust/gdext](https://github.com/godot-rust/gdextension) for complex
 parts because compile-time type safety go brrrr. Prefer GDScript for the simple
 parts of the game's code, though.
 
-Using Godot version 4.1.1.
+Using Godot version 4.1.2.
 
 Godot 4.2 is coming out soon, and I don't see any reason not to update yet, so
 unless some major shit goes down in terms of compatibility, I'll probably update
