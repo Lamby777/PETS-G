@@ -22,6 +22,7 @@ mod items;
 mod macros;
 mod main_menu;
 mod stats;
+mod world;
 
 mod prelude {
     // TODO probably put dialog box opener method here later
