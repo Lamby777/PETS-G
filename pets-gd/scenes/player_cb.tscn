@@ -1,8 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0rlrppekv4vg"]
-
-[ext_resource type="PackedScene" uid="uid://cmgfaw4uqx62h" path="res://scenes/char/agent_e.tscn" id="1_3qgs0"]
-[ext_resource type="PackedScene" uid="uid://5pp7bf4f52af" path="res://scenes/char/agent_s.tscn" id="2_2yjkr"]
-[ext_resource type="PackedScene" uid="uid://boar8shvtnbun" path="res://scenes/char/agent_t.tscn" id="3_706mj"]
+[gd_scene load_steps=2 format=3 uid="uid://b0rlrppekv4vg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubtmb"]
 size = Vector2(24, 48)
@@ -15,12 +11,6 @@ motion_mode = 1
 position = Vector2(2.50975e-05, 28)
 rotation = 1.57079
 shape = SubResource("RectangleShape2D_ubtmb")
-
-[node name="AgentE" parent="." instance=ExtResource("1_3qgs0")]
-
-[node name="AgentS" parent="." instance=ExtResource("2_2yjkr")]
-
-[node name="AgentT" parent="." instance=ExtResource("3_706mj")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
