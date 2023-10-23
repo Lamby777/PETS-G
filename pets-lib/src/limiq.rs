@@ -3,6 +3,7 @@
 //!
 
 use std::collections::VecDeque;
+use std::ops::{Deref, Index};
 
 pub struct LimiQ<T> {
     buffer: VecDeque<T>,
@@ -27,37 +28,22 @@ impl<T> LimiQ<T> {
         }
     }
 
-    // TODO impl deref to vec to reduce boilerplate crap
-    pub fn get_mut(&mut self, index: usize) -> &mut T {
-        self.buffer.get_mut(index).unwrap()
-    }
-
-    pub fn get(&self, index: usize) -> &T {
-        self.buffer.get(index).unwrap()
-    }
-
-    pub fn try_get(&self, index: usize) -> Option<&T> {
-        self.buffer.get(index)
-    }
-
-    pub fn len(&self) -> usize {
-        self.buffer.len()
-    }
-
-    pub fn is_empty(&self) -> bool {
-        self.buffer.is_empty()
-    }
-
-    pub fn get_last(&self) -> Option<&T> {
-        self.buffer.back()
-    }
-
-    pub fn get_last_mut(&mut self) -> Option<&mut T> {
-        self.buffer.back_mut()
-    }
-
     /// get the ith item, or the last item if i is out of bounds
     pub fn get_or_last(&self, i: usize) -> &T {
         &self.buffer[std::cmp::min(i, self.buffer.len() - 1)]
+    }
+}
+
+impl<T> Index<usize> for LimiQ<T> {
+    type Output = T;
+    fn index(&self, index: usize) -> &Self::Output {
+        self.buffer.index(index)
+    }
+}
+
+impl<T> Deref for LimiQ<T> {
+    type Target = VecDeque<T>;
+    fn deref(&self) -> &Self::Target {
+        &self.buffer
     }
 }
