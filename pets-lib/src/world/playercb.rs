@@ -97,7 +97,7 @@ impl CharacterBody2DVirtual for PlayerCB {
         self.node.move_and_slide();
 
         let pos_updated = (self.past_positions.len() == 0)
-            || (*self.past_positions.get(0) != self.node.get_position());
+            || (self.past_positions[0] != self.node.get_position());
 
         if pos_updated {
             self.past_positions.push(self.node.get_global_position());
@@ -107,7 +107,7 @@ impl CharacterBody2DVirtual for PlayerCB {
                 input_vector
             } else {
                 self.past_rotations
-                    .try_get(0)
+                    .get(0)
                     .cloned()
                     .unwrap_or(Vector2 { x: 0.0, y: 0.0 })
             })
