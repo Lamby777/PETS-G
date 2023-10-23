@@ -23,7 +23,16 @@ impl<T> LimiQ<T> {
         self.buffer.push(item);
     }
 
-    pub fn get(&self, index: usize) -> Option<&T> {
+    // TODO impl deref to vec to reduce boilerplate crap
+    pub fn get_mut(&mut self, index: usize) -> &mut T {
+        self.buffer.get_mut(index).unwrap()
+    }
+
+    pub fn get(&self, index: usize) -> &T {
+        self.buffer.get(index).unwrap()
+    }
+
+    pub fn try_get(&self, index: usize) -> Option<&T> {
         self.buffer.get(index)
     }
 
@@ -39,16 +48,8 @@ impl<T> LimiQ<T> {
         self.buffer.last()
     }
 
-    pub fn get_last_mut(&self) -> Option<&mut T> {
+    pub fn get_last_mut(&mut self) -> Option<&mut T> {
         self.buffer.last_mut()
-    }
-
-    pub fn get_first_or(&self, deft: T) -> &T {
-        if self.buffer.is_empty() {
-            &deft
-        } else {
-            &self.buffer[0]
-        }
     }
 
     /// get the ith item, or the last item if i is out of bounds
