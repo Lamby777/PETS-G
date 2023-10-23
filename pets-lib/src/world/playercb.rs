@@ -94,18 +94,14 @@ impl PlayerCB {
 impl CharacterBody2DVirtual for PlayerCB {
     fn ready(&mut self) {
         self.si = StatsInterface::singleton();
+
+        self.party = vec![
+            self.node.get_node_as("AgentE"),
+            self.node.get_node_as("AgentS"),
+            self.node.get_node_as("AgentT"),
+        ];
+
+        // is this even required?
+        // var current_music_zone: Polygon2D
     }
-    // @onready var agentE = $AgentE
-    // @onready var agentS = $AgentS
-    // @onready var agentT = $AgentT
-    //
-    // var current_music_zone: Polygon2D
-    //
-    // var past_positions := LimitedQueue.new(2000)
-    // var past_rotations := LimitedQueue.new(2000)
-    // @onready var party: Array[PChar] = [
-    //   agentE,
-    //   agentS,
-    //   agentT,
-    // ]
 }
