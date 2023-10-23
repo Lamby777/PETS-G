@@ -1,7 +1,5 @@
-[gd_scene load_steps=47 format=3 uid="uid://b0rlrppekv4vg"]
+[gd_scene load_steps=45 format=3 uid="uid://b0rlrppekv4vg"]
 
-[ext_resource type="Script" path="res://scenes/PlayerCB.gd" id="1_c77sw"]
-[ext_resource type="Script" path="res://classes/char.gd" id="2_a8l53"]
 [ext_resource type="Texture2D" uid="uid://d8m1gigeptqj" path="res://assets/textures/char/main/Ethan.png" id="3_vda6a"]
 [ext_resource type="Texture2D" uid="uid://ciurawgpv2g88" path="res://assets/textures/char/main/Siva.png" id="4_aefop"]
 [ext_resource type="Texture2D" uid="uid://bu8yhsiu4q5ul" path="res://assets/textures/char/main/Terra.png" id="5_etqa8"]
@@ -423,7 +421,6 @@ graph_offset = Vector2(-79, 13)
 [node name="PlayerCB" type="CharacterBody2D"]
 y_sort_enabled = true
 motion_mode = 1
-script = ExtResource("1_c77sw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.50975e-05, 28)
@@ -431,7 +428,6 @@ rotation = 1.57079
 shape = SubResource("RectangleShape2D_ubtmb")
 
 [node name="AgentE" type="Node2D" parent="."]
-script = ExtResource("2_a8l53")
 
 [node name="Sprite2D" type="Sprite2D" parent="AgentE"]
 scale = Vector2(4, 4)
@@ -452,7 +448,6 @@ parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
 
 [node name="AgentS" type="Node2D" parent="."]
-script = ExtResource("2_a8l53")
 
 [node name="Sprite2D" type="Sprite2D" parent="AgentS"]
 position = Vector2(0, -12)
@@ -475,7 +470,6 @@ parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
 
 [node name="AgentT" type="Node2D" parent="."]
-script = ExtResource("2_a8l53")
 
 [node name="Sprite2D" type="Sprite2D" parent="AgentT"]
 position = Vector2(0, -12)

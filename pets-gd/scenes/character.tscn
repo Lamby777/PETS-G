@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cke4n0ctvas74"]
+[gd_scene load_steps=43 format=3 uid="uid://cke4n0ctvas74"]
 
 [ext_resource type="Script" path="res://classes/char.gd" id="1_0wuyr"]
 [ext_resource type="Texture2D" uid="uid://d8m1gigeptqj" path="res://assets/textures/char/main/Ethan.png" id="2_7m1xj"]
@@ -415,8 +415,6 @@ states/Start/position = Vector2(186, 177)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji4br"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_iv5kx"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_boay5")]
 graph_offset = Vector2(-79, 13)
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_2u3ik"]
-
 [node name="Character" type="Node2D"]
 script = ExtResource("1_0wuyr")
 
@@ -436,6 +434,5 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_pu8y6")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_2u3ik")
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
