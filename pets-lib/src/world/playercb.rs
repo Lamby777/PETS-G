@@ -32,7 +32,40 @@ struct PlayerCB {
 
 #[godot_api]
 impl PlayerCB {
-    fn _physics_process(&mut self, delta: f64) {
+    fn move_chars(&mut self, moving: bool) {
+        if self.past_positions.len() == 0 {
+            return;
+        }
+
+        for (i, ch) in self.party.iter_mut().enumerate() {
+            // index of past data limqs
+            let nth = i * PERSONAL_SPACE as usize;
+
+            ch.set_global_position(*self.past_positions.get_or_last(nth));
+            {
+                let mut ch = ch.bind_mut();
+                ch.anim_move(moving, *self.past_rotations.get_or_last(nth));
+            }
+        }
+    }
+}
+
+#[godot_api]
+impl CharacterBody2DVirtual for PlayerCB {
+    fn ready(&mut self) {
+        self.si = StatsInterface::singleton();
+
+        self.party = vec![
+            self.node.get_node_as("AgentE"),
+            self.node.get_node_as("AgentS"),
+            self.node.get_node_as("AgentT"),
+        ];
+
+        // is this even required?
+        // var current_music_zone: Polygon2D
+    }
+
+    fn physics_process(&mut self, delta: f64) {
         let input = Input::singleton();
         let input_vector = input
             .get_vector("left".into(), "right".into(), "up".into(), "down".into())
@@ -70,38 +103,5 @@ impl PlayerCB {
         }
 
         self.move_chars(moving)
-    }
-
-    fn move_chars(&mut self, moving: bool) {
-        if self.past_positions.len() == 0 {
-            return;
-        }
-
-        for (i, ch) in self.party.iter_mut().enumerate() {
-            // index of past data limqs
-            let nth = i * PERSONAL_SPACE as usize;
-
-            ch.set_global_position(*self.past_positions.get_or_last(nth));
-            {
-                let mut ch = ch.bind_mut();
-                ch.anim_move(moving, *self.past_rotations.get_or_last(nth));
-            }
-        }
-    }
-}
-
-#[godot_api]
-impl CharacterBody2DVirtual for PlayerCB {
-    fn ready(&mut self) {
-        self.si = StatsInterface::singleton();
-
-        self.party = vec![
-            self.node.get_node_as("AgentE"),
-            self.node.get_node_as("AgentS"),
-            self.node.get_node_as("AgentT"),
-        ];
-
-        // is this even required?
-        // var current_music_zone: Polygon2D
     }
 }
