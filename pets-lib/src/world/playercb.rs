@@ -1,7 +1,7 @@
 use godot::engine::{CharacterBody2D, CharacterBody2DVirtual};
 use godot::prelude::*;
 
-use crate::prelude::*;
+use crate::{load_pchar_scene, prelude::*};
 
 use super::pchar_node::PCharNode;
 
@@ -65,9 +65,9 @@ impl CharacterBody2DVirtual for PlayerCB {
 
     fn ready(&mut self) {
         self.party = vec![
-            self.node.get_node_as("AgentE"),
-            self.node.get_node_as("AgentS"),
-            self.node.get_node_as("AgentT"),
+            load_pchar_scene!("agent_e"),
+            load_pchar_scene!("agent_s"),
+            load_pchar_scene!("agent_t"),
         ];
 
         // is this even required?
