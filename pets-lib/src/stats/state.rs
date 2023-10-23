@@ -95,8 +95,6 @@ impl ObjectVirtual for StatsInterface {
         let (charmap, statcalcs) = default_charmap();
         let save = SaveFile { chars: charmap };
 
-        godot_print!("StatsInterface init");
-
         Self {
             node,
             save,
