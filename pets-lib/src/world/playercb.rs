@@ -20,12 +20,6 @@ struct PlayerCB {
     velocity: Vector2,
 }
 
-// TODO remove this and write impls for gdext if Bromeon approves
-// quick and dirty fix til he responds
-fn vec_mult(v: Vector2, s: f32) -> Vector2 {
-    Vector2::new(v.x * s, v.y * s)
-}
-
 #[godot_api]
 impl PlayerCB {
     fn _physics_process(&mut self, delta: f64) {
@@ -37,7 +31,7 @@ impl PlayerCB {
 
         let (toward, deltatimes) = if moving {
             (
-                vec_mult(input_vector, MAX_SPEED as f32),
+                input_vector * real::from_f64(MAX_SPEED),
                 delta * ACCELERATION,
             )
         } else {
