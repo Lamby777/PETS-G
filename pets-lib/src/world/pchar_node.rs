@@ -31,6 +31,15 @@ impl PCharNode {
     }
 }
 
+#[macro_export]
+macro_rules! load_pchar_scene {
+    ($name:expr) => {{
+        let path = concat!("res://scenes/char/", $name, ".tscn");
+        let packed = load::<PackedScene>(path);
+        packed.instantiate_as::<PCharNode>()
+    }};
+}
+
 #[godot_api]
 impl Node2DVirtual for PCharNode {
     fn init(node: Base<Node2D>) -> Self {
