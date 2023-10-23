@@ -19,12 +19,17 @@ use stats::state::StatsInterface;
 mod battle;
 mod dialogue;
 mod items;
+mod limiq;
 mod macros;
 mod main_menu;
 mod stats;
+mod world;
 
 mod prelude {
     // TODO probably put dialog box opener method here later
+
+    // maybe make a data structures module if i end up making more?
+    pub use crate::limiq::*;
 
     // item stuff, probably useful everywhere
     pub use crate::items::*;

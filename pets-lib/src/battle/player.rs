@@ -6,7 +6,7 @@ use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
 use super::stat_translation::to_battle;
-use crate::{prelude::*, show_dialog};
+use crate::prelude::*;
 
 type DirectionalInputNames = [(&'static str, Vector2); 4];
 
