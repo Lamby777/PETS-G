@@ -18,7 +18,8 @@ pub struct PCharNode {
 
 #[godot_api]
 impl PCharNode {
-    fn anim_move(&mut self, moving: bool, inputs: Vector2) {
+    #[func]
+    pub fn anim_move(&mut self, moving: bool, inputs: Vector2) {
         let mode_str = if moving { "Run" } else { "Idle" };
         let anim_path = format!("parameters/{mode_str}/blend_position");
 

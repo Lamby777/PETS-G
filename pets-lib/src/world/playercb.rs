@@ -53,33 +53,41 @@ impl PlayerCB {
         self.node.move_and_slide();
 
         let pos_updated = (self.past_positions.len() == 0)
-            || (*self.past_positions.get(0).unwrap() != self.node.get_position());
+            || (*self.past_positions.get(0) != self.node.get_position());
 
         if pos_updated {
-            self.past_positions.push_front(global_position);
+            self.past_positions.push(self.node.get_global_position());
 
             // don't push new input vector if slowing down
-            self.past_rotations.push_front(if moving {
+            self.past_rotations.push(if moving {
                 input_vector
             } else {
-                past_rotations.get_first_or(Vector2 { x: 0.0, y: 0.0 })
+                self.past_rotations
+                    .try_get(0)
+                    .cloned()
+                    .unwrap_or(Vector2 { x: 0.0, y: 0.0 })
             })
         }
 
         self.move_chars(moving)
     }
 
-    // func move_chars(moving: bool):
-    //   if past_positions.get_len() == 0: return
-    //
-    //   for i in party.size():
-    //     var ch := party[i]
-    //
-    //     # index of past data limqs
-    //     var nth = i * PERSONAL_SPACE
-    //
-    //     ch.global_position = past_positions.get_or_last(nth)
-    //     ch.anim_move(moving, past_rotations.get_or_last(nth))
+    fn move_chars(&mut self, moving: bool) {
+        if self.past_positions.len() == 0 {
+            return;
+        }
+
+        for (i, ch) in self.party.iter_mut().enumerate() {
+            // index of past data limqs
+            let nth = i * PERSONAL_SPACE as usize;
+
+            ch.set_global_position(*self.past_positions.get_or_last(nth));
+            {
+                let mut ch = ch.bind_mut();
+                ch.anim_move(moving, *self.past_rotations.get_or_last(nth));
+            }
+        }
+    }
 }
 
 #[godot_api]
