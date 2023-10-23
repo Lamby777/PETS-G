@@ -26,6 +26,8 @@ struct PlayerCB {
     velocity: Vector2,
 
     party: Vec<Gd<PCharNode>>,
+    past_positions: LimiQ<Vector2>,
+    past_rotations: LimiQ<Vector2>,
 }
 
 #[godot_api]
@@ -50,8 +52,8 @@ impl PlayerCB {
 
         self.node.move_and_slide();
 
-        let pos_updated = (past_positions.get_len() == 0)
-            || (pastPositions.get_at(0) != self.node.get_position());
+        let pos_updated = (self.past_positions.len() == 0)
+            || (*self.past_positions.get(0).unwrap() != self.node.get_position());
 
         if pos_updated {
             self.past_positions.push_front(global_position);
