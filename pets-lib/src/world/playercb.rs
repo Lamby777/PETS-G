@@ -52,9 +52,18 @@ impl PlayerCB {
 
 #[godot_api]
 impl CharacterBody2DVirtual for PlayerCB {
-    fn ready(&mut self) {
-        self.si = StatsInterface::singleton();
+    fn init(node: Base<CharacterBody2D>) -> Self {
+        Self {
+            node,
+            si: StatsInterface::singleton(),
+            velocity: Vector2::ZERO,
+            party: vec![],
+            past_positions: LimiQ::new(2000),
+            past_rotations: LimiQ::new(2000),
+        }
+    }
 
+    fn ready(&mut self) {
         self.party = vec![
             self.node.get_node_as("AgentE"),
             self.node.get_node_as("AgentS"),
