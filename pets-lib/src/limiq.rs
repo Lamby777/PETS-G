@@ -1,10 +1,13 @@
 //!
-//! Limited Queue
+//! Limited Queue stuff
 //!
 
 use std::collections::VecDeque;
 use std::ops::{Deref, Index};
 
+/// "Limited Queue"
+/// Circular buffer that pops from the back if over capacity
+/// Technically, yes, it's a deque. However, this is you: 🤓
 pub struct LimiQ<T> {
     buffer: VecDeque<T>,
     capacity: usize,
