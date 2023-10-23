@@ -6,6 +6,13 @@ control of your own hardware overly complicated... and is also open-source! <3
 
 ---
 
+## Somewhat Useful Links
+
+- [Soundtrack](https://www.youtube.com/playlist?list=PLxLRTqK8yZMO14zFG12650hGkPOZYV_2p)
+- [Promo page](https://sparklet.org/pets)
+
+---
+
 Using [godot-rust/gdext](https://github.com/godot-rust/gdextension) for complex
 parts because compile-time type safety go brrrr. Prefer GDScript for the simple
 parts of the game's code, though.
