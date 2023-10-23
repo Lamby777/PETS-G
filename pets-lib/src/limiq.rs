@@ -17,12 +17,14 @@ impl<T> LimiQ<T> {
         }
     }
 
+    /// Push to front, but also pop from back if over capacity
+    /// WARNING: O(n) time due to shifting the whole queue
     pub fn push(&mut self, item: T) {
-        if self.buffer.len() >= self.capacity {
-            self.buffer.pop_front();
-        }
+        self.buffer.push_front(item);
 
-        self.buffer.push_back(item);
+        if self.buffer.len() >= self.capacity {
+            self.buffer.pop_back();
+        }
     }
 
     // TODO impl deref to vec to reduce boilerplate crap
