@@ -2,6 +2,6 @@
 //! Overworld Stuff
 //!
 
-mod interaction;
-mod pchar_node;
-mod playercb;
+pub mod interaction;
+pub mod pchar_node;
+pub mod playercb;

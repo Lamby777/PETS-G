@@ -11,10 +11,12 @@
 #![allow(dead_code)]
 #![feature(variant_count)]
 
-use dialogue::autoload::DBoxInterface;
 use godot::engine::Engine;
 use godot::prelude::*;
+
+use dialogue::autoload::DBoxInterface;
 use stats::state::StatsInterface;
+use world::interaction::manager::InteractionManager;
 
 mod battle;
 mod dialogue;
@@ -33,6 +35,8 @@ mod prelude {
 
     // item stuff, probably useful everywhere
     pub use crate::items::*;
+
+    pub use crate::world::interaction::manager::InteractionManager;
 
     // stats stuff
     pub use crate::stats::pchars::PChar;
@@ -64,13 +68,16 @@ unsafe impl ExtensionLibrary for PetsLib {
 
             let gd: Gd<DBoxInterface> = Gd::new_default();
             engine.register_singleton("DBox".into(), gd.upcast());
+
+            let gd: Gd<InteractionManager> = Gd::new_default();
+            engine.register_singleton("Interactions".into(), gd.upcast());
         }
     }
 
     fn on_level_deinit(level: InitLevel) {
         if level == InitLevel::Scene {
             let mut engine = Engine::singleton();
-            for autoload_name in ["Stats", "DBox"] {
+            for autoload_name in ["Stats", "DBox", "Interactions"] {
                 engine.unregister_singleton(autoload_name.into());
             }
         }
