@@ -135,7 +135,6 @@ impl TitleScreen {
             }
 
             Quit => {
-                godot_print!("Quitting via main menu");
                 let mut tree = self.node.get_tree().unwrap();
                 tree.quit();
             }
