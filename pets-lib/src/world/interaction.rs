@@ -12,12 +12,21 @@ use godot::engine::{Area2D, Area2DVirtual};
 struct InteractionZone {
     #[base]
     node: Base<Area2D>,
+
+    #[export]
+    name: GodotString,
 }
+
+#[godot_api]
+impl InteractionZone {}
 
 #[godot_api]
 impl Area2DVirtual for InteractionZone {
     fn init(node: Base<Area2D>) -> Self {
-        Self { node }
+        Self {
+            node,
+            name: "".into(),
+        }
     }
 
     // fn ready(&mut self) {}
