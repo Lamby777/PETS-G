@@ -9,7 +9,7 @@ use godot::engine::{Area2D, Area2DVirtual};
 
 #[derive(GodotClass)]
 #[class(base=Area2D)]
-struct InteractionZone {
+pub struct InteractionZone {
     #[base]
     node: Base<Area2D>,
 
