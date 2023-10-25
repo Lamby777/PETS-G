@@ -5,23 +5,27 @@
 
 use godot::prelude::*;
 
-use godot::engine::{Area2D, Area2DVirtual, Engine};
+use godot::engine::{Engine, Object, ObjectVirtual};
+
+use crate::world::interaction::zone::InteractionZone;
 
 #[derive(GodotClass)]
-#[class(base=Area2D)]
+#[class(base=Object)]
 pub struct InteractionManager {
     #[base]
-    node: Base<Area2D>,
+    node: Base<Object>,
 }
 
 #[godot_api]
 impl InteractionManager {
-    #[signal]
-    fn register_zone() {
-        //
+    // #[signal]
+    fn register_zone(obj: Gd<InteractionZone>) {
+        {
+            let obj = obj.bind();
+            obj.get_name()
+        };
     }
 
-    /// Get a shared ref to the singleton to store in other node structs
     pub fn singleton() -> Gd<InteractionManager> {
         Engine::singleton()
             .get_singleton("Interactions".into())
@@ -31,8 +35,8 @@ impl InteractionManager {
 }
 
 #[godot_api]
-impl Area2DVirtual for InteractionManager {
-    fn init(node: Base<Area2D>) -> Self {
+impl ObjectVirtual for InteractionManager {
+    fn init(node: Base<Object>) -> Self {
         Self { node }
     }
 }
