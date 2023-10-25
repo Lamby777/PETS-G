@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://p2uymvf88jt7"]
+[gd_scene load_steps=11 format=3 uid="uid://p2uymvf88jt7"]
 
 [ext_resource type="Script" path="res://scenes/overworld.gd" id="1_bs1lv"]
 [ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/bush_long.tscn" id="2_87c4u"]
@@ -6,6 +6,9 @@
 [ext_resource type="TileSet" uid="uid://dtft48lqhsjgr" path="res://assets/tilesets/cliff-dirt/tileset_cliff-dirt.tres" id="3_14512"]
 [ext_resource type="Script" path="res://classes/musiczone.gd" id="5_skv18"]
 [ext_resource type="AudioStream" uid="uid://b83wws3dajmi5" path="res://assets/music/zone/routingout.ogg" id="5_x7nbf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4vcdr"]
+size = Vector2(256, 256)
 
 [sub_resource type="Animation" id="Animation_2m57u"]
 length = 0.001
@@ -91,6 +94,16 @@ y_sort_enabled = true
 [node name="BushTriangle" type="Node2D" parent="YSort/DecoBushes"]
 y_sort_enabled = true
 
+[node name="BushMid" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
+position = Vector2(0, 900)
+
+[node name="Test Interaction" type="InteractionZone" parent="YSort/DecoBushes/BushTriangle/BushMid"]
+name = "Deez Nuggets"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/DecoBushes/BushTriangle/BushMid/Test Interaction"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_4vcdr")
+
 [node name="Bush1" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
 position = Vector2(-150, 700)
 
@@ -102,9 +115,6 @@ position = Vector2(-300, 500)
 
 [node name="Bush4" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
 position = Vector2(300, 500)
-
-[node name="Bush5" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
-position = Vector2(0, 900)
 
 [node name="BushHeart" type="Node2D" parent="YSort/DecoBushes"]
 y_sort_enabled = true

@@ -8,7 +8,7 @@ extends Node2D
 
 var current_mz: MusicZone = null
 
-func _ready():  
+func _ready():
   # check if entering new zone
   for zone in mzones.get_children():
     zone.body_entered.connect(entering_mz.bind(zone))
@@ -46,3 +46,6 @@ func crossfade_za_into(new_audio: AudioStream):
   
   za_active.playing = true
   za_fade.play(fadeout_at)
+
+signal register_inter(inter: InteractionZone)
+signal unregister_inter(inter: InteractionZone)
