@@ -36,9 +36,6 @@ pub type Choices = [Gd<RichTextLabel>; CHOICES_COUNT];
 struct TitleScreen {
     #[base]
     node: Base<Node2D>,
-    si: Gd<StatsInterface>,
-
-    // Option because not init til _ready()
     choices: Option<Choices>,
 
     // null if game just started (no choice hovered)
@@ -157,8 +154,6 @@ impl Node2DVirtual for TitleScreen {
     fn init(node: Base<Node2D>) -> Self {
         Self {
             node,
-            si: StatsInterface::singleton(),
-
             choices: None,
             current_choice: None,
         }
