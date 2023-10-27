@@ -22,7 +22,7 @@ impl<T> LimiQ<T> {
     }
 
     /// Push to front, but also pop from back if over capacity
-    /// WARNING: O(n) time due to shifting the whole queue
+    /// No longer O(n) time because it uses VecDeque! (yippee!)
     pub fn push(&mut self, item: T) {
         self.buffer.push_front(item);
 

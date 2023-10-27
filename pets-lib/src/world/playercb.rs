@@ -22,7 +22,6 @@ const PERSONAL_SPACE: u16 = 15;
 struct PlayerCB {
     #[base]
     node: Base<CharacterBody2D>,
-    si: Gd<StatsInterface>,
 
     party: Vec<Gd<PCharNode>>,
     past_positions: LimiQ<Vector2>,
@@ -55,7 +54,6 @@ impl CharacterBody2DVirtual for PlayerCB {
     fn init(node: Base<CharacterBody2D>) -> Self {
         Self {
             node,
-            si: StatsInterface::singleton(),
 
             party: vec![],
             past_positions: LimiQ::new(2000),

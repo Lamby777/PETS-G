@@ -6,8 +6,6 @@ use godot::engine::tween::TransitionType;
 use godot::engine::{PanelContainer, PanelContainerVirtual, RichTextLabel};
 use godot::prelude::*;
 
-use crate::prelude::*;
-
 const DBOX_TWEEN_TIME: f64 = 1.0;
 const DBOX_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
 
@@ -16,8 +14,6 @@ const DBOX_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
 pub struct DialogBox {
     #[base]
     node: Base<PanelContainer>,
-    si: Gd<StatsInterface>,
-
     speaker: GodotString,
     content: GodotString,
 }
@@ -88,8 +84,6 @@ impl PanelContainerVirtual for DialogBox {
     fn init(node: Base<PanelContainer>) -> Self {
         Self {
             node,
-            si: StatsInterface::singleton(),
-
             speaker: "Cherry".into(),
             content: "[wave amp=50 freq=6]Hello, World![/wave]".into(),
         }
