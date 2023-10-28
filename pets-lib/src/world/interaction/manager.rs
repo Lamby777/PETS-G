@@ -18,8 +18,8 @@ pub struct InteractionManager {
 
 #[godot_api]
 impl InteractionManager {
-    // #[signal]
-    fn register_zone(obj: Gd<InteractionZone>) {
+    #[signal]
+    fn register_zone(&self, obj: Gd<InteractionZone>) {
         {
             let obj = obj.bind();
             obj.get_name()
