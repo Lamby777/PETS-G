@@ -15,7 +15,7 @@ use godot::engine::Engine;
 use godot::prelude::*;
 
 use dialogue::autoload::DBoxInterface;
-use stats::state::StatsInterface;
+use stats::stats_interface::StatsInterface;
 use world::interaction::manager::InteractionManager;
 
 mod battle;
@@ -42,7 +42,7 @@ mod prelude {
     pub use crate::stats::pchars::PChar;
     pub use crate::stats::savefiles::SaveFile;
     pub use crate::stats::statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
-    pub use crate::stats::state::StatsInterface;
+    pub use crate::stats::stats_interface::StatsInterface;
     pub use crate::stats::*;
 
     // is this bad practice? no clue and idc honestly
