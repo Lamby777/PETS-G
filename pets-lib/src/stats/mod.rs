@@ -8,7 +8,7 @@ pub mod charmap;
 pub mod pchars;
 pub mod savefiles;
 pub mod statcalc;
-pub mod state;
+pub mod stats_interface;
 
 pub type CharMap = HashMap<String, Rc<RefCell<CharData>>>;
 pub type IntegralStat = i16;
