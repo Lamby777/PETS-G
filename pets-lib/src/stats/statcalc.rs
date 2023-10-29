@@ -4,7 +4,7 @@ use crate::prelude::*;
 
 pub type CharStatCalcs = HashMap<String, Rc<StatCalcList>>;
 
-// function that returns the same type it takes in
+/// Function that computes a stat of type T, given a level
 #[derive(Debug, Clone)]
 pub struct StatCalcFn<T> {
     pub calc: fn(IntegralStat) -> T,
