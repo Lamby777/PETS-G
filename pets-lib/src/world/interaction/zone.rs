@@ -28,6 +28,4 @@ impl Area2DVirtual for InteractionZone {
             name: "".into(),
         }
     }
-
-    // fn ready(&mut self) {}
 }
