@@ -3,9 +3,10 @@
 //! an interaction when within range
 //!
 
+use godot::engine::{Area2D, Area2DVirtual};
 use godot::prelude::*;
 
-use godot::engine::{Area2D, Area2DVirtual};
+use crate::dialogue::DialogueAction;
 
 #[derive(GodotClass)]
 #[class(base=Area2D)]
@@ -15,6 +16,8 @@ pub struct InteractionZone {
 
     #[export]
     name: GodotString,
+
+    action: DialogueAction,
 }
 
 #[godot_api]
@@ -26,6 +29,7 @@ impl Area2DVirtual for InteractionZone {
         Self {
             node,
             name: "".into(),
+            action: DialogueAction::End,
         }
     }
 }

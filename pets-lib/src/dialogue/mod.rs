@@ -7,12 +7,9 @@ pub mod dbox;
 
 /// Possible outcomes of picking a dialogue option.
 ///
-/// Damn, we're really calling it this?
-/// Enum? Option? Result? What do you think this is, Rust?
-/// Oh, wait... it IS Rust...
-///
+/// "Yeah, this new name's WAY less confusing... right?"
 /// - Devon, 2037
-enum DialogueOptionResult {
+pub enum DialogueAction {
     /// Leads to another node
     /// (simple `A -> (B|C)` dialogue)
     NextNode(DialogueNode),
@@ -26,10 +23,10 @@ enum DialogueOptionResult {
     End,
 }
 
-pub struct DialogueOption {
+pub struct DialogueChoice {
     label: String,
     available: bool,
-    leads_to: DialogueOptionResult,
+    leads_to: DialogueAction,
 }
 
 pub struct DialogueNode {
@@ -38,5 +35,5 @@ pub struct DialogueNode {
     vox: String,
 
     text: String,
-    options: Vec<DialogueOption>,
+    options: Vec<DialogueChoice>,
 }
