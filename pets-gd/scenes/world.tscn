@@ -76,7 +76,7 @@ script = ExtResource("1_bs1lv")
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="PlayerCB" parent="YSort" instance=ExtResource("2_r6tgb")]
+[node name="PlayerCB" parent="YSort" groups=["playercb"] instance=ExtResource("2_r6tgb")]
 
 [node name="TileMap" type="TileMap" parent="YSort"]
 y_sort_enabled = true
