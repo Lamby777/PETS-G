@@ -97,10 +97,10 @@ y_sort_enabled = true
 [node name="BushMid" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
 position = Vector2(0, 900)
 
-[node name="Test Interaction" type="InteractionZone" parent="YSort/DecoBushes/BushTriangle/BushMid"]
-name = "Deez Nuggets"
+[node name="TestInteraction" type="InteractionZone" parent="YSort/DecoBushes/BushTriangle/BushMid"]
+name = "TestInteraction"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/DecoBushes/BushTriangle/BushMid/Test Interaction"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/DecoBushes/BushTriangle/BushMid/TestInteraction"]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_4vcdr")
 
