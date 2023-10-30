@@ -15,15 +15,26 @@ pub struct InteractionManager {
     #[base]
     node: Base<Node2D>,
 
-    /// All interaction zones the manager is currently tracking
+    /// All interaction zones the player is inside
     zones: Vec<Gd<InteractionZone>>,
 }
 
 #[godot_api]
 impl InteractionManager {
     #[func]
-    fn register_zone(&mut self, obj: Gd<InteractionZone>) {
+    pub fn register_zone(&mut self, obj: Gd<InteractionZone>) {
         self.zones.push(obj);
+    }
+
+    #[func]
+    pub fn unregister_zone(&mut self, obj: Gd<InteractionZone>) {
+        // TODO clone big bad >:3
+        self.zones = self
+            .zones
+            .clone()
+            .into_iter()
+            .filter(|v| *v != obj)
+            .collect();
     }
 
     pub fn singleton() -> Gd<InteractionManager> {
