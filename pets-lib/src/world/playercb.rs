@@ -19,7 +19,7 @@ const PERSONAL_SPACE: u16 = 15;
 /// running animations on those nodes too.
 #[derive(GodotClass)]
 #[class(base=CharacterBody2D)]
-struct PlayerCB {
+pub struct PlayerCB {
     #[base]
     node: Base<CharacterBody2D>,
 
