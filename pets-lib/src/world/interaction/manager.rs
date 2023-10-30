@@ -3,26 +3,27 @@
 //! Shows the input prompt and handles the action if pressed.
 //!
 
-use godot::engine::{Engine, Object, ObjectVirtual};
+use godot::engine::{Engine, Node2D, Node2DVirtual};
 use godot::prelude::*;
 
 use crate::world::interaction::zone::InteractionZone;
+use crate::world::playercb::PlayerCB;
 
 #[derive(GodotClass)]
-#[class(base=Object)]
+#[class(base=Node2D)]
 pub struct InteractionManager {
     #[base]
-    node: Base<Object>,
+    node: Base<Node2D>,
+
+    /// All interaction zones the manager is currently tracking
+    zones: Vec<Gd<InteractionZone>>,
 }
 
 #[godot_api]
 impl InteractionManager {
-    #[signal]
-    fn register_zone(&self, obj: Gd<InteractionZone>) {
-        {
-            let obj = obj.bind();
-            obj.get_name()
-        };
+    #[func]
+    fn register_zone(&mut self, obj: Gd<InteractionZone>) {
+        self.zones.push(obj);
     }
 
     pub fn singleton() -> Gd<InteractionManager> {
@@ -34,8 +35,31 @@ impl InteractionManager {
 }
 
 #[godot_api]
-impl ObjectVirtual for InteractionManager {
-    fn init(node: Base<Object>) -> Self {
-        Self { node }
+impl Node2DVirtual for InteractionManager {
+    fn init(node: Base<Node2D>) -> Self {
+        Self {
+            node,
+            zones: vec![],
+        }
+    }
+
+    fn process(&mut self, _delta: f64) {
+        if self.zones.len() == 0 {
+            return;
+        }
+
+        let mut tree = self.node.get_tree().unwrap();
+        let pcb = tree.get_first_node_in_group("playercb".into()).unwrap();
+        let pcb = pcb.cast::<PlayerCB>();
+        let pcb_pos = { pcb.get_position() };
+
+        // TODO optimize sorting
+        self.zones.sort_by(|a, b| {
+            let a = a.get_position();
+            let b = b.get_position();
+            let a = (a - pcb_pos).length();
+            let b = (b - pcb_pos).length();
+            a.partial_cmp(&b).unwrap()
+        });
     }
 }
