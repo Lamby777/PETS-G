@@ -1,3 +1,17 @@
 [gd_scene format=3 uid="uid://c0jehwow4ein4"]
 
 [node name="InteractionManager" type="InteractionManager"]
+
+[node name="Play" type="RichTextLabel" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -228.0
+offset_right = 228.0
+offset_bottom = 136.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "C to interact"
+autowrap_mode = 0

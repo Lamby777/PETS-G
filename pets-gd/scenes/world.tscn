@@ -5,10 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://b0rlrppekv4vg" path="res://scenes/player_cb.tscn" id="2_r6tgb"]
 [ext_resource type="TileSet" uid="uid://dtft48lqhsjgr" path="res://assets/tilesets/cliff-dirt/tileset_cliff-dirt.tres" id="3_14512"]
 [ext_resource type="Script" path="res://classes/musiczone.gd" id="5_skv18"]
+[ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="5_uar2c"]
 [ext_resource type="AudioStream" uid="uid://b83wws3dajmi5" path="res://assets/music/zone/routingout.ogg" id="5_x7nbf"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4vcdr"]
-size = Vector2(256, 256)
 
 [sub_resource type="Animation" id="Animation_2m57u"]
 length = 0.001
@@ -97,13 +95,6 @@ y_sort_enabled = true
 [node name="BushMid" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
 position = Vector2(0, 900)
 
-[node name="TestInteraction" type="InteractionZone" parent="YSort/DecoBushes/BushTriangle/BushMid"]
-name = "TestInteraction"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/DecoBushes/BushTriangle/BushMid/TestInteraction"]
-position = Vector2(0, -4)
-shape = SubResource("RectangleShape2D_4vcdr")
-
 [node name="Bush1" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
 position = Vector2(-150, 700)
 
@@ -167,6 +158,9 @@ position = Vector2(-900, 1300)
 
 [node name="BushLong2" parent="YSort/DecoBushes" instance=ExtResource("2_87c4u")]
 position = Vector2(900, 1300)
+
+[node name="InteractionZone" parent="YSort" instance=ExtResource("5_uar2c")]
+position = Vector2(192, 64)
 
 [node name="ZoneAudio" type="Node" parent="."]
 
