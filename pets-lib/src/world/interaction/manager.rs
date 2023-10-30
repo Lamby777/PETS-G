@@ -54,8 +54,8 @@ impl InteractionManager {
         self.zones.sort_by(|a, b| {
             let a = a.get_global_position();
             let b = b.get_global_position();
-            let a = a.distance_to(pcb_pos);
-            let b = b.distance_to(pcb_pos);
+            let a = a.distance_squared_to(pcb_pos);
+            let b = b.distance_squared_to(pcb_pos);
             a.partial_cmp(&b).unwrap()
         });
     }
