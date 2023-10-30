@@ -47,7 +47,6 @@ mod prelude {
 
     // is this bad practice? no clue and idc honestly
     // it's convenient with no real caveat, therefore...
-    pub use serde::{Deserialize, Serialize};
     pub use std::cell::RefCell;
     pub use std::collections::{HashMap, HashSet};
     pub use std::fmt::{Debug, Display};
