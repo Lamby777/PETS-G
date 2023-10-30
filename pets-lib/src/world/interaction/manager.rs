@@ -3,9 +3,8 @@
 //! Shows the input prompt and handles the action if pressed.
 //!
 
-use godot::prelude::*;
-
 use godot::engine::{Engine, Object, ObjectVirtual};
+use godot::prelude::*;
 
 use crate::world::interaction::zone::InteractionZone;
 
