@@ -32,22 +32,8 @@ impl InteractionManager {
             .unwrap()
             .cast()
     }
-}
 
-#[godot_api]
-impl Node2DVirtual for InteractionManager {
-    fn init(node: Base<Node2D>) -> Self {
-        Self {
-            node,
-            zones: vec![],
-        }
-    }
-
-    fn process(&mut self, _delta: f64) {
-        if self.zones.len() == 0 {
-            return;
-        }
-
+    pub fn sort_zones(&mut self) {
         let mut tree = self.node.get_tree().unwrap();
         let pcb = tree.get_first_node_in_group("playercb".into()).unwrap();
         let pcb = pcb.cast::<PlayerCB>();
@@ -61,5 +47,32 @@ impl Node2DVirtual for InteractionManager {
             let b = b.distance_to(pcb_pos);
             a.partial_cmp(&b).unwrap()
         });
+    }
+}
+
+#[godot_api]
+impl Node2DVirtual for InteractionManager {
+    fn init(node: Base<Node2D>) -> Self {
+        Self {
+            node,
+            zones: vec![],
+        }
+    }
+
+    fn process(&mut self, _delta: f64) {
+        if self.zones.len() == 0 {
+            // TODO hide label
+            return;
+        }
+
+        self.sort_zones();
+
+        let input = Input::singleton();
+        if input.is_action_just_pressed("ui_accept".into()) {
+            let zone = self.zones[0].bind_mut();
+            zone.interact();
+        }
+
+        // TODO show label
     }
 }

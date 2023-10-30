@@ -21,7 +21,14 @@ pub struct InteractionZone {
 }
 
 #[godot_api]
-impl InteractionZone {}
+impl InteractionZone {
+    #[func]
+    pub fn interact(&self) {
+        godot_print!("Interacted!");
+
+        // TODO
+    }
+}
 
 #[godot_api]
 impl Area2DVirtual for InteractionZone {
