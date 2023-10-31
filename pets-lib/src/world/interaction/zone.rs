@@ -33,13 +33,15 @@ impl InteractionZone {
     #[func]
     fn on_entered(&mut self, _body: Gd<PlayerCB>) {
         let mut im = InteractionManager::singleton();
-        im.bind_mut().register_zone(self.node.to_godot().cast());
+        im.bind_mut().register_zone(self.node.clone().cast());
+        godot_print!("Entered!");
     }
 
     #[func]
     fn on_exited(&mut self, _body: Gd<PlayerCB>) {
         let mut im = InteractionManager::singleton();
-        im.bind_mut().unregister_zone(self.node.to_godot().cast());
+        im.bind_mut().unregister_zone(self.node.clone().cast());
+        godot_print!("Exited!");
     }
 }
 
@@ -51,5 +53,13 @@ impl Area2DVirtual for InteractionZone {
             name: "".into(),
             action: DialogueAction::End,
         }
+    }
+
+    fn ready(&mut self) {
+        let enter_fn = Callable::from_object_method(self.node.to_godot(), "on_entered");
+        let exit_fn = Callable::from_object_method(self.node.to_godot(), "on_exited");
+
+        self.node.connect("body_entered".into(), enter_fn);
+        self.node.connect("body_exited".into(), exit_fn);
     }
 }
