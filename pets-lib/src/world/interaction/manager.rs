@@ -3,7 +3,7 @@
 //! Shows the input prompt and handles the action if pressed.
 //!
 
-use godot::engine::{Engine, Node2D, Node2DVirtual};
+use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
 use crate::world::interaction::zone::InteractionZone;
@@ -37,11 +37,12 @@ impl InteractionManager {
             .collect();
     }
 
-    pub fn singleton() -> Gd<InteractionManager> {
-        Engine::singleton()
-            .get_singleton("Interactions".into())
-            .unwrap()
-            .cast()
+    /// "ummm ackshually, this is not a singleton"
+    pub fn singleton(any_node: Gd<Node>) -> Gd<InteractionManager> {
+        // using this cool godot feature I just found...
+        // you can set a node to be accessible with just its
+        // name and a % prefix... nice for this sort of situation
+        any_node.get_node_as("%InteractionManager")
     }
 
     pub fn sort_zones(&mut self) {
