@@ -16,7 +16,6 @@ use godot::prelude::*;
 
 use dialogue::autoload::DBoxInterface;
 use stats::stats_interface::StatsInterface;
-use world::interaction::manager::InteractionManager;
 
 mod battle;
 mod dialogue;
@@ -67,16 +66,13 @@ unsafe impl ExtensionLibrary for PetsLib {
 
             let gd: Gd<DBoxInterface> = Gd::new_default();
             engine.register_singleton("DBox".into(), gd.upcast());
-
-            let gd: Gd<InteractionManager> = Gd::new_default();
-            engine.register_singleton("Interactions".into(), gd.upcast());
         }
     }
 
     fn on_level_deinit(level: InitLevel) {
         if level == InitLevel::Scene {
             let mut engine = Engine::singleton();
-            for autoload_name in ["Stats", "DBox", "Interactions"] {
+            for autoload_name in ["Stats", "DBox"] {
                 engine.unregister_singleton(autoload_name.into());
             }
         }
