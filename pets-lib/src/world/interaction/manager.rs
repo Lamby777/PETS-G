@@ -30,13 +30,7 @@ impl InteractionManager {
 
     #[func]
     pub fn unregister_zone(&mut self, obj: Gd<InteractionZone>) {
-        // TODO clone big bad >:3
-        self.zones = self
-            .zones
-            .clone()
-            .into_iter()
-            .filter(|v| *v != obj)
-            .collect();
+        self.zones.retain(|v| *v != obj);
     }
 
     pub fn prompt_txt(&mut self) -> &mut Gd<RichTextLabel> {
