@@ -7,7 +7,7 @@ use godot::engine::{Area2D, Area2DVirtual};
 use godot::prelude::*;
 
 use crate::dialogue::DialogueAction;
-use crate::prelude::InteractionManager;
+use crate::prelude::*;
 use crate::world::playercb::PlayerCB;
 
 #[derive(GodotClass)]
@@ -27,7 +27,7 @@ impl InteractionZone {
     #[func]
     pub fn interact(&self) {
         // TODO
-        godot_print!("Interacted!");
+        show_dialog!(self.node, "Deez", "Test");
     }
 
     // TODO holy mother of code smells, what the hell is this mess?
