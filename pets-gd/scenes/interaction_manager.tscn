@@ -3,6 +3,7 @@
 [node name="InteractionManager" type="InteractionManager"]
 
 [node name="Prompt" type="RichTextLabel" parent="."]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
