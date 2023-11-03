@@ -9,16 +9,21 @@ macro_rules! uninit {
     };
 }
 
-/// Get the root from anywhere without having to pass in self.node
 #[macro_export]
-macro_rules! godot_root {
+macro_rules! godot_tree {
     () => {
         godot::engine::Engine::singleton()
             .get_main_loop()
             .unwrap()
             .cast::<SceneTree>()
-            .get_root()
-            .unwrap()
+    };
+}
+
+/// Get the root from anywhere without having to pass in self.node
+#[macro_export]
+macro_rules! godot_root {
+    () => {
+        $crate::godot_tree!().get_root().unwrap()
     };
 }
 
@@ -26,10 +31,10 @@ macro_rules! godot_root {
 #[macro_export]
 macro_rules! node_at {
     ($path:expr) => {
-        godot_root!().get_node_as($path)
+        $crate::godot_root!().get_node_as($path)
     };
 
     ($path:expr, $type:ty) => {
-        godot_root!().get_node_as::<$type>($path)
+        $crate::godot_root!().get_node_as::<$type>($path)
     };
 }
