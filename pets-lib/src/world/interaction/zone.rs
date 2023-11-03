@@ -29,17 +29,15 @@ impl InteractionZone {
         show_dialog!("Deez", "Test");
     }
 
-    // TODO holy mother of code smells, what the hell is this mess?
-
     #[func]
     fn on_entered(&mut self, _body: Gd<PlayerCB>) {
-        let mut im = InteractionManager::singleton(self.node.clone().upcast());
+        let mut im = InteractionManager::singleton();
         im.bind_mut().register_zone(self.node.clone().cast());
     }
 
     #[func]
     fn on_exited(&mut self, _body: Gd<PlayerCB>) {
-        let mut im = InteractionManager::singleton(self.node.clone().upcast());
+        let mut im = InteractionManager::singleton();
         im.bind_mut().unregister_zone(self.node.clone().cast());
     }
 }
