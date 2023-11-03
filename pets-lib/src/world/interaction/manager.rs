@@ -3,7 +3,7 @@
 //! Shows the input prompt and handles the action if pressed.
 //!
 
-use godot::engine::{Node2D, Node2DVirtual};
+use godot::engine::{Node2D, Node2DVirtual, RichTextLabel};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -15,6 +15,7 @@ use crate::world::playercb::PlayerCB;
 pub struct InteractionManager {
     #[base]
     node: Base<Node2D>,
+    prompt: Option<Gd<RichTextLabel>>,
 
     /// All interaction zones the player is inside
     zones: Vec<Gd<InteractionZone>>,
@@ -36,6 +37,15 @@ impl InteractionManager {
             .into_iter()
             .filter(|v| *v != obj)
             .collect();
+    }
+
+    pub fn prompt_shown(&mut self, hidden: bool) {
+        let prompt = self.prompt.as_mut().unwrap();
+        if hidden {
+            prompt.hide();
+        } else {
+            prompt.show();
+        }
     }
 
     /// "ummm ackshually, this is not a singleton"
@@ -69,12 +79,18 @@ impl Node2DVirtual for InteractionManager {
         Self {
             node,
             zones: vec![],
+            prompt: None,
         }
     }
 
+    fn ready(&mut self) {
+        self.prompt = Some(self.node.get_node_as("Prompt"));
+    }
+
     fn process(&mut self, _delta: f64) {
-        if self.zones.len() == 0 {
-            // TODO hide label
+        let no_zones_found = self.zones.len() == 0;
+        self.prompt_shown(no_zones_found);
+        if no_zones_found {
             return;
         }
 
@@ -85,7 +101,5 @@ impl Node2DVirtual for InteractionManager {
             let zone = self.zones[0].bind_mut();
             zone.interact();
         }
-
-        // TODO show label
     }
 }
