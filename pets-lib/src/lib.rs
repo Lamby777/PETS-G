@@ -28,6 +28,7 @@ mod world;
 
 mod prelude {
     pub use crate::godot_root;
+    pub use crate::godot_tree;
     pub use crate::node_at;
     pub use crate::show_dialog;
 
