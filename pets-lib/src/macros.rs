@@ -19,11 +19,17 @@ macro_rules! godot_tree {
     };
 }
 
-/// Get the root from anywhere without having to pass in self.node
 #[macro_export]
 macro_rules! godot_root {
     () => {
         $crate::godot_tree!().get_root().unwrap()
+    };
+}
+
+#[macro_export]
+macro_rules! current_scene {
+    () => {
+        $crate::godot_tree!().get_current_scene().unwrap()
     };
 }
 

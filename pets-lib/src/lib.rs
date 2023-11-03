@@ -27,6 +27,8 @@ mod stats;
 mod world;
 
 mod prelude {
+    // macros
+    pub use crate::current_scene;
     pub use crate::godot_root;
     pub use crate::godot_tree;
     pub use crate::node_at;
