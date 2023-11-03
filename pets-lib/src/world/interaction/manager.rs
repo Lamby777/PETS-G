@@ -6,6 +6,7 @@
 use godot::engine::{Node2D, Node2DVirtual};
 use godot::prelude::*;
 
+use crate::prelude::*;
 use crate::world::interaction::zone::InteractionZone;
 use crate::world::playercb::PlayerCB;
 
@@ -38,11 +39,12 @@ impl InteractionManager {
     }
 
     /// "ummm ackshually, this is not a singleton"
-    pub fn singleton(any_node: Gd<Node>) -> Gd<InteractionManager> {
+    pub fn singleton() -> Gd<InteractionManager> {
         // using this cool godot feature I just found...
         // you can set a node to be accessible with just its
         // name and a % prefix... nice for this sort of situation
-        any_node.get_node_as("%InteractionManager")
+        let sc = godot_tree!().get_current_scene().unwrap();
+        sc.get_node_as("%InteractionManager")
     }
 
     pub fn sort_zones(&mut self) {
