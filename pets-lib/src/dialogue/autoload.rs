@@ -6,6 +6,7 @@ use godot::engine::Engine;
 use godot::prelude::*;
 
 use super::dbox::DialogBox;
+use crate::prelude::*;
 
 /// Autoload class for easy management of dialog boxes
 #[derive(GodotClass)]
@@ -23,11 +24,8 @@ macro_rules! show_dialog {
     ($speaker:expr, $($t:tt)*) => {{
         let msg = format!($($t)*);
 
-        // as long as the node is in the scene, this will work
-        let root = godot_root!();
-
         let dbox = crate::dialogue::autoload::DBoxInterface::singleton();
-        dbox.bind().show_dialog(root.upcast(), $speaker.into(), msg.into());
+        dbox.bind().show_dialog($speaker.into(), msg.into());
     }};
 }
 
@@ -42,11 +40,11 @@ impl DBoxInterface {
     }
 
     #[func]
-    pub fn show_dialog(&self, mut tree: Gd<Node>, spk: GodotString, msg: GodotString) {
+    pub fn show_dialog(&self, spk: GodotString, msg: GodotString) {
         let mut dbox_gd = self.dbox_scene.instantiate_as::<DialogBox>();
 
         dbox_gd.set_name("Dialog".into());
-        tree.add_child(dbox_gd.clone().upcast());
+        godot_root!().add_child(dbox_gd.clone().upcast());
 
         // simple stuff like this is why I love this language
         {
