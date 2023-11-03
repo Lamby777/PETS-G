@@ -8,3 +8,39 @@ macro_rules! uninit {
         }
     };
 }
+
+#[macro_export]
+macro_rules! godot_tree {
+    () => {
+        godot::engine::Engine::singleton()
+            .get_main_loop()
+            .unwrap()
+            .cast::<SceneTree>()
+    };
+}
+
+#[macro_export]
+macro_rules! godot_root {
+    () => {
+        $crate::godot_tree!().get_root().unwrap()
+    };
+}
+
+#[macro_export]
+macro_rules! current_scene {
+    () => {
+        $crate::godot_tree!().get_current_scene().unwrap()
+    };
+}
+
+/// Gets the node at any given path
+#[macro_export]
+macro_rules! node_at {
+    ($path:expr) => {
+        $crate::godot_root!().get_node_as($path)
+    };
+
+    ($path:expr, $type:ty) => {
+        $crate::godot_root!().get_node_as::<$type>($path)
+    };
+}

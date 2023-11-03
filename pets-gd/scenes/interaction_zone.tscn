@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://2i16xk27wro6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vib8o"]
+size = Vector2(256, 256)
+
+[node name="InteractionZone" type="InteractionZone"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vib8o")

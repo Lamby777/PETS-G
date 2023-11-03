@@ -514,7 +514,8 @@ texture = ExtResource("1")
 1:1/0/terrains_peering_bit/top_right_corner = 0
 
 [resource]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 2
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "CliffDirt"
 terrain_set_0/terrain_0/color = Color(0.372549, 0.219608, 0.0470588, 1)

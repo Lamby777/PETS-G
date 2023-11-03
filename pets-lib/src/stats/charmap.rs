@@ -103,7 +103,7 @@ mod tests {
     #[test]
     fn ch_unique_charmap_works() {
         let (charmap, _) = default_charmap();
-        let ethan = charmap.get(&PChar::ETHAN.to_string()).unwrap();
+        let ethan = charmap.get(PChar::ETHAN).unwrap();
         let ethan = ethan.borrow();
         assert_eq!(ethan.display_name, "Ethan");
         // assert_eq!(ethan.base_stats.max_hp, 12);
@@ -129,7 +129,7 @@ mod tests {
             }
         }
 
-        let ethan = calcs.get(&PChar::ETHAN.to_string()).unwrap();
+        let ethan = calcs.get(PChar::ETHAN).unwrap();
         let hp_fn = *ethan.max_hp;
         let mana_fn = *ethan.max_mana;
         assert_eq!(hp_fn(20), 14);
