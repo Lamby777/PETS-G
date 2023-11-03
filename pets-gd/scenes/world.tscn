@@ -72,6 +72,8 @@ _data = {
 [node name="Overworld" type="Node2D"]
 script = ExtResource("1_bs1lv")
 
+[node name="UILayer" type="CanvasLayer" parent="."]
+
 [node name="InteractionManager" parent="." instance=ExtResource("2_uh12s")]
 unique_name_in_owner = true
 visible = false
