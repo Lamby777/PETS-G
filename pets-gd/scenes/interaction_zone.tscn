@@ -6,5 +6,4 @@ size = Vector2(256, 256)
 [node name="InteractionZone" type="InteractionZone"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_vib8o")
