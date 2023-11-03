@@ -15,7 +15,7 @@ use crate::world::playercb::PlayerCB;
 pub struct InteractionManager {
     #[base]
     node: Base<Node2D>,
-    prompt: Option<Gd<RichTextLabel>>,
+    prompt_txt: Option<Gd<RichTextLabel>>,
 
     /// All interaction zones the player is inside
     zones: Vec<Gd<InteractionZone>>,
@@ -39,8 +39,12 @@ impl InteractionManager {
             .collect();
     }
 
+    pub fn prompt_txt(&mut self) -> &mut Gd<RichTextLabel> {
+        self.prompt_txt.as_mut().unwrap()
+    }
+
     pub fn prompt_shown(&mut self, hidden: bool) {
-        let prompt = self.prompt.as_mut().unwrap();
+        let prompt = self.prompt_txt();
         if hidden {
             prompt.hide();
         } else {
@@ -79,12 +83,12 @@ impl Node2DVirtual for InteractionManager {
         Self {
             node,
             zones: vec![],
-            prompt: None,
+            prompt_txt: None,
         }
     }
 
     fn ready(&mut self) {
-        self.prompt = Some(self.node.get_node_as("Prompt"));
+        self.prompt_txt = Some(self.node.get_node_as("Prompt"));
     }
 
     fn process(&mut self, _delta: f64) {
@@ -95,10 +99,13 @@ impl Node2DVirtual for InteractionManager {
         }
 
         self.sort_zones();
+        let mut zone = self.zones[0].clone();
+        self.prompt_txt()
+            .set_position(zone.get_position() + Vector2::new(0.0, -50.0));
 
         let input = Input::singleton();
         if input.is_action_just_pressed("ui_accept".into()) {
-            let zone = self.zones[0].bind_mut();
+            let zone = zone.bind_mut();
             zone.interact();
         }
     }
