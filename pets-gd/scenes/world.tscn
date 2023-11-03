@@ -76,7 +76,6 @@ script = ExtResource("1_bs1lv")
 
 [node name="InteractionManager" parent="." instance=ExtResource("2_uh12s")]
 unique_name_in_owner = true
-visible = false
 
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
