@@ -16,6 +16,8 @@ pub struct DBoxInterface {
     dbox_scene: Gd<PackedScene>,
 }
 
+/// Show a dialog box with the given speaker and message
+/// usage: `show_dialog!(some_node, "Cherry", "Hello, {}!", name, ...)`
 #[macro_export]
 macro_rules! show_dialog {
     ($any_node:expr, $speaker:expr, $($t:tt)*) => {{
