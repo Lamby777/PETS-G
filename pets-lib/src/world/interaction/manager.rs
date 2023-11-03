@@ -43,8 +43,7 @@ impl InteractionManager {
         // using this cool godot feature I just found...
         // you can set a node to be accessible with just its
         // name and a % prefix... nice for this sort of situation
-        let sc = godot_tree!().get_current_scene().unwrap();
-        sc.get_node_as("%InteractionManager")
+        current_scene!().get_node_as("%InteractionManager")
     }
 
     pub fn sort_zones(&mut self) {
