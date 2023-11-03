@@ -44,7 +44,10 @@ impl DBoxInterface {
         let mut dbox_gd = self.dbox_scene.instantiate_as::<DialogBox>();
 
         dbox_gd.set_name("Dialog".into());
-        godot_root!().add_child(dbox_gd.clone().upcast());
+        current_scene!()
+            .get_node("UILayer".into())
+            .expect("scene should have a UILayer")
+            .add_child(dbox_gd.clone().upcast());
 
         // simple stuff like this is why I love this language
         {
