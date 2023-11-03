@@ -166,7 +166,7 @@ position = Vector2(-900, 1300)
 position = Vector2(900, 1300)
 
 [node name="InteractionZone" parent="YSort" instance=ExtResource("5_uar2c")]
-position = Vector2(192, 68)
+position = Vector2(192, 64)
 
 [node name="ZoneAudio" type="Node" parent="."]
 
