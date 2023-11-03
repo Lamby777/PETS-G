@@ -26,7 +26,7 @@ pub struct InteractionZone {
 impl InteractionZone {
     #[func]
     pub fn interact(&self) {
-        show_dialog!(self.node, "Deez", "Test");
+        show_dialog!("Deez", "Test");
     }
 
     // TODO holy mother of code smells, what the hell is this mess?
