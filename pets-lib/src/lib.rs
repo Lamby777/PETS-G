@@ -27,7 +27,7 @@ mod stats;
 mod world;
 
 mod prelude {
-    // TODO probably put dialog box opener method here later
+    pub use crate::show_dialog;
 
     // maybe make a data structures module if i end up making more?
     pub use crate::limiq::*;
