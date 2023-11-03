@@ -66,6 +66,8 @@ impl CharacterBody2DVirtual for PlayerCB {
             load_pchar_scene_under!(self, "agent_e"),
             load_pchar_scene_under!(self, "agent_s"),
             load_pchar_scene_under!(self, "agent_t"),
+            load_pchar_scene_under!(self, "mira"),
+            load_pchar_scene_under!(self, "dubs"),
         ];
 
         // is this even required?

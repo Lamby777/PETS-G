@@ -416,12 +416,11 @@ graph_offset = Vector2(-79, 13)
 [node name="AgentT" type="PCharNode"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -12)
 scale = Vector2(4, 4)
 texture = ExtResource("1_s1oxq")
 hframes = 9
 vframes = 7
-frame = 22
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
