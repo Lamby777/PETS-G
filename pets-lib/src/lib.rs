@@ -27,6 +27,8 @@ mod stats;
 mod world;
 
 mod prelude {
+    pub use crate::godot_root;
+    pub use crate::node_at;
     pub use crate::show_dialog;
 
     // maybe make a data structures module if i end up making more?

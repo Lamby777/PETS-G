@@ -17,15 +17,17 @@ pub struct DBoxInterface {
 }
 
 /// Show a dialog box with the given speaker and message
-/// usage: `show_dialog!(some_node, "Cherry", "Hello, {}!", name, ...)`
+/// usage: `show_dialog!("Cherry", "Hello, {}!", name, ...)`
 #[macro_export]
 macro_rules! show_dialog {
-    ($any_node:expr, $speaker:expr, $($t:tt)*) => {{
+    ($speaker:expr, $($t:tt)*) => {{
         let msg = format!($($t)*);
 
-        let node = $any_node.clone().upcast();
+        // as long as the node is in the scene, this will work
+        let root = godot_root!();
+
         let dbox = crate::dialogue::autoload::DBoxInterface::singleton();
-        dbox.bind().show_dialog(node, $speaker.into(), msg.into());
+        dbox.bind().show_dialog(root.upcast(), $speaker.into(), msg.into());
     }};
 }
 
