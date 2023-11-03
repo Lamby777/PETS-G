@@ -26,7 +26,6 @@ pub struct InteractionZone {
 impl InteractionZone {
     #[func]
     pub fn interact(&self) {
-        // TODO
         show_dialog!(self.node, "Deez", "Test");
     }
 
@@ -36,14 +35,12 @@ impl InteractionZone {
     fn on_entered(&mut self, _body: Gd<PlayerCB>) {
         let mut im = InteractionManager::singleton(self.node.clone().upcast());
         im.bind_mut().register_zone(self.node.clone().cast());
-        godot_print!("Entered!");
     }
 
     #[func]
     fn on_exited(&mut self, _body: Gd<PlayerCB>) {
         let mut im = InteractionManager::singleton(self.node.clone().upcast());
         im.bind_mut().unregister_zone(self.node.clone().cast());
-        godot_print!("Exited!");
     }
 }
 

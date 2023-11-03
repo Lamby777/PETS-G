@@ -23,11 +23,9 @@ macro_rules! show_dialog {
     ($any_node:expr, $speaker:expr, $($t:tt)*) => {{
         let msg = format!($($t)*);
 
-        // as long as the node is in the scene, this will work
-        let root = $any_node.get_tree().unwrap().get_root().unwrap();
-
+        let node = $any_node.clone().upcast();
         let dbox = crate::dialogue::autoload::DBoxInterface::singleton();
-        dbox.bind().show_dialog(root.upcast(), $speaker.into(), msg.into());
+        dbox.bind().show_dialog(node, $speaker.into(), msg.into());
     }};
 }
 
