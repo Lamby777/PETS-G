@@ -416,6 +416,7 @@ graph_offset = Vector2(-79, 13)
 [node name="Dubs" type="PCharNode"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
 scale = Vector2(4, 4)
 texture = ExtResource("1_xd3eq")
 hframes = 9
