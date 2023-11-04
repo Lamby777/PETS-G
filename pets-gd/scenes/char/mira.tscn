@@ -420,7 +420,7 @@ position = Vector2(0, -16)
 scale = Vector2(4, 4)
 texture = ExtResource("1_gumsw")
 hframes = 8
-vframes = 9
+vframes = 8
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
