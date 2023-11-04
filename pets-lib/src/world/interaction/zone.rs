@@ -6,7 +6,7 @@
 use godot::engine::{Area2D, Area2DVirtual};
 use godot::prelude::*;
 
-use crate::dialogue::DialogueAction;
+use crate::dialogue::dnode::DialogueAction;
 use crate::prelude::*;
 use crate::world::playercb::PlayerCB;
 
