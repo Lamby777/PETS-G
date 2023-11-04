@@ -406,7 +406,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ty6r4"]
 resource_local_to_scene = true
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_p4qdk")
-states/Idle/position = Vector2(381, 100)
+states/Idle/position = Vector2(382, 100)
 states/Run/node = SubResource("AnimationNodeBlendSpace2D_ptivh")
 states/Run/position = Vector2(580, 100)
 states/Start/position = Vector2(127, 109)
