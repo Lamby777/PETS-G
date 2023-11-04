@@ -23,6 +23,7 @@ pub fn uniform_statcalcmap() -> CharStatCalcs {
 
 /// "Jat Chippity goes hard"
 /// Makes it easier to write custom base stats and stuff
+/// Registry of characters with unique stat calculation functions
 macro_rules! ch_unique_registry {
     ($map:expr, $calcs:expr, $($character:ident {
         $($field:ident $(.$property:ident)? = $value:expr,)*
