@@ -1,3 +1,13 @@
+//!
+//! Macros for mostly general-purpose Godot/Rust stuff
+//!
+
+pub use crate::current_scene;
+pub use crate::godot_root;
+pub use crate::godot_tree;
+pub use crate::node_at;
+pub use crate::show_dialog;
+
 #[macro_export]
 macro_rules! uninit {
     ($target:ty) => {
