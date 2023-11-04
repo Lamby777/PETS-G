@@ -2,29 +2,23 @@ use crate::prelude::*;
 
 /// CharMap with all characters having the same exact stats
 pub fn uniform_charmap() -> CharMap {
-    let mut res = CharMap::new();
-
-    // add chars from registry
-    for chname in PChar::ALL.iter() {
-        res.insert(
+    PChar::ALL.iter().fold(CharMap::new(), |mut map, chname| {
+        map.insert(
             chname.to_string(),
             Rc::new(RefCell::new(CharData::default())),
         );
-    }
-
-    res
+        map
+    })
 }
 
 /// The default stat calculation functions for all characters
 pub fn uniform_statcalcmap() -> CharStatCalcs {
-    let mut res = CharStatCalcs::new();
-
-    for chname in PChar::ALL.iter() {
-        let calcs = StatCalcList::default();
-        res.insert(chname.to_string(), Rc::new(calcs));
-    }
-
-    res
+    PChar::ALL
+        .iter()
+        .fold(CharStatCalcs::new(), |mut calcs, chname| {
+            calcs.insert(chname.to_string(), Rc::new(StatCalcList::default()));
+            calcs
+        })
 }
 
 /// "Jat Chippity goes hard"

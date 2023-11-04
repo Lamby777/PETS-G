@@ -70,9 +70,6 @@ impl CharacterBody2DVirtual for PlayerCB {
             load_pchar_scene_under!(self, "dubs"),
             load_pchar_scene_under!(self, "yoyo"),
         ];
-
-        // is this even required?
-        // var current_music_zone: Polygon2D
     }
 
     fn physics_process(&mut self, delta: f64) {
