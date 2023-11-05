@@ -9,6 +9,7 @@
 
 // TODO remove this soon
 #![allow(dead_code)]
+#![allow(unused_imports)]
 #![feature(variant_count)]
 
 use godot::engine::Engine;
