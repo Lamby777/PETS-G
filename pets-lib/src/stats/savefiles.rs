@@ -6,6 +6,7 @@ use crate::prelude::*;
 use godot::engine::{file_access::ModeFlags, FileAccess};
 
 /// All the data saved to one of the save file slots
+#[derive(Serialize, Deserialize)]
 pub struct SaveFile {
     pub chars: CharMap,
 }
