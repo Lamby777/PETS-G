@@ -22,9 +22,9 @@ pub struct DialogueNode {
 }
 
 impl DialogueNode {
+    /// Get a dialogue option by its index
+    /// Returns an error if the option is grayed out or the index is out of range
     pub fn option(&self, index: usize) -> DialogueChoiceResult<&DialogueChoice> {
-        // if the index is out of range or the result has
-        // availabe: false, return err
         let opts = self.options.as_ref().ok_or(())?;
         let opt = opts.get(index).ok_or(())?;
 
