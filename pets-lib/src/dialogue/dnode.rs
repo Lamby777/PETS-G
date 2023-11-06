@@ -5,7 +5,10 @@
 
 use crate::prelude::*;
 
-#[derive(Serialize, Deserialize)]
+/// `Ok` if picked, `Err` if option was grayed out
+pub type DialogueChoiceResult<T> = Result<T, ()>;
+
+#[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct DialogueNode {
     // TODO: static string
     id: String,
@@ -18,11 +21,26 @@ pub struct DialogueNode {
     options: Option<Vec<DialogueChoice>>,
 }
 
+impl DialogueNode {
+    pub fn option(&self, index: usize) -> DialogueChoiceResult<&DialogueChoice> {
+        // if the index is out of range or the result has
+        // availabe: false, return err
+        let opts = self.options.as_ref().ok_or(())?;
+        let opt = opts.get(index).ok_or(())?;
+
+        if opt.available {
+            Ok(opt)
+        } else {
+            Err(())
+        }
+    }
+}
+
 /// Possible outcomes of picking a dialogue option.
 ///
 /// "Yeah, this new name's WAY less confusing... right?"
 /// - Devon, 2037
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub enum DialogueAction {
     /// Leads to another node
     /// (simple `A -> (B|C)` dialogue)
@@ -38,7 +56,7 @@ pub enum DialogueAction {
     End,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct DialogueChoice {
     /// the text saying what the choice is
     label: String,
@@ -58,13 +76,27 @@ mod tests {
     // TODO test for options
 
     #[test]
-    fn dnode_fields() {
+    fn dnode_pick_unavailable_option() {
+        let op1 = DialogueChoice {
+            label: "Test option 1".to_string(),
+            available: true,
+            action: DialogueAction::End,
+        };
+        let op2 = DialogueChoice {
+            label: "Test option 2".to_string(),
+            available: false,
+            action: DialogueAction::End,
+        };
+
         let dnode = DialogueNode {
             id: "test_interaction".to_string(),
             speaker: "Cherry".to_string(),
             vox: "Mira".to_string(),
             text: "This dialogue is for testing purposes".to_string(),
-            options: None,
+            options: Some(vec![op1.clone(), op2.clone()]),
         };
+
+        assert_eq!(*dnode.option(0).unwrap(), op1);
+        assert!(dnode.option(1).is_err());
     }
 }
