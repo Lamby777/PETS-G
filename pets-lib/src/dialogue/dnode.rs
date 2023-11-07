@@ -73,8 +73,6 @@ pub struct DialogueChoice {
 mod tests {
     use super::*;
 
-    // TODO test for options
-
     #[test]
     fn dnode_pick_unavailable_option() {
         let op1 = DialogueChoice {
@@ -96,7 +94,7 @@ mod tests {
             options: Some(vec![op1.clone(), op2.clone()]),
         };
 
-        assert_eq!(*dnode.option(0).unwrap(), op1);
+        assert_eq!(dnode.option(0), Ok(&op1));
         assert!(dnode.option(1).is_err());
     }
 }
