@@ -4,9 +4,22 @@
 //!
 
 use crate::prelude::*;
+use thiserror::Error;
+
+#[derive(Debug, Error, PartialEq)]
+pub enum DialoguePickError {
+    #[error("option `{0}` is grayed out")]
+    Unavailable(usize),
+
+    #[error("option index `{0}` out of range")]
+    OutOfRange(usize),
+
+    #[error("no options listed")]
+    NoOptions,
+}
 
 /// `Ok` if picked, `Err` if option was grayed out
-pub type DialogueChoiceResult<T> = Result<T, ()>;
+pub type DialogueChoiceResult<T> = Result<T, DialoguePickError>;
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct DialogueNode {
@@ -25,13 +38,15 @@ impl DialogueNode {
     /// Get a dialogue option by its index
     /// Returns an error if the option is grayed out or the index is out of range
     pub fn option(&self, index: usize) -> DialogueChoiceResult<&DialogueChoice> {
-        let opts = self.options.as_ref().ok_or(())?;
-        let opt = opts.get(index).ok_or(())?;
+        let opts = self.options.as_ref().ok_or(DialoguePickError::NoOptions)?;
+        let opt = opts
+            .get(index)
+            .ok_or(DialoguePickError::OutOfRange(index))?;
 
         if opt.available {
             Ok(opt)
         } else {
-            Err(())
+            Err(DialoguePickError::Unavailable(index))
         }
     }
 }
@@ -95,6 +110,8 @@ mod tests {
         };
 
         assert_eq!(dnode.option(0), Ok(&op1));
-        assert!(dnode.option(1).is_err());
+
+        let matched = matches!(dnode.option(1), Err(DialoguePickError::Unavailable(1)));
+        assert!(matched);
     }
 }
