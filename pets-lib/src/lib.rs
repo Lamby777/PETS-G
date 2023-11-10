@@ -28,22 +28,15 @@ mod stats;
 mod world;
 
 mod prelude {
-    pub use crate::macros::*;
-
-    // maybe make a data structures module if i end up making more?
-    pub use crate::limiq::*;
-
-    // item stuff, probably useful everywhere
     pub use crate::items::*;
+    pub use crate::limiq::*;
+    pub use crate::macros::*;
+    pub use crate::stats::*;
 
     pub use crate::world::interaction::manager::InteractionManager;
 
-    // stats stuff
-    pub use crate::stats::pchars::PChar;
-    pub use crate::stats::savefiles::SaveFile;
-    pub use crate::stats::statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
-    pub use crate::stats::stats_interface::StatsInterface;
-    pub use crate::stats::*;
+    // all the dialogue node stuff
+    pub use crate::dialogue::dnode::*;
 
     // is this bad practice? no clue and idc honestly
     // it's convenient with no real caveat, therefore...

@@ -4,12 +4,20 @@
 
 use crate::prelude::*;
 
+// stat-related submodules
 pub mod charmap;
 pub mod pchars;
 pub mod savefiles;
 pub mod statcalc;
 pub mod stats_interface;
 
+// re-export some crap from ^^^
+pub use pchars::PChar;
+pub use savefiles::SaveFile;
+pub use statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
+pub use stats_interface::StatsInterface;
+
+// type aliases
 pub type CharMap = HashMap<String, Rc<RefCell<CharData>>>;
 pub type IntegralStat = i16;
 pub type FloatStat = f32;
