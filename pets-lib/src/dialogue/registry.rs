@@ -3,22 +3,16 @@
 //!
 
 use crate::prelude::*;
-use anyhow::Result;
 
+// TODO: &str keys
+/// Map of all the named dialogue nodes
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct DialogueMap {
-    // TODO: &str keys
-    /// Map of all the named dialogue nodes
-    pub nodes: HashMap<String, DialogueNode>,
-}
+pub struct DialogueMap(HashMap<String, DialogueNode>);
 
 impl DialogueMap {
     /// Load a dialogue map from a file
-    pub fn load_from_file(path: &str) -> Result<Self> {
-        //
+    pub fn load_from_file(_path: &str) -> Result<Self> {
         // let map = serde_json::
-        Ok(Self {
-            nodes: HashMap::new(),
-        })
+        Ok(Self(HashMap::new()))
     }
 }
