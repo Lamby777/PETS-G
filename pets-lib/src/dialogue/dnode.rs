@@ -19,13 +19,10 @@ pub enum DialoguePickError {
 }
 
 /// `Ok` if picked, `Err` if option was grayed out
-pub type DialogueChoiceResult<T> = Result<T, DialoguePickError>;
+type Result<T> = std::result::Result<T, DialoguePickError>;
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct DialogueNode {
-    // TODO: static string
-    id: String,
-
     // TODO replace with &'a str
     speaker: String,
     vox: String,
@@ -37,7 +34,7 @@ pub struct DialogueNode {
 impl DialogueNode {
     /// Get a dialogue option by its index
     /// Returns an error if the option is grayed out or the index is out of range
-    pub fn option(&self, index: usize) -> DialogueChoiceResult<&DialogueChoice> {
+    pub fn option(&self, index: usize) -> Result<&DialogueChoice> {
         let opts = self.options.as_ref().ok_or(DialoguePickError::NoOptions)?;
         let opt = opts
             .get(index)
@@ -102,7 +99,6 @@ mod tests {
         };
 
         let dnode = DialogueNode {
-            id: "test_interaction".to_string(),
             speaker: "Cherry".to_string(),
             vox: "Mira".to_string(),
             text: "This dialogue is for testing purposes".to_string(),
