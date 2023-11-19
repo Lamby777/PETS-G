@@ -14,8 +14,8 @@ const DBOX_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
 pub struct DialogBox {
     #[base]
     node: Base<PanelContainer>,
-    spk_txt: GodotString,
-    msg_txt: GodotString,
+    spk_txt: GString,
+    msg_txt: GString,
 }
 
 #[godot_api]
@@ -31,7 +31,7 @@ impl DialogBox {
     }
 
     #[func]
-    pub fn set_txts(&mut self, speaker: GodotString, content: GodotString) {
+    pub fn set_txts(&mut self, speaker: GString, content: GString) {
         self.spk_txt = speaker;
         self.msg_txt = content;
     }

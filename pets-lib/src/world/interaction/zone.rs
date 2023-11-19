@@ -17,7 +17,7 @@ pub struct InteractionZone {
     node: Base<Area2D>,
 
     #[export]
-    name: GodotString,
+    name: GString,
 
     action: DialogueAction,
 }
