@@ -9,7 +9,8 @@ crate-type = ["cdylib"]
 [dependencies]
 anyhow = "1.0.75"
 concat-idents = "1.1.5"
-godot = { git = "https://github.com/godot-rust/gdext", branch = "master" }
+# godot = { git = "https://github.com/godot-rust/gdext", branch = "master" }
+godot = { git = "https://github.com/godot-rust/gdext", rev = "36e75a4726b8f1a4d1df83d73134cdb2518e2345"}
 num-derive = "0.4.0"
 num-traits = "0.2.16"
 serde = {version = "1.0.188", features= ["derive", "rc"] }
