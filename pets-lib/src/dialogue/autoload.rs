@@ -60,7 +60,7 @@ impl DBoxInterface {
 }
 
 #[godot_api]
-impl Node2DVirtual for DBoxInterface {
+impl INode2D for DBoxInterface {
     fn init(node: Base<Node2D>) -> Self {
         Self {
             node,

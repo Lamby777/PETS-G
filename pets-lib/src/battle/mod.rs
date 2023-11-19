@@ -4,7 +4,7 @@
 //!
 
 use godot::engine::global::Key;
-use godot::engine::{Node2D, Node2DVirtual};
+use godot::engine::{INode2D, Node2D};
 use godot::prelude::*;
 
 mod player;
@@ -19,7 +19,7 @@ struct BattleEngine {
 }
 
 #[godot_api]
-impl Node2DVirtual for BattleEngine {
+impl INode2D for BattleEngine {
     fn init(node: Base<Node2D>) -> Self {
         Self { node }
     }

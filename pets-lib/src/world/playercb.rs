@@ -1,4 +1,4 @@
-use godot::engine::{CharacterBody2D, CharacterBody2DVirtual};
+use godot::engine::{CharacterBody2D, ICharacterBody2D};
 use godot::prelude::*;
 
 use crate::{load_pchar_scene_under, prelude::*};
@@ -50,7 +50,7 @@ impl PlayerCB {
 }
 
 #[godot_api]
-impl CharacterBody2DVirtual for PlayerCB {
+impl ICharacterBody2D for PlayerCB {
     fn init(node: Base<CharacterBody2D>) -> Self {
         Self {
             node,
