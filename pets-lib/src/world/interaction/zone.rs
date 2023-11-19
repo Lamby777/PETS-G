@@ -3,7 +3,7 @@
 //! an interaction when within range
 //!
 
-use godot::engine::{Area2D, Area2DVirtual};
+use godot::engine::{Area2D, IArea2D};
 use godot::prelude::*;
 
 use crate::dialogue::dnode::DialogueAction;
@@ -43,7 +43,7 @@ impl InteractionZone {
 }
 
 #[godot_api]
-impl Area2DVirtual for InteractionZone {
+impl IArea2D for InteractionZone {
     fn init(node: Base<Area2D>) -> Self {
         Self {
             node,

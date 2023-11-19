@@ -3,7 +3,7 @@
 //! Shows the input prompt and handles the action if pressed.
 //!
 
-use godot::engine::{Node2D, Node2DVirtual, RichTextLabel};
+use godot::engine::{INode2D, Node2D, RichTextLabel};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -72,7 +72,7 @@ impl InteractionManager {
 }
 
 #[godot_api]
-impl Node2DVirtual for InteractionManager {
+impl INode2D for InteractionManager {
     fn init(node: Base<Node2D>) -> Self {
         Self {
             node,
