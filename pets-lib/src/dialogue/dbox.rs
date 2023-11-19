@@ -3,7 +3,7 @@
 //!
 
 use godot::engine::tween::TransitionType;
-use godot::engine::{PanelContainer, PanelContainerVirtual, RichTextLabel};
+use godot::engine::{IPanelContainer, PanelContainer, RichTextLabel};
 use godot::prelude::*;
 
 const DBOX_TWEEN_TIME: f64 = 0.5;
@@ -80,7 +80,7 @@ impl DialogBox {
 }
 
 #[godot_api]
-impl PanelContainerVirtual for DialogBox {
+impl IPanelContainer for DialogBox {
     fn init(node: Base<PanelContainer>) -> Self {
         Self {
             node,

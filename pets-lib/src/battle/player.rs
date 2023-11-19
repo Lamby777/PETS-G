@@ -2,7 +2,7 @@
 //! Player icon that moves around n shit during battles
 //!
 
-use godot::engine::{Node2D, Node2DVirtual};
+use godot::engine::{INode2D, Node2D};
 use godot::prelude::*;
 
 use super::stat_translation::to_battle;
@@ -66,7 +66,7 @@ impl BattleIcon {
 }
 
 #[godot_api]
-impl Node2DVirtual for BattleIcon {
+impl INode2D for BattleIcon {
     fn init(node: Base<Node2D>) -> Self {
         Self {
             node,
