@@ -57,10 +57,10 @@ unsafe impl ExtensionLibrary for PetsLib {
         if level == InitLevel::Scene {
             let mut engine = Engine::singleton();
 
-            let gd: Gd<StatsInterface> = Gd::new_default();
+            let gd = StatsInterface::alloc_gd();
             engine.register_singleton("Stats".into(), gd.upcast());
 
-            let gd: Gd<DBoxInterface> = Gd::new_default();
+            let gd = DBoxInterface::alloc_gd();
             engine.register_singleton("DBox".into(), gd.upcast());
         }
     }
