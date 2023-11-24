@@ -9,7 +9,7 @@ crate-type = ["cdylib"]
 [dependencies]
 anyhow = "1.0.75"
 concat-idents = "1.1.5"
-dialogical = "0.2.2"
+dialogical = "*"
 godot = { git = "https://github.com/godot-rust/gdext", branch = "master" }
 num-derive = "0.4.0"
 num-traits = "0.2.16"
