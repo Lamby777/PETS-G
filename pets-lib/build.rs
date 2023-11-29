@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use std::process::Command;
 
 fn main() {
-    println!("cargo:rerun-if-changed=dg/src/");
+    println!("cargo:rerun-if-changed=./dg/src");
     println!("cargo:rerun-if-changed=build.rs");
 
     let dir = env::var("CARGO_MANIFEST_DIR").unwrap();

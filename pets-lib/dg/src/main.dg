@@ -1,51 +1,8 @@
-% TestInteraction1
-NAME Mira
-VOX Mira
-
-Yo! This is an example of a dialogue message!
-
----
-
-This is another page, also read by Mira in her own voice!
-
----
-PageOnly VOX Dylan
-
-And now, she will say this page of text in Dylan's voice!
-
----
-
-And now, she will say this page of text in her own voice!
-
----
-NAME Siva
-VOX Siva
-
-Hey, I'm Siva, and I have a different voice sound!
-
----
-
-But changing voices is getting pretty annoying... I wish
-there was a better way to combine these 2...
-
----
+% Main
 ###
 
-// There is! This is a comptime block which can be used
-// for metaprogramming stuff! For example...
-
-Link NAME Mira
-VOX Mira
-
-// ^^^ empty line marks end of the Autolink command
-// And now, any time you use NAME Mira, it will
-// default to her voice as well!
+Import ./rodrick.dg
 
 ###
----
-NAME Mira
-
-That's great! Less boilerplate!
-
 ---
 
