@@ -35,9 +35,6 @@ mod prelude {
 
     pub use crate::world::interaction::manager::InteractionManager;
 
-    // all the dialogue node stuff
-    pub use crate::dialogue::dnode::*;
-
     // is this bad practice? no clue and idc honestly
     // it's convenient with no real caveat, therefore...
     pub use anyhow::{bail, Result};
