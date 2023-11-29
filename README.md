@@ -11,6 +11,7 @@ control of your own hardware overly complicated... and is also open-source! <3
 - [Soundtrack](https://www.youtube.com/playlist?list=PLxLRTqK8yZMO14zFG12650hGkPOZYV_2p)
 - [Promo page](https://sparklet.org/pets)
 - [Dialogue Toolkit](https://github.com/Lamby777/dialogical)
+- [Discord server](https://discord.gg/xEWa6Kwcad)
 
 ---
 
