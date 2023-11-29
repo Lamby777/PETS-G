@@ -49,10 +49,11 @@ impl IArea2D for InteractionZone {
     }
 
     fn ready(&mut self) {
-        let enter_fn = Callable::from_object_method(&self.node.to_godot(), "on_entered");
-        let exit_fn = Callable::from_object_method(&self.node.to_godot(), "on_exited");
+        let node = &mut self.node;
 
-        self.node.connect("body_entered".into(), enter_fn);
-        self.node.connect("body_exited".into(), exit_fn);
+        let enter_fn = Callable::from_object_method(node, "on_entered");
+        let exit_fn = Callable::from_object_method(node, "on_exited");
+        node.connect("body_entered".into(), enter_fn);
+        node.connect("body_exited".into(), exit_fn);
     }
 }
