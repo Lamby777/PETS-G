@@ -18,7 +18,7 @@ pub use statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
 pub use stats_interface::StatsInterface;
 
 // type aliases
-pub type CharMap = HashMap<String, Rc<RefCell<CharData>>>;
+pub type CharMap = HashMap<String, RefCell<CharData>>;
 pub type IntegralStat = i16;
 pub type FloatStat = f32;
 

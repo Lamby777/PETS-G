@@ -70,7 +70,7 @@ impl StatsInterface {
     }
 
     // #[func]
-    pub fn get_character(&self, ch: &str) -> Rc<RefCell<CharData>> {
+    pub fn get_character(&self, ch: &str) -> RefCell<CharData> {
         self.save
             .chars
             .get(ch)

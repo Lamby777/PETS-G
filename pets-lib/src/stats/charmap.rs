@@ -3,10 +3,7 @@ use crate::prelude::*;
 /// CharMap with all characters having the same exact stats
 pub fn uniform_charmap() -> CharMap {
     PChar::ALL.iter().fold(CharMap::new(), |mut map, chname| {
-        map.insert(
-            chname.to_string(),
-            Rc::new(RefCell::new(CharData::default())),
-        );
+        map.insert(chname.to_string(), RefCell::new(CharData::default()));
         map
     })
 }
