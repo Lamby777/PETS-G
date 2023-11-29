@@ -1,0 +1,45 @@
+% Rodrick Sign #1
+NAME Rodrick Sign Co.
+VOX Default
+
+So... you're reading a sign, eh?\n
+Well...
+
+---
+
+Are you smart?
+
+> Nope
+@ Rodrick Sign #1 >> Nope
+
+> Definitely not
+@ Rodrick Sign #1 >> DefNot
+
+---
+% Rodrick Sign #1 >> Nope
+NAME Rodrick Sign Co.
+VOX Default
+
+Yeah, I didn't think so.
+
+@ Rodrick Sign #1 >> Exit
+
+---
+% Rodrick Sign #1 >> DefNot
+NAME Rodrick Sign Co.
+VOX Default
+
+Yeah, I definitely didn't think so.
+
+@ Rodrick Sign #1 >> Exit
+
+---
+% Rodrick Sign #1 >> Exit
+NAME Rodrick Sign Co.
+VOX Default
+
+Come back when you're smart.
+
+$ Exit
+---
+
