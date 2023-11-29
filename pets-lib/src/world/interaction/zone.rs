@@ -6,7 +6,6 @@
 use godot::engine::{Area2D, IArea2D};
 use godot::prelude::*;
 
-use crate::dialogue::dnode::DialogueAction;
 use crate::prelude::*;
 use crate::world::playercb::PlayerCB;
 
@@ -18,8 +17,6 @@ pub struct InteractionZone {
 
     #[export]
     name: GString,
-
-    action: DialogueAction,
 }
 
 #[godot_api]
@@ -48,7 +45,6 @@ impl IArea2D for InteractionZone {
         Self {
             node,
             name: "".into(),
-            action: DialogueAction::End,
         }
     }
 

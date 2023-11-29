@@ -4,4 +4,3 @@
 
 pub mod autoload;
 pub mod dbox;
-pub mod dnode;
