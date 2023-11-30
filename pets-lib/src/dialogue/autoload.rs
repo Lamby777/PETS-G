@@ -40,19 +40,15 @@ impl DBoxInterface {
             )
         });
 
-        let page = ix.pages.get(0).unwrap();
-        // let spk = self.update_spk(page);
-        // let vox = self.update_vox(page);
-
-        let msg = page.content.clone();
-        self.show_dialog("Test".into(), "Test".into(), msg);
+        let mut dbox = self.instantiate_dbox();
+        dbox.bind_mut().set_ix(ix.clone());
     }
 
     #[func]
     pub fn show_dialog(&self, spk: String, _vox: String, msg: String) {
-        // simple stuff like this is why I love this language
         let mut dbox = self.instantiate_dbox();
 
+        // simple stuff like this is why I love this language
         {
             let mut dbox = dbox.bind_mut();
             dbox.set_txts(spk, msg);
