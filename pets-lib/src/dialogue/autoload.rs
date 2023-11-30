@@ -21,7 +21,6 @@ pub struct DBoxInterface {
     dbox_scene: Gd<PackedScene>,
 
     // state for the current interaction
-    // TODO maybe combine these into a struct?
     current_ix: Option<Interaction>,
     current_page_number: usize,
     current_speaker: Speaker,
