@@ -49,6 +49,19 @@ impl DialogBox {
 
     pub fn set_ix(&mut self, ix: Interaction) {
         self.current_ix = Some(ix);
+        self.goto_page(0);
+    }
+
+    pub fn goto_page(&mut self, pageno: usize) {
+        let ix = self.current_ix.as_ref().unwrap().clone();
+        let page = ix.pages.get(pageno).unwrap();
+        let meta = &page.metadata;
+
+        let spk = self.update_spk(meta);
+        let vox = self.update_vox(meta);
+        let msg = page.content.clone();
+
+        self.spk_txt = spk.into();
     }
 
     /// Takes a NAME metaline and updates the speaker accordingly
