@@ -6,8 +6,7 @@ use godot::engine::tween::TransitionType;
 use godot::engine::{IPanelContainer, PanelContainer, RichTextLabel};
 use godot::prelude::*;
 
-const DBOX_TWEEN_TIME: f64 = 0.5;
-const DBOX_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
+use crate::consts::dbox::*;
 
 #[derive(GodotClass)]
 #[class(base=PanelContainer)]
