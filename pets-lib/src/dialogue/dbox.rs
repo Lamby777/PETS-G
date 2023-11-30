@@ -6,7 +6,7 @@ use godot::engine::tween::TransitionType;
 use godot::engine::{IPanelContainer, PanelContainer, RichTextLabel};
 use godot::prelude::*;
 
-use crate::consts::dbox::*;
+use crate::consts::dialogue::*;
 
 #[derive(GodotClass)]
 #[class(base=PanelContainer)]
