@@ -19,12 +19,6 @@ pub struct DBoxInterface {
     #[base]
     node: Base<Node2D>,
     dbox_scene: Gd<PackedScene>,
-
-    // state for the current interaction
-    current_ix: Option<Interaction>,
-    current_page_number: usize,
-    current_speaker: Speaker,
-    current_vox: String,
 }
 
 #[godot_api]
@@ -37,37 +31,6 @@ impl DBoxInterface {
             .cast()
     }
 
-    /// Takes a NAME metaline and updates the speaker accordingly
-    pub fn update_spk(&mut self, page: &Page) -> String {
-        let spk = match page.metadata.speaker.clone() {
-            PageOnly(v) => v,
-            Permanent(v) => {
-                self.current_speaker = v.clone();
-                v
-            }
-            NoChange => self.current_speaker.clone(),
-        };
-
-        match spk {
-            Named(ref v) => v,
-            Narrator => NARRATOR_DISPLAYNAME,
-            Unknown => UNKNOWN_DISPLAYNAME,
-        }
-        .to_owned()
-    }
-
-    /// Takes a VOX metaline and updates the vox accordingly
-    pub fn update_vox(&mut self, page: &Page) -> String {
-        match page.metadata.vox.clone() {
-            PageOnly(v) => v,
-            Permanent(v) => {
-                self.current_vox = v.clone();
-                v
-            }
-            NoChange => self.current_vox.clone(),
-        }
-    }
-
     #[func]
     pub fn start_ix(&mut self, ix_id: String) {
         let ix = ix_map().get(&ix_id).unwrap_or_else(|| {
@@ -78,28 +41,33 @@ impl DBoxInterface {
         });
 
         let page = ix.pages.get(0).unwrap();
-        let spk = self.update_spk(page);
-        let vox = self.update_vox(page);
+        // let spk = self.update_spk(page);
+        // let vox = self.update_vox(page);
 
         let msg = page.content.clone();
-        self.show_dialog(spk, vox, msg);
+        self.show_dialog("Test".into(), "Test".into(), msg);
     }
 
     #[func]
     pub fn show_dialog(&self, spk: String, _vox: String, msg: String) {
-        let mut dbox_gd = self.dbox_scene.instantiate_as::<DialogBox>();
+        let mut dbox = self.dbox_scene.instantiate_as::<DialogBox>();
+        dbox.set_name("Dialog Box".into());
 
-        // TODO check if a box already exists + play vox sounds
-
-        dbox_gd.set_name("Dialog".into());
-        current_scene!()
+        let mut ui_layer = current_scene!()
             .get_node("UILayer".into())
-            .expect("scene should have a UILayer")
-            .add_child(dbox_gd.clone().upcast());
+            .expect("scene should have a UILayer");
+
+        // check if a box already exists
+        if ui_layer.has_node("Dialog Box".into()) {
+            let node = ui_layer.get_node("Dialog Box".into()).unwrap();
+            ui_layer.remove_child(node);
+        }
+
+        ui_layer.add_child(dbox.clone().upcast());
 
         // simple stuff like this is why I love this language
         {
-            let mut dbox = dbox_gd.bind_mut();
+            let mut dbox = dbox.bind_mut();
             dbox.set_txts(spk, msg);
             dbox.do_draw();
             dbox.pop_up()
@@ -113,11 +81,6 @@ impl INode2D for DBoxInterface {
         Self {
             node,
             dbox_scene: load::<PackedScene>("res://scenes/dialog.tscn"),
-
-            current_ix: None,
-            current_page_number: 0,
-            current_speaker: Speaker::Narrator,
-            current_vox: DEFAULT_VOX.to_owned(),
         }
     }
 }

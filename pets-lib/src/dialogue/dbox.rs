@@ -2,6 +2,10 @@
 //! Dialog box class for menus and dialogue text
 //!
 
+use dialogical::Speaker::{self, *};
+use dialogical::{Interaction, Page};
+use dialogical::{Metaline::*, PageMeta};
+
 use godot::engine::tween::TransitionType;
 use godot::engine::{IPanelContainer, PanelContainer, RichTextLabel};
 use godot::prelude::*;
@@ -13,12 +17,33 @@ use crate::consts::dialogue::*;
 pub struct DialogBox {
     #[base]
     node: Base<PanelContainer>,
+
+    // state for the current interaction
+    current_ix: Option<Interaction>,
+    current_page_number: usize,
+    current_speaker: Speaker,
+    current_vox: String,
+
     spk_txt: GString,
     msg_txt: GString,
 }
 
 #[godot_api]
 impl DialogBox {
+    /// init for the purposes of reading out an interaction
+    pub fn new_for_ix(ix: Interaction) -> Gd<Self> {
+        Gd::from_init_fn(|node| Self {
+            node,
+            spk_txt: "Cherry".into(),
+            msg_txt: "[wave amp=50 freq=6]Hello, World![/wave]".into(),
+
+            current_ix: Some(ix),
+            current_page_number: 0,
+            current_speaker: Speaker::Narrator,
+            current_vox: DEFAULT_VOX.to_owned(),
+        })
+    }
+
     /// Get the speaker name label
     fn spk_txt(&self) -> Gd<RichTextLabel> {
         self.node.get_node_as("VSplit/SpeakerName")
@@ -29,10 +54,43 @@ impl DialogBox {
         self.node.get_node_as("VSplit/Content")
     }
 
+    /// Sets the speaker and message text from strings
     #[func]
     pub fn set_txts(&mut self, speaker: String, content: String) {
         self.spk_txt = speaker.into();
         self.msg_txt = content.into();
+    }
+
+    /// Takes a NAME metaline and updates the speaker accordingly
+    pub fn update_spk(&mut self, meta: &PageMeta) -> String {
+        let spk = match meta.speaker {
+            PageOnly(ref v) => v,
+            Permanent(ref v) => {
+                self.current_speaker = v.clone();
+                v
+            }
+            NoChange => &self.current_speaker,
+        };
+
+        match spk {
+            Named(ref v) => v,
+            Narrator => NARRATOR_DISPLAYNAME,
+            Unknown => UNKNOWN_DISPLAYNAME,
+        }
+        .to_owned()
+    }
+
+    /// Takes a VOX metaline and updates the vox accordingly
+    pub fn update_vox(&mut self, meta: &PageMeta) -> String {
+        match meta.vox {
+            PageOnly(ref v) => v,
+            Permanent(ref v) => {
+                self.current_vox = v.clone();
+                v
+            }
+            NoChange => &self.current_vox,
+        }
+        .to_owned()
     }
 
     #[func]
@@ -85,6 +143,11 @@ impl IPanelContainer for DialogBox {
             node,
             spk_txt: "Cherry".into(),
             msg_txt: "[wave amp=50 freq=6]Hello, World![/wave]".into(),
+
+            current_ix: None,
+            current_page_number: 0,
+            current_speaker: Speaker::Narrator,
+            current_vox: DEFAULT_VOX.to_owned(),
         }
     }
 
