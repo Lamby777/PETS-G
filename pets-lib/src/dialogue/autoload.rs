@@ -2,6 +2,7 @@
 //! Singleton for accessing player stats in GDScript.
 //!
 
+use dialogical::{Interaction, Speaker};
 use godot::engine::Engine;
 use godot::prelude::*;
 
@@ -15,18 +16,11 @@ pub struct DBoxInterface {
     #[base]
     node: Base<Node2D>,
     dbox_scene: Gd<PackedScene>,
-}
 
-/// Show a dialog box with the given speaker and message
-/// usage: `show_dialog!("Cherry", "Hello, {}!", name, ...)`
-#[macro_export]
-macro_rules! show_dialog {
-    ($speaker:expr, $($t:tt)*) => {{
-        let msg = format!($($t)*);
-
-        let dbox = crate::dialogue::autoload::DBoxInterface::singleton();
-        dbox.bind().show_dialog($speaker.into(), msg.into());
-    }};
+    // state for the current interaction
+    current_ix: Option<Interaction>,
+    current_page_number: usize,
+    current_speaker: Speaker,
 }
 
 #[godot_api]
@@ -68,7 +62,6 @@ impl DBoxInterface {
         // TODO multi-page stuff, don't just pop up twice
         let msg = page.content.clone();
         self.show_dialog(spk.into(), msg.into());
-        // show_dialog!(spk, "{}", page.content.clone());
     }
 
     #[func]
@@ -97,6 +90,10 @@ impl INode2D for DBoxInterface {
         Self {
             node,
             dbox_scene: load::<PackedScene>("res://scenes/dialog.tscn"),
+
+            current_ix: None,
+            current_page_number: 0,
+            current_speaker: Speaker::Narrator,
         }
     }
 }
