@@ -60,7 +60,6 @@ impl InteractionManager {
         let pcb = pcb.cast::<PlayerCB>();
         let pcb_pos = { pcb.get_position() };
 
-        // TODO optimize sorting
         self.zones.sort_by(|a, b| {
             let a = a.get_global_position();
             let b = b.get_global_position();

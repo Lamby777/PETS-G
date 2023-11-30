@@ -122,13 +122,13 @@ impl TitleScreen {
             }
 
             Options => {
-                // TODO scroll right into the options menu
-                // leaving this empty so it won't panic
+                // should scroll right into options menu
+                todo!()
             }
 
             Credits => {
-                // TODO tween the credits box
-                // leaving this empty so it won't panic
+                // should pull up credits box
+                todo!()
             }
 
             Quit => {

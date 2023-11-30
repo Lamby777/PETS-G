@@ -7,7 +7,6 @@
 //! - Cherry 9/2/2023 | <3
 //!
 
-// TODO remove this soon
 #![allow(dead_code)]
 #![allow(unused_imports)]
 #![feature(variant_count)]
