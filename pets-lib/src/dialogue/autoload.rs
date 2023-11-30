@@ -21,7 +21,7 @@ pub struct DBoxInterface {
     dbox_scene: Gd<PackedScene>,
 
     // state for the current interaction
-    // TODO combine speaker and vox into a `PageMeta`
+    // TODO maybe combine these into a struct?
     current_ix: Option<Interaction>,
     current_page_number: usize,
     current_speaker: Speaker,
@@ -80,14 +80,17 @@ impl DBoxInterface {
 
         let page = ix.pages.get(0).unwrap();
         let spk = self.update_spk(page);
+        let vox = self.update_vox(page);
 
         let msg = page.content.clone();
-        self.show_dialog(spk.into(), msg.into());
+        self.show_dialog(spk, vox, msg);
     }
 
     #[func]
-    pub fn show_dialog(&self, spk: GString, msg: GString) {
+    pub fn show_dialog(&self, spk: String, _vox: String, msg: String) {
         let mut dbox_gd = self.dbox_scene.instantiate_as::<DialogBox>();
+
+        // TODO check if a box already exists + play vox sounds
 
         dbox_gd.set_name("Dialog".into());
         current_scene!()
