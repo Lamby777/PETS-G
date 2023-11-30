@@ -50,28 +50,35 @@ impl DBoxInterface {
 
     #[func]
     pub fn show_dialog(&self, spk: String, _vox: String, msg: String) {
-        let mut dbox = self.dbox_scene.instantiate_as::<DialogBox>();
-        dbox.set_name("Dialog Box".into());
-
-        let mut ui_layer = current_scene!()
-            .get_node("UILayer".into())
-            .expect("scene should have a UILayer");
-
-        // check if a box already exists
-        if ui_layer.has_node("Dialog Box".into()) {
-            let node = ui_layer.get_node("Dialog Box".into()).unwrap();
-            ui_layer.remove_child(node);
-        }
-
-        ui_layer.add_child(dbox.clone().upcast());
-
         // simple stuff like this is why I love this language
+        let mut dbox = self.instantiate_dbox();
+
         {
             let mut dbox = dbox.bind_mut();
             dbox.set_txts(spk, msg);
             dbox.do_draw();
             dbox.pop_up()
         }
+    }
+
+    #[func]
+    pub fn instantiate_dbox(&self) -> Gd<DialogBox> {
+        let mut dbox = self.dbox_scene.instantiate_as::<DialogBox>();
+        dbox.set_name(DBOX_NODE_NAME.into());
+
+        let mut ui_layer = current_scene!()
+            .get_node("UILayer".into())
+            .expect("scene should have a UILayer");
+
+        // check if a box already exists
+        if ui_layer.has_node(DBOX_NODE_NAME.into()) {
+            let node = ui_layer.get_node(DBOX_NODE_NAME.into()).unwrap();
+            ui_layer.remove_child(node);
+        }
+
+        ui_layer.add_child(dbox.clone().upcast());
+
+        dbox
     }
 }
 
