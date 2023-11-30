@@ -40,7 +40,7 @@ impl DBoxInterface {
     }
 
     #[func]
-    pub fn show_dialog(&self, spk: GodotString, msg: GodotString) {
+    pub fn show_dialog(&self, spk: GString, msg: GString) {
         let mut dbox_gd = self.dbox_scene.instantiate_as::<DialogBox>();
 
         dbox_gd.set_name("Dialog".into());
@@ -60,7 +60,7 @@ impl DBoxInterface {
 }
 
 #[godot_api]
-impl Node2DVirtual for DBoxInterface {
+impl INode2D for DBoxInterface {
     fn init(node: Base<Node2D>) -> Self {
         Self {
             node,

@@ -3,10 +3,9 @@
 //! an interaction when within range
 //!
 
-use godot::engine::{Area2D, Area2DVirtual};
+use godot::engine::{Area2D, IArea2D};
 use godot::prelude::*;
 
-use crate::dialogue::DialogueAction;
 use crate::prelude::*;
 use crate::world::playercb::PlayerCB;
 
@@ -17,16 +16,33 @@ pub struct InteractionZone {
     node: Base<Area2D>,
 
     #[export]
-    name: GodotString,
-
-    action: DialogueAction,
+    name: GString,
 }
 
 #[godot_api]
 impl InteractionZone {
     #[func]
     pub fn interact(&self) {
-        show_dialog!("Deez", "Test");
+        use dialogical::Metaline::*;
+        use dialogical::Speaker::*;
+
+        let ix_list = ix_list();
+        let ix = ix_list.get("Rodrick Sign #1").unwrap();
+        let page = ix.pages.get(0).unwrap();
+        let spk = page.metadata.speaker.clone();
+
+        let spk = match spk {
+            PageOnly(v) | Permanent(v) => v,
+            NoChange => unreachable!(),
+        };
+
+        let spk = match spk {
+            Named(v) => v,
+            Narrator => "".to_string(),
+            Unknown => "".to_string(),
+        };
+
+        show_dialog!(spk, "{}", page.content.clone());
     }
 
     #[func]
@@ -43,20 +59,20 @@ impl InteractionZone {
 }
 
 #[godot_api]
-impl Area2DVirtual for InteractionZone {
+impl IArea2D for InteractionZone {
     fn init(node: Base<Area2D>) -> Self {
         Self {
             node,
             name: "".into(),
-            action: DialogueAction::End,
         }
     }
 
     fn ready(&mut self) {
-        let enter_fn = Callable::from_object_method(self.node.to_godot(), "on_entered");
-        let exit_fn = Callable::from_object_method(self.node.to_godot(), "on_exited");
+        let node = &mut self.node;
 
-        self.node.connect("body_entered".into(), enter_fn);
-        self.node.connect("body_exited".into(), exit_fn);
+        let enter_fn = Callable::from_object_method(node, "on_entered");
+        let exit_fn = Callable::from_object_method(node, "on_exited");
+        node.connect("body_entered".into(), enter_fn);
+        node.connect("body_exited".into(), exit_fn);
     }
 }

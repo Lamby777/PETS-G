@@ -4,18 +4,26 @@
 
 use crate::prelude::*;
 
+// stat-related submodules
 pub mod charmap;
 pub mod pchars;
 pub mod savefiles;
 pub mod statcalc;
 pub mod stats_interface;
 
-pub type CharMap = HashMap<String, Rc<RefCell<CharData>>>;
+// re-export some crap from ^^^
+pub use pchars::PChar;
+pub use savefiles::SaveFile;
+pub use statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
+pub use stats_interface::StatsInterface;
+
+// type aliases
+pub type CharMap = HashMap<String, RefCell<CharData>>;
 pub type IntegralStat = i16;
 pub type FloatStat = f32;
 
 /// All the information the game needs to know about a character
-#[derive(Debug, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct CharData {
     /// Name of the character, as picked by the user
     /// ⚠️⚠️⚠️ See <https://github.com/Lamby777/PETS-G/issues/23>
@@ -79,7 +87,7 @@ impl Default for CharData {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct CharStatsStateful {
     /// Current HP
     pub hp: IntegralStat,
@@ -89,7 +97,7 @@ pub struct CharStatsStateful {
     // mana starts at 0 each battle
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct CharStats {
     pub max_hp: IntegralStat,
     pub max_energy: IntegralStat,
@@ -111,7 +119,7 @@ pub struct CharStats {
     pub max_mana: Option<IntegralStat>,
 }
 
-#[derive(Debug, PartialEq, Eq, Hash, Clone)]
+#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Clone)]
 pub enum StatusConditions {
     Sleeping,    // Can't move, but recover 20% energy on wakeup
     Paralysis,   // ^^^ No movement, no energy recovery, but still has PK. Almost no combos

@@ -3,10 +3,7 @@ use crate::prelude::*;
 /// CharMap with all characters having the same exact stats
 pub fn uniform_charmap() -> CharMap {
     PChar::ALL.iter().fold(CharMap::new(), |mut map, chname| {
-        map.insert(
-            chname.to_string(),
-            Rc::new(RefCell::new(CharData::default())),
-        );
+        map.insert(chname.to_string(), RefCell::new(CharData::default()));
         map
     })
 }
@@ -23,6 +20,7 @@ pub fn uniform_statcalcmap() -> CharStatCalcs {
 
 /// "Jat Chippity goes hard"
 /// Makes it easier to write custom base stats and stuff
+/// Registry of characters with unique stat calculation functions
 macro_rules! ch_unique_registry {
     ($map:expr, $calcs:expr, $($character:ident {
         $($field:ident $(.$property:ident)? = $value:expr,)*

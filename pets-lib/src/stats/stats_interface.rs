@@ -70,7 +70,7 @@ impl StatsInterface {
     }
 
     // #[func]
-    pub fn get_character(&self, ch: &str) -> Rc<RefCell<CharData>> {
+    pub fn get_character(&self, ch: &str) -> RefCell<CharData> {
         self.save
             .chars
             .get(ch)
@@ -88,7 +88,7 @@ impl StatsInterface {
 }
 
 #[godot_api]
-impl ObjectVirtual for StatsInterface {
+impl IObject for StatsInterface {
     fn init(node: Base<Object>) -> Self {
         // start an empty save file, but load other if the player
         // picks a save file instead of "new"

@@ -9,6 +9,7 @@
 
 // TODO remove this soon
 #![allow(dead_code)]
+#![allow(unused_imports)]
 #![feature(variant_count)]
 
 use godot::engine::Engine;
@@ -27,25 +28,18 @@ mod stats;
 mod world;
 
 mod prelude {
-    pub use crate::macros::*;
-
-    // maybe make a data structures module if i end up making more?
-    pub use crate::limiq::*;
-
-    // item stuff, probably useful everywhere
     pub use crate::items::*;
-
-    pub use crate::world::interaction::manager::InteractionManager;
-
-    // stats stuff
-    pub use crate::stats::pchars::PChar;
-    pub use crate::stats::savefiles::SaveFile;
-    pub use crate::stats::statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
-    pub use crate::stats::stats_interface::StatsInterface;
+    pub use crate::limiq::*;
+    pub use crate::macros::*;
     pub use crate::stats::*;
+
+    pub use crate::dialogue::ix_list;
+    pub use crate::world::interaction::manager::InteractionManager;
 
     // is this bad practice? no clue and idc honestly
     // it's convenient with no real caveat, therefore...
+    pub use anyhow::{bail, Result};
+    pub use serde::{Deserialize, Serialize};
     pub use std::cell::RefCell;
     pub use std::collections::{HashMap, HashSet};
     pub use std::fmt::{Debug, Display};
@@ -61,10 +55,10 @@ unsafe impl ExtensionLibrary for PetsLib {
         if level == InitLevel::Scene {
             let mut engine = Engine::singleton();
 
-            let gd: Gd<StatsInterface> = Gd::new_default();
+            let gd = StatsInterface::alloc_gd();
             engine.register_singleton("Stats".into(), gd.upcast());
 
-            let gd: Gd<DBoxInterface> = Gd::new_default();
+            let gd = DBoxInterface::alloc_gd();
             engine.register_singleton("DBox".into(), gd.upcast());
         }
     }

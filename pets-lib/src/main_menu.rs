@@ -7,7 +7,7 @@
 //!
 
 use godot::engine::tween::TransitionType;
-use godot::engine::{Control, Node2D, Node2DVirtual, RichTextLabel, Theme};
+use godot::engine::{Control, INode2D, Node2D, RichTextLabel, Theme};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -150,7 +150,7 @@ impl TitleScreen {
 }
 
 #[godot_api]
-impl Node2DVirtual for TitleScreen {
+impl INode2D for TitleScreen {
     fn init(node: Base<Node2D>) -> Self {
         Self {
             node,

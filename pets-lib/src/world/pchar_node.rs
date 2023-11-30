@@ -43,7 +43,7 @@ macro_rules! load_pchar_scene_under {
 }
 
 #[godot_api]
-impl Node2DVirtual for PCharNode {
+impl INode2D for PCharNode {
     fn init(node: Base<Node2D>) -> Self {
         Self {
             node,

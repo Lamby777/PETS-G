@@ -5,35 +5,31 @@
 pub mod autoload;
 pub mod dbox;
 
-/// Possible outcomes of picking a dialogue option.
-///
-/// "Yeah, this new name's WAY less confusing... right?"
-/// - Devon, 2037
-pub enum DialogueAction {
-    /// Leads to another node
-    /// (simple `A -> (B|C)` dialogue)
-    NextNode(DialogueNode),
+use dialogical::InteractionMap;
+use indoc::indoc;
 
-    /// Leads to running a function pointer
-    /// (fancy stuff like shops)
-    Action(fn()),
+use std::sync::OnceLock;
 
-    /// End the tree with this option and (usually)
-    /// return control to the user ("goodbye")
-    End,
+static INTERACTIONS: OnceLock<InteractionMap> = OnceLock::new();
+
+macro_rules! packed_dialogue {
+    () => {
+        dialogical::deserialize(include_bytes!(concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/dg/packed.dgc"
+        )))
+    };
 }
 
-pub struct DialogueChoice {
-    label: String,
-    available: bool,
-    leads_to: DialogueAction,
-}
-
-pub struct DialogueNode {
-    // TODO replace with &'a str
-    speaker: String,
-    vox: String,
-
-    text: String,
-    options: Vec<DialogueChoice>,
+/// Load every interaction in the game from `packed.dgc`
+pub fn ix_list() -> &'static InteractionMap {
+    INTERACTIONS.get_or_init(|| {
+        packed_dialogue!().expect(indoc! {"
+            Failed to load dialogues. If you are a player,
+            please report this to the developers. If you're
+            a contributor, make sure the build script has
+            ran properly or manually compile the interaction
+            list yourself.
+        "})
+    })
 }

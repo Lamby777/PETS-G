@@ -3,10 +3,10 @@
 //!
 
 use godot::engine::tween::TransitionType;
-use godot::engine::{PanelContainer, PanelContainerVirtual, RichTextLabel};
+use godot::engine::{IPanelContainer, PanelContainer, RichTextLabel};
 use godot::prelude::*;
 
-const DBOX_TWEEN_TIME: f64 = 1.0;
+const DBOX_TWEEN_TIME: f64 = 0.5;
 const DBOX_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
 
 #[derive(GodotClass)]
@@ -14,33 +14,33 @@ const DBOX_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
 pub struct DialogBox {
     #[base]
     node: Base<PanelContainer>,
-    speaker: GodotString,
-    content: GodotString,
+    spk_txt: GString,
+    msg_txt: GString,
 }
 
 #[godot_api]
 impl DialogBox {
     /// Get the speaker name label
     fn spk_txt(&self) -> Gd<RichTextLabel> {
-        self.node.get_node_as::<RichTextLabel>("VSplit/SpeakerName")
+        self.node.get_node_as("VSplit/SpeakerName")
     }
 
     /// Get the message text label
     fn msg_txt(&self) -> Gd<RichTextLabel> {
-        self.node.get_node_as::<RichTextLabel>("VSplit/Content")
+        self.node.get_node_as("VSplit/Content")
     }
 
     #[func]
-    pub fn set_txts(&mut self, speaker: GodotString, content: GodotString) {
-        self.speaker = speaker;
-        self.content = content;
+    pub fn set_txts(&mut self, speaker: GString, content: GString) {
+        self.spk_txt = speaker;
+        self.msg_txt = content;
     }
 
     #[func]
     pub fn do_draw(&mut self) {
         // I THINK this clone is fine, probably RC'd
-        self.spk_txt().set_text(self.speaker.clone());
-        self.msg_txt().set_text(self.content.clone());
+        self.spk_txt().set_text(self.spk_txt.clone());
+        self.msg_txt().set_text(self.msg_txt.clone());
     }
 
     #[func]
@@ -80,12 +80,12 @@ impl DialogBox {
 }
 
 #[godot_api]
-impl PanelContainerVirtual for DialogBox {
+impl IPanelContainer for DialogBox {
     fn init(node: Base<PanelContainer>) -> Self {
         Self {
             node,
-            speaker: "Cherry".into(),
-            content: "[wave amp=50 freq=6]Hello, World![/wave]".into(),
+            spk_txt: "Cherry".into(),
+            msg_txt: "[wave amp=50 freq=6]Hello, World![/wave]".into(),
         }
     }
 

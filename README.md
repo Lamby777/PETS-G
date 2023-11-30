@@ -10,6 +10,7 @@ control of your own hardware overly complicated... and is also open-source! <3
 
 - [Soundtrack](https://www.youtube.com/playlist?list=PLxLRTqK8yZMO14zFG12650hGkPOZYV_2p)
 - [Promo page](https://sparklet.org/pets)
+- [Dialogue Toolkit](https://github.com/Lamby777/dialogical)
 - [Discord server](https://discord.gg/xEWa6Kwcad)
 
 ---
@@ -31,6 +32,26 @@ This game is... well, obviously... free and open-source software! Yay! 🎉
 Many of my favorite games are either entirely free (no microtransactions) OR
 open-source / respect your digital freedoms. Be the change you wish to see in
 the world, right?
+
+---
+
+## Setting Up
+
+First, make sure you're using the `nightly` channel for Rust. It **WILL NOT
+COMPILE ON STABLE** due to use of experimental Rust features!
+
+Then, go download the correct version of Godot Engine... with whatever method is
+best for your environment. Add it to your `PATH` as well if you want the "quick
+launch" scripts mentioned below to work.
+
+Then, install `dg`, a crate written for managing and compiling dialogue /
+interaction files for this game.
+
+```
+cargo install dialogical
+```
+
+... and you should be ready to go!
 
 ---
 
