@@ -41,7 +41,13 @@ impl DBoxInterface {
         });
 
         let mut dbox = self.instantiate_dbox();
-        dbox.bind_mut().set_ix(ix.clone());
+
+        {
+            let mut dbox = dbox.bind_mut();
+            dbox.set_ix(ix.clone());
+            dbox.do_draw();
+            dbox.pop_up()
+        }
     }
 
     #[func]
