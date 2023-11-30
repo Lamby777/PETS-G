@@ -40,6 +40,38 @@ impl DBoxInterface {
     }
 
     #[func]
+    pub fn start_ix(&self, ix_id: String) {
+        use dialogical::Metaline::*;
+        use dialogical::Speaker::*;
+
+        let ix = ix_map().get(&ix_id).unwrap_or_else(|| {
+            panic!(
+                "Could not find interaction \"{}\" in the interaction map",
+                ix_id
+            )
+        });
+
+        let page = ix.pages.get(0).unwrap();
+        let spk = page.metadata.speaker.clone();
+
+        let spk = match spk {
+            PageOnly(v) | Permanent(v) => v,
+            NoChange => todo!(),
+        };
+
+        let spk = match spk {
+            Named(v) => v,
+            Narrator => "".to_string(),
+            Unknown => "???".to_string(),
+        };
+
+        // TODO multi-page stuff, don't just pop up twice
+        let msg = page.content.clone();
+        self.show_dialog(spk.into(), msg.into());
+        // show_dialog!(spk, "{}", page.content.clone());
+    }
+
+    #[func]
     pub fn show_dialog(&self, spk: GString, msg: GString) {
         let mut dbox_gd = self.dbox_scene.instantiate_as::<DialogBox>();
 

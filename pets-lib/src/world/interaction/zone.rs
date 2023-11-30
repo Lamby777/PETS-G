@@ -23,26 +23,10 @@ pub struct InteractionZone {
 impl InteractionZone {
     #[func]
     pub fn interact(&self) {
-        use dialogical::Metaline::*;
-        use dialogical::Speaker::*;
+        let di = DBoxInterface::singleton();
+        di.bind().start_ix("Rodrick Sign #1".to_string());
 
-        let ix_list = ix_list();
-        let ix = ix_list.get("Rodrick Sign #1").unwrap();
-        let page = ix.pages.get(0).unwrap();
-        let spk = page.metadata.speaker.clone();
-
-        let spk = match spk {
-            PageOnly(v) | Permanent(v) => v,
-            NoChange => unreachable!(),
-        };
-
-        let spk = match spk {
-            Named(v) => v,
-            Narrator => "".to_string(),
-            Unknown => "".to_string(),
-        };
-
-        show_dialog!(spk, "{}", page.content.clone());
+        // show_dialog!()
     }
 
     #[func]

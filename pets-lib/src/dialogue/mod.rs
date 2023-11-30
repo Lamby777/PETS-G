@@ -22,7 +22,7 @@ macro_rules! packed_dialogue {
 }
 
 /// Load every interaction in the game from `packed.dgc`
-pub fn ix_list() -> &'static InteractionMap {
+pub fn ix_map() -> &'static InteractionMap {
     INTERACTIONS.get_or_init(|| {
         packed_dialogue!().expect(indoc! {"
             Failed to load dialogues. If you are a player,
