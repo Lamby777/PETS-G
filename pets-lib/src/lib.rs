@@ -18,9 +18,8 @@ use godot::prelude::*;
 use dialogue::autoload::DBoxInterface;
 use stats::stats_interface::StatsInterface;
 
-pub(crate) mod consts;
-
 mod battle;
+mod consts;
 mod dialogue;
 mod items;
 mod limiq;

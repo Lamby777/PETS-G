@@ -1,17 +1,10 @@
 use godot::engine::{CharacterBody2D, ICharacterBody2D};
 use godot::prelude::*;
 
+use crate::consts::playercb::*;
 use crate::{load_pchar_scene_under, prelude::*};
 
 use super::pchar_node::PCharNode;
-
-// Movement physics stuff
-const ACCELERATION: f64 = 3000.0;
-const FRICTION: f64 = 2500.0;
-const MAX_SPEED: f64 = 320.0;
-
-// Distance between party members
-const PERSONAL_SPACE: u16 = 15;
 
 /// This scene contains the "player" aka the invisible
 /// entity that is moved around with WASD. It also contains

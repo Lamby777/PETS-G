@@ -10,14 +10,11 @@ use godot::engine::tween::TransitionType;
 use godot::engine::{Control, INode2D, Node2D, RichTextLabel, Theme};
 use godot::prelude::*;
 
+use crate::consts::main_menu::*;
 use crate::prelude::*;
 
 use num_derive::FromPrimitive;
 use num_traits::FromPrimitive;
-
-const MENU_TWEEN_TIME: f64 = 0.1;
-const MENU_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
-const MENU_WAVE_BBCODE: &str = "[wave amp=100 freq=-6]";
 
 #[derive(Debug, FromPrimitive)]
 enum MainMenuChoice {
