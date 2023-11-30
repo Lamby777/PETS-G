@@ -18,6 +18,7 @@ pub mod dialogue {
 
     pub const NARRATOR_DISPLAYNAME: &str = "";
     pub const UNKNOWN_DISPLAYNAME: &str = "???";
+    pub const DEFAULT_VOX: &str = "_";
 
     pub const DBOX_TWEEN_TIME: f64 = 0.5;
     pub const DBOX_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
