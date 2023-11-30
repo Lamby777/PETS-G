@@ -13,8 +13,11 @@ pub mod playercb {
     pub const PERSONAL_SPACE: u16 = 15;
 }
 
-pub mod dbox {
+pub mod dialogue {
     use godot::engine::tween::TransitionType;
+
+    pub const NARRATOR_DISPLAYNAME: &str = "";
+    pub const UNKNOWN_DISPLAYNAME: &str = "???";
 
     pub const DBOX_TWEEN_TIME: f64 = 0.5;
     pub const DBOX_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;

@@ -7,6 +7,7 @@ use godot::engine::Engine;
 use godot::prelude::*;
 
 use super::dbox::DialogBox;
+use crate::consts::dialogue::*;
 use crate::prelude::*;
 
 /// Autoload class for easy management of dialog boxes
@@ -55,8 +56,8 @@ impl DBoxInterface {
 
         let spk = match spk {
             Named(v) => v,
-            Narrator => "".to_string(),
-            Unknown => "???".to_string(),
+            Narrator => NARRATOR_DISPLAYNAME.to_string(),
+            Unknown => UNKNOWN_DISPLAYNAME.to_string(),
         };
 
         // TODO multi-page stuff, don't just pop up twice
