@@ -23,10 +23,8 @@ pub struct InteractionZone {
 impl InteractionZone {
     #[func]
     pub fn interact(&self) {
-        let di = DBoxInterface::singleton();
-        di.bind().start_ix("Rodrick Sign #1".to_string());
-
-        // show_dialog!()
+        let mut di = DBoxInterface::singleton();
+        di.bind_mut().start_ix("Rodrick Sign #1".to_string());
     }
 
     #[func]

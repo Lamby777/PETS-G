@@ -35,7 +35,7 @@ impl DBoxInterface {
     }
 
     #[func]
-    pub fn start_ix(&self, ix_id: String) {
+    pub fn start_ix(&mut self, ix_id: String) {
         use dialogical::Metaline::*;
         use dialogical::Speaker::*;
 
@@ -48,19 +48,25 @@ impl DBoxInterface {
 
         let page = ix.pages.get(0).unwrap();
         let spk = page.metadata.speaker.clone();
+        // let vox = page.metadata.vox.clone();
 
+        // TODO so many clones lol
+        // prob move this to another get/set 2-in-1 function too
         let spk = match spk {
-            PageOnly(v) | Permanent(v) => v,
-            NoChange => todo!(),
+            PageOnly(v) => v,
+            Permanent(v) => {
+                self.current_speaker = v.clone();
+                v
+            }
+            NoChange => self.current_speaker.clone(),
         };
 
         let spk = match spk {
-            Named(v) => v,
-            Narrator => NARRATOR_DISPLAYNAME.to_string(),
-            Unknown => UNKNOWN_DISPLAYNAME.to_string(),
+            Named(ref v) => v,
+            Narrator => NARRATOR_DISPLAYNAME,
+            Unknown => UNKNOWN_DISPLAYNAME,
         };
 
-        // TODO multi-page stuff, don't just pop up twice
         let msg = page.content.clone();
         self.show_dialog(spk.into(), msg.into());
     }
