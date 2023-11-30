@@ -2,7 +2,9 @@
 //! Singleton for accessing player stats in GDScript.
 //!
 
-use dialogical::{Interaction, Speaker};
+use dialogical::Metaline::*;
+use dialogical::Speaker::{self, *};
+use dialogical::{Interaction, Page};
 use godot::engine::Engine;
 use godot::prelude::*;
 
@@ -19,9 +21,11 @@ pub struct DBoxInterface {
     dbox_scene: Gd<PackedScene>,
 
     // state for the current interaction
+    // TODO combine speaker and vox into a `PageMeta`
     current_ix: Option<Interaction>,
     current_page_number: usize,
     current_speaker: Speaker,
+    current_vox: String,
 }
 
 #[godot_api]
@@ -34,25 +38,9 @@ impl DBoxInterface {
             .cast()
     }
 
-    #[func]
-    pub fn start_ix(&mut self, ix_id: String) {
-        use dialogical::Metaline::*;
-        use dialogical::Speaker::*;
-
-        let ix = ix_map().get(&ix_id).unwrap_or_else(|| {
-            panic!(
-                "Could not find interaction \"{}\" in the interaction map",
-                ix_id
-            )
-        });
-
-        let page = ix.pages.get(0).unwrap();
-        let spk = page.metadata.speaker.clone();
-        // let vox = page.metadata.vox.clone();
-
-        // TODO so many clones lol
-        // prob move this to another get/set 2-in-1 function too
-        let spk = match spk {
+    /// Takes a NAME metaline and updates the speaker accordingly
+    pub fn update_spk(&mut self, page: &Page) -> String {
+        let spk = match page.metadata.speaker.clone() {
             PageOnly(v) => v,
             Permanent(v) => {
                 self.current_speaker = v.clone();
@@ -61,11 +49,37 @@ impl DBoxInterface {
             NoChange => self.current_speaker.clone(),
         };
 
-        let spk = match spk {
+        match spk {
             Named(ref v) => v,
             Narrator => NARRATOR_DISPLAYNAME,
             Unknown => UNKNOWN_DISPLAYNAME,
-        };
+        }
+        .to_owned()
+    }
+
+    /// Takes a VOX metaline and updates the vox accordingly
+    pub fn update_vox(&mut self, page: &Page) -> String {
+        match page.metadata.vox.clone() {
+            PageOnly(v) => v,
+            Permanent(v) => {
+                self.current_vox = v.clone();
+                v
+            }
+            NoChange => self.current_vox.clone(),
+        }
+    }
+
+    #[func]
+    pub fn start_ix(&mut self, ix_id: String) {
+        let ix = ix_map().get(&ix_id).unwrap_or_else(|| {
+            panic!(
+                "Could not find interaction \"{}\" in the interaction map",
+                ix_id
+            )
+        });
+
+        let page = ix.pages.get(0).unwrap();
+        let spk = self.update_spk(page);
 
         let msg = page.content.clone();
         self.show_dialog(spk.into(), msg.into());
@@ -101,6 +115,7 @@ impl INode2D for DBoxInterface {
             current_ix: None,
             current_page_number: 0,
             current_speaker: Speaker::Narrator,
+            current_vox: DEFAULT_VOX.to_owned(),
         }
     }
 }
