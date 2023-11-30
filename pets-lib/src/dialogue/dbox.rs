@@ -30,20 +30,6 @@ pub struct DialogBox {
 
 #[godot_api]
 impl DialogBox {
-    /// init for the purposes of reading out an interaction
-    pub fn new_for_ix(ix: Interaction) -> Gd<Self> {
-        Gd::from_init_fn(|node| Self {
-            node,
-            spk_txt: "Cherry".into(),
-            msg_txt: "[wave amp=50 freq=6]Hello, World![/wave]".into(),
-
-            current_ix: Some(ix),
-            current_page_number: 0,
-            current_speaker: Speaker::Narrator,
-            current_vox: DEFAULT_VOX.to_owned(),
-        })
-    }
-
     /// Get the speaker name label
     fn spk_txt(&self) -> Gd<RichTextLabel> {
         self.node.get_node_as("VSplit/SpeakerName")
@@ -59,6 +45,10 @@ impl DialogBox {
     pub fn set_txts(&mut self, speaker: String, content: String) {
         self.spk_txt = speaker.into();
         self.msg_txt = content.into();
+    }
+
+    pub fn set_ix(&mut self, ix: Interaction) {
+        self.current_ix = Some(ix);
     }
 
     /// Takes a NAME metaline and updates the speaker accordingly
