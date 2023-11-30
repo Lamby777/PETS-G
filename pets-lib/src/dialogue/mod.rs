@@ -5,12 +5,12 @@
 pub mod autoload;
 pub mod dbox;
 
-use dialogical::prelude::*;
+use dialogical::InteractionMap;
 use indoc::indoc;
 
 use std::sync::OnceLock;
 
-static INTERACTIONS: OnceLock<Vec<Interaction>> = OnceLock::new();
+static INTERACTIONS: OnceLock<InteractionMap> = OnceLock::new();
 
 macro_rules! packed_dialogue {
     () => {
@@ -21,8 +21,8 @@ macro_rules! packed_dialogue {
     };
 }
 
-// load dialogues
-pub fn interactions() {
+/// Load every interaction in the game from `packed.dgc`
+pub fn ix_list() -> &'static InteractionMap {
     INTERACTIONS.get_or_init(|| {
         packed_dialogue!().expect(indoc! {"
             Failed to load dialogues. If you are a player,
@@ -31,5 +31,5 @@ pub fn interactions() {
             ran properly or manually compile the interaction
             list yourself.
         "})
-    });
+    })
 }

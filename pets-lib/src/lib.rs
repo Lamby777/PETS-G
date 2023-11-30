@@ -33,6 +33,7 @@ mod prelude {
     pub use crate::macros::*;
     pub use crate::stats::*;
 
+    pub use crate::dialogue::ix_list;
     pub use crate::world::interaction::manager::InteractionManager;
 
     // is this bad practice? no clue and idc honestly
