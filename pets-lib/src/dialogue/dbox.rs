@@ -30,9 +30,9 @@ impl DialogBox {
     }
 
     #[func]
-    pub fn set_txts(&mut self, speaker: GString, content: GString) {
-        self.spk_txt = speaker;
-        self.msg_txt = content;
+    pub fn set_txts(&mut self, speaker: String, content: String) {
+        self.spk_txt = speaker.into();
+        self.msg_txt = content.into();
     }
 
     #[func]
