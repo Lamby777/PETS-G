@@ -46,7 +46,7 @@ impl DBoxInterface {
             let mut dbox = dbox.bind_mut();
             dbox.set_ix(ix.clone());
             dbox.do_draw();
-            dbox.pop_up()
+            dbox.tween_into_view(true)
         }
     }
 
@@ -59,7 +59,7 @@ impl DBoxInterface {
             let mut dbox = dbox.bind_mut();
             dbox.set_txts(spk, msg);
             dbox.do_draw();
-            dbox.pop_up()
+            dbox.tween_into_view(true)
         }
     }
 

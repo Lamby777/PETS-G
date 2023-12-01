@@ -116,17 +116,7 @@ impl DialogBox {
         self.msg_txt().set_text(self.msg_txt.clone());
     }
 
-    #[func]
-    pub fn pop_up(&mut self) {
-        self.tween_into_view(true);
-    }
-
-    #[func]
-    pub fn pop_down(&mut self) {
-        self.tween_into_view(false);
-    }
-
-    fn tween_into_view(&mut self, up: bool) {
+    pub fn tween_into_view(&mut self, up: bool) {
         let node = &mut self.node;
         let viewport_y = node.get_viewport_rect().size.y;
         let visible_y = viewport_y - node.get_size().y;
