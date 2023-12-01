@@ -72,27 +72,31 @@ impl TitleScreen {
             theme.get_color("default_color".into(), "RichTextLabel".into())
         };
 
-        let mut x_tween = node.create_tween().unwrap();
-        x_tween
-            .tween_property(
-                node.clone().upcast(),
-                "position:x".into(),
-                Variant::from(target_x),
-                MENU_TWEEN_TIME,
-            )
-            .unwrap()
-            .set_trans(MENU_TWEEN_TRANS);
+        // Tweens
+        let tweens: Option<()> = try {
+            // tween x
+            node.create_tween()?
+                .tween_property(
+                    node.clone().upcast(),
+                    "position:x".into(),
+                    Variant::from(target_x),
+                    MENU_TWEEN_TIME,
+                )?
+                .set_trans(MENU_TWEEN_TRANS);
 
-        let mut color_tween = node.create_tween().unwrap();
-        color_tween
-            .tween_property(
-                node.clone().upcast(),
-                "theme_override_colors/default_color".into(),
-                Variant::from(target_col),
-                MENU_TWEEN_TIME,
-            )
-            .unwrap()
-            .set_trans(MENU_TWEEN_TRANS);
+            // tween color
+            node.create_tween()?
+                .tween_property(
+                    node.clone().upcast(),
+                    "theme_override_colors/default_color".into(),
+                    Variant::from(target_col),
+                    MENU_TWEEN_TIME,
+                )?
+                .set_trans(MENU_TWEEN_TRANS);
+        };
+
+        // panic if null
+        tweens.unwrap();
 
         // set bbcode
         // extremely ugly and hacky solution, but...

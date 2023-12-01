@@ -10,6 +10,7 @@
 #![allow(dead_code)]
 #![allow(unused_imports)]
 #![feature(variant_count)]
+#![feature(try_blocks)]
 
 use godot::engine::Engine;
 use godot::prelude::*;
