@@ -3,7 +3,7 @@
 //! Shows the input prompt and handles the action if pressed.
 //!
 
-use godot::engine::{INode2D, Node2D, RichTextLabel};
+use godot::engine::{INode2D, InputEvent, Node2D, RichTextLabel};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -54,7 +54,8 @@ impl InteractionManager {
         current_scene!().get_node_as("%InteractionManager")
     }
 
-    pub fn sort_zones(&mut self) {
+    /// Sorts the zones by distance from the player
+    pub fn sort_zones_by_distance(&mut self) {
         let mut tree = self.node.get_tree().unwrap();
         let pcb = tree.get_first_node_in_group("playercb".into()).unwrap();
         let pcb = pcb.cast::<PlayerCB>();
@@ -67,6 +68,14 @@ impl InteractionManager {
             let b = b.distance_squared_to(pcb_pos);
             a.partial_cmp(&b).unwrap()
         });
+    }
+
+    /// Get the closest zone to the player
+    /// Assumes the zones are already sorted
+    ///
+    /// Panics if there are no zones
+    pub fn closest_zone(&mut self) -> Gd<InteractionZone> {
+        self.zones[0].clone()
     }
 }
 
@@ -91,15 +100,15 @@ impl INode2D for InteractionManager {
             return;
         }
 
-        self.sort_zones();
-        let mut zone = self.zones[0].clone();
+        self.sort_zones_by_distance();
+        let zone = self.closest_zone();
         self.prompt_txt()
             .set_position(zone.get_position() + Vector2::new(0.0, -50.0));
+    }
 
-        let input = Input::singleton();
-        if input.is_action_just_pressed("ui_accept".into()) {
-            let zone = zone.bind_mut();
-            zone.interact();
+    fn input(&mut self, event: Gd<InputEvent>) {
+        if event.is_action_pressed("ui_accept".into()) {
+            self.closest_zone().bind().interact();
         }
     }
 }

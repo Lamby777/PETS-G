@@ -16,7 +16,7 @@ use crate::consts::dialogue::*;
 ///
 /// Either the name of the speaker or a special name
 /// if it's a narrator or unknown speaker
-pub fn spk_display(spk: Speaker) -> String {
+pub fn spk_display(spk: &Speaker) -> String {
     match spk {
         Named(ref v) => v,
         Narrator => NARRATOR_DISPLAYNAME,
@@ -61,6 +61,9 @@ impl DialogBox {
     }
 
     /// Sets the speaker and message text from strings
+    ///
+    /// DON'T USE THIS FOR INTERACTIONS!!
+    /// That's what `goto_page` is for.
     #[func]
     pub fn set_txts(&mut self, speaker: String, content: String) {
         self.spk_txt = speaker.into();
@@ -72,15 +75,15 @@ impl DialogBox {
         self.goto_page(0);
     }
 
+    /// basically set_txts but for an interaction page
     pub fn goto_page(&mut self, pageno: usize) {
         let ix = self.current_ix.as_ref().unwrap().clone();
         let page = ix.pages.get(pageno).unwrap();
 
         self.update_meta(&page.metadata);
         let msg = page.content.clone();
-
-        // TODO
-        // self.set_txts(spk, msg);
+        let spk = spk_display(&self.current_speaker);
+        self.set_txts(spk, msg);
     }
 
     /// Takes a NAME metaline and updates the speaker accordingly
