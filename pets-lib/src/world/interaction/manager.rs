@@ -105,7 +105,7 @@ impl INode2D for InteractionManager {
         }
     }
 
-    fn input(&mut self, event: Gd<InputEvent>) {
+    fn unhandled_input(&mut self, event: Gd<InputEvent>) {
         if event.is_action_pressed("ui_accept".into()) {
             let di = DBoxInterface::singleton();
             if di.bind().scene_has_active_dbox() {

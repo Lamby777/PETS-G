@@ -83,6 +83,19 @@ impl DialogBox {
         self.node.get_node_as("VSplit/Content")
     }
 
+    // TODO remove this when upgrading to godot 4.2
+    #[func]
+    pub fn set_active(&mut self) {
+        println!("set active");
+        self.active = true;
+    }
+
+    #[func]
+    pub fn set_inactive(&mut self) {
+        println!("set inactive");
+        self.active = false;
+    }
+
     /// Sets the speaker and message text from strings
     ///
     /// DON'T USE THIS FOR INTERACTIONS!!
@@ -169,9 +182,6 @@ impl DialogBox {
             .set_trans(DBOX_TWEEN_TRANS)
             .unwrap();
 
-        godot_print!("tweening: {}", up);
-
-        self.active = up;
         self.tween = Some(y_tween.clone());
         y_tween
     }
@@ -209,11 +219,13 @@ impl IPanelContainer for DialogBox {
             self.current_page_number += 1;
 
             if self.current_page_number >= ix.pages.len() {
-                self.tween_into_view(false);
+                self.tween_into_view(false)
+                    .connect("finished".into(), self.node.callable("set_inactive"));
+                self.current_page_number = 0;
+
                 return;
             }
 
-            godot_print!("going to page {}", self.current_page_number);
             self.goto_page(self.current_page_number);
             self.do_draw();
         }
