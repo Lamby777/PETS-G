@@ -51,12 +51,18 @@ impl DBoxInterface {
     }
 
     #[func]
+    pub fn scene_has_active_dbox(&self) -> bool {
+        let ui_layer = current_scene!().get_node(UI_LAYER_NAME.into()).unwrap();
+        ui_layer.has_node(DBOX_NODE_NAME.into())
+    }
+
+    #[func]
     pub fn instantiate_dbox(&self) -> Gd<DialogBox> {
         let mut dbox = self.dbox_scene.instantiate_as::<DialogBox>();
         dbox.set_name(DBOX_NODE_NAME.into());
 
         let mut ui_layer = current_scene!()
-            .get_node("UILayer".into())
+            .get_node(UI_LAYER_NAME.into())
             .expect("scene should have a UILayer");
 
         // check if a box already exists
