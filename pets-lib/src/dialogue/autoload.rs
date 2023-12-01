@@ -51,19 +51,6 @@ impl DBoxInterface {
     }
 
     #[func]
-    pub fn show_dialog(&self, spk: String, _vox: String, msg: String) {
-        let mut dbox = self.instantiate_dbox();
-
-        // simple stuff like this is why I love this language
-        {
-            let mut dbox = dbox.bind_mut();
-            dbox.set_txts(spk, msg);
-            dbox.do_draw();
-            dbox.tween_into_view(true)
-        }
-    }
-
-    #[func]
     pub fn instantiate_dbox(&self) -> Gd<DialogBox> {
         let mut dbox = self.dbox_scene.instantiate_as::<DialogBox>();
         dbox.set_name(DBOX_NODE_NAME.into());
