@@ -7,10 +7,11 @@ use dialogical::{Interaction, Page};
 use dialogical::{Metaline, Metaline::*, PageMeta};
 
 use godot::engine::tween::TransitionType;
-use godot::engine::{IPanelContainer, PanelContainer, RichTextLabel};
+use godot::engine::{IPanelContainer, InputEvent, PanelContainer, RichTextLabel};
 use godot::prelude::*;
 
 use crate::consts::dialogue::*;
+use crate::prelude::DBoxInterface;
 
 /// Turn a Speaker into a displayable name
 ///
@@ -154,6 +155,9 @@ impl DialogBox {
             .from(Variant::from(tw_start))
             .unwrap()
             .set_trans(DBOX_TWEEN_TRANS);
+
+        // TODO use `Callable::from_fn` in godot 4.2
+        // y_tween.connect("finished".into(), || {});
     }
 }
 
@@ -174,5 +178,28 @@ impl IPanelContainer for DialogBox {
 
     fn ready(&mut self) {
         self.do_draw();
+    }
+
+    fn input(&mut self, event: Gd<InputEvent>) {
+        if event.is_action_pressed("ui_accept".into()) {
+            let di = DBoxInterface::singleton();
+            if !di.bind().scene_has_active_dbox() {
+                return;
+            }
+
+            // go to next page
+            let ix = self.current_ix.as_ref().unwrap();
+            self.current_page_number += 1;
+
+            if self.current_page_number >= ix.pages.len() {
+                self.tween_into_view(false);
+                self.current_ix = None;
+                return;
+            }
+
+            godot_print!("going to page {}", self.current_page_number);
+            self.goto_page(self.current_page_number);
+            self.do_draw();
+        }
     }
 }

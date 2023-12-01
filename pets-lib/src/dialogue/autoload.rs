@@ -41,7 +41,6 @@ impl DBoxInterface {
         });
 
         let mut dbox = self.instantiate_dbox();
-
         {
             let mut dbox = dbox.bind_mut();
             dbox.set_ix(ix.clone());
