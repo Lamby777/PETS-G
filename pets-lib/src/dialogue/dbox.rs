@@ -25,6 +25,24 @@ pub fn spk_display(spk: &Speaker) -> String {
     .to_owned()
 }
 
+#[derive(Clone)]
+pub struct MetaPair<T> {
+    pub temporary: T,
+    pub permanent: T,
+}
+
+impl<T> MetaPair<T> {
+    pub fn clone(v: T) -> Self
+    where
+        T: Clone,
+    {
+        Self {
+            temporary: v.clone(),
+            permanent: v.clone(),
+        }
+    }
+}
+
 #[derive(GodotClass)]
 #[class(base=PanelContainer)]
 pub struct DialogBox {
@@ -34,10 +52,8 @@ pub struct DialogBox {
     // state for the current interaction
     current_ix: Option<Interaction>,
     current_page_number: usize,
-    current_speaker: Speaker,
-    current_vox: String,
-    permanent_speaker: Speaker,
-    permanent_vox: String,
+    speaker: MetaPair<Speaker>,
+    vox: MetaPair<String>,
 
     // independent from any interaction-related stuff,
     // these are the actual strings that are displayed
@@ -82,31 +98,30 @@ impl DialogBox {
 
         self.update_meta(&page.metadata);
         let msg = page.content.clone();
-        let spk = spk_display(&self.current_speaker);
+        let spk = spk_display(&self.speaker.temporary);
         self.set_txts(spk, msg);
     }
 
     /// Updates the speaker and vox based on the given page metadata
     pub fn update_meta(&mut self, meta: &PageMeta) {
-        // TODO maybe combine current/permanent into one tuple?
-        self.current_speaker = Self::match_meta(&mut self.permanent_speaker, &meta.speaker);
-        self.current_vox = Self::match_meta(&mut self.permanent_vox, &meta.vox);
+        Self::match_meta(&mut self.speaker, &meta.speaker);
+        Self::match_meta(&mut self.vox, &meta.vox);
     }
 
     /// helper method for `update_meta`
     ///
     /// matches over a `Metaline` to update a field depending on
     /// whether it's pageonly, permanent, or nochange
-    fn match_meta<'a, T: Clone>(field: &'a mut T, meta_field: &'a Metaline<T>) -> T {
-        match meta_field {
+    fn match_meta<'a, T: Clone>(field: &'a mut MetaPair<T>, meta_field: &'a Metaline<T>) {
+        field.temporary = match meta_field {
             PageOnly(ref v) => v,
             Permanent(ref v) => {
-                *field = v.clone();
+                field.permanent = v.clone();
                 v
             }
-            NoChange => field,
+            NoChange => &field.permanent,
         }
-        .clone()
+        .clone();
     }
 
     #[func]
@@ -152,10 +167,8 @@ impl IPanelContainer for DialogBox {
 
             current_ix: None,
             current_page_number: 0,
-            current_speaker: Speaker::Narrator,
-            current_vox: DEFAULT_VOX.to_owned(),
-            permanent_speaker: Speaker::Narrator,
-            permanent_vox: DEFAULT_VOX.to_owned(),
+            speaker: MetaPair::clone(Speaker::Narrator),
+            vox: MetaPair::clone(DEFAULT_VOX.to_owned()),
         }
     }
 
