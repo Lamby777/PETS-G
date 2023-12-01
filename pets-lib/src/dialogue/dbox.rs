@@ -12,6 +12,19 @@ use godot::prelude::*;
 
 use crate::consts::dialogue::*;
 
+/// Turn a Speaker into a displayable name
+///
+/// Either the name of the speaker or a special name
+/// if it's a narrator or unknown speaker
+pub fn spk_display(spk: Speaker) -> String {
+    match spk {
+        Named(ref v) => v,
+        Narrator => NARRATOR_DISPLAYNAME,
+        Unknown => UNKNOWN_DISPLAYNAME,
+    }
+    .to_owned()
+}
+
 #[derive(GodotClass)]
 #[class(base=PanelContainer)]
 pub struct DialogBox {
@@ -23,7 +36,14 @@ pub struct DialogBox {
     current_page_number: usize,
     current_speaker: Speaker,
     current_vox: String,
+    permanent_speaker: Speaker,
+    permanent_vox: String,
 
+    // independent from any interaction-related stuff,
+    // these are the actual strings that are displayed
+    //
+    // you can set these directly if you're doing something
+    // that's not part of an interaction
     spk_txt: GString,
     msg_txt: GString,
 }
@@ -55,45 +75,35 @@ impl DialogBox {
     pub fn goto_page(&mut self, pageno: usize) {
         let ix = self.current_ix.as_ref().unwrap().clone();
         let page = ix.pages.get(pageno).unwrap();
-        let meta = &page.metadata;
 
-        let spk = self.update_spk(meta);
-        let vox = self.update_vox(meta);
+        self.update_meta(&page.metadata);
         let msg = page.content.clone();
 
-        self.spk_txt = spk.into();
+        // TODO
+        // self.set_txts(spk, msg);
     }
 
     /// Takes a NAME metaline and updates the speaker accordingly
-    pub fn update_spk(&mut self, meta: &PageMeta) -> String {
-        let spk = match meta.speaker {
+    pub fn update_meta(&mut self, meta: &PageMeta) {
+        self.current_speaker = match meta.speaker {
             PageOnly(ref v) => v,
             Permanent(ref v) => {
-                self.current_speaker = v.clone();
+                self.permanent_speaker = v.clone();
                 v
             }
-            NoChange => &self.current_speaker,
-        };
-
-        match spk {
-            Named(ref v) => v,
-            Narrator => NARRATOR_DISPLAYNAME,
-            Unknown => UNKNOWN_DISPLAYNAME,
+            NoChange => &self.permanent_speaker,
         }
-        .to_owned()
-    }
+        .clone();
 
-    /// Takes a VOX metaline and updates the vox accordingly
-    pub fn update_vox(&mut self, meta: &PageMeta) -> String {
-        match meta.vox {
+        self.current_vox = match meta.vox {
             PageOnly(ref v) => v,
             Permanent(ref v) => {
-                self.current_vox = v.clone();
+                self.permanent_vox = v.clone();
                 v
             }
-            NoChange => &self.current_vox,
+            NoChange => &self.permanent_vox,
         }
-        .to_owned()
+        .to_owned();
     }
 
     #[func]
@@ -151,6 +161,8 @@ impl IPanelContainer for DialogBox {
             current_page_number: 0,
             current_speaker: Speaker::Narrator,
             current_vox: DEFAULT_VOX.to_owned(),
+            permanent_speaker: Speaker::Narrator,
+            permanent_vox: DEFAULT_VOX.to_owned(),
         }
     }
 
