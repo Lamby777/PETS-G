@@ -7,7 +7,7 @@ use dialogical::{Interaction, Page};
 use dialogical::{Metaline, Metaline::*, PageMeta};
 
 use godot::engine::tween::TransitionType;
-use godot::engine::{IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween};
+use godot::engine::{IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween, Viewport};
 use godot::prelude::*;
 
 use crate::consts::dialogue::*;
@@ -81,19 +81,6 @@ impl DialogBox {
     /// Get the message text label
     fn msg_txt(&self) -> Gd<RichTextLabel> {
         self.node.get_node_as("VSplit/Content")
-    }
-
-    // TODO remove this when upgrading to godot 4.2
-    #[func]
-    pub fn set_active(&mut self) {
-        println!("set active");
-        self.active = true;
-    }
-
-    #[func]
-    pub fn set_inactive(&mut self) {
-        println!("set inactive");
-        self.active = false;
     }
 
     /// Sets the speaker and message text from strings
@@ -182,6 +169,7 @@ impl DialogBox {
             .set_trans(DBOX_TWEEN_TRANS)
             .unwrap();
 
+        self.active = up;
         self.tween = Some(y_tween.clone());
         y_tween
     }
@@ -219,15 +207,15 @@ impl IPanelContainer for DialogBox {
             self.current_page_number += 1;
 
             if self.current_page_number >= ix.pages.len() {
-                self.tween_into_view(false)
-                    .connect("finished".into(), self.node.callable("set_inactive"));
+                self.tween_into_view(false);
                 self.current_page_number = 0;
-
-                return;
+            } else {
+                self.goto_page(self.current_page_number);
+                self.do_draw();
             }
 
-            self.goto_page(self.current_page_number);
-            self.do_draw();
+            // mark the input as handled
+            self.node.get_viewport().unwrap().set_input_as_handled();
         }
     }
 }
