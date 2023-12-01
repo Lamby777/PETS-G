@@ -66,8 +66,13 @@ impl DBoxInterface {
 
         // check if a box already exists
         if ui_layer.has_node(DBOX_NODE_NAME.into()) {
-            let node = ui_layer.get_node(DBOX_NODE_NAME.into()).unwrap();
-            ui_layer.remove_child(node);
+            let mut node = ui_layer
+                .get_node(DBOX_NODE_NAME.into())
+                .unwrap()
+                .cast::<DialogBox>();
+
+            node.bind_mut().cancel_tween();
+            ui_layer.remove_child(node.upcast());
         }
 
         ui_layer.add_child(dbox.clone().upcast());
