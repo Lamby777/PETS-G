@@ -55,6 +55,7 @@ pub struct DialogBox {
     current_page_number: usize,
     speaker: MetaPair<Speaker>,
     vox: MetaPair<String>,
+    tween: Option<Gd<Tween>>,
 
     // independent from any interaction-related stuff,
     // these are the actual strings that are displayed
@@ -132,6 +133,12 @@ impl DialogBox {
         self.msg_txt().set_text(self.msg_txt.clone());
     }
 
+    pub fn cancel_tween(&mut self) {
+        if let Some(tween) = &mut self.tween {
+            tween.stop()
+        }
+    }
+
     pub fn tween_into_view(&mut self, up: bool) -> Gd<Tween> {
         let node = &mut self.node;
         let viewport_y = node.get_viewport_rect().size.y;
@@ -157,6 +164,7 @@ impl DialogBox {
             .set_trans(DBOX_TWEEN_TRANS)
             .unwrap();
 
+        self.tween = Some(y_tween.clone());
         y_tween
     }
 }
@@ -169,6 +177,7 @@ impl IPanelContainer for DialogBox {
             spk_txt: "Cherry".into(),
             msg_txt: "[wave amp=50 freq=6]Hello, World![/wave]".into(),
 
+            tween: None,
             current_ix: None,
             current_page_number: 0,
             speaker: MetaPair::clone(Speaker::Narrator),
