@@ -7,7 +7,7 @@ use dialogical::{Interaction, Page};
 use dialogical::{Metaline, Metaline::*, PageMeta};
 
 use godot::engine::tween::TransitionType;
-use godot::engine::{IPanelContainer, InputEvent, PanelContainer, RichTextLabel};
+use godot::engine::{IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween};
 use godot::prelude::*;
 
 use crate::consts::dialogue::*;
@@ -132,7 +132,7 @@ impl DialogBox {
         self.msg_txt().set_text(self.msg_txt.clone());
     }
 
-    pub fn tween_into_view(&mut self, up: bool) {
+    pub fn tween_into_view(&mut self, up: bool) -> Gd<Tween> {
         let node = &mut self.node;
         let viewport_y = node.get_viewport_rect().size.y;
         let visible_y = viewport_y - node.get_size().y;
@@ -154,12 +154,10 @@ impl DialogBox {
             .unwrap()
             .from(Variant::from(tw_start))
             .unwrap()
-            .set_trans(DBOX_TWEEN_TRANS);
+            .set_trans(DBOX_TWEEN_TRANS)
+            .unwrap();
 
-        if !up {
-            let free = self.node.callable("queue_free");
-            y_tween.connect("finished".into(), free);
-        }
+        y_tween
     }
 }
 
@@ -194,8 +192,9 @@ impl IPanelContainer for DialogBox {
             self.current_page_number += 1;
 
             if self.current_page_number >= ix.pages.len() {
-                self.tween_into_view(false);
-                self.current_ix = None;
+                let free = self.node.callable("queue_free");
+                self.tween_into_view(false).connect("finished".into(), free);
+
                 return;
             }
 
