@@ -4,7 +4,7 @@
 
 use dialogical::Speaker::{self, *};
 use dialogical::{Interaction, Page};
-use dialogical::{Metaline::*, PageMeta};
+use dialogical::{Metaline, Metaline::*, PageMeta};
 
 use godot::engine::tween::TransitionType;
 use godot::engine::{IPanelContainer, PanelContainer, RichTextLabel};
@@ -86,27 +86,27 @@ impl DialogBox {
         self.set_txts(spk, msg);
     }
 
-    /// Takes a NAME metaline and updates the speaker accordingly
+    /// Updates the speaker and vox based on the given page metadata
     pub fn update_meta(&mut self, meta: &PageMeta) {
-        self.current_speaker = match meta.speaker {
-            PageOnly(ref v) => v,
-            Permanent(ref v) => {
-                self.permanent_speaker = v.clone();
-                v
-            }
-            NoChange => &self.permanent_speaker,
-        }
-        .clone();
+        // TODO maybe combine current/permanent into one tuple?
+        self.current_speaker = Self::match_meta(&mut self.permanent_speaker, &meta.speaker);
+        self.current_vox = Self::match_meta(&mut self.permanent_vox, &meta.vox);
+    }
 
-        self.current_vox = match meta.vox {
+    /// helper method for `update_meta`
+    ///
+    /// matches over a `Metaline` to update a field depending on
+    /// whether it's pageonly, permanent, or nochange
+    fn match_meta<'a, T: Clone>(field: &'a mut T, meta_field: &'a Metaline<T>) -> T {
+        match meta_field {
             PageOnly(ref v) => v,
             Permanent(ref v) => {
-                self.permanent_vox = v.clone();
+                *field = v.clone();
                 v
             }
-            NoChange => &self.permanent_vox,
+            NoChange => field,
         }
-        .to_owned();
+        .clone()
     }
 
     #[func]
