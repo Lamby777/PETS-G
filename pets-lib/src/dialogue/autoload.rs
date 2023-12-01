@@ -69,7 +69,6 @@ impl DBoxInterface {
 
         // check if a box already exists
         if ui_layer.has_node(DBOX_NODE_NAME.into()) {
-            println!("Reusing existing dialog box");
             let mut dbox = ui_layer
                 .get_node(DBOX_NODE_NAME.into())
                 .unwrap()
@@ -78,7 +77,6 @@ impl DBoxInterface {
             dbox.bind_mut().cancel_tween();
             dbox
         } else {
-            println!("Creating new dialog box");
             let mut dbox = self.dbox_scene.instantiate_as::<DialogBox>();
             dbox.set_name(DBOX_NODE_NAME.into());
             ui_layer.add_child(dbox.clone().upcast());

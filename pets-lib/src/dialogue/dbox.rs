@@ -147,12 +147,12 @@ impl DialogBox {
     pub fn tween_into_view(&mut self, up: bool) -> Gd<Tween> {
         let node = &mut self.node;
         let viewport_y = node.get_viewport_rect().size.y;
-        let visible_y = viewport_y - node.get_size().y;
 
-        let (tw_start, tw_end) = if up {
-            (viewport_y, visible_y)
+        let tw_end = if up {
+            // visible y
+            viewport_y - node.get_size().y
         } else {
-            (visible_y, viewport_y)
+            viewport_y
         };
 
         let mut y_tween = node.create_tween().unwrap();
@@ -164,10 +164,12 @@ impl DialogBox {
                 DBOX_TWEEN_TIME,
             )
             .unwrap()
-            .from(Variant::from(tw_start))
+            .from(Variant::from(self.node.get_position().y))
             .unwrap()
             .set_trans(DBOX_TWEEN_TRANS)
             .unwrap();
+
+        godot_print!("tweening: {}", up);
 
         self.active = up;
         self.tween = Some(y_tween.clone());
@@ -208,7 +210,6 @@ impl IPanelContainer for DialogBox {
 
             if self.current_page_number >= ix.pages.len() {
                 self.tween_into_view(false);
-
                 return;
             }
 
