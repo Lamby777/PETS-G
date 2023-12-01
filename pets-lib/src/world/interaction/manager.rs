@@ -37,7 +37,7 @@ impl InteractionManager {
         self.prompt_txt.as_mut().unwrap()
     }
 
-    pub fn prompt_shown(&mut self, hidden: bool) {
+    pub fn prompt_hidden(&mut self, hidden: bool) {
         let prompt = self.prompt_txt();
         if hidden {
             prompt.hide();
@@ -74,8 +74,8 @@ impl InteractionManager {
     /// Assumes the zones are already sorted
     ///
     /// Panics if there are no zones
-    pub fn closest_zone(&mut self) -> Gd<InteractionZone> {
-        self.zones[0].clone()
+    pub fn closest_zone(&mut self) -> Option<Gd<InteractionZone>> {
+        self.zones.get(0).cloned()
     }
 }
 
@@ -94,16 +94,15 @@ impl INode2D for InteractionManager {
     }
 
     fn process(&mut self, _delta: f64) {
-        let no_zones_found = self.zones.len() == 0;
-        self.prompt_shown(no_zones_found);
-        if no_zones_found {
-            return;
-        }
-
         self.sort_zones_by_distance();
-        let zone = self.closest_zone();
-        self.prompt_txt()
-            .set_position(zone.get_position() + Vector2::new(0.0, -50.0));
+
+        if let Some(zone) = self.closest_zone() {
+            self.prompt_hidden(false);
+            self.prompt_txt()
+                .set_position(zone.get_position() + Vector2::new(0.0, -50.0));
+        } else {
+            self.prompt_hidden(true);
+        }
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
@@ -113,7 +112,9 @@ impl INode2D for InteractionManager {
                 return;
             }
 
-            self.closest_zone().bind().interact();
+            if let Some(zone) = self.closest_zone() {
+                zone.bind().interact();
+            }
         }
     }
 }
