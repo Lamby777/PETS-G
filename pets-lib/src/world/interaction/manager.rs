@@ -3,7 +3,7 @@
 //! Shows the input prompt and handles the action if pressed.
 //!
 
-use godot::engine::{INode2D, Node2D, RichTextLabel};
+use godot::engine::{INode2D, InputEvent, Node2D, RichTextLabel};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -37,7 +37,7 @@ impl InteractionManager {
         self.prompt_txt.as_mut().unwrap()
     }
 
-    pub fn prompt_shown(&mut self, hidden: bool) {
+    pub fn prompt_hidden(&mut self, hidden: bool) {
         let prompt = self.prompt_txt();
         if hidden {
             prompt.hide();
@@ -54,13 +54,13 @@ impl InteractionManager {
         current_scene!().get_node_as("%InteractionManager")
     }
 
-    pub fn sort_zones(&mut self) {
+    /// Sorts the zones by distance from the player
+    pub fn sort_zones_by_distance(&mut self) {
         let mut tree = self.node.get_tree().unwrap();
         let pcb = tree.get_first_node_in_group("playercb".into()).unwrap();
         let pcb = pcb.cast::<PlayerCB>();
         let pcb_pos = { pcb.get_position() };
 
-        // TODO optimize sorting
         self.zones.sort_by(|a, b| {
             let a = a.get_global_position();
             let b = b.get_global_position();
@@ -68,6 +68,14 @@ impl InteractionManager {
             let b = b.distance_squared_to(pcb_pos);
             a.partial_cmp(&b).unwrap()
         });
+    }
+
+    /// Get the closest zone to the player
+    /// Assumes the zones are already sorted
+    ///
+    /// Panics if there are no zones
+    pub fn closest_zone(&mut self) -> Option<Gd<InteractionZone>> {
+        self.zones.get(0).cloned()
     }
 }
 
@@ -86,21 +94,27 @@ impl INode2D for InteractionManager {
     }
 
     fn process(&mut self, _delta: f64) {
-        let no_zones_found = self.zones.len() == 0;
-        self.prompt_shown(no_zones_found);
-        if no_zones_found {
-            return;
+        self.sort_zones_by_distance();
+
+        if let Some(zone) = self.closest_zone() {
+            self.prompt_hidden(false);
+            self.prompt_txt()
+                .set_position(zone.get_position() + Vector2::new(0.0, -50.0));
+        } else {
+            self.prompt_hidden(true);
         }
+    }
 
-        self.sort_zones();
-        let mut zone = self.zones[0].clone();
-        self.prompt_txt()
-            .set_position(zone.get_position() + Vector2::new(0.0, -50.0));
+    fn unhandled_input(&mut self, event: Gd<InputEvent>) {
+        if event.is_action_pressed("ui_accept".into()) {
+            let di = DBoxInterface::singleton();
+            if di.bind().scene_has_active_dbox() {
+                return;
+            }
 
-        let input = Input::singleton();
-        if input.is_action_just_pressed("ui_accept".into()) {
-            let zone = zone.bind_mut();
-            zone.interact();
+            if let Some(zone) = self.closest_zone() {
+                zone.bind().interact();
+            }
         }
     }
 }

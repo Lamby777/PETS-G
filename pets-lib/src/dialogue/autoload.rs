@@ -2,10 +2,14 @@
 //! Singleton for accessing player stats in GDScript.
 //!
 
+use dialogical::Metaline::*;
+use dialogical::Speaker::{self, *};
+use dialogical::{Interaction, Page};
 use godot::engine::Engine;
 use godot::prelude::*;
 
 use super::dbox::DialogBox;
+use crate::consts::dialogue::*;
 use crate::prelude::*;
 
 /// Autoload class for easy management of dialog boxes
@@ -15,18 +19,6 @@ pub struct DBoxInterface {
     #[base]
     node: Base<Node2D>,
     dbox_scene: Gd<PackedScene>,
-}
-
-/// Show a dialog box with the given speaker and message
-/// usage: `show_dialog!("Cherry", "Hello, {}!", name, ...)`
-#[macro_export]
-macro_rules! show_dialog {
-    ($speaker:expr, $($t:tt)*) => {{
-        let msg = format!($($t)*);
-
-        let dbox = crate::dialogue::autoload::DBoxInterface::singleton();
-        dbox.bind().show_dialog($speaker.into(), msg.into());
-    }};
 }
 
 #[godot_api]
@@ -40,21 +32,55 @@ impl DBoxInterface {
     }
 
     #[func]
-    pub fn show_dialog(&self, spk: GString, msg: GString) {
-        let mut dbox_gd = self.dbox_scene.instantiate_as::<DialogBox>();
+    pub fn start_ix(&mut self, ix_id: String) {
+        let ix = ix_map().get(&ix_id).unwrap_or_else(|| {
+            panic!(
+                "Could not find interaction \"{}\" in the interaction map",
+                ix_id
+            )
+        });
 
-        dbox_gd.set_name("Dialog".into());
-        current_scene!()
-            .get_node("UILayer".into())
-            .expect("scene should have a UILayer")
-            .add_child(dbox_gd.clone().upcast());
-
-        // simple stuff like this is why I love this language
+        let mut dbox = self.instantiate_dbox();
         {
-            let mut dbox = dbox_gd.bind_mut();
-            dbox.set_txts(spk, msg);
+            let mut dbox = dbox.bind_mut();
+            dbox.set_ix(ix.clone());
             dbox.do_draw();
-            dbox.pop_up()
+            dbox.tween_into_view(true);
+        }
+    }
+
+    #[func]
+    pub fn scene_has_active_dbox(&self) -> bool {
+        let ui_layer = current_scene!().get_node(UI_LAYER_NAME.into()).unwrap();
+        if let Some(dbox) = ui_layer.get_node(DBOX_NODE_NAME.into()) {
+            let dbox = dbox.cast::<DialogBox>();
+            let dbox = dbox.bind();
+            dbox.is_active()
+        } else {
+            false
+        }
+    }
+
+    #[func]
+    pub fn instantiate_dbox(&self) -> Gd<DialogBox> {
+        let mut ui_layer = current_scene!()
+            .get_node(UI_LAYER_NAME.into())
+            .expect("scene should have a UILayer");
+
+        // check if a box already exists
+        if ui_layer.has_node(DBOX_NODE_NAME.into()) {
+            let mut dbox = ui_layer
+                .get_node(DBOX_NODE_NAME.into())
+                .unwrap()
+                .cast::<DialogBox>();
+
+            dbox.bind_mut().cancel_tween();
+            dbox
+        } else {
+            let mut dbox = self.dbox_scene.instantiate_as::<DialogBox>();
+            dbox.set_name(DBOX_NODE_NAME.into());
+            ui_layer.add_child(dbox.clone().upcast());
+            dbox
         }
     }
 }

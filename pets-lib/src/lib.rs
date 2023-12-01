@@ -7,7 +7,6 @@
 //! - Cherry 9/2/2023 | <3
 //!
 
-// TODO remove this soon
 #![allow(dead_code)]
 #![allow(unused_imports)]
 #![feature(variant_count)]
@@ -19,6 +18,7 @@ use dialogue::autoload::DBoxInterface;
 use stats::stats_interface::StatsInterface;
 
 mod battle;
+mod consts;
 mod dialogue;
 mod items;
 mod limiq;
@@ -33,7 +33,9 @@ mod prelude {
     pub use crate::macros::*;
     pub use crate::stats::*;
 
-    pub use crate::dialogue::ix_list;
+    pub use crate::dialogue::autoload::DBoxInterface;
+    pub use crate::dialogue::ix_map;
+
     pub use crate::world::interaction::manager::InteractionManager;
 
     // is this bad practice? no clue and idc honestly

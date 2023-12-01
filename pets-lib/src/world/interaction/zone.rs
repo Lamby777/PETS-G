@@ -23,26 +23,8 @@ pub struct InteractionZone {
 impl InteractionZone {
     #[func]
     pub fn interact(&self) {
-        use dialogical::Metaline::*;
-        use dialogical::Speaker::*;
-
-        let ix_list = ix_list();
-        let ix = ix_list.get("Rodrick Sign #1").unwrap();
-        let page = ix.pages.get(0).unwrap();
-        let spk = page.metadata.speaker.clone();
-
-        let spk = match spk {
-            PageOnly(v) | Permanent(v) => v,
-            NoChange => unreachable!(),
-        };
-
-        let spk = match spk {
-            Named(v) => v,
-            Narrator => "".to_string(),
-            Unknown => "".to_string(),
-        };
-
-        show_dialog!(spk, "{}", page.content.clone());
+        let mut di = DBoxInterface::singleton();
+        di.bind_mut().start_ix("Rodrick Sign #1".to_string());
     }
 
     #[func]
@@ -70,8 +52,8 @@ impl IArea2D for InteractionZone {
     fn ready(&mut self) {
         let node = &mut self.node;
 
-        let enter_fn = Callable::from_object_method(node, "on_entered");
-        let exit_fn = Callable::from_object_method(node, "on_exited");
+        let enter_fn = node.callable("on_entered");
+        let exit_fn = node.callable("on_exited");
         node.connect("body_entered".into(), enter_fn);
         node.connect("body_exited".into(), exit_fn);
     }
