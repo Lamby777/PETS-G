@@ -156,8 +156,10 @@ impl DialogBox {
             .unwrap()
             .set_trans(DBOX_TWEEN_TRANS);
 
-        // TODO use `Callable::from_fn` in godot 4.2
-        // y_tween.connect("finished".into(), || {});
+        if !up {
+            let free = self.node.callable("queue_free");
+            y_tween.connect("finished".into(), free);
+        }
     }
 }
 
