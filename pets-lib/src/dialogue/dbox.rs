@@ -56,6 +56,7 @@ pub struct DialogBox {
     speaker: MetaPair<Speaker>,
     vox: MetaPair<String>,
     tween: Option<Gd<Tween>>,
+    active: bool,
 
     // independent from any interaction-related stuff,
     // these are the actual strings that are displayed
@@ -71,6 +72,10 @@ impl DialogBox {
     /// Get the speaker name label
     fn spk_txt(&self) -> Gd<RichTextLabel> {
         self.node.get_node_as("VSplit/SpeakerName")
+    }
+
+    pub fn is_active(&self) -> bool {
+        self.active
     }
 
     /// Get the message text label
@@ -164,6 +169,7 @@ impl DialogBox {
             .set_trans(DBOX_TWEEN_TRANS)
             .unwrap();
 
+        self.active = up;
         self.tween = Some(y_tween.clone());
         y_tween
     }
@@ -177,6 +183,7 @@ impl IPanelContainer for DialogBox {
             spk_txt: "Cherry".into(),
             msg_txt: "[wave amp=50 freq=6]Hello, World![/wave]".into(),
 
+            active: false,
             tween: None,
             current_ix: None,
             current_page_number: 0,
@@ -191,8 +198,7 @@ impl IPanelContainer for DialogBox {
 
     fn input(&mut self, event: Gd<InputEvent>) {
         if event.is_action_pressed("ui_accept".into()) {
-            let di = DBoxInterface::singleton();
-            if !di.bind().scene_has_active_dbox() {
+            if !self.active {
                 return;
             }
 
@@ -201,8 +207,7 @@ impl IPanelContainer for DialogBox {
             self.current_page_number += 1;
 
             if self.current_page_number >= ix.pages.len() {
-                let free = self.node.callable("queue_free");
-                self.tween_into_view(false).connect("finished".into(), free);
+                self.tween_into_view(false);
 
                 return;
             }

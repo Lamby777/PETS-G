@@ -52,32 +52,38 @@ impl DBoxInterface {
     #[func]
     pub fn scene_has_active_dbox(&self) -> bool {
         let ui_layer = current_scene!().get_node(UI_LAYER_NAME.into()).unwrap();
-        ui_layer.has_node(DBOX_NODE_NAME.into())
+        if let Some(dbox) = ui_layer.get_node(DBOX_NODE_NAME.into()) {
+            let dbox = dbox.cast::<DialogBox>();
+            let dbox = dbox.bind();
+            dbox.is_active()
+        } else {
+            false
+        }
     }
 
     #[func]
     pub fn instantiate_dbox(&self) -> Gd<DialogBox> {
-        let mut dbox = self.dbox_scene.instantiate_as::<DialogBox>();
-        dbox.set_name(DBOX_NODE_NAME.into());
-
         let mut ui_layer = current_scene!()
             .get_node(UI_LAYER_NAME.into())
             .expect("scene should have a UILayer");
 
         // check if a box already exists
         if ui_layer.has_node(DBOX_NODE_NAME.into()) {
-            let mut node = ui_layer
+            println!("Reusing existing dialog box");
+            let mut dbox = ui_layer
                 .get_node(DBOX_NODE_NAME.into())
                 .unwrap()
                 .cast::<DialogBox>();
 
-            node.bind_mut().cancel_tween();
-            ui_layer.remove_child(node.upcast());
+            dbox.bind_mut().cancel_tween();
+            dbox
+        } else {
+            println!("Creating new dialog box");
+            let mut dbox = self.dbox_scene.instantiate_as::<DialogBox>();
+            dbox.set_name(DBOX_NODE_NAME.into());
+            ui_layer.add_child(dbox.clone().upcast());
+            dbox
         }
-
-        ui_layer.add_child(dbox.clone().upcast());
-
-        dbox
     }
 }
 
