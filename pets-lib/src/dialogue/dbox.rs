@@ -55,7 +55,7 @@ pub struct DialogBox {
     node: Base<PanelContainer>,
 
     /// the scene to initialize for each choice text
-    choice_scene: Option<Gd<PackedScene>>,
+    choice_labels: Vec<Gd<RichTextLabel>>,
 
     // state for the current interaction
     current_ix: Option<Interaction>,
@@ -212,7 +212,7 @@ impl IPanelContainer for DialogBox {
             spk_txt: "Cherry".into(),
             msg_txt: "[wave amp=50 freq=6]Hello, World![/wave]".into(),
 
-            choice_scene: None, // Some(load("res://scenes/dialogchoice.tscn")),
+            choice_labels: vec![],
 
             active: false,
             tween: None,
