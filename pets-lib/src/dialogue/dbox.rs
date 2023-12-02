@@ -193,9 +193,15 @@ impl DialogBox {
 
                 let labels = choices
                     .iter()
-                    .map(|choice| {
-                        //
-                        // let label = RichTextLabel::new();
+                    .enumerate()
+                    .map(|(i, choice)| {
+                        let mut label = RichTextLabel::new_alloc();
+                        label.set_size(Vector2::new(width, DBOX_CHOICE_LABEL_HEIGHT));
+
+                        let name = format!("ChoiceLabel{}", i);
+                        label.set_name(name.into());
+
+                        label
                     })
                     .collect::<Vec<_>>();
 
