@@ -7,7 +7,7 @@
 //!
 
 use dialogical::Speaker::{self, *};
-use dialogical::{DialogueEnding, Interaction, Page};
+use dialogical::{DialogueChoice, DialogueEnding, Interaction, Page};
 use dialogical::{Metaline, Metaline::*, PageMeta};
 
 use godot::engine::tween::TransitionType;
@@ -46,6 +46,16 @@ impl<T> MetaPair<T> {
             permanent: v,
         }
     }
+}
+
+fn make_choice_label(i: usize, choice: &DialogueChoice, width: f32) -> Gd<RichTextLabel> {
+    let mut label = RichTextLabel::new_alloc();
+
+    let name = format!("ChoiceLabel{}", i);
+    label.set_name(name.into());
+
+    label.set_size(Vector2::new(width, DBOX_CHOICE_LABEL_HEIGHT));
+    label
 }
 
 #[derive(GodotClass)]
@@ -194,15 +204,7 @@ impl DialogBox {
                 let labels = choices
                     .iter()
                     .enumerate()
-                    .map(|(i, choice)| {
-                        let mut label = RichTextLabel::new_alloc();
-                        label.set_size(Vector2::new(width, DBOX_CHOICE_LABEL_HEIGHT));
-
-                        let name = format!("ChoiceLabel{}", i);
-                        label.set_name(name.into());
-
-                        label
-                    })
+                    .map(|(i, v)| make_choice_label(i, v, width))
                     .collect::<Vec<_>>();
 
                 let mut timer = godot_tree!().create_timer(0.1).unwrap();
