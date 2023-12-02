@@ -1,9 +1,13 @@
 //!
 //! Dialog box class for menus and dialogue text
 //!
+//! Yes, an important distinction to make is that "dialogue" is
+//! the speech between characters, and "dialog" is a window or
+//! UI element that displays the dialogue. Don't get too confused!
+//!
 
 use dialogical::Speaker::{self, *};
-use dialogical::{Interaction, Page};
+use dialogical::{DialogueEnding, Interaction, Page};
 use dialogical::{Metaline, Metaline::*, PageMeta};
 
 use godot::engine::tween::TransitionType;
@@ -173,6 +177,27 @@ impl DialogBox {
         self.tween = y_tween.clone();
         y_tween.unwrap()
     }
+
+    pub fn run_ix_ending(&mut self, ending: &DialogueEnding) {
+        use dialogical::Label::*;
+        use DialogueEnding::*;
+
+        match ending {
+            Choices(choices) => {
+                // TODO show choices
+            }
+
+            Label(Function(label)) => {
+                // TODO run the function
+            }
+
+            Label(Goto(label)) => {
+                // TODO "goto" the label
+            }
+
+            End => {}
+        }
+    }
 }
 
 #[godot_api]
@@ -204,12 +229,21 @@ impl IPanelContainer for DialogBox {
 
             // go to next page
             let ix = self.current_ix.as_ref().unwrap();
+            let pagecount = ix.pages.len();
+
             self.current_page_number += 1;
 
-            if self.current_page_number >= ix.pages.len() {
+            // if end of interaction, close the dialog
+            if self.current_page_number >= pagecount {
                 self.tween_into_view(false);
                 self.current_page_number = 0;
             } else {
+                if self.current_page_number == pagecount - 1 {
+                    // if last page, we need to run the ix ending
+                    let ix_ending = ix.ending.clone();
+                    self.run_ix_ending(&ix_ending)
+                }
+
                 self.goto_page(self.current_page_number);
                 self.do_draw();
             }
