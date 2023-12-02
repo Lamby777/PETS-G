@@ -199,9 +199,23 @@ impl DialogBox {
                     let name = format!("ChoiceLabel{}", i);
                     label.set_name(name.into());
                     label.set_text(choice.text.clone().into());
-                    label.set_size(Vector2::new(width, DBOX_CHOICE_LABEL_HEIGHT));
+                    label.set_size(Vector2::new(width, DBOX_CHOICE_HEIGHT));
 
                     self.node.add_child(label.clone().upcast());
+
+                    // queue a timer for the label to slide up
+                    let delay = DBOX_CHOICE_WAVE_TIME * (i + 1) as f64;
+                    let mut timer = godot_tree!().create_timer(delay).unwrap();
+                    timer.connect(
+                        "timeout".into(),
+                        Callable::from_fn("choice_slide_up", |args: &[&Variant]| {
+                            // TODO make this a separate function
+                            // slide the label up
+                            //
+                            Ok(Variant::nil())
+                        }),
+                    );
+
                     label
                 };
 
@@ -210,11 +224,6 @@ impl DialogBox {
                     .enumerate()
                     .map(make_choice_label)
                     .collect::<Vec<_>>();
-
-                let mut timer = godot_tree!().create_timer(0.1).unwrap();
-                timer.connect("timeout".into(), self.node.callable("amogus"));
-
-                // uhhhhhh
             }
 
             Label(Function(_label)) => {
