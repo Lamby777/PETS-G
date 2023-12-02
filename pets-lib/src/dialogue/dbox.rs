@@ -37,13 +37,13 @@ pub struct MetaPair<T> {
 }
 
 impl<T> MetaPair<T> {
-    pub fn clone(v: T) -> Self
+    pub fn from_cloned(v: T) -> Self
     where
         T: Clone,
     {
         Self {
             temporary: v.clone(),
-            permanent: v.clone(),
+            permanent: v,
         }
     }
 }
@@ -53,6 +53,9 @@ impl<T> MetaPair<T> {
 pub struct DialogBox {
     #[base]
     node: Base<PanelContainer>,
+
+    /// the scene to initialize for each choice text
+    choice_scene: Option<Gd<PackedScene>>,
 
     // state for the current interaction
     current_ix: Option<Interaction>,
@@ -185,6 +188,7 @@ impl DialogBox {
         match ending {
             Choices(choices) => {
                 // TODO show choices
+                let _ = choices.len();
             }
 
             Label(Function(label)) => {
@@ -208,12 +212,14 @@ impl IPanelContainer for DialogBox {
             spk_txt: "Cherry".into(),
             msg_txt: "[wave amp=50 freq=6]Hello, World![/wave]".into(),
 
+            choice_scene: None, // Some(load("res://scenes/dialogchoice.tscn")),
+
             active: false,
             tween: None,
             current_ix: None,
             current_page_number: 0,
-            speaker: MetaPair::clone(Speaker::Narrator),
-            vox: MetaPair::clone(DEFAULT_VOX.to_owned()),
+            speaker: MetaPair::from_cloned(Speaker::Narrator),
+            vox: MetaPair::from_cloned(DEFAULT_VOX.to_owned()),
         }
     }
 
