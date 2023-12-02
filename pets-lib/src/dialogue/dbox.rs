@@ -193,13 +193,15 @@ impl DialogBox {
 
                 // closure that gets called to make a choice label
                 // it captures `width` ^^^
-                let make_choice_label = |(i, choice)| {
+                let make_choice_label = |(i, choice): (_, &DialogueChoice)| {
                     let mut label = RichTextLabel::new_alloc();
 
                     let name = format!("ChoiceLabel{}", i);
                     label.set_name(name.into());
-
+                    label.set_text(choice.text.clone().into());
                     label.set_size(Vector2::new(width, DBOX_CHOICE_LABEL_HEIGHT));
+
+                    self.node.add_child(label.clone().upcast());
                     label
                 };
 
