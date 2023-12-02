@@ -90,30 +90,22 @@ impl DialogBox {
         self.node.get_node_as("VSplit/Content")
     }
 
-    /// Sets the speaker and message text from strings
-    ///
-    /// DON'T USE THIS FOR INTERACTIONS!!
-    /// That's what `goto_page` is for.
-    #[func]
-    pub fn set_txts(&mut self, speaker: String, content: String) {
-        self.spk_txt = speaker.into();
-        self.msg_txt = content.into();
-    }
-
     pub fn set_ix(&mut self, ix: Interaction) {
         self.current_ix = Some(ix);
         self.goto_page(0);
     }
 
-    /// basically set_txts but for an interaction page
+    /// sets the speaker and message labels to the given page
     pub fn goto_page(&mut self, pageno: usize) {
         let ix = self.current_ix.as_ref().unwrap().clone();
         let page = ix.pages.get(pageno).unwrap();
 
         self.update_meta(&page.metadata);
+
         let msg = page.content.clone();
         let spk = spk_display(&self.speaker.temporary);
-        self.set_txts(spk, msg);
+        self.spk_txt = spk.into();
+        self.msg_txt = msg.into();
     }
 
     /// Updates the speaker and vox based on the given page metadata
