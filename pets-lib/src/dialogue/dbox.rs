@@ -48,16 +48,6 @@ impl<T> MetaPair<T> {
     }
 }
 
-fn make_choice_label(i: usize, choice: &DialogueChoice, width: f32) -> Gd<RichTextLabel> {
-    let mut label = RichTextLabel::new_alloc();
-
-    let name = format!("ChoiceLabel{}", i);
-    label.set_name(name.into());
-
-    label.set_size(Vector2::new(width, DBOX_CHOICE_LABEL_HEIGHT));
-    label
-}
-
 #[derive(GodotClass)]
 #[class(base=PanelContainer)]
 pub struct DialogBox {
@@ -201,10 +191,22 @@ impl DialogBox {
                 let len = choices.len();
                 let width = self.node.get_size().x / len as f32;
 
+                // closure that gets called to make a choice label
+                // it captures `width` ^^^
+                let make_choice_label = |(i, choice)| {
+                    let mut label = RichTextLabel::new_alloc();
+
+                    let name = format!("ChoiceLabel{}", i);
+                    label.set_name(name.into());
+
+                    label.set_size(Vector2::new(width, DBOX_CHOICE_LABEL_HEIGHT));
+                    label
+                };
+
                 let labels = choices
                     .iter()
                     .enumerate()
-                    .map(|(i, v)| make_choice_label(i, v, width))
+                    .map(make_choice_label)
                     .collect::<Vec<_>>();
 
                 let mut timer = godot_tree!().create_timer(0.1).unwrap();
