@@ -15,7 +15,7 @@ use godot::engine::{IPanelContainer, InputEvent, PanelContainer, RichTextLabel, 
 use godot::prelude::*;
 
 use crate::consts::dialogue::*;
-use crate::prelude::DBoxInterface;
+use crate::prelude::*;
 
 /// Turn a Speaker into a displayable name
 ///
@@ -54,7 +54,7 @@ pub struct DialogBox {
     #[base]
     node: Base<PanelContainer>,
 
-    /// the scene to initialize for each choice text
+    /// the richtextlabel nodes for each current ix choice
     choice_labels: Vec<Gd<RichTextLabel>>,
 
     // state for the current interaction
@@ -173,21 +173,43 @@ impl DialogBox {
         y_tween.unwrap()
     }
 
+    fn free_choice_labels(&mut self) {
+        self.choice_labels
+            .iter_mut()
+            .for_each(|label| label.queue_free());
+        self.choice_labels.clear();
+    }
+
     pub fn run_ix_ending(&mut self, ending: &DialogueEnding) {
         use dialogical::Label::*;
         use DialogueEnding::*;
 
         match ending {
             Choices(choices) => {
-                // TODO show choices
-                let _ = choices.len();
+                self.free_choice_labels();
+
+                let len = choices.len();
+                let width = self.node.get_size().x / len as f32;
+
+                let labels = choices
+                    .iter()
+                    .map(|choice| {
+                        //
+                        // let label = RichTextLabel::new();
+                    })
+                    .collect::<Vec<_>>();
+
+                let mut timer = godot_tree!().create_timer(0.1).unwrap();
+                timer.connect("timeout".into(), self.node.callable("amogus"));
+
+                // uhhhhhh
             }
 
-            Label(Function(label)) => {
+            Label(Function(_label)) => {
                 // TODO run the function
             }
 
-            Label(Goto(label)) => {
+            Label(Goto(_label)) => {
                 // TODO "goto" the label
             }
 
