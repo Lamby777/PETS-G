@@ -184,16 +184,19 @@ impl INode2D for TitleScreen {
     }
 
     fn ready(&mut self) {
-        // The node that contains the text labels for
-        // all the main menu options you can pick
+        // The node that contains the text labels below
         let cont = self.node.get_node_as::<Control>("Background/MenuChoices");
 
-        self.choices = Some([
-            cont.get_node_as("Play"),
-            cont.get_node_as("Options"),
-            cont.get_node_as("Credits"),
-            cont.get_node_as("Quit"),
-            cont.get_node_as("DebugBattle"),
-        ]);
+        self.choices = Some(
+            [
+                // all the main menu label you can pick
+                "Play",
+                "Options",
+                "Credits",
+                "Quit",
+                "DebugBattle",
+            ]
+            .map(|v| cont.get_node_as(v)),
+        );
     }
 }
