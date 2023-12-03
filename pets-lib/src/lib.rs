@@ -11,6 +11,7 @@
 #![allow(unused_imports)]
 #![feature(variant_count)]
 #![feature(try_blocks)]
+#![feature(let_chains)]
 
 use godot::engine::Engine;
 use godot::prelude::*;
