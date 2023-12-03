@@ -51,40 +51,33 @@ impl DBoxInterface {
 
     #[func]
     pub fn scene_has_active_dbox(&self) -> bool {
-        let ui_layer = current_scene!().get_node(UI_LAYER_NAME.into()).unwrap();
+        let ui_layer = current_scene!().get_node_as::<Node>(UI_LAYER_NAME);
 
-        // if let Some(dbox) = ui_layer.get_node(DBOX_NODE_NAME.into()) {
-        if ui_layer.has_node(DBOX_NODE_NAME.into()) {
-            let dbox = ui_layer.get_node(DBOX_NODE_NAME.into()).unwrap();
-            let dbox = dbox.cast::<DialogBox>();
-            let dbox = dbox.bind();
-            dbox.is_active()
-        } else {
-            false
-        }
+        ui_layer
+            .try_get_node_as::<DialogBox>(DBOX_NODE_NAME)
+            .map_or(false, |dbox| dbox.bind().is_active())
     }
 
     #[func]
     pub fn instantiate_dbox(&self) -> Gd<DialogBox> {
-        let mut ui_layer = current_scene!()
-            .get_node(UI_LAYER_NAME.into())
-            .expect("scene should have a UILayer");
+        let mut ui_layer = current_scene!().get_node_as::<Node>(UI_LAYER_NAME);
 
         // check if a box already exists
-        if ui_layer.has_node(DBOX_NODE_NAME.into()) {
-            let mut dbox = ui_layer
-                .get_node(DBOX_NODE_NAME.into())
-                .unwrap()
-                .cast::<DialogBox>();
 
-            dbox.bind_mut().cancel_tween();
-            dbox
-        } else {
-            let mut dbox = self.dbox_scene.instantiate_as::<DialogBox>();
-            dbox.set_name(DBOX_NODE_NAME.into());
-            ui_layer.add_child(dbox.clone().upcast());
-            dbox
-        }
+        ui_layer
+            .try_get_node_as::<DialogBox>(DBOX_NODE_NAME)
+            .map_or_else(
+                || {
+                    let mut dbox = self.dbox_scene.instantiate_as::<DialogBox>();
+                    dbox.set_name(DBOX_NODE_NAME.into());
+                    ui_layer.add_child(dbox.clone().upcast());
+                    dbox
+                },
+                |mut dbox| {
+                    dbox.bind_mut().cancel_tween();
+                    dbox
+                },
+            )
     }
 }
 
