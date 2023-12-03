@@ -11,7 +11,9 @@ use dialogical::{DialogueChoice, DialogueEnding, Interaction, Page};
 use dialogical::{Metaline, Metaline::*, PageMeta};
 
 use godot::engine::tween::TransitionType;
-use godot::engine::{IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween, Viewport};
+use godot::engine::{
+    HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween, Viewport,
+};
 use godot::prelude::*;
 
 use crate::consts::dialogue::*;
@@ -67,6 +69,23 @@ impl<T> MetaPair<T> {
             permanent: v,
         }
     }
+
+    /// matches over a `Metaline` to update a field depending on
+    /// whether it's pageonly, permanent, or nochange
+    fn set_from<'a>(&mut self, meta: &'a Metaline<T>)
+    where
+        T: Clone,
+    {
+        self.temporary = match meta {
+            PageOnly(ref v) => v,
+            Permanent(ref v) => {
+                self.permanent = v.clone();
+                v
+            }
+            NoChange => &self.permanent,
+        }
+        .clone();
+    }
 }
 
 #[derive(GodotClass)]
@@ -102,13 +121,17 @@ impl DialogBox {
         self.node.get_node_as("VBox/SpeakerName")
     }
 
-    pub fn is_active(&self) -> bool {
-        self.active
+    fn choice_container(&self) -> Gd<HBoxContainer> {
+        self.node.get_node_as("VBox/Choices")
     }
 
     /// Get the message text label
     fn msg_txt(&self) -> Gd<RichTextLabel> {
         self.node.get_node_as("VBox/Content")
+    }
+
+    pub fn is_active(&self) -> bool {
+        self.active
     }
 
     pub fn set_ix(&mut self, ix: Interaction) {
@@ -131,24 +154,8 @@ impl DialogBox {
 
     /// Updates the speaker and vox based on the given page metadata
     pub fn update_meta(&mut self, meta: &PageMeta) {
-        Self::match_meta(&mut self.speaker, &meta.speaker);
-        Self::match_meta(&mut self.vox, &meta.vox);
-    }
-
-    /// helper method for `update_meta`
-    ///
-    /// matches over a `Metaline` to update a field depending on
-    /// whether it's pageonly, permanent, or nochange
-    fn match_meta<'a, T: Clone>(field: &'a mut MetaPair<T>, meta_field: &'a Metaline<T>) {
-        field.temporary = match meta_field {
-            PageOnly(ref v) => v,
-            Permanent(ref v) => {
-                field.permanent = v.clone();
-                v
-            }
-            NoChange => &field.permanent,
-        }
-        .clone();
+        self.speaker.set_from(&meta.speaker);
+        self.vox.set_from(&meta.vox);
     }
 
     #[func]
@@ -231,22 +238,19 @@ impl DialogBox {
                     // we can't move the label into the closure because of
                     // thread safety stuff, so just pass in the instance id
                     let label_id = label.instance_id();
+                    let func = Callable::from_fn("choice_slide_up", move |_| {
+                        // get the label again using the instance id
+                        let label = Gd::from_instance_id(label_id);
+                        tween_choice_label(label, true)
+                            .map(|_| Variant::from(()))
+                            .ok_or(())
+                    });
 
-                    timer.connect(
-                        "timeout".into(),
-                        Callable::from_fn("choice_slide_up", move |_| {
-                            // get the label again using the instance id
-                            let label = Gd::<RichTextLabel>::from_instance_id(label_id);
-                            tween_choice_label(label, true)
-                                .map(|_| Variant::from(()))
-                                .ok_or(())
-                        }),
-                    );
-
+                    timer.connect("timeout".into(), func);
                     label
                 };
 
-                let labels = choices
+                self.choice_labels = choices
                     .iter()
                     .enumerate()
                     .map(make_choice_label)
