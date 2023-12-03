@@ -30,6 +30,27 @@ pub fn spk_display(spk: &Speaker) -> String {
     .to_owned()
 }
 
+/// slide the label up with a tween
+fn tween_choice_label(mut label: Gd<RichTextLabel>, up: bool) -> Option<()> {
+    // TODO make this a constant
+    let tw_end = if up { 0 } else { 100 };
+
+    label
+        .create_tween()?
+        .tween_property(
+            label.clone().upcast(),
+            "position:y".into(),
+            Variant::from(tw_end),
+            DBOX_TWEEN_TIME,
+        )?
+        .set_trans(DBOX_TWEEN_TRANS);
+
+    // i mean... what else am i gonna do? the methods return Option<()>
+    // and writing map_err would defeat the purpose of using ? to make
+    // it shorter than spamming `.unwrap()` :P
+    Some(())
+}
+
 #[derive(Clone)]
 pub struct MetaPair<T> {
     pub temporary: T,
@@ -78,7 +99,7 @@ pub struct DialogBox {
 impl DialogBox {
     /// Get the speaker name label
     fn spk_txt(&self) -> Gd<RichTextLabel> {
-        self.node.get_node_as("VSplit/SpeakerName")
+        self.node.get_node_as("VBox/SpeakerName")
     }
 
     pub fn is_active(&self) -> bool {
@@ -87,7 +108,7 @@ impl DialogBox {
 
     /// Get the message text label
     fn msg_txt(&self) -> Gd<RichTextLabel> {
-        self.node.get_node_as("VSplit/Content")
+        self.node.get_node_as("VBox/Content")
     }
 
     pub fn set_ix(&mut self, ix: Interaction) {
@@ -206,13 +227,19 @@ impl DialogBox {
                     // queue a timer for the label to slide up
                     let delay = DBOX_CHOICE_WAVE_TIME * (i + 1) as f64;
                     let mut timer = godot_tree!().create_timer(delay).unwrap();
+
+                    // we can't move the label into the closure because of
+                    // thread safety stuff, so just pass in the instance id
+                    let label_id = label.instance_id();
+
                     timer.connect(
                         "timeout".into(),
-                        Callable::from_fn("choice_slide_up", |args: &[&Variant]| {
-                            // TODO make this a separate function
-                            // slide the label up
-                            //
-                            Ok(Variant::nil())
+                        Callable::from_fn("choice_slide_up", move |_| {
+                            // get the label again using the instance id
+                            let label = Gd::<RichTextLabel>::from_instance_id(label_id);
+                            tween_choice_label(label, true)
+                                .map(|_| Variant::from(()))
+                                .ok_or(())
                         }),
                     );
 
