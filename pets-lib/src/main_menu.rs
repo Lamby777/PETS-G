@@ -6,7 +6,6 @@
 //! - Cherry, 2:54 AM, 10/5/2023 | <3
 //!
 
-use godot::engine::tween::TransitionType;
 use godot::engine::{Control, INode2D, Node2D, RichTextLabel, Theme};
 use godot::prelude::*;
 

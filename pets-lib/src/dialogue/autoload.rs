@@ -2,9 +2,6 @@
 //! Singleton for accessing player stats in GDScript.
 //!
 
-use dialogical::Metaline::*;
-use dialogical::Speaker::{self, *};
-use dialogical::{Interaction, Page};
 use godot::engine::Engine;
 use godot::prelude::*;
 
