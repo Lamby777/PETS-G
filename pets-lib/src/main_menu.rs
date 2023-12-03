@@ -66,10 +66,14 @@ impl TitleScreen {
         let node = &mut choices[choice as usize];
 
         let theme = load::<Theme>("res://themes/theme_deft.tres");
-        let target_col = if is_picked {
-            theme.get_color("font_selected_color".into(), "RichTextLabel".into())
-        } else {
-            theme.get_color("default_color".into(), "RichTextLabel".into())
+        let target_col = {
+            let col = if is_picked {
+                "font_selected_color"
+            } else {
+                "default_color"
+            };
+
+            theme.get_color(col.into(), "RichTextLabel".into())
         };
 
         // Tweens

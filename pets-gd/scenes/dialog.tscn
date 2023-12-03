@@ -19,24 +19,37 @@ layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="SpeakerName" type="RichTextLabel" parent="VBox"]
+custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
-size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 56
 bbcode_enabled = true
 text = "<NPC Name>"
 
 [node name="Content" type="RichTextLabel" parent="VBox"]
+custom_minimum_size = Vector2(0, 230)
 layout_mode = 2
-text = "Test test words wordsy word word noises among us wordy word sentence go brr also more words and maybe some even more i guess Test test words wordsy word word noises among us wordy word sentence go brr also more words and maybe some even more i guess Test test words wordsy word word noises among us wordy word."
-fit_content = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBox"]
-layout_mode = 2
-
-[node name="Content" type="RichTextLabel" parent="VBox/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 2
-size_flags_stretch_ratio = 4.0
 bbcode_enabled = true
-text = "Hello"
-fit_content = true
+text = "buh nah deh, you wunuh scribih, try concat to it, try to parse through it, you wuh nah thinkin that uh i would log do it, baby that was so long and uh i wuh nah stupid, take the next ticket, take the next train"
+
+[node name="Choices" type="HBoxContainer" parent="VBox"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Choice1" type="RichTextLabel" parent="VBox/Choices"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]Deez![/center]"
+
+[node name="Choice2" type="RichTextLabel" parent="VBox/Choices"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]Nuts![/center]"
+
+[node name="Choice3" type="RichTextLabel" parent="VBox/Choices"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]UwU[/center]"
