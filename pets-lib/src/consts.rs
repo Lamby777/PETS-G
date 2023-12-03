@@ -24,7 +24,7 @@ pub mod dialogue {
     pub const DBOX_NODE_NAME: &str = "DialogBox";
     pub const DBOX_TWEEN_TIME: f64 = 0.5;
     pub const DBOX_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
-    pub const DBOX_CHOICE_HEIGHT: f32 = 100.0;
+    pub const DBOX_CHOICE_HEIGHT: f32 = 60.0;
     pub const DBOX_CHOICE_WAVE_TIME: f64 = 0.1;
 }
 
