@@ -8,5 +8,5 @@ Panel/styles/panel = ExtResource("1_7au1f")
 PanelContainer/styles/panel = ExtResource("1_7au1f")
 RichTextLabel/colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 RichTextLabel/colors/font_selected_color = Color(0.87451, 0.556863, 0.113725, 1)
-RichTextLabel/font_sizes/normal_font_size = 44
+RichTextLabel/font_sizes/normal_font_size = 48
 RichTextLabel/fonts/normal_font = ExtResource("1_buwdt")
