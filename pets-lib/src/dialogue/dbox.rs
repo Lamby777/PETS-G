@@ -34,7 +34,6 @@ pub fn spk_display(spk: &Speaker) -> String {
 
 /// slide the label up with a tween
 fn tween_choice_label(label: Gd<RichTextLabel>, up: bool) -> Option<Gd<Tween>> {
-    // TODO make this a constant
     let tw_end = if up { DBOX_CHOICE_HEIGHT } else { 0.0 };
 
     tween(

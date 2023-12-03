@@ -77,7 +77,7 @@ mod standard_calcs {
     //! For all these functions, the doc comment is the
     //! mathematical function. The variable `x` represents
     //! the variable `lvl` in our code.
-    // TODO stop using `as` to cast... somewhat unsafe`
+    // TODO stop using `as` to cast... somewhat unsafe
 
     use crate::prelude::{FloatStat, IntegralStat};
 
