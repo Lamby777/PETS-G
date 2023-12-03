@@ -7,12 +7,11 @@
 //!
 
 use dialogical::Speaker::{self, *};
-use dialogical::{DialogueChoice, DialogueEnding, Interaction, Page};
+use dialogical::{DialogueEnding, Interaction};
 use dialogical::{Metaline, Metaline::*, PageMeta};
 
-use godot::engine::tween::TransitionType;
 use godot::engine::{
-    HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween, Viewport,
+    HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween,
 };
 use godot::prelude::*;
 
