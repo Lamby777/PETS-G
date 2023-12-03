@@ -342,7 +342,7 @@ bbcode_enabled = true
 text = "Debug"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
-autoplay = "main_menu_intro"
 libraries = {
 "": SubResource("AnimationLibrary_qpnwk")
 }
+autoplay = "main_menu_intro"

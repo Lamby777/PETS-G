@@ -21,7 +21,7 @@ pub mod dialogue {
     pub const DEFAULT_VOX: &str = "_";
 
     pub const UI_LAYER_NAME: &str = "UILayer";
-    pub const DBOX_NODE_NAME: &str = "Dialog Box";
+    pub const DBOX_NODE_NAME: &str = "DialogBox";
     pub const DBOX_TWEEN_TIME: f64 = 0.5;
     pub const DBOX_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
     pub const DBOX_CHOICE_HEIGHT: f32 = 100.0;
