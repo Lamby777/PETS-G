@@ -32,15 +32,17 @@ bbcode_enabled = true
 text = "buh nah deh, you wunuh scribih, try concat to it, try to parse through it, you wuh nah thinkin that uh i would log do it, baby that was so long and uh i wuh nah stupid, take the next ticket, take the next train"
 
 [node name="Choices" type="HBoxContainer" parent="VBox"]
+clip_contents = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 8
 
 [node name="Choice1" type="RichTextLabel" parent="VBox/Choices"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
+size_flags_vertical = 8
 bbcode_enabled = true
-text = "[center]Deez![/center]"
+text = "[center]Deeeeeeeeeeeez[/center]"
 
 [node name="Choice2" type="RichTextLabel" parent="VBox/Choices"]
 custom_minimum_size = Vector2(200, 0)

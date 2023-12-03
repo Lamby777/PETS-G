@@ -33,13 +33,13 @@ pub fn spk_display(spk: &Speaker) -> String {
 /// slide the label up with a tween
 fn tween_choice_label(mut label: Gd<RichTextLabel>, up: bool) -> Option<()> {
     // TODO make this a constant
-    let tw_end = if up { 0 } else { 100 };
+    let tw_end = if up { 60 } else { 0 };
 
     label
         .create_tween()?
         .tween_property(
             label.clone().upcast(),
-            "position:y".into(),
+            "custom_minimum_size:y".into(),
             Variant::from(tw_end),
             DBOX_TWEEN_TIME,
         )?
