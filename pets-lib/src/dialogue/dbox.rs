@@ -94,9 +94,6 @@ pub struct DialogBox {
     #[base]
     node: Base<PanelContainer>,
 
-    /// the richtextlabel nodes for each current ix choice
-    choice_labels: Vec<Gd<RichTextLabel>>,
-
     // state for the current interaction
     current_ix: Option<Interaction>,
     current_page_number: usize,
@@ -201,27 +198,23 @@ impl DialogBox {
         y_tween.unwrap()
     }
 
-    fn free_choice_labels(&mut self) {
-        self.choice_labels
-            .iter_mut()
-            .for_each(|label| label.queue_free());
-        self.choice_labels.clear();
+    fn choice_labels(&self) -> Array<Gd<RichTextLabel>> {
+        self.choice_container()
+            .get_children()
+            .iter_shared()
+            .map(|v| v.cast())
+            .collect()
     }
-
     pub fn run_ix_ending(&mut self, ending: &DialogueEnding) {
         use dialogical::Label::*;
         use DialogueEnding::*;
 
         match ending {
             Choices(choices) => {
-                self.free_choice_labels();
-
                 let len = choices.len();
                 let width = self.node.get_size().x / len as f32;
 
-                // closure that gets called to make a choice label
-                // it captures `width` ^^^
-                let make_choice_label = |(i, choice): (_, &DialogueChoice)| {
+                for (i, choice) in choices.iter().enumerate() {
                     let mut label = RichTextLabel::new_alloc();
 
                     let name = format!("ChoiceLabel{}", i);
@@ -247,14 +240,7 @@ impl DialogBox {
                     });
 
                     timer.connect("timeout".into(), func);
-                    label
-                };
-
-                self.choice_labels = choices
-                    .iter()
-                    .enumerate()
-                    .map(make_choice_label)
-                    .collect::<Vec<_>>();
+                }
             }
 
             Label(Function(_label)) => {
@@ -277,8 +263,6 @@ impl IPanelContainer for DialogBox {
             node,
             spk_txt: "Cherry".into(),
             msg_txt: "[wave amp=50 freq=6]Hello, World![/wave]".into(),
-
-            choice_labels: vec![],
 
             active: false,
             tween: None,
@@ -307,6 +291,10 @@ impl IPanelContainer for DialogBox {
 
             // if end of interaction, close the dialog
             if self.current_page_number >= pagecount {
+                // TODO only do these if the ending is End
+                // Function labels can close the dialog box on their own,
+                // and Goto/Choice don't need to close the box anyway.
+                // (Choice can still do it by using function labels tho)
                 self.tween_into_view(false);
                 self.current_page_number = 0;
             } else {
