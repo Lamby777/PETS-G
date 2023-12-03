@@ -33,24 +33,18 @@ pub fn spk_display(spk: &Speaker) -> String {
 }
 
 /// slide the label up with a tween
-fn tween_choice_label(mut label: Gd<RichTextLabel>, up: bool) -> Option<()> {
+fn tween_choice_label(label: Gd<RichTextLabel>, up: bool) -> Option<Gd<Tween>> {
     // TODO make this a constant
-    let tw_end = if up { 60 } else { 0 };
+    let tw_end = if up { DBOX_CHOICE_HEIGHT } else { 0.0 };
 
-    label
-        .create_tween()?
-        .tween_property(
-            label.clone().upcast(),
-            "custom_minimum_size:y".into(),
-            Variant::from(tw_end),
-            DBOX_TWEEN_TIME,
-        )?
-        .set_trans(DBOX_TWEEN_TRANS);
-
-    // i mean... what else am i gonna do? the methods return Option<()>
-    // and writing map_err would defeat the purpose of using ? to make
-    // it shorter than spamming `.unwrap()` :P
-    Some(())
+    tween(
+        label.clone().upcast(),
+        "custom_minimum_size:y",
+        None,
+        tw_end,
+        DBOX_TWEEN_TIME,
+        DBOX_TWEEN_TRANS,
+    )
 }
 
 #[derive(Clone)]
@@ -179,19 +173,14 @@ impl DialogBox {
             viewport_y
         };
 
-        let y_tween: Option<Gd<Tween>> = try {
-            let mut y_tween = node.create_tween()?;
-            y_tween
-                .tween_property(
-                    node.clone().upcast(),
-                    "position:y".into(),
-                    Variant::from(tw_end),
-                    DBOX_TWEEN_TIME,
-                )?
-                .from(Variant::from(self.node.get_position().y))?
-                .set_trans(DBOX_TWEEN_TRANS)?;
-            y_tween
-        };
+        let y_tween = tween(
+            node.clone().upcast(),
+            "position:y",
+            Some(self.node.get_position().y),
+            tw_end,
+            DBOX_TWEEN_TIME,
+            DBOX_TWEEN_TRANS,
+        );
 
         self.active = up;
         self.tween = y_tween.clone();

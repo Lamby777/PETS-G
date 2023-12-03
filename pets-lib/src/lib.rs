@@ -24,16 +24,16 @@ mod consts;
 mod dialogue;
 mod items;
 mod limiq;
-mod macros;
 mod main_menu;
 mod stats;
+mod util;
 mod world;
 
 mod prelude {
     pub use crate::items::*;
     pub use crate::limiq::*;
-    pub use crate::macros::*;
     pub use crate::stats::*;
+    pub use crate::util::*;
 
     pub use crate::dialogue::autoload::DBoxInterface;
     pub use crate::dialogue::ix_map;
