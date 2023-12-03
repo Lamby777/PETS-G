@@ -211,13 +211,17 @@ impl DialogBox {
 
         match ending {
             Choices(choices) => {
+                self.choice_labels()
+                    .iter_shared()
+                    .for_each(|mut v| v.queue_free());
+
                 let len = choices.len();
                 let width = self.node.get_size().x / len as f32;
 
                 for (i, choice) in choices.iter().enumerate() {
                     let mut label = RichTextLabel::new_alloc();
 
-                    let name = format!("ChoiceLabel{}", i);
+                    let name = format!("Choice{}", i);
                     label.set_name(name.into());
                     label.set_text(choice.text.clone().into());
                     label.set_size(Vector2::new(width, DBOX_CHOICE_HEIGHT));
