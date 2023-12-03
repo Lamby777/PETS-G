@@ -103,8 +103,10 @@ impl TitleScreen {
         // how else could you work with in-band formatting? :P
         let old_text = node.get_text();
         let new_text = if is_picked {
+            // prepend [wave] stuff to msg
             format!("{}{}", MENU_WAVE_BBCODE, old_text)
         } else {
+            // slice off [wave] stuff from start
             let st: String = old_text.into();
             st[MENU_WAVE_BBCODE.len()..].to_owned()
         };
