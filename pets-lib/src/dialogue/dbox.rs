@@ -11,6 +11,7 @@ use dialogical::{DialogueChoice, DialogueEnding, Interaction};
 use dialogical::{Metaline, Metaline::*, PageMeta};
 
 use godot::engine::control::SizeFlags;
+use godot::engine::text_server::AutowrapMode;
 use godot::engine::{
     HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween,
 };
@@ -44,24 +45,6 @@ fn tween_choice_label(label: Gd<RichTextLabel>, up: bool) -> Option<Gd<Tween>> {
         DBOX_TWEEN_TIME,
         DBOX_TWEEN_TRANS,
     )
-}
-
-fn fit_width_to_text(mut label: Gd<RichTextLabel>) {
-    // what the actual hell
-    let theme = default_theme!();
-    let font = theme
-        .get_font("normal_font".into(), "RichTextLabel".into())
-        .unwrap();
-
-    let fontsize = theme.get_font_size("normal_font_size".into(), "RichTextLabel".into());
-
-    println!("font name: {:?}", font.get_font_name());
-    println!("font size: {:?}", fontsize);
-
-    let strsize = font.get_string_size(label.get_text());
-    println!("width of {:?} is {:?}", label.get_text(), strsize);
-
-    label.set_custom_minimum_size(Vector2::new(strsize.x * 3.2, DBOX_CHOICE_HEIGHT));
 }
 
 #[derive(Clone)]
@@ -233,10 +216,11 @@ impl DialogBox {
             label.set_text(choice.text.clone().into());
             label.set_size(Vector2::new(width, DBOX_CHOICE_HEIGHT));
             label.set_use_bbcode(true);
-            label.set_scroll_active(false);
-
             label.set_v_size_flags(SizeFlags::SIZE_SHRINK_END);
-            fit_width_to_text(label.clone());
+
+            // expand width to fit whole thing in one line
+            label.set_fit_content(true);
+            label.set_autowrap_mode(AutowrapMode::AUTOWRAP_OFF);
 
             container.add_child(label.clone().upcast());
 
