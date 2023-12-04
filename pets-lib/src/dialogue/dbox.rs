@@ -46,6 +46,16 @@ fn tween_choice_label(label: Gd<RichTextLabel>, up: bool) -> Option<Gd<Tween>> {
     )
 }
 
+fn fit_width_to_text(mut label: Gd<RichTextLabel>) {
+    let mut width = 0.0;
+
+    // increase width til the entire thing fits on 1 line
+    while label.get_visible_line_count() < 1 {
+        label.set_custom_minimum_size(Vector2::new(width, DBOX_CHOICE_HEIGHT));
+        width += 1.0;
+    }
+}
+
 #[derive(Clone)]
 pub struct MetaPair<T> {
     pub temporary: T,
@@ -211,14 +221,14 @@ impl DialogBox {
         for (i, choice) in choices.iter().enumerate() {
             let mut label = RichTextLabel::new_alloc();
 
-            let name = format!("Choice{}", i);
-            godot_print!("adding choice label {} with text {}", name, choice.text);
-            label.set_name(name.into());
+            label.set_name(format!("Choice{}", i).into());
             label.set_text(choice.text.clone().into());
             label.set_size(Vector2::new(width, DBOX_CHOICE_HEIGHT));
             label.set_use_bbcode(true);
+            label.set_scroll_active(false);
+
             label.set_v_size_flags(SizeFlags::SIZE_SHRINK_END);
-            label.set_custom_minimum_size(Vector2 { x: 300.0, y: 0.0 });
+            fit_width_to_text(label.clone());
 
             container.add_child(label.clone().upcast());
 
