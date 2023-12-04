@@ -10,6 +10,7 @@ use dialogical::Speaker::{self, *};
 use dialogical::{DialogueChoice, DialogueEnding, Interaction};
 use dialogical::{Metaline, Metaline::*, PageMeta};
 
+use godot::engine::control::SizeFlags;
 use godot::engine::{
     HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween,
 };
@@ -110,15 +111,20 @@ impl DialogBox {
         self.node.get_node_as("VBox/SpeakerName")
     }
 
-    fn choice_container(&self) -> Gd<HBoxContainer> {
-        self.node.get_node_as("VBox/Choices")
-    }
-
     /// Get the message text label
     fn msg_txt(&self) -> Gd<RichTextLabel> {
         self.node.get_node_as("VBox/Content")
     }
 
+    /// Get the container for choice labels
+    fn choice_container(&self) -> Gd<HBoxContainer> {
+        self.node.get_node_as("VBox/Choices")
+    }
+
+    /// If the dialog box is currently active
+    ///
+    /// Active means either tweening on-screen,
+    /// OR on-screen and not tweening off-screen
     pub fn is_active(&self) -> bool {
         self.active
     }
@@ -200,16 +206,21 @@ impl DialogBox {
 
         let len = choices.len();
         let width = self.node.get_size().x / len as f32;
+        let mut container = self.choice_container();
 
         for (i, choice) in choices.iter().enumerate() {
             let mut label = RichTextLabel::new_alloc();
 
             let name = format!("Choice{}", i);
+            godot_print!("adding choice label {} with text {}", name, choice.text);
             label.set_name(name.into());
             label.set_text(choice.text.clone().into());
             label.set_size(Vector2::new(width, DBOX_CHOICE_HEIGHT));
+            label.set_use_bbcode(true);
+            label.set_v_size_flags(SizeFlags::SIZE_SHRINK_END);
+            label.set_custom_minimum_size(Vector2 { x: 300.0, y: 0.0 });
 
-            self.node.add_child(label.clone().upcast());
+            container.add_child(label.clone().upcast());
 
             // queue a timer for the label to slide up
             let delay = DBOX_CHOICE_WAVE_TIME * (i + 1) as f64;
@@ -219,6 +230,8 @@ impl DialogBox {
             // thread safety stuff, so just pass in the instance id
             let label_id = label.instance_id();
             let func = Callable::from_fn("choice_slide_up", move |_| {
+                godot_print!("sliding up choice label {}", label_id);
+
                 // get the label again using the instance id
                 let label = Gd::from_instance_id(label_id);
                 tween_choice_label(label, true)
