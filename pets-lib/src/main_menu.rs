@@ -6,7 +6,7 @@
 //! - Cherry, 2:54 AM, 10/5/2023 | <3
 //!
 
-use godot::engine::{Control, INode2D, Node2D, RichTextLabel, Theme};
+use godot::engine::{Control, INode2D, Node2D, RichTextLabel};
 use godot::prelude::*;
 
 use crate::consts::main_menu::*;
@@ -64,7 +64,6 @@ impl TitleScreen {
         let choices = self.choices.as_mut().unwrap();
         let node = &mut choices[choice as usize];
 
-        let theme = load::<Theme>("res://themes/theme_deft.tres");
         let target_col = {
             let col = if is_picked {
                 "font_selected_color"
@@ -72,7 +71,7 @@ impl TitleScreen {
                 "default_color"
             };
 
-            theme.get_color(col.into(), "RichTextLabel".into())
+            default_theme!().get_color(col.into(), "RichTextLabel".into())
         };
 
         // tween x
