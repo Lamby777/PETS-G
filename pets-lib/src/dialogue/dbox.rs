@@ -205,8 +205,6 @@ impl DialogBox {
             .iter_shared()
             .for_each(|mut v| v.queue_free());
 
-        let len = choices.len();
-        let width = self.node.get_size().x / len as f32;
         let mut container = self.choice_container();
 
         for (i, choice) in choices.iter().enumerate() {
@@ -214,9 +212,10 @@ impl DialogBox {
 
             label.set_name(format!("Choice{}", i).into());
             label.set_text(choice.text.clone().into());
-            label.set_size(Vector2::new(width, DBOX_CHOICE_HEIGHT));
+
             label.set_use_bbcode(true);
             label.set_v_size_flags(SizeFlags::SIZE_SHRINK_END);
+            label.set_custom_minimum_size(Vector2::new(0.0, DBOX_CHOICE_HEIGHT));
 
             // expand width to fit whole thing in one line
             label.set_fit_content(true);
