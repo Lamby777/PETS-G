@@ -47,13 +47,21 @@ fn tween_choice_label(label: Gd<RichTextLabel>, up: bool) -> Option<Gd<Tween>> {
 }
 
 fn fit_width_to_text(mut label: Gd<RichTextLabel>) {
-    let font = default_theme!()
-        .get_font("normal_font".into(), "".into())
+    // what the actual hell
+    let theme = default_theme!();
+    let font = theme
+        .get_font("normal_font".into(), "RichTextLabel".into())
         .unwrap();
+
+    let fontsize = theme.get_font_size("normal_font_size".into(), "RichTextLabel".into());
+
     println!("font name: {:?}", font.get_font_name());
+    println!("font size: {:?}", fontsize);
+
     let strsize = font.get_string_size(label.get_text());
     println!("width of {:?} is {:?}", label.get_text(), strsize);
-    label.set_custom_minimum_size(Vector2::new(strsize.x, DBOX_CHOICE_HEIGHT));
+
+    label.set_custom_minimum_size(Vector2::new(strsize.x * 3.2, DBOX_CHOICE_HEIGHT));
 }
 
 #[derive(Clone)]
