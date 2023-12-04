@@ -11,6 +11,7 @@ pub struct SaveFile {
     pub chars: CharMap,
 }
 
+#[allow(unused)]
 impl SaveFile {
     pub fn new_empty() -> Self {
         Self {

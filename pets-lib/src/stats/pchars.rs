@@ -16,6 +16,7 @@ macro_rules! pchar_names {
     };
 }
 
+#[allow(unused)]
 impl PChar {
     pchar_names! {
         // Debugging purposes

@@ -25,6 +25,7 @@ pub struct StatsInterface {
 /// for example, `si.natural_speed_of(PChars::ETHAN)`
 macro_rules! impl_stat_getters_on_si {
     ($($stat:ident),*) => {
+        #[allow(unused)]
         impl StatsInterface {$(
             concat_idents::concat_idents!(fn_name = natural_, $stat, _of {
                 /// Get the stat of a given character at a level,

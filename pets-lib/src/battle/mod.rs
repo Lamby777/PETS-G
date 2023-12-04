@@ -8,8 +8,10 @@ use godot::engine::{INode2D, Node2D};
 use godot::prelude::*;
 
 mod player;
-mod rhythm;
 mod stat_translation;
+
+#[allow(unused)]
+mod rhythm;
 
 #[derive(GodotClass)]
 #[class(base=Node2D)]

@@ -7,8 +7,6 @@
 //! - Cherry 9/2/2023 | <3
 //!
 
-#![allow(dead_code)]
-// #![allow(unused_imports)]
 #![feature(variant_count)]
 #![feature(try_blocks)]
 #![feature(let_chains)]
