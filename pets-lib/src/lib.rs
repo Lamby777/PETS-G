@@ -8,7 +8,6 @@
 //!
 
 #![feature(variant_count)]
-#![feature(try_blocks)]
 #![feature(let_chains)]
 
 use godot::engine::Engine;
