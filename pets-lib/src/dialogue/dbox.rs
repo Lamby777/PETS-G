@@ -7,7 +7,7 @@
 //!
 
 use dialogical::Speaker::{self, *};
-use dialogical::{DialogueEnding, Interaction};
+use dialogical::{DialogueChoice, DialogueEnding, Interaction};
 use dialogical::{Metaline, Metaline::*, PageMeta};
 
 use godot::engine::{
@@ -192,47 +192,50 @@ impl DialogBox {
             .map(|v| v.cast())
             .collect()
     }
+
+    fn update_choice_labels(&mut self, choices: &[DialogueChoice]) {
+        self.choice_labels()
+            .iter_shared()
+            .for_each(|mut v| v.queue_free());
+
+        let len = choices.len();
+        let width = self.node.get_size().x / len as f32;
+
+        for (i, choice) in choices.iter().enumerate() {
+            let mut label = RichTextLabel::new_alloc();
+
+            let name = format!("Choice{}", i);
+            label.set_name(name.into());
+            label.set_text(choice.text.clone().into());
+            label.set_size(Vector2::new(width, DBOX_CHOICE_HEIGHT));
+
+            self.node.add_child(label.clone().upcast());
+
+            // queue a timer for the label to slide up
+            let delay = DBOX_CHOICE_WAVE_TIME * (i + 1) as f64;
+            let mut timer = godot_tree!().create_timer(delay).unwrap();
+
+            // we can't move the label into the closure because of
+            // thread safety stuff, so just pass in the instance id
+            let label_id = label.instance_id();
+            let func = Callable::from_fn("choice_slide_up", move |_| {
+                // get the label again using the instance id
+                let label = Gd::from_instance_id(label_id);
+                tween_choice_label(label, true)
+                    .map(|_| Variant::from(()))
+                    .ok_or(())
+            });
+
+            timer.connect("timeout".into(), func);
+        }
+    }
+
     pub fn run_ix_ending(&mut self, ending: &DialogueEnding) {
         use dialogical::Label::*;
         use DialogueEnding::*;
 
         match ending {
-            Choices(choices) => {
-                self.choice_labels()
-                    .iter_shared()
-                    .for_each(|mut v| v.queue_free());
-
-                let len = choices.len();
-                let width = self.node.get_size().x / len as f32;
-
-                for (i, choice) in choices.iter().enumerate() {
-                    let mut label = RichTextLabel::new_alloc();
-
-                    let name = format!("Choice{}", i);
-                    label.set_name(name.into());
-                    label.set_text(choice.text.clone().into());
-                    label.set_size(Vector2::new(width, DBOX_CHOICE_HEIGHT));
-
-                    self.node.add_child(label.clone().upcast());
-
-                    // queue a timer for the label to slide up
-                    let delay = DBOX_CHOICE_WAVE_TIME * (i + 1) as f64;
-                    let mut timer = godot_tree!().create_timer(delay).unwrap();
-
-                    // we can't move the label into the closure because of
-                    // thread safety stuff, so just pass in the instance id
-                    let label_id = label.instance_id();
-                    let func = Callable::from_fn("choice_slide_up", move |_| {
-                        // get the label again using the instance id
-                        let label = Gd::from_instance_id(label_id);
-                        tween_choice_label(label, true)
-                            .map(|_| Variant::from(()))
-                            .ok_or(())
-                    });
-
-                    timer.connect("timeout".into(), func);
-                }
-            }
+            Choices(choices) => self.update_choice_labels(choices),
 
             Label(Function(_label)) => {
                 // TODO run the function
