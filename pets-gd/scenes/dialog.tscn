@@ -43,12 +43,13 @@ layout_mode = 2
 size_flags_vertical = 8
 bbcode_enabled = true
 text = "[center]Deeeeeeeeeeeez[/center]"
+autowrap_mode = 0
 
 [node name="Choice2" type="RichTextLabel" parent="VBox/Choices"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 bbcode_enabled = true
-text = "[center]Nuts![/center]"
+text = "[center]Nuggets![/center]"
 
 [node name="Choice3" type="RichTextLabel" parent="VBox/Choices"]
 custom_minimum_size = Vector2(200, 0)

@@ -47,13 +47,13 @@ fn tween_choice_label(label: Gd<RichTextLabel>, up: bool) -> Option<Gd<Tween>> {
 }
 
 fn fit_width_to_text(mut label: Gd<RichTextLabel>) {
-    let mut width = 0.0;
-
-    // increase width til the entire thing fits on 1 line
-    while label.get_visible_line_count() < 1 {
-        label.set_custom_minimum_size(Vector2::new(width, DBOX_CHOICE_HEIGHT));
-        width += 1.0;
-    }
+    let font = default_theme!()
+        .get_font("normal_font".into(), "".into())
+        .unwrap();
+    println!("font name: {:?}", font.get_font_name());
+    let strsize = font.get_string_size(label.get_text());
+    println!("width of {:?} is {:?}", label.get_text(), strsize);
+    label.set_custom_minimum_size(Vector2::new(strsize.x, DBOX_CHOICE_HEIGHT));
 }
 
 #[derive(Clone)]
@@ -240,8 +240,6 @@ impl DialogBox {
             // thread safety stuff, so just pass in the instance id
             let label_id = label.instance_id();
             let func = Callable::from_fn("choice_slide_up", move |_| {
-                godot_print!("sliding up choice label {}", label_id);
-
                 // get the label again using the instance id
                 let label = Gd::from_instance_id(label_id);
                 tween_choice_label(label, true)

@@ -7,6 +7,7 @@ use godot::engine::Tween;
 use godot::prelude::*;
 
 pub use crate::current_scene;
+pub use crate::default_theme;
 pub use crate::godot_tree;
 
 #[allow(unused)]
@@ -45,12 +46,19 @@ where
 }
 
 #[macro_export]
+macro_rules! default_theme {
+    () => {
+        load::<godot::engine::Theme>("res://themes/theme_deft.tres")
+    };
+}
+
+#[macro_export]
 macro_rules! godot_tree {
     () => {
         godot::engine::Engine::singleton()
             .get_main_loop()
             .unwrap()
-            .cast::<SceneTree>()
+            .cast::<godot::engine::SceneTree>()
     };
 }
 
