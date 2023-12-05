@@ -44,14 +44,11 @@ impl TitleScreen {
         let old_choice = self.current_choice;
 
         let res: u8 = if let Some(n) = old_choice {
+            self.tween_choice_to(false, n);
             (n as i16 + diff).rem_euclid(CHOICES_COUNT as i16) as u8
         } else {
             0
         };
-
-        if let Some(old_choice) = old_choice {
-            self.tween_choice_to(false, old_choice);
-        }
 
         self.tween_choice_to(true, res);
         self.current_choice = Some(res);
