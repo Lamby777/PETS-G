@@ -206,28 +206,20 @@ impl DialogBox {
         let mut container = self.choice_container();
 
         for (i, choice) in choices.iter().enumerate() {
-            let mut label = RichTextLabel::new_alloc();
+            let mut label = new_choice_label();
 
             label.set_name(format!("Choice{}", i).into());
             label.set_text(choice.text.clone().into());
-            label.set_use_bbcode(true);
-
-            label.set_scroll_active(false);
-            label.set_v_size_flags(SizeFlags::SIZE_SHRINK_END);
-
-            // expand width to fit whole thing in one line
-            label.set_fit_content(true);
-            label.set_autowrap_mode(AutowrapMode::AUTOWRAP_OFF);
-
-            container.add_child(label.clone().upcast());
-
-            // queue a timer for the label to slide up
-            let delay = DBOX_CHOICE_WAVE_TIME * (i + 1) as f64;
-            let mut timer = godot_tree!().create_timer(delay).unwrap();
 
             // we can't move the label into the closure because of
             // thread safety stuff, so just pass in the instance id
             let label_id = label.instance_id();
+
+            // queue a timer for the label to slide up
+            let mut timer = godot_tree!()
+                .create_timer(DBOX_CHOICE_WAVE_TIME * (i + 1) as f64)
+                .unwrap();
+
             let func = Callable::from_fn("choice_slide_up", move |_| {
                 // get the label again using the instance id
                 let label = Gd::from_instance_id(label_id);
@@ -236,6 +228,7 @@ impl DialogBox {
                     .ok_or(())
             });
 
+            container.add_child(label.upcast());
             timer.connect("timeout".into(), func);
         }
     }
@@ -272,6 +265,21 @@ fn tween_choice_label(label: Gd<RichTextLabel>, up: bool) -> Option<Gd<Tween>> {
         DBOX_TWEEN_TIME,
         DBOX_TWEEN_TRANS,
     )
+}
+
+/// create a new choice label with default settings
+fn new_choice_label() -> Gd<RichTextLabel> {
+    let mut label = RichTextLabel::new_alloc();
+
+    label.set_use_bbcode(true);
+    label.set_scroll_active(false);
+    label.set_v_size_flags(SizeFlags::SIZE_SHRINK_END);
+
+    // expand width to fit whole thing in one line
+    label.set_fit_content(true);
+    label.set_autowrap_mode(AutowrapMode::AUTOWRAP_OFF);
+
+    label
 }
 
 #[godot_api]
