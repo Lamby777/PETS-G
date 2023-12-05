@@ -228,7 +228,11 @@ impl DialogBox {
 
             let func = Callable::from_fn("choice_slide_up", move |_| {
                 // get the label again using the instance id
-                let label = Gd::from_instance_id(label_id);
+                let Ok(label) = Gd::try_from_instance_id(label_id) else {
+                    godot_print!("label not found");
+                    return Ok(Variant::from(()));
+                };
+
                 tween_choice_label(label, up)
                     .map(|_| Variant::from(()))
                     .ok_or(())
