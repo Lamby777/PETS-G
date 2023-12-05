@@ -189,11 +189,10 @@ impl DialogBox {
 
     fn shift_selection(&mut self, offset: i16) {
         let choice_count = self.choice_labels().len();
+
         let new_choice = match self.selected_choice {
             Some(v) => (v as i16 + offset).rem_euclid(choice_count as i16) as usize,
-
-            // default to the last choice
-            None => choice_count - 1,
+            None => 0,
         };
 
         self.selected_choice = Some(new_choice);
