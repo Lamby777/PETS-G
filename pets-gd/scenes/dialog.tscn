@@ -1,15 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://wkelk3y4bkcj"]
+[gd_scene load_steps=3 format=3 uid="uid://wkelk3y4bkcj"]
 
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_jbfs2"]
+[ext_resource type="PackedScene" uid="uid://ckyanktf41aox" path="res://scenes/dialogchoice.tscn" id="2_uetgi"]
 
 [node name="DialogBox" type="DialogBox"]
+clip_contents = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -704.0
 offset_top = 1080.0
 offset_right = 704.0
-offset_bottom = 1520.0
+offset_bottom = 1526.0
 grow_horizontal = 2
 pivot_offset = Vector2(704, 220)
 theme = ExtResource("1_jbfs2")
@@ -36,3 +38,11 @@ clip_contents = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="Amogus" parent="VBox/Choices" instance=ExtResource("2_uetgi")]
+layout_mode = 2
+
+[node name="Amogus2" parent="VBox/Choices" instance=ExtResource("2_uetgi")]
+layout_mode = 2
+text = "Amogus2"
