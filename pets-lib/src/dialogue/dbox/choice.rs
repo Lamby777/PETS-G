@@ -41,6 +41,7 @@ impl DialogBox {
         }
     }
 
+    #[allow(unused)]
     pub(super) fn tween_choices_wave(&mut self, up: bool) {
         for (i, label) in self.choice_labels().iter_shared().enumerate() {
             // we can't move the label into the closure because of
@@ -49,14 +50,25 @@ impl DialogBox {
 
             let func = Callable::from_fn("choice_slide_up", move |_| {
                 // get the label again using the instance id
-                let Ok(label) = Gd::try_from_instance_id(label_id) else {
+                let label = Gd::<Control>::try_from_instance_id(label_id);
+                let Ok(label) = label else {
                     // godot_warn!("label not found");
                     return Ok(Variant::from(()));
                 };
 
-                tween_choice_label(label, up)
-                    .map(|_| Variant::from(()))
-                    .ok_or(())
+                let tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
+
+                // tween(
+                //     label.upcast(),
+                //     "theme_override_constants/margin_top",
+                //     None,
+                //     tw_end,
+                //     DBOX_CHOICE_TWEEN_TIME,
+                //     DBOX_CHOICE_TWEEN_TRANS,
+                // )
+                // .unwrap();
+
+                Ok(Variant::from(()))
             });
 
             let mut timer = godot_tree!()
@@ -66,21 +78,6 @@ impl DialogBox {
             timer.connect("timeout".into(), func);
         }
     }
-}
-
-/// tween a label's y minimum size to grow or shrink
-/// TODO inline this in tween_choices_wave
-fn tween_choice_label(label: Gd<Control>, up: bool) -> Option<Gd<Tween>> {
-    let tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
-
-    tween(
-        label.clone().upcast(),
-        "theme_override_constants/margin_top",
-        None,
-        tw_end,
-        DBOX_CHOICE_TWEEN_TIME,
-        DBOX_CHOICE_TWEEN_TRANS,
-    )
 }
 
 /// create a new choice label with default settings
