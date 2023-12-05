@@ -45,4 +45,3 @@ layout_mode = 2
 
 [node name="Amogus2" parent="VBox/Choices" instance=ExtResource("2_uetgi")]
 layout_mode = 2
-text = "Amogus2"
