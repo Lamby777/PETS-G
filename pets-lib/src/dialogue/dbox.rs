@@ -94,32 +94,11 @@ pub struct DialogBox {
 
 #[godot_api]
 impl DialogBox {
-    /// Get the speaker name label
-    fn spk_txt(&self) -> Gd<RichTextLabel> {
-        self.node.get_node_as("VBox/SpeakerName")
-    }
-
-    /// Get the message text label
-    fn msg_txt(&self) -> Gd<RichTextLabel> {
-        self.node.get_node_as("VBox/Content")
-    }
-
-    /// Get the container for choice labels
-    fn choice_container(&self) -> Gd<HBoxContainer> {
-        self.node.get_node_as("VBox/Choices")
-    }
-
-    /// If the dialog box is currently active
-    ///
-    /// Active means either tweening on-screen,
-    /// OR on-screen and not tweening off-screen
-    pub fn is_active(&self) -> bool {
-        self.active
-    }
-
-    pub fn set_ix(&mut self, ix: Interaction) {
-        self.current_ix = Some(ix);
-        self.goto_page(0);
+    #[func]
+    pub fn do_draw(&mut self) {
+        // I THINK this clone is fine, probably RC'd
+        self.spk_txt().set_text(self.spk_txt.clone());
+        self.msg_txt().set_text(self.msg_txt.clone());
     }
 
     /// sets the speaker and message labels to the given page
@@ -133,25 +112,6 @@ impl DialogBox {
         let spk = spk_display(&self.speaker.temporary);
         self.spk_txt = spk.into();
         self.msg_txt = msg.into();
-    }
-
-    /// Updates the speaker and vox based on the given page metadata
-    pub fn update_meta(&mut self, meta: &PageMeta) {
-        self.speaker.set_from(&meta.speaker);
-        self.vox.set_from(&meta.vox);
-    }
-
-    #[func]
-    pub fn do_draw(&mut self) {
-        // I THINK this clone is fine, probably RC'd
-        self.spk_txt().set_text(self.spk_txt.clone());
-        self.msg_txt().set_text(self.msg_txt.clone());
-    }
-
-    pub fn cancel_tween(&mut self) {
-        if let Some(tween) = &mut self.tween {
-            tween.stop()
-        }
     }
 
     pub fn tween_into_view(&mut self, up: bool) -> Gd<Tween> {
@@ -179,14 +139,6 @@ impl DialogBox {
         y_tween.unwrap()
     }
 
-    fn choice_labels(&self) -> Array<Gd<RichTextLabel>> {
-        self.choice_container()
-            .get_children()
-            .iter_shared()
-            .map(|v| v.cast())
-            .collect()
-    }
-
     fn shift_selection(&mut self, offset: i16) {
         let choice_count = self.choice_labels().len();
 
@@ -196,12 +148,6 @@ impl DialogBox {
         };
 
         self.selected_choice = Some(new_choice);
-    }
-
-    fn free_choice_labels(&mut self) {
-        self.choice_labels()
-            .iter_shared()
-            .for_each(|mut v| v.queue_free());
     }
 
     /// delete old labels and create new default ones
@@ -354,5 +300,64 @@ impl IPanelContainer for DialogBox {
             // mark the input as handled
             self.node.get_viewport().unwrap().set_input_as_handled();
         }
+    }
+}
+
+/// shorter methods that are sorta self-explanatory
+/// moving 'em here to avoid clutter up above
+/// TODO no #[godot_api] ...?
+impl DialogBox {
+    /// Get the speaker name label
+    fn spk_txt(&self) -> Gd<RichTextLabel> {
+        self.node.get_node_as("VBox/SpeakerName")
+    }
+
+    /// Get the message text label
+    fn msg_txt(&self) -> Gd<RichTextLabel> {
+        self.node.get_node_as("VBox/Content")
+    }
+
+    /// Get the container for choice labels
+    fn choice_container(&self) -> Gd<HBoxContainer> {
+        self.node.get_node_as("VBox/Choices")
+    }
+
+    /// If the dialog box is currently active
+    ///
+    /// Active means either tweening on-screen,
+    /// OR on-screen and not tweening off-screen
+    pub fn is_active(&self) -> bool {
+        self.active
+    }
+
+    pub fn set_ix(&mut self, ix: Interaction) {
+        self.current_ix = Some(ix);
+        self.goto_page(0);
+    }
+
+    /// Updates the speaker and vox based on the given page metadata
+    pub fn update_meta(&mut self, meta: &PageMeta) {
+        self.speaker.set_from(&meta.speaker);
+        self.vox.set_from(&meta.vox);
+    }
+
+    pub fn cancel_tween(&mut self) {
+        if let Some(tween) = &mut self.tween {
+            tween.stop()
+        }
+    }
+
+    fn choice_labels(&self) -> Array<Gd<RichTextLabel>> {
+        self.choice_container()
+            .get_children()
+            .iter_shared()
+            .map(|v| v.cast())
+            .collect()
+    }
+
+    fn free_choice_labels(&mut self) {
+        self.choice_labels()
+            .iter_shared()
+            .for_each(|mut v| v.queue_free());
     }
 }
