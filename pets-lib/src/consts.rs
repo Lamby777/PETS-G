@@ -24,7 +24,12 @@ pub mod dialogue {
     pub const DBOX_NODE_NAME: &str = "DialogBox";
     pub const DBOX_TWEEN_TIME: f64 = 0.5;
     pub const DBOX_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
-    pub const DBOX_CHOICE_TWEEN_TIME: f64 = 5.0;
+
+    /// distance the dialog box is from the bottom of the screen
+    /// to avoid the glow effect from showing while it's not active
+    pub const DBOX_Y_BELOW_VIEWPORT: f32 = 20.0;
+
+    pub const DBOX_CHOICE_TWEEN_TIME: f64 = DBOX_TWEEN_TIME;
     pub const DBOX_CHOICE_TWEEN_TRANS: TransitionType = DBOX_TWEEN_TRANS;
     pub const DBOX_CHOICE_HEIGHT: f32 = 60.0;
     pub const DBOX_CHOICE_WAVE_TIME: f64 = 0.1;
