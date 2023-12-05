@@ -1,17 +1,12 @@
 [gd_scene format=3 uid="uid://ckyanktf41aox"]
 
-[node name="Control" type="Control"]
+[node name="Container" type="Container"]
 clip_contents = true
-layout_mode = 3
-anchors_preset = 0
 offset_right = 219.0
 offset_bottom = 477.0
 
 [node name="Label" type="RichTextLabel" parent="."]
 layout_mode = 2
-offset_top = 700.0
-offset_right = 219.0
-offset_bottom = 777.0
 size_flags_vertical = 8
 theme_override_font_sizes/normal_font_size = 56
 bbcode_enabled = true
