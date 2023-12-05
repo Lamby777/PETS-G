@@ -4,7 +4,7 @@
 
 use dialogical::DialogueChoice;
 
-use godot::engine::{Control, RichTextLabel, Tween};
+use godot::engine::{Container, RichTextLabel};
 use godot::prelude::*;
 
 use crate::consts::dialogue::*;
@@ -50,7 +50,7 @@ impl DialogBox {
 
             let func = Callable::from_fn("choice_slide_up", move |_| {
                 // get the label again using the instance id
-                let label = Gd::<Control>::try_from_instance_id(label_id);
+                let label = Gd::<Container>::try_from_instance_id(label_id);
                 let Ok(label) = label else {
                     // godot_warn!("label not found");
                     return Ok(Variant::from(()));
@@ -81,7 +81,7 @@ impl DialogBox {
 }
 
 /// create a new choice label with default settings
-fn new_choice_label() -> Gd<Control> {
+fn new_choice_label() -> Gd<Container> {
     let label = load::<PackedScene>("res://scenes/dialogchoice.tscn");
     label.instantiate_as()
 }
