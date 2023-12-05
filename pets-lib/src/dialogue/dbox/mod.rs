@@ -223,7 +223,6 @@ impl IPanelContainer for DialogBox {
 
 /// shorter methods that are sorta self-explanatory
 /// moving 'em here to avoid clutter up above
-/// TODO no #[godot_api] ...?
 impl DialogBox {
     /// Get the speaker name label
     fn spk_txt(&self) -> Gd<RichTextLabel> {
