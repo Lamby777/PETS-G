@@ -71,11 +71,11 @@ impl DialogBox {
 /// tween a label's y minimum size to grow or shrink
 /// TODO inline this in tween_choices_wave
 fn tween_choice_label(label: Gd<MarginContainer>, up: bool) -> Option<Gd<Tween>> {
-    let tw_end = if up { DBOX_CHOICE_HEIGHT * 20.0 } else { 0.0 };
+    let tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
 
     tween(
         label.clone().upcast(),
-        "custom_minimum_size:y",
+        "theme_override_constants/margin_top",
         None,
         tw_end,
         DBOX_CHOICE_TWEEN_TIME,
