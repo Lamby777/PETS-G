@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://ckyanktf41aox"]
 
-[node name="PanelContainer" type="MarginContainer"]
+[node name="Margins" type="MarginContainer"]
 clip_contents = true
 offset_right = 219.0
 offset_bottom = 77.0
+size_flags_vertical = 0
 theme_override_constants/margin_top = 400
 
 [node name="Label" type="RichTextLabel" parent="."]
