@@ -7,11 +7,8 @@
 //!
 
 use dialogical::Speaker::{self, *};
-use dialogical::{DialogueChoice, DialogueEnding, Interaction};
-use dialogical::{Metaline, Metaline::*, PageMeta};
+use dialogical::{DialogueEnding, Interaction, Metaline, Metaline::*, PageMeta};
 
-use godot::engine::control::SizeFlags;
-use godot::engine::text_server::AutowrapMode;
 use godot::engine::{
     HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween,
 };
@@ -19,6 +16,9 @@ use godot::prelude::*;
 
 use crate::consts::dialogue::*;
 use crate::prelude::*;
+
+// extra impls
+mod choice;
 
 /// Turn a Speaker into a displayable name
 ///
@@ -94,32 +94,11 @@ pub struct DialogBox {
 
 #[godot_api]
 impl DialogBox {
-    /// Get the speaker name label
-    fn spk_txt(&self) -> Gd<RichTextLabel> {
-        self.node.get_node_as("VBox/SpeakerName")
-    }
-
-    /// Get the message text label
-    fn msg_txt(&self) -> Gd<RichTextLabel> {
-        self.node.get_node_as("VBox/Content")
-    }
-
-    /// Get the container for choice labels
-    fn choice_container(&self) -> Gd<HBoxContainer> {
-        self.node.get_node_as("VBox/Choices")
-    }
-
-    /// If the dialog box is currently active
-    ///
-    /// Active means either tweening on-screen,
-    /// OR on-screen and not tweening off-screen
-    pub fn is_active(&self) -> bool {
-        self.active
-    }
-
-    pub fn set_ix(&mut self, ix: Interaction) {
-        self.current_ix = Some(ix);
-        self.goto_page(0);
+    #[func]
+    pub fn do_draw(&mut self) {
+        // I THINK this clone is fine, probably RC'd
+        self.spk_txt().set_text(self.spk_txt.clone());
+        self.msg_txt().set_text(self.msg_txt.clone());
     }
 
     /// sets the speaker and message labels to the given page
@@ -133,25 +112,6 @@ impl DialogBox {
         let spk = spk_display(&self.speaker.temporary);
         self.spk_txt = spk.into();
         self.msg_txt = msg.into();
-    }
-
-    /// Updates the speaker and vox based on the given page metadata
-    pub fn update_meta(&mut self, meta: &PageMeta) {
-        self.speaker.set_from(&meta.speaker);
-        self.vox.set_from(&meta.vox);
-    }
-
-    #[func]
-    pub fn do_draw(&mut self) {
-        // I THINK this clone is fine, probably RC'd
-        self.spk_txt().set_text(self.spk_txt.clone());
-        self.msg_txt().set_text(self.msg_txt.clone());
-    }
-
-    pub fn cancel_tween(&mut self) {
-        if let Some(tween) = &mut self.tween {
-            tween.stop()
-        }
     }
 
     pub fn tween_into_view(&mut self, up: bool) -> Gd<Tween> {
@@ -179,80 +139,13 @@ impl DialogBox {
         y_tween.unwrap()
     }
 
-    fn choice_labels(&self) -> Array<Gd<RichTextLabel>> {
-        self.choice_container()
-            .get_children()
-            .iter_shared()
-            .map(|v| v.cast())
-            .collect()
-    }
-
-    fn shift_selection(&mut self, offset: i16) {
-        let choice_count = self.choice_labels().len();
-
-        let new_choice = match self.selected_choice {
-            Some(v) => (v as i16 + offset).rem_euclid(choice_count as i16) as usize,
-            None => 0,
-        };
-
-        self.selected_choice = Some(new_choice);
-    }
-
-    fn free_choice_labels(&mut self) {
-        self.choice_labels()
-            .iter_shared()
-            .for_each(|mut v| v.queue_free());
-    }
-
-    /// delete old labels and create new default ones
-    fn recreate_labels(&mut self, choices: &[DialogueChoice]) {
-        self.free_choice_labels();
-
-        let mut container = self.choice_container();
-
-        for (i, choice) in choices.iter().enumerate() {
-            let mut label = new_choice_label();
-
-            label.set_name(format!("Choice{}", i).into());
-            label.set_text(choice.text.clone().into());
-
-            container.add_child(label.upcast());
-        }
-    }
-
-    fn tween_choices_wave(&mut self, up: bool) {
-        for (i, label) in self.choice_labels().iter_shared().enumerate() {
-            // we can't move the label into the closure because of
-            // thread safety stuff, so just pass in the instance id
-            let label_id = label.instance_id();
-
-            let func = Callable::from_fn("choice_slide_up", move |_| {
-                // get the label again using the instance id
-                let Ok(label) = Gd::try_from_instance_id(label_id) else {
-                    godot_print!("label not found");
-                    return Ok(Variant::from(()));
-                };
-
-                tween_choice_label(label, up)
-                    .map(|_| Variant::from(()))
-                    .ok_or(())
-            });
-
-            let mut timer = godot_tree!()
-                .create_timer(DBOX_CHOICE_WAVE_TIME * (i + 1) as f64)
-                .unwrap();
-
-            timer.connect("timeout".into(), func);
-        }
-    }
-
     pub fn run_ix_ending(&mut self, ending: &DialogueEnding) {
         use dialogical::Label::*;
         use DialogueEnding::*;
 
         match ending {
             Choices(choices) => {
-                self.recreate_labels(choices);
+                self.recreate_choice_labels(choices);
                 self.tween_choices_wave(true);
             }
 
@@ -267,35 +160,6 @@ impl DialogBox {
             End => {}
         }
     }
-}
-
-/// tween a label's y minimum size to grow or shrink
-fn tween_choice_label(label: Gd<RichTextLabel>, up: bool) -> Option<Gd<Tween>> {
-    let tw_end = if up { DBOX_CHOICE_HEIGHT * 20.0 } else { 0.0 };
-
-    tween(
-        label.clone().upcast(),
-        "custom_minimum_size:y",
-        None,
-        tw_end,
-        DBOX_TWEEN_TIME,
-        DBOX_TWEEN_TRANS,
-    )
-}
-
-/// create a new choice label with default settings
-fn new_choice_label() -> Gd<RichTextLabel> {
-    let mut label = RichTextLabel::new_alloc();
-
-    label.set_use_bbcode(true);
-    label.set_scroll_active(false);
-    label.set_v_size_flags(SizeFlags::SIZE_SHRINK_END);
-
-    // expand width to fit whole thing in one line
-    label.set_fit_content(true);
-    label.set_autowrap_mode(AutowrapMode::AUTOWRAP_OFF);
-
-    label
 }
 
 #[godot_api]
@@ -354,5 +218,64 @@ impl IPanelContainer for DialogBox {
             // mark the input as handled
             self.node.get_viewport().unwrap().set_input_as_handled();
         }
+    }
+}
+
+/// shorter methods that are sorta self-explanatory
+/// moving 'em here to avoid clutter up above
+/// TODO no #[godot_api] ...?
+impl DialogBox {
+    /// Get the speaker name label
+    fn spk_txt(&self) -> Gd<RichTextLabel> {
+        self.node.get_node_as("VBox/SpeakerName")
+    }
+
+    /// Get the message text label
+    fn msg_txt(&self) -> Gd<RichTextLabel> {
+        self.node.get_node_as("VBox/Content")
+    }
+
+    /// Get the container for choice labels
+    fn choice_container(&self) -> Gd<HBoxContainer> {
+        self.node.get_node_as("VBox/Choices")
+    }
+
+    /// If the dialog box is currently active
+    ///
+    /// Active means either tweening on-screen,
+    /// OR on-screen and not tweening off-screen
+    pub fn is_active(&self) -> bool {
+        self.active
+    }
+
+    pub fn set_ix(&mut self, ix: Interaction) {
+        self.current_ix = Some(ix);
+        self.goto_page(0);
+    }
+
+    /// Updates the speaker and vox based on the given page metadata
+    pub fn update_meta(&mut self, meta: &PageMeta) {
+        self.speaker.set_from(&meta.speaker);
+        self.vox.set_from(&meta.vox);
+    }
+
+    pub fn cancel_tween(&mut self) {
+        if let Some(tween) = &mut self.tween {
+            tween.stop()
+        }
+    }
+
+    fn choice_labels(&self) -> Array<Gd<RichTextLabel>> {
+        self.choice_container()
+            .get_children()
+            .iter_shared()
+            .map(|v| v.cast())
+            .collect()
+    }
+
+    fn free_choice_labels(&mut self) {
+        self.choice_labels()
+            .iter_shared()
+            .for_each(|mut v| v.queue_free());
     }
 }
