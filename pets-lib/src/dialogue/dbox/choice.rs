@@ -4,7 +4,7 @@
 
 use dialogical::DialogueChoice;
 
-use godot::engine::{MarginContainer, RichTextLabel, Tween};
+use godot::engine::{Control, RichTextLabel, Tween};
 use godot::prelude::*;
 
 use crate::consts::dialogue::*;
@@ -70,7 +70,7 @@ impl DialogBox {
 
 /// tween a label's y minimum size to grow or shrink
 /// TODO inline this in tween_choices_wave
-fn tween_choice_label(label: Gd<MarginContainer>, up: bool) -> Option<Gd<Tween>> {
+fn tween_choice_label(label: Gd<Control>, up: bool) -> Option<Gd<Tween>> {
     let tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
 
     tween(
@@ -84,7 +84,7 @@ fn tween_choice_label(label: Gd<MarginContainer>, up: bool) -> Option<Gd<Tween>>
 }
 
 /// create a new choice label with default settings
-fn new_choice_label() -> Gd<MarginContainer> {
+fn new_choice_label() -> Gd<Control> {
     let label = load::<PackedScene>("res://scenes/dialogchoice.tscn");
     label.instantiate_as()
 }
