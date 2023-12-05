@@ -33,20 +33,6 @@ pub fn spk_display(spk: &Speaker) -> String {
     .to_owned()
 }
 
-/// slide the label up with a tween
-fn tween_choice_label(label: Gd<RichTextLabel>, up: bool) -> Option<Gd<Tween>> {
-    let tw_end = if up { DBOX_CHOICE_HEIGHT * 20.0 } else { 0.0 };
-
-    tween(
-        label.clone().upcast(),
-        "custom_minimum_size:y",
-        None,
-        tw_end,
-        DBOX_TWEEN_TIME,
-        DBOX_TWEEN_TRANS,
-    )
-}
-
 #[derive(Clone)]
 pub struct MetaPair<T> {
     pub temporary: T,
@@ -95,6 +81,7 @@ pub struct DialogBox {
     vox: MetaPair<String>,
     tween: Option<Gd<Tween>>,
     active: bool,
+    selected_choice: Option<usize>,
 
     // independent from any interaction-related stuff,
     // these are the actual strings that are displayed
@@ -200,7 +187,19 @@ impl DialogBox {
             .collect()
     }
 
-    fn update_choice_labels(&mut self, choices: &[DialogueChoice]) {
+    fn shift_selection(&mut self, offset: i16) {
+        let choice_count = self.choice_labels().len();
+        let new_choice = match self.selected_choice {
+            Some(v) => (v as i16 + offset).rem_euclid(choice_count as i16) as usize,
+
+            // default to the last choice
+            None => choice_count - 1,
+        };
+
+        self.selected_choice = Some(new_choice);
+    }
+
+    fn new_choice_labels(&mut self, choices: &[DialogueChoice]) {
         self.choice_labels()
             .iter_shared()
             .for_each(|mut v| v.queue_free());
@@ -247,7 +246,7 @@ impl DialogBox {
         use DialogueEnding::*;
 
         match ending {
-            Choices(choices) => self.update_choice_labels(choices),
+            Choices(choices) => self.new_choice_labels(choices),
 
             Label(Function(_label)) => {
                 // TODO run the function
@@ -262,6 +261,20 @@ impl DialogBox {
     }
 }
 
+/// tween a label's y minimum size to grow or shrink
+fn tween_choice_label(label: Gd<RichTextLabel>, up: bool) -> Option<Gd<Tween>> {
+    let tw_end = if up { DBOX_CHOICE_HEIGHT * 20.0 } else { 0.0 };
+
+    tween(
+        label.clone().upcast(),
+        "custom_minimum_size:y",
+        None,
+        tw_end,
+        DBOX_TWEEN_TIME,
+        DBOX_TWEEN_TRANS,
+    )
+}
+
 #[godot_api]
 impl IPanelContainer for DialogBox {
     fn init(node: Base<PanelContainer>) -> Self {
@@ -270,6 +283,7 @@ impl IPanelContainer for DialogBox {
             spk_txt: "Cherry".into(),
             msg_txt: "[wave amp=50 freq=6]Hello, World![/wave]".into(),
 
+            selected_choice: None,
             active: false,
             tween: None,
             current_ix: None,
