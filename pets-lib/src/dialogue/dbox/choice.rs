@@ -51,21 +51,20 @@ impl DialogBox {
                 // get the label again using the instance id
                 let label = Gd::<DChoice>::try_from_instance_id(label_id);
                 let Ok(label) = label else {
-                    // godot_warn!("label not found");
                     return Ok(Variant::from(()));
                 };
 
                 let tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
 
-                // tween(
-                //     label.upcast(),
-                //     "theme_override_constants/margin_top",
-                //     None,
-                //     tw_end,
-                //     DBOX_CHOICE_TWEEN_TIME,
-                //     DBOX_CHOICE_TWEEN_TRANS,
-                // )
-                // .unwrap();
+                tween(
+                    label.upcast(),
+                    "theme_override_constants/margin_top",
+                    None,
+                    tw_end,
+                    DBOX_CHOICE_TWEEN_TIME,
+                    DBOX_CHOICE_TWEEN_TRANS,
+                )
+                .unwrap();
 
                 Ok(Variant::from(()))
             });

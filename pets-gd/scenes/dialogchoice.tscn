@@ -1,8 +1,15 @@
-[gd_scene format=3 uid="uid://ckyanktf41aox"]
+[gd_scene load_steps=2 format=3 uid="uid://ckyanktf41aox"]
 
 [node name="DChoice" type="DChoice"]
 offset_right = 40.0
 offset_bottom = 40.0
+[ext_resource type="Script" path="res://scenes/dialogchoicecontainer.gd" id="1_pimq0"]
+
+[node name="Container" type="Container"]
+clip_contents = true
+offset_right = 200.0
+offset_bottom = 200.0
+script = ExtResource("1_pimq0")
 
 [node name="Label" type="RichTextLabel" parent="."]
 layout_mode = 2
