@@ -4,7 +4,7 @@
 
 use dialogical::DialogueChoice;
 
-use godot::engine::{RichTextLabel, Tween};
+use godot::engine::{MarginContainer, RichTextLabel, Tween};
 use godot::prelude::*;
 
 use crate::consts::dialogue::*;
@@ -31,12 +31,13 @@ impl DialogBox {
         let mut container = self.choice_container();
 
         for (i, choice) in choices.iter().enumerate() {
-            let mut label = new_choice_label();
+            let margins = new_choice_label();
+            let mut label = margins.get_node_as::<RichTextLabel>("Label");
 
             label.set_name(format!("Choice{}", i).into());
             label.set_text(choice.text.clone().into());
 
-            container.add_child(label.upcast());
+            container.add_child(margins.upcast());
         }
     }
 
@@ -69,7 +70,7 @@ impl DialogBox {
 
 /// tween a label's y minimum size to grow or shrink
 /// TODO inline this in tween_choices_wave
-fn tween_choice_label(label: Gd<RichTextLabel>, up: bool) -> Option<Gd<Tween>> {
+fn tween_choice_label(label: Gd<MarginContainer>, up: bool) -> Option<Gd<Tween>> {
     let tw_end = if up { DBOX_CHOICE_HEIGHT * 20.0 } else { 0.0 };
 
     tween(
@@ -83,7 +84,7 @@ fn tween_choice_label(label: Gd<RichTextLabel>, up: bool) -> Option<Gd<Tween>> {
 }
 
 /// create a new choice label with default settings
-fn new_choice_label() -> Gd<RichTextLabel> {
+fn new_choice_label() -> Gd<MarginContainer> {
     let label = load::<PackedScene>("res://scenes/dialogchoice.tscn");
     label.instantiate_as()
 }
