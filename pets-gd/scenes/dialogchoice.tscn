@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://ckyanktf41aox"]
+
+[node name="Amogus" type="RichTextLabel"]
+size_flags_vertical = 8
+theme_override_font_sizes/normal_font_size = 56
+bbcode_enabled = true
+text = "Amogus"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

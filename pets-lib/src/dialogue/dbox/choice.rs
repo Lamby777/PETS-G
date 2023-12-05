@@ -4,8 +4,6 @@
 
 use dialogical::DialogueChoice;
 
-use godot::engine::control::SizeFlags;
-use godot::engine::text_server::AutowrapMode;
 use godot::engine::{RichTextLabel, Tween};
 use godot::prelude::*;
 
@@ -86,15 +84,6 @@ fn tween_choice_label(label: Gd<RichTextLabel>, up: bool) -> Option<Gd<Tween>> {
 
 /// create a new choice label with default settings
 fn new_choice_label() -> Gd<RichTextLabel> {
-    let mut label = RichTextLabel::new_alloc();
-
-    label.set_use_bbcode(true);
-    label.set_scroll_active(false);
-    label.set_v_size_flags(SizeFlags::SIZE_SHRINK_END);
-
-    // expand width to fit whole thing in one line
-    label.set_fit_content(true);
-    label.set_autowrap_mode(AutowrapMode::AUTOWRAP_OFF);
-
-    label
+    let label = load::<PackedScene>("res://scenes/dialogchoice.tscn");
+    label.instantiate_as()
 }
