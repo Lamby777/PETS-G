@@ -118,12 +118,12 @@ impl DialogBox {
         let node = &mut self.node;
         let viewport_y = node.get_viewport_rect().size.y;
 
-        let tw_end = if up {
-            // visible y
-            viewport_y - node.get_size().y
-        } else {
-            viewport_y
-        };
+        let tw_end = viewport_y
+            + if up {
+                -node.get_size().y
+            } else {
+                DBOX_Y_BELOW_VIEWPORT
+            };
 
         let y_tween = tween(
             node.clone().upcast(),
