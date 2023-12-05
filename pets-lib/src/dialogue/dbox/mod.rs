@@ -10,8 +10,7 @@ use dialogical::Speaker::{self, *};
 use dialogical::{DialogueEnding, Interaction, Metaline, Metaline::*, PageMeta};
 
 use godot::engine::{
-    HBoxContainer, IPanelContainer, InputEvent, MarginContainer, PanelContainer, RichTextLabel,
-    Tween,
+    Control, HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween,
 };
 use godot::prelude::*;
 
@@ -266,7 +265,7 @@ impl DialogBox {
         }
     }
 
-    fn choice_labels(&self) -> Array<Gd<MarginContainer>> {
+    fn choice_labels(&self) -> Array<Gd<Control>> {
         self.choice_container()
             .get_children()
             .iter_shared()

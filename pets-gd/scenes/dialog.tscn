@@ -17,7 +17,9 @@ pivot_offset = Vector2(704, 220)
 theme = ExtResource("1_jbfs2")
 
 [node name="VBox" type="VBoxContainer" parent="."]
+clip_contents = true
 layout_mode = 2
+size_flags_vertical = 0
 theme_override_constants/separation = 16
 
 [node name="SpeakerName" type="RichTextLabel" parent="VBox"]
