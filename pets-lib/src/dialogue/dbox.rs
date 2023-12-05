@@ -198,10 +198,15 @@ impl DialogBox {
         self.selected_choice = Some(new_choice);
     }
 
-    fn new_choice_labels(&mut self, choices: &[DialogueChoice]) {
+    fn free_choice_labels(&mut self) {
         self.choice_labels()
             .iter_shared()
             .for_each(|mut v| v.queue_free());
+    }
+
+    /// delete old labels and create new default ones
+    fn recreate_labels(&mut self, choices: &[DialogueChoice]) {
+        self.free_choice_labels();
 
         let mut container = self.choice_container();
 
@@ -211,24 +216,28 @@ impl DialogBox {
             label.set_name(format!("Choice{}", i).into());
             label.set_text(choice.text.clone().into());
 
+            container.add_child(label.upcast());
+        }
+    }
+
+    fn tween_choices_wave(&mut self, up: bool) {
+        for (i, label) in self.choice_labels().iter_shared().enumerate() {
             // we can't move the label into the closure because of
             // thread safety stuff, so just pass in the instance id
             let label_id = label.instance_id();
 
-            // queue a timer for the label to slide up
-            let mut timer = godot_tree!()
-                .create_timer(DBOX_CHOICE_WAVE_TIME * (i + 1) as f64)
-                .unwrap();
-
             let func = Callable::from_fn("choice_slide_up", move |_| {
                 // get the label again using the instance id
                 let label = Gd::from_instance_id(label_id);
-                tween_choice_label(label, true)
+                tween_choice_label(label, up)
                     .map(|_| Variant::from(()))
                     .ok_or(())
             });
 
-            container.add_child(label.upcast());
+            let mut timer = godot_tree!()
+                .create_timer(DBOX_CHOICE_WAVE_TIME * (i + 1) as f64)
+                .unwrap();
+
             timer.connect("timeout".into(), func);
         }
     }
@@ -238,7 +247,10 @@ impl DialogBox {
         use DialogueEnding::*;
 
         match ending {
-            Choices(choices) => self.new_choice_labels(choices),
+            Choices(choices) => {
+                self.recreate_labels(choices);
+                self.tween_choices_wave(true);
+            }
 
             Label(Function(_label)) => {
                 // TODO run the function
