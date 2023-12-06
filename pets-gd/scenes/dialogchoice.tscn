@@ -1,11 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckyanktf41aox"]
+[gd_scene format=3 uid="uid://ckyanktf41aox"]
 
-[ext_resource type="Script" path="res://scenes/dialogchoicecontainer.gd" id="1_wl4wp"]
-
-[node name="DChoiceContainer" type="Container"]
+[node name="DChoice" type="DChoice"]
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_wl4wp")
 
 [node name="Label" type="RichTextLabel" parent="."]
 layout_mode = 2
