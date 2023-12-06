@@ -1,6 +1,10 @@
 //!
 //! custom class for choice labels
 //!
+//! this would be like 10 lines of gdscript
+//! but it kept throwing errors so here we are
+//! 🦀 **blazingly fast** 🦀
+//!
 
 use godot::engine::notify::ContainerNotification;
 use godot::engine::{Container, IContainer};
@@ -15,6 +19,10 @@ pub struct DChoice {
 
 #[godot_api]
 impl IContainer for DChoice {
+    fn init(node: Base<Container>) -> Self {
+        Self { node }
+    }
+
     fn on_notification(&mut self, what: ContainerNotification) {
         let node = &mut self.node;
 
