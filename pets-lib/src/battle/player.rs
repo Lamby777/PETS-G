@@ -5,7 +5,7 @@
 use godot::engine::{INode2D, Node2D};
 use godot::prelude::*;
 
-use super::stat_translation::to_battle;
+use super::stat_translation as to_battle;
 use crate::prelude::*;
 
 type DirectionalInputNames = [(&'static str, Vector2); 4];
