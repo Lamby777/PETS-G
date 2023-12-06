@@ -39,13 +39,11 @@ impl IContainer for DChoice {
 
         let label = self.node.get_node_as::<RichTextLabel>("Label");
         let size = Vector2 {
-            // x: label.get_size().x,
-            // y: self.node.get_size().y,
-            x: 500.0,
-            y: 500.0,
+            x: label.get_size().x,
+            y: self.node.get_size().y,
         };
 
-        self.node.set_size(size);
+        // self.node.set_size(size);
 
         let rect = Rect2::new(Vector2::ZERO, size);
         self.node.fit_child_in_rect(label.upcast(), rect);
