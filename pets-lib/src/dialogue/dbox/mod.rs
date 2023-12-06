@@ -20,6 +20,9 @@ use crate::prelude::*;
 // extra impls
 mod choice;
 
+// custom class for choice labels
+mod dchoice;
+
 /// Turn a Speaker into a displayable name
 ///
 /// Either the name of the speaker or a special name
