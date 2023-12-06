@@ -3,7 +3,7 @@
 //!
 
 use godot::engine::notify::ContainerNotification;
-use godot::engine::{Container, Control, IContainer};
+use godot::engine::{Container, IContainer};
 use godot::prelude::*;
 
 #[derive(GodotClass)]
@@ -20,9 +20,12 @@ impl IContainer for DChoice {
 
         if what == ContainerNotification::SortChildren {
             for c in node.get_children().iter_shared() {
-                let c = c.cast::<Control>();
-                let size = node.get_size();
-                node.fit_child_in_rect(c, Rect2::new(Vector2::ZERO, size));
+                let rect = {
+                    let size = node.get_size();
+                    Rect2::new(Vector2::ZERO, size)
+                };
+
+                node.fit_child_in_rect(c.cast(), rect);
             }
         }
     }
