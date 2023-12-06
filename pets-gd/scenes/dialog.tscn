@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://wkelk3y4bkcj"]
+[gd_scene load_steps=2 format=3 uid="uid://wkelk3y4bkcj"]
 
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_jbfs2"]
-[ext_resource type="PackedScene" uid="uid://ckyanktf41aox" path="res://scenes/dialogchoice.tscn" id="2_uetgi"]
 
 [node name="DialogBox" type="DialogBox"]
 clip_contents = true
@@ -42,9 +41,3 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_constants/separation = 60
-
-[node name="Amogus" parent="VBox/Choices" instance=ExtResource("2_uetgi")]
-layout_mode = 2
-
-[node name="Amogus2" parent="VBox/Choices" instance=ExtResource("2_uetgi")]
-layout_mode = 2

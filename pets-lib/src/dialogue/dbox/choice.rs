@@ -4,12 +4,12 @@
 
 use dialogical::DialogueChoice;
 
-use godot::engine::{Container, RichTextLabel};
 use godot::prelude::*;
 
 use crate::consts::dialogue::*;
 use crate::prelude::*;
 
+use super::dchoice::DChoice;
 use super::DialogBox;
 
 impl DialogBox {
@@ -31,13 +31,11 @@ impl DialogBox {
         let mut container = self.choice_container();
 
         for (i, choice) in choices.iter().enumerate() {
-            let margins = new_choice_label();
-            let mut label = margins.get_node_as::<RichTextLabel>("Label");
+            let mut dchoice = new_choice_label();
+            dchoice.set_name(format!("Choice{}", i).into());
+            dchoice.bind_mut().set_text(choice.text.clone().into());
 
-            label.set_name(format!("Choice{}", i).into());
-            label.set_text(choice.text.clone().into());
-
-            container.add_child(margins.upcast());
+            container.add_child(dchoice.upcast());
         }
     }
 
@@ -50,7 +48,7 @@ impl DialogBox {
 
             let func = Callable::from_fn("choice_slide_up", move |_| {
                 // get the label again using the instance id
-                let label = Gd::<Container>::try_from_instance_id(label_id);
+                let label = Gd::<DChoice>::try_from_instance_id(label_id);
                 let Ok(label) = label else {
                     // godot_warn!("label not found");
                     return Ok(Variant::from(()));
@@ -81,7 +79,7 @@ impl DialogBox {
 }
 
 /// create a new choice label with default settings
-fn new_choice_label() -> Gd<Container> {
+fn new_choice_label() -> Gd<DChoice> {
     let label = load::<PackedScene>("res://scenes/dialogchoice.tscn");
     label.instantiate_as()
 }
