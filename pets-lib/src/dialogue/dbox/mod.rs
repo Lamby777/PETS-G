@@ -10,7 +10,7 @@ use dialogical::Speaker::{self, *};
 use dialogical::{DialogueEnding, Interaction, Metaline, Metaline::*, PageMeta};
 
 use godot::engine::{
-    Container, HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween,
+    HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween,
 };
 use godot::prelude::*;
 
@@ -22,6 +22,7 @@ mod choice;
 
 // custom class for choice labels
 mod dchoice;
+use dchoice::DChoice;
 
 /// Turn a Speaker into a displayable name
 ///
@@ -268,7 +269,7 @@ impl DialogBox {
         }
     }
 
-    fn choice_labels(&self) -> Array<Gd<Container>> {
+    fn choice_labels(&self) -> Array<Gd<DChoice>> {
         self.choice_container()
             .get_children()
             .iter_shared()

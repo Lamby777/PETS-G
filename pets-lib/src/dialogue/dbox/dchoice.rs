@@ -7,7 +7,7 @@
 //!
 
 use godot::engine::notify::ContainerNotification;
-use godot::engine::{Container, Control, IContainer, RichTextLabel};
+use godot::engine::{Container, IContainer, RichTextLabel};
 use godot::prelude::*;
 
 #[derive(GodotClass)]
@@ -15,6 +15,15 @@ use godot::prelude::*;
 pub struct DChoice {
     #[base]
     node: Base<Container>,
+}
+
+#[godot_api]
+impl DChoice {
+    #[func]
+    pub fn set_text(&mut self, text: GString) {
+        let mut label = self.node.get_node_as::<RichTextLabel>("Label");
+        label.set_text(text);
+    }
 }
 
 #[godot_api]
@@ -30,8 +39,10 @@ impl IContainer for DChoice {
 
         let label = self.node.get_node_as::<RichTextLabel>("Label");
         let size = Vector2 {
-            x: label.get_size().x,
-            y: self.node.get_size().y,
+            // x: label.get_size().x,
+            // y: self.node.get_size().y,
+            x: 500.0,
+            y: 500.0,
         };
 
         self.node.set_size(size);
