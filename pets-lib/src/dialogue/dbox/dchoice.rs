@@ -7,7 +7,7 @@
 //!
 
 use godot::engine::notify::ContainerNotification;
-use godot::engine::{Container, IContainer};
+use godot::engine::{Container, Control, IContainer, RichTextLabel};
 use godot::prelude::*;
 
 #[derive(GodotClass)]
@@ -24,17 +24,19 @@ impl IContainer for DChoice {
     }
 
     fn on_notification(&mut self, what: ContainerNotification) {
-        let node = &mut self.node;
-
-        if what == ContainerNotification::SortChildren {
-            for c in node.get_children().iter_shared() {
-                let rect = {
-                    let size = node.get_size();
-                    Rect2::new(Vector2::ZERO, size)
-                };
-
-                node.fit_child_in_rect(c.cast(), rect);
-            }
+        if what != ContainerNotification::SortChildren {
+            return;
         }
+
+        let label = self.node.get_node_as::<RichTextLabel>("Label");
+        let size = Vector2 {
+            x: label.get_size().x,
+            y: self.node.get_size().y,
+        };
+
+        self.node.set_size(size);
+
+        let rect = Rect2::new(Vector2::ZERO, size);
+        self.node.fit_child_in_rect(label.upcast(), rect);
     }
 }
