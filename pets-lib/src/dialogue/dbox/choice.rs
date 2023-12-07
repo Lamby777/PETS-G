@@ -13,6 +13,7 @@ use super::dchoice::DChoice;
 use super::DialogBox;
 
 impl DialogBox {
+    #[allow(unused)]
     fn shift_selection(&mut self, offset: i16) {
         let choice_count = self.choice_labels().len();
 
