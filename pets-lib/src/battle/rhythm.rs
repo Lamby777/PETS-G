@@ -20,7 +20,14 @@ enum RhythmEvent {
 
     /// A note that deals extra damage when played
     /// (potentially more difficult timing, too?)
-    PowerChord { length: f64, multiplier: f64 },
+    PowerChord {
+        /// Delay after this note, before going on to the
+        /// next one (delay is in notes, not seconds)
+        length: f64,
+
+        /// The multiplier for damage dealt
+        multiplier: f64,
+    },
 }
 
 /// "Parts" of a track. Tracks can switch tempo
@@ -28,7 +35,7 @@ struct RhythmSection {
     start_time: f64,          // Start time of the section in seconds
     end_time: f64,            // End time of the section in seconds
     tempo: f64,               // Tempo in beats per minute
-    events: Vec<RhythmEvent>, // List of events within this section/
+    events: Vec<RhythmEvent>, // List of events within this section
 }
 
 /// One track's information, for rhythm purposes
