@@ -3,6 +3,8 @@
 //! the GDExtension side that runs during battles.
 //!
 
+#![allow(unused)]
+
 use godot::engine::global::Key;
 use godot::engine::{INode2D, Node2D};
 use godot::prelude::*;
@@ -13,19 +15,33 @@ mod stat_translation;
 #[allow(unused)]
 mod rhythm;
 
+#[derive(Default)]
+enum BattleState {
+    #[default]
+    /// Picking one of the options below
+    Menu,
+
+    /// Dodging attacks while clicking to the beat
+    Attack,
+
+    /// Selecting a skill to use
+    Skill,
+
+    /// Selecting an item to use
+    Item,
+}
+
 #[derive(GodotClass)]
-#[class(base=Node2D)]
+#[class(init, base=Node2D)]
 struct BattleEngine {
     #[base]
     node: Base<Node2D>,
+
+    current_state: BattleState,
 }
 
 #[godot_api]
 impl INode2D for BattleEngine {
-    fn init(node: Base<Node2D>) -> Self {
-        Self { node }
-    }
-
     fn process(&mut self, _delta: f64) {
         let input = Input::singleton();
 
