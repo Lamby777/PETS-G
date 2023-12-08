@@ -37,15 +37,6 @@ impl InteractionManager {
         self.prompt_txt.as_mut().unwrap()
     }
 
-    pub fn prompt_hidden(&mut self, hidden: bool) {
-        let prompt = self.prompt_txt();
-        if hidden {
-            prompt.hide();
-        } else {
-            prompt.show();
-        }
-    }
-
     /// "ummm ackshually, this is not a singleton"
     pub fn singleton() -> Gd<InteractionManager> {
         // using this cool godot feature I just found...
@@ -96,13 +87,18 @@ impl INode2D for InteractionManager {
     fn process(&mut self, _delta: f64) {
         self.sort_zones_by_distance();
 
-        if let Some(zone) = self.closest_zone() {
-            self.prompt_hidden(false);
-            self.prompt_txt()
-                .set_position(zone.get_position() + Vector2::new(0.0, -50.0));
-        } else {
-            self.prompt_hidden(true);
-        }
+        let Some(zone) = self.closest_zone() else {
+            // if no zones, hide the prompt
+            self.prompt_txt().hide();
+
+            return;
+        };
+
+        let txt = self.prompt_txt();
+        txt.show();
+
+        // move the prompt to the zone
+        txt.set_position(zone.get_position() + Vector2::new(0.0, -50.0));
     }
 
     fn unhandled_input(&mut self, event: Gd<InputEvent>) {
