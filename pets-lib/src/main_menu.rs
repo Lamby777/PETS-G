@@ -166,9 +166,7 @@ impl INode2D for TitleScreen {
 
         if submitting && let Some(choice) = self.current_choice {
             let choice = MainMenuChoice::from_u8(choice).unwrap();
-
             self.pick_choice(choice);
-            return;
         } else if going_down {
             self.change_menu_choice(1);
         } else if going_up {
