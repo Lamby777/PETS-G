@@ -49,22 +49,6 @@ pub struct CharData {
 
 impl Default for CharData {
     fn default() -> Self {
-        // This part is a bit ugly...
-        let stats = CharStats {
-            max_hp: 0,
-            max_energy: 0,
-
-            attack: 0,
-            defense: 0,
-            speed: 0,
-            stability: 0,
-            delta: 0,
-            epsilon: 0,
-
-            max_mana: Some(0),
-            lambda: Some(0),
-        };
-
         // will be dropped after this function...
         // just need it to see default values and prevent
         // repeating the same numbers everywhere
@@ -78,8 +62,8 @@ impl Default for CharData {
 
         CharData {
             display_name: "Chicken Nugget".to_owned(),
+            stats: CharStats::default(),
             level,
-            stats,
             state,
             conditions: HashSet::new(),
             inventory: vec![],
@@ -97,7 +81,7 @@ pub struct CharStatsStateful {
     // mana starts at 0 each battle
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Clone, Debug, Default, Serialize, Deserialize)]
 pub struct CharStats {
     pub max_hp: IntegralStat,
     pub max_energy: IntegralStat,
