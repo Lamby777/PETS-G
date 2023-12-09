@@ -39,7 +39,7 @@ macro_rules! impl_stat_getters_on_si {
                     let calcs = self.get_statcalc(pchar);
 
                     // calculate the stat
-                    (*calcs.speed)(lv)
+                    (calcs.speed)(lv)
                 }
             });
         )*}

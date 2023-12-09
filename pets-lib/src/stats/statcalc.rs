@@ -5,24 +5,7 @@ use crate::prelude::*;
 pub type CharStatCalcs = HashMap<String, Rc<StatCalcList>>;
 
 /// Function that computes a stat of type T, given a level
-#[derive(Debug, Clone)]
-pub struct StatCalcFn<T> {
-    pub calc: fn(IntegralStat) -> T,
-}
-
-impl<T> Deref for StatCalcFn<T> {
-    type Target = fn(IntegralStat) -> T;
-
-    fn deref(&self) -> &Self::Target {
-        &self.calc
-    }
-}
-
-impl<T> From<fn(IntegralStat) -> T> for StatCalcFn<T> {
-    fn from(calc: fn(IntegralStat) -> T) -> Self {
-        Self { calc }
-    }
-}
+pub type StatCalcFn<T> = fn(IntegralStat) -> T;
 
 /// A list of stat calculation functions for ONE CHARACTER
 #[derive(Debug, Clone)]
@@ -47,7 +30,7 @@ pub struct StatCalcList {
 macro_rules! use_standard {
     ($($stat:ident),*) => {
         Self {
-            $($stat: StatCalcFn::from(standard_calcs::$stat as fn(_) -> _)),*
+            $($stat: standard_calcs::$stat as fn(_) -> _),*
         }
     };
 }
