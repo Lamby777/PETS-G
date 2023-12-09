@@ -72,8 +72,8 @@ impl Default for CharData {
         let level = 1;
 
         let state = CharStatsStateful {
-            hp: (*calc.max_hp)(level),
-            energy: (*calc.max_energy)(level),
+            hp: (calc.max_hp)(level),
+            energy: (calc.max_energy)(level),
         };
 
         CharData {
