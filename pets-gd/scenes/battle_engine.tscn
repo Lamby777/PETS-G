@@ -1,19 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://kgl5788x405y"]
+[gd_scene load_steps=3 format=3 uid="uid://kgl5788x405y"]
 
+[ext_resource type="Texture2D" uid="uid://he44mug8lejt" path="res://assets/textures/misc/BattleIcons.png" id="1_s3l7q"]
 [ext_resource type="AudioStream" uid="uid://bobf56v1g63p4" path="res://assets/music/battle/alright.ogg" id="1_uwjym"]
 
 [node name="BattleEngine" type="BattleEngine"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="BlackBG" type="ColorRect" parent="."]
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
 [node name="BattleIcon" type="BattleIcon" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="BattleIcon"]
-offset_right = 64.0
-offset_bottom = 64.0
+[node name="Sprite2D" type="Sprite2D" parent="BattleIcon"]
+scale = Vector2(8, 8)
+texture = ExtResource("1_s3l7q")
+hframes = 5
+vframes = 2
 
 [node name="BattleMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_uwjym")
