@@ -3,9 +3,6 @@
 //! the GDExtension side that runs during battles.
 //!
 
-#![allow(unused)]
-
-use godot::engine::global::Key;
 use godot::engine::{INode2D, Node2D};
 use godot::prelude::*;
 
@@ -15,6 +12,7 @@ mod stat_translation;
 #[allow(unused)]
 mod rhythm;
 
+#[allow(unused)]
 #[derive(Default)]
 enum BattleState {
     #[default]
@@ -31,6 +29,7 @@ enum BattleState {
     Item,
 }
 
+#[allow(unused)]
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
 struct BattleEngine {
