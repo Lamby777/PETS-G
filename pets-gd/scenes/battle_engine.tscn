@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://kgl5788x405y"]
+[gd_scene load_steps=5 format=3 uid="uid://kgl5788x405y"]
 
+[ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="1_3ebub"]
 [ext_resource type="Texture2D" uid="uid://he44mug8lejt" path="res://assets/textures/misc/BattleIcons.png" id="1_s3l7q"]
 [ext_resource type="AudioStream" uid="uid://bobf56v1g63p4" path="res://assets/music/battle/alright.ogg" id="1_uwjym"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w1wwc"]
+shader = ExtResource("1_3ebub")
 
 [node name="BattleEngine" type="BattleEngine"]
 
 [node name="BlackBG" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_w1wwc")
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
