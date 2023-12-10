@@ -43,12 +43,7 @@ struct BattleEngine {
 #[godot_api]
 impl INode2D for BattleEngine {
     fn process(&mut self, _delta: f64) {
-        let input = Input::singleton();
-
-        // if q pressed, quit (dev shit)
-        if input.is_key_pressed(Key::KEY_Q) {
-            let mut tree = self.node.get_tree().unwrap();
-            tree.quit();
-        }
+        let _input = Input::singleton();
+        //
     }
 }
