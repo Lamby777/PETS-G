@@ -6,6 +6,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w1wwc"]
 shader = ExtResource("1_3ebub")
+shader_parameter/strength = 1.0
+shader_parameter/speed = 0.096
+shader_parameter/angle = 47.788
 
 [node name="BattleEngine" type="BattleEngine"]
 
