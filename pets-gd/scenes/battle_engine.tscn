@@ -1,22 +1,44 @@
-[gd_scene load_steps=5 format=3 uid="uid://kgl5788x405y"]
+[gd_scene load_steps=7 format=3 uid="uid://kgl5788x405y"]
 
 [ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="1_3ebub"]
 [ext_resource type="Texture2D" uid="uid://he44mug8lejt" path="res://assets/textures/misc/BattleIcons.png" id="1_s3l7q"]
 [ext_resource type="AudioStream" uid="uid://bobf56v1g63p4" path="res://assets/music/battle/alright.ogg" id="1_uwjym"]
+[ext_resource type="Texture2D" uid="uid://4yrote6ugf4h" path="res://assets/textures/builds/signs/gshitter_banner.png" id="2_r6rdn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_88ovb"]
+shader = ExtResource("1_3ebub")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w1wwc"]
 shader = ExtResource("1_3ebub")
 shader_parameter/strength = 1.0
-shader_parameter/speed = 0.096
+shader_parameter/speed = 2.0
 shader_parameter/angle = 47.788
 
 [node name="BattleEngine" type="BattleEngine"]
 
-[node name="BlackBG" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_w1wwc")
+[node name="VideoDrugs" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="VideoDrugs"]
+material = SubResource("ShaderMaterial_88ovb")
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
+
+[node name="Layer1" type="TextureRect" parent="VideoDrugs"]
+material = SubResource("ShaderMaterial_w1wwc")
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_r6rdn")
+stretch_mode = 1
 
 [node name="BattleIcon" type="BattleIcon" parent="."]
 
