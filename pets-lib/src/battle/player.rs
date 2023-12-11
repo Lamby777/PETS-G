@@ -2,20 +2,24 @@
 //! Player icon that moves around n shit during battles
 //!
 
+use std::cell::LazyCell;
+
 use godot::engine::{INode2D, Node2D};
 use godot::prelude::*;
 
 use super::stat_translation as to_battle;
 use crate::prelude::*;
 
-type DirectionalInputNames = [(&'static str, Vector2); 4];
+type DirectionalInputNames = [(StringName, Vector2); 4];
 
-const BATTLE_DIRECTIONS: DirectionalInputNames = [
-    ("battle_move_up", Vector2::UP),
-    ("battle_move_down", Vector2::DOWN),
-    ("battle_move_left", Vector2::LEFT),
-    ("battle_move_right", Vector2::RIGHT),
-];
+const BATTLE_DIRECTIONS: LazyCell<DirectionalInputNames> = LazyCell::new(|| {
+    [
+        ("battle_move_up".into(), Vector2::UP),
+        ("battle_move_down".into(), Vector2::DOWN),
+        ("battle_move_left".into(), Vector2::LEFT),
+        ("battle_move_right".into(), Vector2::RIGHT),
+    ]
+});
 
 #[derive(GodotClass)]
 #[class(base=Node2D)]
@@ -47,9 +51,9 @@ impl BattleIcon {
 
         // check inputs
         let mut input_vector = Vector2::new(0.0, 0.0);
-        for (k, v) in BATTLE_DIRECTIONS.into_iter() {
-            if input.is_action_pressed(k.into()) {
-                input_vector += v;
+        for (k, v) in BATTLE_DIRECTIONS.iter() {
+            if input.is_action_pressed(k.clone()) {
+                input_vector += *v;
             }
         }
 
