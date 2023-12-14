@@ -10,7 +10,7 @@ use crate::prelude::*;
 use crate::world::playercb::PlayerCB;
 
 #[derive(GodotClass)]
-#[class(base=Area2D)]
+#[class(init, base=Area2D)]
 pub struct InteractionZone {
     #[base]
     node: Base<Area2D>,
@@ -42,13 +42,6 @@ impl InteractionZone {
 
 #[godot_api]
 impl IArea2D for InteractionZone {
-    fn init(node: Base<Area2D>) -> Self {
-        Self {
-            node,
-            name: "".into(),
-        }
-    }
-
     fn ready(&mut self) {
         let node = &mut self.node;
 

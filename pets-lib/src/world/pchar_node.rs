@@ -5,7 +5,7 @@ use godot::engine::Sprite2D;
 use godot::prelude::*;
 
 #[derive(GodotClass)]
-#[class(base=Node2D)]
+#[class(init, base=Node2D)]
 pub struct PCharNode {
     #[base]
     node: Base<Node2D>,
@@ -44,17 +44,6 @@ macro_rules! load_pchar_scene_under {
 
 #[godot_api]
 impl INode2D for PCharNode {
-    fn init(node: Base<Node2D>) -> Self {
-        Self {
-            node,
-
-            sprite: None,
-            anim_player: None,
-            anim_tree: None,
-            anim_state: None,
-        }
-    }
-
     fn ready(&mut self) {
         self.sprite = Some(self.node.get_node_as("Sprite2D"));
         self.anim_player = Some(self.node.get_node_as("AnimationPlayer"));

@@ -28,7 +28,7 @@ const CHOICES_COUNT: usize = std::mem::variant_count::<MainMenuChoice>();
 pub type Choices = [Gd<RichTextLabel>; CHOICES_COUNT];
 
 #[derive(GodotClass)]
-#[class(base=Node2D)]
+#[class(init, base=Node2D)]
 struct TitleScreen {
     #[base]
     node: Base<Node2D>,
@@ -149,14 +149,6 @@ impl TitleScreen {
 
 #[godot_api]
 impl INode2D for TitleScreen {
-    fn init(node: Base<Node2D>) -> Self {
-        Self {
-            node,
-            choices: None,
-            current_choice: None,
-        }
-    }
-
     fn process(&mut self, _delta: f64) {
         let input = Input::singleton();
 
