@@ -11,7 +11,7 @@ use godot::engine::{Container, IContainer, RichTextLabel};
 use godot::prelude::*;
 
 #[derive(GodotClass)]
-#[class(base=Container)]
+#[class(init, base=Container)]
 pub struct DChoice {
     #[base]
     node: Base<Container>,
@@ -28,10 +28,6 @@ impl DChoice {
 
 #[godot_api]
 impl IContainer for DChoice {
-    fn init(node: Base<Container>) -> Self {
-        Self { node }
-    }
-
     fn on_notification(&mut self, what: ContainerNotification) {
         if what != ContainerNotification::SortChildren {
             return;

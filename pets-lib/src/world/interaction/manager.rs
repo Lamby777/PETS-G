@@ -11,7 +11,7 @@ use crate::world::interaction::zone::InteractionZone;
 use crate::world::playercb::PlayerCB;
 
 #[derive(GodotClass)]
-#[class(base=Node2D)]
+#[class(init, base=Node2D)]
 pub struct InteractionManager {
     #[base]
     node: Base<Node2D>,
@@ -72,14 +72,6 @@ impl InteractionManager {
 
 #[godot_api]
 impl INode2D for InteractionManager {
-    fn init(node: Base<Node2D>) -> Self {
-        Self {
-            node,
-            zones: vec![],
-            prompt_txt: None,
-        }
-    }
-
     fn ready(&mut self) {
         self.prompt_txt = Some(self.node.get_node_as("Prompt"));
     }

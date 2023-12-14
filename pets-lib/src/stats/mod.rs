@@ -62,11 +62,12 @@ impl Default for CharData {
 
         CharData {
             display_name: "Chicken Nugget".to_owned(),
-            stats: CharStats::default(),
             level,
             state,
-            conditions: HashSet::new(),
-            inventory: vec![],
+
+            stats: Default::default(),
+            conditions: Default::default(),
+            inventory: Default::default(),
         }
     }
 }
