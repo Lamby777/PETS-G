@@ -184,57 +184,45 @@ offset_right = 1024.0
 offset_bottom = 612.0
 grow_vertical = 2
 
-[node name="InfoBars" type="Control" parent="Menu/DualMenu/RightPanel"]
-layout_mode = 3
-anchors_preset = 0
+[node name="InfoBars" type="VBoxContainer" parent="Menu/DualMenu/RightPanel"]
+layout_mode = 0
 offset_left = 64.0
-offset_top = 256.0
-offset_right = 104.0
-offset_bottom = 296.0
+offset_top = 128.0
+offset_right = 472.0
+offset_bottom = 325.0
+theme_override_constants/separation = 64
 
-[node name="HP" type="Control" parent="Menu/DualMenu/RightPanel/InfoBars"]
-anchors_preset = 0
-offset_right = 4.0
-offset_bottom = 27.0
+[node name="HP" type="VBoxContainer" parent="Menu/DualMenu/RightPanel/InfoBars"]
+custom_minimum_size = Vector2(408, 0)
+layout_mode = 2
 
 [node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/InfoBars/HP"]
 clip_contents = false
-layout_mode = 0
-offset_right = 456.0
-offset_bottom = 136.0
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "HP"
 
 [node name="Bar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/InfoBars/HP"]
-layout_mode = 0
-offset_top = 120.0
-offset_right = 448.0
-offset_bottom = 192.0
+layout_mode = 2
 value = 80.0
 
-[node name="Mana" type="Control" parent="Menu/DualMenu/RightPanel/InfoBars"]
-layout_mode = 3
-anchors_preset = 0
-offset_top = 256.0
-offset_right = 4.0
-offset_bottom = 283.0
+[node name="Mana" type="VBoxContainer" parent="Menu/DualMenu/RightPanel/InfoBars"]
+custom_minimum_size = Vector2(408, 0)
+layout_mode = 2
 
 [node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/InfoBars/Mana"]
 clip_contents = false
-layout_mode = 0
-offset_right = 456.0
-offset_bottom = 136.0
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Mana"
 
 [node name="Bar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/InfoBars/Mana"]
-layout_mode = 0
-offset_top = 120.0
-offset_right = 448.0
-offset_bottom = 192.0
+layout_mode = 2
 theme_type_variation = &"TealBar"
 value = 80.0
