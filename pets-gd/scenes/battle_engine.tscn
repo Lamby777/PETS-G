@@ -122,6 +122,57 @@ offset_bottom = 612.0
 grow_horizontal = 0
 grow_vertical = 2
 
+[node name="Choices" type="Control" parent="Menu/DualMenu/LeftPanel"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 256.0
+offset_right = 168.0
+offset_bottom = 296.0
+
+[node name="Attack" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Choices"]
+clip_contents = false
+layout_mode = 0
+offset_right = 456.0
+offset_bottom = 136.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "Attack"
+
+[node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Choices"]
+clip_contents = false
+layout_mode = 0
+offset_top = 128.0
+offset_right = 456.0
+offset_bottom = 264.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "Skills"
+
+[node name="Items" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Choices"]
+clip_contents = false
+layout_mode = 0
+offset_top = 256.0
+offset_right = 456.0
+offset_bottom = 392.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "Items"
+
+[node name="Run" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Choices"]
+clip_contents = false
+layout_mode = 0
+offset_top = 384.0
+offset_right = 456.0
+offset_bottom = 520.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "Run"
+
 [node name="RightPanel" type="Panel" parent="Menu/DualMenu"]
 layout_mode = 1
 anchors_preset = 4
@@ -132,3 +183,58 @@ offset_top = -604.0
 offset_right = 1024.0
 offset_bottom = 612.0
 grow_vertical = 2
+
+[node name="InfoBars" type="Control" parent="Menu/DualMenu/RightPanel"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 256.0
+offset_right = 104.0
+offset_bottom = 296.0
+
+[node name="HP" type="Control" parent="Menu/DualMenu/RightPanel/InfoBars"]
+anchors_preset = 0
+offset_right = 4.0
+offset_bottom = 27.0
+
+[node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/InfoBars/HP"]
+clip_contents = false
+layout_mode = 0
+offset_right = 456.0
+offset_bottom = 136.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "HP"
+
+[node name="Bar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/InfoBars/HP"]
+layout_mode = 0
+offset_top = 120.0
+offset_right = 448.0
+offset_bottom = 192.0
+value = 80.0
+
+[node name="Mana" type="Control" parent="Menu/DualMenu/RightPanel/InfoBars"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 256.0
+offset_right = 4.0
+offset_bottom = 283.0
+
+[node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/InfoBars/Mana"]
+clip_contents = false
+layout_mode = 0
+offset_right = 456.0
+offset_bottom = 136.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "Mana"
+
+[node name="Bar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/InfoBars/Mana"]
+layout_mode = 0
+offset_top = 120.0
+offset_right = 448.0
+offset_bottom = 192.0
+theme_type_variation = &"TealBar"
+value = 80.0
