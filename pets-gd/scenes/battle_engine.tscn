@@ -108,7 +108,7 @@ offset_bottom = 500.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LeftPanel" type="Panel" parent="Menu/DualMenu"]
+[node name="LeftPanel" type="PanelContainer" parent="Menu/DualMenu"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -122,58 +122,54 @@ offset_bottom = 612.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Choices" type="Control" parent="Menu/DualMenu/LeftPanel"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 128.0
-offset_top = 256.0
-offset_right = 168.0
-offset_bottom = 296.0
+[node name="Margins" type="MarginContainer" parent="Menu/DualMenu/LeftPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 16
 
-[node name="Attack" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Choices"]
+[node name="Choices" type="VBoxContainer" parent="Menu/DualMenu/LeftPanel/Margins"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Attack" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/Choices"]
 clip_contents = false
-layout_mode = 0
-offset_right = 456.0
-offset_bottom = 136.0
+layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Attack"
+fit_content = true
 
-[node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Choices"]
+[node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/Choices"]
 clip_contents = false
-layout_mode = 0
-offset_top = 128.0
-offset_right = 456.0
-offset_bottom = 264.0
+layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Skills"
+fit_content = true
 
-[node name="Items" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Choices"]
+[node name="Items" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/Choices"]
 clip_contents = false
-layout_mode = 0
-offset_top = 256.0
-offset_right = 456.0
-offset_bottom = 392.0
+layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Items"
+fit_content = true
 
-[node name="Run" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Choices"]
+[node name="Run" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/Choices"]
 clip_contents = false
-layout_mode = 0
-offset_top = 384.0
-offset_right = 456.0
-offset_bottom = 520.0
+layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Run"
+fit_content = true
 
-[node name="RightPanel" type="Panel" parent="Menu/DualMenu"]
+[node name="RightPanel" type="PanelContainer" parent="Menu/DualMenu"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -184,45 +180,45 @@ offset_right = 1024.0
 offset_bottom = 612.0
 grow_vertical = 2
 
-[node name="InfoBars" type="VBoxContainer" parent="Menu/DualMenu/RightPanel"]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 128.0
-offset_right = 472.0
-offset_bottom = 325.0
+[node name="Margins" type="MarginContainer" parent="Menu/DualMenu/RightPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 80
+
+[node name="InfoBars" type="VBoxContainer" parent="Menu/DualMenu/RightPanel/Margins"]
+layout_mode = 2
 theme_override_constants/separation = 64
 
-[node name="HP" type="VBoxContainer" parent="Menu/DualMenu/RightPanel/InfoBars"]
-custom_minimum_size = Vector2(408, 0)
+[node name="HP" type="VBoxContainer" parent="Menu/DualMenu/RightPanel/Margins/InfoBars"]
 layout_mode = 2
 
-[node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/InfoBars/HP"]
+[node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HP"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
-text = "HP"
+text = "[center]HP"
 
-[node name="Bar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/InfoBars/HP"]
+[node name="Bar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HP"]
 layout_mode = 2
 value = 80.0
 
-[node name="Mana" type="VBoxContainer" parent="Menu/DualMenu/RightPanel/InfoBars"]
-custom_minimum_size = Vector2(408, 0)
+[node name="Mana" type="VBoxContainer" parent="Menu/DualMenu/RightPanel/Margins/InfoBars"]
 layout_mode = 2
 
-[node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/InfoBars/Mana"]
+[node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/Mana"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
-text = "Mana"
+text = "[center]Mana"
 
-[node name="Bar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/InfoBars/Mana"]
+[node name="Bar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/Mana"]
 layout_mode = 2
 theme_type_variation = &"TealBar"
 value = 80.0
