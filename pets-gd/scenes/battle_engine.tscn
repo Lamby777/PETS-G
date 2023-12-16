@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://kgl5788x405y"]
+[gd_scene load_steps=9 format=3 uid="uid://kgl5788x405y"]
 
 [ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="1_3ebub"]
 [ext_resource type="Shader" path="res://themes/vdrugs/common.gdshader" id="1_8w1nf"]
 [ext_resource type="Texture2D" uid="uid://he44mug8lejt" path="res://assets/textures/misc/BattleIcons.png" id="1_s3l7q"]
 [ext_resource type="AudioStream" uid="uid://bobf56v1g63p4" path="res://assets/music/battle/alright.ogg" id="1_uwjym"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="5_xtul0"]
+[ext_resource type="Texture2D" uid="uid://cx24dyfnh30ag" path="res://assets/textures/portraits/Ethan.png" id="6_34tkp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88ovb"]
 shader = ExtResource("1_8w1nf")
@@ -56,46 +57,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("5_xtul0")
 
-[node name="Choices" type="PanelContainer" parent="Menu"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -724.0
-offset_top = 1080.0
-offset_right = 684.0
-offset_bottom = 1526.0
-grow_horizontal = 2
-pivot_offset = Vector2(704, 220)
-
-[node name="VBox" type="VBoxContainer" parent="Menu/Choices"]
-clip_contents = true
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/separation = 16
-
-[node name="SpeakerName" type="RichTextLabel" parent="Menu/Choices/VBox"]
-custom_minimum_size = Vector2(0, 70)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 56
-bbcode_enabled = true
-text = "kitkatz"
-
-[node name="Content" type="RichTextLabel" parent="Menu/Choices/VBox"]
-custom_minimum_size = Vector2(0, 230)
-layout_mode = 2
-bbcode_enabled = true
-text = ":3 ^w^ tryna cat to it, tryna pounce do it, you wunuh thinkin that uh meow would lah do it ^w^ :3"
-
-[node name="Choices" type="HBoxContainer" parent="Menu/Choices/VBox"]
-clip_contents = true
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-theme_override_constants/separation = 60
-
 [node name="DualMenu" type="Control" parent="Menu"]
 layout_mode = 1
 anchors_preset = 15
@@ -125,15 +86,30 @@ grow_vertical = 2
 [node name="Margins" type="MarginContainer" parent="Menu/DualMenu/LeftPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 200
+theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 80
 
-[node name="Choices" type="VBoxContainer" parent="Menu/DualMenu/LeftPanel/Margins"]
+[node name="VBox" type="VBoxContainer" parent="Menu/DualMenu/LeftPanel/Margins"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Portrait" type="TextureRect" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
+layout_mode = 2
+texture = ExtResource("6_34tkp")
+expand_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="Choices" type="VBoxContainer" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Attack" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/Choices"]
+[node name="Attack" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Choices"]
 clip_contents = false
 layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
@@ -142,7 +118,7 @@ bbcode_enabled = true
 text = "Attack"
 fit_content = true
 
-[node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/Choices"]
+[node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Choices"]
 clip_contents = false
 layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
@@ -151,7 +127,7 @@ bbcode_enabled = true
 text = "Skills"
 fit_content = true
 
-[node name="Items" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/Choices"]
+[node name="Items" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Choices"]
 clip_contents = false
 layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
@@ -160,7 +136,7 @@ bbcode_enabled = true
 text = "Items"
 fit_content = true
 
-[node name="Run" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/Choices"]
+[node name="Run" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Choices"]
 clip_contents = false
 layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
@@ -182,43 +158,20 @@ grow_vertical = 2
 
 [node name="Margins" type="MarginContainer" parent="Menu/DualMenu/RightPanel"]
 layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 200
+theme_override_constants/margin_left = -512
+theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
 
 [node name="InfoBars" type="VBoxContainer" parent="Menu/DualMenu/RightPanel/Margins"]
 layout_mode = 2
-theme_override_constants/separation = 64
+theme_override_constants/separation = 32
 
-[node name="HP" type="VBoxContainer" parent="Menu/DualMenu/RightPanel/Margins/InfoBars"]
-layout_mode = 2
-
-[node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HP"]
-clip_contents = false
-custom_minimum_size = Vector2(0, 120)
-layout_mode = 2
-theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 80
-bbcode_enabled = true
-text = "[center]HP"
-
-[node name="Bar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HP"]
+[node name="HPBar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/Margins/InfoBars"]
 layout_mode = 2
 value = 80.0
 
-[node name="Mana" type="VBoxContainer" parent="Menu/DualMenu/RightPanel/Margins/InfoBars"]
-layout_mode = 2
-
-[node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/Mana"]
-clip_contents = false
-custom_minimum_size = Vector2(0, 120)
-layout_mode = 2
-theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 80
-bbcode_enabled = true
-text = "[center]Mana"
-
-[node name="Bar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/Mana"]
+[node name="ManaBar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/Margins/InfoBars"]
 layout_mode = 2
 theme_type_variation = &"TealBar"
 value = 80.0

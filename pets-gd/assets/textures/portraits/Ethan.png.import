@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chr12jncorljr"
-path="res://.godot/imported/BattlePortraits.png-5f2e31dccb7b0efdf77b2549ecfde05d.ctex"
+uid="uid://cx24dyfnh30ag"
+path="res://.godot/imported/Ethan.png-6497150b8d3cda8a80776e9fa47db462.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/misc/BattlePortraits.png"
-dest_files=["res://.godot/imported/BattlePortraits.png-5f2e31dccb7b0efdf77b2549ecfde05d.ctex"]
+source_file="res://assets/textures/portraits/Ethan.png"
+dest_files=["res://.godot/imported/Ethan.png-6497150b8d3cda8a80776e9fa47db462.ctex"]
 
 [params]
 
