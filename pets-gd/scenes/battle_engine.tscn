@@ -92,17 +92,25 @@ theme_override_constants/margin_bottom = 80
 
 [node name="VBox" type="VBoxContainer" parent="Menu/DualMenu/LeftPanel/Margins"]
 layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = 40
 
-[node name="Portrait" type="TextureRect" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
+[node name="Portrait" type="PanelContainer" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
+z_index = 1
+custom_minimum_size = Vector2(432, 223)
 layout_mode = 2
+theme_type_variation = &"FramePanelContainer"
+
+[node name="Clipper" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Portrait"]
+clip_contents = true
+layout_mode = 2
+
+[node name="Texture" type="TextureRect" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Portrait/Clipper"]
+z_index = -1
+layout_mode = 2
+offset_right = 418.0
+offset_bottom = 209.0
 texture = ExtResource("6_34tkp")
 expand_mode = 5
-
-[node name="ColorRect" type="ColorRect" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
-custom_minimum_size = Vector2(0, 8)
-layout_mode = 2
-color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Choices" type="VBoxContainer" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
 custom_minimum_size = Vector2(0, 400)
@@ -160,7 +168,7 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_constants/margin_left = -512
 theme_override_constants/margin_top = 80
-theme_override_constants/margin_right = 80
+theme_override_constants/margin_right = -16
 theme_override_constants/margin_bottom = 80
 
 [node name="InfoBars" type="VBoxContainer" parent="Menu/DualMenu/RightPanel/Margins"]

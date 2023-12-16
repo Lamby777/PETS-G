@@ -1,9 +1,26 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://b4to5dpqntd2r"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://b4to5dpqntd2r"]
 
 [ext_resource type="StyleBox" uid="uid://d0gx7x3tj2b01" path="res://themes/container_stylebox.tres" id="1_7au1f"]
 [ext_resource type="FontFile" uid="uid://0vkr7mnpb6tm" path="res://assets/fonts/Renogare-Regular.otf" id="1_buwdt"]
 [ext_resource type="StyleBox" uid="uid://bkrnvbebigypu" path="res://themes/progressbar-bg.tres" id="3_wlgti"]
 [ext_resource type="StyleBox" uid="uid://8tta6x0qsrdp" path="res://themes/progressbar.tres" id="4_2xeni"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p8chw"]
+content_margin_left = 7.0
+content_margin_top = 7.0
+content_margin_right = 7.0
+content_margin_bottom = 7.0
+draw_center = false
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(1, 1, 1, 0.239216)
+shadow_size = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64pvq"]
 bg_color = Color(0.376471, 0.694118, 0.921569, 1)
@@ -21,6 +38,8 @@ expand_margin_right = 1.0
 expand_margin_bottom = 1.0
 
 [resource]
+FramePanelContainer/base_type = &"PanelContainer"
+FramePanelContainer/styles/panel = SubResource("StyleBoxFlat_p8chw")
 Panel/styles/panel = ExtResource("1_7au1f")
 PanelContainer/styles/panel = ExtResource("1_7au1f")
 ProgressBar/colors/font_color = Color(0.95, 0.95, 0.95, 1)
