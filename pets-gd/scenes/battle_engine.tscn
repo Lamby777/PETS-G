@@ -185,7 +185,7 @@ show_percentage = false
 layout_mode = 0
 offset_left = 40.0
 offset_right = 496.0
-offset_bottom = 64.0
+offset_bottom = 66.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_font_sizes/normal_font_size = 56
@@ -193,16 +193,40 @@ text = "HP"
 fit_content = true
 autowrap_mode = 0
 
-[node name="Counter" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HPBar"]
+[node name="Slash" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HPBar"]
 layout_mode = 0
-offset_left = 296.0
+offset_left = 672.0
 offset_right = 752.0
 offset_bottom = 66.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_font_sizes/normal_font_size = 56
+text = " /"
+autowrap_mode = 0
+
+[node name="Max" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HPBar"]
+layout_mode = 0
+offset_left = 704.0
+offset_right = 936.0
+offset_bottom = 66.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 56
 bbcode_enabled = true
-text = "[right]1999/2000"
+text = "[right]2000"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Value" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HPBar"]
+layout_mode = 0
+offset_left = 392.0
+offset_right = 616.0
+offset_bottom = 66.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 56
+bbcode_enabled = true
+text = "[right]1999"
 fit_content = true
 autowrap_mode = 0
 
@@ -216,7 +240,7 @@ show_percentage = false
 [node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
 offset_left = 40.0
 offset_right = 496.0
-offset_bottom = 64.0
+offset_bottom = 66.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_font_sizes/normal_font_size = 56
@@ -224,14 +248,36 @@ text = "Mana"
 fit_content = true
 autowrap_mode = 0
 
-[node name="Counter" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
-offset_left = 296.0
+[node name="Slash" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
+offset_left = 672.0
 offset_right = 752.0
 offset_bottom = 66.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_font_sizes/normal_font_size = 56
+text = " /"
+autowrap_mode = 0
+
+[node name="Max" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
+offset_left = 704.0
+offset_right = 936.0
+offset_bottom = 66.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 56
 bbcode_enabled = true
-text = "[right]168/192"
+text = "[right]192"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Value" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
+offset_left = 392.0
+offset_right = 616.0
+offset_bottom = 66.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 56
+bbcode_enabled = true
+text = "[right]168"
 fit_content = true
 autowrap_mode = 0
