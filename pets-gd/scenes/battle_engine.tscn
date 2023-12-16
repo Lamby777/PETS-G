@@ -168,7 +168,7 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_constants/margin_left = -512
 theme_override_constants/margin_top = 80
-theme_override_constants/margin_right = -16
+theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 80
 
 [node name="InfoBars" type="VBoxContainer" parent="Menu/DualMenu/RightPanel/Margins"]
@@ -176,10 +176,62 @@ layout_mode = 2
 theme_override_constants/separation = 32
 
 [node name="HPBar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/Margins/InfoBars"]
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 value = 80.0
+show_percentage = false
+
+[node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HPBar"]
+layout_mode = 0
+offset_left = 40.0
+offset_right = 496.0
+offset_bottom = 64.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 56
+text = "HP"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Counter" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HPBar"]
+layout_mode = 0
+offset_left = 296.0
+offset_right = 752.0
+offset_bottom = 66.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 56
+bbcode_enabled = true
+text = "[right]1999/2000"
+fit_content = true
+autowrap_mode = 0
 
 [node name="ManaBar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/Margins/InfoBars"]
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_type_variation = &"TealBar"
 value = 80.0
+show_percentage = false
+
+[node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
+offset_left = 40.0
+offset_right = 496.0
+offset_bottom = 64.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 56
+text = "Mana"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Counter" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
+offset_left = 296.0
+offset_right = 752.0
+offset_bottom = 66.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 56
+bbcode_enabled = true
+text = "[right]168/192"
+fit_content = true
+autowrap_mode = 0
