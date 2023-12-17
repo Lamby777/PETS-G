@@ -238,6 +238,7 @@ value = 80.0
 show_percentage = false
 
 [node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
+layout_mode = 0
 offset_left = 40.0
 offset_right = 496.0
 offset_bottom = 66.0
@@ -249,6 +250,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Slash" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
+layout_mode = 0
 offset_left = 672.0
 offset_right = 752.0
 offset_bottom = 66.0
@@ -259,6 +261,7 @@ text = " /"
 autowrap_mode = 0
 
 [node name="Max" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
+layout_mode = 0
 offset_left = 704.0
 offset_right = 936.0
 offset_bottom = 66.0
@@ -271,6 +274,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Value" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
+layout_mode = 0
 offset_left = 392.0
 offset_right = 616.0
 offset_bottom = 66.0
