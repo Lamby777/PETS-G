@@ -14,99 +14,89 @@ use crate::prelude::*;
 
 use num_derive::FromPrimitive;
 use num_traits::FromPrimitive;
-
-#[derive(Debug, FromPrimitive)]
+#[derive(Debug, Default, FromPrimitive)]
 enum MainMenuChoice {
-    Play = 0,
+    #[default]
+    Play,
+
     Options,
     Credits,
     Quit,
     DebugBattle,
 }
 
-const CHOICES_COUNT: usize = std::mem::variant_count::<MainMenuChoice>();
-pub type Choices = [Gd<RichTextLabel>; CHOICES_COUNT];
+fn tween_choice_to(is_picked: bool, node: &mut Gd<RichTextLabel>) {
+    let target_x = if is_picked { 64.0 } else { 0.0 };
+
+    let target_col = {
+        let col = if is_picked {
+            "font_selected_color"
+        } else {
+            "default_color"
+        };
+
+        default_theme!().get_color(col.into(), "RichTextLabel".into())
+    };
+
+    // tween x
+    tween(
+        node.clone().upcast(),
+        "position:x",
+        None,
+        target_x,
+        MENU_TWEEN_TIME,
+        MENU_TWEEN_TRANS,
+    )
+    .unwrap();
+
+    // tween color
+    tween(
+        node.clone().upcast(),
+        "theme_override_colors/default_color",
+        None,
+        target_col,
+        MENU_TWEEN_TIME,
+        MENU_TWEEN_TRANS,
+    )
+    .unwrap();
+
+    // set bbcode
+    // extremely ugly and hacky solution, but...
+    // how else could you work with in-band formatting? :P
+    let old_text = node.get_text();
+    let new_text = if is_picked {
+        // prepend [wave] stuff to msg
+        format!("{}{}", MENU_WAVE_BBCODE, old_text)
+    } else {
+        // slice off [wave] stuff from start
+        let st: String = old_text.into();
+        st[MENU_WAVE_BBCODE.len()..].to_owned()
+    };
+
+    node.set_text(new_text.into());
+}
 
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
 struct TitleScreen {
     #[base]
     node: Base<Node2D>,
-    choices: Option<Choices>,
-
-    // null if game just started (no choice hovered)
-    current_choice: Option<u8>,
+    list: ChoiceList<Gd<RichTextLabel>>,
 }
 
 #[godot_api]
 impl TitleScreen {
-    fn change_menu_choice(&mut self, diff: i16) {
-        let old_choice = self.current_choice;
+    fn change_menu_choice(&mut self, diff: i32) {
+        // tween old down and new up
+        if let Some((_, old_node)) = self.list.current_iv_mut() {
+            tween_choice_to(false, old_node);
+        }
 
-        let res: u8 = if let Some(n) = old_choice {
-            self.tween_choice_to(false, n);
-            (n as i16 + diff).rem_euclid(CHOICES_COUNT as i16) as u8
-        } else {
-            0
-        };
+        self.list.offset_by(diff);
 
-        self.tween_choice_to(true, res);
-        self.current_choice = Some(res);
-    }
-
-    fn tween_choice_to(&mut self, is_picked: bool, choice: u8) {
-        let target_x = if is_picked { 64.0 } else { 0.0 };
-
-        // assume choices is not null
-        let choices = self.choices.as_mut().unwrap();
-        let node = &mut choices[choice as usize];
-
-        let target_col = {
-            let col = if is_picked {
-                "font_selected_color"
-            } else {
-                "default_color"
-            };
-
-            default_theme!().get_color(col.into(), "RichTextLabel".into())
-        };
-
-        // tween x
-        tween(
-            node.clone().upcast(),
-            "position:x",
-            None,
-            target_x,
-            MENU_TWEEN_TIME,
-            MENU_TWEEN_TRANS,
-        )
-        .unwrap();
-
-        // tween color
-        tween(
-            node.clone().upcast(),
-            "theme_override_colors/default_color",
-            None,
-            target_col,
-            MENU_TWEEN_TIME,
-            MENU_TWEEN_TRANS,
-        )
-        .unwrap();
-
-        // set bbcode
-        // extremely ugly and hacky solution, but...
-        // how else could you work with in-band formatting? :P
-        let old_text = node.get_text();
-        let new_text = if is_picked {
-            // prepend [wave] stuff to msg
-            format!("{}{}", MENU_WAVE_BBCODE, old_text)
-        } else {
-            // slice off [wave] stuff from start
-            let st: String = old_text.into();
-            st[MENU_WAVE_BBCODE.len()..].to_owned()
-        };
-
-        node.set_text(new_text.into());
+        // tween the newly selected node
+        let (_, new_node) = self.list.current_iv_mut().unwrap();
+        tween_choice_to(true, new_node);
     }
 
     fn pick_choice(&mut self, choice: MainMenuChoice) {
@@ -156,10 +146,10 @@ impl INode2D for TitleScreen {
         let going_up = input.is_action_just_pressed("ui_up".into());
         let submitting = input.is_action_just_pressed("ui_accept".into());
 
-        match self.current_choice {
-            Some(choice) if submitting => {
-                let choice = MainMenuChoice::from_u8(choice).unwrap();
-                self.pick_choice(choice);
+        match self.list.current_iv_mut() {
+            Some((i, _)) if submitting => {
+                let i = MainMenuChoice::from_usize(i).unwrap();
+                self.pick_choice(i);
             }
 
             _ if going_down => self.change_menu_choice(1),
@@ -172,7 +162,7 @@ impl INode2D for TitleScreen {
         // The node that contains the text labels below
         let cont = self.node.get_node_as::<Control>("Background/MenuChoices");
 
-        self.choices = Some(
+        self.list = ChoiceList::new(
             [
                 // all the main menu label you can pick
                 "Play",
@@ -181,7 +171,10 @@ impl INode2D for TitleScreen {
                 "Quit",
                 "DebugBattle",
             ]
-            .map(|v| cont.get_node_as(v)),
+            .iter()
+            .map(|v| cont.get_node_as(v))
+            // .collect(),
+            .collect::<Vec<_>>(),
         );
     }
 }
