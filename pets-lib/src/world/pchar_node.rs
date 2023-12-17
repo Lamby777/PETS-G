@@ -32,6 +32,19 @@ impl PCharNode {
 }
 
 #[macro_export]
+macro_rules! load_pchar_scenes_under {
+    ($parent:expr; $($name:expr),*) => {{
+        let mut res = vec![];
+
+        $({
+            res.push(crate::load_pchar_scene_under!($parent, $name));
+        })*
+
+        res
+    }};
+}
+
+#[macro_export]
 macro_rules! load_pchar_scene_under {
     ($parent:expr, $name:expr) => {{
         let path = concat!("res://scenes/char/", $name, ".tscn");
