@@ -121,10 +121,8 @@ mod tests {
             }
         }
 
-        let ethan = calcs.get(PChar::ETHAN).unwrap();
-        let hp_fn = *ethan.max_hp;
-        let mana_fn = *ethan.max_mana;
-        assert_eq!(hp_fn(20), 14);
-        assert_eq!(mana_fn(40), Some(41));
+        let calcs = calcs.get(PChar::ETHAN).unwrap();
+        assert_eq!((calcs.max_hp)(20), 14);
+        assert_eq!((calcs.max_mana)(40), Some(41));
     }
 }
