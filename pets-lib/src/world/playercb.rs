@@ -2,7 +2,7 @@ use godot::engine::{CharacterBody2D, ICharacterBody2D};
 use godot::prelude::*;
 
 use crate::consts::playercb::*;
-use crate::{load_pchar_scene_under, prelude::*};
+use crate::{load_pchar_scenes_under, prelude::*};
 
 use super::pchar_node::PCharNode;
 
@@ -55,14 +55,15 @@ impl ICharacterBody2D for PlayerCB {
     }
 
     fn ready(&mut self) {
-        self.party = vec![
-            load_pchar_scene_under!(self, "agent_e"),
-            load_pchar_scene_under!(self, "agent_s"),
-            load_pchar_scene_under!(self, "agent_t"),
-            load_pchar_scene_under!(self, "mira"),
-            load_pchar_scene_under!(self, "dubs"),
-            load_pchar_scene_under!(self, "yoyo"),
-        ];
+        self.party = load_pchar_scenes_under!(
+            self;
+            "agent_e",
+            "agent_s",
+            "agent_t",
+            "mira",
+            "dubs",
+            "yoyo"
+        );
     }
 
     fn physics_process(&mut self, delta: f64) {
