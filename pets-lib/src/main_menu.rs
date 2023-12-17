@@ -14,11 +14,9 @@ use crate::prelude::*;
 
 use num_derive::FromPrimitive;
 use num_traits::FromPrimitive;
-#[derive(Debug, Default, FromPrimitive)]
+#[derive(Debug, FromPrimitive)]
 enum MainMenuChoice {
-    #[default]
     Play,
-
     Options,
     Credits,
     Quit,
