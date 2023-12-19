@@ -9,6 +9,7 @@
 use godot::engine::{Control, INode2D, Node2D, RichTextLabel};
 use godot::prelude::*;
 
+use crate::choicelist::ChoiceNodes;
 use crate::consts::main_menu::*;
 use crate::prelude::*;
 
@@ -79,7 +80,7 @@ fn tween_choice_to(is_picked: bool, node: &mut Gd<RichTextLabel>) {
 struct TitleScreen {
     #[base]
     node: Base<Node2D>,
-    list: ChoiceList<Gd<RichTextLabel>>,
+    list: ChoiceNodes<MainMenuChoice, RichTextLabel>,
 }
 
 #[godot_api]
@@ -171,7 +172,6 @@ impl INode2D for TitleScreen {
             ]
             .iter()
             .map(|v| cont.get_node_as(v))
-            // .collect(),
             .collect::<Vec<_>>(),
         );
     }
