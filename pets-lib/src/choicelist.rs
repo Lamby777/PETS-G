@@ -15,6 +15,7 @@ pub struct ChoiceList<Enum, T: GodotClass> {
     choices: Vec<(Enum, Gd<T>)>,
     selected: Option<usize>,
     label_tweener: fn(bool, Gd<T>),
+    on_picked: fn(&mut Self, Enum),
 }
 
 impl<Enum, T: GodotClass> Default for ChoiceList<Enum, T> {
@@ -23,11 +24,12 @@ impl<Enum, T: GodotClass> Default for ChoiceList<Enum, T> {
             choices: vec![],
             selected: None,
             label_tweener: |_, _| {},
+            on_picked: |_, _| {},
         }
     }
 }
 
-impl<Enum, T: GodotClass> ChoiceList<Enum, T> {
+impl<Enum: Copy, T: GodotClass> ChoiceList<Enum, T> {
     pub fn new(choices: impl Into<Vec<(Enum, Gd<T>)>>) -> Self {
         Self {
             choices: choices.into(),
@@ -70,7 +72,7 @@ impl<Enum, T: GodotClass> ChoiceList<Enum, T> {
 
         match self.current_iv_mut() {
             Some((i, _)) if submitting => {
-                // self.pick_choice(*i);
+                (self.on_picked)(self, *i);
             }
 
             _ if going_down => self.change_menu_choice(1),
