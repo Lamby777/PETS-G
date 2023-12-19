@@ -157,20 +157,19 @@ impl INode2D for TitleScreen {
     fn ready(&mut self) {
         // The node that contains the text labels below
         let cont = self.node.get_node_as::<Control>("Background/MenuChoices");
+        let nodes_map = [
+            // all the main menu label you can pick
+            (Play, "Play"),
+            (Options, "Options"),
+            (Credits, "Credits"),
+            (Quit, "Quit"),
+            (DebugBattle, "DebugBattle"),
+        ]
+        .into_iter()
+        .map(|(e, nodename)| (e, cont.get_node_as(nodename)))
+        .collect::<Vec<_>>();
 
         use MainMenuChoice::*;
-        self.list = ChoiceList::new(
-            [
-                // all the main menu label you can pick
-                (Play, "Play"),
-                (Options, "Options"),
-                (Credits, "Credits"),
-                (Quit, "Quit"),
-                (DebugBattle, "DebugBattle"),
-            ]
-            .into_iter()
-            .map(|(e, nodename)| (e, cont.get_node_as(nodename)))
-            .collect::<Vec<_>>(),
-        );
+        self.list = ChoiceList::new(nodes_map, tween_choice_to, Self::pick_choice);
     }
 }
