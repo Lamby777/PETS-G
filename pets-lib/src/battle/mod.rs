@@ -44,24 +44,30 @@ struct BattleEngine {
 
 impl BattleEngine {
     fn menu_confirm(&mut self) {
+        let input = Input::singleton();
+
+        // TODO up/down
+
+        if !input.is_action_just_pressed("ui_accept".into()) {
+            // do nothing
+            return;
+        }
+
         // TODO check what the current choice is
+        // and change the state accordingly
     }
 }
 
 #[godot_api]
 impl INode2D for BattleEngine {
     fn process(&mut self, _delta: f64) {
-        let input = Input::singleton();
         use BattleState::*;
 
-        match self.state {
-            Menu if input.is_action_just_pressed("ui_accept".into()) => {
-                self.menu_confirm();
-            }
-
-            _ => {
-                //
-            }
-        }
+        (match self.state {
+            Menu => Self::menu_confirm,
+            Attack => todo!(),
+            Skill => todo!(),
+            Item => todo!(),
+        })(self);
     }
 }
