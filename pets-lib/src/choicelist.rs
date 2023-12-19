@@ -30,7 +30,11 @@ impl<Enum, T: GodotClass> Default for ChoiceList<Enum, T> {
 }
 
 impl<Enum: Copy, T: GodotClass> ChoiceList<Enum, T> {
-    pub fn new(choices: impl Into<Vec<(Enum, Gd<T>)>>) -> Self {
+    pub fn new(
+        choices: impl Into<Vec<(Enum, Gd<T>)>>,
+        tweener: fn(bool, Gd<T>),
+        on_picked: fn(&mut Self, Enum),
+    ) -> Self {
         Self {
             choices: choices.into(),
             ..Default::default()
