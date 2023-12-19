@@ -3,7 +3,7 @@
 //! the GDExtension side that runs during battles.
 //!
 
-use godot::engine::{INode2D, InputEvent, Node2D, RichTextLabel};
+use godot::engine::{INode2D, Node2D, RichTextLabel};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -42,14 +42,26 @@ struct BattleEngine {
     state: BattleState,
 }
 
+impl BattleEngine {
+    fn menu_confirm(&mut self) {
+        // TODO check what the current choice is
+    }
+}
+
 #[godot_api]
 impl INode2D for BattleEngine {
-    fn input(&mut self, event: Gd<InputEvent>) {
+    fn process(&mut self, _delta: f64) {
+        let input = Input::singleton();
         use BattleState::*;
 
         match self.state {
-            Menu if event.is_action_pressed("ui_accept".into()) => {}
-            _ => {}
+            Menu if input.is_action_just_pressed("ui_accept".into()) => {
+                self.menu_confirm();
+            }
+
+            _ => {
+                //
+            }
         }
     }
 }
