@@ -4,6 +4,9 @@
 
 use godot::prelude::*;
 
+type TweenFn<T> = fn(bool, Gd<T>);
+type PickHandler<Enum> = fn(&mut (), Enum);
+
 /// A list of concrete nodes and their associated
 /// enum variants. Makes it easier to work with
 /// an enum that has associated nodes for selecting
@@ -14,8 +17,8 @@ use godot::prelude::*;
 pub struct ChoiceList<Enum, T: GodotClass> {
     choices: Vec<(Enum, Gd<T>)>,
     selected: Option<usize>,
-    label_tweener: fn(bool, Gd<T>),
-    on_picked: fn(&mut Self, Enum),
+    label_tweener: TweenFn<T>,
+    on_picked: PickHandler<Enum>,
 }
 
 impl<Enum, T: GodotClass> Default for ChoiceList<Enum, T> {
@@ -32,7 +35,7 @@ impl<Enum, T: GodotClass> Default for ChoiceList<Enum, T> {
 impl<Enum: Copy, T: GodotClass> ChoiceList<Enum, T> {
     pub fn new(
         choices: impl Into<Vec<(Enum, Gd<T>)>>,
-        tweener: fn(bool, Gd<T>),
+        tweener: TweenFn<T>,
         on_picked: fn(&mut Self, Enum),
     ) -> Self {
         Self {
@@ -76,7 +79,7 @@ impl<Enum: Copy, T: GodotClass> ChoiceList<Enum, T> {
 
         match self.current_iv_mut() {
             Some((i, _)) if submitting => {
-                (self.on_picked)(self, *i);
+                // (self.on_picked)(*i);
             }
 
             _ if going_down => self.change_menu_choice(1),

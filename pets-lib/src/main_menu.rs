@@ -11,7 +11,7 @@ use godot::prelude::*;
 
 use crate::choicelist::ChoiceList;
 use crate::consts::main_menu::*;
-use crate::prelude::*;
+use crate::{change_scene, prelude::*};
 
 #[derive(Clone, Copy, Debug)]
 enum MainMenuChoice {
@@ -103,10 +103,7 @@ impl TitleScreen {
             Play => {
                 // TODO should animate the menu boxes flying
                 // off into the right, and the camera goes left
-                self.node
-                    .get_tree()
-                    .unwrap()
-                    .change_scene_to_file("res://scenes/world.tscn".into());
+                change_scene!("world");
             }
 
             Options => {
@@ -119,16 +116,10 @@ impl TitleScreen {
                 todo!()
             }
 
-            Quit => {
-                let mut tree = self.node.get_tree().unwrap();
-                tree.quit();
-            }
+            Quit => godot_tree!().quit(),
 
             DebugBattle => {
-                self.node
-                    .get_tree()
-                    .unwrap()
-                    .change_scene_to_file("res://scenes/battle_engine.tscn".into());
+                change_scene!("battle_engine");
             }
         }
     }
@@ -170,6 +161,6 @@ impl INode2D for TitleScreen {
         .collect::<Vec<_>>();
 
         use MainMenuChoice::*;
-        self.list = ChoiceList::new(nodes_map, tween_choice_to, Self::pick_choice);
+        self.list = ChoiceList::new(nodes_map, tween_choice_to, todo!());
     }
 }
