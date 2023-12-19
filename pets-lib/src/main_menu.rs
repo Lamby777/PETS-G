@@ -9,13 +9,14 @@
 use godot::engine::{Control, INode2D, Node2D, RichTextLabel};
 use godot::prelude::*;
 
-use crate::choicelist::ChoiceNodes;
+use crate::choicelist::ChoiceList;
 use crate::consts::main_menu::*;
 use crate::prelude::*;
 
-use num_derive::FromPrimitive;
-use num_traits::FromPrimitive;
-#[derive(Debug, FromPrimitive)]
+// use num_derive::FromPrimitive;
+// use num_traits::FromPrimitive;
+// #[derive(Debug, FromPrimitive)]
+#[derive(Clone, Copy, Debug)]
 enum MainMenuChoice {
     Play,
     Options,
@@ -24,7 +25,7 @@ enum MainMenuChoice {
     DebugBattle,
 }
 
-fn tween_choice_to(is_picked: bool, node: &mut Gd<RichTextLabel>) {
+fn tween_choice_to(is_picked: bool, mut node: Gd<RichTextLabel>) {
     let target_x = if is_picked { 64.0 } else { 0.0 };
 
     let target_col = {
@@ -80,7 +81,7 @@ fn tween_choice_to(is_picked: bool, node: &mut Gd<RichTextLabel>) {
 struct TitleScreen {
     #[base]
     node: Base<Node2D>,
-    list: ChoiceNodes<MainMenuChoice, RichTextLabel>,
+    list: ChoiceList<MainMenuChoice, RichTextLabel>,
 }
 
 #[godot_api]
@@ -88,14 +89,14 @@ impl TitleScreen {
     fn change_menu_choice(&mut self, diff: i32) {
         // tween old down and new up
         if let Some((_, old_node)) = self.list.current_iv_mut() {
-            tween_choice_to(false, old_node);
+            tween_choice_to(false, old_node.clone());
         }
 
         self.list.offset_by(diff);
 
         // tween the newly selected node
         let (_, new_node) = self.list.current_iv_mut().unwrap();
-        tween_choice_to(true, new_node);
+        tween_choice_to(true, new_node.clone());
     }
 
     fn pick_choice(&mut self, choice: MainMenuChoice) {
@@ -147,8 +148,8 @@ impl INode2D for TitleScreen {
 
         match self.list.current_iv_mut() {
             Some((i, _)) if submitting => {
-                let i = MainMenuChoice::from_usize(i).unwrap();
-                self.pick_choice(i);
+                // let i = MainMenuChoice::from_usize(i).unwrap();
+                self.pick_choice(*i);
             }
 
             _ if going_down => self.change_menu_choice(1),
@@ -161,17 +162,18 @@ impl INode2D for TitleScreen {
         // The node that contains the text labels below
         let cont = self.node.get_node_as::<Control>("Background/MenuChoices");
 
+        use MainMenuChoice::*;
         self.list = ChoiceList::new(
             [
                 // all the main menu label you can pick
-                "Play",
-                "Options",
-                "Credits",
-                "Quit",
-                "DebugBattle",
+                (Play, "Play"),
+                (Options, "Options"),
+                (Credits, "Credits"),
+                (Quit, "Quit"),
+                (DebugBattle, "DebugBattle"),
             ]
-            .iter()
-            .map(|v| cont.get_node_as(v))
+            .into_iter()
+            .map(|(e, nodename)| (e, cont.get_node_as(nodename)))
             .collect::<Vec<_>>(),
         );
     }
