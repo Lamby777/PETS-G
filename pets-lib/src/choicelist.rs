@@ -14,7 +14,7 @@ use godot::prelude::*;
 pub struct ChoiceList<Enum, T: GodotClass> {
     choices: Vec<(Enum, Gd<T>)>,
     selected: Option<usize>,
-    label_tweener: Option<fn(bool, Gd<T>)>,
+    label_tweener: fn(bool, Gd<T>),
 }
 
 impl<Enum, T: GodotClass> Default for ChoiceList<Enum, T> {
@@ -22,7 +22,7 @@ impl<Enum, T: GodotClass> Default for ChoiceList<Enum, T> {
         Self {
             choices: vec![],
             selected: None,
-            label_tweener: None,
+            label_tweener: |_, _| {},
         }
     }
 }
@@ -51,14 +51,14 @@ impl<Enum, T: GodotClass> ChoiceList<Enum, T> {
     fn change_menu_choice(&mut self, diff: i32) {
         // tween old down and new up
         if let Some((_, old_node)) = self.current_iv_mut() {
-            self.label_tweener.map(|f| f(false, old_node.clone()));
+            (self.label_tweener)(false, old_node.clone());
         }
 
         self.offset_by(diff);
 
         // tween the newly selected node
         let (_, new_node) = self.current_iv_mut().unwrap();
-        self.label_tweener.map(|f| f(true, new_node.clone()));
+        (self.label_tweener)(true, new_node.clone());
     }
 
     pub fn process_input(&mut self) {
