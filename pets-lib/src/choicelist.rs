@@ -1,7 +1,18 @@
 //!
-//! Choice List struct, an abstract representation of
-//! a list of choices.
+//! Helper stuff for working with choice lists
 //!
+
+use godot::prelude::*;
+
+/// A list of concrete nodes and their associated
+/// enum variants. Makes it easier to work with
+/// an enum that has associated nodes for selecting
+/// different options.
+pub struct ChoiceNodes<Enum, T: GodotClass>(pub ChoiceList<(Enum, Gd<T>)>);
+
+impl<Enum, T: GodotClass> ChoiceNodes<Enum, T> {
+    //
+}
 
 /// An abstract representation of a list of choices.
 /// Incrementing past the end of the list will wrap

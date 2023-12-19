@@ -3,8 +3,10 @@
 //! the GDExtension side that runs during battles.
 //!
 
-use godot::engine::{INode2D, Node2D};
+use godot::engine::{INode2D, InputEvent, Node2D, RichTextLabel};
 use godot::prelude::*;
+
+use crate::prelude::*;
 
 mod player;
 mod stat_translation;
@@ -13,7 +15,7 @@ mod stat_translation;
 mod rhythm;
 
 #[allow(unused)]
-#[derive(Default)]
+#[derive(Default, PartialEq)]
 enum BattleState {
     #[default]
     /// Picking one of the options below
@@ -36,13 +38,18 @@ struct BattleEngine {
     #[base]
     node: Base<Node2D>,
 
-    current_state: BattleState,
+    choices: ChoiceList<Gd<RichTextLabel>>,
+    state: BattleState,
 }
 
 #[godot_api]
 impl INode2D for BattleEngine {
-    fn process(&mut self, _delta: f64) {
-        let _input = Input::singleton();
-        //
+    fn input(&mut self, event: Gd<InputEvent>) {
+        use BattleState::*;
+
+        match self.state {
+            Menu if event.is_action_pressed("ui_accept".into()) => {}
+            _ => {}
+        }
     }
 }
