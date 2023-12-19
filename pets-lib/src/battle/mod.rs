@@ -38,7 +38,7 @@ struct BattleEngine {
     #[base]
     node: Base<Node2D>,
 
-    choices: ChoiceList<Gd<RichTextLabel>>,
+    choices: ChoiceList<BattleState, RichTextLabel>,
     state: BattleState,
 }
 
