@@ -63,6 +63,13 @@ macro_rules! godot_tree {
 }
 
 #[macro_export]
+macro_rules! change_scene {
+    ($scene:expr) => {
+        crate::godot_tree!().change_scene_to_file(concat!("res://scenes/", $scene, ".tscn").into())
+    };
+}
+
+#[macro_export]
 macro_rules! godot_root {
     () => {
         $crate::godot_tree!().get_root().unwrap()

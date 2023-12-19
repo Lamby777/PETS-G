@@ -47,9 +47,10 @@ impl InteractionManager {
 
     /// Sorts the zones by distance from the player
     pub fn sort_zones_by_distance(&mut self) {
-        let mut tree = self.node.get_tree().unwrap();
-        let pcb = tree.get_first_node_in_group("playercb".into()).unwrap();
-        let pcb = pcb.cast::<PlayerCB>();
+        let pcb = godot_tree!()
+            .get_first_node_in_group("playercb".into())
+            .unwrap()
+            .cast::<PlayerCB>();
         let pcb_pos = { pcb.get_position() };
 
         self.zones.sort_by(|a, b| {
