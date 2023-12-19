@@ -13,9 +13,6 @@ use crate::choicelist::ChoiceList;
 use crate::consts::main_menu::*;
 use crate::prelude::*;
 
-// use num_derive::FromPrimitive;
-// use num_traits::FromPrimitive;
-// #[derive(Debug, FromPrimitive)]
 #[derive(Clone, Copy, Debug)]
 enum MainMenuChoice {
     Play,
@@ -148,7 +145,6 @@ impl INode2D for TitleScreen {
 
         match self.list.current_iv_mut() {
             Some((i, _)) if submitting => {
-                // let i = MainMenuChoice::from_usize(i).unwrap();
                 self.pick_choice(*i);
             }
 
