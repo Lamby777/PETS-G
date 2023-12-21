@@ -52,7 +52,7 @@ impl<Enum: Copy, T: GodotClass> ChoiceList<Enum, T> {
         }
 
         self.selected = Some(match self.selected {
-            Some(n) => ((n as i32 + diff) as usize).rem_euclid(self.choices.len()),
+            Some(n) => (n as i32 + diff).rem_euclid(self.choices.len() as i32) as usize,
             None => 0,
         });
 
