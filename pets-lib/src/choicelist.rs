@@ -5,7 +5,6 @@
 use godot::prelude::*;
 
 type TweenFn<T> = fn(bool, Gd<T>);
-type PickHandler<Owner, Enum> = fn(&mut Owner, Enum);
 
 /// A list of concrete nodes and their associated
 /// enum variants. Makes it easier to work with
@@ -14,29 +13,29 @@ type PickHandler<Owner, Enum> = fn(&mut Owner, Enum);
 ///
 /// Incrementing past the end of the list will wrap
 /// back to the start, and vice versa.
-pub struct ChoiceList<Enum, T: GodotClass, Owner> {
+pub struct ChoiceList<Enum, T: GodotClass> {
     choices: Vec<(Enum, Gd<T>)>,
     selected: Option<usize>,
     label_tweener: TweenFn<T>,
-    on_picked: PickHandler<Owner, Enum>,
+    on_picked: fn(Enum),
 }
 
-impl<Enum, T: GodotClass, Owner> Default for ChoiceList<Enum, T, Owner> {
+impl<Enum, T: GodotClass> Default for ChoiceList<Enum, T> {
     fn default() -> Self {
         Self {
             choices: vec![],
             selected: None,
             label_tweener: |_, _| {},
-            on_picked: |_, _| {},
+            on_picked: |_| {},
         }
     }
 }
 
-impl<Enum: Copy, T: GodotClass, Owner> ChoiceList<Enum, T, Owner> {
+impl<Enum: Copy, T: GodotClass> ChoiceList<Enum, T> {
     pub fn new(
         choices: impl Into<Vec<(Enum, Gd<T>)>>,
         label_tweener: TweenFn<T>,
-        on_picked: PickHandler<Owner, Enum>,
+        on_picked: fn(Enum),
     ) -> Self {
         Self {
             choices: choices.into(),
@@ -47,29 +46,25 @@ impl<Enum: Copy, T: GodotClass, Owner> ChoiceList<Enum, T, Owner> {
     }
 
     pub fn offset_by(&mut self, diff: i32) {
+        // tween old down and new up
+        if let Some((_, old_node)) = self.current_iv_mut() {
+            (self.label_tweener)(false, old_node.clone());
+        }
+
         self.selected = Some(match self.selected {
             Some(n) => ((n as i32 + diff) as usize).rem_euclid(self.choices.len()),
             None => 0,
         });
+
+        // tween the newly selected node
+        let (_, new_node) = self.current_iv_mut().unwrap();
+        (self.label_tweener)(true, new_node.clone());
     }
 
     /// get currently selected choice
     /// `None` if no choice is selected
     pub fn current_iv_mut(&self) -> Option<&(Enum, Gd<T>)> {
         self.selected.map(|n| &self.choices[n])
-    }
-
-    fn change_menu_choice(&mut self, diff: i32) {
-        // tween old down and new up
-        if let Some((_, old_node)) = self.current_iv_mut() {
-            (self.label_tweener)(false, old_node.clone());
-        }
-
-        self.offset_by(diff);
-
-        // tween the newly selected node
-        let (_, new_node) = self.current_iv_mut().unwrap();
-        (self.label_tweener)(true, new_node.clone());
     }
 
     pub fn process_input(&mut self) {
@@ -81,11 +76,11 @@ impl<Enum: Copy, T: GodotClass, Owner> ChoiceList<Enum, T, Owner> {
 
         match self.current_iv_mut() {
             Some((i, _)) if submitting => {
-                // (self.on_picked)(*i);
+                (self.on_picked)(*i);
             }
 
-            _ if going_down => self.change_menu_choice(1),
-            _ if going_up => self.change_menu_choice(-1),
+            _ if going_down => self.offset_by(1),
+            _ if going_up => self.offset_by(-1),
             _ => {}
         }
     }

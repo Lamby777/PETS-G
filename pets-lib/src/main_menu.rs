@@ -78,71 +78,13 @@ fn tween_choice_to(is_picked: bool, mut node: Gd<RichTextLabel>) {
 struct TitleScreen {
     #[base]
     node: Base<Node2D>,
-    list: ChoiceList<MainMenuChoice, RichTextLabel, Self>,
-}
-
-#[godot_api]
-impl TitleScreen {
-    fn change_menu_choice(&mut self, diff: i32) {
-        // tween old down and new up
-        if let Some((_, old_node)) = self.list.current_iv_mut() {
-            tween_choice_to(false, old_node.clone());
-        }
-
-        self.list.offset_by(diff);
-
-        // tween the newly selected node
-        let (_, new_node) = self.list.current_iv_mut().unwrap();
-        tween_choice_to(true, new_node.clone());
-    }
-
-    fn pick_choice(&mut self, choice: MainMenuChoice) {
-        use MainMenuChoice::*;
-
-        match choice {
-            Play => {
-                // TODO should animate the menu boxes flying
-                // off into the right, and the camera goes left
-                change_scene!("world");
-            }
-
-            Options => {
-                // should scroll right into options menu
-                todo!()
-            }
-
-            Credits => {
-                // should pull up credits box
-                todo!()
-            }
-
-            Quit => godot_tree!().quit(),
-
-            DebugBattle => {
-                change_scene!("battle_engine");
-            }
-        }
-    }
+    list: ChoiceList<MainMenuChoice, RichTextLabel>,
 }
 
 #[godot_api]
 impl INode2D for TitleScreen {
     fn process(&mut self, _delta: f64) {
-        let input = Input::singleton();
-
-        let going_down = input.is_action_just_pressed("ui_down".into());
-        let going_up = input.is_action_just_pressed("ui_up".into());
-        let submitting = input.is_action_just_pressed("ui_accept".into());
-
-        match self.list.current_iv_mut() {
-            Some((i, _)) if submitting => {
-                self.pick_choice(*i);
-            }
-
-            _ if going_down => self.change_menu_choice(1),
-            _ if going_up => self.change_menu_choice(-1),
-            _ => {}
-        }
+        self.list.process_input();
     }
 
     fn ready(&mut self) {
@@ -161,6 +103,32 @@ impl INode2D for TitleScreen {
         .collect::<Vec<_>>();
 
         use MainMenuChoice::*;
-        self.list = ChoiceList::new(nodes_map, tween_choice_to, Self::pick_choice);
+        self.list = ChoiceList::new(nodes_map, tween_choice_to, |choice: MainMenuChoice| {
+            use MainMenuChoice::*;
+
+            match choice {
+                Play => {
+                    // TODO should animate the menu boxes flying
+                    // off into the right, and the camera goes left
+                    change_scene!("world");
+                }
+
+                Options => {
+                    // should scroll right into options menu
+                    todo!()
+                }
+
+                Credits => {
+                    // should pull up credits box
+                    todo!()
+                }
+
+                Quit => godot_tree!().quit(),
+
+                DebugBattle => {
+                    change_scene!("battle_engine");
+                }
+            }
+        });
     }
 }
