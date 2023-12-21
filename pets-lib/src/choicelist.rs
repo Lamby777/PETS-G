@@ -5,7 +5,7 @@
 use godot::prelude::*;
 
 type TweenFn<T> = fn(bool, Gd<T>);
-type PickHandler<Enum> = fn(&mut (), Enum);
+type PickHandler<Owner, Enum> = fn(&mut Owner, Enum);
 
 /// A list of concrete nodes and their associated
 /// enum variants. Makes it easier to work with
@@ -14,14 +14,14 @@ type PickHandler<Enum> = fn(&mut (), Enum);
 ///
 /// Incrementing past the end of the list will wrap
 /// back to the start, and vice versa.
-pub struct ChoiceList<Enum, T: GodotClass> {
+pub struct ChoiceList<Enum, T: GodotClass, Owner> {
     choices: Vec<(Enum, Gd<T>)>,
     selected: Option<usize>,
     label_tweener: TweenFn<T>,
-    on_picked: PickHandler<Enum>,
+    on_picked: PickHandler<Owner, Enum>,
 }
 
-impl<Enum, T: GodotClass> Default for ChoiceList<Enum, T> {
+impl<Enum, T: GodotClass, Owner> Default for ChoiceList<Enum, T, Owner> {
     fn default() -> Self {
         Self {
             choices: vec![],
@@ -32,14 +32,16 @@ impl<Enum, T: GodotClass> Default for ChoiceList<Enum, T> {
     }
 }
 
-impl<Enum: Copy, T: GodotClass> ChoiceList<Enum, T> {
+impl<Enum: Copy, T: GodotClass, Owner> ChoiceList<Enum, T, Owner> {
     pub fn new(
         choices: impl Into<Vec<(Enum, Gd<T>)>>,
-        tweener: TweenFn<T>,
-        on_picked: fn(&mut Self, Enum),
+        label_tweener: TweenFn<T>,
+        on_picked: PickHandler<Owner, Enum>,
     ) -> Self {
         Self {
             choices: choices.into(),
+            label_tweener,
+            on_picked,
             ..Default::default()
         }
     }
