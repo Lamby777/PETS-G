@@ -78,7 +78,7 @@ fn tween_choice_to(is_picked: bool, mut node: Gd<RichTextLabel>) {
 struct TitleScreen {
     #[base]
     node: Base<Node2D>,
-    list: ChoiceList<MainMenuChoice, RichTextLabel>,
+    list: ChoiceList<MainMenuChoice, RichTextLabel, Self>,
 }
 
 #[godot_api]
@@ -161,6 +161,6 @@ impl INode2D for TitleScreen {
         .collect::<Vec<_>>();
 
         use MainMenuChoice::*;
-        self.list = ChoiceList::new(nodes_map, tween_choice_to, todo!());
+        self.list = ChoiceList::new(nodes_map, tween_choice_to, Self::pick_choice);
     }
 }
