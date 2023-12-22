@@ -39,8 +39,8 @@ enum BattleState {
 #[derive(Clone, Copy, PartialEq)]
 enum BattleChoice {
     Attack,
-    Skill,
-    Item,
+    Skills,
+    Items,
     Run,
 }
 
@@ -101,8 +101,8 @@ impl INode2D for BattleEngine {
         let nodes_map = [
             // all the main menu label you can pick
             (Attack, "Attack"),
-            (Skill, "Skills"),
-            (Item, "Items"),
+            (Skills, "Skills"),
+            (Items, "Items"),
             (Run, "Run"),
         ]
         .into_iter()
@@ -113,8 +113,8 @@ impl INode2D for BattleEngine {
             // call different functions depending on the choice
             match choice {
                 Attack => todo!(),
-                Skill => todo!(),
-                Item => todo!(),
+                Skills => todo!(),
+                Items => todo!(),
                 Run => todo!(),
             }
         });
