@@ -36,13 +36,14 @@ enum BattleState {
 }
 
 #[allow(unused)]
-#[derive(Clone, Copy, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 enum BattleChoice {
     Attack,
     Skills,
     Items,
     Run,
 }
+display_is_debug!(BattleChoice);
 
 #[allow(unused)]
 #[derive(GodotClass)]
