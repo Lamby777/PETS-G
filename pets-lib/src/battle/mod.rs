@@ -99,18 +99,9 @@ impl INode2D for BattleEngine {
 
         // The node that contains the text labels below
         let cont = self.node.get_node_as::<Control>("%Choices");
-        let nodes_map = [
-            // all the main menu label you can pick
-            (Attack, "Attack"),
-            (Skills, "Skills"),
-            (Items, "Items"),
-            (Run, "Run"),
-        ]
-        .into_iter()
-        .map(|(e, nodename)| (e, cont.get_node_as(nodename)))
-        .collect::<Vec<_>>();
+        let choices = &[Attack, Skills, Items, Run];
 
-        self.choices = ChoiceList::new(nodes_map, tween_choice_to, |choice| {
+        self.choices = ChoiceList::new(choices, tween_choice_to, |choice| {
             // call different functions depending on the choice
             match choice {
                 Attack => todo!(),
