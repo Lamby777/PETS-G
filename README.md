@@ -14,15 +14,12 @@ control of your own hardware overly complicated... and is also open-source! <3
 
 ---
 
-Using [godot-rust/gdext](https://github.com/godot-rust/gdextension) for complex
-parts because compile-time type safety go brrrr. Prefer GDScript for the simple
-parts of the game's code, though.
+On Godot version 4.2.1
 
-Using Godot version 4.1.2.
-
-Godot 4.2 is coming out soon, and I don't see any reason not to update yet, so
-unless some major shit goes down in terms of compatibility, I'll probably update
-to that too. (Updating from 4.0 -> 4.1 was kind of a massive waste of my time)
+Using [godot-rust/gdext](https://github.com/godot-rust/gdextension) for most of
+the stuff, because of the type system. Prefer GDScript for things that probably
+won't need to interact with Rust code, and are simpler to just write as GDScript
+scripts.
 
 ---
 
