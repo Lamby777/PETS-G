@@ -29,14 +29,19 @@ impl<Enum, T: GodotClass> Default for ChoiceList<Enum, T> {
     }
 }
 
+#[macro_export]
+macro_rules! choice_nodes_from_variants {
+    () => {};
+}
+
 impl<Enum: Copy, T: GodotClass> ChoiceList<Enum, T> {
     pub fn new(
-        choices: impl Into<Vec<(Enum, Gd<T>)>>,
+        choices: Vec<(Enum, Gd<T>)>,
         label_tweener: fn(bool, Gd<T>),
         on_picked: fn(Enum),
     ) -> Self {
         Self {
-            choices: choices.into(),
+            choices,
             label_tweener,
             on_picked,
             ..Default::default()
