@@ -11,7 +11,7 @@ use godot::prelude::*;
 
 use crate::choicelist::ChoiceList;
 use crate::consts::main_menu::*;
-use crate::{change_scene, prelude::*};
+use crate::prelude::*;
 
 #[derive(Clone, Copy, Debug)]
 enum MainMenuChoice {

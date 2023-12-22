@@ -6,6 +6,7 @@ use godot::engine::tween::TransitionType;
 use godot::engine::Tween;
 use godot::prelude::*;
 
+pub use crate::change_scene;
 pub use crate::current_scene;
 pub use crate::default_theme;
 pub use crate::godot_tree;
@@ -48,7 +49,7 @@ where
 #[macro_export]
 macro_rules! default_theme {
     () => {
-        load::<godot::engine::Theme>("res://themes/theme_deft.tres")
+        godot::prelude::load::<godot::engine::Theme>("res://themes/theme_deft.tres")
     };
 }
 
@@ -65,7 +66,7 @@ macro_rules! godot_tree {
 #[macro_export]
 macro_rules! change_scene {
     ($scene:expr) => {
-        crate::godot_tree!().change_scene_to_file(concat!("res://scenes/", $scene, ".tscn").into())
+        $crate::godot_tree!().change_scene_to_file(concat!("res://scenes/", $scene, ".tscn").into())
     };
 }
 
