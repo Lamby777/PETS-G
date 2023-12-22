@@ -9,6 +9,7 @@ use godot::prelude::*;
 pub use crate::change_scene;
 pub use crate::current_scene;
 pub use crate::default_theme;
+pub use crate::display_is_debug;
 pub use crate::godot_tree;
 
 #[allow(unused)]
@@ -81,5 +82,16 @@ macro_rules! godot_root {
 macro_rules! current_scene {
     () => {
         $crate::godot_tree!().get_current_scene().unwrap()
+    };
+}
+
+#[macro_export]
+macro_rules! display_is_debug {
+    ($target:ident) => {
+        impl std::fmt::Display for $target {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                std::fmt::Debug::fmt(&self, f)
+            }
+        }
     };
 }
