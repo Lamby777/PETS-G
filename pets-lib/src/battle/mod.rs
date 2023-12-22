@@ -3,9 +3,10 @@
 //! the GDExtension side that runs during battles.
 //!
 
-use godot::engine::{INode2D, Node2D, RichTextLabel};
+use godot::engine::{Control, INode2D, Node2D, RichTextLabel};
 use godot::prelude::*;
 
+use crate::consts::dialogue::*;
 use crate::prelude::*;
 
 mod player;
@@ -29,6 +30,18 @@ enum BattleState {
 
     /// Selecting an item to use
     Item,
+
+    /// Run away from the battle
+    Run,
+}
+
+#[allow(unused)]
+#[derive(Clone, Copy, PartialEq)]
+enum BattleChoice {
+    Attack,
+    Skill,
+    Item,
+    Run,
 }
 
 #[allow(unused)]
@@ -38,36 +51,76 @@ struct BattleEngine {
     #[base]
     node: Base<Node2D>,
 
-    choices: ChoiceList<BattleState, RichTextLabel>,
+    choices: ChoiceList<BattleChoice, RichTextLabel>,
     state: BattleState,
 }
 
-impl BattleEngine {
-    fn menu_confirm(&mut self) {
-        let input = Input::singleton();
+fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
+    let target_x = if is_picked { 64.0 } else { 0.0 };
 
-        // TODO up/down
+    let target_col = {
+        let col = if is_picked {
+            "font_selected_color"
+        } else {
+            "default_color"
+        };
 
-        if !input.is_action_just_pressed("ui_accept".into()) {
-            // do nothing
-            return;
-        }
+        default_theme!().get_color(col.into(), "RichTextLabel".into())
+    };
 
-        // TODO check what the current choice is
-        // and change the state accordingly
-    }
+    // tween x
+    tween(
+        node.clone().upcast(),
+        "position:x",
+        None,
+        target_x,
+        DBOX_TWEEN_TIME,
+        DBOX_TWEEN_TRANS,
+    )
+    .unwrap();
+
+    // tween color
+    tween(
+        node.upcast(),
+        "theme_override_colors/default_color",
+        None,
+        target_col,
+        DBOX_TWEEN_TIME,
+        DBOX_TWEEN_TRANS,
+    )
+    .unwrap();
 }
 
 #[godot_api]
 impl INode2D for BattleEngine {
-    fn process(&mut self, _delta: f64) {
-        use BattleState::*;
+    fn ready(&mut self) {
+        use BattleChoice::*;
 
-        (match self.state {
-            Menu => Self::menu_confirm,
-            Attack => todo!(),
-            Skill => todo!(),
-            Item => todo!(),
-        })(self);
+        // The node that contains the text labels below
+        let cont = self.node.get_node_as::<Control>("%Choices");
+        let nodes_map = [
+            // all the main menu label you can pick
+            (Attack, "Attack"),
+            (Skill, "Skills"),
+            (Item, "Items"),
+            (Run, "Run"),
+        ]
+        .into_iter()
+        .map(|(e, nodename)| (e, cont.get_node_as(nodename)))
+        .collect::<Vec<_>>();
+
+        self.choices = ChoiceList::new(nodes_map, tween_choice_to, |choice| {
+            // call different functions depending on the choice
+            match choice {
+                Attack => todo!(),
+                Skill => todo!(),
+                Item => todo!(),
+                Run => todo!(),
+            }
+        });
+    }
+
+    fn process(&mut self, _delta: f64) {
+        self.choices.process_input();
     }
 }

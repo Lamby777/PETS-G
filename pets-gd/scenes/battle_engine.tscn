@@ -113,6 +113,7 @@ texture = ExtResource("6_34tkp")
 expand_mode = 5
 
 [node name="Choices" type="VBoxContainer" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 theme_override_constants/separation = 10

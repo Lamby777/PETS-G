@@ -88,6 +88,8 @@ impl INode2D for TitleScreen {
     }
 
     fn ready(&mut self) {
+        use MainMenuChoice::*;
+
         // The node that contains the text labels below
         let cont = self.node.get_node_as::<Control>("Background/MenuChoices");
         let nodes_map = [
@@ -102,10 +104,7 @@ impl INode2D for TitleScreen {
         .map(|(e, nodename)| (e, cont.get_node_as(nodename)))
         .collect::<Vec<_>>();
 
-        use MainMenuChoice::*;
-        self.list = ChoiceList::new(nodes_map, tween_choice_to, |choice: MainMenuChoice| {
-            use MainMenuChoice::*;
-
+        self.list = ChoiceList::new(nodes_map, tween_choice_to, |choice| {
             match choice {
                 Play => {
                     // TODO should animate the menu boxes flying
