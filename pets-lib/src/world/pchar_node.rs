@@ -37,7 +37,7 @@ macro_rules! load_pchar_scenes_under {
         let mut res = vec![];
 
         $({
-            res.push(crate::load_pchar_scene_under!($parent, $name));
+            res.push($crate::load_pchar_scene_under!($parent, $name));
         })*
 
         res
