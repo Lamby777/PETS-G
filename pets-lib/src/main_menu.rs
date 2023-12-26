@@ -8,12 +8,14 @@
 
 use godot::engine::{Control, INode2D, Node2D, RichTextLabel};
 use godot::prelude::*;
+use num_enum::TryFromPrimitive;
 
 use crate::choicelist::ChoiceList;
 use crate::consts::main_menu::*;
 use crate::prelude::*;
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, TryFromPrimitive)]
+#[repr(usize)]
 enum MainMenuChoice {
     Play,
     Options,
@@ -94,14 +96,14 @@ impl INode2D for TitleScreen {
         let cont = self.node.get_node_as::<Control>("Background/MenuChoices");
         let nodes_map = [
             // all the main menu label you can pick
-            (Play, "Play"),
-            (Options, "Options"),
-            (Credits, "Credits"),
-            (Quit, "Quit"),
-            (DebugBattle, "DebugBattle"),
+            ("Play"),
+            ("Options"),
+            ("Credits"),
+            ("Quit"),
+            ("DebugBattle"),
         ]
         .into_iter()
-        .map(|(e, nodename)| (e, cont.get_node_as(nodename)))
+        .map(|nodename| cont.get_node_as(nodename))
         .collect::<Vec<_>>();
 
         self.list = ChoiceList::new(nodes_map, tween_choice_to, |choice| {

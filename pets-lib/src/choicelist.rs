@@ -3,7 +3,6 @@
 //!
 
 use godot::prelude::*;
-use num_enum::IntoPrimitive;
 
 /// A list of concrete nodes and their associated
 /// enum variants. Makes it easier to work with
@@ -14,18 +13,23 @@ use num_enum::IntoPrimitive;
 /// back to the start, and vice versa.
 pub struct ChoiceList<Enum, T>
 where
+    Enum: TryFrom<usize>,
     T: GodotClass,
 {
-    choices: Vec<(Enum, Gd<T>)>,
+    nodes: Vec<Gd<T>>,
     selected: Option<usize>,
     label_tweener: fn(bool, Gd<T>),
     on_picked: fn(Enum),
 }
 
-impl<Enum, T: GodotClass> Default for ChoiceList<Enum, T> {
+impl<Enum, T> Default for ChoiceList<Enum, T>
+where
+    Enum: TryFrom<usize>,
+    T: GodotClass,
+{
     fn default() -> Self {
         Self {
-            choices: vec![],
+            nodes: vec![],
             selected: None,
             label_tweener: |_, _| {},
             on_picked: |_| {},
@@ -33,14 +37,14 @@ impl<Enum, T: GodotClass> Default for ChoiceList<Enum, T> {
     }
 }
 
-impl<Enum: Copy, T: GodotClass> ChoiceList<Enum, T> {
-    pub fn new(
-        choices: Vec<(Enum, Gd<T>)>,
-        label_tweener: fn(bool, Gd<T>),
-        on_picked: fn(Enum),
-    ) -> Self {
+impl<Enum: Copy, T: GodotClass> ChoiceList<Enum, T>
+where
+    Enum: TryFrom<usize>,
+    T: GodotClass,
+{
+    pub fn new(choices: Vec<Gd<T>>, label_tweener: fn(bool, Gd<T>), on_picked: fn(Enum)) -> Self {
         Self {
-            choices,
+            nodes: choices,
             label_tweener,
             on_picked,
             ..Default::default()
@@ -54,7 +58,7 @@ impl<Enum: Copy, T: GodotClass> ChoiceList<Enum, T> {
         }
 
         self.selected = Some(match self.selected {
-            Some(n) => (n as i32 + diff).rem_euclid(self.choices.len() as i32) as usize,
+            Some(n) => (n as i32 + diff).rem_euclid(self.nodes.len() as i32) as usize,
             None => 0,
         });
 
@@ -65,8 +69,16 @@ impl<Enum: Copy, T: GodotClass> ChoiceList<Enum, T> {
 
     /// get currently selected choice
     /// `None` if no choice is selected
-    pub fn current_iv_mut(&self) -> Option<&(Enum, Gd<T>)> {
-        self.selected.map(|n| &self.choices[n])
+    pub fn current_iv_mut(&self) -> Option<(Enum, Gd<T>)> {
+        self.selected.map(|n| {
+            // can't unwrap, doesn't implement Debug
+            let Ok(variant) = Enum::try_from(n) else {
+                panic!("your mom");
+            };
+
+            let node = &self.nodes[n];
+            (variant, node.clone())
+        })
     }
 
     pub fn process_input(&mut self) {
@@ -78,7 +90,7 @@ impl<Enum: Copy, T: GodotClass> ChoiceList<Enum, T> {
 
         match self.current_iv_mut() {
             Some((i, _)) if submitting => {
-                (self.on_picked)(*i);
+                (self.on_picked)(i);
             }
 
             _ if going_down => self.offset_by(1),
