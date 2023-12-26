@@ -5,6 +5,7 @@
 
 use godot::engine::{Control, INode2D, Node2D, RichTextLabel};
 use godot::prelude::*;
+use num_enum::TryFromPrimitive;
 
 use crate::consts::main_menu::*;
 use crate::prelude::*;
@@ -36,7 +37,8 @@ enum BattleState {
 }
 
 #[allow(unused)]
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq, TryFromPrimitive)]
+#[repr(usize)]
 enum BattleChoice {
     Attack,
     Skills,
@@ -99,7 +101,18 @@ impl INode2D for BattleEngine {
 
         // The node that contains the text labels below
         let cont = self.node.get_node_as::<Control>("%Choices");
-        let choices = &[Attack, Skills, Items, Run];
+        // let choices = &[Attack, Skills, Items, Run];
+        // TODO update
+        let choices = [
+            // all the main menu label you can pick
+            ("Attack"),
+            ("Skills"),
+            ("Items"),
+            ("Run"),
+        ]
+        .into_iter()
+        .map(|nodename| cont.get_node_as(nodename))
+        .collect::<Vec<_>>();
 
         self.choices = ChoiceList::new(choices, tween_choice_to, |choice| {
             // call different functions depending on the choice
