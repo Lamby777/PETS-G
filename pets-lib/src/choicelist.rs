@@ -3,6 +3,7 @@
 //!
 
 use godot::prelude::*;
+use num_enum::IntoPrimitive;
 
 /// A list of concrete nodes and their associated
 /// enum variants. Makes it easier to work with
@@ -11,7 +12,10 @@ use godot::prelude::*;
 ///
 /// Incrementing past the end of the list will wrap
 /// back to the start, and vice versa.
-pub struct ChoiceList<Enum, T: GodotClass> {
+pub struct ChoiceList<Enum, T>
+where
+    T: GodotClass,
+{
     choices: Vec<(Enum, Gd<T>)>,
     selected: Option<usize>,
     label_tweener: fn(bool, Gd<T>),
@@ -27,11 +31,6 @@ impl<Enum, T: GodotClass> Default for ChoiceList<Enum, T> {
             on_picked: |_| {},
         }
     }
-}
-
-#[macro_export]
-macro_rules! choice_nodes_from_variants {
-    () => {};
 }
 
 impl<Enum: Copy, T: GodotClass> ChoiceList<Enum, T> {
