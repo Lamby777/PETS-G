@@ -37,6 +37,10 @@ where
     }
 }
 
+pub fn n_to_variant<Enum: TryFrom<usize>>(n: usize) -> Option<Enum> {
+    Enum::try_from(n).ok()
+}
+
 impl<Enum: Copy, T: GodotClass> ChoiceList<Enum, T>
 where
     Enum: TryFrom<usize>,
@@ -53,7 +57,7 @@ where
 
     pub fn offset_by(&mut self, diff: i32) {
         // tween old down and new up
-        if let Some((_, old_node)) = self.current_iv_mut() {
+        if let Some((_, old_node)) = self.current_iv() {
             (self.label_tweener)(false, old_node.clone());
         }
 
@@ -63,19 +67,16 @@ where
         });
 
         // tween the newly selected node
-        let (_, new_node) = self.current_iv_mut().unwrap();
+        let (_, new_node) = self.current_iv().unwrap();
         (self.label_tweener)(true, new_node.clone());
     }
 
     /// get currently selected choice
     /// `None` if no choice is selected
-    pub fn current_iv_mut(&self) -> Option<(Enum, Gd<T>)> {
+    pub fn current_iv(&self) -> Option<(Enum, Gd<T>)> {
         self.selected.map(|n| {
             // can't unwrap, doesn't implement Debug
-            let Ok(variant) = Enum::try_from(n) else {
-                panic!("your mom");
-            };
-
+            let variant = n_to_variant(n).unwrap();
             let node = &self.nodes[n];
             (variant, node.clone())
         })
@@ -88,7 +89,7 @@ where
         let going_up = input.is_action_just_pressed("ui_up".into());
         let submitting = input.is_action_just_pressed("ui_accept".into());
 
-        match self.current_iv_mut() {
+        match self.current_iv() {
             Some((i, _)) if submitting => {
                 (self.on_picked)(i);
             }
