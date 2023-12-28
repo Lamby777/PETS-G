@@ -14,7 +14,7 @@ use godot::prelude::*;
 pub struct ChoiceList<Enum, T>
 where
     Enum: TryFrom<usize>,
-    T: GodotClass,
+    T: GodotClass + Inherits<Node>,
 {
     nodes: Vec<Gd<T>>,
     selected: Option<usize>,
@@ -25,7 +25,7 @@ where
 impl<Enum, T> Default for ChoiceList<Enum, T>
 where
     Enum: TryFrom<usize>,
-    T: GodotClass,
+    T: GodotClass + Inherits<Node>,
 {
     fn default() -> Self {
         Self {
@@ -44,11 +44,21 @@ pub fn n_to_variant<Enum: TryFrom<usize>>(n: usize) -> Option<Enum> {
 impl<Enum: Copy, T: GodotClass> ChoiceList<Enum, T>
 where
     Enum: TryFrom<usize>,
-    T: GodotClass,
+    T: GodotClass + Inherits<Node>,
 {
-    pub fn new(choices: Vec<Gd<T>>, label_tweener: fn(bool, Gd<T>), on_picked: fn(Enum)) -> Self {
+    pub fn from_children_of(
+        parent: Gd<Node>,
+        label_tweener: fn(bool, Gd<T>),
+        on_picked: fn(Enum),
+    ) -> Self {
+        let nodes = parent
+            .get_children()
+            .iter_shared()
+            .map(|v| v.cast())
+            .collect();
+
         Self {
-            nodes: choices,
+            nodes,
             label_tweener,
             on_picked,
             ..Default::default()

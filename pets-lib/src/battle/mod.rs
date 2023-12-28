@@ -3,7 +3,7 @@
 //! the GDExtension side that runs during battles.
 //!
 
-use godot::engine::{Control, INode2D, Node2D, RichTextLabel};
+use godot::engine::{INode2D, Node2D, RichTextLabel};
 use godot::prelude::*;
 use num_enum::TryFromPrimitive;
 
@@ -100,21 +100,9 @@ impl INode2D for BattleEngine {
         use BattleChoice::*;
 
         // The node that contains the text labels below
-        let cont = self.node.get_node_as::<Control>("%Choices");
-        // let choices = &[Attack, Skills, Items, Run];
-        // TODO update
-        let choices = [
-            // all the main menu label you can pick
-            ("Attack"),
-            ("Skills"),
-            ("Items"),
-            ("Run"),
-        ]
-        .into_iter()
-        .map(|nodename| cont.get_node_as(nodename))
-        .collect::<Vec<_>>();
+        let cont = self.node.get_node_as("%Choices");
 
-        self.choices = ChoiceList::new(choices, tween_choice_to, |choice| {
+        self.choices = ChoiceList::from_children_of(cont, tween_choice_to, |choice| {
             // call different functions depending on the choice
             match choice {
                 Attack => todo!(),

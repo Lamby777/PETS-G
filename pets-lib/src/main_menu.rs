@@ -6,7 +6,7 @@
 //! - Cherry, 2:54 AM, 10/5/2023 | <3
 //!
 
-use godot::engine::{Control, INode2D, Node2D, RichTextLabel};
+use godot::engine::{INode2D, Node2D, RichTextLabel};
 use godot::prelude::*;
 use num_enum::TryFromPrimitive;
 
@@ -93,20 +93,9 @@ impl INode2D for TitleScreen {
         use MainMenuChoice::*;
 
         // The node that contains the text labels below
-        let cont = self.node.get_node_as::<Control>("Background/MenuChoices");
-        let nodes_map = [
-            // all the main menu label you can pick
-            ("Play"),
-            ("Options"),
-            ("Credits"),
-            ("Quit"),
-            ("DebugBattle"),
-        ]
-        .into_iter()
-        .map(|nodename| cont.get_node_as(nodename))
-        .collect::<Vec<_>>();
+        let cont = self.node.get_node_as("Background/MenuChoices");
 
-        self.list = ChoiceList::new(nodes_map, tween_choice_to, |choice| {
+        self.list = ChoiceList::from_children_of(cont, tween_choice_to, |choice| {
             match choice {
                 Play => {
                     // TODO should animate the menu boxes flying
