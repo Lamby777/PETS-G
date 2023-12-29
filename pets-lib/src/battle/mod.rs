@@ -68,7 +68,7 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
             "default_color"
         };
 
-        default_theme!().get_color(col.into(), "RichTextLabel".into())
+        default_theme().get_color(col.into(), "RichTextLabel".into())
     };
 
     // tween x

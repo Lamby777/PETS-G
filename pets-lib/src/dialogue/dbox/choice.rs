@@ -70,7 +70,7 @@ impl DialogBox {
                 Ok(Variant::from(()))
             });
 
-            let mut timer = godot_tree!()
+            let mut timer = godot_tree()
                 .create_timer(DBOX_CHOICE_WAVE_TIME * (i + 1) as f64)
                 .unwrap();
 
