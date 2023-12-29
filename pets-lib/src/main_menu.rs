@@ -34,7 +34,7 @@ fn tween_choice_to(is_picked: bool, mut node: Gd<RichTextLabel>) {
             "default_color"
         };
 
-        default_theme!().get_color(col.into(), "RichTextLabel".into())
+        default_theme().get_color(col.into(), "RichTextLabel".into())
     };
 
     // tween x
@@ -113,7 +113,7 @@ impl INode2D for TitleScreen {
                     todo!()
                 }
 
-                Quit => godot_tree!().quit(),
+                Quit => godot_tree().quit(),
 
                 DebugBattle => {
                     change_scene!("battle_engine");

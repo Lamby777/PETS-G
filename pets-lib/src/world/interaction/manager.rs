@@ -42,12 +42,12 @@ impl InteractionManager {
         // using this cool godot feature I just found...
         // you can set a node to be accessible with just its
         // name and a % prefix... nice for this sort of situation
-        current_scene!().get_node_as("%InteractionManager")
+        current_scene().get_node_as("%InteractionManager")
     }
 
     /// Sorts the zones by distance from the player
     pub fn sort_zones_by_distance(&mut self) {
-        let pcb = godot_tree!()
+        let pcb = godot_tree()
             .get_first_node_in_group("playercb".into())
             .unwrap()
             .cast::<PlayerCB>();
