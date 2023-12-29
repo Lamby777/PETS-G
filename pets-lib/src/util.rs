@@ -9,7 +9,6 @@ use godot::engine::Window;
 use godot::prelude::*;
 
 pub use crate::change_scene;
-pub use crate::display_is_debug;
 
 /// shorthand to do some tweeneroonies :3
 #[must_use = "`None` = failed to create tween"]
@@ -67,16 +66,5 @@ pub fn current_scene() -> Gd<Node> {
 macro_rules! change_scene {
     ($scene:expr) => {
         godot_tree().change_scene_to_file(concat!("res://scenes/", $scene, ".tscn").into())
-    };
-}
-
-#[macro_export]
-macro_rules! display_is_debug {
-    ($target:ident) => {
-        impl std::fmt::Display for $target {
-            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                std::fmt::Debug::fmt(&self, f)
-            }
-        }
     };
 }
