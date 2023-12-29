@@ -45,7 +45,6 @@ enum BattleChoice {
     Items,
     Run,
 }
-display_is_debug!(BattleChoice);
 
 #[allow(unused)]
 #[derive(GodotClass)]
