@@ -50,7 +50,7 @@ macro_rules! load_pchar_scene_under {
         let path = concat!("res://scenes/char/", $name, ".tscn");
         let packed = load::<PackedScene>(path);
         let inst = packed.instantiate_as::<PCharNode>();
-        $parent.node.add_child(inst.clone().upcast());
+        $parent.base_mut().add_child(inst.clone().upcast());
         inst
     }};
 }
@@ -58,10 +58,10 @@ macro_rules! load_pchar_scene_under {
 #[godot_api]
 impl INode2D for PCharNode {
     fn ready(&mut self) {
-        self.sprite = Some(self.node.get_node_as("Sprite2D"));
-        self.anim_player = Some(self.node.get_node_as("AnimationPlayer"));
+        self.sprite = Some(self.base().get_node_as("Sprite2D"));
+        self.anim_player = Some(self.base().get_node_as("AnimationPlayer"));
 
-        let mut tree = self.node.get_node_as::<AnimationTree>("AnimationTree");
+        let mut tree = self.base().get_node_as::<AnimationTree>("AnimationTree");
         tree.set_active(true);
         self.anim_state = tree.get("parameters/playback".into()).to();
 

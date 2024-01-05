@@ -93,7 +93,7 @@ impl INode2D for TitleScreen {
         use MainMenuChoice::*;
 
         // The node that contains the text labels below
-        let cont = self.node.get_node_as("Background/MenuChoices");
+        let cont = self.base().get_node_as("Background/MenuChoices");
 
         self.list = ChoiceList::from_children_of(cont, tween_choice_to, |choice| {
             match choice {
