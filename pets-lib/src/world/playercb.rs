@@ -82,17 +82,17 @@ impl ICharacterBody2D for PlayerCB {
             (Vector2::ZERO, (delta * FRICTION))
         };
 
-        let velocity = self.node.get_velocity();
-        self.node
+        let velocity = self.base().get_velocity();
+        self.base_mut()
             .set_velocity(velocity.move_toward(toward, deltatimes as f32));
 
-        self.node.move_and_slide();
+        self.base_mut().move_and_slide();
 
         let pos_updated = (self.past_positions.len() == 0)
-            || (self.past_positions[0] != self.node.get_position());
+            || (self.past_positions[0] != self.base().get_position());
 
         if pos_updated {
-            self.past_positions.push(self.node.get_global_position());
+            self.past_positions.push(self.base().get_global_position());
 
             // don't push new input vector if slowing down
             self.past_rotations.push(if moving {

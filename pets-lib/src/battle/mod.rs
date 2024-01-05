@@ -99,7 +99,7 @@ impl INode2D for BattleEngine {
         use BattleChoice::*;
 
         // The node that contains the text labels below
-        let cont = self.node.get_node_as("%Choices");
+        let cont = self.base().get_node_as("%Choices");
 
         self.choices = ChoiceList::from_children_of(cont, tween_choice_to, |choice| {
             // call different functions depending on the choice

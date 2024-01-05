@@ -64,8 +64,8 @@ impl BattleIcon {
         }
 
         let change = self.velocity * real::from_f64(delta);
-        let position = self.node.get_global_position() + change;
-        self.node.set_global_position(position);
+        let position = self.base().get_global_position() + change;
+        self.base_mut().set_global_position(position);
     }
 }
 

@@ -74,7 +74,7 @@ impl InteractionManager {
 #[godot_api]
 impl INode2D for InteractionManager {
     fn ready(&mut self) {
-        self.prompt_txt = Some(self.node.get_node_as("Prompt"));
+        self.prompt_txt = Some(self.base().get_node_as("Prompt"));
     }
 
     fn process(&mut self, _delta: f64) {
