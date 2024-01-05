@@ -107,7 +107,10 @@ impl INode2D for BattleEngine {
                 Attack => todo!(),
                 Skills => todo!(),
                 Items => todo!(),
-                Run => todo!(),
+                Run => {
+                    // TODO roll, don't always succeed
+                    change_scene!("world");
+                }
             }
         });
     }
