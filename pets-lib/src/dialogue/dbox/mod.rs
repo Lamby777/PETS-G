@@ -119,7 +119,7 @@ impl DialogBox {
     }
 
     pub fn tween_into_view(&mut self, up: bool) -> Gd<Tween> {
-        let node = &mut self.node;
+        let node = self.base();
         let viewport_y = node.get_viewport_rect().size.y;
 
         let tw_end = viewport_y
@@ -132,7 +132,7 @@ impl DialogBox {
         let y_tween = tween(
             node.clone().upcast(),
             "position:y",
-            Some(self.node.get_position().y),
+            Some(node.get_position().y),
             tw_end,
             DBOX_TWEEN_TIME,
             DBOX_TWEEN_TRANS,
@@ -216,7 +216,7 @@ impl IPanelContainer for DialogBox {
             }
 
             // mark the input as handled
-            self.node.get_viewport().unwrap().set_input_as_handled();
+            self.base().get_viewport().unwrap().set_input_as_handled();
         }
     }
 }
@@ -227,17 +227,17 @@ impl IPanelContainer for DialogBox {
 impl DialogBox {
     /// Get the speaker name label
     fn spk_txt(&self) -> Gd<RichTextLabel> {
-        self.node.get_node_as("VBox/SpeakerName")
+        self.base().get_node_as("VBox/SpeakerName")
     }
 
     /// Get the message text label
     fn msg_txt(&self) -> Gd<RichTextLabel> {
-        self.node.get_node_as("VBox/Content")
+        self.base().get_node_as("VBox/Content")
     }
 
     /// Get the container for choice labels
     fn choice_container(&self) -> Gd<HBoxContainer> {
-        self.node.get_node_as("VBox/Choices")
+        self.base().get_node_as("VBox/Choices")
     }
 
     /// If the dialog box is currently active

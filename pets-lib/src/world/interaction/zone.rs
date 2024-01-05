@@ -30,20 +30,20 @@ impl InteractionZone {
     #[func]
     fn on_entered(&mut self, _body: Gd<PlayerCB>) {
         let mut im = InteractionManager::singleton();
-        im.bind_mut().register_zone(self.node.clone().cast());
+        im.bind_mut().register_zone(self.base().clone().cast());
     }
 
     #[func]
     fn on_exited(&mut self, _body: Gd<PlayerCB>) {
         let mut im = InteractionManager::singleton();
-        im.bind_mut().unregister_zone(self.node.clone().cast());
+        im.bind_mut().unregister_zone(self.base().clone().cast());
     }
 }
 
 #[godot_api]
 impl IArea2D for InteractionZone {
     fn ready(&mut self) {
-        let node = &mut self.node;
+        let mut node = self.base_mut();
 
         let enter_fn = node.callable("on_entered");
         let exit_fn = node.callable("on_exited");

@@ -48,7 +48,7 @@ impl DBoxInterface {
 
     #[func]
     pub fn scene_has_active_dbox(&self) -> bool {
-        let ui_layer = current_scene!().get_node_as::<Node>(UI_LAYER_NAME);
+        let ui_layer = current_scene().get_node_as::<Node>(UI_LAYER_NAME);
 
         ui_layer
             .try_get_node_as::<DialogBox>(DBOX_NODE_NAME)
@@ -57,7 +57,7 @@ impl DBoxInterface {
 
     #[func]
     pub fn instantiate_dbox(&self) -> Gd<DialogBox> {
-        let mut ui_layer = current_scene!().get_node_as::<Node>(UI_LAYER_NAME);
+        let mut ui_layer = current_scene().get_node_as::<Node>(UI_LAYER_NAME);
 
         ui_layer
             .try_get_node_as::<DialogBox>(DBOX_NODE_NAME)

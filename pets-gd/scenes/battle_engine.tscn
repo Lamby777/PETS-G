@@ -112,14 +112,16 @@ offset_bottom = 209.0
 texture = ExtResource("6_34tkp")
 expand_mode = 5
 
-[node name="Choices" type="VBoxContainer" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
+[node name="Choices" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
-theme_override_constants/separation = 10
 
 [node name="Attack" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Choices"]
 clip_contents = false
 layout_mode = 2
+offset_right = 432.0
+offset_bottom = 94.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
@@ -129,6 +131,9 @@ fit_content = true
 [node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Choices"]
 clip_contents = false
 layout_mode = 2
+offset_top = 104.0
+offset_right = 432.0
+offset_bottom = 198.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
@@ -138,6 +143,9 @@ fit_content = true
 [node name="Items" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Choices"]
 clip_contents = false
 layout_mode = 2
+offset_top = 208.0
+offset_right = 432.0
+offset_bottom = 302.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
@@ -147,6 +155,9 @@ fit_content = true
 [node name="Run" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Choices"]
 clip_contents = false
 layout_mode = 2
+offset_top = 312.0
+offset_right = 432.0
+offset_bottom = 406.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true

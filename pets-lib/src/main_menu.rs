@@ -6,15 +6,16 @@
 //! - Cherry, 2:54 AM, 10/5/2023 | <3
 //!
 
-use godot::engine::{Control, INode2D, Node2D, RichTextLabel};
+use godot::engine::{INode2D, Node2D, RichTextLabel};
 use godot::prelude::*;
+use num_enum::TryFromPrimitive;
 
+use crate::choicelist::ChoiceList;
 use crate::consts::main_menu::*;
 use crate::prelude::*;
 
-use num_derive::FromPrimitive;
-use num_traits::FromPrimitive;
-#[derive(Debug, FromPrimitive)]
+#[derive(Clone, Copy, Debug, TryFromPrimitive)]
+#[repr(usize)]
 enum MainMenuChoice {
     Play,
     Options,
@@ -23,7 +24,7 @@ enum MainMenuChoice {
     DebugBattle,
 }
 
-fn tween_choice_to(is_picked: bool, node: &mut Gd<RichTextLabel>) {
+fn tween_choice_to(is_picked: bool, mut node: Gd<RichTextLabel>) {
     let target_x = if is_picked { 64.0 } else { 0.0 };
 
     let target_col = {
@@ -33,7 +34,7 @@ fn tween_choice_to(is_picked: bool, node: &mut Gd<RichTextLabel>) {
             "default_color"
         };
 
-        default_theme!().get_color(col.into(), "RichTextLabel".into())
+        default_theme().get_color(col.into(), "RichTextLabel".into())
     };
 
     // tween x
@@ -79,100 +80,45 @@ fn tween_choice_to(is_picked: bool, node: &mut Gd<RichTextLabel>) {
 struct TitleScreen {
     #[base]
     node: Base<Node2D>,
-    list: ChoiceList<Gd<RichTextLabel>>,
-}
-
-#[godot_api]
-impl TitleScreen {
-    fn change_menu_choice(&mut self, diff: i32) {
-        // tween old down and new up
-        if let Some((_, old_node)) = self.list.current_iv_mut() {
-            tween_choice_to(false, old_node);
-        }
-
-        self.list.offset_by(diff);
-
-        // tween the newly selected node
-        let (_, new_node) = self.list.current_iv_mut().unwrap();
-        tween_choice_to(true, new_node);
-    }
-
-    fn pick_choice(&mut self, choice: MainMenuChoice) {
-        use MainMenuChoice::*;
-
-        match choice {
-            Play => {
-                // TODO should animate the menu boxes flying
-                // off into the right, and the camera goes left
-                self.node
-                    .get_tree()
-                    .unwrap()
-                    .change_scene_to_file("res://scenes/world.tscn".into());
-            }
-
-            Options => {
-                // should scroll right into options menu
-                todo!()
-            }
-
-            Credits => {
-                // should pull up credits box
-                todo!()
-            }
-
-            Quit => {
-                let mut tree = self.node.get_tree().unwrap();
-                tree.quit();
-            }
-
-            DebugBattle => {
-                self.node
-                    .get_tree()
-                    .unwrap()
-                    .change_scene_to_file("res://scenes/battle_engine.tscn".into());
-            }
-        }
-    }
+    list: ChoiceList<MainMenuChoice, RichTextLabel>,
 }
 
 #[godot_api]
 impl INode2D for TitleScreen {
     fn process(&mut self, _delta: f64) {
-        let input = Input::singleton();
-
-        let going_down = input.is_action_just_pressed("ui_down".into());
-        let going_up = input.is_action_just_pressed("ui_up".into());
-        let submitting = input.is_action_just_pressed("ui_accept".into());
-
-        match self.list.current_iv_mut() {
-            Some((i, _)) if submitting => {
-                let i = MainMenuChoice::from_usize(i).unwrap();
-                self.pick_choice(i);
-            }
-
-            _ if going_down => self.change_menu_choice(1),
-            _ if going_up => self.change_menu_choice(-1),
-            _ => {}
-        }
+        self.list.process_input();
     }
 
     fn ready(&mut self) {
-        // The node that contains the text labels below
-        let cont = self.node.get_node_as::<Control>("Background/MenuChoices");
+        use MainMenuChoice::*;
 
-        self.list = ChoiceList::new(
-            [
-                // all the main menu label you can pick
-                "Play",
-                "Options",
-                "Credits",
-                "Quit",
-                "DebugBattle",
-            ]
-            .iter()
-            .map(|v| cont.get_node_as(v))
-            // .collect(),
-            .collect::<Vec<_>>(),
-        );
+        // The node that contains the text labels below
+        let cont = self.base().get_node_as("Background/MenuChoices");
+
+        self.list = ChoiceList::from_children_of(cont, tween_choice_to, |choice| {
+            match choice {
+                Play => {
+                    // TODO should animate the menu boxes flying
+                    // off into the right, and the camera goes left
+                    change_scene!("world");
+                }
+
+                Options => {
+                    // should scroll right into options menu
+                    todo!()
+                }
+
+                Credits => {
+                    // should pull up credits box
+                    todo!()
+                }
+
+                Quit => godot_tree().quit(),
+
+                DebugBattle => {
+                    change_scene!("battle_engine");
+                }
+            }
+        });
     }
 }

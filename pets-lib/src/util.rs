@@ -3,15 +3,12 @@
 //!
 
 use godot::engine::tween::TransitionType;
+use godot::engine::Theme;
 use godot::engine::Tween;
+use godot::engine::Window;
 use godot::prelude::*;
 
-pub use crate::current_scene;
-pub use crate::default_theme;
-pub use crate::godot_tree;
-
-#[allow(unused)]
-pub use crate::godot_root;
+pub use crate::change_scene;
 
 /// shorthand to do some tweeneroonies :3
 #[must_use = "`None` = failed to create tween"]
@@ -45,33 +42,29 @@ where
     Some(tween)
 }
 
-#[macro_export]
-macro_rules! default_theme {
-    () => {
-        load::<godot::engine::Theme>("res://themes/theme_deft.tres")
-    };
+pub fn default_theme() -> Gd<Theme> {
+    load("res://themes/theme_deft.tres")
+}
+
+pub fn godot_tree() -> Gd<SceneTree> {
+    godot::engine::Engine::singleton()
+        .get_main_loop()
+        .unwrap()
+        .cast()
+}
+
+#[allow(unused)]
+pub fn godot_root() -> Gd<Window> {
+    godot_tree().get_root().unwrap()
+}
+
+pub fn current_scene() -> Gd<Node> {
+    godot_tree().get_current_scene().unwrap()
 }
 
 #[macro_export]
-macro_rules! godot_tree {
-    () => {
-        godot::engine::Engine::singleton()
-            .get_main_loop()
-            .unwrap()
-            .cast::<godot::engine::SceneTree>()
-    };
-}
-
-#[macro_export]
-macro_rules! godot_root {
-    () => {
-        $crate::godot_tree!().get_root().unwrap()
-    };
-}
-
-#[macro_export]
-macro_rules! current_scene {
-    () => {
-        $crate::godot_tree!().get_current_scene().unwrap()
+macro_rules! change_scene {
+    ($scene:expr) => {
+        godot_tree().change_scene_to_file(concat!("res://scenes/", $scene, ".tscn").into())
     };
 }
