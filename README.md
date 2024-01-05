@@ -41,8 +41,8 @@ Then, go download the correct version of Godot Engine... with whatever method is
 best for your environment. Add it to your `PATH` as well if you want the "quick
 launch" scripts mentioned below to work.
 
-Then, install `dg`, a crate written for managing and compiling dialogue /
-interaction files for this game.
+Then, install `dialogical`, a crate written for managing and compiling dialogue
+/ interaction files for this game.
 
 ```
 cargo install dialogical
@@ -61,10 +61,8 @@ Godot project, but that's edited with the actual Godot editor.
 There are 2 quickstart scripts in `pets-lib` for my CLI text editor bois. The
 `run` script just opens the main scene with whatever arguments you give. The
 `battle` one similarly just opens the battle scene. This is pretty nice for
-testing purposes, but I think hot reloading GDExtension Rust libraries might
-have support now...? (Not entirely sure... I changed a string once and it
-updated on next startup, but idk about entire classes/nodes. Those probably need
-restarts.)
+testing purposes, but don't worry about reloading each time... Hot reloads are
+now supported.
 
 Refer to
 [this wiki page](https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html)
