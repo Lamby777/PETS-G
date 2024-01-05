@@ -15,8 +15,8 @@ pub use crate::change_scene;
 pub fn tween<NP, V>(
     mut node: Gd<Node>,
     property: NP,
-    from: Option<V>,
-    target: V,
+    start_value: Option<V>,
+    end_value: V,
     time: f64,
     trans: TransitionType,
 ) -> Option<Gd<Tween>>
@@ -30,13 +30,13 @@ where
         .tween_property(
             node.clone().upcast(),
             property.into(),
-            target.to_variant(),
+            end_value.to_variant(),
             time,
         )?
         .set_trans(trans)?;
 
-    if let Some(from) = from {
-        property.from(from.to_variant())?;
+    if let Some(start_value) = start_value {
+        property.from(start_value.to_variant())?;
     }
 
     Some(tween)

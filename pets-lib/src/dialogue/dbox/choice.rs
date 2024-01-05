@@ -40,7 +40,6 @@ impl DialogBox {
         }
     }
 
-    #[allow(unused)]
     pub(super) fn tween_choices_wave(&mut self, up: bool) {
         for (i, label) in self.choice_labels().iter_shared().enumerate() {
             // we can't move the label into the closure because of
@@ -54,17 +53,17 @@ impl DialogBox {
                     return Ok(Variant::from(()));
                 };
 
-                let tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
+                let _tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
 
-                tween(
-                    label.upcast(),
-                    "theme_override_constants/margin_top",
-                    None,
-                    tw_end,
-                    DBOX_CHOICE_TWEEN_TIME,
-                    DBOX_CHOICE_TWEEN_TRANS,
-                )
-                .unwrap();
+                // tween(
+                //     label.upcast(),
+                //     "theme_override_constants/margin_top",
+                //     None,
+                //     tw_end,
+                //     DBOX_CHOICE_TWEEN_TIME,
+                //     DBOX_CHOICE_TWEEN_TRANS,
+                // )
+                // .unwrap();
 
                 Ok(Variant::from(()))
             });
