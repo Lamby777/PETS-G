@@ -50,7 +50,7 @@ impl BattleIcon {
         self.velocity *= self.friction;
 
         // check inputs
-        let mut input_vector = Vector2::new(0.0, 0.0);
+        let mut input_vector = Vector2::ZERO;
         for (k, v) in BATTLE_DIRECTIONS.iter() {
             if input.is_action_pressed(k.clone()) {
                 input_vector += *v;
@@ -79,7 +79,7 @@ impl INode2D for BattleIcon {
             speed: 400.0,
             acceleration: 80.0,
             friction: 0.96,
-            velocity: Vector2::new(0.0, 0.0),
+            velocity: Vector2::ZERO,
         }
     }
 

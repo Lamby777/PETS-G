@@ -98,10 +98,7 @@ impl ICharacterBody2D for PlayerCB {
             self.past_rotations.push(if moving {
                 input_vector
             } else {
-                self.past_rotations
-                    .get(0)
-                    .cloned()
-                    .unwrap_or(Vector2 { x: 0.0, y: 0.0 })
+                self.past_rotations.get(0).cloned().unwrap_or(Vector2::ZERO)
             })
         }
 
