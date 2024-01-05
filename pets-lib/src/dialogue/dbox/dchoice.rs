@@ -7,14 +7,14 @@
 //!
 
 use godot::engine::notify::ContainerNotification;
-use godot::engine::{Container, IContainer, RichTextLabel};
+use godot::engine::{IContainer, MarginContainer, RichTextLabel};
 use godot::prelude::*;
 
 #[derive(GodotClass)]
-#[class(init, base=Container)]
+#[class(init, base=MarginContainer)]
 pub struct DChoice {
     #[base]
-    node: Base<Container>,
+    node: Base<MarginContainer>,
 }
 
 #[godot_api]
@@ -39,7 +39,7 @@ impl IContainer for DChoice {
             y: self.base().get_size().y,
         };
 
-        // self.base().set_size(size);
+        self.base_mut().set_size(size);
 
         let rect = Rect2::new(Vector2::ZERO, size);
         self.base_mut().fit_child_in_rect(label.upcast(), rect);
