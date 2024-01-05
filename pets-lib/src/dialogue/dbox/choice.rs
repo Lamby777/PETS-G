@@ -49,7 +49,7 @@ impl DialogBox {
             let func = Callable::from_fn("choice_slide_up", move |_| {
                 // get the label again using the instance id
                 let label = Gd::<DChoice>::try_from_instance_id(label_id);
-                let Ok(label) = label else {
+                let Ok(_label) = label else {
                     return Ok(Variant::from(()));
                 };
 
