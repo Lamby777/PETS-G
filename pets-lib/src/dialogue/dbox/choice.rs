@@ -49,15 +49,16 @@ impl DialogBox {
             let func = Callable::from_fn("choice_slide_up", move |_| {
                 // get the label again using the instance id
                 let label = Gd::<DChoice>::try_from_instance_id(label_id);
-                let Ok(_label) = label else {
+
+                let Ok(label) = label else {
                     return Ok(Variant::from(()));
                 };
 
-                let _tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
+                // let tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
 
                 // tween(
                 //     label.upcast(),
-                //     "theme_override_constants/margin_top",
+                //     "position:y",
                 //     None,
                 //     tw_end,
                 //     DBOX_CHOICE_TWEEN_TIME,
@@ -65,6 +66,7 @@ impl DialogBox {
                 // )
                 // .unwrap();
 
+                // label.bind_mut().tween_label(up);
                 Ok(Variant::from(()))
             });
 
