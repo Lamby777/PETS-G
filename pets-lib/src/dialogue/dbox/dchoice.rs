@@ -10,6 +10,9 @@ use godot::engine::notify::ContainerNotification;
 use godot::engine::{IContainer, MarginContainer, RichTextLabel};
 use godot::prelude::*;
 
+use crate::consts::dialogue::*;
+use crate::prelude::*;
+
 #[derive(GodotClass)]
 #[class(init, base=MarginContainer)]
 pub struct DChoice {
@@ -23,6 +26,22 @@ impl DChoice {
     pub fn set_text(&mut self, text: GString) {
         let mut label = self.base().get_node_as::<RichTextLabel>("Label");
         label.set_text(text);
+    }
+
+    /// tween the contained text label in/out of the window
+    #[func]
+    pub fn tween_label(&mut self, up: bool) {
+        let tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
+
+        tween(
+            self.base().clone().upcast(),
+            "position:y",
+            None,
+            tw_end,
+            DBOX_CHOICE_TWEEN_TIME,
+            DBOX_CHOICE_TWEEN_TRANS,
+        )
+        .unwrap();
     }
 }
 
