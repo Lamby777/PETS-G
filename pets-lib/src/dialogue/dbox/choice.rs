@@ -54,19 +54,7 @@ impl DialogBox {
                     return Ok(Variant::from(()));
                 };
 
-                // let tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
-
-                // tween(
-                //     label.upcast(),
-                //     "position:y",
-                //     None,
-                //     tw_end,
-                //     DBOX_CHOICE_TWEEN_TIME,
-                //     DBOX_CHOICE_TWEEN_TRANS,
-                // )
-                // .unwrap();
-
-                // label.bind_mut().tween_label(up);
+                label.bind().tween_label(up);
                 Ok(Variant::from(()))
             });
 

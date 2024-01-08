@@ -29,8 +29,7 @@ impl DChoice {
     }
 
     /// tween the contained text label in/out of the window
-    #[func]
-    pub fn tween_label(&mut self, up: bool) {
+    pub fn tween_label(&self, up: bool) {
         let tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
 
         tween(
