@@ -24,8 +24,11 @@ pub struct DChoice {
 impl DChoice {
     #[func]
     pub fn set_text(&mut self, text: GString) {
-        let mut label = self.base().get_node_as::<RichTextLabel>("Label");
-        label.set_text(text);
+        self.txt_label().set_text(text);
+    }
+
+    fn txt_label(&self) -> Gd<RichTextLabel> {
+        self.base().get_node_as("Label")
     }
 
     /// tween the contained text label in/out of the window
@@ -33,7 +36,7 @@ impl DChoice {
         let tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
 
         tween(
-            self.base().clone().upcast(),
+            self.txt_label().upcast(),
             "position:y",
             None,
             tw_end,
