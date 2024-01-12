@@ -1,3 +1,5 @@
+use godot::engine::Input;
+
 /// Abstract list of things to choose from, with listener
 /// functions for when the choice is picked or changed.
 ///
@@ -50,5 +52,21 @@ impl<T> ListVec<T> {
         if let Some(f) = self.on_changed {
             f(old, new);
         }
+    }
+}
+
+/// Call a change or pick event on a listvec based
+/// on the input state.
+pub fn process_input<T>(lv: &mut ListVec<T>) {
+    fn is_pressed(name: &str) -> bool {
+        Input::singleton().is_action_just_pressed(name.into())
+    }
+
+    if is_pressed("ui_down") {
+        lv.offset_by(1);
+    } else if is_pressed("ui_up") {
+        lv.offset_by(-1);
+    } else if is_pressed("ui_accept") {
+        lv.pick();
     }
 }
