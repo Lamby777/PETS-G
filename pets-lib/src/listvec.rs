@@ -13,16 +13,24 @@ pub struct ListVec<T> {
 }
 
 impl<T> ListVec<T> {
-    fn on_changed(&self, old: Option<&T>, new: &T) {
-        if let Some(f) = self.on_changed {
-            f(old, new);
-        }
-    }
+    /// Call the pick handler on the currently selected element.
+    pub fn pick(&self) {
+        let picked = self
+            .selected
+            .map(|i| &self.elements[i])
+            .expect("Called `pick` on choice out of bounds!");
 
-    fn on_picked(&self, picked: &T) {
+        // Calling `pick` on a bad index should always error,
+        // even if no `on_picked` function is set. This is just
+        // to make sure the dev knows they screwed up.
+
         if let Some(f) = self.on_picked {
             f(picked);
         }
+    }
+
+    pub fn inner(&self) -> &[T] {
+        &self.elements
     }
 
     /// Move `diff` positions forward in the list.
@@ -37,6 +45,10 @@ impl<T> ListVec<T> {
 
         self.selected = Some(new_i);
         let new = &self.elements[new_i];
-        self.on_changed(old, new);
+
+        // run change handler if one was set
+        if let Some(f) = self.on_changed {
+            f(old, new);
+        }
     }
 }
