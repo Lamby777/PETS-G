@@ -12,13 +12,23 @@ pub type ChoiceList<Enum, T> = ListVec<(Enum, Gd<T>)>;
 ///
 /// Incrementing past the end of the list will wrap
 /// back to the start, and vice versa.
-#[derive(Default)]
 pub struct ListVec<T> {
     elements: Vec<T>,
     selected: Option<usize>,
 
     on_changed: Option<fn(Option<&T>, &T)>,
     on_picked: Option<fn(&T)>,
+}
+
+impl<T> Default for ListVec<T> {
+    fn default() -> Self {
+        Self {
+            elements: vec![],
+            selected: None,
+            on_changed: None,
+            on_picked: None,
+        }
+    }
 }
 
 impl<T> ListVec<T> {
