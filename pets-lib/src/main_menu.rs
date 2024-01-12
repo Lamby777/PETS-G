@@ -86,7 +86,7 @@ struct TitleScreen {
 impl INode2D for TitleScreen {
     fn process(&mut self, _delta: f64) {
         use crate::listvec::process_input;
-        process_input(&mut self.choices)
+        process_input(self.choices.inner_mut())
     }
 
     fn ready(&mut self) {
@@ -95,30 +95,39 @@ impl INode2D for TitleScreen {
         // The node that contains the text labels below
         let cont = self.base().get_node_as("Background/MenuChoices");
 
-        self.choices = ChoiceList::from_children_of(cont, tween_choice_to, |choice| {
-            match choice {
-                Play => {
-                    // TODO should animate the menu boxes flying
-                    // off into the right, and the camera goes left
-                    change_scene!("world");
+        self.choices = ChoiceList::from_children_of(
+            cont,
+            Some(|old, (_, new)| {
+                tween_choice_to(true, new.clone());
+                if let Some((_, old)) = old {
+                    tween_choice_to(false, old.clone());
                 }
+            }),
+            Some(|(choice, _)| {
+                match choice {
+                    Play => {
+                        // TODO should animate the menu boxes flying
+                        // off into the right, and the camera goes left
+                        change_scene!("world");
+                    }
 
-                Options => {
-                    // should scroll right into options menu
-                    todo!()
+                    Options => {
+                        // should scroll right into options menu
+                        todo!()
+                    }
+
+                    Credits => {
+                        // should pull up credits box
+                        todo!()
+                    }
+
+                    Quit => godot_tree().quit(),
+
+                    DebugBattle => {
+                        change_scene!("battle_engine");
+                    }
                 }
-
-                Credits => {
-                    // should pull up credits box
-                    todo!()
-                }
-
-                Quit => godot_tree().quit(),
-
-                DebugBattle => {
-                    change_scene!("battle_engine");
-                }
-            }
-        });
+            }),
+        );
     }
 }
