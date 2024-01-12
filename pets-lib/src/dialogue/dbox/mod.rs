@@ -85,7 +85,7 @@ pub struct DialogBox {
     vox: MetaPair<String>,
     tween: Option<Gd<Tween>>,
     active: bool,
-    selected_choice: Option<usize>,
+    choices: ListVec<Gd<DChoice>>,
 
     // independent from any interaction-related stuff,
     // these are the actual strings that are displayed
@@ -183,7 +183,7 @@ impl IPanelContainer for DialogBox {
             spk_txt: "Cherry".into(),
             msg_txt: "[wave amp=50 freq=6]Hello, World![/wave]".into(),
 
-            selected_choice: None,
+            choices: ListVec::default(),
             active: false,
             tween: None,
             current_ix: None,
