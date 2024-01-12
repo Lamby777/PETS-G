@@ -103,6 +103,7 @@ where
         parent: Gd<Node>,
 
         // what the fuck
+        // TODO https://github.com/rust-lang/rust/issues/8995
         on_change: Option<fn(Option<&(Enum, Gd<T>)>, &(Enum, Gd<T>))>,
         on_picked: Option<fn(&(Enum, Gd<T>))>,
     ) -> Self {
