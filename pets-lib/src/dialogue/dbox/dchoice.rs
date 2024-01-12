@@ -45,6 +45,17 @@ impl DChoice {
         )
         .unwrap();
     }
+
+    /// create a new choice label with default settings
+    pub fn new_container(i: usize, text: &str) -> Gd<Self> {
+        let scene = load::<PackedScene>("res://scenes/dialogchoice.tscn");
+        let mut dchoice = scene.instantiate_as::<Self>();
+
+        dchoice.set_name(format!("Choice{}", i).into());
+        dchoice.bind_mut().set_text(text.into());
+
+        dchoice
+    }
 }
 
 #[godot_api]

@@ -32,7 +32,7 @@ impl DialogBox {
         let mut container = self.choice_container();
 
         for (i, choice) in choices.iter().enumerate() {
-            let dchoice = new_dchoice(i, &choice.text);
+            let dchoice = DChoice::new_container(i, &choice.text);
             container.add_child(dchoice.upcast());
         }
     }
@@ -62,15 +62,4 @@ impl DialogBox {
             timer.connect("timeout".into(), func);
         }
     }
-}
-
-/// create a new choice label with default settings
-fn new_dchoice(i: usize, text: &str) -> Gd<DChoice> {
-    let scene = load::<PackedScene>("res://scenes/dialogchoice.tscn");
-    let mut dchoice = scene.instantiate_as::<DChoice>();
-
-    dchoice.set_name(format!("Choice{}", i).into());
-    dchoice.bind_mut().set_text(text.into());
-
-    dchoice
 }
