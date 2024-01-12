@@ -14,18 +14,6 @@ use super::dchoice::DChoice;
 use super::DialogBox;
 
 impl DialogBox {
-    #[allow(unused)]
-    fn shift_selection(&mut self, offset: i16) {
-        let choice_count = self.choice_labels().len();
-
-        let new_choice = match self.selected_choice {
-            Some(v) => (v as i16 + offset).rem_euclid(choice_count as i16) as usize,
-            None => 0,
-        };
-
-        self.selected_choice = Some(new_choice);
-    }
-
     /// delete old labels and create new default ones
     pub(super) fn recreate_choice_labels(&mut self, choices: &[DialogueChoice]) {
         self.free_choice_labels();
