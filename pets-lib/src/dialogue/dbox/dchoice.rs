@@ -7,7 +7,7 @@
 //!
 
 use godot::engine::notify::ContainerNotification;
-use godot::engine::{IContainer, MarginContainer, RichTextLabel};
+use godot::engine::{IMarginContainer, MarginContainer, RichTextLabel};
 use godot::prelude::*;
 
 use crate::consts::dialogue::*;
@@ -48,7 +48,7 @@ impl DChoice {
 }
 
 #[godot_api]
-impl IContainer for DChoice {
+impl IMarginContainer for DChoice {
     fn on_notification(&mut self, what: ContainerNotification) {
         if what != ContainerNotification::SortChildren {
             return;
