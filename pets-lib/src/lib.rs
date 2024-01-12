@@ -23,6 +23,7 @@ mod consts;
 mod dialogue;
 mod items;
 mod limiq;
+mod listvec;
 mod main_menu;
 mod stats;
 mod util;
@@ -38,6 +39,7 @@ mod prelude {
     pub use crate::choicelist::ChoiceList;
     pub use crate::dialogue::autoload::DBoxInterface;
     pub use crate::dialogue::ix_map;
+    pub use crate::listvec::ListVec;
     pub use crate::world::interaction::manager::InteractionManager;
 
     // is this bad practice? no clue and idc honestly
