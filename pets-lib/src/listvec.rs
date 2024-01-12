@@ -2,10 +2,8 @@
 //! Helper crap for dealing with user-facing
 //! lists of stuff
 //!
+use crate::prelude::*;
 use godot::prelude::*;
-
-/// For when you want to map enum values to concrete nodes
-pub type ChoiceList<Enum, T> = ListVec<(Enum, Gd<T>)>;
 
 /// Abstract list of things to choose from, with listener
 /// functions for when the choice is picked or changed.
@@ -18,17 +16,6 @@ pub struct ListVec<T> {
 
     on_changed: Option<fn(Option<&T>, &T)>,
     on_picked: Option<fn(&T)>,
-}
-
-impl<T> Default for ListVec<T> {
-    fn default() -> Self {
-        Self {
-            elements: vec![],
-            selected: None,
-            on_changed: None,
-            on_picked: None,
-        }
-    }
 }
 
 impl<T> ListVec<T> {
@@ -85,5 +72,53 @@ pub fn process_input<T>(lv: &mut ListVec<T>) {
         lv.offset_by(-1);
     } else if is_pressed("ui_accept") {
         lv.pick();
+    }
+}
+
+/// For when you want to map enum values to concrete nodes
+pub struct ChoiceList<Enum, T>(ListVec<(Enum, Gd<T>)>)
+where
+    T: GodotClass;
+
+impl<Enum, T> ChoiceList<Enum, T>
+where
+    T: GodotClass,
+{
+    //
+}
+
+impl<Enum, T> Deref for ChoiceList<Enum, T>
+where
+    T: GodotClass,
+{
+    type Target = ListVec<(Enum, Gd<T>)>;
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+// ////////////////////////////////////////////////////////////// //
+//                                                                //
+// ignore the boilerplate crap below, the compiler was being dumb //
+//                                                                //
+// ////////////////////////////////////////////////////////////// //
+
+impl<T> Default for ListVec<T> {
+    fn default() -> Self {
+        Self {
+            elements: Vec::new(),
+            selected: None,
+            on_changed: None,
+            on_picked: None,
+        }
+    }
+}
+
+impl<Enum, T> Default for ChoiceList<Enum, T>
+where
+    T: GodotClass,
+{
+    fn default() -> Self {
+        Self(ListVec::default())
     }
 }
