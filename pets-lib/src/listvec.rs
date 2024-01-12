@@ -100,7 +100,13 @@ where
 {
     /// make a list from the child nodes of a parent node
     /// assumes the children are in the same order as the enum variants
-    pub fn from_children_of(parent: Gd<Node>) -> Self {
+    pub fn from_children_of(
+        parent: Gd<Node>,
+
+        // what the fuck
+        on_change: Option<fn(Option<&(Enum, Gd<T>)>, &(Enum, Gd<T>))>,
+        on_picked: Option<fn(&(Enum, Gd<T>))>,
+    ) -> Self {
         let children = parent
             .get_children()
             .iter_shared()
@@ -108,9 +114,8 @@ where
             .map(|(i, node)| (Enum::try_from(i).ok().unwrap(), node.cast()))
             .collect();
 
-        Self {
-            0: ListVec::new(children, None, None),
-        }
+        let lv = ListVec::new(children, on_change, on_picked);
+        Self(lv)
     }
 }
 
