@@ -7,7 +7,7 @@
 //!
 
 use dialogical::Speaker::{self, *};
-use dialogical::{DialogueEnding, Interaction, Metaline, Metaline::*, PageMeta};
+use dialogical::{DialogueChoice, DialogueEnding, Interaction, Metaline, Metaline::*, PageMeta};
 
 use godot::engine::{
     HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween,
@@ -17,10 +17,6 @@ use godot::prelude::*;
 use crate::consts::dialogue::*;
 use crate::prelude::*;
 
-// extra impls
-mod choice;
-
-// custom class for choice labels
 mod dchoice;
 use dchoice::DChoice;
 
@@ -279,5 +275,52 @@ impl DialogBox {
         self.choice_labels()
             .iter_shared()
             .for_each(|mut v| v.queue_free());
+    }
+
+    /// delete old labels and create new default ones
+    pub fn recreate_choice_labels(&mut self, choices: &[DialogueChoice]) {
+        self.free_choice_labels();
+
+        let mut container = self.choice_container();
+
+        for (i, choice) in choices.iter().enumerate() {
+            let dchoice = DChoice::new_container(i, &choice.text);
+            container.add_child(dchoice.upcast());
+        }
+    }
+
+    pub fn tween_choices_wave(&mut self, up: bool) {
+        for (i, cont) in self.choice_labels().iter_shared().enumerate() {
+            // if moving up, start below the window
+            if up {
+                godot_print!("Up!");
+                cont.get_node_as::<RichTextLabel>("Label")
+                    .set_position(Vector2::new(0.0, DBOX_CHOICE_HEIGHT));
+            } else {
+                godot_print!("Down!");
+            }
+
+            // we can't move the label into the closure because of
+            // thread safety stuff, so just pass in the instance id
+            let label_id = cont.instance_id();
+
+            let func = Callable::from_fn("choice_slide_up", move |_| {
+                // get the label again using the instance id
+                let label = Gd::<DChoice>::try_from_instance_id(label_id);
+
+                let Ok(label) = label else {
+                    return Ok(Variant::from(()));
+                };
+
+                label.bind().tween_label(up);
+                Ok(Variant::from(()))
+            });
+
+            // set timer
+            godot_tree()
+                .create_timer(DBOX_CHOICE_WAVE_TIME * i as f64)
+                .unwrap()
+                .connect("timeout".into(), func);
+        }
     }
 }
