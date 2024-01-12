@@ -161,7 +161,9 @@ impl DialogBox {
                 // TODO "goto" the label
             }
 
-            End => {}
+            End => {
+                self.tween_choices_wave(false);
+            }
         }
     }
 }
