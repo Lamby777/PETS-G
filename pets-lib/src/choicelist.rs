@@ -4,6 +4,8 @@
 
 use godot::prelude::*;
 
+use crate::prelude::ListVec;
+
 /// A list of concrete nodes and their associated
 /// enum variants. Makes it easier to work with
 /// an enum that has associated nodes for selecting
@@ -16,25 +18,7 @@ where
     Enum: TryFrom<usize>,
     T: GodotClass + Inherits<Node>,
 {
-    nodes: Vec<Gd<T>>,
-    selected: Option<usize>,
-    label_tweener: fn(bool, Gd<T>),
-    on_picked: fn(Enum),
-}
-
-impl<Enum, T> Default for ChoiceList<Enum, T>
-where
-    Enum: TryFrom<usize>,
-    T: GodotClass + Inherits<Node>,
-{
-    fn default() -> Self {
-        Self {
-            nodes: vec![],
-            selected: None,
-            label_tweener: |_, _| {},
-            on_picked: |_| {},
-        }
-    }
+    listvec: ListVec<Gd<T>>,
 }
 
 pub fn n_to_variant<Enum: TryFrom<usize>>(n: usize) -> Option<Enum> {
@@ -93,20 +77,16 @@ where
     }
 
     pub fn process_input(&mut self) {
-        let input = Input::singleton();
+        fn is_pressed(name: &str) -> bool {
+            Input::singleton().is_action_just_pressed(name.into())
+        }
 
-        let going_down = input.is_action_just_pressed("ui_down".into());
-        let going_up = input.is_action_just_pressed("ui_up".into());
-        let submitting = input.is_action_just_pressed("ui_accept".into());
-
-        match self.current_iv() {
-            Some((i, _)) if submitting => {
-                (self.on_picked)(i);
-            }
-
-            _ if going_down => self.offset_by(1),
-            _ if going_up => self.offset_by(-1),
-            _ => {}
+        if is_pressed("ui_down") {
+            self.offset_by(1);
+        } else if is_pressed("ui_up") {
+            self.offset_by(-1);
+        } else if is_pressed("ui_accept") {
+            self.listvec.pick();
         }
     }
 }
