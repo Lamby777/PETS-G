@@ -4,6 +4,7 @@
 
 use dialogical::DialogueChoice;
 
+use godot::engine::RichTextLabel;
 use godot::prelude::*;
 
 use crate::consts::dialogue::*;
@@ -38,10 +39,19 @@ impl DialogBox {
     }
 
     pub(super) fn tween_choices_wave(&mut self, up: bool) {
-        for (i, label) in self.choice_labels().iter_shared().enumerate() {
+        for (i, cont) in self.choice_labels().iter_shared().enumerate() {
+            // if moving up, start below the window
+            if up {
+                godot_print!("Up!");
+                cont.get_node_as::<RichTextLabel>("Label")
+                    .set_position(Vector2::new(0.0, DBOX_CHOICE_HEIGHT));
+            } else {
+                godot_print!("Down!");
+            }
+
             // we can't move the label into the closure because of
             // thread safety stuff, so just pass in the instance id
-            let label_id = label.instance_id();
+            let label_id = cont.instance_id();
 
             let func = Callable::from_fn("choice_slide_up", move |_| {
                 // get the label again using the instance id

@@ -108,7 +108,10 @@ impl DialogBox {
     /// sets the speaker and message labels to the given page
     pub fn goto_page(&mut self, pageno: usize) {
         let ix = self.current_ix.as_ref().unwrap().clone();
-        let page = ix.pages.get(pageno).unwrap();
+        let Some(page) = ix.pages.get(pageno) else {
+            godot_warn!("Page out of bounds! {}", pageno);
+            return;
+        };
 
         self.update_meta(&page.metadata);
 
@@ -118,6 +121,7 @@ impl DialogBox {
         self.msg_txt = msg.into();
     }
 
+    /// The method that moves the dialog box (on|off)-screen
     pub fn tween_into_view(&mut self, up: bool) -> Gd<Tween> {
         let node = self.base();
         let viewport_y = node.get_viewport_rect().size.y;
@@ -162,7 +166,10 @@ impl DialogBox {
             }
 
             End => {
-                self.tween_choices_wave(false);
+                // if end of interaction, close the dialog
+                self.tween_into_view(false);
+
+                // self.tween_choices_wave(false);
             }
         }
     }
@@ -198,24 +205,14 @@ impl IPanelContainer for DialogBox {
 
             self.current_page_number += 1;
 
-            // if end of interaction, close the dialog
-            if self.current_page_number >= pagecount {
-                // TODO only do these if the ending is End
-                // Function labels can close the dialog box on their own,
-                // and Goto/Choice don't need to close the box anyway.
-                // (Choice can still do it by using function labels tho)
-                self.tween_into_view(false);
-                self.current_page_number = 0;
-            } else {
-                if self.current_page_number == pagecount - 1 {
-                    // if last page, we need to run the ix ending
-                    let ix_ending = ix.ending.clone();
-                    self.run_ix_ending(&ix_ending)
-                }
-
-                self.goto_page(self.current_page_number);
-                self.do_draw();
+            if self.current_page_number == pagecount - 1 {
+                // if last page, we need to run the ix ending
+                let ix_ending = ix.ending.clone();
+                self.run_ix_ending(&ix_ending)
             }
+
+            self.goto_page(self.current_page_number);
+            self.do_draw();
 
             // mark the input as handled
             self.base().get_viewport().unwrap().set_input_as_handled();
