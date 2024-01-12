@@ -53,11 +53,11 @@ impl DialogBox {
                 Ok(Variant::from(()))
             });
 
-            let mut timer = godot_tree()
-                .create_timer(DBOX_CHOICE_WAVE_TIME * (i + 1) as f64)
-                .unwrap();
-
-            timer.connect("timeout".into(), func);
+            // set timer
+            godot_tree()
+                .create_timer(DBOX_CHOICE_WAVE_TIME * i as f64)
+                .unwrap()
+                .connect("timeout".into(), func);
         }
     }
 }
