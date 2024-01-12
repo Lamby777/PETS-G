@@ -101,18 +101,28 @@ impl INode2D for BattleEngine {
         // The node that contains the text labels below
         let cont = self.base().get_node_as("%Choices");
 
-        self.choices = ChoiceList::from_children_of(cont, tween_choice_to, |choice| {
-            // call different functions depending on the choice
-            match choice {
-                Attack => todo!(),
-                Skills => todo!(),
-                Items => todo!(),
-                Run => {
-                    // TODO roll, don't always succeed
-                    change_scene!("world");
+        self.choices = ChoiceList::from_children_of(
+            cont,
+            Some(|old, (_, new)| {
+                tween_choice_to(true, new.clone());
+
+                if let Some((_, old)) = old {
+                    tween_choice_to(false, old.clone());
                 }
-            }
-        });
+            }),
+            Some(|(choice, _)| {
+                // call different functions depending on the choice
+                match choice {
+                    Attack => todo!(),
+                    Skills => todo!(),
+                    Items => todo!(),
+                    Run => {
+                        // TODO roll, don't always succeed
+                        change_scene!("world");
+                    }
+                }
+            }),
+        );
     }
 
     fn process(&mut self, _delta: f64) {
