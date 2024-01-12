@@ -18,7 +18,6 @@ use dialogue::autoload::DBoxInterface;
 use stats::stats_interface::StatsInterface;
 
 mod battle;
-mod choicelist;
 mod consts;
 mod dialogue;
 mod items;
@@ -36,10 +35,9 @@ mod prelude {
     pub use crate::stats::*;
     pub use crate::util::*;
 
-    pub use crate::choicelist::ChoiceList;
     pub use crate::dialogue::autoload::DBoxInterface;
     pub use crate::dialogue::ix_map;
-    pub use crate::listvec::ListVec;
+    pub use crate::listvec::{ChoiceList, ListVec};
     pub use crate::world::interaction::manager::InteractionManager;
 
     // is this bad practice? no clue and idc honestly
