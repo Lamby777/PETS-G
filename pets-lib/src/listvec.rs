@@ -19,6 +19,19 @@ pub struct ListVec<T> {
 }
 
 impl<T> ListVec<T> {
+    pub fn new(
+        elements: Vec<T>,
+        on_changed: Option<fn(Option<&T>, &T)>,
+        on_picked: Option<fn(&T)>,
+    ) -> Self {
+        Self {
+            elements,
+            selected: None,
+            on_changed,
+            on_picked,
+        }
+    }
+
     /// Call the pick handler on the currently selected element.
     pub fn pick(&self) {
         let picked = self
@@ -78,18 +91,32 @@ pub fn process_input<T>(lv: &mut ListVec<T>) {
 /// For when you want to map enum values to concrete nodes
 pub struct ChoiceList<Enum, T>(ListVec<(Enum, Gd<T>)>)
 where
-    T: GodotClass;
+    T: GodotClass + Inherits<Node>;
 
 impl<Enum, T> ChoiceList<Enum, T>
 where
-    T: GodotClass,
+    T: GodotClass + Inherits<Node>,
+    Enum: TryFrom<usize>,
 {
-    //
+    /// make a list from the child nodes of a parent node
+    /// assumes the children are in the same order as the enum variants
+    pub fn from_children_of(parent: Gd<Node>) -> Self {
+        let children = parent
+            .get_children()
+            .iter_shared()
+            .enumerate()
+            .map(|(i, node)| (Enum::try_from(i).ok().unwrap(), node.cast()))
+            .collect();
+
+        Self {
+            0: ListVec::new(children, None, None),
+        }
+    }
 }
 
 impl<Enum, T> Deref for ChoiceList<Enum, T>
 where
-    T: GodotClass,
+    T: GodotClass + Inherits<Node>,
 {
     type Target = ListVec<(Enum, Gd<T>)>;
     fn deref(&self) -> &Self::Target {
@@ -116,7 +143,7 @@ impl<T> Default for ListVec<T> {
 
 impl<Enum, T> Default for ChoiceList<Enum, T>
 where
-    T: GodotClass,
+    T: GodotClass + Inherits<Node>,
 {
     fn default() -> Self {
         Self(ListVec::default())
