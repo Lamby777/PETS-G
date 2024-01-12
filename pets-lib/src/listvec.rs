@@ -2,7 +2,6 @@
 //! Helper crap for dealing with user-facing
 //! lists of stuff
 //!
-use crate::prelude::*;
 use godot::prelude::*;
 
 /// Abstract list of things to choose from, with listener
@@ -46,10 +45,6 @@ impl<T> ListVec<T> {
         if let Some(f) = self.on_picked {
             f(picked);
         }
-    }
-
-    pub fn inner(&self) -> &[T] {
-        &self.elements
     }
 
     /// Move `diff` positions forward in the list.
@@ -98,6 +93,10 @@ where
     T: GodotClass + Inherits<Node>,
     Enum: TryFrom<usize>,
 {
+    pub fn inner_mut(&mut self) -> &mut ListVec<(Enum, Gd<T>)> {
+        &mut self.0
+    }
+
     /// make a list from the child nodes of a parent node
     /// assumes the children are in the same order as the enum variants
     pub fn from_children_of(
@@ -116,16 +115,6 @@ where
 
         let lv = ListVec::new(children, on_change, on_picked);
         Self(lv)
-    }
-}
-
-impl<Enum, T> Deref for ChoiceList<Enum, T>
-where
-    T: GodotClass + Inherits<Node>,
-{
-    type Target = ListVec<(Enum, Gd<T>)>;
-    fn deref(&self) -> &Self::Target {
-        &self.0
     }
 }
 
