@@ -198,7 +198,11 @@ impl IPanelContainer for DialogBox {
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
-        if self.active && event.is_action_pressed("ui_accept".into()) {
+        if !self.active {
+            return;
+        }
+
+        if event.is_action_pressed("ui_accept".into()) {
             // go to next page
             let ix = self.current_ix.as_ref().unwrap();
             let pagecount = ix.pages.len();
