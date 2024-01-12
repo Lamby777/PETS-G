@@ -1,4 +1,11 @@
-use godot::engine::Input;
+//!
+//! Helper crap for dealing with user-facing
+//! lists of stuff
+//!
+use godot::prelude::*;
+
+/// For when you want to map enum values to concrete nodes
+pub type ChoiceList<Enum, T> = ListVec<(Enum, Gd<T>)>;
 
 /// Abstract list of things to choose from, with listener
 /// functions for when the choice is picked or changed.

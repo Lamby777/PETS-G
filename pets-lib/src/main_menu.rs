@@ -10,7 +10,6 @@ use godot::engine::{INode2D, Node2D, RichTextLabel};
 use godot::prelude::*;
 use num_enum::TryFromPrimitive;
 
-use crate::choicelist::ChoiceList;
 use crate::consts::main_menu::*;
 use crate::prelude::*;
 
