@@ -184,11 +184,6 @@ impl DialogBox {
     }
 
     fn on_accept(&mut self) {
-        if self.awaiting_choice {
-            self.on_choice_confirm();
-            return;
-        }
-
         // go to next page
         self.current_page_number += 1;
 
@@ -262,17 +257,13 @@ impl IPanelContainer for DialogBox {
             return;
         }
 
-        let is_pressed = |name: &str| event.is_action_pressed(name.into());
-
-        if is_pressed("ui_accept") {
-            self.on_accept();
+        if self.awaiting_choice {
+            crate::listvec::process_input_horiz(&mut self.choices);
             return;
-        } else if is_pressed("ui_right") {
-            godot_print!("Right");
-            self.choices.offset_by(1);
-        } else if is_pressed("ui_left") {
-            godot_print!("Left");
-            self.choices.offset_by(-1);
+        }
+
+        if event.is_action_pressed("ui_accept".into()) {
+            self.on_accept();
         }
     }
 }
