@@ -203,7 +203,7 @@ impl DialogBox {
 
         // if we're on the last page and the ending
         // is a choice, we gotta let the user pick
-        let picked = self.choices.pick();
+        let picked = self.choices.pick_iv();
 
         let Some((picked_i, _)) = picked else {
             // don't do anything if nothing was selected

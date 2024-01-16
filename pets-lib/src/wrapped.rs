@@ -71,12 +71,12 @@ impl<T> Wrapped<T> {
     }
 
     /// returns the currently selected index and element
-    pub fn pick(&self) -> Option<(usize, &T)> {
+    pub fn pick_iv(&self) -> Option<(usize, &T)> {
         self.selected.map(|i| (i, &self.elements[i]))
     }
 
     /// returns the currently selected element
-    pub fn pick_v(&self) -> Option<&T> {
+    pub fn pick(&self) -> Option<&T> {
         self.selected.map(|i| &self.elements[i])
     }
 
