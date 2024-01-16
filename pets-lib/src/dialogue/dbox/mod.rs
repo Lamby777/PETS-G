@@ -6,7 +6,7 @@
 //! UI element that displays the dialogue. Don't get too confused!
 //!
 
-use dialogical::{DialogueChoice, DialogueEnding, Interaction, Metaline, PageMeta, Speaker};
+use dialogical::{DialogueChoice, DialogueEnding, Interaction, Label, Metaline, PageMeta, Speaker};
 
 use godot::engine::{
     HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween,
@@ -147,8 +147,21 @@ impl DialogBox {
         y_tween.unwrap()
     }
 
+    pub fn run_label(&mut self, label: &Label) {
+        use Label::*;
+
+        match label {
+            Goto(_) => {
+                // TODO
+            }
+
+            Function(_) => {
+                // TODO
+            }
+        }
+    }
+
     pub fn run_ix_ending(&mut self) {
-        use dialogical::Label::*;
         use DialogueEnding::*;
 
         let ending = self.current_ix_ending().unwrap().clone();
@@ -159,12 +172,8 @@ impl DialogBox {
                 self.awaiting_choice = true;
             }
 
-            Label(Function(_label)) => {
-                // TODO run the function
-            }
-
-            Label(Goto(_label)) => {
-                // TODO "goto" the label
+            Label(label) => {
+                self.run_label(&label);
             }
 
             End => {
@@ -179,6 +188,7 @@ impl DialogBox {
     fn on_accept(&mut self) {
         if self.awaiting_choice {
             self.on_choice_confirm();
+            return;
         }
 
         // go to next page
@@ -214,11 +224,10 @@ impl DialogBox {
         };
 
         if let Some(label) = &choices[picked_i].label {
-            //
+            self.run_label(label);
         }
 
         self.awaiting_choice = false;
-        return;
     }
 }
 
