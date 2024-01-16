@@ -110,15 +110,17 @@ impl INode2D for BattleEngine {
             return;
         };
 
-        use BattleChoice::*;
         use ListOperation::*;
         match action {
             Walk(rev) => {
-                if let Some((_, (_, old_node))) = self.choices.pick_iv() {
+                // if a node was already selected, tween it back down
+                if let Some((_, old_node)) = self.choices.pick() {
                     tween_choice_to(false, old_node.clone());
                 }
 
                 self.choices.walk(rev);
+
+                // tween the newly picked node up
                 let (_, new_node) = self.choices.pick().unwrap();
                 tween_choice_to(true, new_node.clone());
             }
@@ -127,6 +129,7 @@ impl INode2D for BattleEngine {
                 let (choice, _) = self.choices.pick().unwrap();
 
                 // call different functions depending on the choice
+                use BattleChoice::*;
                 match choice {
                     Attack => todo!(),
                     Skills => todo!(),
