@@ -79,14 +79,13 @@ fn tween_choice_to(is_picked: bool, mut node: Gd<RichTextLabel>) {
 struct TitleScreen {
     #[base]
     node: Base<Node2D>,
-    choices: ListVec<(MainMenuChoice, Gd<RichTextLabel>)>,
+    choices: Wrapped<(MainMenuChoice, Gd<RichTextLabel>)>,
 }
 
 #[godot_api]
 impl INode2D for TitleScreen {
     fn process(&mut self, _delta: f64) {
-        use crate::listvec::process_input_vert;
-        process_input_vert(&mut self.choices)
+        crate::listvec::process_input(&mut self.choices)
     }
 
     fn ready(&mut self) {
