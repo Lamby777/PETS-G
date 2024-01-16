@@ -54,6 +54,10 @@ impl<T> ListVec<T> {
         self.selected = None;
     }
 
+    pub fn selected_pair(&self) -> Option<(usize, &T)> {
+        self.selected.map(|i| (i, &self.elements[i]))
+    }
+
     /// Call the pick handler on the currently selected element.
     pub fn pick(&self) {
         let picked = self
