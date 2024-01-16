@@ -3,12 +3,30 @@
 //!
 
 use godot::engine::tween::TransitionType;
-use godot::engine::Theme;
-use godot::engine::Tween;
-use godot::engine::Window;
+use godot::engine::{RichTextLabel, Theme, Tween, Window};
 use godot::prelude::*;
 
 pub use crate::change_scene;
+
+/// takes a bbcode string and operates on the node's text, either:
+///
+/// adds the bbcode to the start if `active` is true...
+/// otherwise removes the first `bbcode.len()` characters
+///
+/// If it's deleting the start of your string when you don't want it to,
+/// you probably incorrectly passed `false` for `active`.
+pub fn bbcode_toggle(mut node: Gd<RichTextLabel>, bbcode: &str, active: bool) {
+    let old_text = node.get_text();
+
+    let new_text = if active {
+        format!("{}{}", bbcode, old_text)
+    } else {
+        let st: String = old_text.into();
+        st[bbcode.len()..].to_owned()
+    };
+
+    node.set_text(new_text.into());
+}
 
 /// shorthand to do some tweeneroonies :3
 #[must_use = "`None` = failed to create tween"]

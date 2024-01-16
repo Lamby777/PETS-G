@@ -5,6 +5,10 @@
 //! the speech between characters, and "dialog" is a window or
 //! UI element that displays the dialogue. Don't get too confused!
 //!
+//! Update: I've honestly given up trying to remember which is which.
+//! Take a look at my branch names and commit messages to see
+//! how much I care anymore.
+//!
 
 use dialogical::{DialogueChoice, DialogueEnding, Interaction, Label, Metaline, PageMeta, Speaker};
 
@@ -18,6 +22,29 @@ use crate::prelude::*;
 
 mod dchoice;
 use dchoice::DChoice;
+
+fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
+    let target_col = {
+        let col = if is_picked {
+            "font_selected_color"
+        } else {
+            "default_color"
+        };
+
+        default_theme().get_color(col.into(), "RichTextLabel".into())
+    };
+
+    // tween color
+    tween(
+        node.upcast(),
+        "theme_override_colors/default_color",
+        None,
+        target_col,
+        DBOX_TWEEN_TIME,
+        DBOX_TWEEN_TRANS,
+    )
+    .unwrap();
+}
 
 #[derive(GodotClass)]
 #[class(base=PanelContainer)]
@@ -107,6 +134,7 @@ impl DialogBox {
                 });
 
                 self.set_ix(new_ix.clone());
+                self.do_draw();
             }
 
             Function(_) => {
