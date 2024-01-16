@@ -5,9 +5,6 @@
 use crate::prelude::*;
 use godot::prelude::*;
 
-type ChangeHandler<T> = Option<fn(Option<&T>, &T)>;
-type PickHandler<T> = Option<fn(usize, &T)>;
-
 fn is_pressed(name: &str) -> bool {
     Input::singleton().is_action_just_pressed(name.into())
 }
@@ -42,18 +39,13 @@ pub fn process_input_horiz<T>(lv: &mut ListVec<T>) {
 pub struct ListVec<T> {
     elements: Vec<T>,
     selected: Option<usize>,
-
-    on_changed: ChangeHandler<T>,
-    on_picked: PickHandler<T>,
 }
 
 impl<T> ListVec<T> {
-    pub fn new(elements: Vec<T>, on_changed: ChangeHandler<T>, on_picked: PickHandler<T>) -> Self {
+    pub fn new(elements: Vec<T>) -> Self {
         Self {
             elements,
             selected: None,
-            on_changed,
-            on_picked,
         }
     }
 
@@ -117,14 +109,7 @@ where
 
     /// make a list from the child nodes of a parent node
     /// assumes the children are in the same order as the enum variants
-    pub fn from_children_of(
-        parent: Gd<Node>,
-
-        // what the fuck
-        // TODO https://github.com/rust-lang/rust/issues/8995
-        on_change: ChangeHandler<(Enum, Gd<T>)>,
-        on_picked: PickHandler<(Enum, Gd<T>)>,
-    ) -> Self {
+    pub fn from_children_of(parent: Gd<Node>) -> Self {
         let children = parent
             .get_children()
             .iter_shared()
@@ -132,7 +117,7 @@ where
             .map(|(i, node)| (Enum::try_from(i).ok().unwrap(), node.cast()))
             .collect();
 
-        let lv = ListVec::new(children, on_change, on_picked);
+        let lv = ListVec::new(children);
         Self(lv)
     }
 }
