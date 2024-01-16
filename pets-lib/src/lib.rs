@@ -22,11 +22,11 @@ mod consts;
 mod dialogue;
 mod items;
 mod limiq;
-mod listvec;
 mod main_menu;
 mod stats;
 mod util;
 mod world;
+mod wrapped;
 
 #[allow(unused_imports)]
 mod prelude {
@@ -37,8 +37,8 @@ mod prelude {
 
     pub use crate::dialogue::autoload::DBoxInterface;
     pub use crate::dialogue::ix_map;
-    pub use crate::listvec::Wrapped;
     pub use crate::world::interaction::manager::InteractionManager;
+    pub use crate::wrapped::Wrapped;
 
     // is this bad practice? no clue and idc honestly
     // it's convenient with no real caveat, therefore...
