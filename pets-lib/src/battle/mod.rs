@@ -119,12 +119,12 @@ impl INode2D for BattleEngine {
                 }
 
                 self.choices.walk(rev);
-                let (_, (_, new_node)) = self.choices.pick().unwrap();
+                let (_, new_node) = self.choices.pick_v().unwrap();
                 tween_choice_to(true, new_node.clone());
             }
 
             Pick => {
-                let (_, (choice, _)) = self.choices.pick().unwrap();
+                let (choice, _) = self.choices.pick_v().unwrap();
 
                 // call different functions depending on the choice
                 match choice {
