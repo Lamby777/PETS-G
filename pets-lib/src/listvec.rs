@@ -76,11 +76,6 @@ impl<T> Wrapped<T> {
         self.selected.map(|i| (i, &self.elements[i]))
     }
 
-    pub fn walk(&mut self, backwards: bool) {
-        let diff = if backwards { -1 } else { 1 };
-        self.offset_by(diff);
-    }
-
     pub fn next(&mut self) {
         self.walk(false);
     }
@@ -89,23 +84,12 @@ impl<T> Wrapped<T> {
         self.walk(true);
     }
 
-    /// Move `diff` positions forward in the list.
-    /// If negative, moves backwards.
-    fn offset_by(&mut self, diff: i32) {
-        let old = self.selected.map(|i| &self.elements[i]);
-
-        let new_i = match self.selected {
+    pub fn walk(&mut self, backwards: bool) {
+        let diff = if backwards { -1 } else { 1 };
+        self.selected = Some(match self.selected {
             Some(n) => (n as i32 + diff).rem_euclid(self.elements.len() as i32) as usize,
             None => 0,
-        };
-
-        self.selected = Some(new_i);
-        let new = &self.elements[new_i];
-
-        // TODO run change handler if one was set
-        // if let Some(f) = self.on_changed {
-        //     f(old, new);
-        // }
+        });
     }
 }
 
