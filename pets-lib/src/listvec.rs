@@ -5,6 +5,22 @@
 use crate::prelude::*;
 use godot::prelude::*;
 
+/// Call a change or pick event on a listvec based
+/// on the input state.
+pub fn process_input_vert<T>(lv: &mut ListVec<T>) {
+    fn is_pressed(name: &str) -> bool {
+        Input::singleton().is_action_just_pressed(name.into())
+    }
+
+    if is_pressed("ui_down") {
+        lv.offset_by(1);
+    } else if is_pressed("ui_up") {
+        lv.offset_by(-1);
+    } else if is_pressed("ui_accept") {
+        lv.pick();
+    }
+}
+
 /// Abstract list of things to choose from, with listener
 /// functions for when the choice is picked or changed.
 ///
@@ -74,35 +90,6 @@ impl<T> ListVec<T> {
     }
 }
 
-impl<T> Deref for ListVec<T> {
-    type Target = Vec<T>;
-    fn deref(&self) -> &Self::Target {
-        &self.elements
-    }
-}
-
-impl<T> DerefMut for ListVec<T> {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.elements
-    }
-}
-
-/// Call a change or pick event on a listvec based
-/// on the input state.
-pub fn process_input<T>(lv: &mut ListVec<T>) {
-    fn is_pressed(name: &str) -> bool {
-        Input::singleton().is_action_just_pressed(name.into())
-    }
-
-    if is_pressed("ui_down") {
-        lv.offset_by(1);
-    } else if is_pressed("ui_up") {
-        lv.offset_by(-1);
-    } else if is_pressed("ui_accept") {
-        lv.pick();
-    }
-}
-
 /// For when you want to map enum values to concrete nodes
 pub struct ChoiceList<Enum, T>(ListVec<(Enum, Gd<T>)>)
 where
@@ -139,10 +126,21 @@ where
     }
 }
 
+impl<T> Deref for ListVec<T> {
+    type Target = Vec<T>;
+    fn deref(&self) -> &Self::Target {
+        &self.elements
+    }
+}
+
+impl<T> DerefMut for ListVec<T> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.elements
+    }
+}
+
 // ////////////////////////////////////////////////////////////// //
-//                                                                //
 // ignore the boilerplate crap below, the compiler was being dumb //
-//                                                                //
 // ////////////////////////////////////////////////////////////// //
 
 impl<T> Default for ListVec<T> {
