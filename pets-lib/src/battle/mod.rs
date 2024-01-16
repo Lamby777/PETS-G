@@ -105,10 +105,7 @@ impl INode2D for BattleEngine {
 
     fn process(&mut self, _delta: f64) {
         use crate::wrapped::*;
-        let action = process_input(ListDir::TopToBottom);
-        let Some(action) = action else {
-            return;
-        };
+        let action = process_input(&mut self.choices, ListDir::TopToBottom);
 
         use ListOperation::*;
         match action {
@@ -125,9 +122,7 @@ impl INode2D for BattleEngine {
                 tween_choice_to(true, new_node.clone());
             }
 
-            Pick => {
-                let (choice, _) = self.choices.pick().unwrap();
-
+            Pick(_, (choice, _)) => {
                 // call different functions depending on the choice
                 use BattleChoice::*;
                 match choice {
@@ -140,6 +135,8 @@ impl INode2D for BattleEngine {
                     }
                 }
             }
+
+            Nothing => {}
         }
     }
 }

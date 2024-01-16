@@ -86,10 +86,7 @@ struct TitleScreen {
 impl INode2D for TitleScreen {
     fn process(&mut self, _delta: f64) {
         use crate::wrapped::*;
-        let action = process_input(ListDir::TopToBottom);
-        let Some(action) = action else {
-            return;
-        };
+        let action = process_input(&mut self.choices, ListDir::TopToBottom);
 
         use ListOperation::*;
         match action {
@@ -106,9 +103,7 @@ impl INode2D for TitleScreen {
                 tween_choice_to(true, new_node.clone());
             }
 
-            Pick => {
-                let (choice, _) = self.choices.pick().unwrap();
-
+            Pick(_, (choice, _)) => {
                 use MainMenuChoice::*;
                 match choice {
                     Play => {
@@ -134,6 +129,8 @@ impl INode2D for TitleScreen {
                     }
                 }
             }
+
+            Nothing => {}
         }
     }
 
