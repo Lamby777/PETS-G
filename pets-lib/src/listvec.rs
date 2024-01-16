@@ -5,16 +5,26 @@
 use crate::prelude::*;
 use godot::prelude::*;
 
+fn is_pressed(name: &str) -> bool {
+    Input::singleton().is_action_just_pressed(name.into())
+}
+
 /// Call a change or pick event on a listvec based
 /// on the input state.
 pub fn process_input_vert<T>(lv: &mut ListVec<T>) {
-    fn is_pressed(name: &str) -> bool {
-        Input::singleton().is_action_just_pressed(name.into())
-    }
-
     if is_pressed("ui_down") {
         lv.offset_by(1);
     } else if is_pressed("ui_up") {
+        lv.offset_by(-1);
+    } else if is_pressed("ui_accept") {
+        lv.pick();
+    }
+}
+
+pub fn process_input_horiz<T>(lv: &mut ListVec<T>) {
+    if is_pressed("ui_right") {
+        lv.offset_by(1);
+    } else if is_pressed("ui_left") {
         lv.offset_by(-1);
     } else if is_pressed("ui_accept") {
         lv.pick();
