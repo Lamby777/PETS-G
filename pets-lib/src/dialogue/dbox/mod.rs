@@ -204,14 +204,10 @@ impl IPanelContainer for DialogBox {
         if event.is_action_pressed("ui_accept".into()) {
             // go to next page
             let ix = self.current_ix.as_ref().unwrap();
-            let pagecount = ix.pages.len();
-
             self.current_page_number += 1;
 
-            if self.current_page_number == pagecount - 1 {
-                // if last page, we need to run the ix ending
-                let ix_ending = ix.ending.clone();
-                self.run_ix_ending(&ix_ending)
+            if self.is_on_last_page() {
+                self.run_ix_ending(&ix.ending.clone())
             }
 
             self.goto_page(self.current_page_number);
@@ -252,6 +248,11 @@ impl DialogBox {
     pub fn set_ix(&mut self, ix: Interaction) {
         self.current_ix = Some(ix);
         self.goto_page(0);
+    }
+
+    pub fn is_on_last_page(&self) -> bool {
+        let ix = self.current_ix.as_ref().unwrap();
+        self.current_page_number == ix.pages.len() - 1
     }
 
     /// Updates the speaker and vox based on the given page metadata
