@@ -19,57 +19,6 @@ use crate::prelude::*;
 mod dchoice;
 use dchoice::DChoice;
 
-/// Turn a Speaker into a displayable name
-///
-/// Either the name of the speaker or a special name
-/// if it's a narrator or unknown speaker
-pub fn spk_display(spk: &Speaker) -> String {
-    use Speaker::*;
-
-    match spk {
-        Named(ref v) => v,
-        Narrator => NARRATOR_DISPLAYNAME,
-        Unknown => UNKNOWN_DISPLAYNAME,
-    }
-    .to_owned()
-}
-
-#[derive(Clone)]
-pub struct MetaPair<T> {
-    pub temporary: T,
-    pub permanent: T,
-}
-
-impl<T> MetaPair<T> {
-    pub fn from_cloned(v: T) -> Self
-    where
-        T: Clone,
-    {
-        Self {
-            temporary: v.clone(),
-            permanent: v,
-        }
-    }
-
-    /// matches over a `Metaline` to update a field depending on
-    /// whether it's pageonly, permanent, or nochange
-    fn set_from<'a>(&mut self, meta: &'a Metaline<T>)
-    where
-        T: Clone,
-    {
-        use Metaline::*;
-        self.temporary = match meta {
-            PageOnly(ref v) => v,
-            Permanent(ref v) => {
-                self.permanent = v.clone();
-                v
-            }
-            NoChange => &self.permanent,
-        }
-        .clone();
-    }
-}
-
 #[derive(GodotClass)]
 #[class(base=PanelContainer)]
 pub struct DialogBox {
@@ -151,9 +100,13 @@ impl DialogBox {
         use Label::*;
 
         match label {
-            Goto(_) => {
-                godot_print!("GOTO");
-                // TODO
+            Goto(ix_id) => {
+                let new_ix = ix_map().get(ix_id).unwrap_or_else(|| {
+                    godot_error!("GOTO: Could not find interaction with ID: {}", ix_id);
+                    panic!()
+                });
+
+                self.set_ix(new_ix.clone());
             }
 
             Function(_) => {
@@ -165,10 +118,8 @@ impl DialogBox {
 
     pub fn end_interaction(&mut self) {
         // close the dialog and tween choices away
-        godot_print!("Ending interaction!");
         self.tween_choices_wave(false);
         self.tween_into_view(false);
-        godot_print!("Ended interaction!");
     }
 
     pub fn run_ix_ending(&mut self) {
@@ -383,5 +334,56 @@ impl DialogBox {
                 .unwrap()
                 .connect("timeout".into(), func);
         }
+    }
+}
+
+/// Turn a Speaker into a displayable name
+///
+/// Either the name of the speaker or a special name
+/// if it's a narrator or unknown speaker
+pub fn spk_display(spk: &Speaker) -> String {
+    use Speaker::*;
+
+    match spk {
+        Named(ref v) => v,
+        Narrator => NARRATOR_DISPLAYNAME,
+        Unknown => UNKNOWN_DISPLAYNAME,
+    }
+    .to_owned()
+}
+
+#[derive(Clone)]
+pub struct MetaPair<T> {
+    pub temporary: T,
+    pub permanent: T,
+}
+
+impl<T> MetaPair<T> {
+    pub fn from_cloned(v: T) -> Self
+    where
+        T: Clone,
+    {
+        Self {
+            temporary: v.clone(),
+            permanent: v,
+        }
+    }
+
+    /// matches over a `Metaline` to update a field depending on
+    /// whether it's pageonly, permanent, or nochange
+    fn set_from<'a>(&mut self, meta: &'a Metaline<T>)
+    where
+        T: Clone,
+    {
+        use Metaline::*;
+        self.temporary = match meta {
+            PageOnly(ref v) => v,
+            Permanent(ref v) => {
+                self.permanent = v.clone();
+                v
+            }
+            NoChange => &self.permanent,
+        }
+        .clone();
     }
 }
