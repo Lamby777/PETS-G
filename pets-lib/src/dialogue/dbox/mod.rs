@@ -161,6 +161,12 @@ impl DialogBox {
         }
     }
 
+    pub fn end_interaction(&mut self) {
+        // close the dialog and tween choices away
+        self.tween_choices_wave(false);
+        self.tween_into_view(false);
+    }
+
     pub fn run_ix_ending(&mut self) {
         use DialogueEnding::*;
 
@@ -172,16 +178,8 @@ impl DialogBox {
                 self.awaiting_choice = true;
             }
 
-            Label(label) => {
-                self.run_label(&label);
-            }
-
-            End => {
-                // if end of interaction, close the dialog
-                self.tween_into_view(false);
-
-                // self.tween_choices_wave(false);
-            }
+            Label(label) => self.run_label(&label),
+            End => self.end_interaction(),
         }
     }
 
@@ -225,6 +223,11 @@ impl DialogBox {
 
         if let Some(label) = &choices[picked_i].label {
             self.run_label(label);
+        } else {
+            // no label means end the interaction
+            godot_print!("Ending!");
+            self.end_interaction();
+            godot_print!("Ended!");
         }
 
         self.awaiting_choice = false;
