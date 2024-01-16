@@ -85,7 +85,8 @@ struct TitleScreen {
 #[godot_api]
 impl INode2D for TitleScreen {
     fn process(&mut self, _delta: f64) {
-        crate::listvec::process_input(&mut self.choices)
+        use crate::listvec::*;
+        process_input(&mut self.choices, ListDir::TopToBottom);
     }
 
     fn ready(&mut self) {

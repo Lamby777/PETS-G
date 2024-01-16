@@ -258,7 +258,8 @@ impl IPanelContainer for DialogBox {
         }
 
         if self.awaiting_choice {
-            crate::listvec::process_input(&mut self.choices);
+            use crate::listvec::*;
+            process_input(&mut self.choices, ListDir::LeftToRight);
             return;
         }
 
