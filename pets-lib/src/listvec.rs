@@ -31,6 +31,12 @@ impl<T> ListVec<T> {
         }
     }
 
+    /// takes ownership of a vector and uses it as the list
+    pub fn replace_vec(&mut self, new: Vec<T>) {
+        self.elements = new;
+        self.selected = None;
+    }
+
     pub fn selected_pair(&self) -> Option<(usize, &T)> {
         self.selected.map(|i| (i, &self.elements[i]))
     }

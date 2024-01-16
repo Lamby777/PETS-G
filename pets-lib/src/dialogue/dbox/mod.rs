@@ -96,7 +96,6 @@ pub struct DialogBox {
 impl DialogBox {
     #[func]
     pub fn do_draw(&mut self) {
-        // I THINK this clone is fine, probably RC'd
         self.spk_txt().set_text(self.spk_txt.clone());
         self.msg_txt().set_text(self.msg_txt.clone());
     }
@@ -283,10 +282,17 @@ impl DialogBox {
 
         let mut container = self.choice_container();
 
-        for (i, choice) in choices.iter().enumerate() {
-            let dchoice = DChoice::new_container(i, &choice.text);
-            container.add_child(dchoice.upcast());
-        }
+        let new_nodes = choices
+            .iter()
+            .enumerate()
+            .map(|(i, choice)| {
+                let dchoice = DChoice::new_container(i, &choice.text);
+                container.add_child(dchoice.clone().upcast());
+                dchoice
+            })
+            .collect();
+
+        self.choices.replace_vec(new_nodes);
     }
 
     pub fn tween_choices_wave(&mut self, up: bool) {
