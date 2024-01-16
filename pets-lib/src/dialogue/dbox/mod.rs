@@ -262,8 +262,17 @@ impl IPanelContainer for DialogBox {
             return;
         }
 
-        if event.is_action_pressed("ui_accept".into()) {
+        let is_pressed = |name: &str| event.is_action_pressed(name.into());
+
+        if is_pressed("ui_accept") {
             self.on_accept();
+            return;
+        } else if is_pressed("ui_right") {
+            godot_print!("Right");
+            self.choices.offset_by(1);
+        } else if is_pressed("ui_left") {
+            godot_print!("Left");
+            self.choices.offset_by(-1);
         }
     }
 }
