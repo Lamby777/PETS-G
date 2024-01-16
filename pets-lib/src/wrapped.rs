@@ -34,18 +34,17 @@ impl ListDir {
 }
 
 pub enum ListOperation {
-    Next,
-    Prev,
+    Walk(bool),
     Pick,
 }
 
 /// Convert user input into list navigation
-pub fn process_input<T>(list: &mut Wrapped<T>, dir: ListDir) -> Option<ListOperation> {
+pub fn process_input(dir: ListDir) -> Option<ListOperation> {
     use ListOperation::*;
 
     Some(match () {
-        _ if is_pressed(dir.ui_next()) => Next,
-        _ if is_pressed(dir.ui_prev()) => Prev,
+        _ if is_pressed(dir.ui_next()) => Walk(false),
+        _ if is_pressed(dir.ui_prev()) => Walk(true),
         _ if is_pressed("ui_accept") => Pick,
         _ => return None,
     })
