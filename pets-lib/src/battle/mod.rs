@@ -110,7 +110,7 @@ impl INode2D for BattleEngine {
                     tween_choice_to(false, old.clone());
                 }
             }),
-            Some(|(choice, _)| {
+            Some(|_, (choice, _)| {
                 // call different functions depending on the choice
                 match choice {
                     Attack => todo!(),
