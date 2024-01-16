@@ -96,13 +96,27 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
 #[godot_api]
 impl INode2D for BattleEngine {
     fn ready(&mut self) {
-        // use BattleChoice::*;
-
         // The node that contains the text labels below
         let cont = self.base().get_node_as("%Choices");
 
         use crate::wrapped::from_children_of;
         self.choices = from_children_of(cont);
+    }
+
+    fn process(&mut self, _delta: f64) {
+        use crate::wrapped::*;
+        let action = process_input(ListDir::TopToBottom);
+        let Some(action) = action else {
+            return;
+        };
+
+        use ListOperation::*;
+        match action {
+            Walk(_rev) => {}
+            Pick => {}
+        }
+
+        // use BattleChoice::*;
         //     Some(|old, (_, new)| {
         //         tween_choice_to(true, new.clone());
         //
@@ -123,11 +137,5 @@ impl INode2D for BattleEngine {
         //         }
         //     }),
         // );
-    }
-
-    fn process(&mut self, _delta: f64) {
-        todo!();
-        // use crate::wrapped::*;
-        // process_input(&mut self.choices, ListDir::TopToBottom);
     }
 }
