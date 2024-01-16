@@ -58,7 +58,6 @@ impl<T> MetaPair<T> {
         T: Clone,
     {
         use Metaline::*;
-
         self.temporary = match meta {
             PageOnly(ref v) => v,
             Permanent(ref v) => {
@@ -84,6 +83,8 @@ pub struct DialogBox {
     vox: MetaPair<String>,
     tween: Option<Gd<Tween>>,
     active: bool,
+
+    /// the choice label containers
     choices: ListVec<Gd<DChoice>>,
 
     // independent from any interaction-related stuff,
