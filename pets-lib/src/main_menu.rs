@@ -85,9 +85,56 @@ struct TitleScreen {
 #[godot_api]
 impl INode2D for TitleScreen {
     fn process(&mut self, _delta: f64) {
-        todo!()
-        // use crate::wrapped::*;
-        // process_input(&mut self.choices, ListDir::TopToBottom);
+        use crate::wrapped::*;
+        let action = process_input(ListDir::TopToBottom);
+        let Some(action) = action else {
+            return;
+        };
+
+        use ListOperation::*;
+        match action {
+            Walk(rev) => {
+                // if a node was already selected, tween it back down
+                if let Some((_, old_node)) = self.choices.pick() {
+                    tween_choice_to(false, old_node.clone());
+                }
+
+                self.choices.walk(rev);
+
+                // tween the newly picked node up
+                let (_, new_node) = self.choices.pick().unwrap();
+                tween_choice_to(true, new_node.clone());
+            }
+
+            Pick => {
+                let (choice, _) = self.choices.pick().unwrap();
+
+                use MainMenuChoice::*;
+                match choice {
+                    Play => {
+                        // TODO should animate the menu boxes flying
+                        // off into the right, and the camera goes left
+                        change_scene!("world");
+                    }
+
+                    Options => {
+                        // should scroll right into options menu
+                        todo!()
+                    }
+
+                    Credits => {
+                        // should pull up credits box
+                        todo!()
+                    }
+
+                    Quit => godot_tree().quit(),
+
+                    DebugBattle => {
+                        change_scene!("battle_engine");
+                    }
+                }
+            }
+        }
     }
 
     fn ready(&mut self) {
@@ -95,40 +142,6 @@ impl INode2D for TitleScreen {
 
         // The node that contains the text labels below
         let cont = self.base().get_node_as("Background/MenuChoices");
-
-        use crate::wrapped::from_children_of;
-        self.choices = from_children_of(cont);
-        //     Some(|old, (_, new)| {
-        //         tween_choice_to(true, new.clone());
-        //         if let Some((_, old)) = old {
-        //             tween_choice_to(false, old.clone());
-        //         }
-        //     }),
-        //     Some(|_, (choice, _)| {
-        //         match choice {
-        //             Play => {
-        //                 // TODO should animate the menu boxes flying
-        //                 // off into the right, and the camera goes left
-        //                 change_scene!("world");
-        //             }
-        //
-        //             Options => {
-        //                 // should scroll right into options menu
-        //                 todo!()
-        //             }
-        //
-        //             Credits => {
-        //                 // should pull up credits box
-        //                 todo!()
-        //             }
-        //
-        //             Quit => godot_tree().quit(),
-        //
-        //             DebugBattle => {
-        //                 change_scene!("battle_engine");
-        //             }
-        //         }
-        //     }),
-        // );
+        self.choices = crate::wrapped::from_children_of(cont);
     }
 }
