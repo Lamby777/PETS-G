@@ -33,6 +33,8 @@ pub mod dialogue {
     pub const DBOX_CHOICE_TWEEN_TRANS: TransitionType = DBOX_TWEEN_TRANS;
     pub const DBOX_CHOICE_HEIGHT: f32 = 60.0;
     pub const DBOX_CHOICE_WAVE_TIME: f64 = 0.1;
+
+    pub const DBOX_SELECTION_BBCODE: &str = "[wave amp=100 freq=-6]";
 }
 
 pub mod main_menu {
@@ -40,5 +42,5 @@ pub mod main_menu {
 
     pub const MENU_TWEEN_TIME: f64 = 0.1;
     pub const MENU_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
-    pub const MENU_WAVE_BBCODE: &str = "[wave amp=100 freq=-6]";
+    pub const MENU_WAVE_BBCODE: &str = super::dialogue::DBOX_SELECTION_BBCODE;
 }
