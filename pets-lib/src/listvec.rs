@@ -68,9 +68,10 @@ impl<T> ListVec<T> {
         // even if no `on_picked` function is set. This is just
         // to make sure the dev knows they screwed up.
 
-        if let Some(f) = self.on_picked {
-            f(picked_i, picked_v);
-        }
+        // TODO
+        // if let Some(f) = self.on_picked {
+        //     f(picked_i, picked_v);
+        // }
     }
 
     /// Move `diff` positions forward in the list.
@@ -86,40 +87,28 @@ impl<T> ListVec<T> {
         self.selected = Some(new_i);
         let new = &self.elements[new_i];
 
-        // run change handler if one was set
-        if let Some(f) = self.on_changed {
-            f(old, new);
-        }
+        // TODO run change handler if one was set
+        // if let Some(f) = self.on_changed {
+        //     f(old, new);
+        // }
     }
 }
 
-/// For when you want to map enum values to concrete nodes
-pub struct ChoiceList<Enum, T>(ListVec<(Enum, Gd<T>)>)
+/// make a list from the child nodes of a parent node
+/// assumes the children are in the same order as the enum variants
+pub fn lv_from_children_of<Enum, T>(parent: Gd<Node>) -> ListVec<(Enum, Gd<T>)>
 where
-    T: GodotClass + Inherits<Node>;
-
-impl<Enum, T> ChoiceList<Enum, T>
-where
-    T: GodotClass + Inherits<Node>,
     Enum: TryFrom<usize>,
+    T: GodotClass + Inherits<Node>,
 {
-    pub fn inner_mut(&mut self) -> &mut ListVec<(Enum, Gd<T>)> {
-        &mut self.0
-    }
+    let children = parent
+        .get_children()
+        .iter_shared()
+        .enumerate()
+        .map(|(i, node)| (Enum::try_from(i).ok().unwrap(), node.cast()))
+        .collect();
 
-    /// make a list from the child nodes of a parent node
-    /// assumes the children are in the same order as the enum variants
-    pub fn from_children_of(parent: Gd<Node>) -> Self {
-        let children = parent
-            .get_children()
-            .iter_shared()
-            .enumerate()
-            .map(|(i, node)| (Enum::try_from(i).ok().unwrap(), node.cast()))
-            .collect();
-
-        let lv = ListVec::new(children);
-        Self(lv)
-    }
+    ListVec::new(children)
 }
 
 impl<T> Deref for ListVec<T> {
@@ -144,17 +133,6 @@ impl<T> Default for ListVec<T> {
         Self {
             elements: Vec::new(),
             selected: None,
-            on_changed: None,
-            on_picked: None,
         }
-    }
-}
-
-impl<Enum, T> Default for ChoiceList<Enum, T>
-where
-    T: GodotClass + Inherits<Node>,
-{
-    fn default() -> Self {
-        Self(ListVec::default())
     }
 }

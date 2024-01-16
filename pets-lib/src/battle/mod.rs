@@ -53,7 +53,7 @@ struct BattleEngine {
     #[base]
     node: Base<Node2D>,
 
-    choices: ChoiceList<BattleChoice, RichTextLabel>,
+    choices: ListVec<(BattleChoice, Gd<RichTextLabel>)>,
     state: BattleState,
 }
 
@@ -96,37 +96,37 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
 #[godot_api]
 impl INode2D for BattleEngine {
     fn ready(&mut self) {
-        use BattleChoice::*;
+        // use BattleChoice::*;
 
         // The node that contains the text labels below
         let cont = self.base().get_node_as("%Choices");
 
-        self.choices = ChoiceList::from_children_of(
-            cont,
-            Some(|old, (_, new)| {
-                tween_choice_to(true, new.clone());
-
-                if let Some((_, old)) = old {
-                    tween_choice_to(false, old.clone());
-                }
-            }),
-            Some(|_, (choice, _)| {
-                // call different functions depending on the choice
-                match choice {
-                    Attack => todo!(),
-                    Skills => todo!(),
-                    Items => todo!(),
-                    Run => {
-                        // TODO roll, don't always succeed
-                        change_scene!("world");
-                    }
-                }
-            }),
-        );
+        use crate::listvec::lv_from_children_of;
+        self.choices = lv_from_children_of(cont);
+        //     Some(|old, (_, new)| {
+        //         tween_choice_to(true, new.clone());
+        //
+        //         if let Some((_, old)) = old {
+        //             tween_choice_to(false, old.clone());
+        //         }
+        //     }),
+        //     Some(|_, (choice, _)| {
+        //         // call different functions depending on the choice
+        //         match choice {
+        //             Attack => todo!(),
+        //             Skills => todo!(),
+        //             Items => todo!(),
+        //             Run => {
+        //                 // TODO roll, don't always succeed
+        //                 change_scene!("world");
+        //             }
+        //         }
+        //     }),
+        // );
     }
 
     fn process(&mut self, _delta: f64) {
         use crate::listvec::process_input_vert;
-        process_input_vert(self.choices.inner_mut())
+        process_input_vert(&mut self.choices)
     }
 }
