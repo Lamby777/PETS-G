@@ -5,6 +5,9 @@
 use crate::prelude::*;
 use godot::prelude::*;
 
+type ChangeHandler<T> = Option<fn(Option<&T>, &T)>;
+type PickHandler<T> = Option<fn(usize, &T)>;
+
 fn is_pressed(name: &str) -> bool {
     Input::singleton().is_action_just_pressed(name.into())
 }
@@ -40,16 +43,12 @@ pub struct ListVec<T> {
     elements: Vec<T>,
     selected: Option<usize>,
 
-    on_changed: Option<fn(Option<&T>, &T)>,
-    on_picked: Option<fn(&T)>,
+    on_changed: ChangeHandler<T>,
+    on_picked: PickHandler<T>,
 }
 
 impl<T> ListVec<T> {
-    pub fn new(
-        elements: Vec<T>,
-        on_changed: Option<fn(Option<&T>, &T)>,
-        on_picked: Option<fn(&T)>,
-    ) -> Self {
+    pub fn new(elements: Vec<T>, on_changed: ChangeHandler<T>, on_picked: PickHandler<T>) -> Self {
         Self {
             elements,
             selected: None,
@@ -70,17 +69,18 @@ impl<T> ListVec<T> {
 
     /// Call the pick handler on the currently selected element.
     pub fn pick(&self) {
-        let picked = self
+        let picked_i = self
             .selected
-            .map(|i| &self.elements[i])
             .expect("Called `pick` on choice out of bounds!");
+
+        let picked_v = &self.elements[picked_i];
 
         // Calling `pick` on a bad index should always error,
         // even if no `on_picked` function is set. This is just
         // to make sure the dev knows they screwed up.
 
         if let Some(f) = self.on_picked {
-            f(picked);
+            f(picked_i, picked_v);
         }
     }
 
@@ -125,8 +125,8 @@ where
 
         // what the fuck
         // TODO https://github.com/rust-lang/rust/issues/8995
-        on_change: Option<fn(Option<&(Enum, Gd<T>)>, &(Enum, Gd<T>))>,
-        on_picked: Option<fn(&(Enum, Gd<T>))>,
+        on_change: ChangeHandler<(Enum, Gd<T>)>,
+        on_picked: PickHandler<(Enum, Gd<T>)>,
     ) -> Self {
         let children = parent
             .get_children()

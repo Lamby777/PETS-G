@@ -103,7 +103,7 @@ impl INode2D for TitleScreen {
                     tween_choice_to(false, old.clone());
                 }
             }),
-            Some(|(choice, _)| {
+            Some(|_, (choice, _)| {
                 match choice {
                     Play => {
                         // TODO should animate the menu boxes flying
