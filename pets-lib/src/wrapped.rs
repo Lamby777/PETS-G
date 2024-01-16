@@ -75,6 +75,7 @@ impl<T> Wrapped<T> {
         self.selected.map(|i| (i, &self.elements[i]))
     }
 
+    /// move selection forwards or backwards
     pub fn walk(&mut self, backwards: bool) {
         let diff = if backwards { -1 } else { 1 };
         self.selected = Some(match self.selected {
