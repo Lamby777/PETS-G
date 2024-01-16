@@ -85,7 +85,7 @@ struct TitleScreen {
 #[godot_api]
 impl INode2D for TitleScreen {
     fn process(&mut self, _delta: f64) {
-        use crate::listvec::*;
+        use crate::wrapped::*;
         process_input(&mut self.choices, ListDir::TopToBottom);
     }
 
@@ -95,8 +95,8 @@ impl INode2D for TitleScreen {
         // The node that contains the text labels below
         let cont = self.base().get_node_as("Background/MenuChoices");
 
-        use crate::listvec::lv_from_children_of;
-        self.choices = lv_from_children_of(cont);
+        use crate::wrapped::from_children_of;
+        self.choices = from_children_of(cont);
         //     Some(|old, (_, new)| {
         //         tween_choice_to(true, new.clone());
         //         if let Some((_, old)) = old {
