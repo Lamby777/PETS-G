@@ -163,8 +163,10 @@ impl DialogBox {
 
     pub fn end_interaction(&mut self) {
         // close the dialog and tween choices away
+        godot_print!("Ending interaction!");
         self.tween_choices_wave(false);
         self.tween_into_view(false);
+        godot_print!("Ended interaction!");
     }
 
     pub fn run_ix_ending(&mut self) {
@@ -197,6 +199,38 @@ impl DialogBox {
         // mark the input as handled
         self.base().get_viewport().unwrap().set_input_as_handled();
     }
+
+    pub fn process_choice_input(&mut self) {
+        use crate::wrapped::*;
+        let Some(action) = process_input(ListDir::LeftToRight) else {
+            return;
+        };
+
+        use ListOperation::*;
+        match action {
+            Walk(rev) => {
+                // TODO tween stuff
+                self.choices.walk(rev);
+            }
+
+            Pick => {
+                let (picked_i, _) = self.choices.pick_iv().unwrap();
+
+                // we know the ending has to be `Choices` and not a label or end
+                let ending = self.current_ix_ending().unwrap().clone();
+                let DialogueEnding::Choices(choices) = ending else {
+                    unreachable!()
+                };
+
+                match &choices[picked_i].label {
+                    Some(label) => self.run_label(label),
+                    None => self.end_interaction(),
+                }
+
+                self.awaiting_choice = false;
+            }
+        }
+    }
 }
 
 #[godot_api]
@@ -228,40 +262,7 @@ impl IPanelContainer for DialogBox {
         }
 
         if self.awaiting_choice {
-            use crate::wrapped::*;
-            let Some(action) = process_input(ListDir::LeftToRight) else {
-                return;
-            };
-
-            use ListOperation::*;
-            match action {
-                Walk(rev) => {
-                    // tween stuff
-                    self.choices.walk(rev);
-                }
-
-                Pick => {
-                    let (picked_i, _) = self.choices.pick_iv().unwrap();
-
-                    // we know the ending has to be `Choices` and not a label or end
-                    let ending = self.current_ix_ending().unwrap().clone();
-                    let DialogueEnding::Choices(choices) = ending else {
-                        unreachable!()
-                    };
-
-                    if let Some(label) = &choices[picked_i].label {
-                        self.run_label(label);
-                    } else {
-                        // no label means end the interaction
-                        godot_print!("Ending!");
-                        self.end_interaction();
-                        godot_print!("Ended!");
-                    }
-
-                    self.awaiting_choice = false;
-                }
-            }
-
+            self.process_choice_input();
             return;
         }
 
