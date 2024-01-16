@@ -147,13 +147,14 @@ impl DialogBox {
         y_tween.unwrap()
     }
 
-    pub fn run_ix_ending(&mut self, ending: &DialogueEnding) {
+    pub fn run_ix_ending(&mut self) {
         use dialogical::Label::*;
         use DialogueEnding::*;
 
+        let ending = self.current_ix_ending().unwrap().clone();
         match ending {
             Choices(choices) => {
-                self.recreate_choice_labels(choices);
+                self.recreate_choice_labels(&choices);
                 self.tween_choices_wave(true);
                 self.awaiting_choice = true;
             }
@@ -177,7 +178,8 @@ impl DialogBox {
 
     fn on_accept(&mut self) {
         if self.awaiting_choice {
-            //
+            // if we're on the last page and the ending
+            // is a choice, we gotta let the user pick
             self.awaiting_choice = false;
             return;
         }
@@ -186,8 +188,7 @@ impl DialogBox {
         self.current_page_number += 1;
 
         if self.is_on_last_page() {
-            let ix_ending = self.current_ix_end().unwrap().clone();
-            self.run_ix_ending(&ix_ending);
+            self.run_ix_ending();
         }
 
         self.goto_page(self.current_page_number);
@@ -268,7 +269,7 @@ impl DialogBox {
         self.current_page_number == ix.pages.len() - 1
     }
 
-    pub fn current_ix_end(&self) -> Option<&DialogueEnding> {
+    pub fn current_ix_ending(&self) -> Option<&DialogueEnding> {
         let ix = self.current_ix.as_ref();
         ix.map(|ix| &ix.ending)
     }
