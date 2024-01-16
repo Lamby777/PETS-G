@@ -33,21 +33,22 @@ impl ListDir {
     }
 }
 
-pub enum ListOperation {
+pub enum ListOperation<'a, T> {
     Walk(bool),
-    Pick,
+    Pick(usize, &'a T),
+    Nothing,
 }
 
 /// Convert user input into list navigation
-pub fn process_input(dir: ListDir) -> Option<ListOperation> {
+pub fn process_input<T>(wrap: &mut Wrapped<T>, dir: ListDir) -> ListOperation<T> {
     use ListOperation::*;
 
-    Some(match () {
+    match wrap.selected {
+        Some(i) if is_pressed("ui_accept") => Pick(i, &wrap[i]),
         _ if is_pressed(dir.ui_next()) => Walk(false),
         _ if is_pressed(dir.ui_prev()) => Walk(true),
-        _ if is_pressed("ui_accept") => Pick,
-        _ => return None,
-    })
+        _ => return Nothing,
+    }
 }
 
 /// Wrapping vector with a selected index
@@ -71,7 +72,7 @@ impl<T> Wrapped<T> {
     }
 
     /// returns the currently selected index and element
-    pub fn pick_iv(&self) -> Option<(usize, &T)> {
+    pub fn _pick_iv(&self) -> Option<(usize, &T)> {
         self.selected.map(|i| (i, &self.elements[i]))
     }
 

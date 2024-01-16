@@ -152,10 +152,12 @@ impl DialogBox {
 
         match label {
             Goto(_) => {
+                godot_print!("GOTO");
                 // TODO
             }
 
             Function(_) => {
+                godot_print!("FUNCTION");
                 // TODO
             }
         }
@@ -202,9 +204,7 @@ impl DialogBox {
 
     pub fn process_choice_input(&mut self) {
         use crate::wrapped::*;
-        let Some(action) = process_input(ListDir::LeftToRight) else {
-            return;
-        };
+        let action = process_input(&mut self.choices, ListDir::LeftToRight);
 
         use ListOperation::*;
         match action {
@@ -213,9 +213,7 @@ impl DialogBox {
                 self.choices.walk(rev);
             }
 
-            Pick => {
-                let (picked_i, _) = self.choices.pick_iv().unwrap();
-
+            Pick(picked_i, _) => {
                 // we know the ending has to be `Choices` and not a label or end
                 let ending = self.current_ix_ending().unwrap().clone();
                 let DialogueEnding::Choices(choices) = ending else {
@@ -229,6 +227,8 @@ impl DialogBox {
 
                 self.awaiting_choice = false;
             }
+
+            Nothing => {}
         }
     }
 }
