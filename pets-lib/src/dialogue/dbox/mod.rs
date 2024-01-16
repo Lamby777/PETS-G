@@ -178,10 +178,7 @@ impl DialogBox {
 
     fn on_accept(&mut self) {
         if self.awaiting_choice {
-            // if we're on the last page and the ending
-            // is a choice, we gotta let the user pick
-            self.awaiting_choice = false;
-            return;
+            self.on_choice_confirm();
         }
 
         // go to next page
@@ -196,6 +193,32 @@ impl DialogBox {
 
         // mark the input as handled
         self.base().get_viewport().unwrap().set_input_as_handled();
+    }
+
+    fn on_choice_confirm(&mut self) {
+        use DialogueEnding::Choices;
+
+        // if we're on the last page and the ending
+        // is a choice, we gotta let the user pick
+        let picked = self.choices.selected_pair();
+
+        let Some((picked_i, _)) = picked else {
+            // don't do anything if nothing was selected
+            return;
+        };
+
+        // we know the ending has to be `Choices` and not a label or end
+        let ending = self.current_ix_ending().unwrap().clone();
+        let Choices(choices) = ending else {
+            unreachable!()
+        };
+
+        if let Some(label) = &choices[picked_i].label {
+            //
+        }
+
+        self.awaiting_choice = false;
+        return;
     }
 }
 
