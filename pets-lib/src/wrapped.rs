@@ -75,14 +75,6 @@ impl<T> Wrapped<T> {
         self.selected.map(|i| (i, &self.elements[i]))
     }
 
-    pub fn next(&mut self) {
-        self.walk(false);
-    }
-
-    pub fn prev(&mut self) {
-        self.walk(true);
-    }
-
     pub fn walk(&mut self, backwards: bool) {
         let diff = if backwards { -1 } else { 1 };
         self.selected = Some(match self.selected {
