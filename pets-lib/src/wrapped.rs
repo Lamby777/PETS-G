@@ -75,6 +75,11 @@ impl<T> Wrapped<T> {
         self.selected.map(|i| (i, &self.elements[i]))
     }
 
+    /// returns the currently selected element
+    pub fn pick_v(&self) -> Option<&T> {
+        self.selected.map(|i| &self.elements[i])
+    }
+
     /// move selection forwards or backwards
     pub fn walk(&mut self, backwards: bool) {
         let diff = if backwards { -1 } else { 1 };
