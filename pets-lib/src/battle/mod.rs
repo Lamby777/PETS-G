@@ -114,17 +114,17 @@ impl INode2D for BattleEngine {
         use ListOperation::*;
         match action {
             Walk(rev) => {
-                if let Some((_, (_, old_node))) = self.choices.pick() {
+                if let Some((_, (_, old_node))) = self.choices.pick_iv() {
                     tween_choice_to(false, old_node.clone());
                 }
 
                 self.choices.walk(rev);
-                let (_, new_node) = self.choices.pick_v().unwrap();
+                let (_, new_node) = self.choices.pick().unwrap();
                 tween_choice_to(true, new_node.clone());
             }
 
             Pick => {
-                let (choice, _) = self.choices.pick_v().unwrap();
+                let (choice, _) = self.choices.pick().unwrap();
 
                 // call different functions depending on the choice
                 match choice {
