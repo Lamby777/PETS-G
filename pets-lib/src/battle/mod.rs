@@ -110,32 +110,33 @@ impl INode2D for BattleEngine {
             return;
         };
 
+        use BattleChoice::*;
         use ListOperation::*;
         match action {
-            Walk(_rev) => {}
-            Pick => {}
-        }
+            Walk(rev) => {
+                if let Some((_, (_, old_node))) = self.choices.pick() {
+                    tween_choice_to(false, old_node.clone());
+                }
 
-        // use BattleChoice::*;
-        //     Some(|old, (_, new)| {
-        //         tween_choice_to(true, new.clone());
-        //
-        //         if let Some((_, old)) = old {
-        //             tween_choice_to(false, old.clone());
-        //         }
-        //     }),
-        //     Some(|_, (choice, _)| {
-        //         // call different functions depending on the choice
-        //         match choice {
-        //             Attack => todo!(),
-        //             Skills => todo!(),
-        //             Items => todo!(),
-        //             Run => {
-        //                 // TODO roll, don't always succeed
-        //                 change_scene!("world");
-        //             }
-        //         }
-        //     }),
-        // );
+                self.choices.walk(rev);
+                let (_, (_, new_node)) = self.choices.pick().unwrap();
+                tween_choice_to(true, new_node.clone());
+            }
+
+            Pick => {
+                let (_, (choice, _)) = self.choices.pick().unwrap();
+
+                // call different functions depending on the choice
+                match choice {
+                    Attack => todo!(),
+                    Skills => todo!(),
+                    Items => todo!(),
+                    Run => {
+                        // TODO roll, don't always succeed
+                        change_scene!("world");
+                    }
+                }
+            }
+        }
     }
 }
