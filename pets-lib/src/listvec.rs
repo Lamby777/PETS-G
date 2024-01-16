@@ -10,20 +10,45 @@ fn is_pressed(name: &str) -> bool {
 }
 
 /// direction of a list's elements
-enum ListDir {
+pub enum ListDir {
     TopToBottom,
     LeftToRight,
 }
 
-/// Call a change or pick event on a listvec based
-/// on the input state.
-pub fn process_input<T>(list: &mut Wrapped<T>) {
-    if is_pressed("ui_down") {
-        list.offset_by(1);
-    } else if is_pressed("ui_up") {
-        list.offset_by(-1);
-    } else if is_pressed("ui_accept") {
+impl ListDir {
+    pub fn ui_next(&self) -> &str {
+        use ListDir::*;
+        match self {
+            TopToBottom => "ui_down",
+            LeftToRight => "ui_right",
+        }
     }
+
+    pub fn ui_prev(&self) -> &str {
+        use ListDir::*;
+        match self {
+            TopToBottom => "ui_up",
+            LeftToRight => "ui_left",
+        }
+    }
+}
+
+pub enum ListOperation {
+    Next,
+    Prev,
+    Pick,
+}
+
+/// Convert user input into list navigation
+pub fn process_input<T>(list: &mut Wrapped<T>, dir: ListDir) -> Option<ListOperation> {
+    use ListOperation::*;
+
+    Some(match () {
+        _ if is_pressed(dir.ui_next()) => Next,
+        _ if is_pressed(dir.ui_prev()) => Prev,
+        _ if is_pressed("ui_accept") => Pick,
+        _ => return None,
+    })
 }
 
 /// Wrapping vector with a selected index
@@ -51,9 +76,22 @@ impl<T> Wrapped<T> {
         self.selected.map(|i| (i, &self.elements[i]))
     }
 
+    pub fn walk(&mut self, backwards: bool) {
+        let diff = if backwards { -1 } else { 1 };
+        self.offset_by(diff);
+    }
+
+    pub fn next(&mut self) {
+        self.walk(false);
+    }
+
+    pub fn prev(&mut self) {
+        self.walk(true);
+    }
+
     /// Move `diff` positions forward in the list.
     /// If negative, moves backwards.
-    pub fn offset_by(&mut self, diff: i32) {
+    fn offset_by(&mut self, diff: i32) {
         let old = self.selected.map(|i| &self.elements[i]);
 
         let new_i = match self.selected {

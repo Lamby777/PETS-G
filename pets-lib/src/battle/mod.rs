@@ -126,6 +126,7 @@ impl INode2D for BattleEngine {
     }
 
     fn process(&mut self, _delta: f64) {
-        crate::listvec::process_input(&mut self.choices)
+        use crate::listvec::*;
+        process_input(&mut self.choices, ListDir::TopToBottom);
     }
 }
