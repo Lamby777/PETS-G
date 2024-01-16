@@ -79,55 +79,55 @@ fn tween_choice_to(is_picked: bool, mut node: Gd<RichTextLabel>) {
 struct TitleScreen {
     #[base]
     node: Base<Node2D>,
-    choices: ChoiceList<MainMenuChoice, RichTextLabel>,
+    choices: ListVec<(MainMenuChoice, Gd<RichTextLabel>)>,
 }
 
 #[godot_api]
 impl INode2D for TitleScreen {
     fn process(&mut self, _delta: f64) {
         use crate::listvec::process_input_vert;
-        process_input_vert(self.choices.inner_mut())
+        process_input_vert(&mut self.choices)
     }
 
     fn ready(&mut self) {
-        use MainMenuChoice::*;
+        // use MainMenuChoice::*;
 
         // The node that contains the text labels below
         let cont = self.base().get_node_as("Background/MenuChoices");
 
-        self.choices = ChoiceList::from_children_of(
-            cont,
-            Some(|old, (_, new)| {
-                tween_choice_to(true, new.clone());
-                if let Some((_, old)) = old {
-                    tween_choice_to(false, old.clone());
-                }
-            }),
-            Some(|_, (choice, _)| {
-                match choice {
-                    Play => {
-                        // TODO should animate the menu boxes flying
-                        // off into the right, and the camera goes left
-                        change_scene!("world");
-                    }
-
-                    Options => {
-                        // should scroll right into options menu
-                        todo!()
-                    }
-
-                    Credits => {
-                        // should pull up credits box
-                        todo!()
-                    }
-
-                    Quit => godot_tree().quit(),
-
-                    DebugBattle => {
-                        change_scene!("battle_engine");
-                    }
-                }
-            }),
-        );
+        use crate::listvec::lv_from_children_of;
+        self.choices = lv_from_children_of(cont);
+        //     Some(|old, (_, new)| {
+        //         tween_choice_to(true, new.clone());
+        //         if let Some((_, old)) = old {
+        //             tween_choice_to(false, old.clone());
+        //         }
+        //     }),
+        //     Some(|_, (choice, _)| {
+        //         match choice {
+        //             Play => {
+        //                 // TODO should animate the menu boxes flying
+        //                 // off into the right, and the camera goes left
+        //                 change_scene!("world");
+        //             }
+        //
+        //             Options => {
+        //                 // should scroll right into options menu
+        //                 todo!()
+        //             }
+        //
+        //             Credits => {
+        //                 // should pull up credits box
+        //                 todo!()
+        //             }
+        //
+        //             Quit => godot_tree().quit(),
+        //
+        //             DebugBattle => {
+        //                 change_scene!("battle_engine");
+        //             }
+        //         }
+        //     }),
+        // );
     }
 }

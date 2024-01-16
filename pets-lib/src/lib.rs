@@ -37,7 +37,7 @@ mod prelude {
 
     pub use crate::dialogue::autoload::DBoxInterface;
     pub use crate::dialogue::ix_map;
-    pub use crate::listvec::{ChoiceList, ListVec};
+    pub use crate::listvec::ListVec;
     pub use crate::world::interaction::manager::InteractionManager;
 
     // is this bad practice? no clue and idc honestly
