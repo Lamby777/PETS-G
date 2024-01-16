@@ -83,6 +83,7 @@ pub struct DialogBox {
     vox: MetaPair<String>,
     tween: Option<Gd<Tween>>,
     active: bool,
+    awaiting_choice: bool,
 
     /// the choice label containers
     choices: ListVec<Gd<DChoice>>,
@@ -172,6 +173,26 @@ impl DialogBox {
             }
         }
     }
+
+    fn on_accept(&mut self) {
+        if self.awaiting_choice {
+            return;
+        }
+
+        // go to next page
+        let ix = self.current_ix.as_ref().unwrap();
+        self.current_page_number += 1;
+
+        if self.is_on_last_page() {
+            self.run_ix_ending(&ix.ending.clone())
+        }
+
+        self.goto_page(self.current_page_number);
+        self.do_draw();
+
+        // mark the input as handled
+        self.base().get_viewport().unwrap().set_input_as_handled();
+    }
 }
 
 #[godot_api]
@@ -184,6 +205,7 @@ impl IPanelContainer for DialogBox {
 
             choices: ListVec::default(),
             active: false,
+            awaiting_choice: false,
             tween: None,
             current_ix: None,
             current_page_number: 0,
@@ -202,19 +224,7 @@ impl IPanelContainer for DialogBox {
         }
 
         if event.is_action_pressed("ui_accept".into()) {
-            // go to next page
-            let ix = self.current_ix.as_ref().unwrap();
-            self.current_page_number += 1;
-
-            if self.is_on_last_page() {
-                self.run_ix_ending(&ix.ending.clone())
-            }
-
-            self.goto_page(self.current_page_number);
-            self.do_draw();
-
-            // mark the input as handled
-            self.base().get_viewport().unwrap().set_input_as_handled();
+            self.on_accept();
         }
     }
 }
