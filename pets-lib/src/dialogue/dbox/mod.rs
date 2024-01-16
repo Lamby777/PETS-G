@@ -86,7 +86,7 @@ pub struct DialogBox {
     awaiting_choice: bool,
 
     /// the choice label containers
-    choices: ListVec<Gd<DChoice>>,
+    choices: Wrapped<Gd<DChoice>>,
 
     // independent from any interaction-related stuff,
     // these are the actual strings that are displayed
@@ -203,7 +203,7 @@ impl DialogBox {
 
         // if we're on the last page and the ending
         // is a choice, we gotta let the user pick
-        let picked = self.choices.selected_pair();
+        let picked = self.choices.pick();
 
         let Some((picked_i, _)) = picked else {
             // don't do anything if nothing was selected
@@ -237,7 +237,7 @@ impl IPanelContainer for DialogBox {
             spk_txt: "Cherry".into(),
             msg_txt: "[wave amp=50 freq=6]Hello, World![/wave]".into(),
 
-            choices: ListVec::default(),
+            choices: Wrapped::default(),
             active: false,
             awaiting_choice: false,
             tween: None,
@@ -258,7 +258,7 @@ impl IPanelContainer for DialogBox {
         }
 
         if self.awaiting_choice {
-            crate::listvec::process_input_horiz(&mut self.choices);
+            crate::listvec::process_input(&mut self.choices);
             return;
         }
 

@@ -33,13 +33,13 @@ macro_rules! impl_stat_getters_on_si {
                 pub fn fn_name(&self, pchar: &str) -> IntegralStat {
                     // get character level
                     let ch = self.get_character(pchar);
-                    let lv = ch.borrow().level;
+                    let lvl = ch.borrow().level;
 
                     // get calculation fn for character
                     let calcs = self.get_statcalc(pchar);
 
                     // calculate the stat
-                    (calcs.speed)(lv)
+                    (calcs.speed)(lvl)
                 }
             });
         )*}

@@ -9,39 +9,30 @@ fn is_pressed(name: &str) -> bool {
     Input::singleton().is_action_just_pressed(name.into())
 }
 
+/// direction of a list's elements
+enum ListDir {
+    TopToBottom,
+    LeftToRight,
+}
+
 /// Call a change or pick event on a listvec based
 /// on the input state.
-pub fn process_input_vert<T>(lv: &mut ListVec<T>) {
+pub fn process_input<T>(list: &mut Wrapped<T>) {
     if is_pressed("ui_down") {
-        lv.offset_by(1);
+        list.offset_by(1);
     } else if is_pressed("ui_up") {
-        lv.offset_by(-1);
+        list.offset_by(-1);
     } else if is_pressed("ui_accept") {
-        lv.pick();
     }
 }
 
-pub fn process_input_horiz<T>(lv: &mut ListVec<T>) {
-    if is_pressed("ui_right") {
-        lv.offset_by(1);
-    } else if is_pressed("ui_left") {
-        lv.offset_by(-1);
-    } else if is_pressed("ui_accept") {
-        lv.pick();
-    }
-}
-
-/// Abstract list of things to choose from, with listener
-/// functions for when the choice is picked or changed.
-///
-/// Incrementing past the end of the list will wrap
-/// back to the start, and vice versa.
-pub struct ListVec<T> {
+/// Wrapping vector with a selected index
+pub struct Wrapped<T> {
     elements: Vec<T>,
     selected: Option<usize>,
 }
 
-impl<T> ListVec<T> {
+impl<T> Wrapped<T> {
     pub fn new(elements: Vec<T>) -> Self {
         Self {
             elements,
@@ -55,23 +46,9 @@ impl<T> ListVec<T> {
         self.selected = None;
     }
 
-    pub fn selected_pair(&self) -> Option<(usize, &T)> {
+    /// returns the currently selected index and element
+    pub fn pick(&self) -> Option<(usize, &T)> {
         self.selected.map(|i| (i, &self.elements[i]))
-    }
-
-    /// Call the pick handler on the currently selected element.
-    pub fn pick(&self) {
-        let picked_i = self.selected.expect("no index was selected");
-        let picked_v = &self.elements[picked_i];
-
-        // Calling `pick` on a bad index should always error,
-        // even if no `on_picked` function is set. This is just
-        // to make sure the dev knows they screwed up.
-
-        // TODO
-        // if let Some(f) = self.on_picked {
-        //     f(picked_i, picked_v);
-        // }
     }
 
     /// Move `diff` positions forward in the list.
@@ -96,7 +73,7 @@ impl<T> ListVec<T> {
 
 /// make a list from the child nodes of a parent node
 /// assumes the children are in the same order as the enum variants
-pub fn lv_from_children_of<Enum, T>(parent: Gd<Node>) -> ListVec<(Enum, Gd<T>)>
+pub fn lv_from_children_of<Enum, T>(parent: Gd<Node>) -> Wrapped<(Enum, Gd<T>)>
 where
     Enum: TryFrom<usize>,
     T: GodotClass + Inherits<Node>,
@@ -108,17 +85,17 @@ where
         .map(|(i, node)| (Enum::try_from(i).ok().unwrap(), node.cast()))
         .collect();
 
-    ListVec::new(children)
+    Wrapped::new(children)
 }
 
-impl<T> Deref for ListVec<T> {
+impl<T> Deref for Wrapped<T> {
     type Target = Vec<T>;
     fn deref(&self) -> &Self::Target {
         &self.elements
     }
 }
 
-impl<T> DerefMut for ListVec<T> {
+impl<T> DerefMut for Wrapped<T> {
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.elements
     }
@@ -128,7 +105,7 @@ impl<T> DerefMut for ListVec<T> {
 // ignore the boilerplate crap below, the compiler was being dumb //
 // ////////////////////////////////////////////////////////////// //
 
-impl<T> Default for ListVec<T> {
+impl<T> Default for Wrapped<T> {
     fn default() -> Self {
         Self {
             elements: Vec::new(),

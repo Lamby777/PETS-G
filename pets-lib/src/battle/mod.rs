@@ -53,7 +53,7 @@ struct BattleEngine {
     #[base]
     node: Base<Node2D>,
 
-    choices: ListVec<(BattleChoice, Gd<RichTextLabel>)>,
+    choices: Wrapped<(BattleChoice, Gd<RichTextLabel>)>,
     state: BattleState,
 }
 
@@ -126,7 +126,6 @@ impl INode2D for BattleEngine {
     }
 
     fn process(&mut self, _delta: f64) {
-        use crate::listvec::process_input_vert;
-        process_input_vert(&mut self.choices)
+        crate::listvec::process_input(&mut self.choices)
     }
 }
