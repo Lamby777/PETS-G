@@ -69,10 +69,7 @@ impl<T> ListVec<T> {
 
     /// Call the pick handler on the currently selected element.
     pub fn pick(&self) {
-        let picked_i = self
-            .selected
-            .expect("Called `pick` on choice out of bounds!");
-
+        let picked_i = self.selected.expect("no index was selected");
         let picked_v = &self.elements[picked_i];
 
         // Calling `pick` on a bad index should always error,
