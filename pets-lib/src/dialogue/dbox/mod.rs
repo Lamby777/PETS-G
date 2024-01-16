@@ -187,9 +187,14 @@ impl DialogBox {
 
         use ListOperation::*;
         match action {
-            Walk(rev) => {
-                // TODO tween stuff
-                self.choices.walk(rev);
+            Walk(old, new_node) => {
+                if let Some(old_node) = old {
+                    let old_node = old_node.get_node_as::<RichTextLabel>("Label");
+                    tween_choice_to(false, old_node.clone());
+                }
+
+                let new_node = new_node.get_node_as::<RichTextLabel>("Label");
+                tween_choice_to(true, new_node.clone());
             }
 
             Pick(picked_i, _) => {

@@ -34,21 +34,39 @@ impl ListDir {
 }
 
 pub enum ListOperation<'a, T> {
-    Walk(bool),
+    /// Reference to the old and new elements
+    Walk(Option<&'a T>, &'a T),
+
+    /// Index of and a reference to the picked element
     Pick(usize, &'a T),
+
+    /// Either no input or tried to confirm on no selection
     Nothing,
 }
 
 /// Convert user input into list navigation
-pub fn process_input<T>(wrap: &mut Wrapped<T>, dir: ListDir) -> ListOperation<T> {
+pub fn process_input<T: Clone>(wrap: &mut Wrapped<T>, dir: ListDir) -> ListOperation<T> {
     use ListOperation::*;
 
-    match wrap.selected {
-        Some(i) if is_pressed("ui_accept") => Pick(i, &wrap[i]),
-        _ if is_pressed(dir.ui_next()) => Walk(false),
-        _ if is_pressed(dir.ui_prev()) => Walk(true),
+    let is_reverse = match wrap.selected {
+        Some(i) if is_pressed("ui_accept") => return Pick(i, &wrap[i]),
+        _ if is_pressed(dir.ui_next()) => false,
+        _ if is_pressed(dir.ui_prev()) => true,
         _ => return Nothing,
-    }
+    };
+
+    // hasn't returned yet, so we're walking
+
+    let old_i = wrap.selected;
+    wrap.walk(is_reverse);
+
+    // index the vector after calling `walk` (avoids borrow check issues)
+    let old = old_i.map(|i| &wrap[i]);
+
+    // guaranteed to be `Some` because we just called `walk`
+    let new = wrap.pick().unwrap();
+
+    Walk(old, new)
 }
 
 /// Wrapping vector with a selected index

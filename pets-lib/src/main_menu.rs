@@ -23,7 +23,7 @@ enum MainMenuChoice {
     DebugBattle,
 }
 
-fn tween_choice_to(is_picked: bool, mut node: Gd<RichTextLabel>) {
+fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
     let target_x = if is_picked { 64.0 } else { 0.0 };
 
     let target_col = {
@@ -78,16 +78,11 @@ impl INode2D for TitleScreen {
 
         use ListOperation::*;
         match action {
-            Walk(rev) => {
-                // if a node was already selected, tween it back down
-                if let Some((_, old_node)) = self.choices.pick() {
+            Walk(old, (_, new_node)) => {
+                if let Some((_, old_node)) = old {
                     tween_choice_to(false, old_node.clone());
                 }
 
-                self.choices.walk(rev);
-
-                // tween the newly picked node up
-                let (_, new_node) = self.choices.pick().unwrap();
                 tween_choice_to(true, new_node.clone());
             }
 
