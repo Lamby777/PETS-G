@@ -2,6 +2,7 @@
 //! Helper crap for dealing with user-facing
 //! lists of stuff
 //!
+use crate::prelude::*;
 use godot::prelude::*;
 
 /// Abstract list of things to choose from, with listener
@@ -70,6 +71,19 @@ impl<T> ListVec<T> {
         if let Some(f) = self.on_changed {
             f(old, new);
         }
+    }
+}
+
+impl<T> Deref for ListVec<T> {
+    type Target = Vec<T>;
+    fn deref(&self) -> &Self::Target {
+        &self.elements
+    }
+}
+
+impl<T> DerefMut for ListVec<T> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.elements
     }
 }
 
