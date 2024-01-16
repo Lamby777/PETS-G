@@ -6,8 +6,7 @@
 //! UI element that displays the dialogue. Don't get too confused!
 //!
 
-use dialogical::Speaker::{self, *};
-use dialogical::{DialogueChoice, DialogueEnding, Interaction, Metaline, Metaline::*, PageMeta};
+use dialogical::{DialogueChoice, DialogueEnding, Interaction, Metaline, PageMeta, Speaker};
 
 use godot::engine::{
     HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween,
@@ -25,6 +24,8 @@ use dchoice::DChoice;
 /// Either the name of the speaker or a special name
 /// if it's a narrator or unknown speaker
 pub fn spk_display(spk: &Speaker) -> String {
+    use Speaker::*;
+
     match spk {
         Named(ref v) => v,
         Narrator => NARRATOR_DISPLAYNAME,
@@ -56,6 +57,8 @@ impl<T> MetaPair<T> {
     where
         T: Clone,
     {
+        use Metaline::*;
+
         self.temporary = match meta {
             PageOnly(ref v) => v,
             Permanent(ref v) => {
