@@ -155,6 +155,7 @@ impl DialogBox {
             Choices(choices) => {
                 self.recreate_choice_labels(choices);
                 self.tween_choices_wave(true);
+                self.awaiting_choice = true;
             }
 
             Label(Function(_label)) => {
@@ -176,15 +177,17 @@ impl DialogBox {
 
     fn on_accept(&mut self) {
         if self.awaiting_choice {
+            //
+            self.awaiting_choice = false;
             return;
         }
 
         // go to next page
-        let ix = self.current_ix.as_ref().unwrap();
         self.current_page_number += 1;
 
         if self.is_on_last_page() {
-            self.run_ix_ending(&ix.ending.clone())
+            let ix_ending = self.current_ix_end().unwrap().clone();
+            self.run_ix_ending(&ix_ending);
         }
 
         self.goto_page(self.current_page_number);
@@ -263,6 +266,11 @@ impl DialogBox {
     pub fn is_on_last_page(&self) -> bool {
         let ix = self.current_ix.as_ref().unwrap();
         self.current_page_number == ix.pages.len() - 1
+    }
+
+    pub fn current_ix_end(&self) -> Option<&DialogueEnding> {
+        let ix = self.current_ix.as_ref();
+        ix.map(|ix| &ix.ending)
     }
 
     /// Updates the speaker and vox based on the given page metadata
