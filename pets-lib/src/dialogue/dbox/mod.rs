@@ -262,18 +262,10 @@ impl DialogBox {
         }
     }
 
-    fn choice_labels(&self) -> Array<Gd<DChoice>> {
-        self.choice_container()
-            .get_children()
-            .iter_shared()
-            .map(|v| v.cast())
-            .collect()
-    }
-
     fn free_choice_labels(&mut self) {
-        self.choice_labels()
-            .iter_shared()
-            .for_each(|mut v| v.queue_free());
+        for node in self.choices.iter_mut() {
+            node.queue_free();
+        }
     }
 
     /// delete old labels and create new default ones
@@ -296,7 +288,7 @@ impl DialogBox {
     }
 
     pub fn tween_choices_wave(&mut self, up: bool) {
-        for (i, cont) in self.choice_labels().iter_shared().enumerate() {
+        for (i, cont) in self.choices.iter().enumerate() {
             // if moving up, start below the window
             if up {
                 godot_print!("Up!");
