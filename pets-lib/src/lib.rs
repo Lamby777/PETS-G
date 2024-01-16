@@ -47,7 +47,7 @@ mod prelude {
     pub use std::cell::RefCell;
     pub use std::collections::{HashMap, HashSet};
     pub use std::fmt::{Debug, Display};
-    pub use std::ops::Deref;
+    pub use std::ops::{Deref, DerefMut};
     pub use std::rc::Rc;
 }
 
