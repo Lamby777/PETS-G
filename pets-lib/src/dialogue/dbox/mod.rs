@@ -36,7 +36,7 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
 
     // tween color
     tween(
-        node.upcast(),
+        node.clone().upcast(),
         "theme_override_colors/default_color",
         None,
         target_col,
@@ -44,6 +44,8 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
         DBOX_CHOICE_TWEEN_TRANS,
     )
     .unwrap();
+
+    bbcode_toggle(node, DBOX_SELECTION_BBCODE, is_picked);
 }
 
 #[derive(GodotClass)]
