@@ -350,11 +350,8 @@ impl DialogBox {
         for (i, cont) in self.choices.iter().enumerate() {
             // if moving up, start below the window
             if up {
-                godot_print!("Up!");
                 cont.get_node_as::<RichTextLabel>("Label")
                     .set_position(Vector2::new(0.0, DBOX_CHOICE_HEIGHT));
-            } else {
-                godot_print!("Down!");
             }
 
             // we can't move the label into the closure because of
@@ -365,11 +362,10 @@ impl DialogBox {
                 // get the label again using the instance id
                 let label = Gd::<DChoice>::try_from_instance_id(label_id);
 
-                let Ok(label) = label else {
-                    return Ok(Variant::from(()));
+                if let Ok(label) = label {
+                    label.bind().tween_label(up);
                 };
 
-                label.bind().tween_label(up);
                 Ok(Variant::from(()))
             });
 
