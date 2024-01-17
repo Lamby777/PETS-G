@@ -3,20 +3,43 @@
 //!
 
 use godot::engine::tween::TransitionType;
-use godot::engine::Theme;
-use godot::engine::Tween;
-use godot::engine::Window;
+use godot::engine::{RichTextLabel, Theme, Tween, Window};
 use godot::prelude::*;
 
 pub use crate::change_scene;
+
+/// takes a bbcode string and prepends or removes it from the label text
+pub fn bbcode_toggle(mut node: Gd<RichTextLabel>, bbcode: &str, active: bool) {
+    // TODO maybe there's a way to slice directly from the GString?
+    // waiting for a reply to my "noob question" thread on discord...
+    let old_text = node.get_text().to_string();
+    let new_text = prefix_mod(&old_text, bbcode, active);
+
+    node.set_text(new_text.into());
+}
+
+/// adds `prefix` to the start of `target` if `active` is true...
+/// otherwise removes the first `prefix.len()` characters
+///
+/// panics if `target` is shorter than `prefix`.
+/// you also need to make sure you don't call it with `false`
+/// if the prefix isn't already there. be careful with this function...
+pub fn prefix_mod(target: &str, prefix: &str, active: bool) -> String {
+    if active {
+        format!("{}{}", prefix, target)
+    } else {
+        let st: String = target.into();
+        st[prefix.len()..].to_owned()
+    }
+}
 
 /// shorthand to do some tweeneroonies :3
 #[must_use = "`None` = failed to create tween"]
 pub fn tween<NP, V>(
     mut node: Gd<Node>,
     property: NP,
-    from: Option<V>,
-    target: V,
+    start_value: Option<V>,
+    end_value: V,
     time: f64,
     trans: TransitionType,
 ) -> Option<Gd<Tween>>
@@ -30,13 +53,13 @@ where
         .tween_property(
             node.clone().upcast(),
             property.into(),
-            target.to_variant(),
+            end_value.to_variant(),
             time,
         )?
         .set_trans(trans)?;
 
-    if let Some(from) = from {
-        property.from(from.to_variant())?;
+    if let Some(start_value) = start_value {
+        property.from(start_value.to_variant())?;
     }
 
     Some(tween)
@@ -67,4 +90,15 @@ macro_rules! change_scene {
     ($scene:expr) => {
         godot_tree().change_scene_to_file(concat!("res://scenes/", $scene, ".tscn").into())
     };
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_prefix_mod() {
+        assert_eq!(prefix_mod("hello", "world", true), "worldhello");
+        assert_eq!(prefix_mod("worldhello", "world", false), "hello");
+    }
 }

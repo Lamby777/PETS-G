@@ -10,7 +10,6 @@ use godot::engine::{INode2D, Node2D, RichTextLabel};
 use godot::prelude::*;
 use num_enum::TryFromPrimitive;
 
-use crate::choicelist::ChoiceList;
 use crate::consts::main_menu::*;
 use crate::prelude::*;
 
@@ -24,7 +23,7 @@ enum MainMenuChoice {
     DebugBattle,
 }
 
-fn tween_choice_to(is_picked: bool, mut node: Gd<RichTextLabel>) {
+fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
     let target_x = if is_picked { 64.0 } else { 0.0 };
 
     let target_col = {
@@ -59,20 +58,8 @@ fn tween_choice_to(is_picked: bool, mut node: Gd<RichTextLabel>) {
     )
     .unwrap();
 
-    // set bbcode
-    // extremely ugly and hacky solution, but...
-    // how else could you work with in-band formatting? :P
-    let old_text = node.get_text();
-    let new_text = if is_picked {
-        // prepend [wave] stuff to msg
-        format!("{}{}", MENU_WAVE_BBCODE, old_text)
-    } else {
-        // slice off [wave] stuff from start
-        let st: String = old_text.into();
-        st[MENU_WAVE_BBCODE.len()..].to_owned()
-    };
-
-    node.set_text(new_text.into());
+    // make it wavy (or not) :3
+    bbcode_toggle(node, MENU_WAVE_BBCODE, is_picked);
 }
 
 #[derive(GodotClass)]
@@ -80,45 +67,61 @@ fn tween_choice_to(is_picked: bool, mut node: Gd<RichTextLabel>) {
 struct TitleScreen {
     #[base]
     node: Base<Node2D>,
-    list: ChoiceList<MainMenuChoice, RichTextLabel>,
+    choices: Wrapped<(MainMenuChoice, Gd<RichTextLabel>)>,
 }
 
 #[godot_api]
 impl INode2D for TitleScreen {
     fn process(&mut self, _delta: f64) {
-        self.list.process_input();
+        use crate::wrapped::*;
+        let action = process_input(&mut self.choices, ListDir::TopToBottom);
+
+        use ListOperation::*;
+        match action {
+            Walk(old, (_, new_node)) => {
+                if let Some((_, old_node)) = old {
+                    tween_choice_to(false, old_node.clone());
+                }
+
+                tween_choice_to(true, new_node.clone());
+            }
+
+            Pick(_, (choice, _)) => {
+                use MainMenuChoice::*;
+                match choice {
+                    Play => {
+                        // TODO should animate the menu boxes flying
+                        // off into the right, and the camera goes left
+                        change_scene!("world");
+                    }
+
+                    Options => {
+                        // should scroll right into options menu
+                        todo!()
+                    }
+
+                    Credits => {
+                        // should pull up credits box
+                        todo!()
+                    }
+
+                    Quit => godot_tree().quit(),
+
+                    DebugBattle => {
+                        change_scene!("battle_engine");
+                    }
+                }
+            }
+
+            Nothing => {}
+        }
     }
 
     fn ready(&mut self) {
-        use MainMenuChoice::*;
+        // use MainMenuChoice::*;
 
         // The node that contains the text labels below
         let cont = self.base().get_node_as("Background/MenuChoices");
-
-        self.list = ChoiceList::from_children_of(cont, tween_choice_to, |choice| {
-            match choice {
-                Play => {
-                    // TODO should animate the menu boxes flying
-                    // off into the right, and the camera goes left
-                    change_scene!("world");
-                }
-
-                Options => {
-                    // should scroll right into options menu
-                    todo!()
-                }
-
-                Credits => {
-                    // should pull up credits box
-                    todo!()
-                }
-
-                Quit => godot_tree().quit(),
-
-                DebugBattle => {
-                    change_scene!("battle_engine");
-                }
-            }
-        });
+        self.choices = crate::wrapped::from_children_of(cont);
     }
 }

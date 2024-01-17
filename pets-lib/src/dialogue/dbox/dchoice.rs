@@ -7,27 +7,59 @@
 //!
 
 use godot::engine::notify::ContainerNotification;
-use godot::engine::{Container, IContainer, RichTextLabel};
+use godot::engine::{IMarginContainer, MarginContainer, RichTextLabel};
 use godot::prelude::*;
 
+use crate::consts::dialogue::*;
+use crate::prelude::*;
+
 #[derive(GodotClass)]
-#[class(init, base=Container)]
+#[class(init, base=MarginContainer)]
 pub struct DChoice {
     #[base]
-    node: Base<Container>,
+    node: Base<MarginContainer>,
 }
 
 #[godot_api]
 impl DChoice {
     #[func]
     pub fn set_text(&mut self, text: GString) {
-        let mut label = self.base().get_node_as::<RichTextLabel>("Label");
-        label.set_text(text);
+        self.txt_label().set_text(text);
+    }
+
+    fn txt_label(&self) -> Gd<RichTextLabel> {
+        self.base().get_node_as("Label")
+    }
+
+    /// tween the contained text label in/out of the window
+    pub fn tween_label(&self, up: bool) {
+        let tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
+
+        tween(
+            self.txt_label().upcast(),
+            "position:y",
+            None,
+            tw_end,
+            DBOX_CHOICE_TWEEN_TIME,
+            DBOX_CHOICE_TWEEN_TRANS,
+        )
+        .unwrap();
+    }
+
+    /// create a new choice label with default settings
+    pub fn new_container(i: usize, text: &str) -> Gd<Self> {
+        let scene = load::<PackedScene>("res://scenes/dialogchoice.tscn");
+        let mut dchoice = scene.instantiate_as::<Self>();
+
+        dchoice.set_name(format!("Choice{}", i).into());
+        dchoice.bind_mut().set_text(text.into());
+
+        dchoice
     }
 }
 
 #[godot_api]
-impl IContainer for DChoice {
+impl IMarginContainer for DChoice {
     fn on_notification(&mut self, what: ContainerNotification) {
         if what != ContainerNotification::SortChildren {
             return;
@@ -39,9 +71,14 @@ impl IContainer for DChoice {
             y: self.base().get_size().y,
         };
 
-        // self.base().set_size(size);
-
-        let rect = Rect2::new(Vector2::ZERO, size);
-        self.base_mut().fit_child_in_rect(label.upcast(), rect);
+        let mut base = self.base_mut();
+        base.set_size(size);
+        base.fit_child_in_rect(
+            label.upcast(),
+            Rect2 {
+                position: Vector2::ZERO,
+                size,
+            },
+        );
     }
 }

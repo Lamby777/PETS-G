@@ -1,15 +1,16 @@
 [gd_scene format=3 uid="uid://ckyanktf41aox"]
 
 [node name="DChoice" type="DChoice"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 200.0
+offset_bottom = 200.0
 
 [node name="Label" type="RichTextLabel" parent="."]
 layout_mode = 2
 size_flags_vertical = 8
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 56
 bbcode_enabled = true
-text = "Amogus"
+text = "Sample Text Words Words More Words"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0

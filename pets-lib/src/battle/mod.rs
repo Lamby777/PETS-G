@@ -53,7 +53,7 @@ struct BattleEngine {
     #[base]
     node: Base<Node2D>,
 
-    choices: ChoiceList<BattleChoice, RichTextLabel>,
+    choices: Wrapped<(BattleChoice, Gd<RichTextLabel>)>,
     state: BattleState,
 }
 
@@ -96,26 +96,42 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
 #[godot_api]
 impl INode2D for BattleEngine {
     fn ready(&mut self) {
-        use BattleChoice::*;
-
         // The node that contains the text labels below
         let cont = self.base().get_node_as("%Choices");
 
-        self.choices = ChoiceList::from_children_of(cont, tween_choice_to, |choice| {
-            // call different functions depending on the choice
-            match choice {
-                Attack => todo!(),
-                Skills => todo!(),
-                Items => todo!(),
-                Run => {
-                    // TODO roll, don't always succeed
-                    change_scene!("world");
-                }
-            }
-        });
+        use crate::wrapped::from_children_of;
+        self.choices = from_children_of(cont);
     }
 
     fn process(&mut self, _delta: f64) {
-        self.choices.process_input();
+        use crate::wrapped::*;
+        let action = process_input(&mut self.choices, ListDir::TopToBottom);
+
+        use ListOperation::*;
+        match action {
+            Walk(old, (_, new_node)) => {
+                if let Some((_, old_node)) = old {
+                    tween_choice_to(false, old_node.clone());
+                }
+
+                tween_choice_to(true, new_node.clone());
+            }
+
+            Pick(_, (choice, _)) => {
+                // call different functions depending on the choice
+                use BattleChoice::*;
+                match choice {
+                    Attack => todo!(),
+                    Skills => todo!(),
+                    Items => todo!(),
+                    Run => {
+                        // TODO roll, don't always succeed
+                        change_scene!("world");
+                    }
+                }
+            }
+
+            Nothing => {}
+        }
     }
 }

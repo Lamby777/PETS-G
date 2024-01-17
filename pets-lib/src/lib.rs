@@ -18,7 +18,6 @@ use dialogue::autoload::DBoxInterface;
 use stats::stats_interface::StatsInterface;
 
 mod battle;
-mod choicelist;
 mod consts;
 mod dialogue;
 mod items;
@@ -27,6 +26,7 @@ mod main_menu;
 mod stats;
 mod util;
 mod world;
+mod wrapped;
 
 #[allow(unused_imports)]
 mod prelude {
@@ -35,10 +35,10 @@ mod prelude {
     pub use crate::stats::*;
     pub use crate::util::*;
 
-    pub use crate::choicelist::ChoiceList;
     pub use crate::dialogue::autoload::DBoxInterface;
     pub use crate::dialogue::ix_map;
     pub use crate::world::interaction::manager::InteractionManager;
+    pub use crate::wrapped::Wrapped;
 
     // is this bad practice? no clue and idc honestly
     // it's convenient with no real caveat, therefore...
@@ -47,7 +47,7 @@ mod prelude {
     pub use std::cell::RefCell;
     pub use std::collections::{HashMap, HashSet};
     pub use std::fmt::{Debug, Display};
-    pub use std::ops::Deref;
+    pub use std::ops::{Deref, DerefMut};
     pub use std::rc::Rc;
 }
 
@@ -59,10 +59,10 @@ unsafe impl ExtensionLibrary for PetsLib {
         if level == InitLevel::Scene {
             let mut engine = Engine::singleton();
 
-            let gd = StatsInterface::alloc_gd();
+            let gd = StatsInterface::new_alloc();
             engine.register_singleton("Stats".into(), gd.upcast());
 
-            let gd = DBoxInterface::alloc_gd();
+            let gd = DBoxInterface::new_alloc();
             engine.register_singleton("DBox".into(), gd.upcast());
         }
     }
