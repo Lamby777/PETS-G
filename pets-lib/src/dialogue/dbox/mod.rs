@@ -207,8 +207,18 @@ impl DialogBox {
                 };
 
                 match &choices[picked_i].label {
-                    Some(label) => self.run_label(label),
+                    // no label means end the interaction
                     None => self.end_interaction(),
+
+                    Some(label) => {
+                        let dchoice = &self.choices[picked_i];
+                        let txt = dchoice.get_node_as("Label");
+
+                        tween_choice_to(false, txt);
+                        self.tween_choices_wave(false);
+
+                        self.run_label(label);
+                    }
                 }
 
                 self.awaiting_choice = false;
