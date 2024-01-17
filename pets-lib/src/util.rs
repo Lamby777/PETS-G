@@ -8,24 +8,29 @@ use godot::prelude::*;
 
 pub use crate::change_scene;
 
-/// takes a bbcode string and operates on the node's text, either:
-///
-/// adds the bbcode to the start if `active` is true...
-/// otherwise removes the first `bbcode.len()` characters
-///
-/// If it's deleting the start of your string when you don't want it to,
-/// you probably incorrectly passed `false` for `active`.
+/// takes a bbcode string and prepends or removes it from the label text
 pub fn bbcode_toggle(mut node: Gd<RichTextLabel>, bbcode: &str, active: bool) {
-    let old_text = node.get_text();
-
-    let new_text = if active {
-        format!("{}{}", bbcode, old_text)
-    } else {
-        let st: String = old_text.into();
-        st[bbcode.len()..].to_owned()
-    };
+    // TODO maybe there's a way to slice directly from the GString?
+    // waiting for a reply to my "noob question" thread on discord...
+    let old_text = node.get_text().to_string();
+    let new_text = prefix_mod(&old_text, bbcode, active);
 
     node.set_text(new_text.into());
+}
+
+/// adds `prefix` to the start of `target` if `active` is true...
+/// otherwise removes the first `prefix.len()` characters
+///
+/// panics if `target` is shorter than `prefix`.
+/// you also need to make sure you don't call it with `false`
+/// if the prefix isn't already there. be careful with this function...
+pub fn prefix_mod(target: &str, prefix: &str, active: bool) -> String {
+    if active {
+        format!("{}{}", prefix, target)
+    } else {
+        let st: String = target.into();
+        st[prefix.len()..].to_owned()
+    }
 }
 
 /// shorthand to do some tweeneroonies :3
@@ -85,4 +90,15 @@ macro_rules! change_scene {
     ($scene:expr) => {
         godot_tree().change_scene_to_file(concat!("res://scenes/", $scene, ".tscn").into())
     };
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_prefix_mod() {
+        assert_eq!(prefix_mod("hello", "world", true), "worldhello");
+        assert_eq!(prefix_mod("worldhello", "world", false), "hello");
+    }
 }
