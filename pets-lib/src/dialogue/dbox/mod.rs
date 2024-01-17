@@ -40,8 +40,8 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
         "theme_override_colors/default_color",
         None,
         target_col,
-        DBOX_TWEEN_TIME,
-        DBOX_TWEEN_TRANS,
+        DBOX_CHOICE_TWEEN_TIME,
+        DBOX_CHOICE_TWEEN_TRANS,
     )
     .unwrap();
 }

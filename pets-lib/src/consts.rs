@@ -2,6 +2,7 @@
 //! All the "important" constants for configuring
 //! how the game works. Tinker all you want. Go nuts. :)
 //!
+use godot::engine::tween::TransitionType;
 
 pub mod playercb {
     // Movement physics stuff
@@ -14,7 +15,7 @@ pub mod playercb {
 }
 
 pub mod dialogue {
-    use godot::engine::tween::TransitionType;
+    use super::*;
 
     pub const NARRATOR_DISPLAYNAME: &str = "";
     pub const UNKNOWN_DISPLAYNAME: &str = "???";
@@ -29,7 +30,7 @@ pub mod dialogue {
     /// to avoid the glow effect from showing while it's not active
     pub const DBOX_Y_BELOW_VIEWPORT: f32 = 20.0;
 
-    pub const DBOX_CHOICE_TWEEN_TIME: f64 = DBOX_TWEEN_TIME;
+    pub const DBOX_CHOICE_TWEEN_TIME: f64 = main_menu::MENU_TWEEN_TIME;
     pub const DBOX_CHOICE_TWEEN_TRANS: TransitionType = DBOX_TWEEN_TRANS;
     pub const DBOX_CHOICE_HEIGHT: f32 = 60.0;
     pub const DBOX_CHOICE_WAVE_TIME: f64 = 0.1;
@@ -38,9 +39,9 @@ pub mod dialogue {
 }
 
 pub mod main_menu {
-    use godot::engine::tween::TransitionType;
+    use super::*;
 
     pub const MENU_TWEEN_TIME: f64 = 0.1;
     pub const MENU_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
-    pub const MENU_WAVE_BBCODE: &str = super::dialogue::DBOX_SELECTION_BBCODE;
+    pub const MENU_WAVE_BBCODE: &str = dialogue::DBOX_SELECTION_BBCODE;
 }
