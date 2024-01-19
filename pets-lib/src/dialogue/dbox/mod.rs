@@ -301,6 +301,10 @@ impl DialogBox {
         self.current_ix = Some(ix);
         self.current_page_number = 0;
         self.do_draw();
+
+        if self.is_on_or_past_last_page() {
+            self.run_ix_ending();
+        }
     }
 
     pub fn is_on_or_past_last_page(&self) -> bool {
