@@ -130,10 +130,12 @@ impl DialogBox {
 
         match label {
             Goto(ix_id) => {
-                let new_ix = ix_map().get(ix_id).unwrap_or_else(|| {
-                    godot_error!("GOTO: Could not find interaction with ID: {}", ix_id);
-                    panic!()
-                });
+                let new_ix = ix_map().get(ix_id);
+                let new_ix = unwrap_that_mf!(
+                    new_ix,
+                    "GOTO: Could not find interaction with ID: {}",
+                    ix_id
+                );
 
                 self.set_ix(new_ix.clone());
                 self.do_draw();

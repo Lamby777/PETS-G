@@ -30,12 +30,12 @@ impl DBoxInterface {
 
     #[func]
     pub fn start_ix(&mut self, ix_id: String) {
-        let ix = ix_map().get(&ix_id).unwrap_or_else(|| {
-            panic!(
-                "Could not find interaction \"{}\" in the interaction map",
-                ix_id
-            )
-        });
+        let ix = ix_map().get(&ix_id);
+        let ix = unwrap_that_mf!(
+            ix,
+            "Could not find interaction \"{}\" in the interaction map",
+            ix_id
+        );
 
         let mut dbox = self.instantiate_dbox();
         {
