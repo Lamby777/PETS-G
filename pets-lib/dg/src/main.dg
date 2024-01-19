@@ -1,6 +1,7 @@
 ###
 
 Import rodrick.dg
+Import debug-battle.dg
 
 ###
 ---
