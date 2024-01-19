@@ -7,7 +7,6 @@ use godot::engine::{Area2D, IArea2D};
 use godot::prelude::*;
 
 use crate::prelude::*;
-use crate::world::playercb::PlayerCB;
 
 #[derive(GodotClass)]
 #[class(init, base=Area2D)]

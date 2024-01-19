@@ -82,7 +82,6 @@ unique_name_in_owner = true
 y_sort_enabled = true
 
 [node name="PlayerCB" parent="YSort" groups=["playercb"] instance=ExtResource("2_r6tgb")]
-collision_mask = 3
 
 [node name="TileMap" type="TileMap" parent="YSort"]
 y_sort_enabled = true
