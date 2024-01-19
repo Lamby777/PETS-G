@@ -414,7 +414,7 @@ impl<T> MetaPair<T> {
 
     /// matches over a `Metaline` to update a field depending on
     /// whether it's pageonly, permanent, or nochange
-    fn set_from<'a>(&mut self, meta: &'a Metaline<T>)
+    pub fn set_from<'a>(&mut self, meta: &'a Metaline<T>)
     where
         T: Clone,
     {
