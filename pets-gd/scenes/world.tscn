@@ -166,6 +166,10 @@ position = Vector2(-900, 1300)
 [node name="BushLong2" parent="YSort/DecoBushes" instance=ExtResource("2_87c4u")]
 position = Vector2(900, 1300)
 
+[node name="DebugBattleZone" parent="YSort" instance=ExtResource("5_uar2c")]
+interaction_id = "Debug Battle"
+position = Vector2(-192, 64)
+
 [node name="RodrickSign" parent="YSort" instance=ExtResource("6_w4dbq")]
 position = Vector2(192, 64)
 
