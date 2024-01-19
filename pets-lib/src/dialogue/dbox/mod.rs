@@ -152,8 +152,8 @@ impl DialogBox {
         }
     }
 
+    /// close the dialog and tween choices away
     pub fn end_interaction(&mut self) {
-        // close the dialog and tween choices away
         self.current_page_number = 0;
         self.current_ix = None;
         self.tween_choices_wave(false);
@@ -176,6 +176,10 @@ impl DialogBox {
         }
     }
 
+    fn mark_input_handled(&mut self) {
+        self.base().get_viewport().unwrap().set_input_as_handled();
+    }
+
     fn on_accept(&mut self) {
         // go to next page
         self.current_page_number += 1;
@@ -185,9 +189,6 @@ impl DialogBox {
         }
 
         self.do_draw();
-
-        // mark the input as handled
-        self.base().get_viewport().unwrap().set_input_as_handled();
     }
 
     pub fn process_choice_input(&mut self) {
@@ -261,11 +262,13 @@ impl IPanelContainer for DialogBox {
         }
 
         if self.awaiting_choice {
+            self.mark_input_handled();
             self.process_choice_input();
             return;
         }
 
         if event.is_action_pressed("ui_accept".into()) {
+            self.mark_input_handled();
             self.on_accept();
         }
     }
@@ -297,12 +300,17 @@ impl DialogBox {
         self.active
     }
 
+    pub fn is_one_page(&self) -> bool {
+        let ix = self.current_ix.as_ref().unwrap();
+        ix.pages.len() == 1
+    }
+
     pub fn set_ix(&mut self, ix: Interaction) {
         self.current_ix = Some(ix);
         self.current_page_number = 0;
         self.do_draw();
 
-        if self.is_on_or_past_last_page() {
+        if self.is_one_page() {
             let ending = self.current_ix_ending().unwrap().clone();
             if let DialogueEnding::Choices(choices) = ending {
                 self.recreate_choice_labels(&choices);
