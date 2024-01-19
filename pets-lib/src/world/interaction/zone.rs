@@ -28,12 +28,7 @@ impl InteractionZone {
     }
 
     #[func]
-    fn on_enter_or_exit(&mut self, body: Gd<Node2D>, entered: bool) {
-        // return early if the body is not the player
-        if let Err(_) = body.try_cast::<PlayerCB>() {
-            return;
-        }
-
+    fn on_enter_or_exit(&mut self, entered: bool) {
         let zone = self.base().clone().cast();
         let mut im = InteractionManager::singleton();
         let mut im = im.bind_mut();
@@ -46,13 +41,13 @@ impl InteractionZone {
     }
 
     #[func]
-    fn on_entered(&mut self, body: Gd<Node2D>) {
-        self.on_enter_or_exit(body, true);
+    fn on_entered(&mut self, _body: Gd<Node2D>) {
+        self.on_enter_or_exit(true);
     }
 
     #[func]
-    fn on_exited(&mut self, body: Gd<Node2D>) {
-        self.on_enter_or_exit(body, false);
+    fn on_exited(&mut self, _body: Gd<Node2D>) {
+        self.on_enter_or_exit(false);
     }
 }
 
