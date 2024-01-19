@@ -31,7 +31,7 @@ impl DBoxInterface {
     #[func]
     pub fn start_ix(&mut self, ix_id: String) {
         let ix = ix_map().get(&ix_id);
-        let ix = unwrap_that_mf!(
+        let ix = unwrap_fmt!(
             ix,
             "Could not find interaction \"{}\" in the interaction map",
             ix_id

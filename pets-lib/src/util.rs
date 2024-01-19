@@ -6,9 +6,6 @@ use godot::engine::tween::TransitionType;
 use godot::engine::{RichTextLabel, Theme, Tween, Window};
 use godot::prelude::*;
 
-mod unwrap;
-pub use unwrap::*;
-
 /// takes a bbcode string and prepends or removes it from the label text
 pub fn bbcode_toggle(mut node: Gd<RichTextLabel>, bbcode: &str, active: bool) {
     // TODO maybe there's a way to slice directly from the GString?

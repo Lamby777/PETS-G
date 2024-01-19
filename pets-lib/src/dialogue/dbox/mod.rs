@@ -131,7 +131,7 @@ impl DialogBox {
         match label {
             Goto(ix_id) => {
                 let new_ix = ix_map().get(ix_id);
-                let new_ix = unwrap_that_mf!(
+                let new_ix = unwrap_fmt!(
                     new_ix,
                     "GOTO: Could not find interaction with ID: {}",
                     ix_id
