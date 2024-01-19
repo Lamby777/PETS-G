@@ -176,7 +176,7 @@ impl DialogBox {
         // go to next page
         self.current_page_number += 1;
 
-        if self.is_on_last_page() {
+        if self.is_on_or_past_last_page() {
             self.run_ix_ending();
         }
 
@@ -300,9 +300,9 @@ impl DialogBox {
         self.do_draw();
     }
 
-    pub fn is_on_last_page(&self) -> bool {
+    pub fn is_on_or_past_last_page(&self) -> bool {
         let ix = self.current_ix.as_ref().unwrap();
-        self.current_page_number == ix.pages.len() - 1
+        self.current_page_number >= ix.pages.len() - 1
     }
 
     pub fn current_ix_ending(&self) -> Option<&DialogueEnding> {
