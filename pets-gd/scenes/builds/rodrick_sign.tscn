@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://drxvvfvnc7awr"]
+
+[ext_resource type="Texture2D" uid="uid://dd4tfjxmis0g4" path="res://assets/textures/builds/signs/sign_rodrick.png" id="1_vp6q5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ueqcd"]
+radius = 4.0
+height = 21.3333
+
+[node name="RodrickSign" type="StaticBody2D"]
+position = Vector2(0, -16)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_vp6q5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16)
+rotation = 1.57079
+scale = Vector2(4, 4)
+shape = SubResource("CapsuleShape2D_ueqcd")
+metadata/_edit_group_ = true
