@@ -144,8 +144,7 @@ impl DialogBox {
             }
 
             Function(_) => {
-                godot_print!("FUNCTION");
-                // TODO
+                todo!("function labels not implemented yet");
             }
         }
     }
