@@ -79,13 +79,16 @@ pub struct DialogBox {
 impl DialogBox {
     #[func]
     pub fn do_draw(&mut self) {
+        self.goto_current_page();
         self.spk_txt().set_text(self.spk_txt.clone());
         self.msg_txt().set_text(self.msg_txt.clone());
     }
 
     /// sets the speaker and message labels to the given page
-    pub fn goto_page(&mut self, pageno: usize) {
+    pub fn goto_current_page(&mut self) {
+        let pageno = self.current_page_number;
         let ix = self.current_ix.as_ref().unwrap().clone();
+
         let Some(page) = ix.pages.get(pageno) else {
             godot_warn!("Page out of bounds! {}", pageno);
             return;
@@ -138,7 +141,6 @@ impl DialogBox {
                 );
 
                 self.set_ix(new_ix.clone());
-                self.do_draw();
             }
 
             Function(_) => {
@@ -178,7 +180,6 @@ impl DialogBox {
             self.run_ix_ending();
         }
 
-        self.goto_page(self.current_page_number);
         self.do_draw();
 
         // mark the input as handled
@@ -250,10 +251,6 @@ impl IPanelContainer for DialogBox {
         }
     }
 
-    fn ready(&mut self) {
-        self.do_draw();
-    }
-
     fn input(&mut self, event: Gd<InputEvent>) {
         if !self.active {
             return;
@@ -265,6 +262,7 @@ impl IPanelContainer for DialogBox {
         }
 
         if event.is_action_pressed("ui_accept".into()) {
+            godot_print!(":D");
             self.on_accept();
         }
     }
@@ -298,7 +296,8 @@ impl DialogBox {
 
     pub fn set_ix(&mut self, ix: Interaction) {
         self.current_ix = Some(ix);
-        self.goto_page(0);
+        self.current_page_number = 0;
+        self.do_draw();
     }
 
     pub fn is_on_last_page(&self) -> bool {
