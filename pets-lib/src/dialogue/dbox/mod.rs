@@ -87,22 +87,25 @@ impl DialogBox {
     /// sets the speaker and message labels to the given page
     pub fn goto_current_page(&mut self) {
         let pageno = self.current_page_number;
-        let ix = self.current_ix.as_ref().unwrap().clone();
+        let ix = self.current_ix.as_ref();
 
-        let Some(page) = ix.pages.get(pageno) else {
-            godot_warn!("Page out of bounds! {}", pageno);
-            return;
+        if let Some(ix) = ix {
+            let ix = ix.clone();
+            let Some(page) = ix.pages.get(pageno) else {
+                panic!("Page number {} out of range!", pageno);
+            };
+
+            self.update_meta(&page.metadata);
+            self.spk_txt = spk_display(&self.speaker.temporary).into();
+            self.msg_txt = page.content.clone().into();
+        } else {
+            self.spk_txt = "".into();
+            self.msg_txt = "".into();
         };
-
-        self.update_meta(&page.metadata);
-
-        let msg = page.content.clone();
-        let spk = spk_display(&self.speaker.temporary);
-        self.spk_txt = spk.into();
-        self.msg_txt = msg.into();
     }
 
     /// The method that moves the dialog box (on|off)-screen
+    /// and sets the `active` flag
     pub fn tween_into_view(&mut self, up: bool) -> Gd<Tween> {
         let node = self.base();
         let viewport_y = node.get_viewport_rect().size.y;
@@ -151,6 +154,8 @@ impl DialogBox {
 
     pub fn end_interaction(&mut self) {
         // close the dialog and tween choices away
+        self.current_page_number = 0;
+        self.current_ix = None;
         self.tween_choices_wave(false);
         self.tween_into_view(false);
     }
@@ -261,7 +266,6 @@ impl IPanelContainer for DialogBox {
         }
 
         if event.is_action_pressed("ui_accept".into()) {
-            godot_print!(":D");
             self.on_accept();
         }
     }
