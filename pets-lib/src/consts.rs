@@ -24,7 +24,7 @@ pub mod dialogue {
     pub const UI_LAYER_NAME: &str = "UILayer";
     pub const DBOX_NODE_NAME: &str = "DialogBox";
     pub const DBOX_TWEEN_TIME: f64 = 0.5;
-    pub const DBOX_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
+    pub const DBOX_TWEEN_TRANS: TransitionType = TransitionType::QUAD;
 
     /// distance the dialog box is from the bottom of the screen
     /// to avoid the glow effect from showing while it's not active
@@ -42,6 +42,6 @@ pub mod main_menu {
     use super::*;
 
     pub const MENU_TWEEN_TIME: f64 = 0.1;
-    pub const MENU_TWEEN_TRANS: TransitionType = TransitionType::TRANS_QUAD;
+    pub const MENU_TWEEN_TRANS: TransitionType = TransitionType::QUAD;
     pub const MENU_WAVE_BBCODE: &str = dialogue::DBOX_SELECTION_BBCODE;
 }
