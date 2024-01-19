@@ -3,7 +3,7 @@
 //!
 
 use godot::engine::tween::TransitionType;
-use godot::engine::{RichTextLabel, Theme, Tween, Window};
+use godot::engine::{Engine, RichTextLabel, Theme, Tween, Window};
 use godot::prelude::*;
 
 /// takes a bbcode string and prepends or removes it from the label text
@@ -71,10 +71,7 @@ pub fn default_theme() -> Gd<Theme> {
 }
 
 pub fn godot_tree() -> Gd<SceneTree> {
-    godot::engine::Engine::singleton()
-        .get_main_loop()
-        .unwrap()
-        .cast()
+    Engine::singleton().get_main_loop().unwrap().cast()
 }
 
 #[allow(unused)]
