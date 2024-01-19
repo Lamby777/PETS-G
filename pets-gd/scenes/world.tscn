@@ -170,7 +170,7 @@ position = Vector2(900, 1300)
 position = Vector2(192, 64)
 
 [node name="InteractionZone" parent="YSort/RodrickSign" instance=ExtResource("5_uar2c")]
-name = "InteractionZone"
+interaction_id = "Rodrick Sign #1"
 
 [node name="ZoneAudio" type="Node" parent="."]
 

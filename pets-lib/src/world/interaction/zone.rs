@@ -15,15 +15,17 @@ pub struct InteractionZone {
     node: Base<Area2D>,
 
     #[export]
-    name: GString,
+    interaction_id: GString,
 }
 
 #[godot_api]
 impl InteractionZone {
     #[func]
     pub fn interact(&self) {
+        let ix_id = self.interaction_id.to_string();
+
         let mut di = DBoxInterface::singleton();
-        di.bind_mut().start_ix("Rodrick Sign #1".to_string());
+        di.bind_mut().start_ix(ix_id);
     }
 
     #[func]
