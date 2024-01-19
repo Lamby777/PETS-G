@@ -303,7 +303,12 @@ impl DialogBox {
         self.do_draw();
 
         if self.is_on_or_past_last_page() {
-            self.run_ix_ending();
+            let ending = self.current_ix_ending().unwrap().clone();
+            if let DialogueEnding::Choices(choices) = ending {
+                self.recreate_choice_labels(&choices);
+                self.tween_choices_wave(true);
+                self.awaiting_choice = true;
+            }
         }
     }
 
