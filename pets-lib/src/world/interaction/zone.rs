@@ -28,25 +28,31 @@ impl InteractionZone {
     }
 
     #[func]
-    fn on_entered(&mut self, body: Gd<Node2D>) {
-        // body should inherit PlayerCB
+    fn on_enter_or_exit(&mut self, body: Gd<Node2D>, entered: bool) {
+        // return early if the body is not the player
         if let Err(_) = body.try_cast::<PlayerCB>() {
             return;
         }
 
+        let zone = self.base().clone().cast();
         let mut im = InteractionManager::singleton();
-        im.bind_mut().register_zone(self.base().clone().cast());
+        let mut im = im.bind_mut();
+
+        if entered {
+            im.register_zone(zone);
+        } else {
+            im.unregister_zone(zone);
+        }
+    }
+
+    #[func]
+    fn on_entered(&mut self, body: Gd<Node2D>) {
+        self.on_enter_or_exit(body, true);
     }
 
     #[func]
     fn on_exited(&mut self, body: Gd<Node2D>) {
-        // body should inherit PlayerCB
-        if let Err(_) = body.try_cast::<PlayerCB>() {
-            return;
-        }
-
-        let mut im = InteractionManager::singleton();
-        im.bind_mut().unregister_zone(self.base().clone().cast());
+        self.on_enter_or_exit(body, false);
     }
 }
 
