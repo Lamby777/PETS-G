@@ -6,7 +6,8 @@ use godot::engine::tween::TransitionType;
 use godot::engine::{RichTextLabel, Theme, Tween, Window};
 use godot::prelude::*;
 
-pub use crate::change_scene;
+mod unwrap;
+pub use unwrap::*;
 
 /// takes a bbcode string and prepends or removes it from the label text
 pub fn bbcode_toggle(mut node: Gd<RichTextLabel>, bbcode: &str, active: bool) {
@@ -88,6 +89,7 @@ pub fn current_scene() -> Gd<Node> {
     godot_tree().get_current_scene().unwrap()
 }
 
+pub use crate::change_scene;
 #[macro_export]
 macro_rules! change_scene {
     ($scene:expr) => {
