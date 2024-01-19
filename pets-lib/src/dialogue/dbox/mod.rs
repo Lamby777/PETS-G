@@ -121,7 +121,7 @@ impl DialogBox {
         );
 
         self.active = up;
-        self.tween = y_tween.clone();
+        self.tween = y_tween.clone().ok();
         y_tween.unwrap()
     }
 

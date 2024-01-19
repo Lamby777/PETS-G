@@ -34,7 +34,6 @@ pub fn prefix_mod(target: &str, prefix: &str, active: bool) -> String {
 }
 
 /// shorthand to do some tweeneroonies :3
-#[must_use = "`None` = failed to create tween"]
 pub fn tween<NP, V>(
     mut node: Gd<Node>,
     property: NP,
@@ -42,27 +41,31 @@ pub fn tween<NP, V>(
     end_value: V,
     time: f64,
     trans: TransitionType,
-) -> Option<Gd<Tween>>
+) -> Result<Gd<Tween>, ()>
 where
     NP: Into<NodePath>,
     V: ToGodot,
 {
-    let mut tween = node.create_tween()?;
+    let res: Option<_> = try {
+        let mut tween = node.create_tween()?;
 
-    let mut property = tween
-        .tween_property(
-            node.clone().upcast(),
-            property.into(),
-            end_value.to_variant(),
-            time,
-        )?
-        .set_trans(trans)?;
+        let mut property = tween
+            .tween_property(
+                node.clone().upcast(),
+                property.into(),
+                end_value.to_variant(),
+                time,
+            )?
+            .set_trans(trans)?;
 
-    if let Some(start_value) = start_value {
-        property.from(start_value.to_variant())?;
-    }
+        if let Some(start_value) = start_value {
+            property.from(start_value.to_variant())?;
+        }
 
-    Some(tween)
+        tween
+    };
+
+    res.ok_or(())
 }
 
 pub fn default_theme() -> Gd<Theme> {
