@@ -28,13 +28,23 @@ impl InteractionZone {
     }
 
     #[func]
-    fn on_entered(&mut self, _body: Gd<PlayerCB>) {
+    fn on_entered(&mut self, body: Gd<Node2D>) {
+        // body should inherit PlayerCB
+        if let Err(_) = body.try_cast::<PlayerCB>() {
+            return;
+        }
+
         let mut im = InteractionManager::singleton();
         im.bind_mut().register_zone(self.base().clone().cast());
     }
 
     #[func]
-    fn on_exited(&mut self, _body: Gd<PlayerCB>) {
+    fn on_exited(&mut self, body: Gd<Node2D>) {
+        // body should inherit PlayerCB
+        if let Err(_) = body.try_cast::<PlayerCB>() {
+            return;
+        }
+
         let mut im = InteractionManager::singleton();
         im.bind_mut().unregister_zone(self.base().clone().cast());
     }
