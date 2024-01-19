@@ -1,13 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://p2uymvf88jt7"]
+[gd_scene load_steps=13 format=3 uid="uid://p2uymvf88jt7"]
 
 [ext_resource type="Script" path="res://scenes/overworld.gd" id="1_bs1lv"]
-[ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/bush_long.tscn" id="2_87c4u"]
+[ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/builds/bush_long.tscn" id="2_87c4u"]
 [ext_resource type="PackedScene" uid="uid://b0rlrppekv4vg" path="res://scenes/player_cb.tscn" id="2_r6tgb"]
 [ext_resource type="PackedScene" uid="uid://c0jehwow4ein4" path="res://scenes/interaction_manager.tscn" id="2_uh12s"]
 [ext_resource type="TileSet" uid="uid://dtft48lqhsjgr" path="res://assets/tilesets/cliff-dirt/tileset_cliff-dirt.tres" id="3_14512"]
 [ext_resource type="Script" path="res://classes/musiczone.gd" id="5_skv18"]
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="5_uar2c"]
 [ext_resource type="AudioStream" uid="uid://b83wws3dajmi5" path="res://assets/music/zone/routingout.ogg" id="5_x7nbf"]
+[ext_resource type="PackedScene" uid="uid://drxvvfvnc7awr" path="res://scenes/builds/rodrick_sign.tscn" id="6_w4dbq"]
 
 [sub_resource type="Animation" id="Animation_2m57u"]
 length = 0.001
@@ -166,8 +167,11 @@ position = Vector2(-900, 1300)
 [node name="BushLong2" parent="YSort/DecoBushes" instance=ExtResource("2_87c4u")]
 position = Vector2(900, 1300)
 
-[node name="InteractionZone" parent="YSort" instance=ExtResource("5_uar2c")]
+[node name="RodrickSign" parent="YSort" instance=ExtResource("6_w4dbq")]
 position = Vector2(192, 64)
+
+[node name="InteractionZone" parent="YSort/RodrickSign" instance=ExtResource("5_uar2c")]
+name = "InteractionZone"
 
 [node name="ZoneAudio" type="Node" parent="."]
 
