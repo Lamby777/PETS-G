@@ -10,8 +10,7 @@
 //! how much I care anymore.
 //!
 
-use dialogical::{DialogueChoice, DialogueEnding, Interaction, Label, Metaline, PageMeta, Speaker};
-
+use dialogical::prelude::*;
 use godot::engine::{
     HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween,
 };
