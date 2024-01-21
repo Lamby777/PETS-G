@@ -8,8 +8,6 @@ use godot::prelude::*;
 
 /// takes a bbcode string and prepends or removes it from the label text
 pub fn bbcode_toggle(mut node: Gd<RichTextLabel>, bbcode: &str, active: bool) {
-    // TODO maybe there's a way to slice directly from the GString?
-    // waiting for a reply to my "noob question" thread on discord...
     let old_text = node.get_text().to_string();
     let new_text = prefix_mod(&old_text, bbcode, active);
 
