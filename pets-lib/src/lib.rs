@@ -25,6 +25,7 @@ mod functions;
 mod items;
 mod limiq;
 mod main_menu;
+mod singleton;
 mod stats;
 mod util;
 mod world;
@@ -41,6 +42,8 @@ mod prelude {
 
     pub use crate::dialogue::ix_map;
     pub use crate::world::interaction::manager::InteractionManager;
+
+    pub use crate::singleton::Singleton;
     pub use crate::wrapped::Wrapped;
 
     // is this bad practice? no clue and idc honestly
