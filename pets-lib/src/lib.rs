@@ -17,11 +17,14 @@ use godot::engine::Engine;
 use godot::prelude::*;
 
 use dialogue::autoload::DBoxInterface;
+use functions::FnInterface;
+// TODO rename module to `autoload`
 use stats::stats_interface::StatsInterface;
 
 mod battle;
 mod consts;
 mod dialogue;
+mod functions;
 mod items;
 mod limiq;
 mod main_menu;
@@ -66,7 +69,7 @@ macro_rules! register_singletons {
     };
 }
 
-const SINGLETON_NAMES: &[&str] = &["Stats", "DBox"];
+const SINGLETON_NAMES: &[&str] = &["Stats", "DBox", "Functions"];
 
 #[gdextension]
 unsafe impl ExtensionLibrary for PetsLib {
@@ -74,7 +77,8 @@ unsafe impl ExtensionLibrary for PetsLib {
         if level == InitLevel::Scene {
             register_singletons! {
                 StatsInterface => "Stats",
-                DBoxInterface => "DBox"
+                DBoxInterface => "DBox",
+                FnInterface => "Functions"
             };
         }
     }
