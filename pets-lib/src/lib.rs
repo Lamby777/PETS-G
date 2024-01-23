@@ -43,7 +43,7 @@ mod prelude {
     pub use crate::dialogue::ix_map;
     pub use crate::world::interaction::manager::InteractionManager;
 
-    pub use crate::singleton::Singleton;
+    pub use crate::singleton::Autoload;
     pub use crate::wrapped::Wrapped;
 
     // is this bad practice? no clue and idc honestly

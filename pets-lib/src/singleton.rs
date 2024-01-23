@@ -1,12 +1,17 @@
 use godot::engine::Engine;
 use godot::prelude::*;
 
-pub trait Singleton: GodotClass + Inherits<Object> {
-    const SINGLETON_NAME: &'static str;
+///
+/// Trait for autoloaded classes
+/// Makes it more convenient to get the singleton instance
+///
+pub trait Autoload: GodotClass + Inherits<Object> {
+    const AUTOLOAD_NAME: &'static str;
 
+    /// Get a shared ref to use in other nodes
     fn singleton() -> Gd<Self> {
         Engine::singleton()
-            .get_singleton(Self::SINGLETON_NAME.into())
+            .get_singleton(Self::AUTOLOAD_NAME.into())
             .unwrap()
             .cast()
     }
