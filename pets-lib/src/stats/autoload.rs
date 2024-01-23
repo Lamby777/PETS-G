@@ -60,6 +60,10 @@ impl_stat_getters_on_si! {
     max_mana
 }
 
+impl Singleton for StatsInterface {
+    const SINGLETON_NAME: &'static str = "Stats";
+}
+
 #[godot_api]
 impl StatsInterface {
     /// Get a shared ref to the singleton to store in other node structs
