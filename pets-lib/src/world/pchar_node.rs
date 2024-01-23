@@ -5,15 +5,15 @@ use godot::engine::Sprite2D;
 use godot::prelude::*;
 
 #[derive(GodotClass)]
-#[class(init, base=Node2D)]
+#[class(base=Node2D)]
 pub struct PCharNode {
     #[base]
-    node: Base<Node2D>,
+    base: Base<Node2D>,
 
-    sprite: Option<Gd<Sprite2D>>,
-    anim_player: Option<Gd<AnimationPlayer>>,
-    anim_tree: Option<Gd<AnimationTree>>,
-    anim_state: Option<Gd<AnimationNodeStateMachinePlayback>>,
+    sprite: OnReady<Gd<Sprite2D>>,
+    anim_player: OnReady<Gd<AnimationPlayer>>,
+    anim_tree: OnReady<Gd<AnimationTree>>,
+    anim_state: OnReady<Gd<AnimationNodeStateMachinePlayback>>,
 }
 
 #[godot_api]
@@ -23,11 +23,8 @@ impl PCharNode {
         let mode_str = if moving { "Run" } else { "Idle" };
         let anim_path = format!("parameters/{mode_str}/blend_position");
 
-        self.anim_tree
-            .as_mut()
-            .unwrap()
-            .set(anim_path.into(), Variant::from(inputs));
-        self.anim_state.as_mut().unwrap().travel(mode_str.into());
+        self.anim_tree.set(anim_path.into(), Variant::from(inputs));
+        self.anim_state.travel(mode_str.into());
     }
 }
 
@@ -57,14 +54,27 @@ macro_rules! load_pchar_scene_under {
 
 #[godot_api]
 impl INode2D for PCharNode {
+    fn init(base: Base<Node2D>) -> Self {
+        Self {
+            base,
+            sprite: OnReady::manual(),
+            anim_player: OnReady::manual(),
+            anim_tree: OnReady::manual(),
+            anim_state: OnReady::manual(),
+        }
+    }
+
     fn ready(&mut self) {
-        self.sprite = Some(self.base().get_node_as("Sprite2D"));
-        self.anim_player = Some(self.base().get_node_as("AnimationPlayer"));
+        let sprite = self.base().get_node_as("Sprite2D");
+        let anim_player = self.base().get_node_as("AnimationPlayer");
+        self.sprite.init(sprite);
+        self.anim_player.init(anim_player);
 
         let mut tree = self.base().get_node_as::<AnimationTree>("AnimationTree");
         tree.set_active(true);
-        self.anim_state = tree.get("parameters/playback".into()).to();
+        let anim_state = tree.get("parameters/playback".into()).to();
+        self.anim_state.init(anim_state);
 
-        self.anim_tree = Some(tree);
+        self.anim_tree.init(tree);
     }
 }

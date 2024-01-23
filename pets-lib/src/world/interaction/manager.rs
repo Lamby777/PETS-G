@@ -11,11 +11,11 @@ use crate::world::interaction::zone::InteractionZone;
 use crate::world::playercb::PlayerCB;
 
 #[derive(GodotClass)]
-#[class(init, base=Node2D)]
+#[class(base=Node2D)]
 pub struct InteractionManager {
     #[base]
     node: Base<Node2D>,
-    prompt_txt: Option<Gd<RichTextLabel>>,
+    prompt_txt: OnReady<Gd<RichTextLabel>>,
 
     /// All interaction zones the player is inside
     zones: Vec<Gd<InteractionZone>>,
@@ -31,10 +31,6 @@ impl InteractionManager {
     #[func]
     pub fn unregister_zone(&mut self, obj: Gd<InteractionZone>) {
         self.zones.retain(|v| *v != obj);
-    }
-
-    pub fn prompt_txt(&mut self) -> &mut Gd<RichTextLabel> {
-        self.prompt_txt.as_mut().unwrap()
     }
 
     /// "ummm ackshually, this is not a singleton"
@@ -73,8 +69,17 @@ impl InteractionManager {
 
 #[godot_api]
 impl INode2D for InteractionManager {
+    fn init(node: Base<Node2D>) -> Self {
+        Self {
+            node,
+            prompt_txt: OnReady::manual(),
+            zones: vec![],
+        }
+    }
+
     fn ready(&mut self) {
-        self.prompt_txt = Some(self.base().get_node_as("Prompt"));
+        let prompt_txt = self.base().get_node_as("Prompt");
+        self.prompt_txt.init(prompt_txt);
     }
 
     fn process(&mut self, _delta: f64) {
@@ -82,16 +87,14 @@ impl INode2D for InteractionManager {
 
         let Some(zone) = self.closest_zone() else {
             // if no zones, hide the prompt
-            self.prompt_txt().hide();
-
+            self.prompt_txt.hide();
             return;
         };
 
-        let txt = self.prompt_txt();
-        txt.show();
-
         // move the prompt to the zone
-        txt.set_position(zone.get_position() + Vector2::new(0.0, -50.0));
+        self.prompt_txt.show();
+        self.prompt_txt
+            .set_position(zone.get_position() + Vector2::new(0.0, -50.0));
     }
 
     fn unhandled_input(&mut self, event: Gd<InputEvent>) {
