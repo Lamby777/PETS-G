@@ -11,6 +11,7 @@
 #![feature(let_chains)]
 #![feature(lazy_cell)]
 #![feature(try_blocks)]
+#![feature(generic_arg_infer)]
 
 use godot::engine::Engine;
 use godot::prelude::*;
@@ -56,24 +57,32 @@ mod prelude {
 
 struct PetsLib;
 
+macro_rules! register_singletons {
+    ($($struct:ident => $name:expr),*) => {
+        $(
+            let gd = $struct::new_alloc();
+            Engine::singleton().register_singleton($name.into(), gd.upcast());
+        )*
+    };
+}
+
+const SINGLETON_NAMES: &[&str] = &["Stats", "DBox"];
+
 #[gdextension]
 unsafe impl ExtensionLibrary for PetsLib {
     fn on_level_init(level: InitLevel) {
         if level == InitLevel::Scene {
-            let mut engine = Engine::singleton();
-
-            let gd = StatsInterface::new_alloc();
-            engine.register_singleton("Stats".into(), gd.upcast());
-
-            let gd = DBoxInterface::new_alloc();
-            engine.register_singleton("DBox".into(), gd.upcast());
+            register_singletons! {
+                StatsInterface => "Stats",
+                DBoxInterface => "DBox"
+            };
         }
     }
 
     fn on_level_deinit(level: InitLevel) {
         if level == InitLevel::Scene {
             let mut engine = Engine::singleton();
-            for autoload_name in ["Stats", "DBox"] {
+            for autoload_name in SINGLETON_NAMES {
                 engine.unregister_singleton(autoload_name.into());
             }
         }
