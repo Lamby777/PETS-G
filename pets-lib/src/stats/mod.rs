@@ -5,17 +5,17 @@
 use crate::prelude::*;
 
 // stat-related submodules
+pub mod autoload;
 pub mod charmap;
 pub mod pchars;
 pub mod savefiles;
 pub mod statcalc;
-pub mod stats_interface;
 
 // re-export some crap from ^^^
+pub use autoload::StatsInterface;
 pub use pchars::PChar;
 pub use savefiles::SaveFile;
 pub use statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
-pub use stats_interface::StatsInterface;
 
 // type aliases
 pub type CharMap = HashMap<String, RefCell<CharData>>;
