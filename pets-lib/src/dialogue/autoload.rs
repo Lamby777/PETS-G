@@ -21,7 +21,7 @@ pub struct DBoxInterface {
 #[godot_api]
 impl DBoxInterface {
     /// Get a shared ref to the singleton to store in other node structs
-    pub fn singleton() -> Gd<DBoxInterface> {
+    pub fn singleton() -> Gd<Self> {
         Engine::singleton()
             .get_singleton("DBox".into())
             .unwrap()
