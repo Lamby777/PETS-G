@@ -7,7 +7,8 @@ use godot::prelude::*;
 
 use crate::prelude::*;
 
-/// Autoload class for easy management of dialog boxes
+/// Autoload for functions that may need to be
+/// called from anywhere in the game's code.
 #[derive(GodotClass)]
 #[class(base=Object, init)]
 pub struct FnInterface {}
