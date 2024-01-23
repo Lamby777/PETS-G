@@ -2,7 +2,6 @@
 //! Singleton for accessing player stats in GDScript.
 //!
 
-use godot::engine::Engine;
 use godot::prelude::*;
 
 use super::dbox::DialogBox;
@@ -18,16 +17,12 @@ pub struct DBoxInterface {
     dbox_scene: Gd<PackedScene>,
 }
 
+impl Autoload for DBoxInterface {
+    const AUTOLOAD_NAME: &'static str = "DBox";
+}
+
 #[godot_api]
 impl DBoxInterface {
-    /// Get a shared ref to the singleton to store in other node structs
-    pub fn singleton() -> Gd<Self> {
-        Engine::singleton()
-            .get_singleton("DBox".into())
-            .unwrap()
-            .cast()
-    }
-
     #[func]
     pub fn start_ix(&mut self, ix_id: String) {
         let ix = ix_map().get(&ix_id);

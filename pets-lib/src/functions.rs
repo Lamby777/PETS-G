@@ -2,7 +2,6 @@
 //! Singleton for accessing player stats in GDScript.
 //!
 
-use godot::engine::Engine;
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -13,13 +12,9 @@ use crate::prelude::*;
 #[class(base=Object, init)]
 pub struct FnInterface {}
 
-#[godot_api]
-impl FnInterface {
-    /// Get a shared ref to the singleton to store in other node structs
-    pub fn singleton() -> Gd<Self> {
-        Engine::singleton()
-            .get_singleton("Functions".into())
-            .unwrap()
-            .cast()
-    }
+impl Autoload for FnInterface {
+    const AUTOLOAD_NAME: &'static str = "Functions";
 }
+
+#[godot_api]
+impl FnInterface {}
