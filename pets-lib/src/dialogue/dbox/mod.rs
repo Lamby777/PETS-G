@@ -145,8 +145,9 @@ impl DialogBox {
                 self.set_ix(new_ix.clone());
             }
 
-            Function(_) => {
-                todo!("function labels not implemented yet");
+            Function(fn_id) => {
+                // todo!("function labels not implemented yet");
+                FnInterface::call(fn_id);
             }
         }
     }
