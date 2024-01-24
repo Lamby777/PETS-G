@@ -1,10 +1,5 @@
-//!
-//! Singleton for accessing player stats in GDScript.
-//!
-
-use godot::prelude::*;
-
 use crate::prelude::*;
+use godot::prelude::*;
 
 /// Autoload for functions that may need to be
 /// called from anywhere in the game's code.
