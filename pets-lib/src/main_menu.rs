@@ -108,7 +108,7 @@ impl INode2D for TitleScreen {
                     Quit => godot_tree().quit(),
 
                     DebugBattle => {
-                        change_scene!("battle_engine");
+                        change_scene!("battle");
                     }
                 }
             }

@@ -27,7 +27,6 @@ impl FnInterface {
 
     #[func]
     pub fn debug_battle() {
-        // TODO rename `battle_engine` to `battle`
-        change_scene!("battle_engine");
+        change_scene!("battle");
     }
 }
