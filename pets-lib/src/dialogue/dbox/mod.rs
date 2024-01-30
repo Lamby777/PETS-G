@@ -199,12 +199,10 @@ impl DialogBox {
         match action {
             Walk(old, new_node) => {
                 if let Some(old_node) = old {
-                    let old_node = old_node.get_node_as::<RichTextLabel>("Label");
-                    tween_choice_to(false, old_node.clone());
+                    tween_choice_to(false, old_node.bind().txt_label());
                 }
 
-                let new_node = new_node.get_node_as::<RichTextLabel>("Label");
-                tween_choice_to(true, new_node.clone());
+                tween_choice_to(true, new_node.bind().txt_label());
             }
 
             Pick(picked_i, _) => {
@@ -220,7 +218,7 @@ impl DialogBox {
 
                     Some(label) => {
                         let dchoice = &self.choices[picked_i];
-                        let txt = dchoice.get_node_as("Label");
+                        let txt = dchoice.bind().txt_label();
 
                         tween_choice_to(false, txt);
                         self.tween_choices_wave(false);
@@ -371,7 +369,8 @@ impl DialogBox {
         for (i, cont) in self.choices.iter().enumerate() {
             // if moving up, start below the window
             if up {
-                cont.get_node_as::<RichTextLabel>("Label")
+                cont.bind()
+                    .txt_label()
                     .set_position(Vector2::new(0.0, DBOX_CHOICE_HEIGHT));
             }
 
