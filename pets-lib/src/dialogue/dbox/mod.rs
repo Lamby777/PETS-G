@@ -90,8 +90,7 @@ impl DialogBox {
         self.tween_txt_visibility();
     }
 
-    /// Start tweening a text's visible characters from
-    /// 0% to 100% visible...
+    /// Start tweening a text's visible characters from 0% to 100% visible...
     /// See <https://github.com/Lamby777/PETS-G/issues/50>
     pub fn tween_txt_visibility(&mut self) {
         let tw = tween(
@@ -119,9 +118,8 @@ impl DialogBox {
 
         if let Some(ix) = ix {
             let ix = ix.clone();
-            let Some(page) = ix.pages.get(pageno) else {
-                panic!("Page number {} out of range!", pageno);
-            };
+            let page = ix.pages.get(pageno);
+            let page = unwrap_fmt!(page, "Page #{} out of range!", pageno);
 
             self.update_meta(&page.metadata);
             self.spk_txt = spk_display(&self.speaker.temporary).into();
