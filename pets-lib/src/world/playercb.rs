@@ -13,9 +13,7 @@ use super::pchar_node::PCharNode;
 #[derive(GodotClass)]
 #[class(base=CharacterBody2D)]
 pub struct PlayerCB {
-    #[base]
-    node: Base<CharacterBody2D>,
-
+    base: Base<CharacterBody2D>,
     party: Vec<Gd<PCharNode>>,
     past_positions: LimiQ<Vector2>,
     past_rotations: LimiQ<Vector2>,
@@ -44,9 +42,9 @@ impl PlayerCB {
 
 #[godot_api]
 impl ICharacterBody2D for PlayerCB {
-    fn init(node: Base<CharacterBody2D>) -> Self {
+    fn init(base: Base<CharacterBody2D>) -> Self {
         Self {
-            node,
+            base,
 
             party: vec![],
             past_positions: LimiQ::new(2000),

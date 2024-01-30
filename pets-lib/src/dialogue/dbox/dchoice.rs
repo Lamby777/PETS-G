@@ -16,8 +16,7 @@ use crate::prelude::*;
 #[derive(GodotClass)]
 #[class(init, base=MarginContainer)]
 pub struct DChoice {
-    #[base]
-    node: Base<MarginContainer>,
+    base: Base<MarginContainer>,
 }
 
 #[godot_api]

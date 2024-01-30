@@ -51,8 +51,7 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
 #[derive(GodotClass)]
 #[class(base=PanelContainer)]
 pub struct DialogBox {
-    #[base]
-    node: Base<PanelContainer>,
+    base: Base<PanelContainer>,
 
     // state for the current interaction
     current_ix: Option<Interaction>,
@@ -267,9 +266,9 @@ impl DialogBox {
 
 #[godot_api]
 impl IPanelContainer for DialogBox {
-    fn init(node: Base<PanelContainer>) -> Self {
+    fn init(base: Base<PanelContainer>) -> Self {
         Self {
-            node,
+            base,
             spk_txt: "Cherry".into(),
             msg_txt: "[wave amp=50 freq=6]Hello, World![/wave]".into(),
 

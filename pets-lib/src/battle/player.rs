@@ -24,8 +24,7 @@ const BATTLE_DIRECTIONS: LazyCell<DirectionalInputNames> = LazyCell::new(|| {
 #[derive(GodotClass)]
 #[class(base=Node2D)]
 struct BattleIcon {
-    #[base]
-    node: Base<Node2D>,
+    base: Base<Node2D>,
     si: Gd<StatsInterface>,
 
     /// Maximum speed of player icon
@@ -71,9 +70,9 @@ impl BattleIcon {
 
 #[godot_api]
 impl INode2D for BattleIcon {
-    fn init(node: Base<Node2D>) -> Self {
+    fn init(base: Base<Node2D>) -> Self {
         Self {
-            node,
+            base,
             si: StatsInterface::singleton(),
 
             speed: 400.0,

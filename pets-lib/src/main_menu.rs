@@ -65,8 +65,7 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
 struct TitleScreen {
-    #[base]
-    node: Base<Node2D>,
+    base: Base<Node2D>,
     choices: Wrapped<(MainMenuChoice, Gd<RichTextLabel>)>,
 }
 

@@ -10,8 +10,7 @@ use crate::prelude::*;
 #[derive(GodotClass)]
 #[class(base=Object)]
 pub struct StatsInterface {
-    #[base]
-    node: Base<Object>,
+    base: Base<Object>,
 
     /// Hash map of info on all the different characters in the game.
     save: SaveFile,
@@ -85,14 +84,14 @@ impl StatsInterface {
 
 #[godot_api]
 impl IObject for StatsInterface {
-    fn init(node: Base<Object>) -> Self {
+    fn init(base: Base<Object>) -> Self {
         // start an empty save file, but load other if the player
         // picks a save file instead of "new"
         let (charmap, statcalcs) = default_charmap();
         let save = SaveFile { chars: charmap };
 
         Self {
-            node,
+            base,
             save,
             statcalcs,
         }
