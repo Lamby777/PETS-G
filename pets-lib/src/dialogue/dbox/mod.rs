@@ -58,9 +58,15 @@ pub struct DialogBox {
     current_page_number: usize,
     speaker: MetaPair<Speaker>,
     vox: MetaPair<String>,
-    tween: Option<Gd<Tween>>,
     active: bool,
     awaiting_choice: bool,
+
+    /// The tween that moves the dialog box on/off screen
+    box_tween: Option<Gd<Tween>>,
+
+    /// The tween that makes characters in the message
+    /// become visible one by one
+    visible_text_tween: Option<Gd<Tween>>,
 
     /// the choice label containers
     choices: Wrapped<Gd<DChoice>>,
@@ -126,7 +132,7 @@ impl DialogBox {
         );
 
         self.active = up;
-        self.tween = y_tween.clone().ok();
+        self.box_tween = y_tween.clone().ok();
         y_tween.unwrap()
     }
 
@@ -246,7 +252,8 @@ impl IPanelContainer for DialogBox {
             choices: Wrapped::default(),
             active: false,
             awaiting_choice: false,
-            tween: None,
+            box_tween: None,
+            visible_text_tween: None,
             current_ix: None,
             current_page_number: 0,
             speaker: MetaPair::from_cloned(Speaker::Narrator),
@@ -335,7 +342,7 @@ impl DialogBox {
     }
 
     pub fn cancel_tween(&mut self) {
-        if let Some(tween) = &mut self.tween {
+        if let Some(tween) = &mut self.box_tween {
             tween.stop()
         }
     }
