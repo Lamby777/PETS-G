@@ -11,8 +11,7 @@ use crate::prelude::*;
 #[derive(GodotClass)]
 #[class(init, base=Area2D)]
 pub struct InteractionZone {
-    #[base]
-    node: Base<Area2D>,
+    base: Base<Area2D>,
 
     #[export]
     interaction_id: GString,

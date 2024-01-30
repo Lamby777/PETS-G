@@ -12,8 +12,7 @@ use crate::prelude::*;
 #[derive(GodotClass)]
 #[class(base=Object)]
 pub struct DBoxInterface {
-    #[base]
-    node: Base<Object>,
+    base: Base<Object>,
     dbox_scene: Gd<PackedScene>,
 }
 
@@ -74,9 +73,10 @@ impl DBoxInterface {
 
 #[godot_api]
 impl IObject for DBoxInterface {
-    fn init(node: Base<Object>) -> Self {
+    fn init(base: Base<Object>) -> Self {
         Self {
-            node,
+            base,
+            // TODO use init macro
             dbox_scene: load::<PackedScene>("res://scenes/dialog.tscn"),
         }
     }

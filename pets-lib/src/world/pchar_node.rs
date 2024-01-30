@@ -7,9 +7,7 @@ use godot::prelude::*;
 #[derive(GodotClass)]
 #[class(base=Node2D)]
 pub struct PCharNode {
-    #[base]
     base: Base<Node2D>,
-
     sprite: OnReady<Gd<Sprite2D>>,
     anim_player: OnReady<Gd<AnimationPlayer>>,
     anim_tree: OnReady<Gd<AnimationTree>>,
