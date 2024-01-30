@@ -27,7 +27,7 @@ impl DChoice {
         self.txt_label().set_text(text);
     }
 
-    fn txt_label(&self) -> Gd<RichTextLabel> {
+    pub fn txt_label(&self) -> Gd<RichTextLabel> {
         self.base().get_node_as("Label")
     }
 
@@ -65,7 +65,7 @@ impl IMarginContainer for DChoice {
             return;
         }
 
-        let label = self.base().get_node_as::<RichTextLabel>("Label");
+        let label = self.txt_label();
         let size = Vector2 {
             x: label.get_size().x,
             y: self.base().get_size().y,
