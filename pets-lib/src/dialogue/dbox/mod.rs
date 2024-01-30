@@ -11,6 +11,7 @@
 //!
 
 use dialogical::prelude::*;
+use godot::engine::tween::TransitionType;
 use godot::engine::{
     HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween,
 };
@@ -66,7 +67,7 @@ pub struct DialogBox {
 
     /// The tween that makes characters in the message
     /// become visible one by one
-    visible_text_tween: Option<Gd<Tween>>,
+    text_tween: Option<Gd<Tween>>,
 
     /// the choice label containers
     choices: Wrapped<Gd<DChoice>>,
@@ -87,6 +88,29 @@ impl DialogBox {
         self.goto_current_page();
         self.spk_txt().set_text(self.spk_txt.clone());
         self.msg_txt().set_text(self.msg_txt.clone());
+        self.tween_txt_visibility();
+    }
+
+    /// Start tweening a text's visible characters from
+    /// 0% to 100% visible...
+    /// See <https://github.com/Lamby777/PETS-G/issues/50>
+    pub fn tween_txt_visibility(&mut self) {
+        let tw = tween(
+            self.msg_txt().upcast(),
+            "visible_ratio",
+            Some(0.0),
+            1.0,
+            1.0,
+            TransitionType::QUAD,
+        )
+        .unwrap();
+
+        // we unwrap the result and then put it
+        // back into an option because using `ok()`
+        // is not appropriate here. we need to panic
+        // if the tween fails, but we still want the
+        // output to always be `Some`
+        self.text_tween = Some(tw);
     }
 
     /// sets the speaker and message labels to the given page
@@ -253,7 +277,7 @@ impl IPanelContainer for DialogBox {
             active: false,
             awaiting_choice: false,
             box_tween: None,
-            visible_text_tween: None,
+            text_tween: None,
             current_ix: None,
             current_page_number: 0,
             speaker: MetaPair::from_cloned(Speaker::Narrator),
@@ -262,8 +286,21 @@ impl IPanelContainer for DialogBox {
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
+        let is_pressed = |action: &str| event.is_action_pressed(action.into());
+        let confirming = is_pressed("ui_accept");
+
         if !self.active {
             return;
+        }
+
+        if confirming && let Some(mut tw) = self.text_tween.take() {
+            if tw.is_running() {
+                // if tweening, skip it and return early
+                tw.pause();
+                tw.custom_step(1.0);
+                tw.kill();
+                return;
+            }
         }
 
         if self.awaiting_choice {
@@ -272,7 +309,7 @@ impl IPanelContainer for DialogBox {
             return;
         }
 
-        if event.is_action_pressed("ui_accept".into()) {
+        if confirming {
             self.mark_input_handled();
             self.on_accept();
         }
