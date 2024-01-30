@@ -39,6 +39,17 @@ project/assembly_name="P-E-T-S"
 
 enabled=PackedStringArray("res://addons/discord-sdk-gd/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://addons/": "purple",
+"res://assets/": "orange",
+"res://classes/": "blue",
+"res://scenes/": "blue",
+"res://singletons/": "blue",
+"res://themes/": "pink"
+}
+
 [filesystem]
 
 import/blender/enabled=false

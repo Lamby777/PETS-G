@@ -1,14 +1,6 @@
 //!
 //! Dialog box class for menus and dialogue text
 //!
-//! Yes, an important distinction to make is that "dialogue" is
-//! the speech between characters, and "dialog" is a window or
-//! UI element that displays the dialogue. Don't get too confused!
-//!
-//! Update: I've honestly given up trying to remember which is which.
-//! Take a look at my branch names and commit messages to see
-//! how much I care anymore.
-//!
 
 use dialogical::prelude::*;
 use godot::engine::tween::TransitionType;
