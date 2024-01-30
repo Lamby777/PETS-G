@@ -1,17 +1,17 @@
 [gd_scene load_steps=9 format=3 uid="uid://kgl5788x405y"]
 
-[ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="1_3ebub"]
-[ext_resource type="Shader" path="res://themes/vdrugs/common.gdshader" id="1_8w1nf"]
-[ext_resource type="Texture2D" uid="uid://he44mug8lejt" path="res://assets/textures/misc/BattleIcons.png" id="1_s3l7q"]
-[ext_resource type="AudioStream" uid="uid://bobf56v1g63p4" path="res://assets/music/battle/alright.ogg" id="1_uwjym"]
-[ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="5_xtul0"]
-[ext_resource type="Texture2D" uid="uid://cx24dyfnh30ag" path="res://assets/textures/portraits/Ethan.png" id="6_34tkp"]
+[ext_resource type="Shader" path="res://themes/vdrugs/common.gdshader" id="1_of6xr"]
+[ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="2_0m4jp"]
+[ext_resource type="Texture2D" uid="uid://he44mug8lejt" path="res://assets/textures/misc/BattleIcons.png" id="3_k3xai"]
+[ext_resource type="AudioStream" uid="uid://bobf56v1g63p4" path="res://assets/music/battle/alright.ogg" id="4_l6m5j"]
+[ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="5_hcsfj"]
+[ext_resource type="Texture2D" uid="uid://cx24dyfnh30ag" path="res://assets/textures/portraits/Ethan.png" id="6_pjho4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88ovb"]
-shader = ExtResource("1_8w1nf")
+shader = ExtResource("1_of6xr")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w1wwc"]
-shader = ExtResource("1_3ebub")
+shader = ExtResource("2_0m4jp")
 shader_parameter/strength = 1.0
 shader_parameter/speed = 2.0
 shader_parameter/angle = 47.788
@@ -42,12 +42,12 @@ stretch_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="BattleIcon"]
 scale = Vector2(8, 8)
-texture = ExtResource("1_s3l7q")
+texture = ExtResource("3_k3xai")
 hframes = 5
 vframes = 2
 
 [node name="BattleMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_uwjym")
+stream = ExtResource("4_l6m5j")
 autoplay = true
 
 [node name="Menu" type="Control" parent="."]
@@ -55,7 +55,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme = ExtResource("5_xtul0")
+theme = ExtResource("5_hcsfj")
 
 [node name="DualMenu" type="Control" parent="Menu"]
 layout_mode = 1
@@ -109,7 +109,7 @@ z_index = -1
 layout_mode = 2
 offset_right = 418.0
 offset_bottom = 209.0
-texture = ExtResource("6_34tkp")
+texture = ExtResource("6_pjho4")
 expand_mode = 5
 
 [node name="Choices" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]

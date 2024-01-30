@@ -11,19 +11,20 @@
 #![feature(let_chains)]
 #![feature(lazy_cell)]
 #![feature(try_blocks)]
+#![feature(generic_arg_infer)]
 
-use godot::engine::Engine;
 use godot::prelude::*;
 
-use dialogue::autoload::DBoxInterface;
-use stats::stats_interface::StatsInterface;
+use prelude::*;
 
 mod battle;
 mod consts;
 mod dialogue;
+mod functions;
 mod items;
 mod limiq;
 mod main_menu;
+mod singleton;
 mod stats;
 mod util;
 mod world;
@@ -36,8 +37,12 @@ mod prelude {
     pub use crate::util::*;
 
     pub use crate::dialogue::autoload::DBoxInterface;
+    pub use crate::functions::FnInterface;
+
     pub use crate::dialogue::ix_map;
     pub use crate::world::interaction::manager::InteractionManager;
+
+    pub use crate::singleton::Autoload;
     pub use crate::wrapped::Wrapped;
 
     // is this bad practice? no clue and idc honestly
@@ -60,22 +65,27 @@ struct PetsLib;
 unsafe impl ExtensionLibrary for PetsLib {
     fn on_level_init(level: InitLevel) {
         if level == InitLevel::Scene {
-            let mut engine = Engine::singleton();
-
-            let gd = StatsInterface::new_alloc();
-            engine.register_singleton("Stats".into(), gd.upcast());
-
-            let gd = DBoxInterface::new_alloc();
-            engine.register_singleton("DBox".into(), gd.upcast());
+            libdx::foreach_static!(
+                [
+                    StatsInterface,
+                    DBoxInterface,
+                    FnInterface
+                ] => Autoload, register
+            );
         }
     }
 
     fn on_level_deinit(level: InitLevel) {
-        if level == InitLevel::Scene {
-            let mut engine = Engine::singleton();
-            for autoload_name in ["Stats", "DBox"] {
-                engine.unregister_singleton(autoload_name.into());
-            }
+        if level != InitLevel::Scene {
+            return;
         }
+
+        libdx::foreach_static!(
+            [
+                StatsInterface,
+                DBoxInterface,
+                FnInterface
+            ] => Autoload, unregister
+        );
     }
 }

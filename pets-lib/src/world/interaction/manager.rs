@@ -34,7 +34,7 @@ impl InteractionManager {
     }
 
     /// "ummm ackshually, this is not a singleton"
-    pub fn singleton() -> Gd<InteractionManager> {
+    pub fn singleton() -> Gd<Self> {
         // using this cool godot feature I just found...
         // you can set a node to be accessible with just its
         // name and a % prefix... nice for this sort of situation

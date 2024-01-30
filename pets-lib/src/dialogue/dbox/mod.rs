@@ -11,6 +11,7 @@
 //!
 
 use dialogical::prelude::*;
+use godot::engine::tween::TransitionType;
 use godot::engine::{
     HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween,
 };
@@ -58,9 +59,15 @@ pub struct DialogBox {
     current_page_number: usize,
     speaker: MetaPair<Speaker>,
     vox: MetaPair<String>,
-    tween: Option<Gd<Tween>>,
     active: bool,
     awaiting_choice: bool,
+
+    /// The tween that moves the dialog box on/off screen
+    box_tween: Option<Gd<Tween>>,
+
+    /// The tween that makes characters in the message
+    /// become visible one by one
+    text_tween: Option<Gd<Tween>>,
 
     /// the choice label containers
     choices: Wrapped<Gd<DChoice>>,
@@ -81,6 +88,29 @@ impl DialogBox {
         self.goto_current_page();
         self.spk_txt().set_text(self.spk_txt.clone());
         self.msg_txt().set_text(self.msg_txt.clone());
+        self.tween_txt_visibility();
+    }
+
+    /// Start tweening a text's visible characters from
+    /// 0% to 100% visible...
+    /// See <https://github.com/Lamby777/PETS-G/issues/50>
+    pub fn tween_txt_visibility(&mut self) {
+        let tw = tween(
+            self.msg_txt().upcast(),
+            "visible_ratio",
+            Some(0.0),
+            1.0,
+            1.0,
+            TransitionType::QUAD,
+        )
+        .unwrap();
+
+        // we unwrap the result and then put it
+        // back into an option because using `ok()`
+        // is not appropriate here. we need to panic
+        // if the tween fails, but we still want the
+        // output to always be `Some`
+        self.text_tween = Some(tw);
     }
 
     /// sets the speaker and message labels to the given page
@@ -126,7 +156,7 @@ impl DialogBox {
         );
 
         self.active = up;
-        self.tween = y_tween.clone().ok();
+        self.box_tween = y_tween.clone().ok();
         y_tween.unwrap()
     }
 
@@ -145,8 +175,9 @@ impl DialogBox {
                 self.set_ix(new_ix.clone());
             }
 
-            Function(_) => {
-                todo!("function labels not implemented yet");
+            Function(fn_id) => {
+                // todo!("function labels not implemented yet");
+                FnInterface::call(fn_id);
             }
         }
     }
@@ -198,12 +229,10 @@ impl DialogBox {
         match action {
             Walk(old, new_node) => {
                 if let Some(old_node) = old {
-                    let old_node = old_node.get_node_as::<RichTextLabel>("Label");
-                    tween_choice_to(false, old_node.clone());
+                    tween_choice_to(false, old_node.bind().txt_label());
                 }
 
-                let new_node = new_node.get_node_as::<RichTextLabel>("Label");
-                tween_choice_to(true, new_node.clone());
+                tween_choice_to(true, new_node.bind().txt_label());
             }
 
             Pick(picked_i, _) => {
@@ -219,7 +248,7 @@ impl DialogBox {
 
                     Some(label) => {
                         let dchoice = &self.choices[picked_i];
-                        let txt = dchoice.get_node_as("Label");
+                        let txt = dchoice.bind().txt_label();
 
                         tween_choice_to(false, txt);
                         self.tween_choices_wave(false);
@@ -247,7 +276,8 @@ impl IPanelContainer for DialogBox {
             choices: Wrapped::default(),
             active: false,
             awaiting_choice: false,
-            tween: None,
+            box_tween: None,
+            text_tween: None,
             current_ix: None,
             current_page_number: 0,
             speaker: MetaPair::from_cloned(Speaker::Narrator),
@@ -256,8 +286,21 @@ impl IPanelContainer for DialogBox {
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
+        let is_pressed = |action: &str| event.is_action_pressed(action.into());
+        let confirming = is_pressed("ui_accept");
+
         if !self.active {
             return;
+        }
+
+        if confirming && let Some(mut tw) = self.text_tween.take() {
+            if tw.is_running() {
+                // if tweening, skip it and return early
+                tw.pause();
+                tw.custom_step(1.0);
+                tw.kill();
+                return;
+            }
         }
 
         if self.awaiting_choice {
@@ -266,7 +309,7 @@ impl IPanelContainer for DialogBox {
             return;
         }
 
-        if event.is_action_pressed("ui_accept".into()) {
+        if confirming {
             self.mark_input_handled();
             self.on_accept();
         }
@@ -336,7 +379,7 @@ impl DialogBox {
     }
 
     pub fn cancel_tween(&mut self) {
-        if let Some(tween) = &mut self.tween {
+        if let Some(tween) = &mut self.box_tween {
             tween.stop()
         }
     }
@@ -370,7 +413,8 @@ impl DialogBox {
         for (i, cont) in self.choices.iter().enumerate() {
             // if moving up, start below the window
             if up {
-                cont.get_node_as::<RichTextLabel>("Label")
+                cont.bind()
+                    .txt_label()
                     .set_position(Vector2::new(0.0, DBOX_CHOICE_HEIGHT));
             }
 

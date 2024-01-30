@@ -2,7 +2,6 @@
 //! Singleton for accessing player stats in GDScript.
 //!
 
-use godot::engine::Engine;
 use godot::prelude::*;
 
 use super::charmap::default_charmap;
@@ -60,16 +59,12 @@ impl_stat_getters_on_si! {
     max_mana
 }
 
+impl Autoload for StatsInterface {
+    const AUTOLOAD_NAME: &'static str = "Stats";
+}
+
 #[godot_api]
 impl StatsInterface {
-    /// Get a shared ref to the singleton to store in other node structs
-    pub fn singleton() -> Gd<StatsInterface> {
-        Engine::singleton()
-            .get_singleton("Stats".into())
-            .unwrap()
-            .cast()
-    }
-
     // #[func]
     pub fn get_character(&self, ch: &str) -> RefCell<CharData> {
         self.save
