@@ -32,7 +32,7 @@ text = "<NPC Name>"
 custom_minimum_size = Vector2(0, 230)
 layout_mode = 2
 bbcode_enabled = true
-text = "buh nah deh, you wunuh scribih, try concat to it, try to parse through it, you wuh nah thinkin that uh i would log do it, baby that was so long and uh i wuh nah stupid, take the next ticket, take the next train"
+text = "tryna cat to it, tryna bounce through it, all the while thinkin' i might as well do it, baby that was so long ago and you know it, take the next ticket, take the next train, why would i do it, eh you keep on thinkin'"
 
 [node name="Choices" type="HBoxContainer" parent="VBox"]
 clip_contents = true
