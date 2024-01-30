@@ -173,7 +173,6 @@ impl DialogBox {
             }
 
             Function(fn_id) => {
-                // todo!("function labels not implemented yet");
                 FnInterface::call(fn_id);
             }
         }
