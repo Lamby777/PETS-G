@@ -52,11 +52,9 @@ mod prelude {
 
     pub use std::cell::RefCell;
     pub use std::collections::{HashMap, HashSet};
+    pub use std::fmt::Debug;
     pub use std::ops::{Deref, DerefMut};
     pub use std::rc::Rc;
-
-    #[allow(unused_imports)]
-    pub use std::fmt::{Debug, Display};
 }
 
 struct PetsLib;
