@@ -36,7 +36,6 @@ enum BattleState {
     Run,
 }
 
-#[allow(unused)]
 #[derive(Clone, Copy, Debug, PartialEq, TryFromPrimitive)]
 #[repr(usize)]
 enum BattleChoice {
