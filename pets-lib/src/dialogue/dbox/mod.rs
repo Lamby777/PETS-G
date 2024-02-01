@@ -211,7 +211,7 @@ impl DialogBox {
 
     pub fn process_choice_input(&mut self) {
         use crate::wrapped::*;
-        let action = process_input(&mut self.choices, ListDir::LeftToRight);
+        let action = process_input(&mut self.choices, ListDirection::LeftToRight);
 
         use ListOperation::*;
         match action {
