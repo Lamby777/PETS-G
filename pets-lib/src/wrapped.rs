@@ -10,14 +10,14 @@ fn is_pressed(name: &str) -> bool {
 }
 
 /// direction of a list's elements
-pub enum ListDir {
+pub enum ListDirection {
     TopToBottom,
     LeftToRight,
 }
 
-impl ListDir {
+impl ListDirection {
     pub fn ui_next(&self) -> &str {
-        use ListDir::*;
+        use ListDirection::*;
         match self {
             TopToBottom => "ui_down",
             LeftToRight => "ui_right",
@@ -25,7 +25,7 @@ impl ListDir {
     }
 
     pub fn ui_prev(&self) -> &str {
-        use ListDir::*;
+        use ListDirection::*;
         match self {
             TopToBottom => "ui_up",
             LeftToRight => "ui_left",
@@ -45,7 +45,7 @@ pub enum ListOperation<'a, T> {
 }
 
 /// Convert user input into list navigation
-pub fn process_input<T: Clone>(wrap: &mut Wrapped<T>, dir: ListDir) -> ListOperation<T> {
+pub fn process_input<T: Clone>(wrap: &mut Wrapped<T>, dir: ListDirection) -> ListOperation<T> {
     use ListOperation::*;
 
     let is_reverse = match wrap.selected {
