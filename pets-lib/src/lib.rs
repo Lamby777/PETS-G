@@ -62,15 +62,17 @@ struct PetsLib;
 #[gdextension]
 unsafe impl ExtensionLibrary for PetsLib {
     fn on_level_init(level: InitLevel) {
-        if level == InitLevel::Scene {
-            libdx::foreach_static!(
-                [
-                    StatsInterface,
-                    DBoxInterface,
-                    FnInterface
-                ] => Autoload, register
-            );
+        if level != InitLevel::Scene {
+            return;
         }
+
+        libdx::foreach_static!(
+            [
+                StatsInterface,
+                DBoxInterface,
+                FnInterface
+            ] => Autoload, register
+        );
     }
 
     fn on_level_deinit(level: InitLevel) {
