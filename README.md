@@ -41,14 +41,8 @@ Then, go download the correct version of Godot Engine... with whatever method is
 best for your environment. Add it to your `PATH` as well if you want the "quick
 launch" scripts mentioned below to work.
 
-Then, install `dialogical`, a crate written for managing and compiling dialogue
-/ interaction files for this game.
-
-```
-cargo install dialogical
-```
-
-... and you should be ready to go!
+That's it! The dialogue toolkit is now called directly as a build dependency, so
+you no longer need to have `dg` installed system-wide.
 
 ---
 
