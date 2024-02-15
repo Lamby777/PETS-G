@@ -20,7 +20,6 @@ enum MainMenuChoice {
     Options,
     Credits,
     Quit,
-    DebugBattle,
 }
 
 fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
@@ -105,10 +104,6 @@ impl INode2D for TitleScreen {
                     }
 
                     Quit => godot_tree().quit(),
-
-                    DebugBattle => {
-                        change_scene!("battle");
-                    }
                 }
             }
 
