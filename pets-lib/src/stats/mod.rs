@@ -41,7 +41,7 @@ pub struct CharData {
     pub state: CharStatsStateful,
 
     /// Status conditions the character has
-    pub conditions: HashSet<StatusConditions>,
+    pub conditions: HashSet<StatusCondition>,
 
     /// Items this character is holding
     pub inventory: Vec<Item>,
@@ -105,7 +105,7 @@ pub struct CharStats {
 }
 
 #[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Clone)]
-pub enum StatusConditions {
+pub enum StatusCondition {
     Sleeping,    // Can't move, but recover 20% energy on wakeup
     Paralysis,   // ^^^ No movement, no energy recovery, but still has PK. Almost no combos
     Crying,      // Oops, all your attacks missed! Sowwy :<

@@ -13,6 +13,7 @@ godot = { git = "https://github.com/godot-rust/gdext", branch = "master", featur
 indoc = "2.0.4"
 libdx = "2.1.1"
 num_enum = "0.7.1"
+rand = "0.8.5"
 ribbons = "0.1.0"
 serde = {version = "1.0.188", features = ["derive"] }
 
