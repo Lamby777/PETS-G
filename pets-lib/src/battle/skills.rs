@@ -37,7 +37,14 @@ impl ConditionChance {
 }
 
 pub enum SkillFamily {
-    // Elemental
+    Elemental(Element),
+
+    // Other
+    Recovery,
+    Support(SupportStat),
+}
+
+pub enum Element {
     Fire,
     Freeze,
     Thunder,
@@ -46,4 +53,11 @@ pub enum SkillFamily {
     // Unique
     Fuzz,
     Whip,
+}
+
+pub enum SupportStat {
+    Attack,
+    Defense,
+    Speed,
+    Stability,
 }
