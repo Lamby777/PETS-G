@@ -12,9 +12,6 @@ pub enum SkillInfo {
 
     /// Heal HP
     Recovery(PowerLevel),
-    //
-    // /// Raise/Lower stats
-    // Support(SupportStat, PowerLevel),
 }
 
 pub struct Skill {
