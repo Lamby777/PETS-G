@@ -1,16 +1,29 @@
 use crate::consts::battle::*;
 use crate::prelude::*;
 
-pub struct Skill {
-    pub family: SkillFamily,
-    pub to_all: bool,
-    pub power: u8,
+use std::fmt;
 
-    pub cost: u32,
-    pub effect: Option<SkillEffect>,
+type PowerLevel = u8;
+
+pub enum SkillInfo {
+    /// Element-based offensive attack
+    /// power: 0 for "status effect only" skills
+    Elemental(Element, PowerLevel, Option<SkillEffect>),
+
+    /// Heal HP
+    Recovery(PowerLevel),
+    //
+    // /// Raise/Lower stats
+    // Support(SupportStat, PowerLevel),
 }
 
-/// status condition chances
+pub struct Skill {
+    pub stats: SkillInfo,
+    pub to_all: bool,
+    pub cost: u32,
+}
+
+/// status condition from a skill, and its chances
 pub struct SkillEffect {
     condition: StatusCondition,
     chance: f32,
@@ -20,6 +33,20 @@ pub enum ConditionChance {
     Guaranteed,
     Common,
     Rare,
+}
+
+impl ConditionChance {
+    /// User-facing string for the chance of a status condition to
+    /// be used in skill descriptions
+    pub fn chance_str(&self) -> &str {
+        use ConditionChance::*;
+
+        match self {
+            Guaranteed => "Always inflicts",
+            Common => "High chance of inflicting",
+            Rare => "Low chance of inflicting",
+        }
+    }
 }
 
 impl ConditionChance {
@@ -36,28 +63,15 @@ impl ConditionChance {
     }
 }
 
-pub enum SkillFamily {
-    Elemental(Element),
-
-    // Other
-    Recovery,
-    Support(SupportStat),
-}
-
 pub enum Element {
     Fire,
     Freeze,
-    Thunder,
+    Electric,
     Wind,
+    Earth,
+    Psi,
 
     // Unique
     Fuzz,
     Whip,
-}
-
-pub enum SupportStat {
-    Attack,
-    Defense,
-    Speed,
-    Stability,
 }
