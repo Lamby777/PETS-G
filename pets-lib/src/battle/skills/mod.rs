@@ -1,10 +1,13 @@
 use crate::consts::battle::*;
 use crate::prelude::*;
 
-mod attack;
-
 use std::fmt;
 use std::time::Duration;
+
+mod status_effects;
+use status_effects::*;
+
+mod attack;
 
 pub trait Skill {
     fn name(&self) -> &str;
@@ -48,46 +51,6 @@ pub enum ShieldVariant {
     OneElement(Element),
     ManyElements(Vec<Element>),
     AllElements,
-}
-
-/// status condition from a skill, and its chances
-pub struct EffectPair {
-    condition: StatusCondition,
-    chance: f32,
-}
-
-pub enum ConditionChance {
-    Guaranteed,
-    Common,
-    Rare,
-}
-
-impl ConditionChance {
-    /// User-facing string for the chance of a status condition
-    /// To be used in skill descriptions
-    pub fn chance_str(&self) -> &str {
-        use ConditionChance::*;
-
-        match self {
-            Guaranteed => "Always inflicts",
-            Common => "High chance of inflicting",
-            Rare => "Low chance of inflicting",
-        }
-    }
-}
-
-impl ConditionChance {
-    pub fn roll(&self) -> bool {
-        use ConditionChance::*;
-
-        let chance = match self {
-            Guaranteed => return true,
-            Common => CONDITION_CHANCE_LIKELY,
-            Rare => CONDITION_CHANCE_RARE,
-        };
-
-        rand::random::<f32>() < chance
-    }
 }
 
 pub enum Element {
