@@ -115,11 +115,11 @@ pub enum StatusEffect {
     Dizziness,   // "Disoriented", auditory flashbang + harder combos
     Blinded,     // Battle board turns black
 
-    Heatstroke, // Damage over time
-    Frostbite,  // More damage, introduced later in the game
-    Bleeding,   // ^^^ HP meter biased towards rolling down faster
-    Poison,     // ^^^ no PK
-    PoisonR,    // ^^^ no PK, completely unable to fight (basically dead)
+    Burn,      // Damage over time
+    Frostbite, // More damage, introduced later in the game
+    Bleeding,  // ^^^ HP meter biased towards rolling down faster
+    Poison,    // ^^^ no PK
+    PoisonR,   // ^^^ no PK, completely unable to fight (basically dead)
 
     Tired, // Less lenient music timing. Get some rest, dumbass! Don't emulate my bad habits.
 }
@@ -136,7 +136,7 @@ impl Display for StatusEffect {
             ShortBreath => "Short of breath",
             Dizziness => "Dizzy",
             Blinded => "Blinded",
-            Heatstroke => "Heatstroke",
+            Burn => "Burn",
             Frostbite => "Frostbite",
             Bleeding => "Bleeding",
             Poison => "Poisoned",

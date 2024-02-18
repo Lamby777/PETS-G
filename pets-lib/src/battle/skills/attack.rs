@@ -61,12 +61,12 @@ mod tests {
 
     #[test]
     fn test_dmg_low_chance_effect_description() {
-        let skill = SkillAttack::new(Element::Fire, 3)
-            .with_effect(StatusEffect::Heatstroke, EffectChance::Rare);
+        let skill =
+            SkillAttack::new(Element::Fire, 3).with_effect(StatusEffect::Burn, EffectChance::Rare);
 
         assert_eq!(
             skill.description(),
-            "Deals medium Fire-based damage. Low chance of inflicting Heatstroke."
+            "Deals medium Fire-based damage. Low chance of inflicting Burn."
         );
     }
 
@@ -80,9 +80,9 @@ mod tests {
     #[test]
     fn test_low_chance_effect_description() {
         let skill = SkillAttack::new(Element::Fire, 0)
-            .with_effect(StatusEffect::Heatstroke, EffectChance::Common);
+            .with_effect(StatusEffect::Burn, EffectChance::Common);
 
-        assert_eq!(skill.description(), "High chance of inflicting Heatstroke.");
+        assert_eq!(skill.description(), "High chance of inflicting Burn.");
     }
 
     #[test]
