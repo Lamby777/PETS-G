@@ -1,3 +1,9 @@
+//!
+//! this module actually has nothing to do with any
+//! type of skill... it's just another place to put
+//! status condition data structures for reuse.
+//!
+
 use super::*;
 
 /// status condition from a skill, and its chances
