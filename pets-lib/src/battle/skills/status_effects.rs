@@ -40,13 +40,13 @@ impl EffectChance {
 }
 
 impl EffectChance {
-    pub fn roll(&self) -> bool {
+    pub fn _roll(&self) -> bool {
         use EffectChance::*;
 
         let chance = match self {
             Guaranteed => return true,
-            Common => CONDITION_CHANCE_LIKELY,
-            Rare => CONDITION_CHANCE_RARE,
+            Common => EFFECT_CHANCE_LIKELY,
+            Rare => EFFECT_CHANCE_RARE,
         };
 
         rand::random::<f32>() < chance

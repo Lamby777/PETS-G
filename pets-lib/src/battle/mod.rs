@@ -13,7 +13,6 @@ use crate::prelude::*;
 mod player;
 mod stat_translation;
 
-#[allow(unused)]
 mod skills;
 
 #[allow(unused)]
