@@ -14,28 +14,27 @@ mod recovery;
 mod shields;
 mod support;
 
+type CharStatsPtr = Rc<RefCell<CharStats>>;
+
 #[typetag::serde(tag = "type")]
 pub trait SkillFamily {
     fn name(&self) -> &str {
         // TODO this is only to shut up errors for now
         unimplemented!()
     }
-
     fn base_cost(&self) -> u32;
-
     fn description(&self) -> String;
-}
 
-#[derive(Serialize, Deserialize)]
-pub struct SkillConcrete {
-    /// Skill info, doesn't matter whether it's attack/heal/support
-    pub stats: Box<dyn SkillFamily>,
-
-    /// Does this skill affect multiple targets?
-    pub plural: bool,
-
-    /// How much (Mana | (B)PP | whatever tf i decide to call it) does it cost?
-    pub cost: u32,
+    fn cast(
+        &self,
+        caster: CharStatsPtr,
+        target: Option<CharStatsPtr>,
+        allies: Vec<CharStatsPtr>,
+        enemies: Vec<CharStatsPtr>,
+    ) {
+        // TODO this is only to shut up errors for now
+        unimplemented!();
+    }
 }
 
 #[derive(Clone, Debug, PartialEq, EnumIter, Serialize, Deserialize)]
