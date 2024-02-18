@@ -37,7 +37,8 @@ pub trait SkillFamily {
     }
 }
 
-#[derive(Clone, Debug, PartialEq, EnumIter, Serialize, Deserialize)]
+// not this "derive everything" crap again... ughhhhhh
+#[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd, EnumIter, Serialize, Deserialize)]
 pub enum Element {
     // Physical
     Blade,   // swords, claws, etc.
@@ -72,24 +73,9 @@ impl Element {
         Element::iter().filter(Self::is_physical).collect()
     }
 
+    /// Includes unique elements!
     pub fn list_magical() -> Vec<Element> {
         Element::iter().filter(Self::is_magical).collect()
-    }
-
-    /// Skips unique elements (Fuzz, Whip, etc.)
-    pub fn list_magical_not_unique() -> Vec<Element> {
-        Element::iter()
-            .filter(Self::is_magical)
-            .filter(|v| !v.is_unique())
-            .collect()
-    }
-
-    pub fn list_unique() -> Vec<Element> {
-        Element::iter().filter(Self::is_unique).collect()
-    }
-
-    pub fn list_not_unique() -> Vec<Element> {
-        Element::iter().filter(|v| !v.is_unique()).collect()
     }
 
     pub fn is_physical(&self) -> bool {
