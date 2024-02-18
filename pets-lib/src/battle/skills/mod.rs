@@ -9,6 +9,7 @@ mod status_effects;
 use status_effects::*;
 
 mod attack;
+mod recovery;
 mod shields;
 
 #[typetag::serde(tag = "type")]
