@@ -9,7 +9,6 @@ pub enum RecoverySkill {
 
 #[typetag::serde]
 impl SkillFamily for RecoverySkill {
-    /// Panics if neither damage nor effect are present
     fn description(&self) -> String {
         use RecoverySkill::*;
 

@@ -9,8 +9,10 @@ mod status_effects;
 use status_effects::*;
 
 mod attack;
+mod other;
 mod recovery;
 mod shields;
+mod support;
 
 #[typetag::serde(tag = "type")]
 pub trait SkillFamily {

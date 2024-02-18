@@ -48,6 +48,7 @@ mod prelude {
     // is this bad practice? no clue and idc honestly
     // it's convenient with no real caveat, therefore...
     pub use indoc::indoc;
+    pub use rand::Rng;
     pub use ribbons::unwrap_fmt;
     pub use serde::{Deserialize, Serialize};
 
