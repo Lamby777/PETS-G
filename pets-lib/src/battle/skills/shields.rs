@@ -9,12 +9,6 @@ pub enum ShieldVariant {
     AllElements,
 }
 
-/// list elements but put a word like "or" or "and" before the last one
-fn join_conjunction<T: ToString>(list: &[T], conjunction: &str) -> String {
-    let iter = list.iter().map(|x| x.to_string());
-    todo!()
-}
-
 impl ShieldVariant {
     fn describe_affinity(&self) -> String {
         use ShieldVariant::*;

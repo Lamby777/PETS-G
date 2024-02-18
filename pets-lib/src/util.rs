@@ -84,6 +84,30 @@ macro_rules! change_scene {
     };
 }
 
+/// list elements but put a word like "or" or "and" before the last one
+fn join_conjunction<T: ToString>(list: &[T], conjunction: &str) -> String {
+    match list.len() {
+        // handle edge cases
+        0 => return "".to_string(),
+        1 => return list[0].to_string(),
+        2 => {
+            return format!(
+                "{} {} {}",
+                list[0].to_string(),
+                conjunction,
+                list[1].to_string()
+            )
+        }
+        _ => (),
+    }
+
+    let iter = list.iter().map(|x| x.to_string());
+    let first_part = iter.take(list.len() - 1).collect::<Vec<_>>().join(", ");
+    let last = list.last().unwrap().to_string();
+
+    format!("{}, {} {}", first_part, conjunction, last)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -92,5 +116,25 @@ mod tests {
     fn test_prefix_mod() {
         assert_eq!(prefix_mod("hello", "world", true), "worldhello");
         assert_eq!(prefix_mod("worldhello", "world", false), "hello");
+    }
+
+    #[test]
+    fn test_join_conjunction_abc() {
+        assert_eq!(join_conjunction(&["a", "b", "c"], "and"), "a, b, and c");
+    }
+
+    #[test]
+    fn test_join_conjunction_ab() {
+        assert_eq!(join_conjunction(&["a", "b"], "or"), "a or b");
+    }
+
+    #[test]
+    fn test_join_conjunction_a() {
+        assert_eq!(join_conjunction(&["a"], "or"), "a");
+    }
+
+    #[test]
+    fn test_join_conjunction_empty() {
+        assert_eq!(join_conjunction::<&str>(&[], "or"), "");
     }
 }
