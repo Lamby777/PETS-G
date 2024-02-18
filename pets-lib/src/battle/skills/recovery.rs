@@ -20,6 +20,10 @@ impl SkillFamily for RecoverySkill {
             }
         }
     }
+
+    fn base_cost(&self) -> u32 {
+        todo!()
+    }
 }
 
 #[cfg(test)]
