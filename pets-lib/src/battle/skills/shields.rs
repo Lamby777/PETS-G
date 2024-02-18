@@ -18,8 +18,9 @@ impl ShieldVariant {
             OneElement { element } => return element.describe(),
 
             ManyElements { elements } => {
-                return join_words(elements, "and")
-                    .expect("shield of many elements with empty block list")
+                let iter = elements.iter().map(|x| x.describe());
+                return join_words(iter, "and")
+                    .expect("shield of many elements with empty block list");
             }
 
             AllElements => "all kinds of",

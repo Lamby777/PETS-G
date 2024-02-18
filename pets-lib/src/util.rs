@@ -94,25 +94,27 @@ macro_rules! change_scene {
 ///
 /// Song:    "Conjunction Junction, what's your function?"
 /// P/E/T/S: "This one right here, of course!"
-pub fn join_words<T: ToString>(list: &[T], conjunction: &str) -> Option<String> {
-    Some(match list.len() {
+pub fn join_words<I, T>(mut iter: I, conjunction: &str) -> Option<String>
+where
+    I: Iterator<Item = T> + Clone,
+    T: ToString,
+{
+    let len = iter.clone().count();
+    let mut next = || iter.next().unwrap().to_string();
+
+    Some(match len {
         0 => return None,
-        1 => list[0].to_string(),
+        1 => next(),
         2 => {
-            format!(
-                "{} {} {}",
-                list[0].to_string(),
-                conjunction,
-                list[1].to_string()
-            )
+            format!("{} {} {}", next(), conjunction, next())
         }
 
         _ => {
-            let iter = list.iter().map(|x| x.to_string());
-            let first_part = iter.take(list.len() - 1);
+            let iter = iter.map(|x| x.to_string());
+            let first_part = iter.clone().take(len - 1);
             let first_part = first_part.collect::<Vec<_>>().join(", ");
 
-            let last = list.last().unwrap().to_string();
+            let last = iter.last().unwrap().to_string();
             format!("{}, {} {}", first_part, conjunction, last)
         }
     })
@@ -130,24 +132,25 @@ mod tests {
 
     #[test]
     fn test_join_conjunction_abc() {
-        assert_eq!(
-            join_words(&["a", "b", "c"], "and"),
-            Some("a, b, and c".to_owned())
-        );
+        let iter = ["a", "b", "c"].into_iter();
+        assert_eq!(join_words(iter, "and"), Some("a, b, and c".to_owned()));
     }
 
     #[test]
     fn test_join_conjunction_ab() {
-        assert_eq!(join_words(&["a", "b"], "or"), Some("a or b".to_owned()));
+        let iter = ["a", "b"].into_iter();
+        assert_eq!(join_words(iter, "or"), Some("a or b".to_owned()));
     }
 
     #[test]
     fn test_join_conjunction_a() {
-        assert_eq!(join_words(&["a"], "or"), Some("a".to_owned()));
+        let iter = ["a"].into_iter();
+        assert_eq!(join_words(iter, "or"), Some("a".to_owned()));
     }
 
     #[test]
     fn test_join_conjunction_empty() {
-        assert_eq!(join_words::<&str>(&[], "or"), None);
+        let iter = std::iter::empty::<&str>();
+        assert_eq!(join_words(iter, "or"), None);
     }
 }
