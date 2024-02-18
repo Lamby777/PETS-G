@@ -7,9 +7,13 @@ pub struct ChanceOfEffect {
 }
 
 impl ChanceOfEffect {
+    pub fn new(effect: StatusEffect, chance: EffectChance) -> Self {
+        Self { effect, chance }
+    }
+
     pub fn describe(&self) -> String {
         let chance = self.chance.describe();
-        format!("{} {}", chance, self.effect)
+        format!("{} {}.", chance, self.effect)
     }
 }
 
