@@ -71,10 +71,24 @@ mod tests {
     }
 
     #[test]
+    fn test_dmg_description() {
+        let skill = SkillAttack::new(Element::Fire, 1);
+
+        assert_eq!(skill.description(), "Deals faint Fire-based damage.");
+    }
+
+    #[test]
     fn test_low_chance_effect_description() {
         let skill = SkillAttack::new(Element::Fire, 0)
             .with_effect(StatusEffect::Heatstroke, EffectChance::Common);
 
         assert_eq!(skill.description(), "High chance of inflicting Heatstroke.");
+    }
+
+    #[test]
+    fn test_dmg_nonbased_description() {
+        let skill = SkillAttack::new(Element::Psi, 4);
+
+        assert_eq!(skill.description(), "Deals strong Psychic damage.");
     }
 }
