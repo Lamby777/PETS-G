@@ -84,28 +84,38 @@ macro_rules! change_scene {
     };
 }
 
-/// list elements but put a word like "or" or "and" before the last one
-fn join_conjunction<T: ToString>(list: &[T], conjunction: &str) -> String {
-    match list.len() {
-        // handle edge cases
-        0 => return "".to_string(),
-        1 => return list[0].to_string(),
+/// List elements separated by commas, but put a word
+/// like "or" or "and" before the last one to sound less robotic.
+///
+/// # Edge Cases
+/// - no commas if there are only two elements
+/// - nothing happens if there's only one element
+/// - returns None if the list is empty
+///
+/// Song:    "Conjunction Junction, what's your function?"
+/// P/E/T/S: "This one right here, of course!"
+fn join_words<T: ToString>(list: &[T], conjunction: &str) -> Option<String> {
+    Some(match list.len() {
+        0 => return None,
+        1 => list[0].to_string(),
         2 => {
-            return format!(
+            format!(
                 "{} {} {}",
                 list[0].to_string(),
                 conjunction,
                 list[1].to_string()
             )
         }
-        _ => (),
-    }
 
-    let iter = list.iter().map(|x| x.to_string());
-    let first_part = iter.take(list.len() - 1).collect::<Vec<_>>().join(", ");
-    let last = list.last().unwrap().to_string();
+        _ => {
+            let iter = list.iter().map(|x| x.to_string());
+            let first_part = iter.take(list.len() - 1);
+            let first_part = first_part.collect::<Vec<_>>().join(", ");
 
-    format!("{}, {} {}", first_part, conjunction, last)
+            let last = list.last().unwrap().to_string();
+            format!("{}, {} {}", first_part, conjunction, last)
+        }
+    })
 }
 
 #[cfg(test)]
@@ -120,21 +130,24 @@ mod tests {
 
     #[test]
     fn test_join_conjunction_abc() {
-        assert_eq!(join_conjunction(&["a", "b", "c"], "and"), "a, b, and c");
+        assert_eq!(
+            join_words(&["a", "b", "c"], "and"),
+            Some("a, b, and c".to_owned())
+        );
     }
 
     #[test]
     fn test_join_conjunction_ab() {
-        assert_eq!(join_conjunction(&["a", "b"], "or"), "a or b");
+        assert_eq!(join_words(&["a", "b"], "or"), Some("a or b".to_owned()));
     }
 
     #[test]
     fn test_join_conjunction_a() {
-        assert_eq!(join_conjunction(&["a"], "or"), "a");
+        assert_eq!(join_words(&["a"], "or"), Some("a".to_owned()));
     }
 
     #[test]
     fn test_join_conjunction_empty() {
-        assert_eq!(join_conjunction::<&str>(&[], "or"), "");
+        assert_eq!(join_words::<&str>(&[], "or"), None);
     }
 }
