@@ -94,7 +94,7 @@ macro_rules! change_scene {
 ///
 /// Song:    "Conjunction Junction, what's your function?"
 /// P/E/T/S: "This one right here, of course!"
-fn join_words<T: ToString>(list: &[T], conjunction: &str) -> Option<String> {
+pub fn join_words<T: ToString>(list: &[T], conjunction: &str) -> Option<String> {
     Some(match list.len() {
         0 => return None,
         1 => list[0].to_string(),
