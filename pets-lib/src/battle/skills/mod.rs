@@ -26,7 +26,7 @@ pub trait Skill {
 pub enum SkillInfo {
     /// Element-based offensive attack
     /// power: 0 for "status effect only" skills
-    Elemental(Element, u8, Option<EffectPair>),
+    Elemental(Element, u8, Option<ChanceOfEffect>),
 
     /// Heal HP
     Recovery(u8),

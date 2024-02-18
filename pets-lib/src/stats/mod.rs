@@ -41,7 +41,7 @@ pub struct CharData {
     pub state: CharStatsStateful,
 
     /// Status conditions the character has
-    pub conditions: HashSet<StatusCondition>,
+    pub conditions: HashSet<StatusEffect>,
 
     /// Items this character is holding
     pub inventory: Vec<Item>,
@@ -105,7 +105,7 @@ pub struct CharStats {
 }
 
 #[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Clone)]
-pub enum StatusCondition {
+pub enum StatusEffect {
     Sleeping,    // Can't move, but recover 20% energy on wakeup
     Paralysis,   // ^^^ No movement, no energy recovery, but still has PK. Almost no combos
     Crying,      // Oops, all your attacks missed! Sowwy :<
@@ -124,9 +124,9 @@ pub enum StatusCondition {
     Tired, // Less lenient music timing. Get some rest, dumbass! Don't emulate my bad habits.
 }
 
-impl Display for StatusCondition {
+impl Display for StatusEffect {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        use StatusCondition::*;
+        use StatusEffect::*;
 
         let s = match self {
             Sleeping => "Sleeping",

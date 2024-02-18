@@ -1,29 +1,29 @@
 use super::*;
 
 /// status condition from a skill, and its chances
-pub struct EffectPair {
-    pub condition: StatusCondition,
-    pub chance: ConditionChance,
+pub struct ChanceOfEffect {
+    pub effect: StatusEffect,
+    pub chance: EffectChance,
 }
 
-impl EffectPair {
+impl ChanceOfEffect {
     pub fn describe(&self) -> String {
         let chance = self.chance.describe();
-        format!("{} {}", chance, self.condition)
+        format!("{} {}", chance, self.effect)
     }
 }
 
-pub enum ConditionChance {
+pub enum EffectChance {
     Guaranteed,
     Common,
     Rare,
 }
 
-impl ConditionChance {
+impl EffectChance {
     /// User-facing string for the chance of a status condition
     /// To be used in skill descriptions
     pub fn describe(&self) -> &str {
-        use ConditionChance::*;
+        use EffectChance::*;
 
         match self {
             Guaranteed => "Always inflicts",
@@ -33,9 +33,9 @@ impl ConditionChance {
     }
 }
 
-impl ConditionChance {
+impl EffectChance {
     pub fn roll(&self) -> bool {
-        use ConditionChance::*;
+        use EffectChance::*;
 
         let chance = match self {
             Guaranteed => return true,
