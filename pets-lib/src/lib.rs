@@ -52,7 +52,7 @@ mod prelude {
 
     pub use std::cell::RefCell;
     pub use std::collections::{HashMap, HashSet};
-    pub use std::fmt::Debug;
+    pub use std::fmt::{self, Debug, Display};
     pub use std::ops::{Deref, DerefMut};
     pub use std::rc::Rc;
 }

@@ -123,3 +123,27 @@ pub enum StatusCondition {
 
     Tired, // Less lenient music timing. Get some rest, dumbass! Don't emulate my bad habits.
 }
+
+impl Display for StatusCondition {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        use StatusCondition::*;
+
+        let s = match self {
+            Sleeping => "Sleeping",
+            Paralysis => "Paralyzed",
+            Crying => "Crying",
+            LightHeaded => "Light-headed",
+            ShortBreath => "Short of breath",
+            Dizziness => "Dizzy",
+            Blinded => "Blinded",
+            Heatstroke => "Heatstroke",
+            Frostbite => "Frostbite",
+            Bleeding => "Bleeding",
+            Poison => "Poisoned",
+            PoisonR => "Poisoned (R)",
+            Tired => "Tired",
+        };
+
+        write!(f, "{}", s)
+    }
+}

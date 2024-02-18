@@ -35,10 +35,13 @@ impl Skill for SkillAttack {
     }
 
     fn description(&self) -> String {
-        let dmg = self.describe_damage();
-        let fx = self.describe_effects();
+        let mut res = self.describe_damage().unwrap_or_default();
 
-        //
+        if let Some(fx) = &self.status_effect {
+            res += &fx.describe();
+        }
+
+        res
     }
 
     fn cost(&self) -> u32 {
