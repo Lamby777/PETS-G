@@ -15,16 +15,14 @@ impl ShieldVariant {
 
         match self {
             Physical => "physical",
-
             OneElement { element } => return element.describe(),
 
             ManyElements { elements } => {
-                // elements.join(", ")
-                // &desc
-                todo!()
+                return join_words(elements, "and")
+                    .expect("shield of many elements with empty block list")
             }
 
-            AllElements => "all elements",
+            AllElements => "all kinds of",
         }
         .to_string()
     }
