@@ -1,17 +1,18 @@
 use super::*;
 use std::time::Duration;
 
+/// What kind of damage does the shield block?
 #[derive(Serialize, Deserialize)]
-pub enum ShieldVariant {
+pub enum ShieldAffinity {
     Physical,
     OneElement { element: Element },
     ManyElements { elements: Vec<Element> },
     AllElements,
 }
 
-impl ShieldVariant {
+impl ShieldAffinity {
     fn describe_affinity(&self) -> String {
-        use ShieldVariant::*;
+        use ShieldAffinity::*;
 
         match self {
             Physical => "physical",
@@ -20,7 +21,7 @@ impl ShieldVariant {
             ManyElements { elements } => {
                 let iter = elements.iter().map(|x| x.describe());
                 return join_words(iter, "and")
-                    .expect("shield of many elements with empty block list");
+                    .expect("shield of many elements has empty block list");
             }
 
             AllElements => "all kinds of",
@@ -32,7 +33,7 @@ impl ShieldVariant {
 #[derive(Serialize, Deserialize)]
 pub struct ShieldSkill {
     /// Element of the shield
-    pub protects_against: ShieldVariant,
+    pub protects_against: ShieldAffinity,
 
     /// How many hits the shield can take
     pub hits: u8,
@@ -66,12 +67,13 @@ impl ShieldSkill {
 
     fn hits_to_str(hits: u8) -> &'static str {
         match hits {
-            1 => "single",
-            2 => "double",
-            3 => "triple",
-            4 => "quadruple",
-            5 => "quintuple",
-            _ => "multiple",
+            0 => unreachable!("shield that can't withstand any hits"),
+            1 => "once",
+            2..=3 => "a couple times",
+            4..=6 => "several times",
+            7..=10 => "many times",
+            11..=15 => "for a while",
+            _ => unreachable!("shield that can withstand over 15 hits"),
         }
     }
 }
@@ -81,13 +83,20 @@ impl SkillFamily for ShieldSkill {
     fn description(&self) -> String {
         let potency = ShieldSkill::multi_to_str(self.multiplier);
         let reflectivity = if self.reflect { "reflects" } else { "blocks" };
-        // let affinity = self.
+        let affinity = self.protects_against.describe_affinity();
 
-        format!(
-            // "Casts a {} shield that {} {} damage {}.",
-            "Casts a {} shield that {}.",
-            potency, reflectivity,
-        )
+        let part1 = format!(
+            "Casts a {}shield that {} {} damage",
+            potency, reflectivity, affinity
+        );
+
+        match self.hits {
+            0 => format!("{}. It probably won't last...", potency),
+            hits => {
+                let hits = ShieldSkill::hits_to_str(hits);
+                format!("{} {}.", part1, hits)
+            }
+        }
     }
 }
 
@@ -95,11 +104,10 @@ impl SkillFamily for ShieldSkill {
 mod tests {
     use super::*;
 
-    #[ignore]
     #[test]
     fn test_describe_impenetrable_flawless() {
         let skill = ShieldSkill {
-            protects_against: ShieldVariant::AllElements,
+            protects_against: ShieldAffinity::AllElements,
             hits: 1,
             multiplier: 0.5,
             reflect: false,
@@ -107,7 +115,7 @@ mod tests {
 
         assert_eq!(
             skill.description(),
-            "Casts a sturdy shield that blocks all damage once."
+            "Casts a sturdy shield that blocks all kinds of damage once."
         );
     }
 }
