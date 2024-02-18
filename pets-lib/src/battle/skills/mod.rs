@@ -3,6 +3,8 @@ use crate::prelude::*;
 
 use std::fmt;
 
+use strum::{EnumIter, IntoEnumIterator};
+
 mod status_effects;
 use status_effects::*;
 
@@ -36,7 +38,7 @@ pub struct SkillConcrete {
     pub cost: u32,
 }
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, EnumIter, Serialize, Deserialize)]
 pub enum Element {
     // Physical
     Blade,   // swords, claws, etc.
@@ -63,6 +65,48 @@ impl Display for Element {
 }
 
 impl Element {
+    pub fn list_all() -> Vec<Element> {
+        Element::iter().collect()
+    }
+
+    pub fn list_physical() -> Vec<Element> {
+        Element::iter().filter(Self::is_physical).collect()
+    }
+
+    pub fn list_magical() -> Vec<Element> {
+        Element::iter().filter(Self::is_magical).collect()
+    }
+
+    /// Skips unique elements (Fuzz, Whip, etc.)
+    pub fn list_magical_not_unique() -> Vec<Element> {
+        Element::iter()
+            .filter(Self::is_magical)
+            .filter(|v| !v.is_unique())
+            .collect()
+    }
+
+    pub fn list_unique() -> Vec<Element> {
+        Element::iter().filter(Self::is_unique).collect()
+    }
+
+    pub fn list_not_unique() -> Vec<Element> {
+        Element::iter().filter(|v| !v.is_unique()).collect()
+    }
+
+    pub fn is_physical(&self) -> bool {
+        use Element::*;
+        matches!(self, Blade | Kinetic)
+    }
+
+    pub fn is_magical(&self) -> bool {
+        !self.is_physical()
+    }
+
+    pub fn is_unique(&self) -> bool {
+        use Element::*;
+        matches!(self, Fuzz | Whip)
+    }
+
     /// User-facing string for formatting the element of a skill
     /// Handles the "edge cases" of grammar like "Fuzz" => "Fuzzy"
     pub fn describe(&self) -> String {
@@ -71,8 +115,11 @@ impl Element {
         match self {
             Blade => "Slash",
             Kinetic => "Kinetic",
+
             Electric => "Electric",
             Psi => "Psychic",
+            Spirit => "Supernatural",
+
             Fuzz => "Fuzzy",
             Whip => "Whip",
 

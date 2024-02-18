@@ -5,8 +5,8 @@
 pub mod autoload;
 pub mod dbox;
 
+use crate::prelude::*;
 use dialogical::InteractionMap;
-use indoc::indoc;
 
 use std::sync::OnceLock;
 
