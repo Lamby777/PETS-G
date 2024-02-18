@@ -2,7 +2,6 @@ use crate::consts::battle::*;
 use crate::prelude::*;
 
 use std::fmt;
-use std::time::Duration;
 
 mod status_effects;
 use status_effects::*;
@@ -12,36 +11,16 @@ mod attack;
 #[typetag::serde(tag = "type")]
 pub trait SkillFamily {
     fn name(&self) -> &str {
-        /// TODO this is only to shut up errors for now
+        // TODO this is only to shut up errors for now
         unimplemented!()
     }
 
     fn base_cost(&self) -> u32 {
-        /// TODO this is only to shut up errors for now
+        // TODO this is only to shut up errors for now
         unimplemented!()
     }
 
     fn description(&self) -> String;
-}
-
-pub enum SkillInfo {
-    /// Element-based offensive attack
-    /// power: 0 for "status effect only" skills
-    Elemental(Element, u8, Option<ChanceOfEffect>),
-
-    /// Heal HP
-    Recovery(u8),
-
-    /// Slow down time
-    Flux { power: u8, lasts_for: Duration },
-
-    /// Shield
-    Shield {
-        protects_against: ShieldVariant,
-        power: u8,
-        lasts_for: u8,
-        partial: bool,
-    },
 }
 
 #[derive(Serialize, Deserialize)]
