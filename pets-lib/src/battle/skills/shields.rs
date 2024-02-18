@@ -74,6 +74,9 @@ pub struct ShieldSkill {
 
     /// Whether the shield reflects damage
     pub reflect: bool,
+
+    /// Does the shield cover the whole party?
+    pub plural: bool,
 }
 
 impl ShieldSkill {
@@ -113,10 +116,11 @@ impl SkillFamily for ShieldSkill {
         let potency = ShieldSkill::multi_to_str(self.multiplier);
         let reflectivity = if self.reflect { "reflects" } else { "blocks" };
         let affinity = self.affinity.describe_affinity();
+        let width = if self.plural { "wide " } else { "" };
 
         let part1 = format!(
-            "Casts a {}shield that {} {} damage",
-            potency, reflectivity, affinity
+            "Casts a {}{}shield that {} {} damage",
+            width, potency, reflectivity, affinity
         );
 
         match self.hits {
@@ -145,6 +149,7 @@ mod tests {
             hits: 1,
             multiplier: 0.2,
             reflect: false,
+            plural: false,
         };
 
         assert_eq!(
@@ -160,6 +165,7 @@ mod tests {
             hits: 7,
             multiplier: 0.8,
             reflect: true,
+            plural: false,
         };
 
         assert_eq!(
@@ -175,6 +181,7 @@ mod tests {
             hits: 3,
             multiplier: 0.5,
             reflect: false,
+            plural: false,
         };
 
         assert_eq!(
@@ -190,6 +197,7 @@ mod tests {
             hits: 3,
             multiplier: 0.5,
             reflect: false,
+            plural: false,
         };
 
         assert_eq!(
@@ -200,17 +208,18 @@ mod tests {
     }
 
     #[test]
-    fn test_describe_one_specific_element() {
+    fn test_describe_wide_one_specific_element() {
         let skill = ShieldSkill {
             affinity: ShieldAffinity::Specific(vec![Fuzz]),
             hits: 3,
             multiplier: 0.5,
             reflect: false,
+            plural: true,
         };
 
         assert_eq!(
             skill.description(),
-            "Casts a shield that blocks only Fuzzy damage a couple times."
+            "Casts a wide shield that blocks only Fuzzy damage a couple times."
         );
     }
 }

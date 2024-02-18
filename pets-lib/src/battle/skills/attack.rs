@@ -4,6 +4,7 @@ use super::*;
 pub struct AttackSkill {
     pub element: Element,
     pub power: u8,
+    pub plural: bool,
     pub status_effect: Option<ChanceOfEffect>,
 }
 
@@ -12,12 +13,18 @@ impl AttackSkill {
         Self {
             element,
             power,
+            plural: false,
             status_effect: None,
         }
     }
 
     pub fn with_effect(mut self, effect: StatusEffect, chance: EffectChance) -> Self {
         self.status_effect = Some(ChanceOfEffect::new(effect, chance));
+        self
+    }
+
+    pub fn make_plural(mut self) -> Self {
+        self.plural = true;
         self
     }
 
