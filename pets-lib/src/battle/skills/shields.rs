@@ -12,51 +12,58 @@ pub enum ShieldAffinity {
 }
 
 impl ShieldAffinity {
-    pub fn from_vec(elements: Vec<Element>) -> ShieldAffinity {
+    /// Attempts to convert an explicit list of elements like
+    /// [Blade, Kinetic] into a more general variant like Physical
+    fn coerce_specific(&self) -> Option<Self> {
         use ShieldAffinity::*;
 
-        fn matches(slice: &[Element], pred: impl Fn(&Element) -> bool) -> bool {
-            slice.iter().any(pred)
-        }
+        let Specific(elements) = self else {
+            panic!("attempt to `coerce_specific` a non-specific shield");
+        };
 
-        if matches(&elements, Element::is_physical) {
-            Physical
-        } else if matches(&elements, Element::is_magical) {
-            Magical
-        } else if elements.len() == std::mem::variant_count::<Element>() {
+        // we don't need to sort the other vectors we're comparing to,
+        // because sorting this one will sort based on enum variant order
+        // and the enum iterators happen to also iterate in order...
+        // (at least i sure hope they do)
+        let mut sorted = elements.clone();
+        sorted.sort();
+
+        Some(if sorted == Element::list_all() {
             AllElements
+        } else if sorted == Element::list_physical() {
+            Physical
+        } else if sorted == Element::list_magical() {
+            Magical
         } else {
-            Specific(elements)
-        }
-    }
-
-    /// convert to list of elements, if it isn't already
-    pub fn to_vec(elements: ShieldAffinity) -> Vec<Element> {
-        use ShieldAffinity::*;
-
-        match elements {
-            AllElements => Element::list_all(),
-            Magical => Element::list_magical(),
-            Physical => Element::list_physical(),
-            Specific(inner) => inner,
-        }
+            return None;
+        })
     }
 
     fn describe_affinity(&self) -> String {
         use ShieldAffinity::*;
 
-        match self {
-            AllElements => "all kinds of",
-            Magical => "magical",
-            Physical => "physical",
-
-            Specific(elements) => {
-                let iter = elements.iter().map(|x| x.describe());
-                return join_words(iter, "and", Some("only"))
-                    .expect("shield of many elements has empty block list");
-            }
+        fn match_simple(affinity: &ShieldAffinity) -> Option<&str> {
+            Some(match affinity {
+                AllElements => "all kinds of",
+                Magical => "magical",
+                Physical => "physical",
+                _ => return None,
+            })
         }
-        .to_string()
+
+        match self {
+            Specific(elements) => {
+                if let Some(coerced) = self.coerce_specific() {
+                    return match_simple(&coerced).unwrap().to_string();
+                }
+
+                let iter = elements.iter().map(|x| x.describe());
+                join_words(iter, "and", Some("only"))
+                    .expect("shield of many elements has empty block list")
+            }
+
+            _ => match_simple(self).unwrap().to_string(),
+        }
     }
 }
 
@@ -224,6 +231,22 @@ mod tests {
         assert_eq!(
             skill.description(),
             "Casts a wide shield that blocks only Fuzzy damage a couple times."
+        );
+    }
+
+    #[test]
+    fn test_describe_physical_as_specific() {
+        let skill = ShieldSkill {
+            affinity: ShieldAffinity::Specific(Element::list_physical()),
+            hits: 3,
+            multiplier: 0.5,
+            reflect: false,
+            plural: true,
+        };
+
+        assert_eq!(
+            skill.description(),
+            "Casts a wide shield that blocks physical damage a couple times."
         );
     }
 }

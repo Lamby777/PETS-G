@@ -55,11 +55,17 @@ impl SkillFamily for AttackSkill {
         let dmg = self.describe_damage();
         let fx = self.status_effect.as_ref().map(|fx| fx.describe());
 
-        match (dmg, fx) {
+        let p1 = match (dmg, fx) {
             (Some(dmg), Some(fx)) => format!("{} {}", dmg, fx),
             (Some(dmg), None) => dmg,
             (None, Some(fx)) => fx,
             (None, None) => panic!("no damage or effect to format"),
+        };
+
+        if self.plural {
+            format!("{} Targets all enemies!", p1)
+        } else {
+            p1
         }
     }
 
@@ -73,7 +79,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_dmg_low_chance_effect_description() {
+    fn test_describe_dmg_low_chance_effect() {
         let skill =
             AttackSkill::new(Element::Fire, 3).with_effect(StatusEffect::Burn, EffectChance::Rare);
 
@@ -84,14 +90,14 @@ mod tests {
     }
 
     #[test]
-    fn test_dmg_description() {
+    fn test_describe_dmg() {
         let skill = AttackSkill::new(Element::Fire, 1);
 
         assert_eq!(skill.description(), "Deals faint Fire-based damage.");
     }
 
     #[test]
-    fn test_low_chance_effect_description() {
+    fn test_describe_low_chance_effect() {
         let skill = AttackSkill::new(Element::Fire, 0)
             .with_effect(StatusEffect::Burn, EffectChance::Common);
 
@@ -99,9 +105,21 @@ mod tests {
     }
 
     #[test]
-    fn test_dmg_nonbased_description() {
+    fn test_describe_dmg_nonbased() {
         let skill = AttackSkill::new(Element::Psi, 4);
 
         assert_eq!(skill.description(), "Deals strong Psychic damage.");
+    }
+
+    #[test]
+    fn test_describe_molotov_cocktail() {
+        let skill = AttackSkill::new(Element::Fire, 0)
+            .with_effect(StatusEffect::Burn, EffectChance::Guaranteed)
+            .make_plural();
+
+        assert_eq!(
+            skill.description(),
+            "Always inflicts Burn. Targets all enemies!"
+        );
     }
 }
