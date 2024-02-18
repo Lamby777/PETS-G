@@ -4,9 +4,7 @@ use std::time::Duration;
 /// What kind of damage does the shield block?
 #[derive(Serialize, Deserialize)]
 pub enum ShieldAffinity {
-    Physical,
-    OneElement { element: Element },
-    ManyElements { elements: Vec<Element> },
+    Elements { elements: Vec<Element> },
     AllElements,
 }
 
@@ -15,16 +13,21 @@ impl ShieldAffinity {
         use ShieldAffinity::*;
 
         match self {
-            Physical => "physical",
-            OneElement { element } => return element.describe(),
+            AllElements => "all kinds of",
 
-            ManyElements { elements } => {
+            Elements { elements } => {
+                // if only blade and kinetic, call it physical
+                if elements.len() == 2
+                    && elements.contains(&Element::Blade)
+                    && elements.contains(&Element::Kinetic)
+                {
+                    return "physical".to_owned();
+                }
+
                 let iter = elements.iter().map(|x| x.describe());
                 return join_words(iter, "and")
                     .expect("shield of many elements has empty block list");
             }
-
-            AllElements => "all kinds of",
         }
         .to_string()
     }
