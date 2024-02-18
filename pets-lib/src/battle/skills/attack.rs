@@ -1,8 +1,6 @@
 use super::*;
 
 pub struct SkillAttack {
-    pub name: &'static str,
-    pub cost: u32,
     pub power: u8,
     pub element: Element,
     pub status_effect: Option<EffectPair>,
@@ -30,10 +28,6 @@ impl SkillAttack {
 }
 
 impl Skill for SkillAttack {
-    fn name(&self) -> &str {
-        self.name
-    }
-
     fn description(&self) -> String {
         let mut res = self.describe_damage().unwrap_or_default();
 
@@ -42,9 +36,5 @@ impl Skill for SkillAttack {
         }
 
         res
-    }
-
-    fn cost(&self) -> u32 {
-        self.cost
     }
 }
