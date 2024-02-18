@@ -2,26 +2,53 @@ use crate::consts::battle::*;
 use crate::prelude::*;
 
 use std::fmt;
+use std::time::Duration;
 
 type PowerLevel = u8;
 
 pub enum SkillInfo {
     /// Element-based offensive attack
     /// power: 0 for "status effect only" skills
-    Elemental(Element, PowerLevel, Option<SkillEffect>),
+    Elemental(Element, PowerLevel, Option<EffectPair>),
 
     /// Heal HP
     Recovery(PowerLevel),
+
+    /// Slow down time
+    Flux {
+        power: PowerLevel,
+        lasts_for: Duration,
+    },
+
+    /// Shield
+    Shield {
+        protects_against: ShieldVariant,
+        power: PowerLevel,
+        lasts_for: u8,
+        partial: bool,
+    },
 }
 
 pub struct Skill {
+    /// Skill info, doesn't matter whether it's attack/heal/support
     pub stats: SkillInfo,
-    pub to_all: bool,
+
+    /// Does this skill affect multiple targets?
+    pub plural: bool,
+
+    /// How much (Mana | (B)PP | whatever tf i decide to call it) does it cost?
     pub cost: u32,
 }
 
+pub enum ShieldVariant {
+    Physical,
+    OneElement(Element),
+    ManyElements(Vec<Element>),
+    AllElements,
+}
+
 /// status condition from a skill, and its chances
-pub struct SkillEffect {
+pub struct EffectPair {
     condition: StatusCondition,
     chance: f32,
 }
@@ -33,8 +60,8 @@ pub enum ConditionChance {
 }
 
 impl ConditionChance {
-    /// User-facing string for the chance of a status condition to
-    /// be used in skill descriptions
+    /// User-facing string for the chance of a status condition
+    /// To be used in skill descriptions
     pub fn chance_str(&self) -> &str {
         use ConditionChance::*;
 
@@ -62,7 +89,7 @@ impl ConditionChance {
 
 pub enum Element {
     Fire,
-    Freeze,
+    Ice,
     Electric,
     Wind,
     Earth,
