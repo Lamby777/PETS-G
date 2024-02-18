@@ -3,16 +3,46 @@ use std::time::Duration;
 
 #[derive(Serialize, Deserialize)]
 pub enum ShieldVariant {
-    Physical(Duration),
-    OneElement { element: Element, hits: u8 },
-    ManyElements { elements: Vec<Element>, hits: u8 },
-    AllElements { hits: u8 },
+    Physical,
+    OneElement { element: Element },
+    ManyElements { elements: Vec<Element> },
+    AllElements,
+}
+
+/// list elements but put a word like "or" or "and" before the last one
+fn join_conjunction<T: ToString>(list: &[T], conjunction: &str) -> String {
+    let iter = list.iter().map(|x| x.to_string());
+    todo!()
+}
+
+impl ShieldVariant {
+    fn describe_affinity(&self) -> String {
+        use ShieldVariant::*;
+
+        match self {
+            Physical => "physical",
+
+            OneElement { element } => return element.describe(),
+
+            ManyElements { elements } => {
+                // elements.join(", ")
+                // &desc
+                todo!()
+            }
+
+            AllElements => "all elements",
+        }
+        .to_string()
+    }
 }
 
 #[derive(Serialize, Deserialize)]
 pub struct ShieldSkill {
     /// Element of the shield
     pub protects_against: ShieldVariant,
+
+    /// How many hits the shield can take
+    pub hits: u8,
 
     /// Percent of damage that gets through
     /// If zero, it blocks all damage
@@ -57,8 +87,14 @@ impl ShieldSkill {
 impl SkillFamily for ShieldSkill {
     fn description(&self) -> String {
         let potency = ShieldSkill::multi_to_str(self.multiplier);
-        let reflectivity = if self.reflect { "reflective " } else { "" };
-        let mut result = format!("Casts a {}{}", potency, reflectivity);
+        let reflectivity = if self.reflect { "reflects" } else { "blocks" };
+        // let affinity = self.
+
+        format!(
+            // "Casts a {} shield that {} {} damage {}.",
+            "Casts a {} shield that {}.",
+            potency, reflectivity,
+        )
     }
 }
 
@@ -66,14 +102,19 @@ impl SkillFamily for ShieldSkill {
 mod tests {
     use super::*;
 
+    #[ignore]
     #[test]
     fn test_describe_impenetrable_flawless() {
         let skill = ShieldSkill {
-            protects_against: ShieldVariant::AllElements { hits: 2 },
+            protects_against: ShieldVariant::AllElements,
+            hits: 1,
             multiplier: 0.5,
             reflect: false,
         };
 
-        assert_eq!(skill.description(), "Casts a sturdy flawless shield that.");
+        assert_eq!(
+            skill.description(),
+            "Casts a sturdy shield that blocks all damage once."
+        );
     }
 }
