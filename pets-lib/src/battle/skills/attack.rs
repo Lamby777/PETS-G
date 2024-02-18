@@ -3,7 +3,7 @@ use super::*;
 pub struct SkillAttack {
     pub power: u8,
     pub element: Element,
-    pub status_effect: Option<EffectPair>,
+    pub status_effect: Option<ChanceOfEffect>,
 }
 
 impl SkillAttack {
