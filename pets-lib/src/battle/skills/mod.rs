@@ -10,9 +10,17 @@ use status_effects::*;
 mod attack;
 
 pub trait Skill {
-    fn name(&self) -> &str;
+    fn name(&self) -> &str {
+        /// TODO this is only to shut up errors for now
+        unimplemented!()
+    }
+
+    fn base_cost(&self) -> u32 {
+        /// TODO this is only to shut up errors for now
+        unimplemented!()
+    }
+
     fn description(&self) -> String;
-    fn cost(&self) -> u32;
 }
 
 pub enum SkillInfo {
