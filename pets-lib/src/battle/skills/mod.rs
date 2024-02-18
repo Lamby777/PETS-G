@@ -53,6 +53,7 @@ pub enum ShieldVariant {
     AllElements,
 }
 
+#[derive(Debug)]
 pub enum Element {
     Fire,
     Ice,
@@ -64,4 +65,27 @@ pub enum Element {
     // Unique
     Fuzz,
     Whip,
+}
+
+impl fmt::Display for Element {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        Debug::fmt(self, f)
+    }
+}
+
+impl Element {
+    /// User-facing string for formatting the element of a skill
+    /// Handles the "edge cases" of grammar like "Fuzz" => "Fuzzy"
+    pub fn describe(&self) -> &str {
+        use Element::*;
+
+        match self {
+            Electric => "Electric",
+            Psi => "Psychic",
+            Fuzz => "Fuzzy",
+            Whip => "Whip",
+
+            _ => &format!("{}-based", self),
+        }
+    }
 }
