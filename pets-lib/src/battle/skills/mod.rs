@@ -21,10 +21,7 @@ pub trait SkillFamily {
         unimplemented!()
     }
 
-    fn base_cost(&self) -> u32 {
-        // TODO this is only to shut up errors for now
-        unimplemented!()
-    }
+    fn base_cost(&self) -> u32;
 
     fn description(&self) -> String;
 }

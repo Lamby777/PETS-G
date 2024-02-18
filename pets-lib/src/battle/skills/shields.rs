@@ -127,6 +127,10 @@ impl SkillFamily for ShieldSkill {
             }
         }
     }
+
+    fn base_cost(&self) -> u32 {
+        todo!()
+    }
 }
 
 #[cfg(test)]

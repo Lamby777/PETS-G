@@ -9,6 +9,10 @@ impl SkillFamily for PSIFluxSkill {
     fn description(&self) -> String {
         format!("Warps time in your favor for {} seconds.", self.0.as_secs())
     }
+
+    fn base_cost(&self) -> u32 {
+        todo!()
+    }
 }
 
 #[derive(Serialize, Deserialize)]
@@ -51,6 +55,10 @@ impl SkillFamily for PSIRewireSkill {
             "Gamble away {} of your mana for the rare chance of a profit.",
             self.multi_as_percent_str()
         )
+    }
+
+    fn base_cost(&self) -> u32 {
+        todo!()
     }
 }
 

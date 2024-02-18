@@ -55,6 +55,10 @@ impl SkillFamily for AttackSkill {
             (None, None) => panic!("no damage or effect to format"),
         }
     }
+
+    fn base_cost(&self) -> u32 {
+        1
+    }
 }
 
 #[cfg(test)]
