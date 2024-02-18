@@ -6,6 +6,35 @@ use std::time::Duration;
 
 type PowerLevel = u8;
 
+pub trait Skill {
+    fn name(&self) -> &str;
+    fn description(&self) -> &str;
+    fn cost(&self) -> u32;
+}
+
+pub struct SkillAttack {
+    pub name: &'static str,
+    pub description: &'static str,
+    pub cost: u32,
+    pub power: u8,
+    pub element: Element,
+    pub status_effect: Option<EffectPair>,
+}
+
+impl Skill for SkillAttack {
+    fn name(&self) -> &str {
+        self.name
+    }
+
+    fn description(&self) -> &str {
+        self.description
+    }
+
+    fn cost(&self) -> u32 {
+        self.cost
+    }
+}
+
 pub enum SkillInfo {
     /// Element-based offensive attack
     /// power: 0 for "status effect only" skills
@@ -29,9 +58,9 @@ pub enum SkillInfo {
     },
 }
 
-pub struct Skill {
+pub struct SkillConcrete {
     /// Skill info, doesn't matter whether it's attack/heal/support
-    pub stats: SkillInfo,
+    pub stats: &'static dyn Skill,
 
     /// Does this skill affect multiple targets?
     pub plural: bool,
