@@ -9,7 +9,8 @@ use status_effects::*;
 
 mod attack;
 
-pub trait Skill {
+#[typetag::serde(tag = "type")]
+pub trait SkillFamily {
     fn name(&self) -> &str {
         /// TODO this is only to shut up errors for now
         unimplemented!()
@@ -43,9 +44,10 @@ pub enum SkillInfo {
     },
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct SkillConcrete {
     /// Skill info, doesn't matter whether it's attack/heal/support
-    pub stats: &'static dyn Skill,
+    pub stats: Box<dyn SkillFamily>,
 
     /// Does this skill affect multiple targets?
     pub plural: bool,
@@ -61,7 +63,7 @@ pub enum ShieldVariant {
     AllElements,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum Element {
     Fire,
     Ice,

@@ -1,12 +1,13 @@
 use super::*;
 
-pub struct SkillAttack {
+#[derive(Serialize, Deserialize)]
+pub struct AttackSkill {
     pub element: Element,
     pub power: u8,
     pub status_effect: Option<ChanceOfEffect>,
 }
 
-impl SkillAttack {
+impl AttackSkill {
     pub fn new(element: Element, power: u8) -> Self {
         Self {
             element,
@@ -40,7 +41,8 @@ impl SkillAttack {
     }
 }
 
-impl Skill for SkillAttack {
+#[typetag::serde]
+impl SkillFamily for AttackSkill {
     /// Panics if neither damage nor effect are present
     fn description(&self) -> String {
         let dmg = self.describe_damage();
@@ -62,7 +64,7 @@ mod tests {
     #[test]
     fn test_dmg_low_chance_effect_description() {
         let skill =
-            SkillAttack::new(Element::Fire, 3).with_effect(StatusEffect::Burn, EffectChance::Rare);
+            AttackSkill::new(Element::Fire, 3).with_effect(StatusEffect::Burn, EffectChance::Rare);
 
         assert_eq!(
             skill.description(),
@@ -72,14 +74,14 @@ mod tests {
 
     #[test]
     fn test_dmg_description() {
-        let skill = SkillAttack::new(Element::Fire, 1);
+        let skill = AttackSkill::new(Element::Fire, 1);
 
         assert_eq!(skill.description(), "Deals faint Fire-based damage.");
     }
 
     #[test]
     fn test_low_chance_effect_description() {
-        let skill = SkillAttack::new(Element::Fire, 0)
+        let skill = AttackSkill::new(Element::Fire, 0)
             .with_effect(StatusEffect::Burn, EffectChance::Common);
 
         assert_eq!(skill.description(), "High chance of inflicting Burn.");
@@ -87,7 +89,7 @@ mod tests {
 
     #[test]
     fn test_dmg_nonbased_description() {
-        let skill = SkillAttack::new(Element::Psi, 4);
+        let skill = AttackSkill::new(Element::Psi, 4);
 
         assert_eq!(skill.description(), "Deals strong Psychic damage.");
     }
