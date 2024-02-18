@@ -10,24 +10,22 @@ pub struct SkillAttack {
 
 impl SkillAttack {
     fn describe_power(&self) -> Option<&str> {
-        let word = match self.power {
+        Some(match self.power {
             0 => return None,
             1 => "Faint",
             2 => "Weak",
             3 => "Medium",
             4 => "Strong",
             5 => "Massive",
-        };
-
-        Some(word)
+            _ => unreachable!(),
+        })
     }
 
     fn describe_damage(&self) -> Option<String> {
-        let power = self.describe_power();
-    }
-
-    fn describe_effects(&self) -> Option<String> {
-        //
+        self.describe_power().map(|power| {
+            let element = self.element.describe();
+            format!("Deals {} {} damage.", power, element)
+        })
     }
 }
 
