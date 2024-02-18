@@ -41,13 +41,16 @@ impl SkillAttack {
 }
 
 impl Skill for SkillAttack {
+    /// Panics if neither damage nor effect are present
     fn description(&self) -> String {
-        let mut res = self.describe_damage().unwrap_or_default();
+        let dmg = self.describe_damage();
+        let fx = self.status_effect.as_ref().map(|fx| fx.describe());
 
-        if let Some(fx) = &self.status_effect {
-            format!("{} {}", res, fx.describe())
-        } else {
-            res
+        match (dmg, fx) {
+            (Some(dmg), Some(fx)) => format!("{} {}", dmg, fx),
+            (Some(dmg), None) => dmg,
+            (None, Some(fx)) => fx,
+            (None, None) => panic!("no damage or effect to format"),
         }
     }
 }
