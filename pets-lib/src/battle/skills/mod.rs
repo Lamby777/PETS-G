@@ -36,18 +36,24 @@ pub struct SkillConcrete {
     pub cost: u32,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub enum Element {
+    // Physical
+    Blade,   // swords, claws, etc.
+    Kinetic, // punches, guns, etc.
+
+    // Elemental
     Fire,
-    Ice,
-    Electric,
-    Wind,
-    Earth,
+    Ice,      // or water-related
+    Electric, // or magnetic, nuclear, etc.
+    Wind,     // or anything gas-based
+    Earth,    // or anything rock-based, like sand or metal
     Psi,
+    Spirit, // supernatural, ghostly, etc.
 
     // Unique
-    Fuzz,
-    Whip,
+    Fuzz, // Ethan's magic, often causes confusion/sleep
+    Whip, // Siva's magic, often causes paralysis/bleeding
 }
 
 impl Display for Element {
@@ -63,6 +69,8 @@ impl Element {
         use Element::*;
 
         match self {
+            Blade => "Slash",
+            Kinetic => "Kinetic",
             Electric => "Electric",
             Psi => "Psychic",
             Fuzz => "Fuzzy",
