@@ -82,18 +82,22 @@ pub struct ShieldSkill {
 impl ShieldSkill {
     // it's not gonna become a hard error, stfu clippy
     // <https://github.com/rust-lang/rust/issues/41620#issuecomment-1722194944>
-    #[allow(illegal_floating_point_literal_pattern)]
     fn multi_to_str(multi: f64) -> &'static str {
-        match multi {
-            // ranges because multiple shields combine their power
-            0.0 => "impenetrable ",
-            0.0..=0.3 => "sturdy ",
-            0.3..=0.7 => "",
-            0.7..=1.0 => "weak ",
+        if multi < 0.0 {
+            panic!("shield with negative multiplier");
+        }
 
-            // if your shield powers have been weakened...
-            1.0.. => "nullified ",
-            _ => unreachable!("shield has negative multiplier"),
+        if multi == 0.0 {
+            "impenetrable "
+        } else if multi <= 0.3 {
+            "sturdy "
+        } else if multi <= 0.7 {
+            ""
+        } else if multi <= 1.0 {
+            "weak "
+        } else {
+            // if your shield powers have been weakened past 1.0...
+            "nullified "
         }
     }
 
