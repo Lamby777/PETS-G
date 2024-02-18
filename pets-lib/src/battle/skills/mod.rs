@@ -7,6 +7,7 @@ mod status_effects;
 use status_effects::*;
 
 mod attack;
+mod shields;
 
 #[typetag::serde(tag = "type")]
 pub trait SkillFamily {
@@ -33,13 +34,6 @@ pub struct SkillConcrete {
 
     /// How much (Mana | (B)PP | whatever tf i decide to call it) does it cost?
     pub cost: u32,
-}
-
-pub enum ShieldVariant {
-    Physical,
-    OneElement(Element),
-    ManyElements(Vec<Element>),
-    AllElements,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
