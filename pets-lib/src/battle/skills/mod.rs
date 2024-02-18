@@ -8,9 +8,10 @@ use std::time::Duration;
 
 pub trait Skill {
     fn name(&self) -> &str;
-    fn description(&self) -> &str;
+    fn description(&self) -> String;
     fn cost(&self) -> u32;
 }
+
 pub enum SkillInfo {
     /// Element-based offensive attack
     /// power: 0 for "status effect only" skills
