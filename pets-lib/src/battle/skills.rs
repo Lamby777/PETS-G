@@ -4,8 +4,6 @@ use crate::prelude::*;
 use std::fmt;
 use std::time::Duration;
 
-type PowerLevel = u8;
-
 pub trait Skill {
     fn name(&self) -> &str;
     fn description(&self) -> &str;
@@ -38,21 +36,18 @@ impl Skill for SkillAttack {
 pub enum SkillInfo {
     /// Element-based offensive attack
     /// power: 0 for "status effect only" skills
-    Elemental(Element, PowerLevel, Option<EffectPair>),
+    Elemental(Element, u8, Option<EffectPair>),
 
     /// Heal HP
-    Recovery(PowerLevel),
+    Recovery(u8),
 
     /// Slow down time
-    Flux {
-        power: PowerLevel,
-        lasts_for: Duration,
-    },
+    Flux { power: u8, lasts_for: Duration },
 
     /// Shield
     Shield {
         protects_against: ShieldVariant,
-        power: PowerLevel,
+        power: u8,
         lasts_for: u8,
         partial: bool,
     },
