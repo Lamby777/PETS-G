@@ -7,8 +7,8 @@ use godot::engine::tween::TransitionType;
 // SHUT THE FUCK UP!!!!!!!!!!!!
 #[allow(unused)]
 pub mod battle {
-    pub const EFFECT_CHANCE_LIKELY: f32 = 0.8;
-    pub const EFFECT_CHANCE_RARE: f32 = 0.1;
+    pub const EFFECT_CHANCE_LIKELY: f64 = 0.8;
+    pub const EFFECT_CHANCE_RARE: f64 = 0.1;
 }
 
 pub mod playercb {

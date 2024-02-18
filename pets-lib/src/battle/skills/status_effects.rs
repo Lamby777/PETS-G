@@ -49,6 +49,6 @@ impl EffectChance {
             Rare => EFFECT_CHANCE_RARE,
         };
 
-        rand::random::<f32>() < chance
+        rand::random::<f64>() < chance
     }
 }
