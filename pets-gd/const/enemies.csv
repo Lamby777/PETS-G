@@ -1,3 +1,0 @@
-enemy_id,       max_hp, max_mana,   attack, defense,    speed,  stability,  delta
-"ANonnyMouse",  100,    30,         20,     15,         25,     10,         5
-
