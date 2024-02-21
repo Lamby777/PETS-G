@@ -2,10 +2,8 @@ use godot::engine::Engine;
 use godot::obj::NewAlloc;
 use godot::prelude::*;
 
-///
 /// Trait for autoloaded classes
 /// Makes it more convenient to get the singleton instance
-///
 pub trait Autoload: GodotClass + Inherits<Object> + NewAlloc {
     const AUTOLOAD_NAME: &'static str;
 
