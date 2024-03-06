@@ -1,5 +1,4 @@
 use super::*;
-use std::time::Duration;
 
 /// What kind of damage does the shield block?
 #[derive(Serialize, Deserialize)]
@@ -144,6 +143,16 @@ impl SkillFamily for ShieldSkill {
     }
 
     fn base_cost(&self) -> u32 {
+        todo!()
+    }
+
+    fn cast(
+        &self,
+        _caster: CharStatsPtr,
+        _target: Option<CharStatsPtr>,
+        _allies: Vec<CharStatsPtr>,
+        _enemies: Vec<CharStatsPtr>,
+    ) {
         todo!()
     }
 }

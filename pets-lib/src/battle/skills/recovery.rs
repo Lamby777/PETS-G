@@ -24,6 +24,16 @@ impl SkillFamily for RecoverySkill {
     fn base_cost(&self) -> u32 {
         todo!()
     }
+
+    fn cast(
+        &self,
+        _caster: CharStatsPtr,
+        _target: Option<CharStatsPtr>,
+        _allies: Vec<CharStatsPtr>,
+        _enemies: Vec<CharStatsPtr>,
+    ) {
+        todo!()
+    }
 }
 
 #[cfg(test)]
