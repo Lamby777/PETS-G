@@ -27,14 +27,11 @@ pub trait SkillFamily {
 
     fn cast(
         &self,
-        caster: CharStatsPtr,
-        target: Option<CharStatsPtr>,
-        allies: Vec<CharStatsPtr>,
-        enemies: Vec<CharStatsPtr>,
-    ) {
-        // TODO this is only to shut up errors for now
-        unimplemented!();
-    }
+        _caster: CharStatsPtr,
+        _target: Option<CharStatsPtr>,
+        _allies: Vec<CharStatsPtr>,
+        _enemies: Vec<CharStatsPtr>,
+    );
 }
 
 // not this "derive everything" crap again... ughhhhhh

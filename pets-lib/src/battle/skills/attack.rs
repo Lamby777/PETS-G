@@ -72,6 +72,20 @@ impl SkillFamily for AttackSkill {
     fn base_cost(&self) -> u32 {
         1
     }
+
+    fn cast(
+        &self,
+        _caster: CharStatsPtr,
+        target: Option<CharStatsPtr>,
+        _allies: Vec<CharStatsPtr>,
+        _enemies: Vec<CharStatsPtr>,
+    ) {
+        let target = target.expect("attack skill should have a target");
+        // let damage = self.power as u32;
+        // let mut target = target.borrow_mut();
+        // target.hp = target.hp.saturating_sub(damage);
+        todo!();
+    }
 }
 
 #[cfg(test)]
