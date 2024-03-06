@@ -29,16 +29,8 @@ pub struct CharData {
     /// ⚠️⚠️⚠️ See <https://github.com/Lamby777/PETS-G/issues/23>
     pub display_name: String,
 
-    /// Level of the character
     pub level: IntegralStat,
-
-    /// The character's long-term stat offsets
-    /// Stuff like using a consumable with permanent boosts...
     pub stats: CharStats,
-
-    /// The character's short-term stats
-    /// Stuff like how full a bar is, etc.
-    pub state: CharStatsStateful,
 
     /// Status conditions the character has
     pub conditions: HashSet<StatusEffect>,
@@ -52,19 +44,9 @@ impl Default for CharData {
         // will be dropped after this function...
         // just need it to see default values and prevent
         // repeating the same numbers everywhere
-        let calc = StatCalcList::default();
-        let level = 1;
-
-        let state = CharStatsStateful {
-            hp: (calc.max_hp)(level),
-            energy: (calc.max_energy)(level),
-        };
-
         CharData {
             display_name: "Chicken Nugget".to_owned(),
-            level,
-            state,
-
+            level: 1,
             stats: Default::default(),
             conditions: Default::default(),
             inventory: Default::default(),
@@ -72,7 +54,13 @@ impl Default for CharData {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+pub struct CharStats {
+    pub stateless: CharStatsStateless,
+    pub stateful: CharStatsStateful,
+}
+
+#[derive(Clone, Debug, Default, Serialize, Deserialize)]
 pub struct CharStatsStateful {
     /// Current HP
     pub hp: IntegralStat,
@@ -83,7 +71,7 @@ pub struct CharStatsStateful {
 }
 
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
-pub struct CharStats {
+pub struct CharStatsStateless {
     pub max_hp: IntegralStat,
     pub max_energy: IntegralStat,
 

@@ -13,6 +13,16 @@ impl SkillFamily for PSIFluxSkill {
     fn base_cost(&self) -> u32 {
         todo!()
     }
+
+    fn cast(
+        &self,
+        _caster: CharStatsPtr,
+        _target: Option<CharStatsPtr>,
+        _allies: Vec<CharStatsPtr>,
+        _enemies: Vec<CharStatsPtr>,
+    ) {
+        todo!()
+    }
 }
 
 #[derive(Serialize, Deserialize)]
@@ -58,6 +68,16 @@ impl SkillFamily for PSIRewireSkill {
     }
 
     fn base_cost(&self) -> u32 {
+        todo!()
+    }
+
+    fn cast(
+        &self,
+        _caster: CharStatsPtr,
+        _target: Option<CharStatsPtr>,
+        _allies: Vec<CharStatsPtr>,
+        _enemies: Vec<CharStatsPtr>,
+    ) {
         todo!()
     }
 }
