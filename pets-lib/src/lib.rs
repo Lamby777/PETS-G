@@ -41,11 +41,12 @@ mod prelude {
     pub use crate::util::*;
 
     pub use crate::dialogue::autoload::DBoxInterface;
+    pub use crate::dialogue::ix_map;
     pub use crate::functions::FnInterface;
     pub use crate::pchars::{EnemyID, PChar};
-
-    pub use crate::dialogue::ix_map;
     pub use crate::world::interaction::manager::InteractionManager;
+    pub use crate::world::interaction::zone::InteractionZone;
+    pub use crate::world::playercb::PlayerCB;
 
     pub use crate::singleton::Autoload;
     pub use crate::wrapped::Wrapped;

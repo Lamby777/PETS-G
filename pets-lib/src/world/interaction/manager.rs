@@ -7,8 +7,6 @@ use godot::engine::{INode2D, InputEvent, Node2D, RichTextLabel};
 use godot::prelude::*;
 
 use crate::prelude::*;
-use crate::world::interaction::zone::InteractionZone;
-use crate::world::playercb::PlayerCB;
 
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
@@ -46,11 +44,9 @@ impl InteractionManager {
     pub fn sort_zones_by_distance(&mut self) {
         let pcb_pos = PlayerCB::singleton().get_position();
 
-        self.zones.sort_by(|a, b| {
-            let a = a.get_global_position();
-            let b = b.get_global_position();
-            let a = a.distance_squared_to(pcb_pos);
-            let b = b.distance_squared_to(pcb_pos);
+        self.zones.sort_by(|zone_a, zone_b| {
+            let a = zone_a.get_global_position().distance_squared_to(pcb_pos);
+            let b = zone_b.get_global_position().distance_squared_to(pcb_pos);
             a.partial_cmp(&b).unwrap()
         });
     }
