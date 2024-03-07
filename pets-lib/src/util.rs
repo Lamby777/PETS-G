@@ -3,16 +3,19 @@
 //!
 
 use godot::engine::tween::TransitionType;
-use godot::engine::{Engine, RichTextLabel, Theme, Tween};
+use godot::engine::{Engine, NodeExt, RichTextLabel, Theme, Tween};
 use godot::prelude::*;
 
 /// helper function to load nodes into `OnReady` fields
-pub fn load_onready<T>(parent: Gd<Node>, field: &mut OnReady<Gd<T>>, path: &str)
+/// adapted from bromeon's answer on the gdext discord
+pub fn onready_node<O, T>(this: &Base<O>, path: impl Into<NodePath> + 'static) -> OnReady<Gd<T>>
 where
     T: GodotClass + Inherits<Node>,
+    O: GodotClass,
+    Gd<O>: NodeExt,
 {
-    let node = parent.get_node_as(path);
-    field.init(node);
+    let self_obj = this.to_gd();
+    OnReady::new(move || self_obj.get_node_as(path))
 }
 
 /// takes a bbcode string and prepends or removes it from the label text
