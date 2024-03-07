@@ -35,10 +35,11 @@ impl WalkingEnemy {
         let mode_str = if moving { "Run" } else { "Idle" };
 
         // TODO uncomment when backwards sprites are added
-        // let dir_str = if backwards { "Back" } else { "" };
-        // let anim_name = format!("{mode_str}{dir_str}");
+        let dir_str = ""; // if backwards { "Back" } else { "" };
 
-        self.sprite.set_animation(mode_str.into());
+        let anim_name = format!("{}-{}{}", self.enemy_id, mode_str, dir_str);
+
+        self.sprite.set_animation(anim_name.into());
         self.sprite.set_flip_h(flipped);
     }
 }
