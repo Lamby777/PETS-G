@@ -25,7 +25,7 @@ macro_rules! ch_unique_registry {
     ($map:expr, $calcs:expr, $($character:ident {
         $($field:ident $(.$property:ident)? = $value:expr,)*
         $(;$base:ident => $base_fn:expr),*
-    }),*) => {
+    }),* $(,)?) => {
         $(
             let character = PChar::$character;
             $map.entry(character.to_owned()).and_modify(|pchar| {
@@ -81,7 +81,7 @@ pub fn default_charmap() -> (CharMap, CharStatCalcs) {
             display_name = "Terra".to_owned(),
 
             ;max_hp => |lvl| lvl + 6
-        }
+        },
     }
 
     (res_map, res_calcs)
@@ -118,7 +118,7 @@ mod tests {
                 ;max_hp => |lvl| lvl - 6,
                 ;max_mana => |lvl| Some(lvl + 1),
                 ;speed => |_| 400
-            }
+            },
         }
 
         let calcs = calcs.get(PChar::ETHAN).unwrap();

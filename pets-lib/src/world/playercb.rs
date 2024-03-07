@@ -54,7 +54,7 @@ impl ICharacterBody2D for PlayerCB {
             "agent_t",
             "mira",
             "dubs",
-            "yoyo"
+            "yoyo",
         );
     }
 
