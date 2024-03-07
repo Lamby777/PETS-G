@@ -70,11 +70,6 @@ impl InteractionManager {
 
 #[godot_api]
 impl INode2D for InteractionManager {
-    fn ready(&mut self) {
-        let prompt_txt = self.base().get_node_as("Prompt");
-        self.prompt_txt.init(prompt_txt);
-    }
-
     fn process(&mut self, _delta: f64) {
         self.sort_zones_by_distance();
 
