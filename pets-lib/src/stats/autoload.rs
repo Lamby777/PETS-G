@@ -22,7 +22,7 @@ pub struct StatsInterface {
 /// name the function `x_of`, where `x` is the stat name
 /// for example, `si.natural_speed_of(PChar::ETHAN)`
 macro_rules! impl_stat_getters_on_si {
-    ($($stat:ident),*) => {
+    ($($stat:ident),* $(,)?) => {
         #[allow(unused)]
         impl StatsInterface {$(
             concat_idents::concat_idents!(fn_name = natural_, $stat, _of {
@@ -55,7 +55,7 @@ impl_stat_getters_on_si! {
     delta,
     epsilon,
     lambda,
-    max_mana
+    max_mana,
 }
 
 impl Autoload for StatsInterface {

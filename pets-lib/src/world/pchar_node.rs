@@ -38,7 +38,7 @@ impl PCharNode {
 
 #[macro_export]
 macro_rules! load_pchar_scenes_under {
-    ($parent:expr; $($name:expr),*) => {{
+    ($parent:expr; $($name:expr),* $(,)?) => {{
         let mut res = vec![];
 
         $({

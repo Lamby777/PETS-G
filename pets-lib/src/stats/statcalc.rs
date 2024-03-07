@@ -28,7 +28,7 @@ pub struct StatCalcList {
 }
 
 macro_rules! use_standard {
-    ($($stat:ident),*) => {
+    ($($stat:ident),* $(,)?) => {
         Self {
             $($stat: standard_calcs::$stat as fn(_) -> _),*
         }
@@ -48,7 +48,7 @@ impl Default for StatCalcList {
             delta,
             epsilon,
             lambda,
-            max_mana
+            max_mana,
         }
     }
 }
