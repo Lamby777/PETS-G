@@ -20,7 +20,7 @@ pub struct StatsInterface {
 }
 
 /// name the function `x_of`, where `x` is the stat name
-/// for example, `si.natural_speed_of(PChars::ETHAN)`
+/// for example, `si.natural_speed_of(PChar::ETHAN)`
 macro_rules! impl_stat_getters_on_si {
     ($($stat:ident),*) => {
         #[allow(unused)]
