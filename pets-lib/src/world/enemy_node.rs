@@ -8,8 +8,9 @@ use crate::prelude::*;
 pub struct WalkingEnemy {
     base: Base<StaticBody2D>,
 
-    // #[export]
-    // enemy_id: EnemyID,
+    #[export]
+    enemy_id: GString,
+
     #[init(default = onready_node(&base, "AnimatedSprite2D"))]
     sprite: OnReady<Gd<AnimatedSprite2D>>,
 }
@@ -44,6 +45,14 @@ impl WalkingEnemy {
 
 #[godot_api]
 impl IStaticBody2D for WalkingEnemy {
+    fn ready(&mut self) {
+        // check to make sure it's a valid enemy id
+        let enemy_id = self.enemy_id.to_string();
+        if !EnemyID::ALL.contains(&enemy_id.as_str()) {
+            panic!("Invalid enemy id: {}", enemy_id);
+        }
+    }
+
     fn physics_process(&mut self, _delta: f64) {
         // walk towards player
     }
