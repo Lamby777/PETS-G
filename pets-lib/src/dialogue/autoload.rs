@@ -10,9 +10,11 @@ use crate::prelude::*;
 
 /// Autoload class for easy management of dialog boxes
 #[derive(GodotClass)]
-#[class(base=Object)]
+#[class(init, base=Object)]
 pub struct DBoxInterface {
     base: Base<Object>,
+
+    #[init(default = load("res://scenes/dialog.tscn"))]
     dbox_scene: Gd<PackedScene>,
 }
 
@@ -68,16 +70,5 @@ impl DBoxInterface {
                     dbox
                 },
             )
-    }
-}
-
-#[godot_api]
-impl IObject for DBoxInterface {
-    fn init(base: Base<Object>) -> Self {
-        Self {
-            base,
-            // TODO use init macro
-            dbox_scene: load::<PackedScene>("res://scenes/dialog.tscn"),
-        }
     }
 }
