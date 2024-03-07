@@ -19,8 +19,7 @@ type CharStatsPtr = Rc<RefCell<CharStats>>;
 #[typetag::serde(tag = "type")]
 pub trait SkillFamily {
     fn name(&self) -> &str {
-        // TODO this is only to shut up errors for now
-        unimplemented!()
+        todo!()
     }
     fn base_cost(&self) -> u32;
     fn description(&self) -> String;
