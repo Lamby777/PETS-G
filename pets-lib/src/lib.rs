@@ -30,9 +30,10 @@ mod util;
 mod world;
 mod wrapped;
 
-#[allow(unused)]
+#[cfg(any())]
 mod llm;
 
+#[allow(unused)]
 mod prelude {
     pub use crate::items::*;
     pub use crate::limiq::*;
@@ -41,6 +42,7 @@ mod prelude {
 
     pub use crate::dialogue::autoload::DBoxInterface;
     pub use crate::functions::FnInterface;
+    pub use crate::pchars::{EnemyID, PChar};
 
     pub use crate::dialogue::ix_map;
     pub use crate::world::interaction::manager::InteractionManager;
@@ -60,7 +62,7 @@ mod prelude {
     pub use std::fmt::{self, Debug, Display};
     pub use std::io;
     pub use std::ops::{Deref, DerefMut};
-    pub use std::path::Path;
+    pub use std::path::{Path, PathBuf};
     pub use std::rc::Rc;
 }
 

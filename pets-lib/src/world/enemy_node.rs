@@ -8,6 +8,8 @@ use crate::prelude::*;
 pub struct WalkingEnemy {
     base: Base<StaticBody2D>,
 
+    // #[export]
+    // enemy_id: EnemyID,
     #[init(default = onready_node(&base, "AnimatedSprite2D"))]
     sprite: OnReady<Gd<AnimatedSprite2D>>,
 }

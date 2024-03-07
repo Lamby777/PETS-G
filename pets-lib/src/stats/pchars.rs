@@ -50,3 +50,8 @@ impl PChar {
         BOBBY
     }
 }
+
+#[derive(Debug, Clone, Copy)]
+pub enum EnemyID {
+    ANonnyMouse,
+}
