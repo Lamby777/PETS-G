@@ -79,7 +79,7 @@ unsafe impl ExtensionLibrary for PetsLib {
             [
                 StatsInterface,
                 DBoxInterface,
-                FnInterface
+                FnInterface,
             ] => Autoload, register
         );
     }
@@ -93,7 +93,7 @@ unsafe impl ExtensionLibrary for PetsLib {
             [
                 StatsInterface,
                 DBoxInterface,
-                FnInterface
+                FnInterface,
             ] => Autoload, unregister
         );
     }

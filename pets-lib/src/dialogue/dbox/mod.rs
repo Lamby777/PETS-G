@@ -163,7 +163,7 @@ impl DialogBox {
                 let new_ix = unwrap_fmt!(
                     new_ix,
                     "GOTO: Could not find interaction with ID: {}",
-                    ix_id
+                    ix_id,
                 );
 
                 self.set_ix(new_ix.clone());

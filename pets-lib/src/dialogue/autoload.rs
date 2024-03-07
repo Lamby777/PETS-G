@@ -30,7 +30,7 @@ impl DBoxInterface {
         let ix = unwrap_fmt!(
             ix,
             "Could not find interaction \"{}\" in the interaction map",
-            ix_id
+            ix_id,
         );
 
         let mut dbox = self.instantiate_dbox();
