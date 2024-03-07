@@ -13,7 +13,6 @@ pub mod statcalc;
 
 // re-export some crap from ^^^
 pub use autoload::StatsInterface;
-pub use pchars::PChar;
 pub use savefiles::SaveFile;
 pub use statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
 
