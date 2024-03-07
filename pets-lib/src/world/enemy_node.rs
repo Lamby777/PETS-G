@@ -42,6 +42,10 @@ impl WalkingEnemy {
         self.sprite.set_animation(anim_name.into());
         self.sprite.set_flip_h(flipped);
     }
+
+    pub fn walk_towards_player(&mut self, _delta: f64) {
+        // TODO
+    }
 }
 
 #[godot_api]
@@ -54,7 +58,7 @@ impl IStaticBody2D for WalkingEnemy {
         }
     }
 
-    fn physics_process(&mut self, _delta: f64) {
-        // walk towards player
+    fn physics_process(&mut self, delta: f64) {
+        self.walk_towards_player(delta);
     }
 }
