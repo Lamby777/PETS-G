@@ -12,8 +12,8 @@ pub struct WalkingEnemy {
 impl WalkingEnemy {
     #[func]
     pub fn anim_move(&mut self, moving: bool, backwards: bool) {
-        let mode_str = if moving { "Run" } else { "Idle" };
-        let dir_str = if backwards { "Back" } else { "" };
+        let _mode_str = if moving { "Run" } else { "Idle" };
+        let _dir_str = if backwards { "Back" } else { "" };
 
         // format!("{mode_str}{dir_str}");
     }
