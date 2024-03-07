@@ -27,9 +27,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3efs2"]
-size = Vector2(24, 48)
+size = Vector2(159.999, 160.001)
 
 [node name="WalkingEnemy" type="WalkingEnemy"]
+enemy_id = "ANONNYMOUSE"
 collision_layer = 8
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -39,6 +40,5 @@ sprite_frames = SubResource("SpriteFrames_hs7pi")
 animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.47955e-05, 20)
 rotation = 1.57079
 shape = SubResource("RectangleShape2D_3efs2")
