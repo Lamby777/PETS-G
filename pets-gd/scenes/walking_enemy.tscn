@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk214wpitbhju"]
+
+[ext_resource type="Texture2D" uid="uid://ced0gmuos2khr" path="res://assets/textures/enemies/anonm2.png" id="1_8afda"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3efs2"]
+size = Vector2(24, 48)
+
+[node name="WalkingEnemy" type="WalkingEnemy"]
+collision_layer = 8
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+scale = Vector2(4, 4)
+texture = ExtResource("1_8afda")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.47955e-05, 20)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_3efs2")

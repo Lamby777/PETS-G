@@ -1,13 +1,13 @@
-use godot::engine::AnimationNodeStateMachinePlayback;
-use godot::engine::AnimationPlayer;
-use godot::engine::AnimationTree;
-use godot::engine::Sprite2D;
+use godot::engine::{
+    AnimationNodeStateMachinePlayback, AnimationPlayer, AnimationTree, IStaticBody2D, Sprite2D,
+    StaticBody2D,
+};
 use godot::prelude::*;
 
 #[derive(GodotClass)]
-#[class(base=Node2D)]
-pub struct EnemyNode {
-    base: Base<Node2D>,
+#[class(base=StaticBody2D)]
+pub struct WalkingEnemy {
+    base: Base<StaticBody2D>,
     sprite: OnReady<Gd<Sprite2D>>,
     anim_player: OnReady<Gd<AnimationPlayer>>,
     anim_tree: OnReady<Gd<AnimationTree>>,
@@ -15,7 +15,7 @@ pub struct EnemyNode {
 }
 
 #[godot_api]
-impl EnemyNode {
+impl WalkingEnemy {
     #[func]
     pub fn anim_move(&mut self, moving: bool, inputs: Vector2) {
         let mode_str = if moving { "Run" } else { "Idle" };
@@ -27,8 +27,8 @@ impl EnemyNode {
 }
 
 #[godot_api]
-impl INode2D for EnemyNode {
-    fn init(base: Base<Node2D>) -> Self {
+impl IStaticBody2D for WalkingEnemy {
+    fn init(base: Base<StaticBody2D>) -> Self {
         Self {
             base,
             sprite: OnReady::manual(),
@@ -50,5 +50,10 @@ impl INode2D for EnemyNode {
         self.anim_state.init(anim_state);
 
         self.anim_tree.init(tree);
+    }
+
+    fn physics_process(&mut self, _delta: f64) {
+        // walk towards player
+        todo!()
     }
 }
