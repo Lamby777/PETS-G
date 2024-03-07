@@ -6,6 +6,15 @@ use godot::engine::tween::TransitionType;
 use godot::engine::{Engine, RichTextLabel, Theme, Tween};
 use godot::prelude::*;
 
+/// helper function to load nodes into `OnReady` fields
+pub fn load_onready<T>(parent: Gd<Node>, field: &mut OnReady<Gd<T>>, path: &str)
+where
+    T: GodotClass + Inherits<Node>,
+{
+    let node = parent.get_node_as(path);
+    field.init(node);
+}
+
 /// takes a bbcode string and prepends or removes it from the label text
 pub fn bbcode_toggle(mut node: Gd<RichTextLabel>, bbcode: &str, active: bool) {
     let old_text = node.get_text().to_string();
