@@ -11,9 +11,11 @@ use crate::world::interaction::zone::InteractionZone;
 use crate::world::playercb::PlayerCB;
 
 #[derive(GodotClass)]
-#[class(base=Node2D)]
+#[class(init, base=Node2D)]
 pub struct InteractionManager {
     base: Base<Node2D>,
+
+    #[init(default = OnReady::manual())]
     prompt_txt: OnReady<Gd<RichTextLabel>>,
 
     /// All interaction zones the player is inside
@@ -68,14 +70,6 @@ impl InteractionManager {
 
 #[godot_api]
 impl INode2D for InteractionManager {
-    fn init(base: Base<Node2D>) -> Self {
-        Self {
-            base,
-            prompt_txt: OnReady::manual(),
-            zones: vec![],
-        }
-    }
-
     fn ready(&mut self) {
         let prompt_txt = self.base().get_node_as("Prompt");
         self.prompt_txt.init(prompt_txt);
