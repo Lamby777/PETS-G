@@ -44,6 +44,5 @@ impl WalkingEnemy {
 impl IStaticBody2D for WalkingEnemy {
     fn physics_process(&mut self, _delta: f64) {
         // walk towards player
-        todo!()
     }
 }
