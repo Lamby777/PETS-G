@@ -6,7 +6,7 @@ use godot::engine::tween::TransitionType;
 use godot::engine::{Engine, NodeExt, RichTextLabel, Theme, Tween};
 use godot::prelude::*;
 
-trait Vector2Ext {
+pub trait Vector2Ext {
     fn to_tuple(&self) -> (f32, f32);
 }
 

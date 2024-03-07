@@ -79,8 +79,8 @@ impl IStaticBody2D for WalkingEnemy {
             self.anim_move(false, None, false);
         } else {
             let pcb = PlayerCB::singleton();
-            let Vector2 { x: pcb_x, y: pcb_y } = pcb.get_global_position();
-            let Vector2 { x: own_x, y: own_y } = self.base().get_global_position();
+            let (pcb_x, pcb_y) = pcb.get_global_position().to_tuple();
+            let (own_x, own_y) = self.base().get_global_position().to_tuple();
 
             // flipped if player is to the right of the enemy
             let flipped = pcb_x > own_x;
