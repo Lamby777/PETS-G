@@ -2,9 +2,11 @@ use godot::engine::{AnimatedSprite2D, IStaticBody2D, StaticBody2D};
 use godot::prelude::*;
 
 #[derive(GodotClass)]
-#[class(base=StaticBody2D)]
+#[class(init, base=StaticBody2D)]
 pub struct WalkingEnemy {
     base: Base<StaticBody2D>,
+
+    #[init(default = OnReady::manual())]
     sprite: OnReady<Gd<AnimatedSprite2D>>,
 }
 
@@ -38,13 +40,6 @@ impl WalkingEnemy {
 
 #[godot_api]
 impl IStaticBody2D for WalkingEnemy {
-    fn init(base: Base<StaticBody2D>) -> Self {
-        Self {
-            base,
-            sprite: OnReady::manual(),
-        }
-    }
-
     fn ready(&mut self) {
         let sprite = self.base().get_node_as("AnimatedSprite2D");
         self.sprite.init(sprite);
