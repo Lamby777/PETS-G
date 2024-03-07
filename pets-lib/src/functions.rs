@@ -4,7 +4,7 @@ use godot::prelude::*;
 /// Autoload for functions that may need to be
 /// called from anywhere in the game's code.
 #[derive(GodotClass)]
-#[class(base=Object, init)]
+#[class(init, base=Object)]
 pub struct FnInterface;
 
 impl Autoload for FnInterface {

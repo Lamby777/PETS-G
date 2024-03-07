@@ -11,11 +11,15 @@ use super::pchar_node::PCharNode;
 /// party members as scenes, and this script does stuff like
 /// running animations on those nodes too.
 #[derive(GodotClass)]
-#[class(base=CharacterBody2D)]
+#[class(init, base=CharacterBody2D)]
 pub struct PlayerCB {
     base: Base<CharacterBody2D>,
     party: Vec<Gd<PCharNode>>,
+
+    #[init(default = LimiQ::new(2000))]
     past_positions: LimiQ<Vector2>,
+
+    #[init(default = LimiQ::new(2000))]
     past_rotations: LimiQ<Vector2>,
 }
 
@@ -42,16 +46,6 @@ impl PlayerCB {
 
 #[godot_api]
 impl ICharacterBody2D for PlayerCB {
-    fn init(base: Base<CharacterBody2D>) -> Self {
-        Self {
-            base,
-
-            party: vec![],
-            past_positions: LimiQ::new(2000),
-            past_rotations: LimiQ::new(2000),
-        }
-    }
-
     fn ready(&mut self) {
         self.party = load_pchar_scenes_under!(
             self;

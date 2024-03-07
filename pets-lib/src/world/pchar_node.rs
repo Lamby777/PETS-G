@@ -5,12 +5,17 @@ use godot::engine::Sprite2D;
 use godot::prelude::*;
 
 #[derive(GodotClass)]
-#[class(base=Node2D)]
+#[class(init, base=Node2D)]
 pub struct PCharNode {
     base: Base<Node2D>,
+
+    #[init(default = OnReady::manual())]
     sprite: OnReady<Gd<Sprite2D>>,
+    #[init(default = OnReady::manual())]
     anim_player: OnReady<Gd<AnimationPlayer>>,
+    #[init(default = OnReady::manual())]
     anim_tree: OnReady<Gd<AnimationTree>>,
+    #[init(default = OnReady::manual())]
     anim_state: OnReady<Gd<AnimationNodeStateMachinePlayback>>,
 }
 
@@ -52,16 +57,6 @@ macro_rules! load_pchar_scene_under {
 
 #[godot_api]
 impl INode2D for PCharNode {
-    fn init(base: Base<Node2D>) -> Self {
-        Self {
-            base,
-            sprite: OnReady::manual(),
-            anim_player: OnReady::manual(),
-            anim_tree: OnReady::manual(),
-            anim_state: OnReady::manual(),
-        }
-    }
-
     fn ready(&mut self) {
         let sprite = self.base().get_node_as("Sprite2D");
         let anim_player = self.base().get_node_as("AnimationPlayer");

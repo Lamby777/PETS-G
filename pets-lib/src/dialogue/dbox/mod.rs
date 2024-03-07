@@ -41,17 +41,20 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
 }
 
 #[derive(GodotClass)]
-#[class(base=PanelContainer)]
+#[class(init, base=PanelContainer)]
 pub struct DialogBox {
     base: Base<PanelContainer>,
 
     // state for the current interaction
     current_ix: Option<Interaction>,
     current_page_number: usize,
-    speaker: MetaPair<Speaker>,
-    vox: MetaPair<String>,
     active: bool,
     awaiting_choice: bool,
+
+    #[init(default = MetaPair::from_cloned(Speaker::Narrator))]
+    speaker: MetaPair<Speaker>,
+    #[init(default = MetaPair::from_cloned(DEFAULT_VOX.to_owned()))]
+    vox: MetaPair<String>,
 
     /// The tween that moves the dialog box on/off screen
     box_tween: Option<Gd<Tween>>,
@@ -68,7 +71,9 @@ pub struct DialogBox {
     //
     // you can set these directly if you're doing something
     // that's not part of an interaction
+    #[init(default = "Cherry".into())]
     spk_txt: GString,
+    #[init(default = "[wave amp=50 freq=6]Hello, World![/wave]".into())]
     msg_txt: GString,
 }
 
@@ -255,24 +260,6 @@ impl DialogBox {
 
 #[godot_api]
 impl IPanelContainer for DialogBox {
-    fn init(base: Base<PanelContainer>) -> Self {
-        Self {
-            base,
-            spk_txt: "Cherry".into(),
-            msg_txt: "[wave amp=50 freq=6]Hello, World![/wave]".into(),
-
-            choices: Wrapped::default(),
-            active: false,
-            awaiting_choice: false,
-            box_tween: None,
-            text_tween: None,
-            current_ix: None,
-            current_page_number: 0,
-            speaker: MetaPair::from_cloned(Speaker::Narrator),
-            vox: MetaPair::from_cloned(DEFAULT_VOX.to_owned()),
-        }
-    }
-
     fn input(&mut self, event: Gd<InputEvent>) {
         let is_pressed = |action: &str| event.is_action_pressed(action.into());
         let confirming = is_pressed("ui_accept");
