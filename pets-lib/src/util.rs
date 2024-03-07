@@ -6,6 +6,17 @@ use godot::engine::tween::TransitionType;
 use godot::engine::{Engine, NodeExt, RichTextLabel, Theme, Tween};
 use godot::prelude::*;
 
+trait Vector2Ext {
+    fn to_tuple(&self) -> (f32, f32);
+}
+
+impl Vector2Ext for Vector2 {
+    /// Convert the godot Vector2 into a tuple of x and y.
+    fn to_tuple(&self) -> (f32, f32) {
+        (self.x, self.y)
+    }
+}
+
 /// helper function to load nodes into `OnReady` fields
 /// adapted from bromeon's answer on the gdext discord
 pub fn onready_node<O, T>(this: &Base<O>, path: impl Into<NodePath> + 'static) -> OnReady<Gd<T>>
