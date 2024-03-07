@@ -2,7 +2,8 @@ use godot::engine::{CharacterBody2D, ICharacterBody2D};
 use godot::prelude::*;
 
 use crate::consts::playercb::*;
-use crate::{load_pchar_scenes_under, prelude::*};
+use crate::load_pchar_scenes_under;
+use crate::prelude::*;
 
 use super::pchar_node::PCharNode;
 
