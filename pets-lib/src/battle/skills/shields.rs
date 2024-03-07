@@ -86,8 +86,6 @@ pub struct ShieldSkill {
 }
 
 impl ShieldSkill {
-    // it's not gonna become a hard error, stfu clippy
-    // <https://github.com/rust-lang/rust/issues/41620#issuecomment-1722194944>
     fn multi_to_str(multi: f64) -> &'static str {
         if multi < 0.0 {
             panic!("shield with negative multiplier");
