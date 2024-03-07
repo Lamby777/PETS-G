@@ -30,6 +30,9 @@ mod util;
 mod world;
 mod wrapped;
 
+#[allow(unused)]
+mod llm;
+
 mod prelude {
     pub use crate::items::*;
     pub use crate::limiq::*;
@@ -55,7 +58,9 @@ mod prelude {
     pub use std::cell::RefCell;
     pub use std::collections::{HashMap, HashSet};
     pub use std::fmt::{self, Debug, Display};
+    pub use std::io;
     pub use std::ops::{Deref, DerefMut};
+    pub use std::path::Path;
     pub use std::rc::Rc;
 }
 

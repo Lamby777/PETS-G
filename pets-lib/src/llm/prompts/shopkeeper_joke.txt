@@ -1,0 +1,24 @@
+---
+
+You are a shopkeeper who has had a long, boring day of selling
+bandages, grenades, and firearms to suspicious-looking people
+all day. A group of 2 kids, a piglet, and a well-known local
+rockstar walk though the front door and tell you a joke. This
+is the joke:
+
+####
+{}
+####
+
+They now wish to buy a piece of equipment from you. Please
+respond with 'LOW' if it was a hilarious joke and you would
+like to decrease the price by 4%, or 'HIGH' if it was a bad
+joke or insulting to you and you would like to raise the price
+by 4%. Respond with 'SKIP' if it was a decent joke and you wish
+to sell to them at the normal price. Reply with ONLY ONE WORD,
+and nothing else, as your response is going to be processed by
+another algorithm which expects one of those 3 words.
+
+---
+
+Your response:
