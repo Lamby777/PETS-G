@@ -4,17 +4,22 @@ use godot::engine::AnimationTree;
 use godot::engine::Sprite2D;
 use godot::prelude::*;
 
+use crate::prelude::*;
+
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
 pub struct PCharNode {
     base: Base<Node2D>,
 
-    #[init(default = OnReady::manual())]
+    #[init(default = onready_node(&base, "Sprite2D"))]
     sprite: OnReady<Gd<Sprite2D>>,
-    #[init(default = OnReady::manual())]
+
+    #[init(default = onready_node(&base, "AnimationPlayer"))]
     anim_player: OnReady<Gd<AnimationPlayer>>,
-    #[init(default = OnReady::manual())]
+
+    #[init(default = onready_node(&base, "AnimationTree"))]
     anim_tree: OnReady<Gd<AnimationTree>>,
+
     #[init(default = OnReady::manual())]
     anim_state: OnReady<Gd<AnimationNodeStateMachinePlayback>>,
 }
@@ -58,16 +63,8 @@ macro_rules! load_pchar_scene_under {
 #[godot_api]
 impl INode2D for PCharNode {
     fn ready(&mut self) {
-        let sprite = self.base().get_node_as("Sprite2D");
-        let anim_player = self.base().get_node_as("AnimationPlayer");
-        self.sprite.init(sprite);
-        self.anim_player.init(anim_player);
-
-        let mut tree = self.base().get_node_as::<AnimationTree>("AnimationTree");
-        tree.set_active(true);
-        let anim_state = tree.get("parameters/playback".into()).to();
+        self.anim_tree.set_active(true);
+        let anim_state = self.anim_tree.get("parameters/playback".into()).to();
         self.anim_state.init(anim_state);
-
-        self.anim_tree.init(tree);
     }
 }

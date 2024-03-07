@@ -15,7 +15,7 @@ use crate::world::playercb::PlayerCB;
 pub struct InteractionManager {
     base: Base<Node2D>,
 
-    #[init(default = OnReady::manual())]
+    #[init(default = onready_node(&base, "Prompt"))]
     prompt_txt: OnReady<Gd<RichTextLabel>>,
 
     /// All interaction zones the player is inside

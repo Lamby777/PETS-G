@@ -1,12 +1,14 @@
 use godot::engine::{AnimatedSprite2D, IStaticBody2D, StaticBody2D};
 use godot::prelude::*;
 
+use crate::prelude::*;
+
 #[derive(GodotClass)]
 #[class(init, base=StaticBody2D)]
 pub struct WalkingEnemy {
     base: Base<StaticBody2D>,
 
-    #[init(default = OnReady::manual())]
+    #[init(default = onready_node(&base, "AnimatedSprite2D"))]
     sprite: OnReady<Gd<AnimatedSprite2D>>,
 }
 
@@ -40,11 +42,6 @@ impl WalkingEnemy {
 
 #[godot_api]
 impl IStaticBody2D for WalkingEnemy {
-    fn ready(&mut self) {
-        let sprite = self.base().get_node_as("AnimatedSprite2D");
-        self.sprite.init(sprite);
-    }
-
     fn physics_process(&mut self, _delta: f64) {
         // walk towards player
         todo!()
