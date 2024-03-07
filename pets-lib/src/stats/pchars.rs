@@ -7,9 +7,10 @@
 /// the old code, and I'm already used to calling them that.
 /// tl;dr get used to it.
 pub struct PChar;
+pub struct EnemyID;
 
-macro_rules! pchar_names {
-    ($($name:ident),*) => {
+macro_rules! names {
+    ($($name:ident),* $(,)?) => {
         $(
             #[allow(unused)]
             pub const $name: &'static str = stringify!($name);
@@ -20,7 +21,7 @@ macro_rules! pchar_names {
 }
 
 impl PChar {
-    pchar_names! {
+    names! {
         // Debugging purposes
         CHERRY,
 
@@ -41,17 +42,21 @@ impl PChar {
         LYEMBO,
 
         // These guys MIGHT be playable at some point...
+        // Probably not, but either way they still need PChars
+        // and some have side stories
         WINTHRUS,
         JUNO,
         COLT,
         HASSAN,
         NYX,
         QUOLO,
-        BOBBY
+        BOBBY,
     }
 }
 
-#[derive(Debug, Clone, Copy)]
-pub enum EnemyID {
-    ANonnyMouse,
+#[allow(unused)]
+impl EnemyID {
+    names! {
+        ANONNYMOUSE,
+    }
 }
