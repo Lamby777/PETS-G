@@ -80,11 +80,16 @@ impl WalkingEnemy {
         self.distance_to_player() < self.sight_range
     }
 
-    pub fn walk_towards_player(&mut self, _delta: f64) {
+    /// Returns the positions of the enemy and the player
+    fn self_pos_pcb_pos(&self) -> ((real, real), (real, real)) {
         let pcb = PlayerCB::singleton();
-        let (pcb_x, pcb_y) = pcb.get_global_position().to_tuple();
-        let (own_x, own_y) = self.base().get_global_position().to_tuple();
+        let pcb_pos = pcb.get_global_position();
+        let self_pos = self.base().get_global_position();
+        (self_pos.to_tuple(), pcb_pos.to_tuple())
+    }
 
+    pub fn walk_towards_player(&mut self, _delta: f64) {
+        let ((pcb_x, pcb_y), (own_x, own_y)) = self.self_pos_pcb_pos();
         let spd = self.max_speed;
 
         self.base_mut()
@@ -113,9 +118,7 @@ impl ICharacterBody2D for WalkingEnemy {
                 backwards: false,
             });
         } else {
-            let pcb = PlayerCB::singleton();
-            let (pcb_x, pcb_y) = pcb.get_global_position().to_tuple();
-            let (own_x, own_y) = self.base().get_global_position().to_tuple();
+            let ((pcb_x, pcb_y), (own_x, own_y)) = self.self_pos_pcb_pos();
 
             // flipped if player is to the right of the enemy
             let flipped = pcb_x > own_x;
