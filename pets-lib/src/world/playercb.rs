@@ -74,15 +74,20 @@ impl ICharacterBody2D for PlayerCB {
         let sprinting = input.is_action_pressed("sprint".into());
         let moving = input_vector != Vector2::ZERO;
 
-        let (toward, deltatimes) = if moving {
-            (input_vector * MAX_SPEED, delta as f32 * ACCELERATION)
+        let (target_pos, deltatimes);
+
+        if moving {
+            let spr = if sprinting { SPRINT_COEFFICIENT } else { 1.0 };
+            target_pos = input_vector * MAX_SPEED * spr;
+            deltatimes = delta as f32 * ACCELERATION;
         } else {
-            (Vector2::ZERO, (delta as f32 * FRICTION))
+            target_pos = Vector2::ZERO;
+            deltatimes = delta as f32 * FRICTION;
         };
 
         let velocity = self.base().get_velocity();
         self.base_mut()
-            .set_velocity(velocity.move_toward(toward, deltatimes as f32));
+            .set_velocity(velocity.move_toward(target_pos, deltatimes as f32));
 
         self.base_mut().move_and_slide();
 
