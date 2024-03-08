@@ -40,7 +40,7 @@ impl PlayerCB {
 
         for (i, ch) in self.party.iter_mut().enumerate() {
             // index of past data limqs
-            let nth = i * PERSONAL_SPACE as usize;
+            let nth = i * PERSONAL_SPACE;
 
             ch.set_global_position(*self.past_positions.get_or_last(nth));
 
@@ -71,13 +71,11 @@ impl ICharacterBody2D for PlayerCB {
         let input_vector = input
             .get_vector("left".into(), "right".into(), "up".into(), "down".into())
             .normalized();
+        let sprinting = input.is_action_pressed("sprint".into());
         let moving = input_vector != Vector2::ZERO;
 
         let (toward, deltatimes) = if moving {
-            (
-                input_vector * real::from_f64(MAX_SPEED),
-                delta * ACCELERATION,
-            )
+            (input_vector * MAX_SPEED, delta * ACCELERATION)
         } else {
             (Vector2::ZERO, (delta * FRICTION))
         };

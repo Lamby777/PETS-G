@@ -2,6 +2,7 @@
 //! All the "important" constants for configuring
 //! how the game works. Tinker all you want. Go nuts. :)
 //!
+use godot::builtin::real;
 use godot::engine::tween::TransitionType;
 
 pub mod battle {
@@ -10,13 +11,16 @@ pub mod battle {
 }
 
 pub mod playercb {
+    use super::*;
+
     // Movement physics stuff
-    pub const ACCELERATION: f64 = 3000.0;
-    pub const FRICTION: f64 = 2500.0;
-    pub const MAX_SPEED: f64 = 320.0;
+    pub const ACCELERATION: real = 3000.0;
+    pub const FRICTION: real = 2500.0;
+    pub const MAX_SPEED: real = 320.0;
+    pub const SPRINT_COEFFICIENT: real = 1.5;
 
     // Distance between party members
-    pub const PERSONAL_SPACE: u16 = 15;
+    pub const PERSONAL_SPACE: usize = 15;
 }
 
 pub mod dialogue {
