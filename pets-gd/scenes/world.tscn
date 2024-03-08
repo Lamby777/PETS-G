@@ -108,18 +108,23 @@ y_sort_enabled = true
 
 [node name="BushMid" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
 position = Vector2(0, 900)
+collision_mask = 9
 
 [node name="Bush1" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
 position = Vector2(-150, 700)
+collision_mask = 9
 
 [node name="Bush2" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
 position = Vector2(150, 700)
+collision_mask = 9
 
 [node name="Bush3" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
 position = Vector2(-300, 500)
+collision_mask = 9
 
 [node name="Bush4" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
 position = Vector2(300, 500)
+collision_mask = 9
 
 [node name="BushHeart" type="Node2D" parent="YSort/DecoBushes"]
 y_sort_enabled = true
@@ -127,51 +132,67 @@ y_sort_enabled = true
 [node name="Middle" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
 y_sort_enabled = true
 position = Vector2(0, 1800)
+collision_mask = 9
 
 [node name="Bush1" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
 position = Vector2(150, 1600)
+collision_mask = 9
 
 [node name="Bush2" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
 position = Vector2(-150, 1600)
+collision_mask = 9
 
 [node name="Bush3" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
 position = Vector2(300, 1460)
+collision_mask = 9
 
 [node name="Bush4" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
 position = Vector2(-300, 1460)
+collision_mask = 9
 
 [node name="Bush5" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
 position = Vector2(450, 1600)
+collision_mask = 9
 
 [node name="Bush6" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
 position = Vector2(-450, 1600)
+collision_mask = 9
 
 [node name="Bush7" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
 position = Vector2(540, 1800)
+collision_mask = 9
 
 [node name="Bush8" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
 position = Vector2(-540, 1800)
+collision_mask = 9
 
 [node name="Bush9" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
 position = Vector2(450, 2000)
+collision_mask = 9
 
 [node name="Bush10" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
 position = Vector2(-450, 2000)
+collision_mask = 9
 
 [node name="Bush11" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
 position = Vector2(270, 2200)
+collision_mask = 9
 
 [node name="Bush12" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
 position = Vector2(-270, 2200)
+collision_mask = 9
 
 [node name="Bush18" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
 position = Vector2(0, 2340)
+collision_mask = 9
 
 [node name="BushLong" parent="YSort/DecoBushes" instance=ExtResource("2_87c4u")]
 position = Vector2(-900, 1300)
+collision_mask = 9
 
 [node name="BushLong2" parent="YSort/DecoBushes" instance=ExtResource("2_87c4u")]
 position = Vector2(900, 1300)
+collision_mask = 9
 
 [node name="DebugBattleZone" parent="YSort" instance=ExtResource("5_uar2c")]
 interaction_id = "Debug Battle"
@@ -179,6 +200,7 @@ position = Vector2(-192, 64)
 
 [node name="RodrickSign" parent="YSort" instance=ExtResource("6_w4dbq")]
 position = Vector2(192, 64)
+collision_mask = 9
 
 [node name="InteractionZone" parent="YSort/RodrickSign" instance=ExtResource("5_uar2c")]
 interaction_id = "Rodrick Sign #1"
