@@ -49,6 +49,11 @@ pub fn llm_generate() {
             Ok(())
         },
     );
+
+    match res {
+        Ok(result) => println!("\n\nInference stats:\n{result}"),
+        Err(err) => println!("\n{err}"),
+    }
 }
 
 pub struct LLMInterface;
