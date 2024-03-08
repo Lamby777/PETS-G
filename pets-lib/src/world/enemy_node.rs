@@ -3,6 +3,13 @@ use godot::prelude::*;
 
 use crate::prelude::*;
 
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+struct AnimOptions {
+    pub moving: bool,
+    pub flipped: Option<bool>,
+    pub backwards: bool,
+}
+
 #[derive(GodotClass)]
 #[class(init, base=StaticBody2D)]
 pub struct WalkingEnemy {
@@ -19,6 +26,9 @@ pub struct WalkingEnemy {
 
     #[init(default = onready_node(&base, "AnimatedSprite2D"))]
     sprite: OnReady<Gd<AnimatedSprite2D>>,
+
+    // returns early from `anim_move` if the same options are passed
+    debounce: Option<AnimOptions>,
 }
 
 #[godot_api]
@@ -36,17 +46,22 @@ impl WalkingEnemy {
     ///
     /// Backwards should be used if the enemy is below the player
     /// in terms of Y position, so they'd be running up the screen.
-    pub fn anim_move(&mut self, moving: bool, flipped: Option<bool>, _backwards: bool) {
-        let mode_str = if moving { "Run" } else { "Idle" };
+    fn anim_move(&mut self, opts: AnimOptions) {
+        if Some(opts) == self.debounce {
+            return;
+        }
+        self.debounce = Some(opts);
+
+        let mode_str = if opts.moving { "Run" } else { "Idle" };
 
         // TODO uncomment when backwards sprites are added
-        let dir_str = ""; // if backwards { "Back" } else { "" };
+        let dir_str = ""; // if opts.backwards { "Back" } else { "" };
 
         let anim_name = format!("{}-{}{}", self.enemy_id, mode_str, dir_str);
 
         self.sprite.set_animation(anim_name.into());
 
-        if let Some(v) = flipped {
+        if let Some(v) = opts.flipped {
             self.sprite.set_flip_h(v);
         }
     }
@@ -90,7 +105,11 @@ impl IStaticBody2D for WalkingEnemy {
     fn physics_process(&mut self, delta: f64) {
         if !self.is_player_in_sight() {
             // if far from player, play idle and face forward
-            self.anim_move(false, None, false);
+            self.anim_move(AnimOptions {
+                moving: false,
+                flipped: None,
+                backwards: false,
+            });
         } else {
             let pcb = PlayerCB::singleton();
             let (pcb_x, pcb_y) = pcb.get_global_position().to_tuple();
@@ -100,7 +119,11 @@ impl IStaticBody2D for WalkingEnemy {
             let flipped = pcb_x > own_x;
             let backwards = pcb_y < own_y;
 
-            self.anim_move(true, Some(flipped), backwards);
+            self.anim_move(AnimOptions {
+                moving: true,
+                flipped: Some(flipped),
+                backwards,
+            });
 
             // if close enough to player, run at them
             self.walk_towards_player(delta);
