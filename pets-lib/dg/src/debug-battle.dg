@@ -2,7 +2,11 @@
 NAME Mira
 VOX Mira
 
-Start a debug battle?
+Hey, [PLAYER]! I see you're level [LEVEL]...
+
+---
+
+Do you wish to start a debug battle?
 
 > Sure!
 $ debug_battle
