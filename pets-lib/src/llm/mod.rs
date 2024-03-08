@@ -6,6 +6,7 @@ use godot::engine::GFile;
 use io::Write;
 use llm::models::Gpt2;
 use llm::Model as _;
+use llm::Prompt;
 
 /// get the path of the pretrained model
 fn get_llm_path() -> Result<PathBuf> {
@@ -20,10 +21,10 @@ fn get_llm_path() -> Result<PathBuf> {
 
 fn load_llm() -> Gpt2 {
     let model_path = get_llm_path().unwrap();
-
     // load a GGML model from disk
     llm::load(
         &model_path,
+        llm::TokenizerSource::Embedded,
         Default::default(),
         llm::load_progress_callback_stdout,
     )
@@ -38,15 +39,20 @@ pub fn llm_generate() {
         &model,
         &mut rand::thread_rng(),
         &llm::InferenceRequest {
-            prompt: "Rust is a cool programming language because",
-            ..Default::default()
+            prompt: Prompt::Text("AI is interesting... Maybe someday it can"),
+            parameters: &llm::InferenceParameters::default(),
+            play_back_previous_tokens: false,
+            maximum_token_count: None,
         },
         &mut Default::default(),
-        |t| {
-            print!("{t}");
-            io::stdout().flush().unwrap();
+        |r| match r {
+            llm::InferenceResponse::PromptToken(t) | llm::InferenceResponse::InferredToken(t) => {
+                print!("{t}");
+                std::io::stdout().flush().unwrap();
 
-            Ok(())
+                Ok(llm::InferenceFeedback::Continue)
+            }
+            _ => Ok(llm::InferenceFeedback::Continue),
         },
     );
 
