@@ -29,6 +29,8 @@ pub struct WalkingEnemy {
 
     // returns early from `anim_move` if the same options are passed
     debounce: Option<AnimOptions>,
+
+    ready: bool,
 }
 
 #[godot_api]
@@ -119,9 +121,15 @@ impl ICharacterBody2D for WalkingEnemy {
         if !EnemyID::ALL.contains(&enemy_id.as_str()) {
             panic!("Invalid enemy id: {}", enemy_id);
         }
+
+        self.ready = true;
     }
 
     fn physics_process(&mut self, delta: f64) {
+        if !self.ready {
+            return;
+        }
+
         if !self.is_player_in_sight() {
             // if far from player, play idle and face forward
             self.anim_move(AnimOptions {
