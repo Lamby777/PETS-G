@@ -5,6 +5,7 @@ use godot::engine::GFile;
 
 use io::Write;
 use llm::models::Gpt2;
+use llm::Model as _;
 
 /// get the path of the pretrained model
 fn get_llm_path() -> Result<PathBuf> {
@@ -29,33 +30,25 @@ fn load_llm() -> Gpt2 {
     .unwrap_or_else(|err| panic!("Failed to load model: {err}"))
 }
 
-fn llm_generate() {
-    todo!()
+pub fn llm_generate() {
+    let model = load_llm();
 
-    // let model = load_llm();
-    //
-    // let mut session = model.start_session(Default::default());
-    // let res = session.infer::<std::convert::Infallible>(
-    //     // model to use for text generation
-    //     &model,
-    //     // randomness provider
-    //     &mut rand::thread_rng(),
-    //     // the prompt to use for text generation, as well as other
-    //     // inference parameters
-    //     &llm::InferenceRequest {
-    //         prompt: "Rust is a cool programming language because",
-    //         ..Default::default()
-    //     },
-    //     // llm::OutputRequest
-    //     &mut Default::default(),
-    //     // output callback
-    //     |t| {
-    //         print!("{t}");
-    //         io::stdout().flush().unwrap();
-    //
-    //         Ok(())
-    //     },
-    // );
+    let mut session = model.start_session(Default::default());
+    let res = session.infer::<std::convert::Infallible>(
+        &model,
+        &mut rand::thread_rng(),
+        &llm::InferenceRequest {
+            prompt: "Rust is a cool programming language because",
+            ..Default::default()
+        },
+        &mut Default::default(),
+        |t| {
+            print!("{t}");
+            io::stdout().flush().unwrap();
+
+            Ok(())
+        },
+    );
 }
 
 pub struct LLMInterface;
