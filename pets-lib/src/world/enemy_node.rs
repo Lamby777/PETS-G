@@ -47,9 +47,11 @@ impl WalkingEnemy {
     /// Backwards should be used if the enemy is below the player
     /// in terms of Y position, so they'd be running up the screen.
     fn anim_move(&mut self, opts: AnimOptions) {
+        // only run if the options have changed
         if Some(opts) == self.debounce {
             return;
         }
+
         self.debounce = Some(opts);
 
         let mode_str = if opts.moving { "Run" } else { "Idle" };
@@ -58,8 +60,8 @@ impl WalkingEnemy {
         let dir_str = ""; // if opts.backwards { "Back" } else { "" };
 
         let anim_name = format!("{}-{}{}", self.enemy_id, mode_str, dir_str);
-
         self.sprite.set_animation(anim_name.into());
+        self.sprite.play();
 
         if let Some(v) = opts.flipped {
             self.sprite.set_flip_h(v);
