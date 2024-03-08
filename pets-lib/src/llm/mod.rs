@@ -19,9 +19,9 @@ fn get_llm_path() -> Result<PathBuf> {
         .map_err(|e| anyhow!("Failed to parse path: {}", e))
 }
 
+/// returns the model loaded from disk
 fn load_llm() -> Bloom {
     let model_path = get_llm_path().unwrap();
-    // load a GGML model from disk
     llm::load(
         &model_path,
         llm::TokenizerSource::Embedded,
@@ -35,7 +35,7 @@ pub fn llm_generate() {
     let model = load_llm();
 
     let mut session = model.start_session(Default::default());
-    let res = session.infer::<std::convert::Infallible>(
+    let res = session.infer::<Infallible>(
         &model,
         &mut rand::thread_rng(),
         &llm::InferenceRequest {
