@@ -4,7 +4,7 @@
 #
 # This specific model is from
 # https://huggingface.co/rustformers/bloom-ggml/blob/main/bloom-1b7-q4_0.bin
-assets/llm.bin
+*.llm
 
 # Godot 4+ specific ignores
 .godot/
