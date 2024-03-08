@@ -59,6 +59,7 @@ mod prelude {
 
     pub use std::cell::RefCell;
     pub use std::collections::{HashMap, HashSet};
+    pub use std::convert::Infallible;
     pub use std::fmt::{self, Debug, Display};
     pub use std::io;
     pub use std::ops::{Deref, DerefMut};
