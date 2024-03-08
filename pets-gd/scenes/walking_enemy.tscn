@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dk214wpitbhju"]
+[gd_scene load_steps=7 format=3 uid="uid://dk214wpitbhju"]
 
 [ext_resource type="Texture2D" uid="uid://ced0gmuos2khr" path="res://assets/textures/enemies/anonm2.png" id="1_8afda"]
 [ext_resource type="Texture2D" uid="uid://bo13i8l87s648" path="res://assets/textures/enemies/anonm2-run1.png" id="2_txe8l"]
@@ -27,7 +27,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3efs2"]
-size = Vector2(56, 96.0001)
+size = Vector2(39.9995, 80.0003)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yogbq"]
+radius = 192.0
 
 [node name="WalkingEnemy" type="WalkingEnemy"]
 enemy_id = "ANONNYMOUSE"
@@ -42,6 +45,12 @@ sprite_frames = SubResource("SpriteFrames_hs7pi")
 animation = &"ANONNYMOUSE-Run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4.57764e-05, 0)
+position = Vector2(-2.38419e-06, 20)
 rotation = 1.57079
 shape = SubResource("RectangleShape2D_3efs2")
+
+[node name="EnemyContactRange" type="EnemyContactRange" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyContactRange"]
+shape = SubResource("CircleShape2D_yogbq")

@@ -1,4 +1,4 @@
-use godot::engine::{AnimatedSprite2D, CharacterBody2D, ICharacterBody2D};
+use godot::engine::{AnimatedSprite2D, Area2D, CharacterBody2D, IArea2D, ICharacterBody2D};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -145,5 +145,28 @@ impl ICharacterBody2D for WalkingEnemy {
             // if close enough to player, run at them
             self.walk_towards_player(delta);
         }
+    }
+}
+
+#[derive(GodotClass)]
+#[class(init, base=Area2D)]
+pub struct EnemyContactRange {
+    base: Base<Area2D>,
+}
+
+#[godot_api]
+impl EnemyContactRange {
+    #[func]
+    fn on_entered(&mut self, _body: Gd<Node2D>) {
+        let _zone = self.base().clone();
+    }
+}
+
+#[godot_api]
+impl IArea2D for EnemyContactRange {
+    fn ready(&mut self) {
+        let mut node = self.base_mut();
+        let enter_fn = node.callable("on_entered");
+        node.connect("body_entered".into(), enter_fn);
     }
 }
