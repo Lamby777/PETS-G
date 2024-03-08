@@ -13,7 +13,9 @@ use crate::consts::dialogue::*;
 use crate::prelude::*;
 
 mod dchoice;
+mod placeholders;
 use dchoice::DChoice;
+use placeholders::process_placeholders;
 
 fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
     let target_col = {
@@ -120,7 +122,7 @@ impl DialogBox {
 
             self.update_meta(&page.metadata);
             self.spk_txt = spk_display(&self.speaker.temporary).into();
-            self.msg_txt = page.content.clone().into();
+            self.msg_txt = process_placeholders(&page.content).into();
         } else {
             self.spk_txt = "".into();
             self.msg_txt = "".into();

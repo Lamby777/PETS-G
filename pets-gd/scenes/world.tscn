@@ -74,6 +74,8 @@ _data = {
 [node name="Overworld" type="Node2D"]
 script = ExtResource("1_bs1lv")
 
+[node name="BattleLayer" type="CanvasLayer" parent="."]
+
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="InteractionManager" parent="." instance=ExtResource("2_uh12s")]
@@ -84,13 +86,107 @@ y_sort_enabled = true
 
 [node name="PlayerCB" parent="YSort" groups=["playercb"] instance=ExtResource("2_r6tgb")]
 
-[node name="Enemies" type="Node2D" parent="YSort"]
+[node name="Room" type="Node2D" parent="YSort"]
 y_sort_enabled = true
 
-[node name="Mouse1" parent="YSort/Enemies" instance=ExtResource("10_30w80")]
+[node name="Mouse1" parent="YSort/Room" instance=ExtResource("10_30w80")]
 position = Vector2(840, 776)
 
-[node name="TileMap" type="TileMap" parent="YSort"]
+[node name="DecoBushes" type="Node2D" parent="YSort/Room"]
+y_sort_enabled = true
+
+[node name="BushTriangle" type="Node2D" parent="YSort/Room/DecoBushes"]
+y_sort_enabled = true
+
+[node name="BushMid" parent="YSort/Room/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
+position = Vector2(0, 900)
+collision_mask = 9
+
+[node name="Bush1" parent="YSort/Room/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
+position = Vector2(-150, 700)
+collision_mask = 9
+
+[node name="Bush2" parent="YSort/Room/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
+position = Vector2(150, 700)
+collision_mask = 9
+
+[node name="Bush3" parent="YSort/Room/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
+position = Vector2(-300, 500)
+collision_mask = 9
+
+[node name="Bush4" parent="YSort/Room/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
+position = Vector2(300, 500)
+collision_mask = 9
+
+[node name="BushHeart" type="Node2D" parent="YSort/Room/DecoBushes"]
+y_sort_enabled = true
+
+[node name="Middle" parent="YSort/Room/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
+y_sort_enabled = true
+position = Vector2(0, 1800)
+collision_mask = 9
+
+[node name="Bush1" parent="YSort/Room/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
+position = Vector2(150, 1600)
+collision_mask = 9
+
+[node name="Bush2" parent="YSort/Room/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
+position = Vector2(-150, 1600)
+collision_mask = 9
+
+[node name="Bush3" parent="YSort/Room/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
+position = Vector2(300, 1460)
+collision_mask = 9
+
+[node name="Bush4" parent="YSort/Room/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
+position = Vector2(-300, 1460)
+collision_mask = 9
+
+[node name="Bush5" parent="YSort/Room/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
+position = Vector2(450, 1600)
+collision_mask = 9
+
+[node name="Bush6" parent="YSort/Room/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
+position = Vector2(-450, 1600)
+collision_mask = 9
+
+[node name="Bush7" parent="YSort/Room/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
+position = Vector2(540, 1800)
+collision_mask = 9
+
+[node name="Bush8" parent="YSort/Room/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
+position = Vector2(-540, 1800)
+collision_mask = 9
+
+[node name="Bush9" parent="YSort/Room/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
+position = Vector2(450, 2000)
+collision_mask = 9
+
+[node name="Bush10" parent="YSort/Room/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
+position = Vector2(-450, 2000)
+collision_mask = 9
+
+[node name="Bush11" parent="YSort/Room/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
+position = Vector2(270, 2200)
+collision_mask = 9
+
+[node name="Bush12" parent="YSort/Room/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
+position = Vector2(-270, 2200)
+collision_mask = 9
+
+[node name="Bush18" parent="YSort/Room/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
+position = Vector2(0, 2340)
+collision_mask = 9
+
+[node name="BushLong" parent="YSort/Room/DecoBushes" instance=ExtResource("2_87c4u")]
+position = Vector2(-900, 1300)
+collision_mask = 9
+
+[node name="BushLong2" parent="YSort/Room/DecoBushes" instance=ExtResource("2_87c4u")]
+position = Vector2(900, 1300)
+collision_mask = 9
+
+[node name="TileMap" type="TileMap" parent="YSort/Room"]
 y_sort_enabled = true
 scale = Vector2(4, 4)
 tile_set = ExtResource("3_14512")
@@ -101,112 +197,31 @@ layer_0/y_sort_origin = -10
 layer_0/tile_data = PackedInt32Array(196610, 65539, 0, 262146, 65539, 2, 262147, 65539, 2, 262148, 65539, 2, 196612, 65539, 0, 196611, 65539, 0, 196613, 393219, 2, 196614, 131075, 1, 262150, 131075, 2, 262149, 65539, 2, 131078, 131075, 1, 65542, 131075, 1, 65541, 3, 1, 131077, 3, 1, 262145, 3, 2, 196609, 3, 0, 327678, 131075, 2, 262142, 131075, 0, 262141, 65539, 0, 262140, 65539, 0, 327676, 65539, 2, 327677, 65539, 2, 196602, 131075, 1, 262138, 327683, 2, 327674, 65539, 2, 327675, 65539, 2, 262139, 65539, 0, 262137, 3, 1, 327673, 3, 2, 196601, 3, 1, 131065, 3, 1, 131066, 131075, 1, 65530, 131075, 1, -6, 131075, 1, -65542, 131075, 1, -65543, 3, 1, -7, 3, 1, 65529, 3, 1, 6, 131075, 1, -65530, 131075, 1, -131066, 131075, 1, -196602, 131075, 1, -262138, 131075, 1, 5, 3, 1, -65531, 3, 1, -131067, 3, 1, -196603, 393219, 1, -262139, 65539, 1, -327674, 131075, 0, -327675, 65539, 0, -196604, 65539, 2, -262140, 65539, 1, -327676, 65539, 0, -196605, 65539, 2, -262141, 65539, 1, -327677, 65539, 0, -196606, 65539, 2, -262142, 65539, 1, -327678, 65539, 0, -196607, 65539, 2, -262143, 65539, 1, -327679, 65539, 0, -196608, 65539, 2, -262144, 65539, 1, -327680, 65539, 0, -131073, 65539, 2, -196609, 65539, 1, -262145, 65539, 0, -131074, 65539, 2, -196610, 65539, 1, -262146, 65539, 0, -131075, 65539, 2, -196611, 65539, 1, -262147, 65539, 0, -131076, 65539, 2, -196612, 65539, 1, -262148, 65539, 0, -131077, 65539, 2, -196613, 65539, 1, -262149, 65539, 0, -131078, 327683, 1, -196614, 65539, 1, -262150, 65539, 0, -131079, 3, 1, -196615, 3, 1, -262151, 3, 0)
 layer_1/name = "Floor"
 layer_1/y_sort_origin = -11
+layer_1/z_index = -1
 layer_1/tile_data = PackedInt32Array(393215, 65536, 1, 327680, 65536, 1, 393216, 65536, 1, 458751, 65536, 1, 458750, 0, 1, 393214, 0, 1, 327679, 65536, 1, 262144, 65536, 1, 327681, 131072, 1, 393217, 131072, 1, 262143, 65536, 1, 196608, 65536, 1, 196606, 0, 1, 196607, 65536, 1, 131072, 65536, 1, 131073, 131072, 1, 131070, 0, 1, 131071, 65536, 1, 65536, 65536, 1, 65534, 0, 0, 65535, 65536, 0, 0, 65536, 0, 65537, 131072, 1, 1, 131072, 0, 262145, 131072, 0, 327678, 0, 0, 458752, 65536, 1, 524287, 65536, 1, 524286, 0, 1, 458753, 131072, 1, 524289, 196608, 1, 524288, 65536, 1, 589823, 65536, 1, 589822, 262144, 1, 589824, 65536, 1, 655359, 65536, 1, 655358, 65536, 1, 589825, 65536, 1, 655361, 65536, 2, 655360, 65536, 2, 720895, 65536, 2, 720894, 65536, 2, 589826, 65536, 1, 655362, 65536, 2, 524290, 65536, 0, 589827, 65536, 1, 655363, 65536, 2, 524291, 65536, 0, 589828, 65536, 1, 655364, 65536, 2, 524292, 65536, 0, 589829, 65536, 1, 655365, 262144, 0, 524293, 65536, 0, 589830, 65536, 1, 655366, 65536, 1, 524294, 65536, 0, 589831, 196608, 1, 655367, 65536, 1, 524295, 131072, 0, 720893, 65536, 2, 655357, 65536, 1, 589821, 65536, 0, 720892, 65536, 2, 655356, 65536, 1, 589820, 65536, 0, 720891, 65536, 2, 655355, 65536, 1, 589819, 65536, 0, 720890, 65536, 2, 655354, 65536, 1, 589818, 65536, 0, 720889, 65536, 2, 655353, 65536, 1, 589817, 65536, 0, 720888, 0, 2, 655352, 0, 1, 589816, 0, 0, 720903, 65536, 2, 720902, 65536, 2, 720901, 0, 2, 655368, 65536, 1, 720904, 262144, 0, 589832, 65536, 0, 655369, 65536, 1, 720905, 65536, 1, 589833, 65536, 0, 655370, 196608, 1, 720906, 65536, 1, 589834, 131072, 0, 786442, 65536, 2, 786441, 65536, 2, 786440, 0, 2, 720907, 65536, 1, 786443, 262144, 0, 655371, 65536, 0, 720908, 65536, 1, 786444, 65536, 1, 655372, 65536, 0, 720909, 196608, 1, 786445, 65536, 1, 655373, 131072, 0, 851981, 65536, 2, 851980, 65536, 2, 851979, 0, 2, 786446, 65536, 1, 851982, 65536, 2, 720910, 65536, 0, 786447, 65536, 1, 851983, 65536, 2, 720911, 65536, 0, 786448, 131072, 1, 851984, 131072, 2, 720912, 131072, 0)
 
-[node name="DecoBushes" type="Node2D" parent="YSort"]
-y_sort_enabled = true
-
-[node name="BushTriangle" type="Node2D" parent="YSort/DecoBushes"]
-y_sort_enabled = true
-
-[node name="BushMid" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
-position = Vector2(0, 900)
-collision_mask = 9
-
-[node name="Bush1" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
-position = Vector2(-150, 700)
-collision_mask = 9
-
-[node name="Bush2" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
-position = Vector2(150, 700)
-collision_mask = 9
-
-[node name="Bush3" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
-position = Vector2(-300, 500)
-collision_mask = 9
-
-[node name="Bush4" parent="YSort/DecoBushes/BushTriangle" instance=ExtResource("2_87c4u")]
-position = Vector2(300, 500)
-collision_mask = 9
-
-[node name="BushHeart" type="Node2D" parent="YSort/DecoBushes"]
-y_sort_enabled = true
-
-[node name="Middle" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
-y_sort_enabled = true
-position = Vector2(0, 1800)
-collision_mask = 9
-
-[node name="Bush1" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
-position = Vector2(150, 1600)
-collision_mask = 9
-
-[node name="Bush2" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
-position = Vector2(-150, 1600)
-collision_mask = 9
-
-[node name="Bush3" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
-position = Vector2(300, 1460)
-collision_mask = 9
-
-[node name="Bush4" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
-position = Vector2(-300, 1460)
-collision_mask = 9
-
-[node name="Bush5" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
-position = Vector2(450, 1600)
-collision_mask = 9
-
-[node name="Bush6" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
-position = Vector2(-450, 1600)
-collision_mask = 9
-
-[node name="Bush7" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
-position = Vector2(540, 1800)
-collision_mask = 9
-
-[node name="Bush8" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
-position = Vector2(-540, 1800)
-collision_mask = 9
-
-[node name="Bush9" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
-position = Vector2(450, 2000)
-collision_mask = 9
-
-[node name="Bush10" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
-position = Vector2(-450, 2000)
-collision_mask = 9
-
-[node name="Bush11" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
-position = Vector2(270, 2200)
-collision_mask = 9
-
-[node name="Bush12" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
-position = Vector2(-270, 2200)
-collision_mask = 9
-
-[node name="Bush18" parent="YSort/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
-position = Vector2(0, 2340)
-collision_mask = 9
-
-[node name="BushLong" parent="YSort/DecoBushes" instance=ExtResource("2_87c4u")]
-position = Vector2(-900, 1300)
-collision_mask = 9
-
-[node name="BushLong2" parent="YSort/DecoBushes" instance=ExtResource("2_87c4u")]
-position = Vector2(900, 1300)
-collision_mask = 9
-
-[node name="DebugBattleZone" parent="YSort" instance=ExtResource("5_uar2c")]
+[node name="DebugBattleZone" parent="YSort/Room" instance=ExtResource("5_uar2c")]
 interaction_id = "Debug Battle"
 position = Vector2(-192, 64)
 
-[node name="RodrickSign" parent="YSort" instance=ExtResource("6_w4dbq")]
+[node name="RodrickSign" parent="YSort/Room" instance=ExtResource("6_w4dbq")]
 position = Vector2(192, 64)
 collision_mask = 9
 
-[node name="InteractionZone" parent="YSort/RodrickSign" instance=ExtResource("5_uar2c")]
+[node name="InteractionZone" parent="YSort/Room/RodrickSign" instance=ExtResource("5_uar2c")]
 interaction_id = "Rodrick Sign #1"
+
+[node name="CV_Outdoors" type="Area2D" parent="YSort/Room"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("5_skv18")
+music = ExtResource("5_x7nbf")
+
+[node name="MusicZone" type="CollisionPolygon2D" parent="YSort/Room/CV_Outdoors"]
+visible = false
+position = Vector2(0, 960)
+scale = Vector2(26, 26)
+polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 
 [node name="ZoneAudio" type="Node" parent="."]
 
@@ -219,15 +234,3 @@ autoplay = true
 libraries = {
 "": SubResource("AnimationLibrary_fv7du")
 }
-
-[node name="MusicZones" type="Node" parent="."]
-
-[node name="CV_Outdoors" type="Area2D" parent="MusicZones"]
-script = ExtResource("5_skv18")
-music = ExtResource("5_x7nbf")
-
-[node name="MusicZone" type="CollisionPolygon2D" parent="MusicZones/CV_Outdoors"]
-visible = false
-position = Vector2(0, 960)
-scale = Vector2(26, 26)
-polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
