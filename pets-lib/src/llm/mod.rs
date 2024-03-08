@@ -1,9 +1,7 @@
 use crate::prelude::*;
 
-use godot::engine::file_access::ModeFlags;
-use godot::engine::GFile;
-
 use io::Write;
+
 use llm::models::Bloom;
 use llm::Model as _;
 use llm::{InferenceFeedback, InferenceResponse, Prompt};
@@ -19,9 +17,9 @@ fn get_llm_path() -> Result<PathBuf> {
         .map_err(|e| anyhow!("Failed to parse path: {}", e))
 }
 
-/// returns the model loaded from disk
 fn load_llm() -> Bloom {
     let model_path = get_llm_path().unwrap();
+    // load a GGML model from disk
     llm::load(
         &model_path,
         llm::TokenizerSource::Embedded,
