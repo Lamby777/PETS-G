@@ -213,15 +213,14 @@ collision_mask = 9
 [node name="InteractionZone" parent="YSort/Room/RodrickSign" instance=ExtResource("5_uar2c")]
 interaction_id = "Rodrick Sign #1"
 
-[node name="MusicZones" type="Node" parent="YSort/Room"]
-
-[node name="CV_Outdoors" type="Area2D" parent="YSort/Room/MusicZones"]
+[node name="CV_Outdoors" type="Area2D" parent="YSort/Room"]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("5_skv18")
 music = ExtResource("5_x7nbf")
 
-[node name="MusicZone" type="CollisionPolygon2D" parent="YSort/Room/MusicZones/CV_Outdoors"]
+[node name="MusicZone" type="CollisionPolygon2D" parent="YSort/Room/CV_Outdoors"]
+visible = false
 position = Vector2(0, 960)
 scale = Vector2(26, 26)
 polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
