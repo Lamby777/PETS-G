@@ -1,4 +1,4 @@
-use godot::engine::{AnimatedSprite2D, Area2D, CharacterBody2D, IArea2D, ICharacterBody2D};
+use godot::engine::{AnimatedSprite2D, Area2D, CharacterBody2D, ICharacterBody2D};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -26,6 +26,9 @@ pub struct WalkingEnemy {
 
     #[init(default = onready_node(&base, "AnimatedSprite2D"))]
     sprite: OnReady<Gd<AnimatedSprite2D>>,
+
+    #[init(default = onready_node(&base, "ContactRange"))]
+    range: OnReady<Gd<Area2D>>,
 
     // returns early from `anim_move` if the same options are passed
     debounce: Option<AnimOptions>,
@@ -111,6 +114,12 @@ impl WalkingEnemy {
 
         self.sprite.set_global_rotation(0.0);
     }
+
+    #[func]
+    fn on_player_touched(&self, _body: Gd<Node2D>) {
+        println!("Player touched enemy");
+        // World::begin_battle(self.enemy_id.to_string());
+    }
 }
 
 #[godot_api]
@@ -121,6 +130,9 @@ impl ICharacterBody2D for WalkingEnemy {
         if !EnemyID::ALL.contains(&enemy_id.as_str()) {
             panic!("Invalid enemy id: {}", enemy_id);
         }
+
+        let callable = self.base().callable("on_player_touched");
+        self.range.connect("body_entered".into(), callable);
 
         self.ready = true;
     }
@@ -153,28 +165,5 @@ impl ICharacterBody2D for WalkingEnemy {
             // if close enough to player, run at them
             self.walk_towards_player(delta);
         }
-    }
-}
-
-#[derive(GodotClass)]
-#[class(init, base=Area2D)]
-pub struct EnemyContactRange {
-    base: Base<Area2D>,
-}
-
-#[godot_api]
-impl EnemyContactRange {
-    #[func]
-    fn on_entered(&mut self, _body: Gd<Node2D>) {
-        let _zone = self.base().clone();
-    }
-}
-
-#[godot_api]
-impl IArea2D for EnemyContactRange {
-    fn ready(&mut self) {
-        let mut node = self.base_mut();
-        let enter_fn = node.callable("on_entered");
-        node.connect("body_entered".into(), enter_fn);
     }
 }

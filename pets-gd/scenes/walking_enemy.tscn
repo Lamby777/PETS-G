@@ -49,8 +49,8 @@ position = Vector2(-2.38419e-06, 20)
 rotation = 1.57079
 shape = SubResource("RectangleShape2D_3efs2")
 
-[node name="EnemyContactRange" type="EnemyContactRange" parent="."]
+[node name="ContactRange" type="Area2D" parent="."]
 collision_layer = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyContactRange"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactRange"]
 shape = SubResource("CircleShape2D_yogbq")
