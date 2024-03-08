@@ -90,19 +90,24 @@ impl WalkingEnemy {
 
     pub fn walk_towards_player(&mut self, _delta: f64) {
         let spd = self.max_speed;
-        let mut base = self.base_mut();
+        {
+            let mut base = self.base_mut();
 
-        let pcb_pos = PlayerCB::singleton().get_position();
-        let own_pos = base.get_position();
+            let pcb_pos = PlayerCB::singleton().get_position();
+            let own_pos = base.get_position();
 
-        let target_pos = (pcb_pos - own_pos).normalized();
-        if own_pos.distance_to(pcb_pos) < 10.0 {
-            return;
+            let target_pos = (pcb_pos - own_pos).normalized();
+            if own_pos.distance_to(pcb_pos) < 10.0 {
+                return;
+            }
+
+            base.set_velocity(target_pos * spd);
+            base.move_and_slide();
+
+            base.look_at(pcb_pos);
         }
 
-        base.set_velocity(target_pos * spd);
-        base.move_and_slide();
-        base.look_at(pcb_pos);
+        self.sprite.set_global_rotation(0.0);
     }
 }
 
