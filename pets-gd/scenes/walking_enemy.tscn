@@ -27,20 +27,21 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3efs2"]
-size = Vector2(159.999, 160.001)
+size = Vector2(56, 96.0001)
 
 [node name="WalkingEnemy" type="WalkingEnemy"]
 enemy_id = "ANONNYMOUSE"
 sight_range = 960.0
-max_speed = 4.0
+max_speed = 150.0
+y_sort_enabled = true
 collision_layer = 8
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -8)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_hs7pi")
 animation = &"ANONNYMOUSE-Run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4.57764e-05, 0)
 rotation = 1.57079
 shape = SubResource("RectangleShape2D_3efs2")

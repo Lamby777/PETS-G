@@ -87,6 +87,9 @@ y_sort_enabled = true
 [node name="Enemies" type="Node2D" parent="YSort"]
 y_sort_enabled = true
 
+[node name="Mouse1" parent="YSort/Enemies" instance=ExtResource("10_30w80")]
+position = Vector2(840, 776)
+
 [node name="TileMap" type="TileMap" parent="YSort"]
 y_sort_enabled = true
 scale = Vector2(4, 4)
@@ -228,6 +231,3 @@ visible = false
 position = Vector2(0, 960)
 scale = Vector2(26, 26)
 polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
-
-[node name="WalkingEnemy" parent="." instance=ExtResource("10_30w80")]
-position = Vector2(840, 776)
