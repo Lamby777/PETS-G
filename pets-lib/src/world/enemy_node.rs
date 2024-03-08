@@ -89,13 +89,20 @@ impl WalkingEnemy {
     }
 
     pub fn walk_towards_player(&mut self, _delta: f64) {
-        let ((pcb_x, pcb_y), (own_x, own_y)) = self.self_pos_pcb_pos();
         let spd = self.max_speed;
+        let mut base = self.base_mut();
 
-        self.base_mut()
-            .move_local_x(if pcb_x > own_x { spd } else { -spd });
-        self.base_mut()
-            .move_local_y(if pcb_y > own_y { spd } else { -spd });
+        let pcb_pos = PlayerCB::singleton().get_position();
+        let own_pos = base.get_position();
+
+        let target_pos = (pcb_pos - own_pos).normalized();
+        if own_pos.distance_to(pcb_pos) < 10.0 {
+            return;
+        }
+
+        base.set_velocity(target_pos * spd);
+        base.move_and_slide();
+        base.look_at(pcb_pos);
     }
 }
 
@@ -118,7 +125,7 @@ impl ICharacterBody2D for WalkingEnemy {
                 backwards: false,
             });
         } else {
-            let ((pcb_x, pcb_y), (own_x, own_y)) = self.self_pos_pcb_pos();
+            let ((own_x, own_y), (pcb_x, pcb_y)) = self.self_pos_pcb_pos();
 
             // flipped if player is to the right of the enemy
             let flipped = pcb_x > own_x;
