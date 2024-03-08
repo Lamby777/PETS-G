@@ -9,7 +9,7 @@ use llm::{InferenceFeedback, InferenceResponse, Prompt};
 /// get the path of the pretrained model
 fn get_llm_path() -> Result<PathBuf> {
     // Open file in read mode
-    let model_file = GFile::open("res://assets/llm.bin", ModeFlags::READ)?;
+    let model_file = GFile::open("res://assets/model.llm", ModeFlags::READ)?;
 
     let path = model_file.path_absolute().to_string();
 
