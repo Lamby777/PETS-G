@@ -1,6 +1,5 @@
 use crate::prelude::*;
 
-use godot::builtin::GString;
 use godot::engine::file_access::ModeFlags;
 use godot::engine::GFile;
 
@@ -8,14 +7,22 @@ use io::Write;
 use llm::models::Gpt2;
 
 /// get the path of the pretrained model
-fn get_llm_path() -> PathBuf {
-    //
+fn get_llm_path() -> Result<PathBuf> {
+    // Open file in read mode
+    let model_file = GFile::open("res://assets/llm.bin", ModeFlags::READ)?;
+
+    let path = model_file.path_absolute().to_string();
+
+    path.parse()
+        .map_err(|e| anyhow!("Failed to parse path: {}", e))
 }
 
 fn load_llm() -> Gpt2 {
+    let model_path = get_llm_path().unwrap();
+
     // load a GGML model from disk
     llm::load(
-        Path::new("/path/to/model"),
+        &model_path,
         Default::default(),
         llm::load_progress_callback_stdout,
     )
