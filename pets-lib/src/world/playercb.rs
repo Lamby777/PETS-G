@@ -75,9 +75,9 @@ impl ICharacterBody2D for PlayerCB {
         let moving = input_vector != Vector2::ZERO;
 
         let (toward, deltatimes) = if moving {
-            (input_vector * MAX_SPEED, delta * ACCELERATION)
+            (input_vector * MAX_SPEED, delta as f32 * ACCELERATION)
         } else {
-            (Vector2::ZERO, (delta * FRICTION))
+            (Vector2::ZERO, (delta as f32 * FRICTION))
         };
 
         let velocity = self.base().get_velocity();
