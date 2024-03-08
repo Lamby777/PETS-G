@@ -1,9 +1,24 @@
 use crate::prelude::*;
 
 use io::Write;
-use llm::models::Gpt2;
 
-fn load_llm() -> Gpt2 {
+use llm::models::Bloom;
+use llm::Model as _;
+use llm::{InferenceFeedback, InferenceResponse, Prompt};
+
+/// get the path of the pretrained model
+fn get_llm_path() -> Result<PathBuf> {
+    // Open file in read mode
+    let model_file = GFile::open("res://assets/llm.bin", ModeFlags::READ)?;
+
+    let path = model_file.path_absolute().to_string();
+
+    path.parse()
+        .map_err(|e| anyhow!("Failed to parse path: {}", e))
+}
+
+fn load_llm() -> Bloom {
+    let model_path = get_llm_path().unwrap();
     // load a GGML model from disk
     llm::load(
         Path::new("/path/to/model"),
