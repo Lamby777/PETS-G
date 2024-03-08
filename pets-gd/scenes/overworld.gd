@@ -1,10 +1,10 @@
 extends Node2D
 
-@onready var mzones    = $MusicZones
 @onready var za_active = $ZoneAudio/Active
 @onready var za_fade   = $ZoneAudio/FadeOut
 @onready var za_anim   = $ZoneAudio/AnimationPlayer
 @onready var player    = $YSort/PlayerCB
+@onready var mzones    = $YSort/Room/MusicZones
 
 var current_mz: MusicZone = null
 
@@ -20,7 +20,7 @@ func leaving_mz(cb):
 
 func entering_mz(cb, zone):
     if not (cb is PlayerCB): return
-
+    
     print("Entering new MusicZone: " + zone.name)
     crossfade_za_into(zone.music)
     current_mz = zone
