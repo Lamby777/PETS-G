@@ -46,6 +46,3 @@ func crossfade_za_into(new_audio: AudioStream):
     
     za_active.playing = true
     za_fade.play(fadeout_at)
-
-signal register_inter(inter: InteractionZone)
-signal unregister_inter(inter: InteractionZone)

@@ -74,6 +74,8 @@ _data = {
 [node name="Overworld" type="Node2D"]
 script = ExtResource("1_bs1lv")
 
+[node name="BattleLayer" type="CanvasLayer" parent="."]
+
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="InteractionManager" parent="." instance=ExtResource("2_uh12s")]
@@ -208,6 +210,17 @@ collision_mask = 9
 [node name="InteractionZone" parent="YSort/RodrickSign" instance=ExtResource("5_uar2c")]
 interaction_id = "Rodrick Sign #1"
 
+[node name="MusicZones" type="Node" parent="YSort"]
+
+[node name="CV_Outdoors" type="Area2D" parent="YSort/MusicZones"]
+script = ExtResource("5_skv18")
+music = ExtResource("5_x7nbf")
+
+[node name="MusicZone" type="CollisionPolygon2D" parent="YSort/MusicZones/CV_Outdoors"]
+position = Vector2(0, 960)
+scale = Vector2(26, 26)
+polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
 [node name="ZoneAudio" type="Node" parent="."]
 
 [node name="FadeOut" type="AudioStreamPlayer" parent="ZoneAudio"]
@@ -219,15 +232,3 @@ autoplay = true
 libraries = {
 "": SubResource("AnimationLibrary_fv7du")
 }
-
-[node name="MusicZones" type="Node" parent="."]
-
-[node name="CV_Outdoors" type="Area2D" parent="MusicZones"]
-script = ExtResource("5_skv18")
-music = ExtResource("5_x7nbf")
-
-[node name="MusicZone" type="CollisionPolygon2D" parent="MusicZones/CV_Outdoors"]
-visible = false
-position = Vector2(0, 960)
-scale = Vector2(26, 26)
-polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
