@@ -1,4 +1,4 @@
-use godot::engine::{AnimatedSprite2D, IStaticBody2D, StaticBody2D};
+use godot::engine::{AnimatedSprite2D, CharacterBody2D, ICharacterBody2D};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -11,9 +11,9 @@ struct AnimOptions {
 }
 
 #[derive(GodotClass)]
-#[class(init, base=StaticBody2D)]
+#[class(init, base=CharacterBody2D)]
 pub struct WalkingEnemy {
-    base: Base<StaticBody2D>,
+    base: Base<CharacterBody2D>,
 
     #[export]
     enemy_id: GString,
@@ -95,7 +95,7 @@ impl WalkingEnemy {
 }
 
 #[godot_api]
-impl IStaticBody2D for WalkingEnemy {
+impl ICharacterBody2D for WalkingEnemy {
     fn ready(&mut self) {
         // check to make sure it's a valid enemy id
         let enemy_id = self.enemy_id.to_string();
