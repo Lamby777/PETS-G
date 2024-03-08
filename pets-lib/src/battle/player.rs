@@ -22,22 +22,25 @@ const BATTLE_DIRECTIONS: LazyCell<DirectionalInputNames> = LazyCell::new(|| {
 });
 
 #[derive(GodotClass)]
-#[class(base=Node2D)]
+#[class(init, base=Node2D)]
 struct BattleIcon {
     base: Base<Node2D>,
-    si: Gd<StatsInterface>,
 
     /// Maximum speed of player icon
+    #[init(default = 400.0)]
     speed: FloatStat,
 
     /// Acceleration amount per tick held
+    #[init(default = 80.0)]
     acceleration: FloatStat,
 
     /// Coefficient of deceleration
+    #[init(default = 0.96)]
     friction: FloatStat,
 
     /// Current velocity of player icon
     /// NOT normalized, but still limited by speed.
+    #[init(default = Vector2::ZERO)]
     velocity: Vector2,
 }
 
@@ -70,20 +73,9 @@ impl BattleIcon {
 
 #[godot_api]
 impl INode2D for BattleIcon {
-    fn init(base: Base<Node2D>) -> Self {
-        Self {
-            base,
-            si: StatsInterface::singleton(),
-
-            speed: 400.0,
-            acceleration: 80.0,
-            friction: 0.96,
-            velocity: Vector2::ZERO,
-        }
-    }
-
     fn ready(&mut self) {
-        let ch_speed = self.si.bind().natural_speed_of(PChar::ETHAN);
+        let si = StatsInterface::singleton();
+        let ch_speed = si.bind().natural_speed_of(PChar::ETHAN);
         self.speed = to_battle::speed(ch_speed);
     }
 
