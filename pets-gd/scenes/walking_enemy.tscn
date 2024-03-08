@@ -31,8 +31,8 @@ size = Vector2(159.999, 160.001)
 
 [node name="WalkingEnemy" type="WalkingEnemy"]
 enemy_id = "ANONNYMOUSE"
-sight_range = 512.0
-max_speed = 2.0
+sight_range = 960.0
+max_speed = 4.0
 collision_layer = 8
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
