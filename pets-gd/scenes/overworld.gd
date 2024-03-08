@@ -4,13 +4,24 @@ extends Node2D
 @onready var za_fade   = $ZoneAudio/FadeOut
 @onready var za_anim   = $ZoneAudio/AnimationPlayer
 @onready var player    = $YSort/PlayerCB
-@onready var mzones    = $YSort/Room/MusicZones
+@onready var room      = $YSort/Room
 
 var current_mz: MusicZone = null
 
+func get_musiczones(parent) -> Array:
+    var res: Array = []
+    
+    for node in parent.get_children():
+        if node is MusicZone:
+            res.append(node)
+        elif node.get_child_count() > 0:
+            res.append_array(get_musiczones(node))
+
+    return res
+
 func _ready():
     # check if entering new zone
-    for zone in mzones.get_children():
+    for zone in get_musiczones(room):
         zone.body_entered.connect(entering_mz.bind(zone))
         zone.body_exited.connect(leaving_mz)
 
