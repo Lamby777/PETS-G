@@ -6,7 +6,7 @@ use godot::engine::GFile;
 use io::Write;
 use llm::models::Gpt2;
 use llm::Model as _;
-use llm::Prompt;
+use llm::{InferenceFeedback, InferenceResponse, Prompt};
 
 /// get the path of the pretrained model
 fn get_llm_path() -> Result<PathBuf> {
@@ -45,14 +45,17 @@ pub fn llm_generate() {
             maximum_token_count: None,
         },
         &mut Default::default(),
-        |r| match r {
-            llm::InferenceResponse::PromptToken(t) | llm::InferenceResponse::InferredToken(t) => {
-                print!("{t}");
-                std::io::stdout().flush().unwrap();
-
-                Ok(llm::InferenceFeedback::Continue)
+        |response| {
+            use InferenceResponse::*;
+            match response {
+                PromptToken(t) | InferredToken(t) => {
+                    print!("{t}");
+                    std::io::stdout().flush().unwrap();
+                }
+                _ => {}
             }
-            _ => Ok(llm::InferenceFeedback::Continue),
+
+            Ok(InferenceFeedback::Continue)
         },
     );
 
