@@ -17,7 +17,7 @@ use music_zone::MusicZone;
 
 // just for testing
 // use a value provided by the mz later on...
-const AUDIO_FADE_TIME: f64 = 0.5;
+const AUDIO_FADE_TIME: real = 0.5;
 
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
@@ -54,18 +54,20 @@ impl World {
     }
 
     #[func]
-    fn crossfade_za_into(&mut self, new_audio: Option<Gd<AudioStream>>) {
+    fn crossfade_za_into(&mut self, _new_audio: Option<Gd<AudioStream>>) {
         // before assigning a new stream, keep track of where
         // the old one ended on, to assign the fadeout's pos to that
-        let fadeout_at = self.active_audio.get_playback_position();
+        let _fadeout_at = self.active_audio.get_playback_position();
         // fading_audio.stream = active_audio.stream
         // active_audio.stream = new_audio
         //
-        // fade_animator.speed_scale = AUDIO_FADE_TIME
-        //
-        // fade_animator.stop()
-        // fade_animator.play("crossfade")
-        //
+        self.fade_animator.set_speed_scale(AUDIO_FADE_TIME);
+        self.fade_animator.stop();
+
+        self.fade_animator
+            .set_assigned_animation("crossfade".into());
+        self.fade_animator.play()
+
         // active_audio.playing = true
         // fading_audio.play(fadeout_at)
     }
