@@ -4,7 +4,7 @@
 
 use crate::prelude::*;
 
-use godot::engine::AnimationPlayer;
+use godot::engine::{AnimationPlayer, AudioStream};
 use godot::prelude::*;
 
 pub mod enemy_node;
@@ -36,34 +36,40 @@ pub struct World {
     #[init(default = onready_node(&base, "ZoneAudio/AnimationPlayer"))]
     fade_animator: OnReady<Gd<AnimationPlayer>>,
 
-    current_mz: Option<MusicZone>,
+    current_mz: Option<Gd<MusicZone>>,
 }
-// func leaving_mz(cb):
-//     crossfade_za_into_null()
-//
-// func entering_mz(cb, zone):
-//     print("Entering new MusicZone: " + zone.name)
-//     crossfade_za_into(zone.music)
-//     current_mz = Some(zone)
-//
-// func crossfade_za_into(new_audio: AudioStream):
-//     # before assigning a new stream, keep track of where
-//     # the old one ended on, to assign the fadeout's pos to that
-//     var fadeout_at    = active_audio.get_playback_position()
-//
-//     fading_audio.stream = active_audio.stream
-//     active_audio.stream = new_audio
-//
-//     fade_animator.speed_scale = AUDIO_FADE_TIME
-//
-//     fade_animator.stop()
-//     fade_animator.play("crossfade")
-//
-//     active_audio.playing = true
-//     fading_audio.play(fadeout_at)
 
 #[godot_api]
 impl World {
+    #[func]
+    fn on_exit(&mut self, _pcb: Gd<Node2D>) {
+        self.crossfade_za_to_null();
+    }
+
+    #[func]
+    fn on_enter(&mut self, _pcb: Gd<Node2D>, zone: Gd<MusicZone>) {
+        godot_print!("Entering new MusicZone: {}", zone.get_name());
+        self.crossfade_za_into(Some(zone.bind().music.clone()));
+        self.current_mz = Some(zone);
+    }
+
+    #[func]
+    fn crossfade_za_into(&mut self, new_audio: Option<Gd<AudioStream>>) {
+        // before assigning a new stream, keep track of where
+        // the old one ended on, to assign the fadeout's pos to that
+        let fadeout_at = self.active_audio.get_playback_position();
+        // fading_audio.stream = active_audio.stream
+        // active_audio.stream = new_audio
+        //
+        // fade_animator.speed_scale = AUDIO_FADE_TIME
+        //
+        // fade_animator.stop()
+        // fade_animator.play("crossfade")
+        //
+        // active_audio.playing = true
+        // fading_audio.play(fadeout_at)
+    }
+
     #[func]
     fn crossfade_za_to_null(&mut self) {
         // self.crossfade_za_into(null);
@@ -78,9 +84,11 @@ impl INode2D for World {
         let mzones = subchildren_of_type::<MusicZone>(room.upcast());
 
         for mut zone in mzones {
-            let on_exit = self.base().callable("crossfade_za_to_null");
+            let on_exit = self.base().callable("on_exit");
+            let on_enter = self.base().callable("on_enter");
 
-            // zone.body_entered.connect(entering_mz.bind(zone))
+            let args = Array::from(&[zone.to_variant()]);
+            zone.connect("body_entered".into(), on_enter.bindv(args));
             zone.connect("body_exited".into(), on_exit);
         }
     }
