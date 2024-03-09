@@ -15,6 +15,10 @@ pub mod playercb;
 
 use music_zone::MusicZone;
 
+// just for testing
+// use a value provided by the mz later on...
+const AUDIO_FADE_TIME: f64 = 0.5;
+
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
 pub struct World {
@@ -34,7 +38,6 @@ pub struct World {
 
     current_mz: Option<MusicZone>,
 }
-
 // func leaving_mz(cb):
 //     crossfade_za_into_null()
 //
@@ -43,21 +46,15 @@ pub struct World {
 //     crossfade_za_into(zone.music)
 //     current_mz = Some(zone)
 //
-// func crossfade_za_into_null():
-//     crossfade_za_into(null)
-//     current_mz = None
-//
 // func crossfade_za_into(new_audio: AudioStream):
 //     # before assigning a new stream, keep track of where
 //     # the old one ended on, to assign the fadeout's pos to that
 //     var fadeout_at    = active_audio.get_playback_position()
 //
-//     fading_audio.stream    = active_audio.stream
-//     active_audio.stream  = new_audio
+//     fading_audio.stream = active_audio.stream
+//     active_audio.stream = new_audio
 //
-//     # just for testing
-//     # use a value provided by the mz later on...
-//     fade_animator.speed_scale = 0.5
+//     fade_animator.speed_scale = AUDIO_FADE_TIME
 //
 //     fade_animator.stop()
 //     fade_animator.play("crossfade")
@@ -67,7 +64,11 @@ pub struct World {
 
 #[godot_api]
 impl World {
-    //
+    #[func]
+    fn crossfade_za_to_null(&mut self) {
+        // self.crossfade_za_into(null);
+        self.current_mz = None;
+    }
 }
 
 #[godot_api]
@@ -76,10 +77,11 @@ impl INode2D for World {
         let room = self.room.clone();
         let mzones = subchildren_of_type::<MusicZone>(room.upcast());
 
-        for zone in mzones {
-            todo!();
+        for mut zone in mzones {
+            let on_exit = self.base().callable("crossfade_za_to_null");
+
             // zone.body_entered.connect(entering_mz.bind(zone))
-            // zone.body_exited.connect(leaving_mz)
+            zone.connect("body_exited".into(), on_exit);
         }
     }
 }
