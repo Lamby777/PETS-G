@@ -1,6 +1,5 @@
-[gd_scene load_steps=14 format=3 uid="uid://p2uymvf88jt7"]
+[gd_scene load_steps=13 format=3 uid="uid://p2uymvf88jt7"]
 
-[ext_resource type="Script" path="res://scenes/overworld.gd" id="1_bs1lv"]
 [ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/builds/bush_long.tscn" id="2_87c4u"]
 [ext_resource type="PackedScene" uid="uid://b0rlrppekv4vg" path="res://scenes/player_cb.tscn" id="2_r6tgb"]
 [ext_resource type="PackedScene" uid="uid://c0jehwow4ein4" path="res://scenes/interaction_manager.tscn" id="2_uh12s"]
@@ -71,8 +70,7 @@ _data = {
 "crossfade": SubResource("Animation_k4si3")
 }
 
-[node name="Overworld" type="Node2D"]
-script = ExtResource("1_bs1lv")
+[node name="Overworld" type="World"]
 
 [node name="BattleLayer" type="CanvasLayer" parent="."]
 
