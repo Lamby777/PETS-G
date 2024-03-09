@@ -34,6 +34,7 @@ pub struct WalkingEnemy {
     anim_debounce: Option<AnimOptions>,
 
     ready: bool,
+    touched_player: bool,
 }
 
 #[godot_api]
@@ -116,7 +117,13 @@ impl WalkingEnemy {
     }
 
     #[func]
-    fn on_player_touched(&self, _body: Gd<Node2D>) {
+    fn on_player_touched(&mut self, _body: Gd<Node2D>) {
+        if self.touched_player {
+            return;
+        }
+
+        self.touched_player = true;
+
         println!("Player touched enemy");
         // World::begin_battle(self.enemy_id.to_string());
     }
