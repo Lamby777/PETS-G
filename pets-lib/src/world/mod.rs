@@ -39,6 +39,13 @@ pub struct World {
     current_mz: Option<Gd<MusicZone>>,
 }
 
+fn set_or_stop_audio(src: Option<Gd<AudioStream>>, audio: &mut Gd<AudioStreamPlayer>) {
+    match src {
+        Some(src) => audio.set_stream(src),
+        None => audio.stop(),
+    }
+}
+
 #[godot_api]
 impl World {
     #[func]
@@ -54,27 +61,34 @@ impl World {
     }
 
     #[func]
-    fn crossfade_audio_into(&mut self, _new_audio: Option<Gd<AudioStream>>) {
+    fn crossfade_audio_into(&mut self, src: Option<Gd<AudioStream>>) {
         // before assigning a new stream, keep track of where
         // the old one ended on, to assign the fadeout's pos to that
-        let _fadeout_at = self.active_audio.get_playback_position();
-        // fading_audio.stream = active_audio.stream
-        // active_audio.stream = new_audio
-        //
+        let fadeout_at = self.active_audio.get_playback_position();
+
+        let old_stream = self.active_audio.get_stream();
+        set_or_stop_audio(old_stream, &mut self.fading_audio);
+        set_or_stop_audio(src, &mut self.active_audio);
+
+        // TODO maybe if there's a way to "reverse" the
+        // animation from the current point...? that would
+        // easily solve <https://github.com/Lamby777/PETS-G/issues/9>
         self.fade_animator.set_speed_scale(AUDIO_FADE_TIME);
         self.fade_animator.stop();
 
         self.fade_animator
             .set_assigned_animation("crossfade".into());
-        self.fade_animator.play()
+        self.fade_animator.play();
 
-        // active_audio.playing = true
-        // fading_audio.play(fadeout_at)
+        // play the stuff
+        self.active_audio.play();
+        self.fading_audio.seek(fadeout_at);
+        self.fading_audio.play();
     }
 
     #[func]
     fn crossfade_audio_to_null(&mut self) {
-        // self.crossfade_audio_into(null);
+        self.crossfade_audio_into(None);
         self.current_mz = None;
     }
 }
