@@ -6,18 +6,7 @@ use godot::engine::tween::TransitionType;
 use godot::engine::{Engine, NodeExt, RichTextLabel, Theme, Tween};
 use godot::prelude::*;
 
-// func get_subchildren_of_type(type, parent) -> Array:
-//     var res: Array = []
-//
-//     for node in parent.get_children():
-//         if is_instance_of(node, type):
-//             res.append(node)
-//         elif node.get_child_count() > 0:
-//             res.append_array(get_subchildren_of_type(type, node))
-//
-//     return res
-
-pub fn get_subchildren_of_type<T>(parent: Gd<Node>) -> Vec<Gd<T>>
+pub fn subchildren_of_type<T>(parent: Gd<Node>) -> Vec<Gd<T>>
 where
     T: GodotClass + Inherits<Node>,
 {
@@ -25,7 +14,7 @@ where
 
     for node in parent.get_children().iter_shared() {
         let Ok(node) = node.clone().try_cast::<T>() else {
-            let children = get_subchildren_of_type::<T>(node);
+            let children = subchildren_of_type::<T>(node);
             res.extend(children);
             continue;
         };
