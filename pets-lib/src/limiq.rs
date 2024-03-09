@@ -2,14 +2,17 @@
 //! Limited Queue stuff
 //!
 
+use crate::prelude::*;
 use std::collections::VecDeque;
-use std::ops::{Deref, Index};
 
 /// "Limited Queue"
 /// Circular buffer that pops from the back if over capacity
 /// Technically, yes, it's a deque. However, this is you: 🤓
+#[derive(Deref)]
 pub struct LimiQ<T> {
+    #[target]
     buffer: VecDeque<T>,
+
     capacity: usize,
 }
 
@@ -37,16 +40,9 @@ impl<T> LimiQ<T> {
     }
 }
 
-impl<T> Index<usize> for LimiQ<T> {
+impl<T> std::ops::Index<usize> for LimiQ<T> {
     type Output = T;
     fn index(&self, index: usize) -> &Self::Output {
         self.buffer.index(index)
-    }
-}
-
-impl<T> Deref for LimiQ<T> {
-    type Target = VecDeque<T>;
-    fn deref(&self) -> &Self::Target {
-        &self.buffer
     }
 }

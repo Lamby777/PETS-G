@@ -8,6 +8,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 concat-idents = "1.1.5"
+derived-deref = "2.1.0"
 dialogical = "*"
 godot = { git = "https://github.com/godot-rust/gdext", branch = "master", features = ["experimental-threads"]}
 indoc = "2.0.4"
