@@ -27,10 +27,7 @@ pub struct PlayerCB {
 #[godot_api]
 impl PlayerCB {
     pub fn singleton() -> Gd<Self> {
-        godot_tree()
-            .get_first_node_in_group("playercb".into())
-            .expect("PlayerCB group had no nodes...?")
-            .cast()
+        current_scene().get_node_as("%PlayerCB")
     }
 
     fn move_chars(&mut self, moving: bool) {
