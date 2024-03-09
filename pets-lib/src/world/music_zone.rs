@@ -8,5 +8,5 @@ pub struct MusicZone {
     base: Base<Area2D>,
 
     #[export]
-    music: Gd<AudioStream>,
+    pub music: Gd<AudioStream>,
 }
