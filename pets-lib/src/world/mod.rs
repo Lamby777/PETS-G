@@ -3,6 +3,8 @@
 //!
 
 use crate::prelude::*;
+
+use godot::engine::AnimationPlayer;
 use godot::prelude::*;
 
 pub mod enemy_node;
@@ -13,43 +15,6 @@ pub mod playercb;
 
 use music_zone::MusicZone;
 
-// @onready var za_active = $ZoneAudio/Active
-// @onready var za_fade   = $ZoneAudio/FadeOut
-// @onready var za_anim   = $ZoneAudio/AnimationPlayer
-// @onready var player    = $YSort/PlayerCB
-//
-// var current_mz: MusicZone = null
-//
-// func leaving_mz(cb):
-//     crossfade_za_into_null()
-//
-// func entering_mz(cb, zone):
-//     print("Entering new MusicZone: " + zone.name)
-//     crossfade_za_into(zone.music)
-//     current_mz = zone
-//
-// func crossfade_za_into_null():
-//     crossfade_za_into(null)
-//     current_mz = null
-//
-// func crossfade_za_into(new_audio: AudioStream):
-//     # before assigning a new stream, keep track of where
-//     # the old one ended on, to assign the fadeout's pos to that
-//     var fadeout_at    = za_active.get_playback_position()
-//
-//     za_fade.stream    = za_active.stream
-//     za_active.stream  = new_audio
-//
-//     # just for testing
-//     # use a value provided by the mz later on...
-//     za_anim.speed_scale = 0.5
-//
-//     za_anim.stop()
-//     za_anim.play("crossfade")
-//
-//     za_active.playing = true
-//     za_fade.play(fadeout_at)
-
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
 pub struct World {
@@ -57,7 +22,48 @@ pub struct World {
 
     #[init(default = onready_node(&base, "YSort/Room"))]
     room: OnReady<Gd<Node2D>>,
+
+    #[init(default = onready_node(&base, "ZoneAudio/Active"))]
+    active_audio: OnReady<Gd<AudioStreamPlayer>>,
+
+    #[init(default = onready_node(&base, "ZoneAudio/FadeOut"))]
+    fading_audio: OnReady<Gd<AudioStreamPlayer>>,
+
+    #[init(default = onready_node(&base, "ZoneAudio/AnimationPlayer"))]
+    fade_animator: OnReady<Gd<AnimationPlayer>>,
+
+    current_mz: Option<MusicZone>,
 }
+
+// func leaving_mz(cb):
+//     crossfade_za_into_null()
+//
+// func entering_mz(cb, zone):
+//     print("Entering new MusicZone: " + zone.name)
+//     crossfade_za_into(zone.music)
+//     current_mz = Some(zone)
+//
+// func crossfade_za_into_null():
+//     crossfade_za_into(null)
+//     current_mz = None
+//
+// func crossfade_za_into(new_audio: AudioStream):
+//     # before assigning a new stream, keep track of where
+//     # the old one ended on, to assign the fadeout's pos to that
+//     var fadeout_at    = active_audio.get_playback_position()
+//
+//     fading_audio.stream    = active_audio.stream
+//     active_audio.stream  = new_audio
+//
+//     # just for testing
+//     # use a value provided by the mz later on...
+//     fade_animator.speed_scale = 0.5
+//
+//     fade_animator.stop()
+//     fade_animator.play("crossfade")
+//
+//     active_audio.playing = true
+//     fading_audio.play(fadeout_at)
 
 #[godot_api]
 impl World {
@@ -75,9 +81,5 @@ impl INode2D for World {
             // zone.body_entered.connect(entering_mz.bind(zone))
             // zone.body_exited.connect(leaving_mz)
         }
-    }
-
-    fn physics_process(&mut self, _delta: f64) {
-        //
     }
 }
