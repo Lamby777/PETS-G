@@ -21,12 +21,9 @@ use music_zone::MusicZone;
 // var current_mz: MusicZone = null
 //
 // func leaving_mz(cb):
-//     if not (cb is PlayerCB): return
 //     crossfade_za_into_null()
 //
 // func entering_mz(cb, zone):
-//     if not (cb is PlayerCB): return
-//
 //     print("Entering new MusicZone: " + zone.name)
 //     crossfade_za_into(zone.music)
 //     current_mz = zone
