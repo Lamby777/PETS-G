@@ -40,13 +40,11 @@ mod prelude {
     pub use crate::stats::*;
     pub use crate::util::*;
 
-    pub use crate::dialogue::autoload::DBoxInterface;
-    pub use crate::dialogue::ix_map;
+    pub use crate::dialogue::{ix_map, DBoxInterface};
     pub use crate::functions::FnInterface;
     pub use crate::pchars::{EnemyID, PChar};
-    pub use crate::world::interaction::manager::InteractionManager;
-    pub use crate::world::interaction::zone::InteractionZone;
-    pub use crate::world::playercb::PlayerCB;
+    pub use crate::world::{InteractionManager, InteractionZone};
+    pub use crate::world::{MusicZone, PlayerCB, World};
 
     pub use crate::singleton::Autoload;
     pub use crate::wrapped::Wrapped;
