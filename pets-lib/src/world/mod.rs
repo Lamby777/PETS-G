@@ -43,18 +43,18 @@ pub struct World {
 impl World {
     #[func]
     fn on_exit(&mut self, _pcb: Gd<Node2D>) {
-        self.crossfade_za_to_null();
+        self.crossfade_audio_to_null();
     }
 
     #[func]
     fn on_enter(&mut self, _pcb: Gd<Node2D>, zone: Gd<MusicZone>) {
         godot_print!("Entering new MusicZone: {}", zone.get_name());
-        self.crossfade_za_into(Some(zone.bind().music.clone()));
+        self.crossfade_audio_into(Some(zone.bind().music.clone()));
         self.current_mz = Some(zone);
     }
 
     #[func]
-    fn crossfade_za_into(&mut self, _new_audio: Option<Gd<AudioStream>>) {
+    fn crossfade_audio_into(&mut self, _new_audio: Option<Gd<AudioStream>>) {
         // before assigning a new stream, keep track of where
         // the old one ended on, to assign the fadeout's pos to that
         let _fadeout_at = self.active_audio.get_playback_position();
@@ -73,8 +73,8 @@ impl World {
     }
 
     #[func]
-    fn crossfade_za_to_null(&mut self) {
-        // self.crossfade_za_into(null);
+    fn crossfade_audio_to_null(&mut self) {
+        // self.crossfade_audio_into(null);
         self.current_mz = None;
     }
 }
