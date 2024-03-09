@@ -84,6 +84,7 @@ unique_name_in_owner = true
 y_sort_enabled = true
 
 [node name="PlayerCB" parent="YSort" groups=["playercb"] instance=ExtResource("2_r6tgb")]
+unique_name_in_owner = true
 
 [node name="Room" type="Node2D" parent="YSort"]
 y_sort_enabled = true
