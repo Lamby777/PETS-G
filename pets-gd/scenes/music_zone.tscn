@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c5mnxr4iyqch7"]
+
+[node name="CV_Outdoors" type="MusicZone"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="MusicZone" type="CollisionPolygon2D" parent="."]
+scale = Vector2(26, 26)
+polygon = PackedVector2Array(-2.46154, -2.46154, 2.46154, -2.46154, 2.46154, 2.46154, -2.46154, 2.46154)

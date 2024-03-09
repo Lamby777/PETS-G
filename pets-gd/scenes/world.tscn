@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://p2uymvf88jt7"]
+[gd_scene load_steps=14 format=3 uid="uid://p2uymvf88jt7"]
 
 [ext_resource type="Script" path="res://scenes/overworld.gd" id="1_bs1lv"]
 [ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/builds/bush_long.tscn" id="2_87c4u"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="5_uar2c"]
 [ext_resource type="AudioStream" uid="uid://b83wws3dajmi5" path="res://assets/music/zone/routingout.ogg" id="5_x7nbf"]
 [ext_resource type="PackedScene" uid="uid://drxvvfvnc7awr" path="res://scenes/builds/rodrick_sign.tscn" id="6_w4dbq"]
+[ext_resource type="PackedScene" uid="uid://c5mnxr4iyqch7" path="res://scenes/music_zone.tscn" id="9_tt2ie"]
 [ext_resource type="PackedScene" uid="uid://dk214wpitbhju" path="res://scenes/walking_enemy.tscn" id="10_30w80"]
 
 [sub_resource type="Animation" id="Animation_2m57u"]
@@ -211,16 +212,12 @@ collision_mask = 9
 [node name="InteractionZone" parent="YSort/Room/RodrickSign" instance=ExtResource("5_uar2c")]
 interaction_id = "Rodrick Sign #1"
 
-[node name="CV_Outdoors" type="MusicZone" parent="YSort/Room"]
+[node name="MZ_CV_Outdoors" parent="YSort/Room" instance=ExtResource("9_tt2ie")]
 music = ExtResource("5_x7nbf")
-collision_layer = 0
-collision_mask = 2
 
-[node name="MusicZone" type="CollisionPolygon2D" parent="YSort/Room/CV_Outdoors"]
+[node name="MusicZone" parent="YSort/Room/MZ_CV_Outdoors" index="0"]
 visible = false
-position = Vector2(0, 960)
-scale = Vector2(26, 26)
-polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+polygon = PackedVector2Array(-68.9231, -20.9231, 88.6154, -20.9231, 88.6154, 78.7692, -68.9231, 78.7692)
 
 [node name="ZoneAudio" type="Node" parent="."]
 
@@ -233,3 +230,5 @@ autoplay = true
 libraries = {
 "": SubResource("AnimationLibrary_fv7du")
 }
+
+[editable path="YSort/Room/MZ_CV_Outdoors"]
