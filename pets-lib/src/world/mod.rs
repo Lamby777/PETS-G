@@ -20,13 +20,6 @@ use music_zone::MusicZone;
 //
 // var current_mz: MusicZone = null
 //
-// func _ready():
-//     var mzones = get_subchildren_of_type(MusicZone, room)
-//     # check if entering new zone
-//     for zone in mzones:
-//         zone.body_entered.connect(entering_mz.bind(zone))
-//         zone.body_exited.connect(leaving_mz)
-//
 // func leaving_mz(cb):
 //     if not (cb is PlayerCB): return
 //     crossfade_za_into_null()
@@ -77,13 +70,14 @@ impl World {
 #[godot_api]
 impl INode2D for World {
     fn ready(&mut self) {
-        // func _ready():
-        //     var mzones = get_subchildren_of_type(MusicZone, room)
-        //     # check if entering new zone
-        //     for zone in mzones:
-        //         zone.body_entered.connect(entering_mz.bind(zone))
-        //         zone.body_exited.connect(leaving_mz)
-        let _mzones = get_subchildren_of_type::<MusicZone>(self.room.clone().upcast());
+        let room = self.room.clone();
+        let mzones = subchildren_of_type::<MusicZone>(room.upcast());
+
+        for zone in mzones {
+            todo!();
+            // zone.body_entered.connect(entering_mz.bind(zone))
+            // zone.body_exited.connect(leaving_mz)
+        }
     }
 
     fn physics_process(&mut self, _delta: f64) {
