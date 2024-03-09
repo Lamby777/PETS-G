@@ -31,7 +31,7 @@ pub struct WalkingEnemy {
     range: OnReady<Gd<Area2D>>,
 
     // returns early from `anim_move` if the same options are passed
-    debounce: Option<AnimOptions>,
+    anim_debounce: Option<AnimOptions>,
 
     ready: bool,
 }
@@ -53,11 +53,11 @@ impl WalkingEnemy {
     /// in terms of Y position, so they'd be running up the screen.
     fn anim_move(&mut self, opts: AnimOptions) {
         // only run if the options have changed
-        if Some(opts) == self.debounce {
+        if Some(opts) == self.anim_debounce {
             return;
         }
 
-        self.debounce = Some(opts);
+        self.anim_debounce = Some(opts);
 
         let mode_str = if opts.moving { "Run" } else { "Idle" };
 
