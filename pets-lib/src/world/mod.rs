@@ -51,6 +51,10 @@ fn set_or_stop_audio(src: Option<Gd<AudioStream>>, mut audio: Gd<AudioStreamPlay
 
 #[godot_api]
 impl World {
+    fn battle_start(eid: GString) {
+        //
+    }
+
     #[func]
     fn on_exit(&mut self, _pcb: Gd<Node2D>) {
         self.crossfade_audio_to_null();
