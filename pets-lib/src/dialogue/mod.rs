@@ -5,6 +5,8 @@
 pub mod autoload;
 pub mod dbox;
 
+pub use autoload::DBoxInterface;
+
 use crate::prelude::*;
 use dialogical::InteractionMap;
 

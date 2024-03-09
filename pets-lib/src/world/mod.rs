@@ -13,7 +13,10 @@ pub mod music_zone;
 pub mod pchar_node;
 pub mod playercb;
 
-use music_zone::MusicZone;
+pub use interaction::manager::InteractionManager;
+pub use interaction::zone::InteractionZone;
+pub use music_zone::MusicZone;
+pub use playercb::PlayerCB;
 
 // just for testing
 // use a value provided by the mz later on...
