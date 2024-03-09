@@ -24,7 +24,7 @@ where
     let mut res = vec![];
 
     for node in parent.get_children().iter_shared() {
-        let Ok(node) = node.try_cast::<T>() else {
+        let Ok(node) = node.clone().try_cast::<T>() else {
             let children = get_subchildren_of_type::<T>(node);
             res.extend(children);
             continue;

@@ -7,8 +7,11 @@ use godot::prelude::*;
 
 pub mod enemy_node;
 pub mod interaction;
+pub mod music_zone;
 pub mod pchar_node;
 pub mod playercb;
+
+use music_zone::MusicZone;
 
 // @onready var za_active = $ZoneAudio/Active
 // @onready var za_fade   = $ZoneAudio/FadeOut
@@ -80,10 +83,10 @@ impl INode2D for World {
         //     for zone in mzones:
         //         zone.body_entered.connect(entering_mz.bind(zone))
         //         zone.body_exited.connect(leaving_mz)
-        let mzones = get_subchildren_of_type::<MusicZone>(self.room.upcast());
+        let _mzones = get_subchildren_of_type::<MusicZone>(self.room.clone().upcast());
     }
 
-    fn physics_process(&mut self, delta: f64) {
+    fn physics_process(&mut self, _delta: f64) {
         //
     }
 }

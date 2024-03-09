@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://p2uymvf88jt7"]
+[gd_scene load_steps=13 format=3 uid="uid://p2uymvf88jt7"]
 
 [ext_resource type="Script" path="res://scenes/overworld.gd" id="1_bs1lv"]
 [ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/builds/bush_long.tscn" id="2_87c4u"]
 [ext_resource type="PackedScene" uid="uid://b0rlrppekv4vg" path="res://scenes/player_cb.tscn" id="2_r6tgb"]
 [ext_resource type="PackedScene" uid="uid://c0jehwow4ein4" path="res://scenes/interaction_manager.tscn" id="2_uh12s"]
 [ext_resource type="TileSet" uid="uid://dtft48lqhsjgr" path="res://assets/tilesets/cliff-dirt/tileset_cliff-dirt.tres" id="3_14512"]
-[ext_resource type="Script" path="res://classes/musiczone.gd" id="5_skv18"]
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="5_uar2c"]
 [ext_resource type="AudioStream" uid="uid://b83wws3dajmi5" path="res://assets/music/zone/routingout.ogg" id="5_x7nbf"]
 [ext_resource type="PackedScene" uid="uid://drxvvfvnc7awr" path="res://scenes/builds/rodrick_sign.tscn" id="6_w4dbq"]
@@ -211,11 +210,10 @@ collision_mask = 9
 [node name="InteractionZone" parent="YSort/Room/RodrickSign" instance=ExtResource("5_uar2c")]
 interaction_id = "Rodrick Sign #1"
 
-[node name="CV_Outdoors" type="Area2D" parent="YSort/Room"]
+[node name="CV_Outdoors" type="MusicZone" parent="YSort/Room"]
+music = ExtResource("5_x7nbf")
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("5_skv18")
-music = ExtResource("5_x7nbf")
 
 [node name="MusicZone" type="CollisionPolygon2D" parent="YSort/Room/CV_Outdoors"]
 visible = false
