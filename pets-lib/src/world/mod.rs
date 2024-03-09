@@ -39,7 +39,7 @@ pub struct World {
     current_mz: Option<Gd<MusicZone>>,
 }
 
-fn set_or_stop_audio(src: Option<Gd<AudioStream>>, audio: &mut Gd<AudioStreamPlayer>) {
+fn set_or_stop_audio(src: Option<Gd<AudioStream>>, mut audio: Gd<AudioStreamPlayer>) {
     match src {
         Some(src) => audio.set_stream(src),
         None => audio.stop(),
@@ -67,8 +67,8 @@ impl World {
         let fadeout_at = self.active_audio.get_playback_position();
 
         let old_stream = self.active_audio.get_stream();
-        set_or_stop_audio(old_stream, &mut self.fading_audio);
-        set_or_stop_audio(src, &mut self.active_audio);
+        set_or_stop_audio(old_stream, self.fading_audio.clone());
+        set_or_stop_audio(src, self.active_audio.clone());
 
         // TODO maybe if there's a way to "reverse" the
         // animation from the current point...? that would
