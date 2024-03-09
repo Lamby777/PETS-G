@@ -125,7 +125,8 @@ impl WalkingEnemy {
         self.touched_player = true;
 
         println!("Player touched enemy");
-        // World::begin_battle(self.enemy_id.to_string());
+
+        World::battle_start(self.enemy_id.clone());
     }
 }
 
