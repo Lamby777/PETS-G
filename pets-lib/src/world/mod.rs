@@ -4,7 +4,8 @@
 
 use crate::prelude::*;
 
-use godot::engine::{AnimationPlayer, AudioStream};
+use godot::engine::utilities::randf_range;
+use godot::engine::{AnimationPlayer, AudioStream, ShaderMaterial, Time};
 use godot::prelude::*;
 
 pub mod enemy_node;
@@ -13,7 +14,10 @@ pub mod music_zone;
 pub mod pchar_node;
 pub mod playercb;
 
-use music_zone::MusicZone;
+pub use interaction::manager::InteractionManager;
+pub use interaction::zone::InteractionZone;
+pub use music_zone::MusicZone;
+pub use playercb::PlayerCB;
 
 // just for testing
 // use a value provided by the mz later on...
@@ -46,8 +50,25 @@ fn set_or_stop_audio(src: Option<Gd<AudioStream>>, mut audio: Gd<AudioStreamPlay
     }
 }
 
+/// randomize vector both fields from -1.0 to 1.0
+fn generate_random_mod() -> Vector2 {
+    let generate = || randf_range(-1.0, 1.0) as f32;
+    Vector2::new(generate(), generate())
+}
+
 #[godot_api]
 impl World {
+    fn battle_start(_eid: GString) {
+        let mut fx_rect = PlayerCB::singleton().bind().get_fx_rect();
+        fx_rect.call("reset_shader_timer".into(), &[]);
+
+        let mut mat = fx_rect.get_material().unwrap().cast::<ShaderMaterial>();
+        let rand_mod = generate_random_mod().to_variant();
+        mat.set_shader_parameter("rand_mod".into(), rand_mod);
+
+        fx_rect.set_visible(true);
+    }
+
     #[func]
     fn on_exit(&mut self, _pcb: Gd<Node2D>) {
         self.crossfade_audio_to_null();
@@ -56,7 +77,7 @@ impl World {
     #[func]
     fn on_enter(&mut self, _pcb: Gd<Node2D>, zone: Gd<MusicZone>) {
         godot_print!("Entering new MusicZone: {}", zone.get_name());
-        self.crossfade_audio_into(Some(zone.bind().music.clone()));
+        self.crossfade_audio_into(zone.bind().music.clone());
         self.current_mz = Some(zone);
     }
 

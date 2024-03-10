@@ -1,14 +1,23 @@
-[gd_scene load_steps=13 format=3 uid="uid://p2uymvf88jt7"]
+[gd_scene load_steps=16 format=3 uid="uid://p2uymvf88jt7"]
 
 [ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/builds/bush_long.tscn" id="2_87c4u"]
 [ext_resource type="PackedScene" uid="uid://b0rlrppekv4vg" path="res://scenes/player_cb.tscn" id="2_r6tgb"]
 [ext_resource type="PackedScene" uid="uid://c0jehwow4ein4" path="res://scenes/interaction_manager.tscn" id="2_uh12s"]
 [ext_resource type="TileSet" uid="uid://dtft48lqhsjgr" path="res://assets/tilesets/cliff-dirt/tileset_cliff-dirt.tres" id="3_14512"]
+[ext_resource type="Shader" path="res://themes/battle_intro.gdshader" id="3_a3d4r"]
+[ext_resource type="Script" path="res://scenes/BattleIntroRect.gd" id="4_jple0"]
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="5_uar2c"]
 [ext_resource type="AudioStream" uid="uid://b83wws3dajmi5" path="res://assets/music/zone/routingout.ogg" id="5_x7nbf"]
 [ext_resource type="PackedScene" uid="uid://drxvvfvnc7awr" path="res://scenes/builds/rodrick_sign.tscn" id="6_w4dbq"]
 [ext_resource type="PackedScene" uid="uid://c5mnxr4iyqch7" path="res://scenes/music_zone.tscn" id="9_tt2ie"]
 [ext_resource type="PackedScene" uid="uid://dk214wpitbhju" path="res://scenes/walking_enemy.tscn" id="10_30w80"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3xdh0"]
+shader = ExtResource("3_a3d4r")
+shader_parameter/SPEED = 0.25
+shader_parameter/start_time = 0.0
+shader_parameter/current_time = 0.0
+shader_parameter/rand_mod = Vector2(0, 0)
 
 [sub_resource type="Animation" id="Animation_2m57u"]
 length = 0.001
@@ -84,6 +93,16 @@ y_sort_enabled = true
 
 [node name="PlayerCB" parent="YSort" groups=["playercb"] instance=ExtResource("2_r6tgb")]
 unique_name_in_owner = true
+
+[node name="BattleIntroRect" type="ColorRect" parent="YSort/PlayerCB"]
+visible = false
+z_index = 5
+material = SubResource("ShaderMaterial_3xdh0")
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+script = ExtResource("4_jple0")
 
 [node name="Room" type="Node2D" parent="YSort"]
 y_sort_enabled = true
@@ -212,10 +231,6 @@ interaction_id = "Rodrick Sign #1"
 
 [node name="MZ_CV_Outdoors" parent="YSort/Room" instance=ExtResource("9_tt2ie")]
 music = ExtResource("5_x7nbf")
-
-[node name="MusicZone" parent="YSort/Room/MZ_CV_Outdoors" index="0"]
-visible = false
-polygon = PackedVector2Array(-68.9231, -20.9231, 88.6154, -20.9231, 88.6154, 78.7692, -68.9231, 78.7692)
 
 [node name="ZoneAudio" type="Node" parent="."]
 

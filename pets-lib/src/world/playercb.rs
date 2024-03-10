@@ -1,4 +1,4 @@
-use godot::engine::{CharacterBody2D, ICharacterBody2D};
+use godot::engine::{CharacterBody2D, ColorRect, ICharacterBody2D};
 use godot::prelude::*;
 
 use crate::consts::playercb::*;
@@ -28,6 +28,10 @@ pub struct PlayerCB {
 impl PlayerCB {
     pub fn singleton() -> Gd<Self> {
         current_scene().get_node_as("%PlayerCB")
+    }
+
+    pub fn get_fx_rect(&self) -> Gd<ColorRect> {
+        self.base().get_node_as("BattleIntroRect")
     }
 
     fn move_chars(&mut self, moving: bool) {
