@@ -1,4 +1,4 @@
-use godot::engine::{CharacterBody2D, ICharacterBody2D};
+use godot::engine::{CharacterBody2D, ColorRect, ICharacterBody2D};
 use godot::prelude::*;
 
 use crate::consts::playercb::*;
@@ -30,7 +30,7 @@ impl PlayerCB {
         current_scene().get_node_as("%PlayerCB")
     }
 
-    pub fn get_fx_rect(&self) -> Gd<Node2D> {
+    pub fn get_fx_rect(&self) -> Gd<ColorRect> {
         self.base().get_node_as("BattleIntroRect")
     }
 
