@@ -114,6 +114,6 @@ impl INode2D for TitleScreen {
     fn ready(&mut self) {
         // The node that contains the text labels below
         let cont = self.base().get_node_as("Background/MenuChoices");
-        self.choices = crate::wrapped::from_children_of(cont);
+        self.choices = Wrapped::from_children_of(cont);
     }
 }
