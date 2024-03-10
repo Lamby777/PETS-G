@@ -51,7 +51,7 @@ enum BattleChoice {
 #[allow(unused)]
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
-struct BattleEngine {
+pub struct BattleEngine {
     base: Base<Node2D>,
     choices: Wrapped<(BattleChoice, Gd<RichTextLabel>)>,
     state: BattleState,

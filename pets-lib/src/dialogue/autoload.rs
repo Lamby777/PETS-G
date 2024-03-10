@@ -2,6 +2,7 @@
 //! Singleton for accessing player stats in GDScript.
 //!
 
+use godot::engine::CanvasLayer;
 use godot::prelude::*;
 
 use super::dbox::DialogBox;
@@ -52,7 +53,7 @@ impl DBoxInterface {
 
     #[func]
     pub fn instantiate_dbox(&self) -> Gd<DialogBox> {
-        let mut ui_layer = current_scene().get_node_as::<Node>(UI_LAYER_NAME);
+        let mut ui_layer = current_scene().get_node_as::<CanvasLayer>(UI_LAYER_NAME);
 
         ui_layer
             .try_get_node_as::<DialogBox>(DBOX_NODE_NAME)

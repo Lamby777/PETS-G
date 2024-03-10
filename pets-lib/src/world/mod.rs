@@ -2,11 +2,12 @@
 //! Overworld Stuff
 //!
 
+use crate::battle::BattleEngine;
 use crate::consts::battle::*;
 use crate::prelude::*;
 
 use godot::engine::utilities::randf_range;
-use godot::engine::{AnimationPlayer, AudioStream};
+use godot::engine::{AnimationPlayer, AudioStream, CanvasLayer};
 use godot::prelude::*;
 
 pub mod enemy_node;
@@ -42,6 +43,9 @@ pub struct World {
     fade_animator: OnReady<Gd<AnimationPlayer>>,
 
     current_mz: Option<Gd<MusicZone>>,
+
+    #[init(default = load("res://scenes/battle.tscn"))]
+    battle_scene: Gd<PackedScene>,
 }
 
 fn set_or_stop_audio(src: Option<Gd<AudioStream>>, mut audio: Gd<AudioStreamPlayer>) {
@@ -59,8 +63,12 @@ fn generate_random_mod() -> Vector2 {
 
 #[godot_api]
 impl World {
+    #[signal]
+    fn battle_intro_done(eid: GString) {}
+
     fn battle_start(eid: GString) {
-        let cue = current_scene().callable("cue_battle_intro_fx");
+        let world = current_scene();
+        let cue = world.callable("cue_battle_intro_fx");
 
         let mat = PlayerCB::fx_material();
         let fade_len = mat.get_shader_parameter("LENGTH".into()).to::<f64>();
@@ -70,7 +78,7 @@ impl World {
             .unwrap()
             .connect("timeout".into(), cue);
 
-        let cue = current_scene()
+        let cue = world
             .callable("cue_battle_scene")
             .bindv((&[eid.to_variant()]).into());
 
@@ -81,8 +89,16 @@ impl World {
     }
 
     #[func]
-    fn cue_battle_scene(&self, _eid: GString) {
-        //
+    fn cue_battle_scene(&mut self, _eid: GString) {
+        // emit a signal for other nodes if they need to do something
+        self.base_mut()
+            .emit_signal("battle_intro_done".into(), &[_eid.to_variant()]);
+
+        let mut layer = current_scene().get_node_as::<CanvasLayer>(LAYER_NAME);
+
+        // load the scene
+        let scene = self.battle_scene.instantiate_as::<BattleEngine>();
+        layer.add_child(scene.clone().upcast());
     }
 
     #[func]
