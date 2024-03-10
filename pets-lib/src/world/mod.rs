@@ -59,13 +59,31 @@ fn generate_random_mod() -> Vector2 {
 
 #[godot_api]
 impl World {
-    fn battle_start(_eid: GString) {
+    fn battle_start(eid: GString) {
         let cue = current_scene().callable("cue_battle_intro_fx");
+
+        let fx_rect = PlayerCB::singleton().bind().get_fx_rect();
+        let mat = fx_rect.get_material().unwrap().cast::<ShaderMaterial>();
+        let fade_len = mat.get_shader_parameter("length".into()).to::<f64>();
 
         godot_tree()
             .create_timer(INTRO_FADE_PREDELAY)
             .unwrap()
             .connect("timeout".into(), cue);
+
+        let cue = current_scene()
+            .callable("cue_battle_scene")
+            .bindv((&[eid.to_variant()]).into());
+
+        godot_tree()
+            .create_timer(INTRO_FADE_PREDELAY + fade_len)
+            .unwrap()
+            .connect("timeout".into(), cue);
+    }
+
+    #[func]
+    fn cue_battle_scene(&self, _eid: GString) {
+        //
     }
 
     #[func]
@@ -133,10 +151,12 @@ impl INode2D for World {
 
         for mut zone in mzones {
             let on_exit = self.base().callable("on_exit");
-            let on_enter = self.base().callable("on_enter");
+            let on_enter = self
+                .base()
+                .callable("on_enter")
+                .bindv((&[zone.to_variant()]).into());
 
-            let args = VariantArray::from(&[zone.to_variant()]);
-            zone.connect("body_entered".into(), on_enter.bindv(args));
+            zone.connect("body_entered".into(), on_enter);
             zone.connect("body_exited".into(), on_exit);
         }
     }
