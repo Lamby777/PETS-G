@@ -10,8 +10,7 @@ use llm::models::Bloom;
 use llm::Model as _;
 use llm::{InferenceFeedback, InferenceResponse, Prompt};
 
-// TODO rename the res:// one to "default" model or smt like that
-const LLM_PATH_RES: &str = "res://assets/model.llm";
+const LLM_PATH_RES: &str = "res://assets/default-model.llm";
 const LLM_PATH_USER: &str = "user://model.llm";
 
 /// get the path of the pretrained model
