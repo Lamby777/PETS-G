@@ -1,7 +1,8 @@
 use crate::prelude::*;
 
 use godot::engine::file_access::ModeFlags;
-use godot::engine::GFile;
+use godot::engine::{DirAccess, GFile};
+use godot::prelude::*;
 
 use io::Write;
 
@@ -9,12 +10,32 @@ use llm::models::Bloom;
 use llm::Model as _;
 use llm::{InferenceFeedback, InferenceResponse, Prompt};
 
-/// get the path of the pretrained model
-fn get_llm_path() -> Result<PathBuf> {
-    // Open file in read mode
-    let model_file = GFile::open("res://assets/model.llm", ModeFlags::READ)?;
+// TODO rename the res:// one to "default" model or smt like that
+const LLM_PATH_RES: &str = "res://assets/model.llm";
+const LLM_PATH_USER: &str = "user://model.llm";
 
-    let path = model_file.path_absolute().to_string();
+/// get the path of the pretrained model
+fn prep_llm_path() -> Result<PathBuf> {
+    // Open the model file, or copy it out first if not exists
+    let open_it = || GFile::open(LLM_PATH_USER, ModeFlags::READ);
+    let mut file = open_it();
+
+    // TODO refactor into an unwrap_or_else or something
+    if let Err(_) = file {
+        // copy the dang file!!1!1111
+        godot_print!("Copying model... This may take a while.");
+        let mut dir = DirAccess::open("res://assets/".into()).unwrap();
+        dir.copy(LLM_PATH_RES.into(), LLM_PATH_USER.into());
+        godot_print!("Done!");
+
+        // try again
+        file = open_it();
+    };
+
+    let file = file?;
+
+    let path = file.path_absolute().to_string();
+    dbg!(&path);
 
     path.parse()
         .map_err(|e| anyhow!("Failed to parse path: {}", e))
@@ -22,7 +43,7 @@ fn get_llm_path() -> Result<PathBuf> {
 
 /// returns the model loaded from disk
 fn load_llm() -> Bloom {
-    let model_path = get_llm_path().unwrap();
+    let model_path = prep_llm_path().unwrap();
     llm::load(
         &model_path,
         llm::TokenizerSource::Embedded,
@@ -66,14 +87,14 @@ pub fn llm_generate() {
     }
 }
 
-pub struct LLMInterface;
+pub struct _LLMInterface;
 
-impl LLMInterface {
-    pub fn preprocess_shopkeeper_joke(joke: &str) -> String {
+impl _LLMInterface {
+    pub fn _preprocess_shopkeeper_joke(joke: &str) -> String {
         format!(include_str!("prompts/shopkeeper_joke.txt"), joke)
     }
 
-    pub fn preprocess_devon_shop(intro: &str) -> String {
+    pub fn _preprocess_devon_shop(intro: &str) -> String {
         format!(include_str!("prompts/devon_shop.txt"), intro)
     }
 }
