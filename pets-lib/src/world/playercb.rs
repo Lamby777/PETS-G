@@ -30,6 +30,10 @@ impl PlayerCB {
         current_scene().get_node_as("%PlayerCB")
     }
 
+    pub fn get_fx_rect(&self) -> Gd<Node2D> {
+        self.base().get_node_as("BattleIntroRect")
+    }
+
     fn move_chars(&mut self, moving: bool) {
         if self.past_positions.len() == 0 {
             return;
