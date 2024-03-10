@@ -27,7 +27,7 @@ impl FnInterface {
 
     #[func]
     pub fn debug_battle() {
-        crate::llm::llm_generate();
-        // change_scene!("battle");
+        // crate::llm::llm_generate();
+        change_scene!("battle");
     }
 }
