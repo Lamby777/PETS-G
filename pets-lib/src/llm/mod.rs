@@ -37,7 +37,7 @@ pub fn llm_generate() {
         &model,
         &mut rand::thread_rng(),
         &llm::InferenceRequest {
-            prompt: Prompt::Text("AI is interesting... Maybe someday it can"),
+            prompt: Prompt::Text("ML is interesting... Maybe someday it can"),
             parameters: &llm::InferenceParameters::default(),
             play_back_previous_tokens: false,
             maximum_token_count: None,
