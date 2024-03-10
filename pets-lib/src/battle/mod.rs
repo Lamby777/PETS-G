@@ -53,10 +53,12 @@ enum BattleChoice {
 #[class(init, base=Node2D)]
 pub struct BattleEngine {
     base: Base<Node2D>,
-
-    // #[init(default = wrapped::from_children_of(&base.to_gd().get_node_as("%Choices")))]
-    choices: Wrapped<(BattleChoice, Gd<RichTextLabel>)>,
     state: BattleState,
+
+    #[init(default = crate::wrapped::from_children_of(
+        base.to_gd().get_node_as("%Choices")
+    ))]
+    choices: Wrapped<(BattleChoice, Gd<RichTextLabel>)>,
 
     #[init(default = onready_node(&base, "AnimationPlayer"))]
     animator: OnReady<Gd<AnimationPlayer>>,
@@ -108,12 +110,6 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
 
 #[godot_api]
 impl INode2D for BattleEngine {
-    fn ready(&mut self) {
-        // The node that contains the text labels below
-        let cont = self.base().get_node_as("%Choices");
-        self.choices = crate::wrapped::from_children_of(cont);
-    }
-
     fn process(&mut self, _delta: f64) {
         use crate::wrapped::*;
         let action = process_input(&mut self.choices, ListDirection::TopToBottom);
