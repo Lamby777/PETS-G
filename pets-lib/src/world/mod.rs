@@ -97,7 +97,7 @@ impl World {
 
         // load the scene
         let mut scene = self.battle_scene.instantiate_as::<BattleEngine>();
-        scene.bind().animate_in();
+        scene.bind_mut().animate_in();
         layer.add_child(scene.clone().upcast());
     }
 

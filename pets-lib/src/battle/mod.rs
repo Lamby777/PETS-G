@@ -100,13 +100,13 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
     .unwrap();
 }
 
-// #[godot_api]
-// impl BattleEngine {
-//     #[func]
-//     pub fn animate_in(&mut self) {
-//         //
-//     }
-// }
+#[godot_api]
+impl BattleEngine {
+    #[func]
+    pub fn animate_in(&mut self) {
+        //
+    }
+}
 
 #[godot_api]
 impl INode2D for BattleEngine {
