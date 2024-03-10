@@ -15,7 +15,7 @@
 shader = ExtResource("3_a3d4r")
 shader_parameter/SPEED = 0.25
 shader_parameter/start_time = 0.0
-shader_parameter/rand_mod = Vector2(1, 0)
+shader_parameter/rand_mod = Vector2(0, 0)
 
 [sub_resource type="Animation" id="Animation_2m57u"]
 length = 0.001
@@ -93,6 +93,7 @@ y_sort_enabled = true
 unique_name_in_owner = true
 
 [node name="BattleIntroRect" type="ColorRect" parent="YSort/PlayerCB"]
+visible = false
 z_index = 5
 material = SubResource("ShaderMaterial_3xdh0")
 offset_left = -960.0
