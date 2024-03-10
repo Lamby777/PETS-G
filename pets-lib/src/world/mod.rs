@@ -63,7 +63,7 @@ impl World {
         let cue = current_scene().callable("cue_battle_intro_fx");
 
         let mat = PlayerCB::fx_material();
-        let fade_len = mat.get_shader_parameter("length".into()).to::<f64>();
+        let fade_len = mat.get_shader_parameter("LENGTH".into()).to::<f64>();
 
         godot_tree()
             .create_timer(INTRO_FADE_PREDELAY)
