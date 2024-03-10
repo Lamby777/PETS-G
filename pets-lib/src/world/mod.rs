@@ -5,7 +5,7 @@
 use crate::prelude::*;
 
 use godot::engine::utilities::randf_range;
-use godot::engine::{AnimationPlayer, AudioStream, ShaderMaterial, Time};
+use godot::engine::{AnimationPlayer, AudioStream, ShaderMaterial};
 use godot::prelude::*;
 
 pub mod enemy_node;
@@ -124,7 +124,7 @@ impl INode2D for World {
             let on_exit = self.base().callable("on_exit");
             let on_enter = self.base().callable("on_enter");
 
-            let args = Array::from(&[zone.to_variant()]);
+            let args = VariantArray::from(&[zone.to_variant()]);
             zone.connect("body_entered".into(), on_enter.bindv(args));
             zone.connect("body_exited".into(), on_exit);
         }
