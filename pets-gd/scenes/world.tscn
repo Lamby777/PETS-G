@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://p2uymvf88jt7"]
+[gd_scene load_steps=16 format=3 uid="uid://p2uymvf88jt7"]
 
 [ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/builds/bush_long.tscn" id="2_87c4u"]
 [ext_resource type="PackedScene" uid="uid://b0rlrppekv4vg" path="res://scenes/player_cb.tscn" id="2_r6tgb"]
 [ext_resource type="PackedScene" uid="uid://c0jehwow4ein4" path="res://scenes/interaction_manager.tscn" id="2_uh12s"]
 [ext_resource type="TileSet" uid="uid://dtft48lqhsjgr" path="res://assets/tilesets/cliff-dirt/tileset_cliff-dirt.tres" id="3_14512"]
 [ext_resource type="Shader" path="res://themes/battle_intro.gdshader" id="3_a3d4r"]
+[ext_resource type="Script" path="res://scenes/BattleIntroRect.gd" id="4_jple0"]
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="5_uar2c"]
 [ext_resource type="AudioStream" uid="uid://b83wws3dajmi5" path="res://assets/music/zone/routingout.ogg" id="5_x7nbf"]
 [ext_resource type="PackedScene" uid="uid://drxvvfvnc7awr" path="res://scenes/builds/rodrick_sign.tscn" id="6_w4dbq"]
@@ -100,6 +101,7 @@ offset_left = -960.0
 offset_top = -540.0
 offset_right = 960.0
 offset_bottom = 540.0
+script = ExtResource("4_jple0")
 
 [node name="Room" type="Node2D" parent="YSort"]
 y_sort_enabled = true
