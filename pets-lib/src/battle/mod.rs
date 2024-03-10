@@ -55,9 +55,6 @@ pub struct BattleEngine {
     base: Base<Node2D>,
     state: BattleState,
 
-    #[init(default = crate::wrapped::from_children_of(
-        base.to_gd().get_node_as("%Choices")
-    ))]
     choices: Wrapped<(BattleChoice, Gd<RichTextLabel>)>,
 
     #[init(default = onready_node(&base, "AnimationPlayer"))]
@@ -110,6 +107,11 @@ impl BattleEngine {
 
 #[godot_api]
 impl INode2D for BattleEngine {
+    fn ready(&mut self) {
+        let choices = self.base().get_node_as("%Choices");
+        self.choices = Wrapped::from_children_of(choices);
+    }
+
     fn process(&mut self, _delta: f64) {
         use crate::wrapped::*;
         let action = process_input(&mut self.choices, ListDirection::TopToBottom);

@@ -112,21 +112,26 @@ impl<T> Wrapped<T> {
     }
 }
 
-/// make a list from the child nodes of a parent node
-/// assumes the children are in the same order as the enum variants
-pub fn from_children_of<Enum, T>(parent: Gd<Node>) -> Wrapped<(Enum, Gd<T>)>
+impl<T> Wrapped<T>
 where
-    Enum: TryFrom<usize>,
-    T: GodotClass + Inherits<Node>,
+    T: GodotClass,
 {
-    let children = parent
-        .get_children()
-        .iter_shared()
-        .enumerate()
-        .map(|(i, node)| (Enum::try_from(i).ok().unwrap(), node.cast()))
-        .collect();
+    /// make a list from the child nodes of a parent node
+    /// assumes the children are in the same order as the enum variants
+    pub fn from_children_of<Enum>(parent: Gd<Node>) -> Wrapped<(Enum, Gd<T>)>
+    where
+        Enum: TryFrom<usize>,
+        T: GodotClass + Inherits<Node>,
+    {
+        let children = parent
+            .get_children()
+            .iter_shared()
+            .enumerate()
+            .map(|(i, node)| (Enum::try_from(i).ok().unwrap(), node.cast()))
+            .collect();
 
-    Wrapped::new(children)
+        Wrapped::new(children)
+    }
 }
 
 // ////////////////////////////////////////////////////////////// //
