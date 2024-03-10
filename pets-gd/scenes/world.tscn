@@ -229,10 +229,6 @@ interaction_id = "Rodrick Sign #1"
 [node name="MZ_CV_Outdoors" parent="YSort/Room" instance=ExtResource("9_tt2ie")]
 music = ExtResource("5_x7nbf")
 
-[node name="MusicZone" parent="YSort/Room/MZ_CV_Outdoors" index="0"]
-visible = false
-polygon = PackedVector2Array(-68.9231, -20.9231, 88.6154, -20.9231, 88.6154, 78.7692, -68.9231, 78.7692)
-
 [node name="ZoneAudio" type="Node" parent="."]
 
 [node name="FadeOut" type="AudioStreamPlayer" parent="ZoneAudio"]
