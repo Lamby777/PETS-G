@@ -2,7 +2,6 @@
 //! Overworld Stuff
 //!
 
-use crate::battle::BattleEngine;
 use crate::consts::battle::*;
 use crate::prelude::*;
 
@@ -97,7 +96,8 @@ impl World {
         let mut layer = current_scene().get_node_as::<CanvasLayer>(LAYER_NAME);
 
         // load the scene
-        let scene = self.battle_scene.instantiate_as::<BattleEngine>();
+        let mut scene = self.battle_scene.instantiate_as::<BattleEngine>();
+        scene.bind().animate_in();
         layer.add_child(scene.clone().upcast());
     }
 
