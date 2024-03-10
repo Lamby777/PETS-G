@@ -11,7 +11,7 @@ animations = [{
 "texture": ExtResource("1_8afda")
 }],
 "loop": true,
-"name": &"ANONNYMOUSE-Idle",
+"name": &"A_NONNY_MOUSE-Idle",
 "speed": 0.0
 }, {
 "frames": [{
@@ -22,7 +22,7 @@ animations = [{
 "texture": ExtResource("3_saoe0")
 }],
 "loop": true,
-"name": &"ANONNYMOUSE-Run",
+"name": &"A_NONNY_MOUSE-Run",
 "speed": 6.0
 }]
 
@@ -42,7 +42,7 @@ collision_layer = 8
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_hs7pi")
-animation = &"ANONNYMOUSE-Run"
+animation = &"A_NONNY_MOUSE-Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.38419e-06, 20)
