@@ -5,6 +5,8 @@
 use godot::builtin::real;
 use godot::engine::tween::TransitionType;
 
+const WAVE_BBCODE: &str = "[wave amp=100 freq=-6]";
+
 pub mod battle {
     pub const INTRO_FADE_PREDELAY: f64 = 0.5;
     pub const EFFECT_CHANCE_LIKELY: f64 = 0.8;
@@ -45,7 +47,7 @@ pub mod dialogue {
     pub const DBOX_CHOICE_HEIGHT: f32 = 60.0;
     pub const DBOX_CHOICE_WAVE_TIME: f64 = 0.1;
 
-    pub const DBOX_SELECTION_BBCODE: &str = "[wave amp=100 freq=-6]";
+    pub const DBOX_SELECTION_BBCODE: &str = WAVE_BBCODE;
 }
 
 pub mod main_menu {
@@ -53,5 +55,5 @@ pub mod main_menu {
 
     pub const MENU_TWEEN_TIME: f64 = 0.1;
     pub const MENU_TWEEN_TRANS: TransitionType = TransitionType::QUAD;
-    pub const MENU_WAVE_BBCODE: &str = dialogue::DBOX_SELECTION_BBCODE;
+    pub const MENU_WAVE_BBCODE: &str = WAVE_BBCODE;
 }
