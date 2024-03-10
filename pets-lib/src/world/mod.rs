@@ -6,7 +6,7 @@ use crate::consts::battle::*;
 use crate::prelude::*;
 
 use godot::engine::utilities::randf_range;
-use godot::engine::{AnimationPlayer, AudioStream, ShaderMaterial};
+use godot::engine::{AnimationPlayer, AudioStream};
 use godot::prelude::*;
 
 pub mod enemy_node;
@@ -62,8 +62,7 @@ impl World {
     fn battle_start(eid: GString) {
         let cue = current_scene().callable("cue_battle_intro_fx");
 
-        let fx_rect = PlayerCB::singleton().bind().get_fx_rect();
-        let mat = fx_rect.get_material().unwrap().cast::<ShaderMaterial>();
+        let mat = PlayerCB::fx_material();
         let fade_len = mat.get_shader_parameter("length".into()).to::<f64>();
 
         godot_tree()
@@ -88,14 +87,14 @@ impl World {
 
     #[func]
     fn cue_battle_intro_fx(&self) {
-        let mut fx_rect = PlayerCB::singleton().bind().get_fx_rect();
-        fx_rect.call("reset_shader_timer".into(), &[]);
+        let mut rect = PlayerCB::fx_rect();
+        let mut mat = PlayerCB::fx_material();
+        rect.call("reset_shader_timer".into(), &[]);
 
-        let mut mat = fx_rect.get_material().unwrap().cast::<ShaderMaterial>();
         let rand_mod = generate_random_mod().to_variant();
         mat.set_shader_parameter("rand_mod".into(), rand_mod);
 
-        fx_rect.set_visible(true);
+        rect.set_visible(true);
     }
 
     #[func]
