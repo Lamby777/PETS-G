@@ -41,6 +41,7 @@ mod prelude {
     pub use crate::stats::*;
     pub use crate::util::*;
 
+    pub use crate::battle::BattleEngine;
     pub use crate::dialogue::{ix_map, DBoxInterface};
     pub use crate::functions::FnInterface;
     pub use crate::pchars::{EnemyID, PChar};
