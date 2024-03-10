@@ -14,10 +14,12 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3xdh0"]
 shader = ExtResource("3_a3d4r")
-shader_parameter/SPEED = 0.25
+shader_parameter/DEBUG_MODE = false
+shader_parameter/SPEED = 0.2
+shader_parameter/LENGTH = 1.0
 shader_parameter/start_time = 0.0
 shader_parameter/current_time = 0.0
-shader_parameter/rand_mod = Vector2(0, 0)
+shader_parameter/rand_mod = Vector2(1, 1)
 
 [sub_resource type="Animation" id="Animation_2m57u"]
 length = 0.001
