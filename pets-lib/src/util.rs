@@ -6,6 +6,25 @@ use godot::engine::tween::TransitionType;
 use godot::engine::{Engine, NodeExt, RichTextLabel, Theme, Tween};
 use godot::prelude::*;
 
+pub fn subchildren_of_type<T>(parent: Gd<Node>) -> Vec<Gd<T>>
+where
+    T: GodotClass + Inherits<Node>,
+{
+    let mut res = vec![];
+
+    for node in parent.get_children().iter_shared() {
+        let Ok(node) = node.clone().try_cast::<T>() else {
+            let children = subchildren_of_type::<T>(node);
+            res.extend(children);
+            continue;
+        };
+
+        res.push(node);
+    }
+
+    res
+}
+
 pub trait Vector2Ext {
     fn to_tuple(&self) -> (f32, f32);
 }

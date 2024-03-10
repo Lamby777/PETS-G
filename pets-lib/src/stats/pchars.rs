@@ -20,11 +20,14 @@ macro_rules! names {
     };
 }
 
+//         //////////////////////////////////////////////////////////
+//       ////                                          ////////////
+//     //////   POTENTIAL SPOILERS BEYOND THIS POINT   //////////
+//   ////////                                          ////////
+// //////////////////////////////////////////////////////////
+
 impl PChar {
     names! {
-        // Debugging purposes
-        CHERRY,
-
         // the "chosen ones"... :)
         PORKY,
         ETHAN,
@@ -34,29 +37,54 @@ impl PChar {
         // These guys will def be playable in the main storyline.
         DYLAN,
         MIRA,
-
-        // not sure if these guys will be playable in the main game,
-        // but they still have side-stories so they'd still need PChars
-        FUZZY,
         LEO,
-        LYEMBO,
 
-        // These guys MIGHT be playable at some point...
-        // Probably not, but either way they still need PChars
-        // and some have side stories
-        WINTHRUS,
-        JUNO,
-        COLT,
-        HASSAN,
+        // The rest probably won't be playable in the main game,
+        // but need PChars regardless.
+        DEVON,
+        FUZZY,
+        LYEMBO,
+        BOBBY,
         NYX,
         QUOLO,
-        BOBBY,
+
+        // Silly billies
+        RUMBLE,
+        ESTHER,
+        RANA,
+        JERIAN,
+
+        // Families
+        PAULA,
+        CLAY,
+        MR_TULIVAE,
+        MS_TULIVAE,
+        JOLAINNE,
+
+        // Winthrus, his crew, and associates
+        WINTHRUS,
+        JUNO,
+        HASSAN,
+        COLT,
+
+        // Important Goober people
+        MYLO,  // HQ
+        CALYX, // Ren
+        RAINE, // VUE arc
+        TAINE, // VUE arc
+
+        // Shopkeepers
+        CHERRY,      // Cherry's Cherries
+        RICHARD,     // Big Richard's Big Ripoffs
+        CHAIRPERSON, // Chair Chairperson of the Gaming Chair Committee
     }
 }
 
 #[allow(unused)]
 impl EnemyID {
     names! {
-        ANONNYMOUSE,
+        A_NONNY_MOUSE,
+        COPPER_CROW,
+        XLR8,
     }
 }

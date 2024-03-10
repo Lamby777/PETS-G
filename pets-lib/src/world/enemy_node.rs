@@ -1,4 +1,4 @@
-use godot::engine::{AnimatedSprite2D, Area2D, CharacterBody2D, IArea2D, ICharacterBody2D};
+use godot::engine::{AnimatedSprite2D, Area2D, CharacterBody2D, ICharacterBody2D};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -27,8 +27,14 @@ pub struct WalkingEnemy {
     #[init(default = onready_node(&base, "AnimatedSprite2D"))]
     sprite: OnReady<Gd<AnimatedSprite2D>>,
 
+    #[init(default = onready_node(&base, "ContactRange"))]
+    range: OnReady<Gd<Area2D>>,
+
     // returns early from `anim_move` if the same options are passed
-    debounce: Option<AnimOptions>,
+    anim_debounce: Option<AnimOptions>,
+
+    ready: bool,
+    touched_player: bool,
 }
 
 #[godot_api]
@@ -48,11 +54,11 @@ impl WalkingEnemy {
     /// in terms of Y position, so they'd be running up the screen.
     fn anim_move(&mut self, opts: AnimOptions) {
         // only run if the options have changed
-        if Some(opts) == self.debounce {
+        if Some(opts) == self.anim_debounce {
             return;
         }
 
-        self.debounce = Some(opts);
+        self.anim_debounce = Some(opts);
 
         let mode_str = if opts.moving { "Run" } else { "Idle" };
 
@@ -109,6 +115,18 @@ impl WalkingEnemy {
 
         self.sprite.set_global_rotation(0.0);
     }
+
+    #[func]
+    fn on_player_touched(&mut self, _body: Gd<Node2D>) {
+        if self.touched_player {
+            return;
+        }
+
+        self.touched_player = true;
+
+        godot_print!("Player touched enemy: {}", self.enemy_id);
+        World::battle_start(self.enemy_id.clone());
+    }
 }
 
 #[godot_api]
@@ -119,9 +137,18 @@ impl ICharacterBody2D for WalkingEnemy {
         if !EnemyID::ALL.contains(&enemy_id.as_str()) {
             panic!("Invalid enemy id: {}", enemy_id);
         }
+
+        let callable = self.base().callable("on_player_touched");
+        self.range.connect("body_entered".into(), callable);
+
+        self.ready = true;
     }
 
     fn physics_process(&mut self, delta: f64) {
+        if !self.ready {
+            return;
+        }
+
         if !self.is_player_in_sight() {
             // if far from player, play idle and face forward
             self.anim_move(AnimOptions {
@@ -145,28 +172,5 @@ impl ICharacterBody2D for WalkingEnemy {
             // if close enough to player, run at them
             self.walk_towards_player(delta);
         }
-    }
-}
-
-#[derive(GodotClass)]
-#[class(init, base=Area2D)]
-pub struct EnemyContactRange {
-    base: Base<Area2D>,
-}
-
-#[godot_api]
-impl EnemyContactRange {
-    #[func]
-    fn on_entered(&mut self, _body: Gd<Node2D>) {
-        let _zone = self.base().clone();
-    }
-}
-
-#[godot_api]
-impl IArea2D for EnemyContactRange {
-    fn ready(&mut self) {
-        let mut node = self.base_mut();
-        let enter_fn = node.callable("on_entered");
-        node.connect("body_entered".into(), enter_fn);
     }
 }

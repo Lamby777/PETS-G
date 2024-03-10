@@ -1,4 +1,4 @@
-use godot::engine::{CharacterBody2D, ICharacterBody2D};
+use godot::engine::{CharacterBody2D, ColorRect, ICharacterBody2D, ShaderMaterial};
 use godot::prelude::*;
 
 use crate::consts::playercb::*;
@@ -27,10 +27,15 @@ pub struct PlayerCB {
 #[godot_api]
 impl PlayerCB {
     pub fn singleton() -> Gd<Self> {
-        godot_tree()
-            .get_first_node_in_group("playercb".into())
-            .expect("PlayerCB group had no nodes...?")
-            .cast()
+        current_scene().get_node_as("%PlayerCB")
+    }
+
+    pub fn fx_rect() -> Gd<ColorRect> {
+        Self::singleton().get_node_as("BattleIntroRect")
+    }
+
+    pub fn fx_material() -> Gd<ShaderMaterial> {
+        Self::fx_rect().get_material().unwrap().cast()
     }
 
     fn move_chars(&mut self, moving: bool) {

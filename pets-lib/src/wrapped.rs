@@ -69,9 +69,12 @@ pub fn process_input<T: Clone>(wrap: &mut Wrapped<T>, dir: ListDirection) -> Lis
     Walk(old, new)
 }
 
+#[derive(Deref, DerefMut)]
 /// Wrapping vector with a selected index
 pub struct Wrapped<T> {
+    #[target]
     elements: Vec<T>,
+
     selected: Option<usize>,
 }
 
@@ -124,19 +127,6 @@ where
         .collect();
 
     Wrapped::new(children)
-}
-
-impl<T> Deref for Wrapped<T> {
-    type Target = Vec<T>;
-    fn deref(&self) -> &Self::Target {
-        &self.elements
-    }
-}
-
-impl<T> DerefMut for Wrapped<T> {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.elements
-    }
 }
 
 // ////////////////////////////////////////////////////////////// //

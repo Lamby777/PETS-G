@@ -12,6 +12,7 @@
 #![feature(lazy_cell)]
 #![feature(try_blocks)]
 #![feature(generic_arg_infer)]
+#![feature(int_roundings)]
 
 use godot::prelude::*;
 
@@ -38,13 +39,11 @@ mod prelude {
     pub use crate::stats::*;
     pub use crate::util::*;
 
-    pub use crate::dialogue::autoload::DBoxInterface;
-    pub use crate::dialogue::ix_map;
+    pub use crate::dialogue::{ix_map, DBoxInterface};
     pub use crate::functions::FnInterface;
     pub use crate::pchars::{EnemyID, PChar};
-    pub use crate::world::interaction::manager::InteractionManager;
-    pub use crate::world::interaction::zone::InteractionZone;
-    pub use crate::world::playercb::PlayerCB;
+    pub use crate::world::{InteractionManager, InteractionZone};
+    pub use crate::world::{MusicZone, PlayerCB, World};
 
     pub use crate::singleton::Autoload;
     pub use crate::wrapped::Wrapped;
@@ -52,6 +51,7 @@ mod prelude {
     // is this bad practice? no clue and idc honestly
     // it's convenient with no real caveat, therefore...
     pub use anyhow::{anyhow, Result};
+    pub use derived_deref::{Deref, DerefMut};
     pub use indoc::indoc;
     pub use rand::Rng;
     pub use ribbons::unwrap_fmt;
@@ -62,7 +62,6 @@ mod prelude {
     pub use std::convert::Infallible;
     pub use std::fmt::{self, Debug, Display};
     pub use std::io;
-    pub use std::ops::{Deref, DerefMut};
     pub use std::path::{Path, PathBuf};
     pub use std::rc::Rc;
 }

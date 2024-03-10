@@ -33,7 +33,7 @@ size = Vector2(39.9995, 80.0003)
 radius = 192.0
 
 [node name="WalkingEnemy" type="WalkingEnemy"]
-enemy_id = "ANONNYMOUSE"
+enemy_id = "A_NONNY_MOUSE"
 sight_range = 850.0
 max_speed = 200.0
 y_sort_enabled = true
@@ -49,8 +49,8 @@ position = Vector2(-2.38419e-06, 20)
 rotation = 1.57079
 shape = SubResource("RectangleShape2D_3efs2")
 
-[node name="EnemyContactRange" type="EnemyContactRange" parent="."]
+[node name="ContactRange" type="Area2D" parent="."]
 collision_layer = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyContactRange"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactRange"]
 shape = SubResource("CircleShape2D_yogbq")
