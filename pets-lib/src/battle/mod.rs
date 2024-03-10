@@ -108,7 +108,7 @@ impl BattleEngine {
 #[godot_api]
 impl INode2D for BattleEngine {
     fn ready(&mut self) {
-        let choices = self.base().get_node_as("%Choices");
+        let choices = self.base().get_node_as("%BattleChoices");
         self.choices = Wrapped::from_children_of(choices);
     }
 

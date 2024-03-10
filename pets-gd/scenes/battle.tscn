@@ -120,12 +120,12 @@ offset_bottom = 209.0
 texture = ExtResource("6_pjho4")
 expand_mode = 5
 
-[node name="Choices" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
+[node name="BattleChoices" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 
-[node name="Attack" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Choices"]
+[node name="Attack" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 clip_contents = false
 layout_mode = 2
 offset_right = 432.0
@@ -136,7 +136,7 @@ bbcode_enabled = true
 text = "Attack"
 fit_content = true
 
-[node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Choices"]
+[node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 clip_contents = false
 layout_mode = 2
 offset_top = 104.0
@@ -148,7 +148,7 @@ bbcode_enabled = true
 text = "Skills"
 fit_content = true
 
-[node name="Items" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Choices"]
+[node name="Items" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 clip_contents = false
 layout_mode = 2
 offset_top = 208.0
@@ -160,7 +160,7 @@ bbcode_enabled = true
 text = "Items"
 fit_content = true
 
-[node name="Run" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Choices"]
+[node name="Run" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 clip_contents = false
 layout_mode = 2
 offset_top = 312.0
