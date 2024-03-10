@@ -50,14 +50,6 @@ fn set_or_stop_audio(src: Option<Gd<AudioStream>>, mut audio: Gd<AudioStreamPlay
     }
 }
 
-fn program_time() -> u64 {
-    // let time = Time::singleton();
-    // let t = time.get_ticks_msec();
-    // t - (t.div_floor(3600)) * 3600
-
-    Time::singleton().get_ticks_msec()
-}
-
 /// randomize vector both fields from -1.0 to 1.0
 fn generate_random_mod() -> Vector2 {
     let generate = || randf_range(-1.0, 1.0) as f32;
@@ -68,11 +60,9 @@ fn generate_random_mod() -> Vector2 {
 impl World {
     fn battle_start(_eid: GString) {
         let mut fx_rect = PlayerCB::singleton().bind().get_fx_rect();
+        fx_rect.call("reset_shader_timer".into(), &[]);
+
         let mut mat = fx_rect.get_material().unwrap().cast::<ShaderMaterial>();
-
-        let ptime = (program_time() as real).to_variant();
-        mat.set_shader_parameter("start_time".into(), ptime);
-
         let rand_mod = generate_random_mod().to_variant();
         mat.set_shader_parameter("rand_mod".into(), rand_mod);
 
