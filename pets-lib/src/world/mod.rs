@@ -4,7 +4,7 @@
 
 use crate::prelude::*;
 
-use godot::engine::utilities::{randf, randf_range, randi};
+use godot::engine::utilities::randf_range;
 use godot::engine::{AnimationPlayer, AudioStream, ShaderMaterial, Time};
 use godot::prelude::*;
 
@@ -87,7 +87,7 @@ impl World {
     #[func]
     fn on_enter(&mut self, _pcb: Gd<Node2D>, zone: Gd<MusicZone>) {
         godot_print!("Entering new MusicZone: {}", zone.get_name());
-        self.crossfade_audio_into(Some(zone.bind().music.clone()));
+        self.crossfade_audio_into(zone.bind().music.clone());
         self.current_mz = Some(zone);
     }
 
