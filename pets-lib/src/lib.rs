@@ -24,13 +24,15 @@ mod dialogue;
 mod functions;
 mod items;
 mod limiq;
-mod llm;
 mod main_menu;
 mod singleton;
 mod stats;
 mod util;
 mod world;
 mod wrapped;
+
+#[cfg(any())]
+mod llm;
 
 #[allow(unused)]
 mod prelude {
