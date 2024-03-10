@@ -6,6 +6,8 @@ use godot::builtin::real;
 use godot::engine::tween::TransitionType;
 
 pub mod battle {
+    pub const LAYER_NAME: &str = "BattleLayer";
+
     pub const INTRO_FADE_PREDELAY: f64 = 0.5;
     pub const EFFECT_CHANCE_LIKELY: f64 = 0.8;
     pub const EFFECT_CHANCE_RARE: f64 = 0.1;
