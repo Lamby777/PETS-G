@@ -2,10 +2,11 @@
 //! Overworld Stuff
 //!
 
+use crate::consts::battle::*;
 use crate::prelude::*;
 
 use godot::engine::utilities::randf_range;
-use godot::engine::{AnimationPlayer, AudioStream, ShaderMaterial, Time};
+use godot::engine::{AnimationPlayer, AudioStream};
 use godot::prelude::*;
 
 pub mod enemy_node;
@@ -58,15 +59,42 @@ fn generate_random_mod() -> Vector2 {
 
 #[godot_api]
 impl World {
-    fn battle_start(_eid: GString) {
-        let mut fx_rect = PlayerCB::singleton().bind().get_fx_rect();
-        fx_rect.call("reset_shader_timer".into(), &[]);
+    fn battle_start(eid: GString) {
+        let cue = current_scene().callable("cue_battle_intro_fx");
 
-        let mut mat = fx_rect.get_material().unwrap().cast::<ShaderMaterial>();
+        let mat = PlayerCB::fx_material();
+        let fade_len = mat.get_shader_parameter("length".into()).to::<f64>();
+
+        godot_tree()
+            .create_timer(INTRO_FADE_PREDELAY)
+            .unwrap()
+            .connect("timeout".into(), cue);
+
+        let cue = current_scene()
+            .callable("cue_battle_scene")
+            .bindv((&[eid.to_variant()]).into());
+
+        godot_tree()
+            .create_timer(INTRO_FADE_PREDELAY + fade_len)
+            .unwrap()
+            .connect("timeout".into(), cue);
+    }
+
+    #[func]
+    fn cue_battle_scene(&self, _eid: GString) {
+        //
+    }
+
+    #[func]
+    fn cue_battle_intro_fx(&self) {
+        let mut rect = PlayerCB::fx_rect();
+        let mut mat = PlayerCB::fx_material();
+        rect.call("reset_shader_timer".into(), &[]);
+
         let rand_mod = generate_random_mod().to_variant();
         mat.set_shader_parameter("rand_mod".into(), rand_mod);
 
-        fx_rect.set_visible(true);
+        rect.set_visible(true);
     }
 
     #[func]
@@ -122,10 +150,12 @@ impl INode2D for World {
 
         for mut zone in mzones {
             let on_exit = self.base().callable("on_exit");
-            let on_enter = self.base().callable("on_enter");
+            let on_enter = self
+                .base()
+                .callable("on_enter")
+                .bindv((&[zone.to_variant()]).into());
 
-            let args = Array::from(&[zone.to_variant()]);
-            zone.connect("body_entered".into(), on_enter.bindv(args));
+            zone.connect("body_entered".into(), on_enter);
             zone.connect("body_exited".into(), on_exit);
         }
     }
