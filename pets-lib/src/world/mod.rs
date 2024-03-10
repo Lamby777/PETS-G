@@ -59,13 +59,8 @@ fn generate_random_mod() -> Vector2 {
 
 #[godot_api]
 impl World {
-    /// Don't call this unless it's the current scene!
-    pub fn singleton() -> Gd<Self> {
-        current_scene().get_node_as("Overworld")
-    }
-
     fn battle_start(_eid: GString) {
-        let cue = World::singleton().callable("cue_battle_intro_fx");
+        let cue = current_scene().callable("cue_battle_intro_fx");
 
         godot_tree()
             .create_timer(INTRO_FADE_PREDELAY)
