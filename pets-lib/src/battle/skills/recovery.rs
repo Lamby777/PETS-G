@@ -16,7 +16,7 @@ impl SkillFamily for RecoverySkill {
             HPPercent(power) => format!("Heals {}% of the target's HP.", power),
             HPAmount(power) => format!("Heals {} HP.", power),
             Status { rating } => {
-                format!("Heals status conditions up to {}★.", rating)
+                format!("Heals status effects up to {}★.", rating)
             }
         }
     }
@@ -55,6 +55,6 @@ mod tests {
     #[test]
     fn test_describe_heal_status_3star() {
         let skill = RecoverySkill::Status { rating: 3 };
-        assert_eq!(skill.description(), "Heals status conditions up to 3★.");
+        assert_eq!(skill.description(), "Heals status effects up to 3★.");
     }
 }

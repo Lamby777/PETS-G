@@ -31,8 +31,8 @@ pub struct CharData {
     pub level: IntegralStat,
     pub stats: CharStats,
 
-    /// Status conditions the character has
-    pub conditions: HashSet<StatusEffect>,
+    /// Status effects the character has
+    pub status_effects: HashSet<StatusEffect>,
 
     /// Items this character is holding
     pub inventory: Vec<Item>,
@@ -40,14 +40,11 @@ pub struct CharData {
 
 impl Default for CharData {
     fn default() -> Self {
-        // will be dropped after this function...
-        // just need it to see default values and prevent
-        // repeating the same numbers everywhere
         CharData {
             display_name: "Chicken Nugget".to_owned(),
             level: 1,
             stats: Default::default(),
-            conditions: Default::default(),
+            status_effects: Default::default(),
             inventory: Default::default(),
         }
     }
