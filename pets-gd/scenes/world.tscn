@@ -247,6 +247,7 @@ interaction_id = "Rodrick Sign #1"
 music = ExtResource("5_x7nbf")
 
 [node name="CollisionPolygon2D" parent="YSort/Room/MZ_CV_Outdoors" index="0"]
+visible = false
 polygon = PackedVector2Array(-59.0769, -19.6923, 59.0769, -19.6923, 59.0769, 59.0769, -59.0769, 59.0769)
 
 [editable path="YSort/Room/MZ_CV_Outdoors"]
