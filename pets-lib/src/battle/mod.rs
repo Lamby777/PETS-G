@@ -3,7 +3,7 @@
 //! the GDExtension side that runs during battles.
 //!
 
-use godot::engine::{INode2D, Node2D, RichTextLabel};
+use godot::engine::{AnimationPlayer, INode2D, Node2D, RichTextLabel};
 use godot::prelude::*;
 use num_enum::TryFromPrimitive;
 
@@ -51,10 +51,14 @@ enum BattleChoice {
 #[allow(unused)]
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
-struct BattleEngine {
+pub struct BattleEngine {
     base: Base<Node2D>,
-    choices: Wrapped<(BattleChoice, Gd<RichTextLabel>)>,
     state: BattleState,
+
+    choices: Wrapped<(BattleChoice, Gd<RichTextLabel>)>,
+
+    #[init(default = onready_node(&base, "AnimationPlayer"))]
+    animator: OnReady<Gd<AnimationPlayer>>,
 }
 
 fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
@@ -94,11 +98,18 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
 }
 
 #[godot_api]
+impl BattleEngine {
+    #[func]
+    pub fn animate_in(&mut self) {
+        //
+    }
+}
+
+#[godot_api]
 impl INode2D for BattleEngine {
     fn ready(&mut self) {
-        // The node that contains the text labels below
-        let cont = self.base().get_node_as("%Choices");
-        self.choices = crate::wrapped::from_children_of(cont);
+        let choices = self.base().get_node_as("%BattleChoices");
+        self.choices = Wrapped::from_children_of(choices);
     }
 
     fn process(&mut self, _delta: f64) {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://kgl5788x405y"]
+[gd_scene load_steps=11 format=3 uid="uid://kgl5788x405y"]
 
 [ext_resource type="Shader" path="res://themes/vdrugs/common.gdshader" id="1_of6xr"]
 [ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="2_0m4jp"]
@@ -15,6 +15,14 @@ shader = ExtResource("2_0m4jp")
 shader_parameter/strength = 1.0
 shader_parameter/speed = 2.0
 shader_parameter/angle = 47.788
+
+[sub_resource type="Animation" id="Animation_0hj2l"]
+resource_name = "slide_in"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_730bq"]
+_data = {
+"slide_in": SubResource("Animation_0hj2l")
+}
 
 [node name="BattleEngine" type="BattleEngine"]
 
@@ -112,12 +120,12 @@ offset_bottom = 209.0
 texture = ExtResource("6_pjho4")
 expand_mode = 5
 
-[node name="Choices" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
+[node name="BattleChoices" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 
-[node name="Attack" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Choices"]
+[node name="Attack" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 clip_contents = false
 layout_mode = 2
 offset_right = 432.0
@@ -128,7 +136,7 @@ bbcode_enabled = true
 text = "Attack"
 fit_content = true
 
-[node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Choices"]
+[node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 clip_contents = false
 layout_mode = 2
 offset_top = 104.0
@@ -140,7 +148,7 @@ bbcode_enabled = true
 text = "Skills"
 fit_content = true
 
-[node name="Items" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Choices"]
+[node name="Items" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 clip_contents = false
 layout_mode = 2
 offset_top = 208.0
@@ -152,7 +160,7 @@ bbcode_enabled = true
 text = "Items"
 fit_content = true
 
-[node name="Run" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Choices"]
+[node name="Run" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 clip_contents = false
 layout_mode = 2
 offset_top = 312.0
@@ -296,3 +304,8 @@ bbcode_enabled = true
 text = "[right]168"
 fit_content = true
 autowrap_mode = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_730bq")
+}

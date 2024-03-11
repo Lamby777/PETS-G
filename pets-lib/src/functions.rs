@@ -25,9 +25,14 @@ impl FnInterface {
         callable.callv(args);
     }
 
+    // #[func]
+    // pub fn debug_llm() {
+    //     crate::llm::llm_generate();
+    // }
+
     #[func]
     pub fn debug_battle() {
-        // crate::llm::llm_generate();
-        change_scene!("battle");
+        let dbg_eid = EnemyID::A_NONNY_MOUSE;
+        World::start_battle(dbg_eid.into());
     }
 }

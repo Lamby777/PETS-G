@@ -12,15 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://c5mnxr4iyqch7" path="res://scenes/music_zone.tscn" id="9_tt2ie"]
 [ext_resource type="PackedScene" uid="uid://dk214wpitbhju" path="res://scenes/walking_enemy.tscn" id="10_30w80"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3xdh0"]
-shader = ExtResource("3_a3d4r")
-shader_parameter/DEBUG_MODE = false
-shader_parameter/SPEED = 0.2
-shader_parameter/LENGTH = 1.0
-shader_parameter/start_time = 0.0
-shader_parameter/current_time = 0.0
-shader_parameter/rand_mod = Vector2(1, 1)
-
 [sub_resource type="Animation" id="Animation_2m57u"]
 length = 0.001
 tracks/0/type = "value"
@@ -81,7 +72,28 @@ _data = {
 "crossfade": SubResource("Animation_k4si3")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3xdh0"]
+shader = ExtResource("3_a3d4r")
+shader_parameter/DEBUG_MODE = false
+shader_parameter/SPEED = 0.2
+shader_parameter/LENGTH = 1.0
+shader_parameter/start_time = 0.0
+shader_parameter/current_time = 0.0
+shader_parameter/rand_mod = Vector2(1, 1)
+
 [node name="Overworld" type="World"]
+
+[node name="ZoneAudio" type="Node" parent="."]
+
+[node name="FadeOut" type="AudioStreamPlayer" parent="ZoneAudio"]
+autoplay = true
+
+[node name="Active" type="AudioStreamPlayer" parent="ZoneAudio"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ZoneAudio"]
+libraries = {
+"": SubResource("AnimationLibrary_fv7du")
+}
 
 [node name="BattleLayer" type="CanvasLayer" parent="."]
 
@@ -234,16 +246,7 @@ interaction_id = "Rodrick Sign #1"
 [node name="MZ_CV_Outdoors" parent="YSort/Room" instance=ExtResource("9_tt2ie")]
 music = ExtResource("5_x7nbf")
 
-[node name="ZoneAudio" type="Node" parent="."]
-
-[node name="FadeOut" type="AudioStreamPlayer" parent="ZoneAudio"]
-autoplay = true
-
-[node name="Active" type="AudioStreamPlayer" parent="ZoneAudio"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ZoneAudio"]
-libraries = {
-"": SubResource("AnimationLibrary_fv7du")
-}
+[node name="CollisionPolygon2D" parent="YSort/Room/MZ_CV_Outdoors" index="0"]
+polygon = PackedVector2Array(-59.0769, -19.6923, 59.0769, -19.6923, 59.0769, 59.0769, -59.0769, 59.0769)
 
 [editable path="YSort/Room/MZ_CV_Outdoors"]
