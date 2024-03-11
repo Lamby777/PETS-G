@@ -41,14 +41,14 @@ impl ShieldAffinity {
     fn describe_affinity(&self) -> String {
         use ShieldAffinity::*;
 
-        fn match_simple(affinity: &ShieldAffinity) -> Option<&str> {
+        let match_simple = |affinity: &ShieldAffinity| {
             Some(match affinity {
                 AllElements => "all kinds of",
                 Magical => "magical",
                 Physical => "physical",
                 _ => return None,
             })
-        }
+        };
 
         match self {
             Specific(elements) => {
