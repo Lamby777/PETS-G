@@ -33,6 +33,6 @@ impl FnInterface {
     #[func]
     pub fn debug_battle() {
         let dbg_eid = EnemyID::A_NONNY_MOUSE;
-        World::battle_start(dbg_eid.into());
+        World::start_battle(dbg_eid.into());
     }
 }

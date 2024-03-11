@@ -65,7 +65,7 @@ impl World {
     #[signal]
     fn battle_intro_done(eid: GString) {}
 
-    pub fn battle_start(eid: GString) {
+    pub fn start_battle(eid: GString) {
         let world = current_scene();
         let cue = world.callable("cue_battle_intro_fx");
 
