@@ -1,12 +1,12 @@
 //!
 //! this module actually has nothing to do with any
 //! type of skill... it's just another place to put
-//! status condition data structures for reuse.
+//! status effect data structures for reuse.
 //!
 
 use super::*;
 
-/// status condition from a skill, and its chances
+/// status effect from a skill, and its chances
 #[derive(Serialize, Deserialize)]
 pub struct ChanceOfEffect {
     pub effect: StatusEffect,
@@ -32,7 +32,7 @@ pub enum EffectChance {
 }
 
 impl EffectChance {
-    /// User-facing string for the chance of a status condition
+    /// User-facing string for the chance of a status effect
     /// To be used in skill descriptions
     pub fn describe(&self) -> &str {
         use EffectChance::*;
