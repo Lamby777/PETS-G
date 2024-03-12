@@ -14,6 +14,7 @@ pub mod statcalc;
 
 // re-export some crap from ^^^
 pub use autoload::StatsInterface;
+pub use battler::Battler;
 pub use savefiles::SaveFile;
 pub use statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
 
@@ -30,7 +31,8 @@ pub struct CharData {
     pub display_name: String,
 
     pub level: IntegralStat,
-    pub stats: CharStats,
+    pub stats: CharStatsStateful,
+    pub inherent_stats: InherentStats,
 
     /// Status effects the character has
     pub status_effects: HashSet<StatusEffect>,
@@ -39,22 +41,35 @@ pub struct CharData {
     pub inventory: Vec<Item>,
 }
 
+impl Battler for CharData {
+    fn hp_mut(&mut self) -> &mut IntegralStat {
+        &mut self.stats.hp
+    }
+
+    fn status_effects(&self) -> &HashSet<StatusEffect> {
+        &self.status_effects
+    }
+
+    fn status_effects_mut(&mut self) -> &mut HashSet<StatusEffect> {
+        &mut self.status_effects
+    }
+
+    fn inherent_stats(&self) -> &InherentStats {
+        &self.inherent_stats
+    }
+}
+
 impl Default for CharData {
     fn default() -> Self {
         CharData {
             display_name: "Chicken Nugget".to_owned(),
             level: 1,
             stats: Default::default(),
+            inherent_stats: Default::default(),
             status_effects: Default::default(),
             inventory: Default::default(),
         }
     }
-}
-
-#[derive(Clone, Debug, Default, Serialize, Deserialize)]
-pub struct CharStats {
-    pub stateless: InherentStats,
-    pub stateful: CharStatsStateful,
 }
 
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]

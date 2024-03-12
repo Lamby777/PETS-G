@@ -3,12 +3,18 @@ use super::*;
 /// Trait for stuff that both party members and enemies
 /// have. For example, an enemy doesn't need to have a
 /// "level," but it does need to have HP and status effects.
-trait Battler {
+pub trait Battler {
     fn hp_mut(&mut self) -> &mut IntegralStat;
-    fn max_hp(&self) -> IntegralStat;
     fn status_effects(&self) -> &HashSet<StatusEffect>;
     fn status_effects_mut(&mut self) -> &mut HashSet<StatusEffect>;
     fn inherent_stats(&self) -> &InherentStats;
+
+    // These are some sensible defaults... You only really need to
+    // implement the above "getters."
+
+    fn max_hp(&self) -> IntegralStat {
+        self.inherent_stats().max_hp
+    }
 
     /// Subtract damage count from the character's HP
     ///
