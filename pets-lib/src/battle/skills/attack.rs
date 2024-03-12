@@ -48,10 +48,42 @@ impl AttackSkill {
     }
 }
 
+fn element_attack_name(element: Element, power: u8) -> String {
+    use Element::*;
+
+    let family = match element {
+        // More unique names for physical attacks
+        Blade | Kinetic => unreachable!(),
+
+        // TODO "favorite thing" name
+        Fuzz => "Fuzz",
+
+        Fire => "Caustics",
+        Ice => todo!(),
+        Electric => todo!(),
+        Wind => "Gusts",
+        Earth => "Ground",
+        Psi => todo!(),
+
+        Spirit => "Praise",
+        Whip => "Whip",
+    };
+
+    todo!()
+}
+
 #[typetag::serde]
 impl SkillFamily for AttackSkill {
     fn name(&self) -> String {
-        todo!()
+        use Element::*;
+
+        let plural = if self.plural { " " } else { "" };
+        let family_name = match self.element {
+            Blade | Kinetic => unreachable!(),
+            el @ _ => element_attack_name(el, self.power),
+        };
+
+        format!("{}{}", family_name, plural)
     }
 
     /// Panics if neither damage nor effect are present
