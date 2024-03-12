@@ -8,9 +8,9 @@ pub trait Battler {
     fn status_effects(&self) -> &HashSet<StatusEffect>;
     fn status_effects_mut(&mut self) -> &mut HashSet<StatusEffect>;
 
-    /// This should take armor, weapons, etc. into account for players.
-    /// It should NOT consider in-battle buffs/debuffs.
+    /// This should only return a reference to the inherent stats
     fn inherent_stats(&self) -> &InherentStats;
+    fn equipment(&self) -> &[Item];
 
     /// This should return a reference to the list of currently active (de)buffs
     fn buffs_list(&self) -> &[InherentStats];
@@ -20,6 +20,17 @@ pub trait Battler {
     // implement the above "getters" to make the rest work.
     //
 
+    /// This should take armor, weapons, etc. into account for players.
+    /// It should NOT consider in-battle buffs/debuffs.
+    fn armored_stats(&self) -> InherentStats {
+        let inherent = self.inherent_stats().clone();
+
+        self.buffs_list()
+            .iter()
+            .cloned()
+            .fold(inherent, |acc, buff| acc + buff)
+    }
+
     /// The final "in practice" stats of the character.
     ///
     /// Takes into account the...
@@ -27,12 +38,12 @@ pub trait Battler {
     /// * Equipment
     /// * Buffs
     fn practical_stats(&self) -> InherentStats {
-        let inherent = self.inherent_stats().clone();
+        let armored = self.armored_stats();
 
         self.buffs_list()
             .iter()
             .cloned()
-            .fold(inherent, |acc, buff| acc + buff)
+            .fold(armored, |acc, buff| acc + buff)
     }
 
     fn max_hp(&self) -> IntegralStat {

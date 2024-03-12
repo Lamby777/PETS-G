@@ -72,6 +72,10 @@ impl Battler for CharData {
         &self.inherent_stats
     }
 
+    fn equipment(&self) -> &[Item] {
+        &self.equipment
+    }
+
     fn buffs_list(&self) -> &[InherentStats] {
         &self.battle_stats.buffs
     }
