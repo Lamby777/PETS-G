@@ -38,30 +38,14 @@ impl ShieldAffinity {
         })
     }
 
-    fn describe_affinity(&self) -> String {
+    fn describe(&self) -> &str {
         use ShieldAffinity::*;
 
-        let match_simple = |affinity: &ShieldAffinity| {
-            Some(match affinity {
-                AllElements => "all kinds of",
-                Magical => "magical",
-                Physical => "physical",
-                _ => return None,
-            })
-        };
-
         match self {
-            Specific(elements) => {
-                if let Some(coerced) = self.coerce_specific() {
-                    return match_simple(&coerced).unwrap().to_string();
-                }
-
-                let iter = elements.iter().map(|x| x.describe());
-                join_words(iter, "and", Some("only"))
-                    .expect("shield of many elements has empty block list")
-            }
-
-            _ => match_simple(self).unwrap().to_string(),
+            Specific(_) => "Specialized",
+            AllElements => "Almighty",
+            Magical => "Magical",
+            Physical => "Physical",
         }
     }
 }
@@ -69,7 +53,11 @@ impl ShieldAffinity {
 #[derive(Serialize, Deserialize)]
 pub struct ShieldSkill {
     /// Element of the shield
-    pub affinity: ShieldAffinity,
+    ///
+    /// Use `set_affinity` to set this, not directly.
+    /// The setter will handle converting lists of specific
+    /// elements into more general affinities where possible.
+    affinity: ShieldAffinity,
 
     /// How many hits the shield can take
     pub hits: u8,
@@ -116,6 +104,10 @@ impl ShieldSkill {
             _ => unreachable!("shield that can withstand over 15 hits"),
         }
     }
+
+    pub fn set_affinity(&mut self, aff: ShieldAffinity) {
+        self.affinity = aff.coerce_specific().unwrap_or(aff);
+    }
 }
 
 #[typetag::serde]
@@ -123,15 +115,28 @@ impl SkillFamily for ShieldSkill {
     fn name(&self) -> String {
         let name = if self.reflect { "Mirror" } else { "Shield" };
         let width = if self.plural { "Wide " } else { "" };
+        let aff = self.affinity.describe();
 
-        format!("{width}{name}")
+        format!("{aff} {width}{name}")
     }
 
     fn description(&self) -> String {
+        use ShieldAffinity::*;
+
         let potency = ShieldSkill::multi_to_str(self.multiplier);
         let reflectivity = if self.reflect { "reflects" } else { "blocks" };
-        let affinity = self.affinity.describe_affinity();
         let width = if self.plural { "wide " } else { "" };
+        let affinity = match &self.affinity {
+            Specific(elements) => {
+                let iter = elements.iter().map(|x| x.describe());
+                join_words(iter, "and", Some("only"))
+                    .expect("shield of many elements has empty block list")
+            }
+
+            AllElements => "all kinds of".to_owned(),
+            Magical => "magical".to_owned(),
+            Physical => "physical".to_owned(),
+        };
 
         let part1 = format!(
             "Casts a {}{}shield that {} {} damage",
@@ -177,6 +182,7 @@ mod tests {
             plural: false,
         };
 
+        assert_eq!(skill.name(), "Almighty Shield");
         assert_eq!(
             skill.description(),
             "Casts a sturdy shield that blocks all kinds of damage once."
@@ -193,6 +199,7 @@ mod tests {
             plural: false,
         };
 
+        assert_eq!(skill.name(), "Magical Mirror");
         assert_eq!(
             skill.description(),
             "Casts a weak shield that reflects magical damage many times."
@@ -242,6 +249,7 @@ mod tests {
             plural: true,
         };
 
+        assert_eq!(skill.name(), "Specialized Wide Shield");
         assert_eq!(
             skill.description(),
             "Casts a wide shield that blocks only Fuzzy damage a couple times."
@@ -250,14 +258,20 @@ mod tests {
 
     #[test]
     fn test_describe_physical_as_specific() {
-        let skill = ShieldSkill {
-            affinity: ShieldAffinity::Specific(Element::list_physical()),
+        let mut skill = ShieldSkill {
+            affinity: ShieldAffinity::Magical,
             hits: 3,
             multiplier: 0.5,
             reflect: false,
             plural: true,
         };
 
+        assert_eq!(skill.name(), "Magical Wide Shield");
+
+        let new_aff = ShieldAffinity::Specific(Element::list_physical());
+        skill.set_affinity(new_aff);
+
+        assert_eq!(skill.name(), "Physical Wide Shield");
         assert_eq!(
             skill.description(),
             "Casts a wide shield that blocks physical damage a couple times."
