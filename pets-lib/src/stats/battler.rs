@@ -14,7 +14,6 @@ pub trait Battler {
 
     /// This should return a reference to the list of currently active (de)buffs
     fn buffs_list(&self) -> &[InherentStats];
-    fn buffs_list_mut(&mut self) -> &mut Vec<InherentStats>;
 
     //
     // Below are some sensible defaults... You only really need to

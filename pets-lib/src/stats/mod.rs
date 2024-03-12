@@ -73,10 +73,6 @@ impl Battler for CharData {
     fn buffs_list(&self) -> &[InherentStats] {
         &self.buffs
     }
-
-    fn buffs_list_mut(&mut self) -> &mut Vec<InherentStats> {
-        &mut self.buffs
-    }
 }
 
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
