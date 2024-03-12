@@ -34,3 +34,20 @@ pub enum ItemCategory {
     Key,
     Consumable,
 }
+
+// implement for vector of items
+trait ItemVec {
+    /// Every item that can be equipped
+    fn equipment(&self) -> impl Iterator<Item = &Item>;
+    fn offsets(&self) -> impl Iterator<Item = &InherentStats>;
+}
+
+impl ItemVec for Vec<Item> {
+    fn equipment(&self) -> impl Iterator<Item = &Item> {
+        self.iter().filter(|i| i.is_equipment())
+    }
+
+    fn offsets(&self) -> impl Iterator<Item = &InherentStats> {
+        self.equipment().map(|i| i.equip_offset.as_ref().unwrap())
+    }
+}
