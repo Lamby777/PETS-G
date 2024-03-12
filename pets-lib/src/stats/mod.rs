@@ -39,6 +39,17 @@ pub struct CharData {
 
     /// Items this character is holding
     pub inventory: Vec<Item>,
+
+    /// Equipment this character is wearing/using
+    ///
+    /// # Important
+    ///
+    /// Equipping an item REMOVES it from the inventory!
+    ///
+    /// Not only does that make it easier to code, but it
+    /// also prevents feeling that your inventory space is
+    /// being "wasted" by equipment.
+    pub equipment: Vec<Item>,
 }
 
 impl Battler for CharData {
@@ -59,15 +70,20 @@ impl Battler for CharData {
     }
 }
 
+/// BOILERPLATE CRAP!!!! :D
 impl Default for CharData {
     fn default() -> Self {
         CharData {
             display_name: "Chicken Nugget".to_owned(),
             level: 1,
+
+            // i seriously can't `..Default::default()` because
+            // that would be infinite recursion... WTF?
             stats: Default::default(),
             inherent_stats: Default::default(),
             status_effects: Default::default(),
             inventory: Default::default(),
+            equipment: Default::default(),
         }
     }
 }

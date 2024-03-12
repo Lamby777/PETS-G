@@ -20,7 +20,7 @@ pub struct Item {
     description: String,
 }
 
-// are you serious m8
+// more derive spam :D
 #[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Clone)]
 pub enum ItemCategory {
     Weapon,

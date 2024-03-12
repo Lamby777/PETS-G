@@ -7,6 +7,9 @@ pub trait Battler {
     fn hp_mut(&mut self) -> &mut IntegralStat;
     fn status_effects(&self) -> &HashSet<StatusEffect>;
     fn status_effects_mut(&mut self) -> &mut HashSet<StatusEffect>;
+
+    /// This should take armor, weapons, etc. into account for players.
+    /// It should NOT consider in-battle buffs/debuffs.
     fn inherent_stats(&self) -> &InherentStats;
 
     // These are some sensible defaults... You only really need to
