@@ -25,10 +25,14 @@ pub trait Battler {
     fn armored_stats(&self) -> InherentStats {
         let inherent = self.inherent_stats().clone();
 
-        self.buffs_list()
+        // get all offsets from each item that has one
+        let offsets = self
+            .equipment()
             .iter()
-            .cloned()
-            .fold(inherent, |acc, buff| acc + buff)
+            .filter_map(|i| i.equip_offset.clone());
+
+        // ... and sum them up
+        inherent + offsets.sum()
     }
 
     /// The final "in practice" stats of the character.
@@ -39,11 +43,9 @@ pub trait Battler {
     /// * Buffs
     fn practical_stats(&self) -> InherentStats {
         let armored = self.armored_stats();
+        let buffs = self.buffs_list().iter().cloned();
 
-        self.buffs_list()
-            .iter()
-            .cloned()
-            .fold(armored, |acc, buff| acc + buff)
+        armored + buffs.sum()
     }
 
     fn max_hp(&self) -> IntegralStat {
