@@ -36,13 +36,13 @@ pub enum ItemCategory {
 }
 
 // implement for vector of items
-trait ItemVec {
+trait ItemsList {
     /// Every item that can be equipped
     fn equipment(&self) -> impl Iterator<Item = &Item>;
     fn offsets(&self) -> impl Iterator<Item = &InherentStats>;
 }
 
-impl ItemVec for Vec<Item> {
+impl ItemsList for &[Item] {
     fn equipment(&self) -> impl Iterator<Item = &Item> {
         self.iter().filter(|i| i.is_equipment())
     }
