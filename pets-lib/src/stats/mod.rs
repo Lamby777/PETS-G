@@ -23,6 +23,14 @@ pub type CharMap = HashMap<String, RefCell<CharData>>;
 pub type IntegralStat = i16;
 pub type FloatStat = f32;
 
+#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+pub struct BattleStats {
+    pub hp: IntegralStat,
+    pub mana: Option<IntegralStat>,
+    pub energy: IntegralStat,
+    pub buffs: Vec<InherentStats>,
+}
+
 /// All the information the game needs to know about a character
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct CharData {
@@ -31,10 +39,8 @@ pub struct CharData {
     pub display_name: String,
 
     pub level: IntegralStat,
-    pub hp: IntegralStat,
-    pub energy: IntegralStat,
     pub inherent_stats: InherentStats,
-    pub buffs: Vec<InherentStats>,
+    pub battle_stats: BattleStats,
 
     /// Status effects the character has
     pub status_effects: HashSet<StatusEffect>,
@@ -56,7 +62,7 @@ pub struct CharData {
 
 impl Battler for CharData {
     fn hp_mut(&mut self) -> &mut IntegralStat {
-        &mut self.hp
+        &mut self.battle_stats.hp
     }
 
     fn status_effects(&self) -> &HashSet<StatusEffect> {
@@ -72,7 +78,7 @@ impl Battler for CharData {
     }
 
     fn buffs_list(&self) -> &[InherentStats] {
-        &self.buffs
+        &self.battle_stats.buffs
     }
 }
 
@@ -150,13 +156,11 @@ impl Default for CharData {
 
             // i seriously can't `..Default::default()` because
             // that would be infinite recursion... WTF?
-            hp: Default::default(),
-            energy: Default::default(),
             inherent_stats: Default::default(),
+            battle_stats: Default::default(),
             status_effects: Default::default(),
             inventory: Default::default(),
             equipment: Default::default(),
-            buffs: Default::default(),
         }
     }
 }
