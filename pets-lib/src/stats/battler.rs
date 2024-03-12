@@ -12,6 +12,9 @@ pub trait Battler {
     /// It should NOT consider in-battle buffs/debuffs.
     fn inherent_stats(&self) -> &InherentStats;
 
+    /// This should return a reference to the list of currently active (de)buffs
+    fn buffs_list(&mut self) -> &mut Vec<InherentStats>;
+
     // These are some sensible defaults... You only really need to
     // implement the above "getters."
 

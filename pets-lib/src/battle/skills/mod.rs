@@ -9,6 +9,7 @@ mod status_effects;
 use status_effects::*;
 
 mod attack;
+mod buffs;
 mod other;
 mod recovery;
 mod shields;

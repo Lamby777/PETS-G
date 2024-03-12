@@ -33,6 +33,7 @@ pub struct CharData {
     pub level: IntegralStat,
     pub stats: CharStatsStateful,
     pub inherent_stats: InherentStats,
+    pub buffs: Vec<InherentStats>,
 
     /// Status effects the character has
     pub status_effects: HashSet<StatusEffect>,
@@ -68,6 +69,10 @@ impl Battler for CharData {
     fn inherent_stats(&self) -> &InherentStats {
         &self.inherent_stats
     }
+
+    fn buffs_list(&mut self) -> &mut Vec<InherentStats> {
+        &mut self.buffs
+    }
 }
 
 /// BOILERPLATE CRAP!!!! :D
@@ -84,6 +89,7 @@ impl Default for CharData {
             status_effects: Default::default(),
             inventory: Default::default(),
             equipment: Default::default(),
+            buffs: Default::default(),
         }
     }
 }
