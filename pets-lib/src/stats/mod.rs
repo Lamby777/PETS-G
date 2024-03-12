@@ -88,7 +88,7 @@ impl Battler for CharData {
 ///
 /// It just means "inherent" as in it doesn't constantly
 /// change like HP, mana, or energy.
-#[derive(Clone, Debug, Default, derive_more::Sum, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Eq, Hash, PartialEq, derive_more::Sum, Serialize, Deserialize)]
 pub struct InherentStats {
     pub max_hp: IntegralStat,
     pub max_energy: IntegralStat,
