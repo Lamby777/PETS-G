@@ -23,10 +23,10 @@ impl SkillFamily for BuffSkill {
 
     fn cast(
         &self,
-        _caster: CharStatsPtr,
-        _target: Option<CharStatsPtr>,
-        _allies: Vec<CharStatsPtr>,
-        _enemies: Vec<CharStatsPtr>,
+        _caster: BattlerPtr,
+        _target: Option<BattlerPtr>,
+        _allies: Vec<BattlerPtr>,
+        _enemies: Vec<BattlerPtr>,
     ) {
         todo!()
     }

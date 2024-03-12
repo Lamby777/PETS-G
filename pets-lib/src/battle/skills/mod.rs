@@ -15,7 +15,7 @@ mod recovery;
 mod shields;
 mod support;
 
-type CharStatsPtr = Rc<RefCell<(InherentStats, CharStatsStateful)>>;
+type BattlerPtr = Rc<RefCell<dyn Battler>>;
 
 #[typetag::serde(tag = "type")]
 pub trait SkillFamily {
@@ -25,10 +25,10 @@ pub trait SkillFamily {
 
     fn cast(
         &self,
-        _caster: CharStatsPtr,
-        _target: Option<CharStatsPtr>,
-        _allies: Vec<CharStatsPtr>,
-        _enemies: Vec<CharStatsPtr>,
+        _caster: BattlerPtr,
+        _target: Option<BattlerPtr>,
+        _allies: Vec<BattlerPtr>,
+        _enemies: Vec<BattlerPtr>,
     );
 }
 
