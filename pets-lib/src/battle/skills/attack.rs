@@ -2,6 +2,7 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct AttackSkill {
+    pub name: String,
     pub element: Element,
     pub power: u8,
     pub plural: bool,
@@ -9,8 +10,9 @@ pub struct AttackSkill {
 }
 
 impl AttackSkill {
-    pub fn new(element: Element, power: u8) -> Self {
+    pub fn new(name: &str, element: Element, power: u8) -> Self {
         Self {
+            name: name.to_owned(),
             element,
             power,
             plural: false,
@@ -48,42 +50,10 @@ impl AttackSkill {
     }
 }
 
-fn element_attack_name(element: Element, power: u8) -> String {
-    use Element::*;
-
-    let family = match element {
-        // More unique names for physical attacks
-        Blade | Kinetic => unreachable!(),
-
-        // TODO "favorite thing" name
-        Fuzz => "Fuzz",
-
-        Fire => "Caustics",
-        Ice => todo!(),
-        Electric => todo!(),
-        Wind => "Gusts",
-        Earth => "Ground",
-        Psi => todo!(),
-
-        Spirit => "Praise",
-        Whip => "Whip",
-    };
-
-    todo!()
-}
-
 #[typetag::serde]
 impl SkillFamily for AttackSkill {
     fn name(&self) -> String {
-        use Element::*;
-
-        let plural = if self.plural { " " } else { "" };
-        let family_name = match self.element {
-            Blade | Kinetic => unreachable!(),
-            el @ _ => element_attack_name(el, self.power),
-        };
-
-        format!("{}{}", family_name, plural)
+        self.name.clone()
     }
 
     /// Panics if neither damage nor effect are present
@@ -130,7 +100,7 @@ mod tests {
 
     #[test]
     fn test_describe_dmg_low_chance_effect() {
-        let skill = AttackSkill::new(Element::Fire, 3)
+        let skill = AttackSkill::new("Caustics C", Element::Fire, 3)
             .with_effect(StatusEffect::Burning, EffectChance::Rare);
 
         assert_eq!(
@@ -141,14 +111,14 @@ mod tests {
 
     #[test]
     fn test_describe_dmg() {
-        let skill = AttackSkill::new(Element::Fire, 1);
+        let skill = AttackSkill::new("Caustics A", Element::Fire, 1);
 
         assert_eq!(skill.description(), "Deals faint Fire-based damage.");
     }
 
     #[test]
     fn test_describe_low_chance_effect() {
-        let skill = AttackSkill::new(Element::Fire, 0)
+        let skill = AttackSkill::new("Flame B", Element::Fire, 0)
             .with_effect(StatusEffect::Burning, EffectChance::Common);
 
         assert_eq!(skill.description(), "High chance of inflicting On Fire.");
@@ -156,14 +126,14 @@ mod tests {
 
     #[test]
     fn test_describe_dmg_nonbased() {
-        let skill = AttackSkill::new(Element::Psi, 4);
+        let skill = AttackSkill::new("Psi D", Element::Psi, 4);
 
         assert_eq!(skill.description(), "Deals strong Psychic damage.");
     }
 
     #[test]
     fn test_describe_molotov_cocktail() {
-        let skill = AttackSkill::new(Element::Fire, 0)
+        let skill = AttackSkill::new("Flare C", Element::Fire, 0)
             .with_effect(StatusEffect::Burning, EffectChance::Guaranteed)
             .make_plural();
 
