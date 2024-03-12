@@ -1,25 +1,21 @@
 use super::*;
 
 #[derive(Serialize, Deserialize)]
-pub enum RecoverySkill {
-    HPPercent { name: String, percent: f64 },
-    HPAmount { name: String, amount: u8 },
-    Status { name: String, rating: u8 },
+pub struct RecoverySkill {
+    pub name: String,
+    pub recovery: RecoveryType,
 }
 
-#[typetag::serde]
-impl SkillFamily for RecoverySkill {
-    fn name(&self) -> String {
-        use RecoverySkill::*;
-        match self {
-            HPPercent { name, .. } => name.clone(),
-            HPAmount { name, .. } => name.clone(),
-            Status { name, .. } => name.clone(),
-        }
-    }
+#[derive(Serialize, Deserialize)]
+pub enum RecoveryType {
+    HPPercent { percent: f64 },
+    HPAmount { amount: u8 },
+    Status { rating: u8 },
+}
 
-    fn description(&self) -> String {
-        use RecoverySkill::*;
+impl RecoveryType {
+    fn describe(&self) -> String {
+        use RecoveryType::*;
 
         match self {
             HPAmount { amount, .. } => {
@@ -34,6 +30,17 @@ impl SkillFamily for RecoverySkill {
                 format!("Heals status effects up to {}★.", rating)
             }
         }
+    }
+}
+
+#[typetag::serde]
+impl SkillFamily for RecoverySkill {
+    fn name(&self) -> String {
+        self.name.clone()
+    }
+
+    fn description(&self) -> String {
+        self.recovery.describe()
     }
 
     fn base_cost(&self) -> u32 {
@@ -57,27 +64,27 @@ mod tests {
 
     #[test]
     fn test_describe_heal_20_percent() {
-        let skill = RecoverySkill::HPPercent {
+        let skill = RecoverySkill {
             name: "Deez".to_owned(),
-            percent: 20.0,
+            recovery: RecoveryType::HPPercent { percent: 20.0 },
         };
         assert_eq!(skill.description(), "Heals 20% of the target's HP.");
     }
 
     #[test]
     fn test_describe_heal_50_hp() {
-        let skill = RecoverySkill::HPAmount {
+        let skill = RecoverySkill {
             name: "Deez".to_owned(),
-            amount: 50,
+            recovery: RecoveryType::HPAmount { amount: 50 },
         };
         assert_eq!(skill.description(), "Heals 50 HP.");
     }
 
     #[test]
     fn test_describe_heal_status_3star() {
-        let skill = RecoverySkill::Status {
+        let skill = RecoverySkill {
             name: "Deez".to_owned(),
-            rating: 3,
+            recovery: RecoveryType::Status { rating: 3 },
         };
         assert_eq!(skill.description(), "Heals status effects up to 3★.");
     }
