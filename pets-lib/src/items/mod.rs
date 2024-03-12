@@ -14,10 +14,16 @@ pub struct Item {
     categories: Vec<ItemCategory>,
 
     /// difference in stats after equipping
-    equip_offset: InherentStats,
+    pub equip_offset: Option<InherentStats>,
 
     name: String,
     description: String,
+}
+
+impl Item {
+    pub fn is_equipment(&self) -> bool {
+        self.equip_offset.is_some()
+    }
 }
 
 // more derive spam :D
