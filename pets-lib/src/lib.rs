@@ -36,12 +36,15 @@ mod llm;
 
 #[allow(unused)]
 mod prelude {
+    pub use crate::consts::type_aliases::*;
+
     pub use crate::items::*;
     pub use crate::limiq::*;
     pub use crate::stats::*;
     pub use crate::util::*;
 
     pub use crate::battle::BattleEngine;
+    pub use crate::charmap::CharMap;
     pub use crate::dialogue::{ix_map, DBoxInterface};
     pub use crate::functions::FnInterface;
     pub use crate::pchars::{EnemyID, PChar};

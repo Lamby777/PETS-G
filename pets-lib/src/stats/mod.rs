@@ -18,11 +18,6 @@ pub use battler::Battler;
 pub use savefiles::SaveFile;
 pub use statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
 
-// type aliases
-pub type CharMap = HashMap<String, RefCell<CharData>>;
-pub type IntegralStat = i16;
-pub type FloatStat = f32;
-
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 pub struct BattleStats {
     pub hp: IntegralStat,

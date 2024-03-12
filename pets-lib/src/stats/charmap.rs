@@ -1,5 +1,7 @@
 use crate::prelude::*;
 
+pub type CharMap = HashMap<String, RefCell<CharData>>;
+
 /// CharMap with all characters having the same exact stats
 pub fn uniform_charmap() -> CharMap {
     PChar::ALL.iter().fold(CharMap::new(), |mut map, chname| {
