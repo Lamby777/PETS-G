@@ -3,7 +3,9 @@
 //!
 
 use crate::prelude::*;
-use godot::engine::{file_access::ModeFlags, FileAccess};
+
+use godot::engine::file_access::ModeFlags;
+use godot::engine::FileAccess;
 
 /// All the data saved to one of the save file slots
 #[derive(Serialize, Deserialize)]

@@ -7,6 +7,11 @@ use godot::engine::tween::TransitionType;
 
 const WAVE_BBCODE: &str = "[wave amp=100 freq=-6]";
 
+pub mod type_aliases {
+    pub type IntegralStat = i16;
+    pub type FloatStat = f32;
+}
+
 pub mod battle {
     pub const LAYER_NAME: &str = "BattleLayer";
 
