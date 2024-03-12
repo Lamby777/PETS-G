@@ -117,7 +117,7 @@ mod tests {
     }
 
     #[test]
-    fn test_describe_low_chance_effect() {
+    fn test_describe_high_chance_effect() {
         let skill = AttackSkill::new("Flame B", Element::Fire, 0)
             .with_effect(StatusEffect::Burning, EffectChance::Common);
 
