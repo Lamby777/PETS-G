@@ -14,7 +14,7 @@ pub struct Item {
     categories: Vec<ItemCategory>,
 
     /// difference in stats after equipping
-    equip_offset: CharStats,
+    equip_offset: InherentStats,
 
     name: String,
     description: String,

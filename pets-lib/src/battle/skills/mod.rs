@@ -14,7 +14,7 @@ mod recovery;
 mod shields;
 mod support;
 
-type CharStatsPtr = Rc<RefCell<CharStats>>;
+type CharStatsPtr = Rc<RefCell<(InherentStats, CharStatsStateful)>>;
 
 #[typetag::serde(tag = "type")]
 pub trait SkillFamily {
