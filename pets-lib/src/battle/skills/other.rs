@@ -6,6 +6,10 @@ pub struct PSIFluxSkill(pub Duration);
 
 #[typetag::serde]
 impl SkillFamily for PSIFluxSkill {
+    fn name(&self) -> String {
+        "PSI Flux".to_owned()
+    }
+
     fn description(&self) -> String {
         format!("Warps time in your favor for {} seconds.", self.0.as_secs())
     }
@@ -60,6 +64,10 @@ impl PSIRewireSkill {
 
 #[typetag::serde]
 impl SkillFamily for PSIRewireSkill {
+    fn name(&self) -> String {
+        "PSI Rewire".to_owned()
+    }
+
     fn description(&self) -> String {
         format!(
             "Gamble away {} of your mana for the rare chance of a profit.",

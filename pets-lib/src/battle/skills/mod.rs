@@ -18,9 +18,7 @@ type CharStatsPtr = Rc<RefCell<(InherentStats, CharStatsStateful)>>;
 
 #[typetag::serde(tag = "type")]
 pub trait SkillFamily {
-    fn name(&self) -> &str {
-        todo!()
-    }
+    fn name(&self) -> String;
     fn base_cost(&self) -> u32;
     fn description(&self) -> String;
 
