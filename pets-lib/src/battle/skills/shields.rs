@@ -120,6 +120,13 @@ impl ShieldSkill {
 
 #[typetag::serde]
 impl SkillFamily for ShieldSkill {
+    fn name(&self) -> String {
+        let name = if self.reflect { "Mirror" } else { "Shield" };
+        let width = if self.plural { "Wide " } else { "" };
+
+        format!("{width}{name}")
+    }
+
     fn description(&self) -> String {
         let potency = ShieldSkill::multi_to_str(self.multiplier);
         let reflectivity = if self.reflect { "reflects" } else { "blocks" };

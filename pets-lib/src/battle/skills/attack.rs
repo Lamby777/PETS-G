@@ -50,6 +50,10 @@ impl AttackSkill {
 
 #[typetag::serde]
 impl SkillFamily for AttackSkill {
+    fn name(&self) -> String {
+        todo!()
+    }
+
     /// Panics if neither damage nor effect are present
     fn description(&self) -> String {
         let dmg = self.describe_damage();

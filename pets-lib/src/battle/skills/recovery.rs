@@ -9,6 +9,10 @@ pub enum RecoverySkill {
 
 #[typetag::serde]
 impl SkillFamily for RecoverySkill {
+    fn name(&self) -> String {
+        todo!()
+    }
+
     fn description(&self) -> String {
         use RecoverySkill::*;
 
