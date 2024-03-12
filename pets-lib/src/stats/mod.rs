@@ -113,15 +113,15 @@ pub struct InherentStats {
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum StatusEffect {
     Sleeping,    // Can't move, but recover 20% energy on wakeup
-    Paralysis,   // ^^^ No movement, no energy recovery, but still has PK. Almost no combos
+    Paralyzed,   // ^^^ No movement, no energy recovery, but still has PK. Almost no combos
     Crying,      // Oops, all your attacks missed! Sowwy :<
     LightHeaded, // Like uncontrollable crying + also affects PK, but lower miss rate overall
 
     ShortBreath, // No attacks, painfully slow movement
-    Dizziness,   // "Disoriented", auditory flashbang + harder combos
+    Dizzy,       // "Disoriented", auditory flashbang + harder combos
     Blinded,     // Battle board turns black
 
-    Burn,      // Damage over time
+    Burning,   // Damage over time
     Frostbite, // More damage, introduced later in the game
     Bleeding,  // ^^^ HP meter biased towards rolling down faster
     Poison,    // ^^^ no PK
@@ -135,19 +135,11 @@ impl Display for StatusEffect {
         use StatusEffect::*;
 
         let s = match self {
-            Sleeping => "Sleeping",
-            Paralysis => "Paralyzed",
-            Crying => "Crying",
             LightHeaded => "Light-headed",
             ShortBreath => "Short of breath",
-            Dizziness => "Dizzy",
-            Blinded => "Blinded",
-            Burn => "Burn",
-            Frostbite => "Frostbite",
-            Bleeding => "Bleeding",
-            Poison => "Poisoned",
+            Burning => "On Fire",
             PoisonR => "Poisoned (R)",
-            Tired => "Tired",
+            _ => return Debug::fmt(&self, f),
         };
 
         write!(f, "{}", s)

@@ -94,8 +94,8 @@ mod tests {
 
     #[test]
     fn test_describe_dmg_low_chance_effect() {
-        let skill =
-            AttackSkill::new(Element::Fire, 3).with_effect(StatusEffect::Burn, EffectChance::Rare);
+        let skill = AttackSkill::new(Element::Fire, 3)
+            .with_effect(StatusEffect::Burning, EffectChance::Rare);
 
         assert_eq!(
             skill.description(),
@@ -113,7 +113,7 @@ mod tests {
     #[test]
     fn test_describe_low_chance_effect() {
         let skill = AttackSkill::new(Element::Fire, 0)
-            .with_effect(StatusEffect::Burn, EffectChance::Common);
+            .with_effect(StatusEffect::Burning, EffectChance::Common);
 
         assert_eq!(skill.description(), "High chance of inflicting Burn.");
     }
@@ -128,7 +128,7 @@ mod tests {
     #[test]
     fn test_describe_molotov_cocktail() {
         let skill = AttackSkill::new(Element::Fire, 0)
-            .with_effect(StatusEffect::Burn, EffectChance::Guaranteed)
+            .with_effect(StatusEffect::Burning, EffectChance::Guaranteed)
             .make_plural();
 
         assert_eq!(
