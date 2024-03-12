@@ -13,10 +13,28 @@ pub trait Battler {
     fn inherent_stats(&self) -> &InherentStats;
 
     /// This should return a reference to the list of currently active (de)buffs
-    fn buffs_list(&mut self) -> &mut Vec<InherentStats>;
+    fn buffs_list(&self) -> &[InherentStats];
+    fn buffs_list_mut(&mut self) -> &mut Vec<InherentStats>;
 
-    // These are some sensible defaults... You only really need to
-    // implement the above "getters."
+    //
+    // Below are some sensible defaults... You only really need to
+    // implement the above "getters" to make the rest work.
+    //
+
+    /// The final "in practice" stats of the character.
+    ///
+    /// Takes into account the...
+    /// * Inherent stats
+    /// * Equipment
+    /// * Buffs
+    fn practical_stats(&self) -> InherentStats {
+        let inherent = self.inherent_stats().clone();
+
+        self.buffs_list()
+            .iter()
+            .cloned()
+            .fold(inherent, |acc, buff| acc + buff)
+    }
 
     fn max_hp(&self) -> IntegralStat {
         self.inherent_stats().max_hp
