@@ -103,7 +103,7 @@ mod tests {
 
         assert_eq!(
             skill.description(),
-            "Deals medium Fire-based damage. Low chance of inflicting Burn."
+            "Deals medium Fire-based damage. Low chance of inflicting On Fire."
         );
     }
 
@@ -119,7 +119,7 @@ mod tests {
         let skill = AttackSkill::new(Element::Fire, 0)
             .with_effect(StatusEffect::Burning, EffectChance::Common);
 
-        assert_eq!(skill.description(), "High chance of inflicting Burn.");
+        assert_eq!(skill.description(), "High chance of inflicting On Fire.");
     }
 
     #[test]
@@ -137,7 +137,7 @@ mod tests {
 
         assert_eq!(
             skill.description(),
-            "Always inflicts Burn. Targets all enemies!"
+            "Always inflicts On Fire. Targets all enemies!"
         );
     }
 }
