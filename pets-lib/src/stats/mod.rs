@@ -31,7 +31,8 @@ pub struct CharData {
     pub display_name: String,
 
     pub level: IntegralStat,
-    pub stats: CharStatsStateful,
+    pub hp: IntegralStat,
+    pub energy: IntegralStat,
     pub inherent_stats: InherentStats,
     pub buffs: Vec<InherentStats>,
 
@@ -55,7 +56,7 @@ pub struct CharData {
 
 impl Battler for CharData {
     fn hp_mut(&mut self) -> &mut IntegralStat {
-        &mut self.stats.hp
+        &mut self.hp
     }
 
     fn status_effects(&self) -> &HashSet<StatusEffect> {
@@ -73,16 +74,6 @@ impl Battler for CharData {
     fn buffs_list(&self) -> &[InherentStats] {
         &self.buffs
     }
-}
-
-#[derive(Clone, Debug, Default, Serialize, Deserialize)]
-pub struct CharStatsStateful {
-    /// Current HP
-    pub hp: IntegralStat,
-
-    /// Current energy level
-    pub energy: IntegralStat,
-    // mana starts at 0 each battle
 }
 
 /// Stats that are inherent to a character or enemy type.
@@ -159,7 +150,8 @@ impl Default for CharData {
 
             // i seriously can't `..Default::default()` because
             // that would be infinite recursion... WTF?
-            stats: Default::default(),
+            hp: Default::default(),
+            energy: Default::default(),
             inherent_stats: Default::default(),
             status_effects: Default::default(),
             inventory: Default::default(),

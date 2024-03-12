@@ -81,10 +81,10 @@ impl SkillFamily for AttackSkill {
 
     fn cast(
         &self,
-        _caster: CharStatsPtr,
-        target: Option<CharStatsPtr>,
-        _allies: Vec<CharStatsPtr>,
-        _enemies: Vec<CharStatsPtr>,
+        _caster: BattlerPtr,
+        target: Option<BattlerPtr>,
+        _allies: Vec<BattlerPtr>,
+        _enemies: Vec<BattlerPtr>,
     ) {
         let target = target.expect("attack skill should have a target");
         // let damage = self.power as u32;
