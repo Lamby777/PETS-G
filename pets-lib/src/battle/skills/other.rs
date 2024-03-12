@@ -21,7 +21,7 @@ impl SkillFamily for PSIFluxSkill {
     fn cast(
         &self,
         _caster: BattlerPtr,
-        _target: Option<BattlerPtr>,
+        _targets: Vec<BattlerPtr>,
         _allies: Vec<BattlerPtr>,
         _enemies: Vec<BattlerPtr>,
     ) {
@@ -82,7 +82,7 @@ impl SkillFamily for PSIRewireSkill {
     fn cast(
         &self,
         _caster: BattlerPtr,
-        _target: Option<BattlerPtr>,
+        _targets: Vec<BattlerPtr>,
         _allies: Vec<BattlerPtr>,
         _enemies: Vec<BattlerPtr>,
     ) {

@@ -50,7 +50,7 @@ impl SkillFamily for RecoverySkill {
     fn cast(
         &self,
         _caster: BattlerPtr,
-        _target: Option<BattlerPtr>,
+        _targets: Vec<BattlerPtr>,
         _allies: Vec<BattlerPtr>,
         _enemies: Vec<BattlerPtr>,
     ) {

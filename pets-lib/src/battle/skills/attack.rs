@@ -82,14 +82,14 @@ impl SkillFamily for AttackSkill {
     fn cast(
         &self,
         _caster: BattlerPtr,
-        target: Option<BattlerPtr>,
+        targets: Vec<BattlerPtr>,
         _allies: Vec<BattlerPtr>,
         _enemies: Vec<BattlerPtr>,
     ) {
-        let target = target.expect("attack skill should have a target");
-        // let damage = self.power as u32;
-        // let mut target = target.borrow_mut();
-        // target.hp = target.hp.saturating_sub(damage);
+        if targets.is_empty() {
+            panic!("attack skill should have a target");
+        }
+
         todo!();
     }
 }
