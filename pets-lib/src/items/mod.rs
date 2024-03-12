@@ -9,34 +9,62 @@ use crate::prelude::*;
 // Or maybe just in a vector... and there can be a function
 // that looks up the item by searching the vector for an Item
 // with the correct `name` property?
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Item {
-    categories: Vec<ItemCategory>,
+    /// The category of the item. This affects how you can use it in-game.
+    category: ItemCat,
 
-    /// difference in stats after equipping
-    pub equip_offset: Option<InherentStats>,
+    /// Things that describe what the item does or is
+    ///
+    /// This may be used for weaknesses/resistances, sorting purposes,
+    /// shopkeeper price calculations, etc.
+    attributes: Vec<ItemAttribute>,
 
     name: String,
     description: String,
 }
 
-impl Item {
-    pub fn is_equipment(&self) -> bool {
-        self.equip_offset.is_some()
-    }
-}
-
 // more derive spam :D
-#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Clone)]
-pub enum ItemCategory {
-    Weapon,
-    Armor,
+/// The category an item belongs to
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum ItemCat {
+    Equipment(EquipmentCat, InherentStats),
     Key,
     Consumable,
 }
 
+/// The category an equippable item belongs to
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum EquipmentCat {
+    Weapon,
+    Armor,
+    Accessory,
+}
+
+impl Item {
+    pub fn is_equipment(&self) -> bool {
+        matches!(self.category, ItemCat::Equipment(..))
+    }
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub enum ItemAttribute {
+    Rare,
+    Expensive,
+    Cheap,
+
+    Melee,
+    Blade,
+
+    Ranged,
+    Firearm,
+
+    Explosive,
+    Grenade,
+}
+
 // implement for vector of items
-trait ItemsList {
+pub trait ItemsList {
     /// Every item that can be equipped
     fn equipment(&self) -> impl Iterator<Item = &Item>;
     fn offsets(&self) -> impl Iterator<Item = &InherentStats>;
@@ -48,6 +76,11 @@ impl ItemsList for &[Item] {
     }
 
     fn offsets(&self) -> impl Iterator<Item = &InherentStats> {
-        self.equipment().map(|i| i.equip_offset.as_ref().unwrap())
+        use ItemCat::*;
+
+        self.iter().filter_map(|i| match &i.category {
+            Equipment(_, offsets) => Some(offsets),
+            _ => None,
+        })
     }
 }

@@ -26,13 +26,11 @@ pub trait Battler {
         let inherent = self.inherent_stats().clone();
 
         // get all offsets from each item that has one
-        let offsets = self
-            .equipment()
-            .iter()
-            .filter_map(|i| i.equip_offset.clone());
+        let equips = self.equipment();
+        let offsets = equips.offsets();
 
         // ... and sum them up
-        inherent + offsets.sum()
+        inherent + offsets.cloned().sum()
     }
 
     /// The final "in practice" stats of the character.
