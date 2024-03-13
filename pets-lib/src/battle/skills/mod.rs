@@ -33,7 +33,18 @@ pub trait SkillFamily {
 }
 
 // not this "derive everything" crap again... ughhhhhh
-#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd, EnumIter, Serialize, Deserialize)]
+#[derive(
+    Clone,
+    Copy,
+    Debug,
+    Eq,
+    Ord,
+    PartialEq,
+    PartialOrd,
+    EnumIter,
+    Serialize,
+    Deserialize
+)]
 pub enum Element {
     // Physical
     Blade,   // swords, claws, etc.
