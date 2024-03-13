@@ -5,6 +5,10 @@
 
 use crate::prelude::*;
 
+mod inv;
+
+pub use inv::ItemList;
+
 /// A single item definition, stored in item hashtable for lookup.
 // Or maybe just in a vector... and there can be a function
 // that looks up the item by searching the vector for an Item
@@ -61,26 +65,4 @@ pub enum ItemAttribute {
 
     Explosive,
     Grenade,
-}
-
-// implement for vector of items
-pub trait ItemsList {
-    /// Every item that can be equipped
-    fn equipment(&self) -> impl Iterator<Item = &Item>;
-    fn offsets(&self) -> impl Iterator<Item = &InherentStats>;
-}
-
-impl ItemsList for &[Item] {
-    fn equipment(&self) -> impl Iterator<Item = &Item> {
-        self.iter().filter(|i| i.is_equipment())
-    }
-
-    fn offsets(&self) -> impl Iterator<Item = &InherentStats> {
-        use ItemCat::*;
-
-        self.iter().filter_map(|i| match &i.category {
-            Equipment(_, offsets) => Some(offsets),
-            _ => None,
-        })
-    }
 }
