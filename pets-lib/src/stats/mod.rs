@@ -5,16 +5,18 @@
 use crate::prelude::*;
 
 // stat-related submodules
-pub mod autoload;
-pub mod battler;
-pub mod charmap;
-pub mod pchars;
-pub mod savefiles;
-pub mod statcalc;
+mod autoload;
+mod battler;
+mod charmap;
+mod pchars;
+mod savefiles;
+mod statcalc;
 
 // re-export some crap from ^^^
 pub use autoload::StatsInterface;
 pub use battler::Battler;
+pub use charmap::CharMap;
+pub use pchars::{EnemyID, PChar};
 pub use savefiles::SaveFile;
 pub use statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
 

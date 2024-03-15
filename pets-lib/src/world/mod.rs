@@ -9,14 +9,13 @@ use godot::engine::utilities::randf_range;
 use godot::engine::{AnimationPlayer, AudioStream, CanvasLayer};
 use godot::prelude::*;
 
-pub mod enemy_node;
-pub mod interaction;
-pub mod music_zone;
-pub mod pchar_node;
-pub mod playercb;
+mod enemy_node;
+mod interaction;
+mod music_zone;
+mod pchar_node;
+mod playercb;
 
-pub use interaction::manager::InteractionManager;
-pub use interaction::zone::InteractionZone;
+pub use interaction::{InteractionManager, InteractionZone};
 pub use music_zone::MusicZone;
 pub use playercb::PlayerCB;
 

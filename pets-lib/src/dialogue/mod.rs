@@ -2,8 +2,8 @@
 //! Dialogue system for the game's menus.
 //!
 
-pub mod autoload;
-pub mod dbox;
+mod autoload;
+mod dbox;
 
 pub use autoload::DBoxInterface;
 

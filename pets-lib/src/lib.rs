@@ -46,12 +46,9 @@ mod prelude {
     pub use crate::util::*;
 
     pub use crate::battle::BattleEngine;
-    pub use crate::charmap::CharMap;
     pub use crate::dialogue::{ix_map, DBoxInterface};
     pub use crate::functions::FnInterface;
-    pub use crate::pchars::{EnemyID, PChar};
-    pub use crate::world::{InteractionManager, InteractionZone};
-    pub use crate::world::{MusicZone, PlayerCB, World};
+    pub use crate::world::{InteractionManager, InteractionZone, MusicZone, PlayerCB, World};
 
     pub use crate::singleton::Autoload;
     pub use crate::wrapped::Wrapped;
