@@ -38,7 +38,7 @@ impl PlayerCB {
         Self::fx_rect().get_material().unwrap().cast()
     }
 
-    /// Checks all the possible things that could prevent the player from moving.
+    /// Checks all the possible things that could prevent movement.
     ///
     /// This includes things like:
     /// * Cutscenes

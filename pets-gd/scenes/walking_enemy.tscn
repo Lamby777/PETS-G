@@ -51,6 +51,7 @@ shape = SubResource("RectangleShape2D_3efs2")
 
 [node name="ContactRange" type="Area2D" parent="."]
 collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContactRange"]
 shape = SubResource("CircleShape2D_yogbq")
