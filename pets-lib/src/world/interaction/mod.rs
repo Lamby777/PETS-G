@@ -2,5 +2,8 @@
 //! Stuff for interactions in the overworld
 //!
 
-pub mod manager;
-pub mod zone;
+mod manager;
+mod zone;
+
+pub use manager::InteractionManager;
+pub use zone::InteractionZone;
