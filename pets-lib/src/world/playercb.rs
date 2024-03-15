@@ -38,6 +38,16 @@ impl PlayerCB {
         Self::fx_rect().get_material().unwrap().cast()
     }
 
+    /// Checks all the possible things that could prevent the player from moving.
+    ///
+    /// This includes things like:
+    /// * Cutscenes
+    /// * Menus
+    fn can_move(&self) -> bool {
+        true // TODO
+    }
+
+    /// Set character positions based on past pos/rot
     fn move_chars(&mut self, moving: bool) {
         if self.past_positions.len() == 0 {
             return;
@@ -46,32 +56,17 @@ impl PlayerCB {
         for (i, ch) in self.party.iter_mut().enumerate() {
             // index of past data limqs
             let nth = i * PERSONAL_SPACE;
-
             ch.set_global_position(*self.past_positions.get_or_last(nth));
 
-            {
-                let mut ch = ch.bind_mut();
-                ch.anim_move(moving, *self.past_rotations.get_or_last(nth));
-            }
+            let mut ch = ch.bind_mut();
+            ch.anim_move(moving, *self.past_rotations.get_or_last(nth));
         }
     }
-}
 
-#[godot_api]
-impl ICharacterBody2D for PlayerCB {
-    fn ready(&mut self) {
-        self.party = load_pchar_scenes_under!(
-            self;
-            "agent_e",
-            "agent_s",
-            "agent_t",
-            "mira",
-            "dubs",
-            "yoyo",
-        );
-    }
-
-    fn physics_process(&mut self, delta: f64) {
+    /// Do all the movement calculations that need to run every tick.
+    ///
+    /// Returns whether the player is moving or not.
+    fn calc_movements(&mut self, delta: f64) -> bool {
         let input = Input::singleton();
         let input_vector = input
             .get_vector("left".into(), "right".into(), "up".into(), "down".into())
@@ -109,6 +104,31 @@ impl ICharacterBody2D for PlayerCB {
             })
         }
 
-        self.move_chars(moving)
+        moving
+    }
+}
+
+#[godot_api]
+impl ICharacterBody2D for PlayerCB {
+    fn ready(&mut self) {
+        self.party = load_pchar_scenes_under!(
+            self;
+            "agent_e",
+            "agent_s",
+            "agent_t",
+            "mira",
+            "dubs",
+            "yoyo",
+        );
+    }
+
+    fn physics_process(&mut self, delta: f64) {
+        let mut moving = false;
+
+        if self.can_move() {
+            moving = self.calc_movements(delta);
+        }
+
+        self.move_chars(moving);
     }
 }
