@@ -27,7 +27,7 @@ pub struct BattleStats {
 }
 
 /// All the information the game needs to know about a character
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct CharData {
     /// Name of the character, as picked by the user
     /// ⚠️⚠️⚠️ See <https://github.com/Lamby777/PETS-G/issues/23>
