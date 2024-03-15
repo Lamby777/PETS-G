@@ -17,9 +17,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: dtolnay/rust-toolchain@nightly
-    - name: Install Dialogical
-      working-directory: pets-lib
-      run: cargo install dialogical
     - name: Build
       working-directory: pets-lib
       run: cargo build --verbose
