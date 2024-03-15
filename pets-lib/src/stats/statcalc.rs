@@ -8,7 +8,7 @@ pub type CharStatCalcs = HashMap<String, Rc<StatCalcList>>;
 pub type StatCalcFn<T> = fn(IntegralStat) -> T;
 
 /// A list of stat calculation functions for ONE CHARACTER
-#[derive(Debug, Clone)]
+#[derive(Clone, Debug)]
 pub struct StatCalcList {
     pub xp_requirement: StatCalcFn<IntegralStat>,
 
