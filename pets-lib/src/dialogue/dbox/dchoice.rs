@@ -72,12 +72,9 @@ impl IMarginContainer for DChoice {
 
         let mut base = self.base_mut();
         base.set_size(size);
-        base.fit_child_in_rect(
-            label.upcast(),
-            Rect2 {
-                position: Vector2::ZERO,
-                size,
-            },
-        );
+        base.fit_child_in_rect(label.upcast(), Rect2 {
+            position: Vector2::ZERO,
+            size,
+        });
     }
 }

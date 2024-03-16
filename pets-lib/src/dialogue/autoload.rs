@@ -53,14 +53,16 @@ impl DBoxInterface {
 
     #[func]
     pub fn instantiate_dbox(&self) -> Gd<DialogBox> {
-        let mut ui_layer = current_scene().get_node_as::<CanvasLayer>(UI_LAYER_NAME);
+        let mut ui_layer =
+            current_scene().get_node_as::<CanvasLayer>(UI_LAYER_NAME);
 
         ui_layer
             .try_get_node_as::<DialogBox>(DBOX_NODE_NAME)
             .map_or_else(
                 || {
                     // if there's no dialog box, create one
-                    let mut dbox = self.dbox_scene.instantiate_as::<DialogBox>();
+                    let mut dbox =
+                        self.dbox_scene.instantiate_as::<DialogBox>();
                     dbox.set_name(DBOX_NODE_NAME.into());
                     ui_layer.add_child(dbox.clone().upcast());
                     dbox

@@ -12,14 +12,15 @@ use crate::prelude::*;
 
 type DirectionalInputNames = [(StringName, Vector2); 4];
 
-const BATTLE_DIRECTIONS: LazyCell<DirectionalInputNames> = LazyCell::new(|| {
-    [
-        ("battle_move_up".into(), Vector2::UP),
-        ("battle_move_down".into(), Vector2::DOWN),
-        ("battle_move_left".into(), Vector2::LEFT),
-        ("battle_move_right".into(), Vector2::RIGHT),
-    ]
-});
+const BATTLE_DIRECTIONS: LazyCell<DirectionalInputNames> =
+    LazyCell::new(|| {
+        [
+            ("battle_move_up".into(), Vector2::UP),
+            ("battle_move_down".into(), Vector2::DOWN),
+            ("battle_move_left".into(), Vector2::LEFT),
+            ("battle_move_right".into(), Vector2::RIGHT),
+        ]
+    });
 
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]

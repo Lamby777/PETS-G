@@ -123,22 +123,44 @@ pub struct InherentStats {
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum StatusEffect {
-    Sleeping,    // Can't move, but recover 20% energy on wakeup
-    Paralyzed,   // ^^^ No movement, no energy recovery, but still has PK. Almost no combos
-    Crying,      // Oops, all your attacks missed! Sowwy :<
-    LightHeaded, // Like uncontrollable crying + also affects PK, but lower miss rate overall
+    /// Can't move, but recover 20% energy on wakeup
+    Sleeping,
 
-    ShortBreath, // No attacks, painfully slow movement
-    Dizzy,       // "Disoriented", auditory flashbang + harder combos
-    Blinded,     // Battle board turns black
+    /// ^^^ No movement, no energy recovery, but still has PK. Almost no combos
+    Paralyzed,
 
-    Burning,   // Damage over time
-    Frostbite, // More damage, introduced later in the game
-    Bleeding,  // ^^^ HP meter biased towards rolling down faster
-    Poison,    // ^^^ no PK
-    PoisonR,   // ^^^ no PK, completely unable to fight (basically dead)
+    /// Oops, all your attacks missed! Sowwy :<
+    Crying,
 
-    Tired, // Less lenient music timing. Get some rest, dumbass! Don't emulate my bad habits.
+    /// Like uncontrollable crying + also no PK, but lower miss rate overall
+    LightHeaded,
+
+    /// No attacks, painfully slow movement
+    ShortBreath,
+
+    /// "Disoriented", auditory flashbang + harder combos
+    Dizzy,
+
+    /// Battle board turns black
+    Blinded,
+
+    /// Damage over time
+    Burning,
+
+    /// More damage over time, introduced later in the game
+    Frostbite,
+
+    /// ^^^ HP meter biased towards rolling down faster
+    Bleeding,
+
+    /// ^^^ no PK
+    Poison,
+
+    /// ^^^ no PK, completely unable to fight (basically dead)
+    PoisonR,
+
+    /// Less lenient music timing.
+    Tired,
 }
 
 impl Display for StatusEffect {

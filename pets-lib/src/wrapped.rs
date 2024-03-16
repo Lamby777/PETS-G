@@ -45,7 +45,10 @@ pub enum ListOperation<'a, T> {
 }
 
 /// Convert user input into list navigation
-pub fn process_input<T: Clone>(wrap: &mut Wrapped<T>, dir: ListDirection) -> ListOperation<T> {
+pub fn process_input<T: Clone>(
+    wrap: &mut Wrapped<T>,
+    dir: ListDirection,
+) -> ListOperation<T> {
     use ListOperation::*;
 
     let is_reverse = match wrap.selected {
@@ -106,7 +109,8 @@ impl<T> Wrapped<T> {
     pub fn walk(&mut self, backwards: bool) {
         let diff = if backwards { -1 } else { 1 };
         self.selected = Some(match self.selected {
-            Some(n) => (n as i32 + diff).rem_euclid(self.elements.len() as i32) as usize,
+            Some(n) => (n as i32 + diff).rem_euclid(self.elements.len() as i32)
+                as usize,
             None => 0,
         });
     }
