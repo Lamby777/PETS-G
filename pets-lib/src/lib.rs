@@ -7,6 +7,8 @@
 //! - Cherry 9/2/2023 | <3
 //!
 
+// This is 80 characters, just for reference for setting IDE zoom and formatting
+
 #![feature(variant_count)]
 #![feature(let_chains)]
 #![feature(lazy_cell)]
