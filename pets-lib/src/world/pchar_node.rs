@@ -1,7 +1,6 @@
-use godot::engine::AnimationNodeStateMachinePlayback;
-use godot::engine::AnimationPlayer;
-use godot::engine::AnimationTree;
-use godot::engine::Sprite2D;
+use godot::engine::{
+    AnimationNodeStateMachinePlayback, AnimationPlayer, AnimationTree, Sprite2D,
+};
 use godot::prelude::*;
 
 use crate::prelude::*;

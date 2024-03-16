@@ -38,7 +38,10 @@ impl Vector2Ext for Vector2 {
 
 /// helper function to load nodes into `OnReady` fields
 /// adapted from bromeon's answer on the gdext discord
-pub fn onready_node<O, T>(this: &Base<O>, path: impl Into<NodePath> + 'static) -> OnReady<Gd<T>>
+pub fn onready_node<O, T>(
+    this: &Base<O>,
+    path: impl Into<NodePath> + 'static,
+) -> OnReady<Gd<T>>
 where
     T: GodotClass + Inherits<Node>,
     O: GodotClass,
@@ -122,7 +125,9 @@ pub use crate::change_scene;
 #[macro_export]
 macro_rules! change_scene {
     ($scene:expr) => {
-        godot_tree().change_scene_to_file(concat!("res://scenes/", $scene, ".tscn").into())
+        godot_tree().change_scene_to_file(
+            concat!("res://scenes/", $scene, ".tscn").into(),
+        )
     };
 }
 

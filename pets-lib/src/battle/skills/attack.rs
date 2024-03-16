@@ -20,7 +20,11 @@ impl AttackSkill {
         }
     }
 
-    pub fn with_effect(mut self, effect: StatusEffect, chance: EffectChance) -> Self {
+    pub fn with_effect(
+        mut self,
+        effect: StatusEffect,
+        chance: EffectChance,
+    ) -> Self {
         self.status_effect = Some(ChanceOfEffect::new(effect, chance));
         self
     }

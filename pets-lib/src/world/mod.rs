@@ -46,7 +46,10 @@ pub struct World {
     battle_scene: Gd<PackedScene>,
 }
 
-fn set_or_stop_audio(src: Option<Gd<AudioStream>>, mut audio: Gd<AudioStreamPlayer>) {
+fn set_or_stop_audio(
+    src: Option<Gd<AudioStream>>,
+    mut audio: Gd<AudioStreamPlayer>,
+) {
     match src {
         Some(src) => audio.set_stream(src),
         None => audio.stop(),

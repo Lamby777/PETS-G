@@ -1,3 +1,4 @@
 overflow_delimited_expr = true
 imports_granularity = "Module"
 merge_derives = false
+max_width = 80

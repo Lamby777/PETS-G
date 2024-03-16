@@ -7,8 +7,7 @@ use godot::prelude::*;
 use io::Write;
 
 use llm::models::Bloom;
-use llm::Model as _;
-use llm::{InferenceFeedback, InferenceResponse, Prompt};
+use llm::{InferenceFeedback, InferenceResponse, Model as _, Prompt};
 
 const LLM_PATH_RES: &str = "res://assets/default-model.llm";
 const LLM_PATH_USER: &str = "user://model.llm";

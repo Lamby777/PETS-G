@@ -114,7 +114,8 @@ impl INode2D for BattleEngine {
 
     fn process(&mut self, _delta: f64) {
         use crate::wrapped::*;
-        let action = process_input(&mut self.choices, ListDirection::TopToBottom);
+        let action =
+            process_input(&mut self.choices, ListDirection::TopToBottom);
 
         use ListOperation::*;
         match action {

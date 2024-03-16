@@ -1,4 +1,6 @@
-use godot::engine::{AnimatedSprite2D, Area2D, CharacterBody2D, ICharacterBody2D};
+use godot::engine::{
+    AnimatedSprite2D, Area2D, CharacterBody2D, ICharacterBody2D,
+};
 use godot::prelude::*;
 
 use crate::prelude::*;

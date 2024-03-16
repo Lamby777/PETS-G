@@ -1,4 +1,6 @@
-use godot::engine::{CharacterBody2D, ColorRect, ICharacterBody2D, ShaderMaterial};
+use godot::engine::{
+    CharacterBody2D, ColorRect, ICharacterBody2D, ShaderMaterial,
+};
 use godot::prelude::*;
 
 use crate::consts::playercb::*;
@@ -69,7 +71,12 @@ impl PlayerCB {
     fn calc_movements(&mut self, delta: f64) -> bool {
         let input = Input::singleton();
         let input_vector = input
-            .get_vector("left".into(), "right".into(), "up".into(), "down".into())
+            .get_vector(
+                "left".into(),
+                "right".into(),
+                "up".into(),
+                "down".into(),
+            )
             .normalized();
         let sprinting = input.is_action_pressed("sprint".into());
         let moving = input_vector != Vector2::ZERO;

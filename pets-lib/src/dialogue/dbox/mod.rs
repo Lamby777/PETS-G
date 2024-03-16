@@ -5,7 +5,8 @@
 use dialogical::prelude::*;
 use godot::engine::tween::TransitionType;
 use godot::engine::{
-    HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel, Tween,
+    HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel,
+    Tween,
 };
 use godot::prelude::*;
 
@@ -218,7 +219,8 @@ impl DialogBox {
 
     pub fn process_choice_input(&mut self) {
         use crate::wrapped::*;
-        let action = process_input(&mut self.choices, ListDirection::LeftToRight);
+        let action =
+            process_input(&mut self.choices, ListDirection::LeftToRight);
 
         use ListOperation::*;
         match action {
