@@ -46,7 +46,10 @@ impl PlayerCB {
     /// * Cutscenes
     /// * Menus
     fn can_move(&self) -> bool {
-        true // TODO
+        let di = DBoxInterface::singleton();
+        let di = di.bind();
+
+        !di.has_active_dbox()
     }
 
     /// Set character positions based on past pos/rot

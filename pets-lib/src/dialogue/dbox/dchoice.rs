@@ -65,16 +65,16 @@ impl IMarginContainer for DChoice {
         }
 
         let label = self.txt_label();
-        let size = Vector2 {
+        let label_size = Vector2 {
             x: label.get_size().x,
             y: self.base().get_size().y,
         };
 
         let mut base = self.base_mut();
-        base.set_size(size);
+        base.set_size(label_size);
         base.fit_child_in_rect(label.upcast(), Rect2 {
             position: Vector2::ZERO,
-            size,
+            size: label_size,
         });
     }
 }

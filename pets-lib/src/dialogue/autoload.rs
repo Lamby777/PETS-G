@@ -34,16 +34,14 @@ impl DBoxInterface {
             ix_id,
         );
 
-        let mut dbox = self.instantiate_dbox();
-        {
-            let mut dbox = dbox.bind_mut();
-            dbox.set_ix(ix.clone());
-            dbox.tween_into_view(true);
-        }
+        let mut dbox = Self::dbox();
+        let mut dbox = dbox.bind_mut();
+        dbox.set_ix(ix.clone());
+        dbox.tween_into_view(true);
     }
 
     #[func]
-    pub fn scene_has_active_dbox(&self) -> bool {
+    pub fn has_active_dbox(&self) -> bool {
         let ui_layer = current_scene().get_node_as::<Node>(UI_LAYER_NAME);
 
         ui_layer
@@ -52,7 +50,10 @@ impl DBoxInterface {
     }
 
     #[func]
-    pub fn instantiate_dbox(&self) -> Gd<DialogBox> {
+    pub fn dbox() -> Gd<DialogBox> {
+        let this = Self::singleton();
+        let this = this.bind();
+
         let mut ui_layer =
             current_scene().get_node_as::<CanvasLayer>(UI_LAYER_NAME);
 
@@ -62,7 +63,7 @@ impl DBoxInterface {
                 || {
                     // if there's no dialog box, create one
                     let mut dbox =
-                        self.dbox_scene.instantiate_as::<DialogBox>();
+                        this.dbox_scene.instantiate_as::<DialogBox>();
                     dbox.set_name(DBOX_NODE_NAME.into());
                     ui_layer.add_child(dbox.clone().upcast());
                     dbox
