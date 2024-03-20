@@ -42,7 +42,7 @@ pub struct World {
 
     current_mz: Option<Gd<MusicZone>>,
 
-    #[init(default = load("res://scenes/battle.tscn"))]
+    #[export]
     battle_scene: Gd<PackedScene>,
 }
 
