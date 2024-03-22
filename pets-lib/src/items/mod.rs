@@ -32,9 +32,19 @@ pub struct Item {
 /// The category an item belongs to
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum ItemCat {
-    Equipment(EquipmentCat, InherentStats),
+    Equipment {
+        category: EquipmentCat,
+        offsets: InherentStats,
+    },
+    AmmoBox {
+        category: AmmoCat,
+        uses: u32,
+    },
+    Consumable {
+        func: String,
+        uses: u32,
+    },
     Key,
-    Consumable,
 }
 
 /// The category an equippable item belongs to
@@ -45,9 +55,19 @@ pub enum EquipmentCat {
     Accessory,
 }
 
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum AmmoCat {
+    Small,
+    Medium,
+    Large,
+    Bolts,
+    Shells,
+    Comp,
+}
+
 impl Item {
     pub fn is_equipment(&self) -> bool {
-        matches!(self.category, ItemCat::Equipment(..))
+        matches!(self.category, ItemCat::Equipment { .. })
     }
 }
 

@@ -15,7 +15,7 @@ impl ItemList for &[Item] {
         use ItemCat::*;
 
         self.iter().filter_map(|i| match &i.category {
-            Equipment(_, offsets) => Some(offsets),
+            Equipment { offsets, .. } => Some(offsets),
             _ => None,
         })
     }
