@@ -173,7 +173,7 @@ impl DialogBox {
             }
 
             Function(fn_id) => {
-                FnInterface::call(fn_id);
+                call_global(fn_id).unwrap();
             }
         }
     }
