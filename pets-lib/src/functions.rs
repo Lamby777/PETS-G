@@ -32,6 +32,10 @@ impl FnInterface {
 
     #[func]
     pub fn debug_battle() {
+        let di = DBoxInterface::singleton();
+        let mut dbox = di.bind().dbox();
+        dbox.bind_mut().end_interaction();
+
         let dbg_eid = EnemyID::A_NONNY_MOUSE;
         World::start_battle(dbg_eid.into());
     }
