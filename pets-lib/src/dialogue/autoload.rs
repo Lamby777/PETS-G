@@ -34,7 +34,7 @@ impl DBoxInterface {
             ix_id,
         );
 
-        let mut dbox = Self::dbox();
+        let mut dbox = self.dbox();
         let mut dbox = dbox.bind_mut();
         dbox.set_ix(ix.clone());
         dbox.tween_into_view(true);
@@ -50,10 +50,7 @@ impl DBoxInterface {
     }
 
     #[func]
-    pub fn dbox() -> Gd<DialogBox> {
-        let this = Self::singleton();
-        let this = this.bind();
-
+    pub fn dbox(&self) -> Gd<DialogBox> {
         let mut ui_layer =
             current_scene().get_node_as::<CanvasLayer>(UI_LAYER_NAME);
 
@@ -63,7 +60,7 @@ impl DBoxInterface {
                 || {
                     // if there's no dialog box, create one
                     let mut dbox =
-                        this.dbox_scene.instantiate_as::<DialogBox>();
+                        self.dbox_scene.instantiate_as::<DialogBox>();
                     dbox.set_name(DBOX_NODE_NAME.into());
                     ui_layer.add_child(dbox.clone().upcast());
                     dbox

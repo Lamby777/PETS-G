@@ -47,9 +47,9 @@ impl PlayerCB {
     /// * Menus
     fn can_move(&self) -> bool {
         let di = DBoxInterface::singleton();
-        let di = di.bind();
+        let dbox_active = di.bind().has_active_dbox();
 
-        !di.has_active_dbox()
+        !dbox_active
     }
 
     /// Set character positions based on past pos/rot
