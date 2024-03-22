@@ -43,7 +43,7 @@ pub struct World {
     current_mz: Option<Gd<MusicZone>>,
 
     #[export]
-    battle_scene: Gd<PackedScene>,
+    battle_scene: Option<Gd<PackedScene>>,
 }
 
 fn set_or_stop_audio(
@@ -89,6 +89,13 @@ impl World {
             .connect("timeout".into(), cue);
     }
 
+    fn instantiate_battle_scene(&self) -> Gd<BattleEngine> {
+        self.battle_scene
+            .as_ref()
+            .expect("no battle scene provided in exported field")
+            .instantiate_as()
+    }
+
     #[func]
     fn cue_battle_scene(&mut self, _eid: GString) {
         // emit a signal for other nodes if they need to do something
@@ -98,7 +105,8 @@ impl World {
         let mut layer = current_scene().get_node_as::<CanvasLayer>(LAYER_NAME);
 
         // load the scene
-        let mut scene = self.battle_scene.instantiate_as::<BattleEngine>();
+        let mut scene = self.instantiate_battle_scene();
+
         scene.bind_mut().animate_in();
         layer.add_child(scene.clone().upcast());
     }
