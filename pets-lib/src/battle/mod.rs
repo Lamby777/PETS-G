@@ -103,6 +103,21 @@ impl BattleEngine {
     pub fn animate_in(&mut self) {
         //
     }
+
+    fn on_choice(&self, choice: BattleChoice) {
+        // call different functions depending on the choice
+        use BattleChoice::*;
+        match choice {
+            Attack => todo!(),
+            Skills => todo!(),
+            Items => todo!(),
+
+            Run => {
+                // TODO roll, don't always succeed
+                change_scene!("world");
+            }
+        }
+    }
 }
 
 #[godot_api]
@@ -117,6 +132,8 @@ impl INode2D for BattleEngine {
         let action =
             process_input(&mut self.choices, ListDirection::TopToBottom);
 
+        let mut picked_choice: Option<BattleChoice> = None;
+
         use ListOperation::*;
         match action {
             Walk(old, (_, new_node)) => {
@@ -128,20 +145,14 @@ impl INode2D for BattleEngine {
             }
 
             Pick(_, (choice, _)) => {
-                // call different functions depending on the choice
-                use BattleChoice::*;
-                match choice {
-                    Attack => todo!(),
-                    Skills => todo!(),
-                    Items => todo!(),
-                    Run => {
-                        // TODO roll, don't always succeed
-                        change_scene!("world");
-                    }
-                }
+                picked_choice = Some(*choice);
             }
 
             Nothing => {}
+        }
+
+        if let Some(choice) = picked_choice {
+            self.on_choice(choice);
         }
     }
 }
