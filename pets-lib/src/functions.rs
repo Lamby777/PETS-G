@@ -3,13 +3,18 @@ use std::cell::LazyCell;
 use crate::prelude::*;
 use godot::prelude::*;
 
+fn end_interaction() {
+    let mut dbox = DBoxInterface::singleton().bind_mut().dbox();
+    dbox.bind_mut().end_interaction();
+}
+
 macro_rules! add_callables {
-    ($table:expr; $($fn_name:ident),* $(,)?) => {
+    ($table:expr; { $($fn_name:ident),* $(,)? }) => {
         $(
             let name = stringify!($fn_name);
             let callable = Callable::from_fn(name, $fn_name);
             $table.insert(name.to_string(), callable);
-        ),*
+        )*
     };
 }
 
@@ -31,24 +36,25 @@ pub fn callv_global(id: &str, args: VariantArray) -> GReturn {
 
 const FUNCTIONS: LazyCell<FnTable> = LazyCell::new(|| {
     let mut table = HashMap::new();
-    add_callables!(table; debug_battle);
+    add_callables!(table; {
+        debug_battle,
+        debug_item,
+    });
 
     table
 });
 
 fn debug_battle(_args: GArgs) -> GReturn {
-    // end interaction
-    let mut dbox = DBoxInterface::singleton().bind().dbox();
-    dbox.bind_mut().end_interaction();
+    end_interaction();
 
-    // start the battle
-    let dbg_eid = EnemyID::A_NONNY_MOUSE;
-    World::start_battle(dbg_eid.into());
-
+    World::start_battle(EnemyID::A_NONNY_MOUSE.into());
     Ok(Variant::nil())
 }
 
-// #[func]
-// pub fn debug_llm() {
-//     crate::llm::llm_generate();
-// }
+fn debug_item(_args: GArgs) -> GReturn {
+    end_interaction();
+
+    // TODO give player an item
+
+    Ok(Variant::nil())
+}
