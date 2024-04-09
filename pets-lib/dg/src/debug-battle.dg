@@ -1,11 +1,14 @@
 % Debug Battle
-NAME Mira
+NAME Mira's Debug Menu
 VOX Mira
 
-Do you wish to start a debug battle?
+What's up? Hard at work debugging?
 
-> Sure!
+> Battle
 $ debug_battle
+
+> Item
+$ debug_item
 
 > Nah...
 
