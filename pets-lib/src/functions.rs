@@ -3,20 +3,6 @@ use std::cell::LazyCell;
 use crate::prelude::*;
 use godot::prelude::*;
 
-// This stuff might be necessary later for
-// accessing callables from gdscript, but for
-// now, it's commented out because YAGNI :3
-//
-// /// Autoload for functions that may need to be
-// /// called from anywhere in the game's code.
-// #[derive(GodotClass)]
-// #[class(init, base=Object)]
-// pub struct FnInterface;
-//
-// impl Autoload for FnInterface {
-//     const AUTOLOAD_NAME: &'static str = "Functions";
-// }
-
 macro_rules! add_callables {
     ($table:expr; $($fn_name:ident),* $(,)?) => {
         $(
@@ -66,6 +52,3 @@ fn debug_battle(_args: GArgs) -> GReturn {
 // pub fn debug_llm() {
 //     crate::llm::llm_generate();
 // }
-
-// i DID regret it later.
-// RIP FnInterface, 2024
