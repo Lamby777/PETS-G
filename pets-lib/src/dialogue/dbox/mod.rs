@@ -173,7 +173,9 @@ impl DialogBox {
             }
 
             Function(fn_id) => {
-                call_global(fn_id).unwrap();
+                let guard = self.base_mut();
+                let _ = call_global(fn_id).unwrap();
+                drop(guard);
             }
         }
     }

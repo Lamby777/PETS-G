@@ -51,10 +51,11 @@ const FUNCTIONS: LazyCell<FnTable> = LazyCell::new(|| {
 });
 
 fn debug_battle(_args: GArgs) -> GReturn {
-    // let di = DBoxInterface::singleton();
-    // let mut dbox = di.bind().dbox();
-    // dbox.bind_mut().end_interaction();
+    // end interaction
+    let mut dbox = DBoxInterface::singleton().bind().dbox();
+    dbox.bind_mut().end_interaction();
 
+    // start the battle
     let dbg_eid = EnemyID::A_NONNY_MOUSE;
     World::start_battle(dbg_eid.into());
 
