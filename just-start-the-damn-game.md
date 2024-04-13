@@ -12,10 +12,6 @@ you gotta go through to set it up. This is for Windows, because Mac support is
 questionable rn, and Linux users only really need to run a couple shell commands
 to get it done.
 
-In this guide, when I say you need to open PowerShell in a specific folder,
-you can do that by holding Shift and right-clicking the empty space inside that
-folder, then clicking "Open PowerShell window here"
-
 ---
 
 ## Get the stuff
