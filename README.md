@@ -1,5 +1,7 @@
 # P/E/T/S (Rewritten)
 
+[JUST LET ME PLAY THE DAMN GAME!](/just-start-the-damn-game.md)
+
 Rewriting my game I started back in 2019, except actually finishing it this time
 because I picked a good game engine that doesn't make basic programming and
 control of your own hardware overly complicated... and is also open-source! <3
@@ -29,20 +31,6 @@ This game is... well, obviously... free and open-source software! Yay! 🎉
 Many of my favorite games are either entirely free (no microtransactions) OR
 open-source / respect your digital freedoms. Be the change you wish to see in
 the world, right?
-
----
-
-## Setting Up
-
-First, make sure you're using the `nightly` channel for Rust. It **WILL NOT
-COMPILE ON STABLE** due to use of experimental Rust features!
-
-Then, go download the correct version of Godot Engine... with whatever method is
-best for your environment. Add it to your `PATH` as well if you want the "quick
-launch" scripts mentioned below to work.
-
-That's it! The dialogue toolkit is now called directly as a build dependency, so
-you no longer need to have `dg` installed system-wide.
 
 ---
 
