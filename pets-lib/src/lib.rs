@@ -20,18 +20,16 @@ use godot::prelude::*;
 
 use prelude::*;
 
-mod battle;
 mod consts;
+mod util;
+
+mod battle;
 mod dialogue;
 mod functions;
 mod items;
-mod limiq;
-mod singleton;
 mod stats;
 mod title_screen;
-mod util;
 mod world;
-mod wrapped;
 
 #[cfg(any())]
 mod llm;
