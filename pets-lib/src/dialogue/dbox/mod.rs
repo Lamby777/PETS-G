@@ -204,10 +204,6 @@ impl DialogBox {
         }
     }
 
-    fn mark_input_handled(&mut self) {
-        self.base().get_viewport().unwrap().set_input_as_handled();
-    }
-
     fn on_accept(&mut self) {
         // go to next page
         self.current_page_number += 1;
@@ -267,8 +263,7 @@ impl DialogBox {
 #[godot_api]
 impl IPanelContainer for DialogBox {
     fn input(&mut self, event: Gd<InputEvent>) {
-        let is_pressed = |action: &str| event.is_action_pressed(action.into());
-        let confirming = is_pressed("ui_accept");
+        let confirming = event.is_action_pressed("ui_accept".into());
 
         if !self.active {
             return;
@@ -285,13 +280,13 @@ impl IPanelContainer for DialogBox {
         }
 
         if self.awaiting_choice {
-            self.mark_input_handled();
+            mark_input_handled(&self.base());
             self.process_choice_input();
             return;
         }
 
         if confirming {
-            self.mark_input_handled();
+            mark_input_handled(&self.base());
             self.on_accept();
         }
     }

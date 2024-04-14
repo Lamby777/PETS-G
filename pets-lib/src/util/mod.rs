@@ -10,6 +10,16 @@ use godot::engine::tween::TransitionType;
 use godot::engine::{Engine, NodeExt, RichTextLabel, Theme, Tween};
 use godot::prelude::*;
 
+pub fn mark_input_handled<T>(node: &Gd<T>)
+where
+    T: Inherits<Node>,
+{
+    node.upcast_ref()
+        .get_viewport()
+        .unwrap()
+        .set_input_as_handled();
+}
+
 pub fn subchildren_of_type<T>(parent: Gd<Node>) -> Vec<Gd<T>>
 where
     T: GodotClass + Inherits<Node>,

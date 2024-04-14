@@ -48,6 +48,7 @@ mod prelude {
     pub use crate::functions::{call_global, callv_global};
     pub use crate::world::{
         InteractionManager, InteractionZone, MusicZone, PlayerCB, World,
+        WorldMenu,
     };
 
     pub use crate::singleton::Autoload;

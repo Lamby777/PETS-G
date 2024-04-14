@@ -3,10 +3,14 @@
 //! inventory, eat food, etc.
 //!
 
-use godot::engine::{AnimationPlayer, IPanel, Panel, RichTextLabel};
+use godot::engine::{
+    AnimationPlayer, IPanel, InputEvent, Panel, RichTextLabel,
+};
 use godot::prelude::*;
 use num_enum::TryFromPrimitive;
 
+// TODO either separate the consts or rename it to something more generic
+use crate::consts::title_screen::*;
 use crate::prelude::*;
 
 #[derive(Clone, Copy, Debug, TryFromPrimitive)]
@@ -57,7 +61,15 @@ impl IPanel for WorldMenu {
 
     fn ready(&mut self) {
         // The node that contains the text labels below
-        let cont = self.base().get_node_as("Background/MenuChoices");
+        let cont = self.base().to_godot().upcast();
         self.choices = Wrapped::from_children_of(cont);
+    }
+
+    fn input(&mut self, event: Gd<InputEvent>) {
+        if event.is_action_pressed("menu".into()) {
+            mark_input_handled(&self.base());
+
+            self.close();
+        }
     }
 }

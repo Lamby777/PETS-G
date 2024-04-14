@@ -17,7 +17,7 @@ mod pchar_node;
 mod playercb;
 
 pub use interaction::{InteractionManager, InteractionZone};
-// pub use menu::WorldMenu;
+pub use menu::WorldMenu;
 pub use music_zone::MusicZone;
 pub use playercb::PlayerCB;
 
