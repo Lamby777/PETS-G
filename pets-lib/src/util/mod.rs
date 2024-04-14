@@ -2,6 +2,10 @@
 //! General-purpose Godot/Rust helper stuff
 //!
 
+pub mod limiq;
+pub mod singleton;
+pub mod wrapped;
+
 use godot::engine::tween::TransitionType;
 use godot::engine::{Engine, NodeExt, RichTextLabel, Theme, Tween};
 use godot::prelude::*;
