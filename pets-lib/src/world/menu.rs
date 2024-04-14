@@ -9,8 +9,6 @@ use godot::engine::{
 use godot::prelude::*;
 use num_enum::TryFromPrimitive;
 
-// TODO either separate the consts or rename it to something more generic
-use crate::consts::title_screen::*;
 use crate::prelude::*;
 
 #[derive(Clone, Copy, Debug, TryFromPrimitive)]
@@ -43,14 +41,6 @@ impl WorldMenu {
         anim.set_speed_scale(if open { 1.0 } else { -1.0 });
         anim.play();
     }
-
-    fn open(&mut self) {
-        self.open_or_close(true);
-    }
-
-    fn close(&mut self) {
-        self.open_or_close(false);
-    }
 }
 
 #[godot_api]
@@ -69,7 +59,7 @@ impl IPanel for WorldMenu {
         if event.is_action_pressed("menu".into()) {
             mark_input_handled(&self.base());
 
-            self.close();
+            self.open_or_close(!self.opened);
         }
     }
 }

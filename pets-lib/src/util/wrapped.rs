@@ -131,7 +131,13 @@ where
             .get_children()
             .iter_shared()
             .enumerate()
-            .map(|(i, node)| (Enum::try_from(i).ok().unwrap(), node.cast()))
+            .filter_map(|(i, node)| {
+                let Ok(node) = node.try_cast::<T>() else {
+                    return None;
+                };
+
+                Some((Enum::try_from(i).ok().unwrap(), node))
+            })
             .collect();
 
         Wrapped::new(children)
