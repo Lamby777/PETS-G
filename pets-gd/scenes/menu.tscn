@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8hhg8v5ls70u"]
+
+[ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_pvxl0"]
+
+[sub_resource type="Animation" id="Animation_3wgbn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-400, 256)]
+}
+
+[sub_resource type="Animation" id="Animation_acqou"]
+resource_name = "open_close"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-400, 256), Vector2(-16, 256)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ujmhv"]
+_data = {
+"RESET": SubResource("Animation_3wgbn"),
+"open_close": SubResource("Animation_acqou")
+}
+
+[node name="Menu" type="Panel"]
+offset_left = -400.0
+offset_top = 256.0
+offset_right = -64.0
+offset_bottom = 832.0
+theme = ExtResource("1_pvxl0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ujmhv")
+}
