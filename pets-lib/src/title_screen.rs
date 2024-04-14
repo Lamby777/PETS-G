@@ -1,5 +1,5 @@
 //!
-//! Main menu scene
+//! Title screen scene
 //! Should work somewhat closely with `savefiles.rs`
 //!
 //! "Oh, boy! More spaghetti code! I love spaghetti, and I love code!"
@@ -10,12 +10,12 @@ use godot::engine::{INode2D, Node2D, RichTextLabel};
 use godot::prelude::*;
 use num_enum::TryFromPrimitive;
 
-use crate::consts::main_menu::*;
+use crate::consts::title_screen::*;
 use crate::prelude::*;
 
 #[derive(Clone, Copy, Debug, TryFromPrimitive)]
 #[repr(usize)]
-enum MainMenuChoice {
+enum TitleScreenChoice {
     Play,
     Options,
     Credits,
@@ -65,7 +65,7 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
 #[class(init, base=Node2D)]
 struct TitleScreen {
     base: Base<Node2D>,
-    choices: Wrapped<(MainMenuChoice, Gd<RichTextLabel>)>,
+    choices: Wrapped<(TitleScreenChoice, Gd<RichTextLabel>)>,
 }
 
 #[godot_api]
@@ -86,7 +86,7 @@ impl INode2D for TitleScreen {
             }
 
             Pick(_, (choice, _)) => {
-                use MainMenuChoice::*;
+                use TitleScreenChoice::*;
                 match choice {
                     Play => {
                         // TODO should animate the menu boxes flying
