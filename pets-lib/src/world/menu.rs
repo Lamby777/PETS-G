@@ -1,0 +1,63 @@
+//!
+//! Class for overworld popout menu, where you can manage
+//! inventory, eat food, etc.
+//!
+
+use godot::engine::{AnimationPlayer, IPanel, Panel, RichTextLabel};
+use godot::prelude::*;
+use num_enum::TryFromPrimitive;
+
+use crate::prelude::*;
+
+#[derive(Clone, Copy, Debug, TryFromPrimitive)]
+#[repr(usize)]
+enum Choice {
+    Inventory,
+    DebugQuit, // TODO use this instead of shift+q
+}
+
+#[derive(GodotClass)]
+#[class(init, base=Panel)]
+pub struct WorldMenu {
+    base: Base<Panel>,
+    choices: Wrapped<(Choice, Gd<RichTextLabel>)>,
+
+    opened: bool,
+}
+
+#[godot_api]
+impl WorldMenu {
+    fn anim_player(&self) -> Gd<AnimationPlayer> {
+        self.base().get_node_as("AnimationPlayer")
+    }
+
+    fn open_or_close(&mut self, open: bool) {
+        self.opened = open;
+
+        let mut anim = self.anim_player();
+        anim.set_assigned_animation("open".into());
+        anim.set_speed_scale(if open { 1.0 } else { -1.0 });
+        anim.play();
+    }
+
+    fn open(&mut self) {
+        self.open_or_close(true);
+    }
+
+    fn close(&mut self) {
+        self.open_or_close(false);
+    }
+}
+
+#[godot_api]
+impl IPanel for WorldMenu {
+    fn process(&mut self, _delta: f64) {
+        //
+    }
+
+    fn ready(&mut self) {
+        // The node that contains the text labels below
+        let cont = self.base().get_node_as("Background/MenuChoices");
+        self.choices = Wrapped::from_children_of(cont);
+    }
+}

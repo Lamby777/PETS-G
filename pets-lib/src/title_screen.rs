@@ -15,7 +15,7 @@ use crate::prelude::*;
 
 #[derive(Clone, Copy, Debug, TryFromPrimitive)]
 #[repr(usize)]
-enum TitleScreenChoice {
+enum Choice {
     Play,
     Options,
     Credits,
@@ -65,7 +65,7 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
 #[class(init, base=Node2D)]
 struct TitleScreen {
     base: Base<Node2D>,
-    choices: Wrapped<(TitleScreenChoice, Gd<RichTextLabel>)>,
+    choices: Wrapped<(Choice, Gd<RichTextLabel>)>,
 }
 
 #[godot_api]
@@ -86,7 +86,7 @@ impl INode2D for TitleScreen {
             }
 
             Pick(_, (choice, _)) => {
-                use TitleScreenChoice::*;
+                use Choice::*;
                 match choice {
                     Play => {
                         // TODO should animate the menu boxes flying
