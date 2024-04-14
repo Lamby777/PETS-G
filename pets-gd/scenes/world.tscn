@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://p2uymvf88jt7"]
 
 [ext_resource type="PackedScene" uid="uid://kgl5788x405y" path="res://scenes/battle.tscn" id="1_37bcu"]
-[ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="2_7vl3d"]
+[ext_resource type="PackedScene" uid="uid://c8hhg8v5ls70u" path="res://scenes/menu.tscn" id="2_6orff"]
 [ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/builds/bush_long.tscn" id="2_87c4u"]
 [ext_resource type="PackedScene" uid="uid://b0rlrppekv4vg" path="res://scenes/player_cb.tscn" id="2_r6tgb"]
 [ext_resource type="PackedScene" uid="uid://c0jehwow4ein4" path="res://scenes/interaction_manager.tscn" id="2_uh12s"]
@@ -102,12 +102,7 @@ libraries = {
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="Menu" type="Panel" parent="UILayer"]
-offset_left = -16.0
-offset_top = 256.0
-offset_right = 320.0
-offset_bottom = 832.0
-theme = ExtResource("2_7vl3d")
+[node name="Menu" parent="UILayer" instance=ExtResource("2_6orff")]
 
 [node name="InteractionManager" parent="." instance=ExtResource("2_uh12s")]
 unique_name_in_owner = true
