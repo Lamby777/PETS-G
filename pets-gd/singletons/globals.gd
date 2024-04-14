@@ -4,7 +4,7 @@ extends Node
 func _input(_event):
     if Input.is_key_pressed(KEY_0):
         get_tree().change_scene_to_file("res://scenes/world.tscn")
-    elif Input.is_key_pressed(KEY_Q) and Input.is_key_pressed(KEY_SHIFT):
+    elif Input.is_key_pressed(KEY_MINUS):
         get_tree().quit()
 
 func _ready():
