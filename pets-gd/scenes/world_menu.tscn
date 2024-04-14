@@ -39,7 +39,7 @@ _data = {
 "open_close": SubResource("Animation_acqou")
 }
 
-[node name="Menu" type="Panel"]
+[node name="WorldMenu" type="WorldMenu"]
 offset_left = -400.0
 offset_top = 256.0
 offset_right = -64.0
