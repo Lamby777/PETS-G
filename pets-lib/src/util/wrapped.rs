@@ -132,11 +132,9 @@ where
             .iter_shared()
             .enumerate()
             .filter_map(|(i, node)| {
-                let Ok(node) = node.try_cast::<T>() else {
-                    return None;
-                };
-
-                Some((Enum::try_from(i).ok().unwrap(), node))
+                node.try_cast::<T>()
+                    .ok() // filter out any that fail to cast
+                    .map(|node| (Enum::try_from(i).ok().unwrap(), node))
             })
             .collect();
 
