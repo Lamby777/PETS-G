@@ -66,9 +66,6 @@ pub struct DialogBox {
     /// become visible one by one
     text_tween: Option<Gd<Tween>>,
 
-    /// the choice label containers
-    choices: Wrapped<Gd<DChoice>>,
-
     // independent from any interaction-related stuff,
     // these are the actual strings that are displayed
     //
@@ -216,47 +213,31 @@ impl DialogBox {
     }
 
     pub fn process_choice_input(&mut self) {
-        use crate::wrapped::*;
-        let action =
-            process_input(&mut self.choices, ListDirection::LeftToRight);
-
-        use ListOperation::*;
-        match action {
-            Walk(old, new_node) => {
-                if let Some(old_node) = old {
-                    tween_choice_to(false, old_node.bind().txt_label());
-                }
-
-                tween_choice_to(true, new_node.bind().txt_label());
-            }
-
-            Pick(picked_i, _) => {
-                // we know the ending has to be `Choices` and not a label or end
-                let ending = self.current_ix_ending().unwrap().clone();
-                let DialogueEnding::Choices(choices) = ending else {
-                    unreachable!()
-                };
-
-                match &choices[picked_i].label {
-                    // no label means end the interaction
-                    None => self.end_interaction(),
-
-                    Some(label) => {
-                        let dchoice = &self.choices[picked_i];
-                        let txt = dchoice.bind().txt_label();
-
-                        tween_choice_to(false, txt);
-                        self.tween_choices_wave(false);
-
-                        self.run_label(label);
-                    }
-                }
-
-                self.awaiting_choice = false;
-            }
-
-            Nothing => {}
-        }
+        // TODO process input without Wrapped<>
+        // Pick(picked_i, _) => {
+        //     // we know the ending has to be `Choices` and not a label or end
+        //     let ending = self.current_ix_ending().unwrap().clone();
+        //     let DialogueEnding::Choices(choices) = ending else {
+        //         unreachable!()
+        //     };
+        //
+        //     match &choices[picked_i].label {
+        //         // no label means end the interaction
+        //         None => self.end_interaction(),
+        //
+        //         Some(label) => {
+        //             let dchoice = &self.choices[picked_i];
+        //             let txt = dchoice.bind().txt_label();
+        //
+        //             tween_choice_to(false, txt);
+        //             self.tween_choices_wave(false);
+        //
+        //             self.run_label(label);
+        //         }
+        //     }
+        //
+        //     self.awaiting_choice = false;
+        // }
     }
 }
 
@@ -361,9 +342,10 @@ impl DialogBox {
     }
 
     fn free_choice_labels(&mut self) {
-        for node in self.choices.iter_mut() {
-            node.queue_free();
-        }
+        // TODO
+        // for node in self.choices.iter_mut() {
+        //     node.queue_free();
+        // }
     }
 
     /// delete old labels and create new default ones
@@ -372,7 +354,7 @@ impl DialogBox {
 
         let mut container = self.choice_container();
 
-        let new_nodes = choices
+        let _new_nodes = choices
             .iter()
             .enumerate()
             .map(|(i, choice)| {
@@ -380,41 +362,43 @@ impl DialogBox {
                 container.add_child(dchoice.clone().upcast());
                 dchoice
             })
-            .collect();
+            .collect::<Vec<_>>();
 
-        self.choices.replace_vec(new_nodes);
+        // TODO
+        // self.choices.replace_vec(new_nodes);
     }
 
     pub fn tween_choices_wave(&mut self, up: bool) {
-        for (i, cont) in self.choices.iter().enumerate() {
-            // if moving up, start below the window
-            if up {
-                cont.bind()
-                    .txt_label()
-                    .set_position(Vector2::new(0.0, DBOX_CHOICE_HEIGHT));
-            }
-
-            // we can't move the label into the closure because of
-            // thread safety stuff, so just pass in the instance id
-            let label_id = cont.instance_id();
-
-            let func = Callable::from_fn("choice_slide_up", move |_| {
-                // get the label again using the instance id
-                let label = Gd::<DChoice>::try_from_instance_id(label_id);
-
-                if let Ok(label) = label {
-                    label.bind().tween_label(up);
-                };
-
-                Ok(Variant::from(()))
-            });
-
-            // set timer
-            godot_tree()
-                .create_timer(DBOX_CHOICE_WAVE_TIME * i as f64)
-                .unwrap()
-                .connect("timeout".into(), func);
-        }
+        //     TODO
+        //     for (i, cont) in self.choices.iter().enumerate() {
+        //         // if moving up, start below the window
+        //         if up {
+        //             cont.bind()
+        //                 .txt_label()
+        //                 .set_position(Vector2::new(0.0, DBOX_CHOICE_HEIGHT));
+        //         }
+        //
+        //         // we can't move the label into the closure because of
+        //         // thread safety stuff, so just pass in the instance id
+        //         let label_id = cont.instance_id();
+        //
+        //         let func = Callable::from_fn("choice_slide_up", move |_| {
+        //             // get the label again using the instance id
+        //             let label = Gd::<DChoice>::try_from_instance_id(label_id);
+        //
+        //             if let Ok(label) = label {
+        //                 label.bind().tween_label(up);
+        //             };
+        //
+        //             Ok(Variant::from(()))
+        //         });
+        //
+        //         // set timer
+        //         godot_tree()
+        //             .create_timer(DBOX_CHOICE_WAVE_TIME * i as f64)
+        //             .unwrap()
+        //             .connect("timeout".into(), func);
+        //     }
     }
 }
 

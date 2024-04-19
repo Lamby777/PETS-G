@@ -65,57 +65,34 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
 #[class(init, base=Node2D)]
 struct TitleScreen {
     base: Base<Node2D>,
-    choices: Wrapped<(Choice, Gd<RichTextLabel>)>,
 }
 
 #[godot_api]
 impl INode2D for TitleScreen {
     fn process(&mut self, _delta: f64) {
-        let action = wrapped::process_input(
-            &mut self.choices,
-            wrapped::ListDirection::TopToBottom,
-        );
-
-        use wrapped::ListOperation::*;
-        match action {
-            Walk(old, (_, new_node)) => {
-                if let Some((_, old_node)) = old {
-                    tween_choice_to(false, old_node.clone());
-                }
-
-                tween_choice_to(true, new_node.clone());
-            }
-
-            Pick(_, (choice, _)) => {
-                use Choice::*;
-                match choice {
-                    Play => {
-                        // TODO should animate the menu boxes flying
-                        // off into the right, and the camera goes left
-                        change_scene!("world");
-                    }
-
-                    Options => {
-                        // should scroll right into options menu
-                        todo!()
-                    }
-
-                    Credits => {
-                        // should pull up credits box
-                        todo!()
-                    }
-
-                    Quit => godot_tree().quit(),
-                }
-            }
-
-            Nothing => {}
-        }
+        // TODO process input without Wrapped<>
+        // match choice {
+        //     Play => {
+        //         // TODO should animate the menu boxes flying
+        //         // off into the right, and the camera goes left
+        //         change_scene!("world");
+        //     }
+        //
+        //     Options => {
+        //         // should scroll right into options menu
+        //         todo!()
+        //     }
+        //
+        //     Credits => {
+        //         // should pull up credits box
+        //         todo!()
+        //     }
+        //
+        //     Quit => godot_tree().quit(),
+        // }
     }
 
     fn ready(&mut self) {
-        // The node that contains the text labels below
-        let cont = self.base().get_node_as("Background/MenuChoices");
-        self.choices = Wrapped::from_children_of(cont);
+        // self.base().get_node_as("Background/MenuChoices");
     }
 }

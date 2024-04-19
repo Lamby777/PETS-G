@@ -22,7 +22,6 @@ enum Choice {
 #[class(init, base=Panel)]
 pub struct WorldMenu {
     base: Base<Panel>,
-    choices: Wrapped<(Choice, Gd<RichTextLabel>)>,
 
     opened: bool,
 }
@@ -54,8 +53,7 @@ impl IPanel for WorldMenu {
     }
 
     fn ready(&mut self) {
-        let cont = self.base().get_node_as("Choices");
-        self.choices = Wrapped::from_children_of(cont);
+        // self.base().get_node_as("Choices");
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
