@@ -91,6 +91,7 @@ impl INode2D for TitleScreen {
             choice.connect("focus_exited".into(), exited);
         }
 
+        let _guard = self.base_mut();
         choices[0].grab_focus();
     }
 
