@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://b4to5dpqntd2r"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://b4to5dpqntd2r"]
 
 [ext_resource type="StyleBox" uid="uid://d0gx7x3tj2b01" path="res://themes/container_stylebox.tres" id="1_7au1f"]
 [ext_resource type="FontFile" uid="uid://0vkr7mnpb6tm" path="res://assets/fonts/Renogare-Regular.otf" id="1_buwdt"]
@@ -21,6 +21,8 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 shadow_color = Color(1, 1, 1, 0.239216)
 shadow_size = 16
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_20pka"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64pvq"]
 bg_color = Color(0.376471, 0.694118, 0.921569, 1)
@@ -53,5 +55,6 @@ RichTextLabel/colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 RichTextLabel/colors/font_selected_color = Color(0.87451, 0.556863, 0.113725, 1)
 RichTextLabel/font_sizes/normal_font_size = 48
 RichTextLabel/fonts/normal_font = ExtResource("1_buwdt")
+RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_20pka")
 TealBar/base_type = &"ProgressBar"
 TealBar/styles/fill = SubResource("StyleBoxFlat_64pvq")
