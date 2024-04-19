@@ -52,7 +52,6 @@ mod prelude {
     };
 
     pub use crate::singleton::Autoload;
-    pub use crate::wrapped::Wrapped;
 
     // is this bad practice? no clue and idc honestly
     // it's convenient with no real caveat, therefore...

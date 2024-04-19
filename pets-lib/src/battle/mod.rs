@@ -55,8 +55,6 @@ pub struct BattleEngine {
     base: Base<Node2D>,
     state: BattleState,
 
-    choices: Wrapped<(BattleChoice, Gd<RichTextLabel>)>,
-
     #[init(default = onready_node(&base, "AnimationPlayer"))]
     animator: OnReady<Gd<AnimationPlayer>>,
 }
@@ -123,36 +121,14 @@ impl BattleEngine {
 #[godot_api]
 impl INode2D for BattleEngine {
     fn ready(&mut self) {
-        let choices = self.base().get_node_as("%BattleChoices");
-        self.choices = Wrapped::from_children_of(choices);
+        //
     }
 
     fn process(&mut self, _delta: f64) {
-        use crate::wrapped::*;
-        let action =
-            process_input(&mut self.choices, ListDirection::TopToBottom);
+        // TODO process input without Wrapped<>
 
-        let mut picked_choice: Option<BattleChoice> = None;
-
-        use ListOperation::*;
-        match action {
-            Walk(old, (_, new_node)) => {
-                if let Some((_, old_node)) = old {
-                    tween_choice_to(false, old_node.clone());
-                }
-
-                tween_choice_to(true, new_node.clone());
-            }
-
-            Pick(_, (choice, _)) => {
-                picked_choice = Some(*choice);
-            }
-
-            Nothing => {}
-        }
-
-        if let Some(choice) = picked_choice {
-            self.on_choice(choice);
-        }
+        // if let Some(choice) = picked_choice {
+        //     self.on_choice(choice);
+        // }
     }
 }
