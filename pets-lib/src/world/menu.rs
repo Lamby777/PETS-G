@@ -38,8 +38,12 @@ impl WorldMenu {
 
         let mut anim = self.anim_player();
         anim.set_assigned_animation("open".into());
-        anim.set_speed_scale(if open { 1.0 } else { -1.0 });
-        anim.play();
+
+        if open {
+            anim.play();
+        } else {
+            anim.play_backwards()
+        }
     }
 }
 
