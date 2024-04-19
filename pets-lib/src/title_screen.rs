@@ -90,12 +90,18 @@ impl INode2D for TitleScreen {
             choice.connect("focus_entered".into(), entered);
             choice.connect("focus_exited".into(), exited);
         }
-
-        let _guard = self.base_mut();
-        choices[0].grab_focus();
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
+        if self.focused.is_none() {
+            let mut choices = self.choices();
+            let guard = self.base_mut();
+            choices[0].grab_focus();
+            drop(guard);
+
+            mark_input_handled(&self.base());
+        }
+
         let confirming = event.is_action_pressed("ui_accept".into());
 
         if confirming {
