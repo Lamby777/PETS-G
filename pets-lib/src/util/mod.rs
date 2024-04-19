@@ -19,6 +19,10 @@ where
         .set_input_as_handled();
 }
 
+/// Recursively get all children of a node that are of a certain type.
+/// Returns a vector. Use `subchildren_of_type_array` for a godot array.
+///
+/// TODO fix: it won't find children of nodes that are the correct type
 pub fn subchildren_of_type<T>(parent: Gd<Node>) -> Vec<Gd<T>>
 where
     T: GodotClass + Inherits<Node>,
