@@ -54,8 +54,7 @@ impl IPanel for WorldMenu {
     }
 
     fn ready(&mut self) {
-        // The node that contains the text labels below
-        let cont = self.base().to_godot().upcast();
+        let cont = self.base().get_node_as("Choices");
         self.choices = Wrapped::from_children_of(cont);
     }
 

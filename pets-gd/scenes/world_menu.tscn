@@ -50,3 +50,38 @@ theme = ExtResource("1_pvxl0")
 libraries = {
 "": SubResource("AnimationLibrary_ujmhv")
 }
+
+[node name="Choices" type="Control" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 80.0
+offset_top = 64.0
+offset_right = 80.0
+offset_bottom = 464.0
+
+[node name="Inventory" type="RichTextLabel" parent="Choices"]
+clip_contents = false
+layout_mode = 2
+offset_left = -48.0
+offset_right = 384.0
+offset_bottom = 64.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "Inventory"
+fit_content = true
+
+[node name="DebugQuit" type="RichTextLabel" parent="Choices"]
+clip_contents = false
+layout_mode = 2
+offset_left = -48.0
+offset_top = 64.0
+offset_right = 384.0
+offset_bottom = 128.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "Quit"
+fit_content = true
