@@ -97,15 +97,9 @@ impl INode2D for TitleScreen {
 
     fn input(&mut self, event: Gd<InputEvent>) {
         let confirming = event.is_action_pressed("ui_accept".into());
-        if !confirming {
-            return;
-        }
 
-        if let Some(focused) = &self.focused {
-            godot_print!("Picked: {}", focused);
-            // self.on_choice_picked(focused);
-        } else {
-            godot_print!("No choice focused");
+        if confirming {
+            self.on_choice_picked();
         }
     }
 }
