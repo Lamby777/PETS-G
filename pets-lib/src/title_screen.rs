@@ -6,26 +6,18 @@
 //! - Cherry, 2:54 AM, 10/5/2023 | <3
 //!
 
-use godot::engine::{Control, INode2D, Node2D, RichTextLabel};
+use godot::engine::{Control, INode2D, InputEvent, Node2D, RichTextLabel};
 use godot::prelude::*;
-use num_enum::TryFromPrimitive;
 
 use crate::consts::title_screen::*;
 use crate::prelude::*;
-
-#[derive(Clone, Copy, Debug, TryFromPrimitive)]
-#[repr(usize)]
-enum Choice {
-    Play,
-    Options,
-    Credits,
-    Quit,
-}
 
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
 struct TitleScreen {
     base: Base<Node2D>,
+
+    focused: Option<String>,
 }
 
 #[godot_api]
@@ -39,8 +31,37 @@ impl TitleScreen {
             .collect()
     }
 
+    pub fn on_choice_picked(&self) {
+        let Some(focused) = &self.focused else {
+            return;
+        };
+
+        match focused.as_str() {
+            "Play" => {
+                // TODO should animate the menu boxes flying
+                // off into the right, and the camera goes left
+                change_scene!("world");
+            }
+
+            "Options" => {
+                // should scroll right into options menu
+                todo!()
+            }
+
+            "Credits" => {
+                // should pull up credits box
+                todo!()
+            }
+
+            "Quit" => godot_tree().quit(),
+
+            _ => unreachable!(),
+        }
+    }
+
     #[func]
-    pub fn _tween_choice_on(choice: Gd<RichTextLabel>) {
+    pub fn _tween_choice_on(&mut self, choice: Gd<RichTextLabel>) {
+        self.focused = Some(choice.get_text().to_string());
         _tween_choice(true, choice);
     }
 
@@ -56,14 +77,15 @@ impl INode2D for TitleScreen {
         let mut choices = self.choices();
 
         for choice in &mut choices {
-            let callable = |name| {
-                let callable = self.base().callable(name);
-                let args = array![choice.to_variant()];
-                callable.bindv(args)
-            };
+            let entered = self
+                .base()
+                .callable("_tween_choice_on")
+                .bindv(varray![choice.to_variant()]);
 
-            let entered = callable("_tween_choice_on");
-            let exited = callable("_tween_choice_off");
+            let exited = self
+                .base()
+                .callable("_tween_choice_off")
+                .bindv(varray![choice.to_variant()]);
 
             choice.connect("focus_entered".into(), entered);
             choice.connect("focus_exited".into(), exited);
@@ -72,27 +94,18 @@ impl INode2D for TitleScreen {
         choices[0].grab_focus();
     }
 
-    fn process(&mut self, _delta: f64) {
-        // TODO process input without Wrapped<>
-        // match choice {
-        //     Play => {
-        //         // TODO should animate the menu boxes flying
-        //         // off into the right, and the camera goes left
-        //         change_scene!("world");
-        //     }
-        //
-        //     Options => {
-        //         // should scroll right into options menu
-        //         todo!()
-        //     }
-        //
-        //     Credits => {
-        //         // should pull up credits box
-        //         todo!()
-        //     }
-        //
-        //     Quit => godot_tree().quit(),
-        // }
+    fn input(&mut self, event: Gd<InputEvent>) {
+        let confirming = event.is_action_pressed("ui_accept".into());
+        if !confirming {
+            return;
+        }
+
+        if let Some(focused) = &self.focused {
+            godot_print!("Picked: {}", focused);
+            // self.on_choice_picked(focused);
+        } else {
+            godot_print!("No choice focused");
+        }
     }
 }
 
