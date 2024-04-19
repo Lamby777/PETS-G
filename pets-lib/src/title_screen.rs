@@ -71,11 +71,12 @@ struct TitleScreen {
 #[godot_api]
 impl INode2D for TitleScreen {
     fn process(&mut self, _delta: f64) {
-        use crate::wrapped::*;
-        let action =
-            process_input(&mut self.choices, ListDirection::TopToBottom);
+        let action = wrapped::process_input(
+            &mut self.choices,
+            wrapped::ListDirection::TopToBottom,
+        );
 
-        use ListOperation::*;
+        use wrapped::ListOperation::*;
         match action {
             Walk(old, (_, new_node)) => {
                 if let Some((_, old_node)) = old {
