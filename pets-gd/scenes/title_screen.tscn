@@ -280,8 +280,8 @@ offset_right = 1036.0
 offset_bottom = 1689.0
 rotation = -1.39589
 
-[node name="MenuChoices" type="Control" parent="Background"]
-anchors_preset = 0
+[node name="MenuChoices" type="Choices" parent="Background"]
+layout_mode = 0
 offset_left = 64.0
 offset_top = 320.0
 offset_right = 104.0
