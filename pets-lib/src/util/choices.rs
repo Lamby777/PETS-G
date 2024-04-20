@@ -39,7 +39,7 @@ impl ChoiceAgent {
 
     #[func]
     pub fn _tween_choice_on(&mut self, choice: Gd<RichTextLabel>) {
-        let newly_focused = choice.get_text().to_string();
+        let newly_focused = choice.get_name().to_string();
 
         self.base_mut().emit_signal("selection_changed".into(), &[
             newly_focused.to_variant(),
