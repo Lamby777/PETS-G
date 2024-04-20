@@ -22,34 +22,36 @@ struct TitleScreen {
 
 #[godot_api]
 impl TitleScreen {
-    // pub fn on_choice_picked(&self) {
-    //     let Some(focused) = &self.focused else {
-    //         return;
-    //     };
-    //
-    //     match focused.as_str() {
-    //         "Play" => {
-    //             // TODO should animate the menu boxes flying
-    //             // off into the right, and the camera goes left
-    //             change_scene!("world");
-    //         }
-    //
-    //         "Options" => {
-    //             // should scroll right into options menu
-    //             todo!()
-    //         }
-    //
-    //         "Credits" => {
-    //             // should pull up credits box
-    //             todo!()
-    //         }
-    //
-    //         "Quit" => godot_tree().quit(),
-    //
-    //         _ => unreachable!(),
-    //     }
-    // }
+    #[func]
+    pub fn on_choice_picked(&self, choice: GString) {
+        match choice.to_string().as_str() {
+            "Play" => {
+                // TODO should animate the menu boxes flying
+                // off into the right, and the camera goes left
+                change_scene!("world");
+            }
+
+            "Options" => {
+                // should scroll right into options menu
+                todo!()
+            }
+
+            "Credits" => {
+                // should pull up credits box
+                todo!()
+            }
+
+            "Quit" => godot_tree().quit(),
+
+            _ => unreachable!(),
+        }
+    }
 }
 
 #[godot_api]
-impl INode2D for TitleScreen {}
+impl INode2D for TitleScreen {
+    fn ready(&mut self) {
+        let callable = self.base().callable("on_choice_picked");
+        self.choices.connect("selection_confirmed".into(), callable);
+    }
+}

@@ -14,6 +14,7 @@ use godot::prelude::*;
 pub struct Choices {
     base: Base<Control>,
 
+    /// Name of the currently focused choice
     focused: Option<String>,
 }
 
@@ -29,7 +30,13 @@ impl Choices {
 
     #[func]
     pub fn _tween_choice_on(&mut self, choice: Gd<RichTextLabel>) {
-        self.focused = Some(choice.get_text().to_string());
+        let newly_focused = choice.get_text().to_string();
+
+        self.base_mut().emit_signal("selection_changed".into(), &[
+            newly_focused.to_variant(),
+        ]);
+        self.focused = Some(newly_focused);
+
         _tween_choice(true, choice);
     }
 
@@ -39,7 +46,10 @@ impl Choices {
     }
 
     #[signal]
-    fn choice_picked() {}
+    fn selection_changed(choice: GString) {}
+
+    #[signal]
+    fn selection_confirmed(choice: GString) {}
 }
 
 #[godot_api]
@@ -75,14 +85,15 @@ impl IControl for Choices {
         }
 
         let confirming = event.is_action_pressed("ui_accept".into());
-
-        if confirming {
-            // TODO signal
-            // self.on_choice_picked();
+        if confirming && let Some(focused) = &self.focused.clone() {
+            self.base_mut().emit_signal("selection_confirmed".into(), &[
+                focused.to_variant(),
+            ]);
         }
     }
 }
 
+// TODO vertical tweening
 fn _tween_choice(is_picked: bool, node: Gd<RichTextLabel>) {
     let target_x = if is_picked { 64.0 } else { 0.0 };
 
