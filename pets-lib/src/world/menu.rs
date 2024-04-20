@@ -3,9 +3,8 @@
 //! inventory, eat food, etc.
 //!
 
-use godot::engine::{
-    AnimationPlayer, IPanel, InputEvent, Panel, RichTextLabel,
-};
+use godot::engine::control::FocusMode;
+use godot::engine::{AnimationPlayer, IPanel, InputEvent, Panel};
 use godot::prelude::*;
 use num_enum::TryFromPrimitive;
 
@@ -22,8 +21,10 @@ enum Choice {
 #[class(init, base=Panel)]
 pub struct WorldMenu {
     base: Base<Panel>,
-
     opened: bool,
+
+    #[init(default = onready_node(&base, "Choices/ChoiceAgent"))]
+    choices: OnReady<Gd<ChoiceAgent>>,
 }
 
 #[godot_api]
@@ -43,6 +44,14 @@ impl WorldMenu {
         } else {
             anim.play_backwards()
         }
+
+        // set focus mode
+        self.choices.bind().set_focus_modes();
+    }
+
+    #[func]
+    pub fn on_choice_picked(&self, choice: GString) {
+        //
     }
 }
 
@@ -53,7 +62,8 @@ impl IPanel for WorldMenu {
     }
 
     fn ready(&mut self) {
-        // self.base().get_node_as("Choices");
+        let callable = self.base().callable("on_choice_picked");
+        self.choices.connect("selection_confirmed".into(), callable);
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
