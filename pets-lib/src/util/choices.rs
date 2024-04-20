@@ -6,25 +6,30 @@
 use crate::consts::choice_lists::*;
 use crate::prelude::*;
 
-use godot::engine::{Control, IControl, InputEvent, RichTextLabel};
+use godot::engine::{INode, InputEvent, Node, RichTextLabel};
 use godot::prelude::*;
 
+/// This class should be placed under any control that has
+/// child RichTextLabels that represent choices. It will
+/// handle all the tweening and input for you.
 #[derive(GodotClass)]
-#[class(init, base=Control)]
-pub struct Choices {
-    base: Base<Control>,
+#[class(init, base=Node)]
+pub struct ChoiceAgent {
+    base: Base<Node>,
 
     /// Name of the currently focused choice
     focused: Option<String>,
 }
 
 #[godot_api]
-impl Choices {
+impl ChoiceAgent {
     fn choices(&self) -> Vec<Gd<RichTextLabel>> {
         self.base()
+            .get_parent()
+            .expect("choice agent has no parent")
             .get_children()
             .iter_shared()
-            .map(|x| x.cast())
+            .filter_map(|x| x.try_cast().ok())
             .collect()
     }
 
@@ -53,7 +58,7 @@ impl Choices {
 }
 
 #[godot_api]
-impl IControl for Choices {
+impl INode for ChoiceAgent {
     fn ready(&mut self) {
         let mut choices = self.choices();
 
