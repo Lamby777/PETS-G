@@ -3,11 +3,9 @@
 //! the GDExtension side that runs during battles.
 //!
 
-use godot::engine::{AnimationPlayer, INode2D, Node2D, RichTextLabel};
+use godot::engine::{AnimationPlayer, INode2D, Node2D};
 use godot::prelude::*;
-use num_enum::TryFromPrimitive;
 
-use crate::consts::choice_lists::*;
 use crate::prelude::*;
 
 mod player;
@@ -39,15 +37,6 @@ enum BattleState {
     Run,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, TryFromPrimitive)]
-#[repr(usize)]
-enum BattleChoice {
-    Attack,
-    Skills,
-    Items,
-    Run,
-}
-
 #[allow(unused)]
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
@@ -55,44 +44,11 @@ pub struct BattleEngine {
     base: Base<Node2D>,
     state: BattleState,
 
+    #[init(default = onready_node(&base, "%BattleChoices"))]
+    choices: OnReady<Gd<Choices>>,
+
     #[init(default = onready_node(&base, "AnimationPlayer"))]
     animator: OnReady<Gd<AnimationPlayer>>,
-}
-
-fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
-    let target_x = if is_picked { 64.0 } else { 0.0 };
-
-    let target_col = {
-        let col = if is_picked {
-            "font_selected_color"
-        } else {
-            "default_color"
-        };
-
-        default_theme().get_color(col.into(), "RichTextLabel".into())
-    };
-
-    // tween x
-    tween(
-        node.clone().upcast(),
-        "position:x",
-        None,
-        target_x,
-        CHOICE_TWEEN_TIME,
-        CHOICE_TWEEN_TRANS,
-    )
-    .unwrap();
-
-    // tween color
-    tween(
-        node.upcast(),
-        "theme_override_colors/default_color",
-        None,
-        target_col,
-        CHOICE_TWEEN_TIME,
-        CHOICE_TWEEN_TRANS,
-    )
-    .unwrap();
 }
 
 #[godot_api]
@@ -102,18 +58,19 @@ impl BattleEngine {
         //
     }
 
-    fn on_choice(&self, choice: BattleChoice) {
-        // call different functions depending on the choice
-        use BattleChoice::*;
-        match choice {
-            Attack => todo!(),
-            Skills => todo!(),
-            Items => todo!(),
+    #[func]
+    pub fn on_choice_picked(&self, choice: GString) {
+        match choice.to_string().as_str() {
+            "Attack" => todo!(),
+            "Skills" => todo!(),
+            "Items" => todo!(),
 
-            Run => {
+            "Run" => {
                 // TODO roll, don't always succeed
                 change_scene!("world");
             }
+
+            _ => unreachable!(),
         }
     }
 }
@@ -121,14 +78,11 @@ impl BattleEngine {
 #[godot_api]
 impl INode2D for BattleEngine {
     fn ready(&mut self) {
-        //
+        let callable = self.base().callable("on_choice_picked");
+        self.choices.connect("selection_confirmed".into(), callable);
     }
 
     fn process(&mut self, _delta: f64) {
-        // TODO process input without Wrapped<>
-
-        // if let Some(choice) = picked_choice {
-        //     self.on_choice(choice);
-        // }
+        //
     }
 }
