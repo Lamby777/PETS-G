@@ -3,7 +3,6 @@
 //! inventory, eat food, etc.
 //!
 
-use godot::engine::control::FocusMode;
 use godot::engine::{AnimationPlayer, IPanel, InputEvent, Panel};
 use godot::prelude::*;
 use num_enum::TryFromPrimitive;
@@ -51,7 +50,12 @@ impl WorldMenu {
 
     #[func]
     pub fn on_choice_picked(&self, choice: GString) {
-        //
+        match choice.to_string().as_str() {
+            "Inventory" => todo!(),
+            "DebugQuit" => godot_tree().quit(),
+
+            _ => unreachable!(),
+        }
     }
 }
 
