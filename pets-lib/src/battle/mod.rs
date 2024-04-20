@@ -45,7 +45,7 @@ pub struct BattleEngine {
     state: BattleState,
 
     #[init(default = onready_node(&base, "%BattleChoices"))]
-    choices: OnReady<Gd<Choices>>,
+    choices: OnReady<Gd<ChoiceAgent>>,
 
     #[init(default = onready_node(&base, "AnimationPlayer"))]
     animator: OnReady<Gd<AnimationPlayer>>,

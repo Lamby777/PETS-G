@@ -16,8 +16,8 @@ use crate::prelude::*;
 struct TitleScreen {
     base: Base<Node2D>,
 
-    #[init(default = onready_node(&base, "Background/MenuChoices"))]
-    choices: OnReady<Gd<Choices>>,
+    #[init(default = onready_node(&base, "Background/MenuChoices/ChoiceAgent"))]
+    choices: OnReady<Gd<ChoiceAgent>>,
 }
 
 #[godot_api]
