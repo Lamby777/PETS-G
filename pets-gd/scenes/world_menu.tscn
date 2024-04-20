@@ -91,3 +91,5 @@ theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "Quit"
 fit_content = true
+
+[node name="ChoiceAgent" type="ChoiceAgent" parent="Choices"]

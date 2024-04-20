@@ -6,6 +6,7 @@
 use crate::consts::choice_lists::*;
 use crate::prelude::*;
 
+use godot::engine::control::FocusMode;
 use godot::engine::{INode, InputEvent, Node, RichTextLabel};
 use godot::prelude::*;
 
@@ -19,11 +20,14 @@ pub struct ChoiceAgent {
 
     /// Name of the currently focused choice
     focused: Option<String>,
+
+    #[export]
+    disabled: bool,
 }
 
 #[godot_api]
 impl ChoiceAgent {
-    fn choices(&self) -> Vec<Gd<RichTextLabel>> {
+    pub fn choice_labels(&self) -> Vec<Gd<RichTextLabel>> {
         self.base()
             .get_parent()
             .expect("choice agent has no parent")
@@ -46,6 +50,18 @@ impl ChoiceAgent {
     }
 
     #[func]
+    pub fn set_focus_modes(&self) {
+        let mode = match self.disabled {
+            true => FocusMode::NONE,
+            false => FocusMode::ALL,
+        };
+
+        self.choice_labels()
+            .iter_mut()
+            .for_each(|x| x.set_focus_mode(mode));
+    }
+
+    #[func]
     pub fn _tween_choice_off(choice: Gd<RichTextLabel>) {
         _tween_choice(false, choice);
     }
@@ -60,7 +76,7 @@ impl ChoiceAgent {
 #[godot_api]
 impl INode for ChoiceAgent {
     fn ready(&mut self) {
-        let mut choices = self.choices();
+        let mut choices = self.choice_labels();
 
         for choice in &mut choices {
             let entered = self
@@ -76,11 +92,17 @@ impl INode for ChoiceAgent {
             choice.connect("focus_entered".into(), entered);
             choice.connect("focus_exited".into(), exited);
         }
+
+        self.set_focus_modes()
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
+        if self.disabled {
+            return;
+        }
+
         if self.focused.is_none() {
-            let mut choices = self.choices();
+            let mut choices = self.choice_labels();
             let guard = self.base_mut();
             choices[0].grab_focus();
             drop(guard);
