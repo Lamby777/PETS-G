@@ -2,7 +2,7 @@
 //! General-purpose Godot/Rust helper stuff
 //!
 
-pub mod choose;
+pub mod choices;
 pub mod limiq;
 pub mod singleton;
 

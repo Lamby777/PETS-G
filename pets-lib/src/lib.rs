@@ -51,7 +51,7 @@ mod prelude {
         WorldMenu,
     };
 
-    pub use crate::choose::Choose;
+    pub use crate::choices::Choices;
     pub use crate::singleton::Autoload;
 
     // is this bad practice? no clue and idc honestly
