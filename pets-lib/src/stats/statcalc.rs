@@ -60,7 +60,6 @@ mod standard_calcs {
     //! For all these functions, the doc comment is the
     //! mathematical function. The variable `x` represents
     //! the variable `lvl` in our code.
-    // TODO stop using `as` to cast... somewhat unsafe
 
     use crate::prelude::{FloatStat, IntegralStat};
 
@@ -78,7 +77,6 @@ mod standard_calcs {
     }
 
     /// floor(5 * log_1.4_(x)) + 0.5x + 40
-    // TODO idk what i was thinking... maybe use sqrt growth instead of log
     pub fn max_hp(lvl: IntegralStat) -> IntegralStat {
         let p1 = (5.0 * (lvl as FloatStat).log(1.4)) as IntegralStat;
         let p2 = (lvl / 2) + 40;
@@ -94,13 +92,11 @@ mod standard_calcs {
     }
 
     pub fn attack(lvl: IntegralStat) -> IntegralStat {
-        // TODO think of a better formula
         // (not listed in desmos link)
         lvl
     }
 
     pub fn defense(lvl: IntegralStat) -> IntegralStat {
-        // TODO think of a better formula
         // (not listed in desmos link)
         lvl
     }
@@ -126,10 +122,6 @@ mod standard_calcs {
     pub fn epsilon(_lvl: IntegralStat) -> IntegralStat {
         // NOTE this one is mostly upgraded manually,
         // but should still improve somewhat with levels...
-        //
-        // TODO prob needs its own dedicated calculation function
-        // in a separate file... but for now let's just leave it
-        // as always returning 1
         1
     }
 

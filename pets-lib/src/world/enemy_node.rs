@@ -64,7 +64,7 @@ impl WalkingEnemy {
 
         let mode_str = if opts.moving { "Run" } else { "Idle" };
 
-        // TODO uncomment when backwards sprites are added
+        // uncomment when backwards sprites are added
         let dir_str = ""; // if opts.backwards { "Back" } else { "" };
 
         let anim_name = format!("{}-{}{}", self.enemy_id, mode_str, dir_str);
