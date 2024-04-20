@@ -3,16 +3,11 @@
 //! lists of stuff
 //!
 
-// TODO customizable tween times specific to the object
-use crate::consts::title_screen::*;
+use crate::consts::choice_lists::*;
 use crate::prelude::*;
 
 use godot::engine::{Control, IControl, InputEvent, RichTextLabel};
 use godot::prelude::*;
-
-fn is_pressed(name: &str) -> bool {
-    Input::singleton().is_action_just_pressed(name.into())
-}
 
 #[derive(GodotClass)]
 #[class(init, base=Control)]
@@ -42,6 +37,9 @@ impl Choices {
     pub fn _tween_choice_off(choice: Gd<RichTextLabel>) {
         _tween_choice(false, choice);
     }
+
+    #[signal]
+    fn choice_picked() {}
 }
 
 #[godot_api]
@@ -104,8 +102,8 @@ fn _tween_choice(is_picked: bool, node: Gd<RichTextLabel>) {
         "position:x",
         None,
         target_x,
-        MENU_TWEEN_TIME,
-        MENU_TWEEN_TRANS,
+        CHOICE_TWEEN_TIME,
+        CHOICE_TWEEN_TRANS,
     )
     .unwrap();
 
@@ -115,11 +113,11 @@ fn _tween_choice(is_picked: bool, node: Gd<RichTextLabel>) {
         "theme_override_colors/default_color",
         None,
         target_col,
-        MENU_TWEEN_TIME,
-        MENU_TWEEN_TRANS,
+        CHOICE_TWEEN_TIME,
+        CHOICE_TWEEN_TRANS,
     )
     .unwrap();
 
     // make it wavy (or not) :3
-    bbcode_toggle(node, MENU_WAVE_BBCODE, is_picked);
+    bbcode_toggle(node, CHOICE_WAVE_BBCODE, is_picked);
 }

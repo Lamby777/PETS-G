@@ -7,7 +7,7 @@ use godot::engine::{AnimationPlayer, INode2D, Node2D, RichTextLabel};
 use godot::prelude::*;
 use num_enum::TryFromPrimitive;
 
-use crate::consts::title_screen::*;
+use crate::consts::choice_lists::*;
 use crate::prelude::*;
 
 mod player;
@@ -78,8 +78,8 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
         "position:x",
         None,
         target_x,
-        MENU_TWEEN_TIME,
-        MENU_TWEEN_TRANS,
+        CHOICE_TWEEN_TIME,
+        CHOICE_TWEEN_TRANS,
     )
     .unwrap();
 
@@ -89,8 +89,8 @@ fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
         "theme_override_colors/default_color",
         None,
         target_col,
-        MENU_TWEEN_TIME,
-        MENU_TWEEN_TRANS,
+        CHOICE_TWEEN_TIME,
+        CHOICE_TWEEN_TRANS,
     )
     .unwrap();
 }

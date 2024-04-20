@@ -55,7 +55,7 @@ pub mod dialogue {
     /// to avoid the glow effect from showing while it's not active
     pub const DBOX_Y_BELOW_VIEWPORT: f32 = 20.0;
 
-    pub const DBOX_CHOICE_TWEEN_TIME: f64 = title_screen::MENU_TWEEN_TIME;
+    pub const DBOX_CHOICE_TWEEN_TIME: f64 = choice_lists::CHOICE_TWEEN_TIME;
     pub const DBOX_CHOICE_TWEEN_TRANS: TransitionType = DBOX_TWEEN_TRANS;
     pub const DBOX_CHOICE_HEIGHT: f32 = 60.0;
     pub const DBOX_CHOICE_WAVE_TIME: f64 = 0.1;
@@ -63,10 +63,10 @@ pub mod dialogue {
     pub const DBOX_SELECTION_BBCODE: &str = WAVE_BBCODE;
 }
 
-pub mod title_screen {
+pub mod choice_lists {
     use super::*;
 
-    pub const MENU_TWEEN_TIME: f64 = 0.1;
-    pub const MENU_TWEEN_TRANS: TransitionType = TransitionType::QUAD;
-    pub const MENU_WAVE_BBCODE: &str = WAVE_BBCODE;
+    pub const CHOICE_TWEEN_TIME: f64 = 0.1;
+    pub const CHOICE_TWEEN_TRANS: TransitionType = TransitionType::QUAD;
+    pub const CHOICE_WAVE_BBCODE: &str = WAVE_BBCODE;
 }
