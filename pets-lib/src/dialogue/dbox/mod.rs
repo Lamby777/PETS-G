@@ -18,31 +18,6 @@ mod placeholders;
 use dchoice::DChoice;
 use placeholders::process_placeholders;
 
-fn tween_choice_to(is_picked: bool, node: Gd<RichTextLabel>) {
-    let target_col = {
-        let col = if is_picked {
-            "font_selected_color"
-        } else {
-            "default_color"
-        };
-
-        default_theme().get_color(col.into(), "RichTextLabel".into())
-    };
-
-    // tween color
-    tween(
-        node.clone().upcast(),
-        "theme_override_colors/default_color",
-        None,
-        target_col,
-        DBOX_CHOICE_TWEEN_TIME,
-        DBOX_CHOICE_TWEEN_TRANS,
-    )
-    .unwrap();
-
-    bbcode_toggle(node, DBOX_SELECTION_BBCODE, is_picked);
-}
-
 #[derive(GodotClass)]
 #[class(init, base=PanelContainer)]
 pub struct DialogBox {

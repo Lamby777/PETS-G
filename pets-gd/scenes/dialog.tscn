@@ -26,13 +26,13 @@ custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 56
 bbcode_enabled = true
-text = "<NPC Name>"
+text = "Cap'n Winthrus"
 
 [node name="Content" type="RichTextLabel" parent="VBox"]
 custom_minimum_size = Vector2(0, 230)
 layout_mode = 2
 bbcode_enabled = true
-text = "tryna cat to it, tryna bounce through it, all the while thinkin' i might as well do it, baby that was so long ago and you know it, take the next ticket, take the next train, why would i do it, eh you keep on thinkin'"
+text = "sussy gussy straight outta ohio weebux fortnite livvy dunne rizzed up baby gronk gaming skibidi toilet gyatt sigma coquette floofy ahoy matey ;-; can i get a meow meow in the chat >w< ^w^ :3 :3 :3 :3"
 
 [node name="Choices" type="HBoxContainer" parent="VBox"]
 clip_contents = true

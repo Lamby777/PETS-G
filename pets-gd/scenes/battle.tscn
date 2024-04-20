@@ -120,7 +120,7 @@ offset_bottom = 209.0
 texture = ExtResource("6_pjho4")
 expand_mode = 5
 
-[node name="BattleChoices" type="Choices" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
+[node name="BattleChoices" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
