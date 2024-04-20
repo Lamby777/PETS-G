@@ -54,7 +54,6 @@ impl Choices {
 
 #[godot_api]
 impl IControl for Choices {
-    // TODO fire signals instead of this, i just copy pasted
     fn ready(&mut self) {
         let mut choices = self.choices();
 
