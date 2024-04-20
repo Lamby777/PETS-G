@@ -192,6 +192,8 @@ bbcode_enabled = true
 text = "Run"
 fit_content = true
 
+[node name="ChoiceAgent" type="ChoiceAgent" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
+
 [node name="RightPanel" type="PanelContainer" parent="Menu/DualMenu"]
 layout_mode = 1
 anchors_preset = 4

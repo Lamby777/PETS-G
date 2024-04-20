@@ -44,7 +44,7 @@ pub struct BattleEngine {
     base: Base<Node2D>,
     state: BattleState,
 
-    #[init(default = onready_node(&base, "%BattleChoices"))]
+    #[init(default = onready_node(&base, "%BattleChoices/ChoiceAgent"))]
     choices: OnReady<Gd<ChoiceAgent>>,
 
     #[init(default = onready_node(&base, "AnimationPlayer"))]
