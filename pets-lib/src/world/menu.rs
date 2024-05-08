@@ -13,7 +13,7 @@ use crate::prelude::*;
 #[repr(usize)]
 enum Choice {
     Inventory,
-    DebugQuit, // TODO use this instead of shift+q
+    DebugQuit,
 }
 
 #[derive(GodotClass)]
@@ -61,10 +61,6 @@ impl WorldMenu {
 
 #[godot_api]
 impl IPanel for WorldMenu {
-    fn process(&mut self, _delta: f64) {
-        //
-    }
-
     fn ready(&mut self) {
         let callable = self.base().callable("on_choice_picked");
         self.choices.connect("selection_confirmed".into(), callable);
