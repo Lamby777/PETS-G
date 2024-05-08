@@ -1,3 +1,4 @@
+//
 //!
 //! General-purpose Godot/Rust helper stuff
 //!
@@ -7,7 +8,7 @@ pub mod limiq;
 pub mod singleton;
 
 use godot::engine::tween::TransitionType;
-use godot::engine::{Engine, NodeExt, RichTextLabel, Theme, Tween};
+use godot::engine::{Engine, RichTextLabel, Theme, Tween};
 use godot::prelude::*;
 
 pub fn mark_input_handled<T>(node: &Gd<T>)
@@ -61,12 +62,11 @@ pub fn onready_node<O, T>(
     path: impl Into<NodePath> + 'static,
 ) -> OnReady<Gd<T>>
 where
-    T: GodotClass + Inherits<Node>,
-    O: GodotClass,
-    Gd<O>: NodeExt,
+    T: Inherits<Node>,
+    O: Inherits<Node>,
 {
     let self_obj = this.to_gd();
-    OnReady::new(move || self_obj.get_node_as(path))
+    OnReady::new(move || self_obj.upcast().get_node_as(path))
 }
 
 /// takes a bbcode string and prepends or removes it from the label text
