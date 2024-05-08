@@ -27,7 +27,7 @@ where
 /// bugfix later: it won't find children of nodes that are the correct type
 pub fn subchildren_of_type<T>(parent: Gd<Node>) -> Vec<Gd<T>>
 where
-    T: GodotClass + Inherits<Node>,
+    T: Inherits<Node>,
 {
     let mut res = vec![];
 
