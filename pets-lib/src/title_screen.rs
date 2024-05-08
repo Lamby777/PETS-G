@@ -6,7 +6,6 @@
 //! - Cherry, 2:54 AM, 10/5/2023 | <3
 //!
 
-use godot::engine::{INode2D, Node2D};
 use godot::prelude::*;
 
 use crate::prelude::*;
