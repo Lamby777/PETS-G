@@ -3,7 +3,7 @@
 //! Shows the input prompt and handles the action if pressed.
 //!
 
-use godot::engine::{INode2D, InputEvent, Node2D, RichTextLabel};
+use godot::engine::{InputEvent, RichTextLabel};
 use godot::prelude::*;
 
 use crate::prelude::*;

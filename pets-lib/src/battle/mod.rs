@@ -3,7 +3,7 @@
 //! the GDExtension side that runs during battles.
 //!
 
-use godot::engine::{AnimationPlayer, INode2D, Node2D};
+use godot::engine::AnimationPlayer;
 use godot::prelude::*;
 
 use crate::prelude::*;
