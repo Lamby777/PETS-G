@@ -72,15 +72,14 @@ impl DialogBox {
             1.0,
             1.0,
             TransitionType::QUAD,
-        )
-        .unwrap();
+        );
 
-        // we unwrap the result and then put it
-        // back into an option because using `ok()`
-        // is not appropriate here. we need to panic
-        // if the tween fails, but we still want the
-        // output to always be `Some`
-        self.text_tween = Some(tw);
+        // panic if tween failed
+        if tw.is_ok() {
+            self.text_tween = tw.ok();
+        } else {
+            panic!("Failed to tween text visibility!");
+        }
     }
 
     /// sets the speaker and message labels to the given page

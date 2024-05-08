@@ -22,6 +22,11 @@ pub struct ChoiceAgent {
     focused: Option<String>,
 
     #[export]
+    #[init(default = CHOICE_WAVE_BBCODE.into())]
+    bbcode: GString,
+
+    #[export]
+    #[var(get, set = set_disabled)]
     disabled: bool,
 }
 
@@ -50,6 +55,27 @@ impl ChoiceAgent {
     }
 
     #[func]
+    pub fn _tween_choice_off(choice: Gd<RichTextLabel>) {
+        _tween_choice(false, choice);
+    }
+
+    #[func]
+    pub fn set_disabled(&mut self, disabled: bool) {
+        self.disabled = disabled;
+        self.set_focus_modes();
+    }
+
+    #[func]
+    pub fn enable(&mut self) {
+        self.set_disabled(false);
+    }
+
+    #[func]
+    pub fn disable(&mut self) {
+        self.set_disabled(true);
+    }
+
+    #[func]
     pub fn set_focus_modes(&self) {
         let mode = match self.disabled {
             true => FocusMode::NONE,
@@ -59,11 +85,6 @@ impl ChoiceAgent {
         self.choice_labels()
             .iter_mut()
             .for_each(|x| x.set_focus_mode(mode));
-    }
-
-    #[func]
-    pub fn _tween_choice_off(choice: Gd<RichTextLabel>) {
-        _tween_choice(false, choice);
     }
 
     #[signal]
