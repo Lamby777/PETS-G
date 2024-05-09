@@ -32,10 +32,14 @@ pub struct ChoiceAgent {
 
 #[godot_api]
 impl ChoiceAgent {
-    pub fn choice_labels(&self) -> Vec<Gd<RichTextLabel>> {
+    pub fn parent(&self) -> Gd<Node> {
         self.base()
             .get_parent()
             .expect("choice agent has no parent")
+    }
+
+    pub fn choice_labels(&self) -> Vec<Gd<RichTextLabel>> {
+        self.parent()
             .get_children()
             .iter_shared()
             .filter_map(|x| x.try_cast().ok())
@@ -61,6 +65,8 @@ impl ChoiceAgent {
 
     #[func]
     pub fn set_disabled(&mut self, disabled: bool) {
+        godot_print!("Setting disabled to {}", disabled);
+
         self.disabled = disabled;
         self.set_focus_modes();
     }
@@ -73,6 +79,14 @@ impl ChoiceAgent {
     #[func]
     pub fn disable(&mut self) {
         self.set_disabled(true);
+    }
+
+    #[func]
+    pub fn focus_first(&mut self) {
+        let mut choices = self.choice_labels();
+        let guard = self.base_mut();
+        choices[0].grab_focus();
+        drop(guard);
     }
 
     #[func]
@@ -122,17 +136,26 @@ impl INode for ChoiceAgent {
             return;
         }
 
+        let is_pressed = |x: &str| event.is_action_pressed(x.into());
+
         if self.focused.is_none() {
-            let mut choices = self.choice_labels();
-            let guard = self.base_mut();
-            choices[0].grab_focus();
-            drop(guard);
+            if !(is_pressed("ui_up")
+                || is_pressed("ui_down")
+                || is_pressed("ui_left")
+                || is_pressed("ui_right"))
+            {
+                // skip out if it wasn't directional input
+                return;
+            }
+
+            self.focus_first();
 
             mark_input_handled(&self.base());
         }
 
-        let confirming = event.is_action_pressed("ui_accept".into());
-        if confirming && let Some(focused) = &self.focused.clone() {
+        if is_pressed("ui_accept")
+            && let Some(focused) = &self.focused.clone()
+        {
             self.base_mut().emit_signal("selection_confirmed".into(), &[
                 focused.to_variant(),
             ]);
