@@ -29,6 +29,8 @@ pub struct DialogBox {
     active: bool,
     awaiting_choice: bool,
 
+    // #[init(default = onready_node(&base, "Choices/ChoiceAgent"))]
+    // choices: OnReady<Gd<ChoiceAgent>>,
     #[init(default = MetaPair::from_cloned(Speaker::Narrator))]
     speaker: MetaPair<Speaker>,
     #[init(default = MetaPair::from_cloned(DEFAULT_VOX.to_owned()))]
@@ -186,7 +188,8 @@ impl DialogBox {
         self.do_draw();
     }
 
-    pub fn process_choice_input(&mut self) {
+    #[func]
+    pub fn on_choice_picked(&self, choice: GString) {
         // TODO process input without Wrapped<>
         // Pick(picked_i, _) => {
         //     // we know the ending has to be `Choices` and not a label or end
@@ -212,11 +215,23 @@ impl DialogBox {
         //
         //     self.awaiting_choice = false;
         // }
+        match choice.to_string().as_str() {
+            "Inventory" => todo!(),
+            "DebugQuit" => godot_tree().quit(),
+
+            _ => unreachable!(),
+        }
     }
 }
 
 #[godot_api]
 impl IPanelContainer for DialogBox {
+    fn ready(&mut self) {
+        let callable = self.base().callable("on_choice_picked");
+        self.choices.connect("selection_confirmed".into(), callable);
+        self.choices.bind().set_focus_modes();
+    }
+
     fn input(&mut self, event: Gd<InputEvent>) {
         let confirming = event.is_action_pressed("ui_accept".into());
 
