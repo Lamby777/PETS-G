@@ -46,9 +46,11 @@ impl PlayerCB {
     /// * Cutscenes
     /// * Menus
     pub fn can_move(&self) -> bool {
-        let di = DBoxInterface::singleton();
-        let dbox_active = di.bind().has_active_dbox();
+        let dbox = DialogBox::singleton();
+        let dbox_active = !dbox.bind().is_active();
 
+        // NOTE don't refactor this function to be smaller.
+        // the line below will get more complex soon...
         !dbox_active
     }
 

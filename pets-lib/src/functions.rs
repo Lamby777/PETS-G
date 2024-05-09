@@ -4,8 +4,7 @@ use crate::prelude::*;
 use godot::prelude::*;
 
 fn end_interaction() {
-    let mut dbox = DBoxInterface::singleton().bind_mut().dbox();
-    dbox.bind_mut().end_interaction();
+    DialogBox::singleton().bind_mut().end_interaction();
 }
 
 macro_rules! add_callables {

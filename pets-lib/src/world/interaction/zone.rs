@@ -23,8 +23,7 @@ impl InteractionZone {
     pub fn interact(&self) {
         let ix_id = self.interaction_id.to_string();
 
-        let mut di = DBoxInterface::singleton();
-        di.bind_mut().start_ix(ix_id);
+        DialogBox::singleton().bind_mut().start_ix(ix_id);
     }
 
     #[func]

@@ -2,10 +2,8 @@
 //! Dialogue system for the game's menus.
 //!
 
-mod autoload;
 mod dbox;
-
-pub use autoload::DBoxInterface;
+pub use dbox::DialogBox;
 
 use crate::prelude::*;
 use dialogical::InteractionMap;

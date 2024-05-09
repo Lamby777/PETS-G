@@ -5,8 +5,8 @@
 use dialogical::prelude::*;
 use godot::engine::tween::TransitionType;
 use godot::engine::{
-    HBoxContainer, IPanelContainer, InputEvent, PanelContainer, RichTextLabel,
-    Tween,
+    CanvasLayer, HBoxContainer, IPanelContainer, InputEvent, PanelContainer,
+    RichTextLabel, Tween,
 };
 use godot::prelude::*;
 
@@ -62,6 +62,32 @@ impl DialogBox {
         self.spk_txt().set_text(self.spk_txt.clone());
         self.msg_txt().set_text(self.msg_txt.clone());
         self.tween_txt_visibility();
+    }
+
+    #[func]
+    pub fn start_ix(&mut self, ix_id: String) {
+        let ix = ix_map().get(&ix_id);
+        let ix = unwrap_fmt!(
+            ix,
+            "Could not find interaction \"{}\" in the interaction map",
+            ix_id,
+        );
+
+        self.set_ix(ix.clone());
+        self.tween_into_view(true);
+    }
+
+    #[func]
+    pub fn singleton() -> Gd<Self> {
+        let ui_layer =
+            current_scene().get_node_as::<CanvasLayer>(UI_LAYER_NAME);
+
+        let mut dbox = ui_layer
+            .try_get_node_as::<DialogBox>(DBOX_NODE_NAME)
+            .expect("no dbox found");
+
+        dbox.bind_mut().cancel_tween();
+        dbox
     }
 
     /// Start tweening a text's visible characters from 0% to 100% visible...
