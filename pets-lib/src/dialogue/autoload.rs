@@ -14,9 +14,6 @@ use crate::prelude::*;
 #[class(init, base=Object)]
 pub struct DBoxInterface {
     base: Base<Object>,
-
-    #[init(default = load("res://scenes/dialog.tscn"))]
-    dbox_scene: Gd<PackedScene>,
 }
 
 impl Autoload for DBoxInterface {
@@ -51,25 +48,14 @@ impl DBoxInterface {
 
     #[func]
     pub fn dbox(&self) -> Gd<DialogBox> {
-        let mut ui_layer =
+        let ui_layer =
             current_scene().get_node_as::<CanvasLayer>(UI_LAYER_NAME);
 
-        ui_layer
+        let mut dbox = ui_layer
             .try_get_node_as::<DialogBox>(DBOX_NODE_NAME)
-            .map_or_else(
-                || {
-                    // if there's no dialog box, create one
-                    let mut dbox =
-                        self.dbox_scene.instantiate_as::<DialogBox>();
-                    dbox.set_name(DBOX_NODE_NAME.into());
-                    ui_layer.add_child(dbox.clone().upcast());
-                    dbox
-                },
-                |mut dbox| {
-                    // if there is one, cancel any tweens and return it
-                    dbox.bind_mut().cancel_tween();
-                    dbox
-                },
-            )
+            .expect("no dbox found");
+
+        dbox.bind_mut().cancel_tween();
+        dbox
     }
 }
