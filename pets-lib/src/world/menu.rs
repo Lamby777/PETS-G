@@ -45,7 +45,16 @@ impl WorldMenu {
         }
 
         // set focus mode
-        self.choices.bind().set_focus_modes();
+        let mut choices = self.choices.bind_mut();
+        choices.set_disabled(!open);
+        if open {
+            choices.focus_first();
+        }
+    }
+
+    #[func]
+    pub fn toggle_open(&mut self) {
+        self.open_or_close(!self.opened);
     }
 
     #[func]
@@ -64,13 +73,14 @@ impl IPanel for WorldMenu {
     fn ready(&mut self) {
         let callable = self.base().callable("on_choice_picked");
         self.choices.connect("selection_confirmed".into(), callable);
+        self.choices.bind().set_focus_modes();
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
         if event.is_action_pressed("menu".into()) {
             mark_input_handled(&self.base());
 
-            self.open_or_close(!self.opened);
+            self.toggle_open();
         }
     }
 }
