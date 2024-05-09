@@ -77,8 +77,10 @@ impl INode2D for InteractionManager {
     fn unhandled_input(&mut self, event: Gd<InputEvent>) {
         if event.is_action_pressed("ui_accept".into()) {
             {
-                let di = DBoxInterface::singleton();
-                if di.bind().has_active_dbox() {
+                let pcb = PlayerCB::singleton();
+                if !pcb.bind().can_move() {
+                    // can't interact with stuff if you're
+                    // not allowed to move.
                     return;
                 }
             }

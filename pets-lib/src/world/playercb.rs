@@ -45,7 +45,7 @@ impl PlayerCB {
     /// This includes things like:
     /// * Cutscenes
     /// * Menus
-    fn can_move(&self) -> bool {
+    pub fn can_move(&self) -> bool {
         let di = DBoxInterface::singleton();
         let dbox_active = di.bind().has_active_dbox();
 
