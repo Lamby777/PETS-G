@@ -44,7 +44,7 @@ mod prelude {
     pub use crate::util::*;
 
     pub use crate::battle::BattleEngine;
-    pub use crate::dialogue::{ix_map, DBoxInterface};
+    pub use crate::dialogue::{ix_map, DialogBox};
     pub use crate::functions::{call_global, callv_global};
     pub use crate::world::{
         InteractionManager, InteractionZone, MusicZone, PlayerCB, World,
@@ -83,7 +83,6 @@ unsafe impl ExtensionLibrary for PetsLib {
         libdx::foreach_static!(
             [
                 StatsInterface,
-                DBoxInterface,
             ] => Autoload, register
         );
     }
@@ -96,7 +95,6 @@ unsafe impl ExtensionLibrary for PetsLib {
         libdx::foreach_static!(
             [
                 StatsInterface,
-                DBoxInterface,
             ] => Autoload, unregister
         );
     }
