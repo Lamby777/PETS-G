@@ -372,34 +372,36 @@ impl DialogBox {
 
     pub fn tween_choices_wave(&mut self, up: bool) {
         self.choice_agent.bind_mut().set_disabled(!up);
+        let choices = self.choice_container().get_children();
 
-        //     TODO
-        //     for (i, cont) in self.choices.iter().enumerate() {
-        //         // if moving up, start below the window
-        //         if up {
-        //             cont.bind()
-        //                 .txt_label()
-        //                 .set_position(Vector2::new(0.0, DBOX_CHOICE_HEIGHT));
-        //         }
-        //
-        //         // we can't move the label into the closure because of
-        //         // thread safety stuff, so just pass in the instance id
-        //         let label_id = cont.instance_id();
-        //
-        //         let func = Callable::from_fn("choice_slide_up", move |_| {
-        //             // get the label again using the instance id
-        //             let label = Gd::<DChoice>::try_from_instance_id(label_id);
-        //
-        //             if let Ok(label) = label {
-        //                 label.bind().tween_label(up);
-        //             };
-        //
-        //             Ok(Variant::from(()))
-        //         });
-        //
-        //         // set timer
-        //         set_timeout(DBOX_CHOICE_WAVE_TIME * i as f64, func);
-        //     }
+        for (i, cont) in choices
+            .iter_shared()
+            .filter_map(|n| n.try_cast::<DChoice>().ok())
+            .enumerate()
+        {
+            // if moving up, start below the window
+            if up {
+                cont.bind()
+                    .txt_label()
+                    .set_position(Vector2::new(0.0, DBOX_CHOICE_HEIGHT));
+            }
+
+            // we can't move the label into the closure because of
+            // thread safety stuff, so just pass in the instance id
+            let label_id = cont.instance_id();
+
+            let choice_slide_up = move || {
+                // get the label again using the instance id
+                let label = Gd::<DChoice>::try_from_instance_id(label_id);
+
+                if let Ok(label) = label {
+                    label.bind().tween_label(up);
+                };
+            };
+
+            // set timer
+            set_timeout(DBOX_CHOICE_WAVE_TIME * i as f64, choice_slide_up);
+        }
     }
 }
 
