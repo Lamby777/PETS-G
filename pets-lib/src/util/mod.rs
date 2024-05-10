@@ -11,6 +11,21 @@ use godot::engine::tween::TransitionType;
 use godot::engine::{Engine, RichTextLabel, Theme, Tween};
 use godot::prelude::*;
 
+/// Like setTimeout in JS, using godot timers.
+/// Uses SECONDS, not ms.
+pub fn set_timeout<F>(time_sec: f64, mut func: F)
+where
+    F: FnMut() + Sync + Send + 'static,
+{
+    godot_tree().create_timer(time_sec).unwrap().connect(
+        "timeout".into(),
+        Callable::from_fn("timeout", move |_| {
+            func();
+            Ok(Variant::nil())
+        }),
+    );
+}
+
 pub fn mark_input_handled<T>(node: &Gd<T>)
 where
     T: Inherits<Node>,

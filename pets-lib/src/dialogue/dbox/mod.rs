@@ -398,10 +398,7 @@ impl DialogBox {
         //         });
         //
         //         // set timer
-        //         godot_tree()
-        //             .create_timer(DBOX_CHOICE_WAVE_TIME * i as f64)
-        //             .unwrap()
-        //             .connect("timeout".into(), func);
+        //         set_timeout(DBOX_CHOICE_WAVE_TIME * i as f64, func);
         //     }
     }
 }
