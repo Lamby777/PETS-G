@@ -29,8 +29,9 @@ pub struct DialogBox {
     active: bool,
     awaiting_choice: bool,
 
-    // #[init(default = onready_node(&base, "Choices/ChoiceAgent"))]
-    // choices: OnReady<Gd<ChoiceAgent>>,
+    #[init(default = onready_node(&base, "VBox/Choices/ChoiceAgent"))]
+    choices: OnReady<Gd<ChoiceAgent>>,
+
     #[init(default = MetaPair::from_cloned(Speaker::Narrator))]
     speaker: MetaPair<Speaker>,
     #[init(default = MetaPair::from_cloned(DEFAULT_VOX.to_owned()))]
@@ -255,7 +256,7 @@ impl IPanelContainer for DialogBox {
     fn ready(&mut self) {
         let callable = self.base().callable("on_choice_picked");
         self.choices.connect("selection_confirmed".into(), callable);
-        self.choices.bind().set_focus_modes();
+        self.choices.bind_mut().set_disabled(true);
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
@@ -277,7 +278,7 @@ impl IPanelContainer for DialogBox {
 
         if self.awaiting_choice {
             mark_input_handled(&self.base());
-            self.process_choice_input();
+            // TODO self.process_choice_input();
             return;
         }
 
