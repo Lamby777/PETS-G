@@ -65,8 +65,6 @@ impl ChoiceAgent {
 
     #[func]
     pub fn set_disabled(&mut self, disabled: bool) {
-        godot_print!("Setting disabled to {}", disabled);
-
         self.disabled = disabled;
         self.set_focus_modes();
     }
