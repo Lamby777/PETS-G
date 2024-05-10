@@ -46,6 +46,7 @@ impl WorldMenu {
 
         // set focus mode
         let mut choices = self.choices.bind_mut();
+
         choices.set_disabled(!open);
         if open {
             choices.focus_first();
