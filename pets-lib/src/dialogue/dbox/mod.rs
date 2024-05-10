@@ -370,15 +370,19 @@ impl DialogBox {
         // self.choices.replace_vec(new_nodes);
     }
 
-    pub fn tween_choices_wave(&mut self, up: bool) {
-        self.choice_agent.bind_mut().set_disabled(!up);
-        let choices = self.choice_container().get_children();
-
-        for (i, cont) in choices
+    pub fn choice_nodes(&self) -> Vec<Gd<DChoice>> {
+        self.choice_container()
+            .get_children()
             .iter_shared()
             .filter_map(|n| n.try_cast::<DChoice>().ok())
-            .enumerate()
-        {
+            .collect()
+    }
+
+    pub fn tween_choices_wave(&mut self, up: bool) {
+        self.choice_agent.bind_mut().set_disabled(!up);
+        let choices = self.choice_nodes();
+
+        for (i, cont) in choices.iter().enumerate() {
             // if moving up, start below the window
             if up {
                 cont.bind()
