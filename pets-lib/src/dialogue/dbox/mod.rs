@@ -246,7 +246,7 @@ impl IPanelContainer for DialogBox {
         let callable = self.base().callable("on_choice_picked");
         self.choice_agent
             .connect("selection_confirmed".into(), callable);
-        self.choice_agent.bind_mut().set_disabled(true);
+        self.choice_agent.bind_mut().disable();
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
