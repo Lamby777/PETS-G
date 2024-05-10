@@ -28,16 +28,12 @@ impl TitleScreen {
                 // TODO should animate the menu boxes flying
                 // off into the right, and the camera goes left
 
-                // bandaid fix of waiting 100ms to avoid changing
+                // bandaid fix of waiting to avoid changing the
                 // scene on the same tick as the event cancel.
                 // remove this when the intro animation is done
-                godot_tree().create_timer(0.1).unwrap().connect(
-                    "timeout".into(),
-                    Callable::from_fn("", |_| {
-                        change_scene!("world");
-                        Ok(Variant::nil())
-                    }),
-                );
+                set_timeout(0.01, || {
+                    change_scene!("world");
+                });
             }
 
             "Options" => {

@@ -64,6 +64,17 @@ fn generate_random_mod() -> Vector2 {
     Vector2::new(generate(), generate())
 }
 
+fn cue_battle_intro_fx() {
+    let mut rect = PlayerCB::fx_rect();
+    let mut mat = PlayerCB::fx_material();
+    rect.call("reset_shader_timer".into(), &[]);
+
+    let rand_mod = generate_random_mod().to_variant();
+    mat.set_shader_parameter("rand_mod".into(), rand_mod);
+
+    rect.set_visible(true);
+}
+
 #[godot_api]
 impl World {
     #[signal]
@@ -71,15 +82,11 @@ impl World {
 
     pub fn start_battle(eid: GString) {
         let world = current_scene();
-        let cue = world.callable("cue_battle_intro_fx");
 
         let mat = PlayerCB::fx_material();
         let fade_len = mat.get_shader_parameter("LENGTH".into()).to::<f64>();
 
-        godot_tree()
-            .create_timer(INTRO_FADE_PREDELAY)
-            .unwrap()
-            .connect("timeout".into(), cue);
+        set_timeout(INTRO_FADE_PREDELAY, cue_battle_intro_fx);
 
         let cue = world
             .callable("cue_battle_scene")
@@ -111,18 +118,6 @@ impl World {
 
         scene.bind_mut().animate_in();
         layer.add_child(scene.clone().upcast());
-    }
-
-    #[func]
-    fn cue_battle_intro_fx(&self) {
-        let mut rect = PlayerCB::fx_rect();
-        let mut mat = PlayerCB::fx_material();
-        rect.call("reset_shader_timer".into(), &[]);
-
-        let rand_mod = generate_random_mod().to_variant();
-        mat.set_shader_parameter("rand_mod".into(), rand_mod);
-
-        rect.set_visible(true);
     }
 
     #[func]
