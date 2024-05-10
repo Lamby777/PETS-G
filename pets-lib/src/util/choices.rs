@@ -154,6 +154,8 @@ impl INode for ChoiceAgent {
         if is_pressed("ui_accept")
             && let Some(focused) = &self.focused.clone()
         {
+            mark_input_handled(&self.base());
+
             self.base_mut().emit_signal("selection_confirmed".into(), &[
                 focused.to_variant(),
             ]);

@@ -15,7 +15,7 @@ pub fn mark_input_handled<T>(node: &Gd<T>)
 where
     T: Inherits<Node>,
 {
-    node.upcast_ref()
+    node.upcast_ref::<Node>()
         .get_viewport()
         .unwrap()
         .set_input_as_handled();
