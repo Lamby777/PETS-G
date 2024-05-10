@@ -5,8 +5,8 @@
 use dialogical::prelude::*;
 use godot::engine::tween::TransitionType;
 use godot::engine::{
-    CanvasLayer, HBoxContainer, IPanelContainer, InputEvent, PanelContainer,
-    RichTextLabel, Tween,
+    AnimationPlayer, CanvasLayer, HBoxContainer, IPanelContainer, InputEvent,
+    PanelContainer, RichTextLabel, Tween,
 };
 use godot::prelude::*;
 
@@ -30,15 +30,12 @@ pub struct DialogBox {
     awaiting_choice: bool,
 
     #[init(default = onready_node(&base, "VBox/Choices/ChoiceAgent"))]
-    choices: OnReady<Gd<ChoiceAgent>>,
+    choice_agent: OnReady<Gd<ChoiceAgent>>,
 
     #[init(default = MetaPair::from_cloned(Speaker::Narrator))]
     speaker: MetaPair<Speaker>,
     #[init(default = MetaPair::from_cloned(DEFAULT_VOX.to_owned()))]
     vox: MetaPair<String>,
-
-    /// The tween that moves the dialog box on/off screen
-    box_tween: Option<Gd<Tween>>,
 
     /// The tween that makes characters in the message
     /// become visible one by one
@@ -75,7 +72,7 @@ impl DialogBox {
         );
 
         self.set_ix(ix.clone());
-        self.tween_into_view(true);
+        self.open_or_close(true);
     }
 
     #[func]
@@ -83,12 +80,9 @@ impl DialogBox {
         let ui_layer =
             current_scene().get_node_as::<CanvasLayer>(UI_LAYER_NAME);
 
-        let mut dbox = ui_layer
+        ui_layer
             .try_get_node_as::<DialogBox>(DBOX_NODE_NAME)
-            .expect("no dbox found");
-
-        dbox.bind_mut().cancel_tween();
-        dbox
+            .expect("no dbox found")
     }
 
     /// Start tweening a text's visible characters from 0% to 100% visible...
@@ -130,31 +124,26 @@ impl DialogBox {
         };
     }
 
-    /// The method that moves the dialog box (on|off)-screen
-    /// and sets the `active` flag
-    pub fn tween_into_view(&mut self, up: bool) -> Gd<Tween> {
-        let node = self.base();
-        let viewport_y = node.get_viewport_rect().size.y;
+    fn anim_player(&self) -> Gd<AnimationPlayer> {
+        self.base().get_node_as("AnimationPlayer")
+    }
 
-        let tw_end = viewport_y
-            + if up {
-                -node.get_size().y
-            } else {
-                DBOX_Y_BELOW_VIEWPORT
-            };
+    #[func]
+    pub fn open_or_close(&mut self, open: bool) {
+        self.active = open;
 
-        let y_tween = tween(
-            node.clone().upcast(),
-            "position:y",
-            Some(node.get_position().y),
-            tw_end,
-            DBOX_TWEEN_TIME,
-            DBOX_TWEEN_TRANS,
-        );
+        let mut anim = self.anim_player();
+        anim.set_assigned_animation("open".into());
 
-        self.active = up;
-        self.box_tween = y_tween.clone().ok();
-        y_tween.unwrap()
+        if open {
+            anim.play();
+        } else {
+            anim.play_backwards()
+        }
+
+        // set focus mode
+        let mut choices = self.choice_agent.bind_mut();
+        choices.set_disabled(!open);
     }
 
     pub fn run_label(&mut self, label: &Label) {
@@ -185,7 +174,7 @@ impl DialogBox {
         self.current_page_number = 0;
         self.current_ix = None;
         self.tween_choices_wave(false);
-        self.tween_into_view(false);
+        self.open_or_close(false);
     }
 
     pub fn run_ix_ending(&mut self) {
@@ -255,8 +244,9 @@ impl DialogBox {
 impl IPanelContainer for DialogBox {
     fn ready(&mut self) {
         let callable = self.base().callable("on_choice_picked");
-        self.choices.connect("selection_confirmed".into(), callable);
-        self.choices.bind_mut().set_disabled(true);
+        self.choice_agent
+            .connect("selection_confirmed".into(), callable);
+        self.choice_agent.bind_mut().set_disabled(true);
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
@@ -351,17 +341,13 @@ impl DialogBox {
         self.vox.set_from(&meta.vox);
     }
 
-    pub fn cancel_tween(&mut self) {
-        if let Some(tween) = &mut self.box_tween {
-            tween.stop()
-        }
-    }
-
     fn free_choice_labels(&mut self) {
-        // TODO
-        // for node in self.choices.iter_mut() {
-        //     node.queue_free();
-        // }
+        let cont = self.choice_container().upcast();
+        let children = subchildren_of_type::<DChoice>(cont);
+
+        for mut node in children {
+            node.queue_free();
+        }
     }
 
     /// delete old labels and create new default ones
@@ -385,6 +371,8 @@ impl DialogBox {
     }
 
     pub fn tween_choices_wave(&mut self, up: bool) {
+        self.choice_agent.bind_mut().set_disabled(!up);
+
         //     TODO
         //     for (i, cont) in self.choices.iter().enumerate() {
         //         // if moving up, start below the window
