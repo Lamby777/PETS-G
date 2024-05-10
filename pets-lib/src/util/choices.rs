@@ -7,7 +7,7 @@ use crate::consts::choice_lists::*;
 use crate::prelude::*;
 
 use godot::engine::control::FocusMode;
-use godot::engine::{InputEvent, RichTextLabel};
+use godot::engine::{Control, InputEvent, RichTextLabel};
 use godot::prelude::*;
 
 /// This class should be placed under any control that has
@@ -38,7 +38,7 @@ impl ChoiceAgent {
             .expect("choice agent has no parent")
     }
 
-    pub fn choice_labels(&self) -> Vec<Gd<RichTextLabel>> {
+    pub fn choice_labels(&self) -> Vec<Gd<Control>> {
         self.parent()
             .get_children()
             .iter_shared()
@@ -47,7 +47,7 @@ impl ChoiceAgent {
     }
 
     #[func]
-    pub fn _tween_choice_on(&mut self, choice: Gd<RichTextLabel>) {
+    pub fn _tween_choice_on(&mut self, choice: Gd<Control>) {
         let newly_focused = choice.get_name().to_string();
 
         self.base_mut().emit_signal("selection_changed".into(), &[
@@ -59,7 +59,7 @@ impl ChoiceAgent {
     }
 
     #[func]
-    pub fn _tween_choice_off(choice: Gd<RichTextLabel>) {
+    pub fn _tween_choice_off(choice: Gd<Control>) {
         _tween_choice(false, choice);
     }
 
@@ -162,7 +162,12 @@ impl INode for ChoiceAgent {
 }
 
 // TODO vertical tweening
-fn _tween_choice(is_picked: bool, node: Gd<RichTextLabel>) {
+fn _tween_choice(is_picked: bool, node: Gd<Control>) {
+    let node = node.try_cast::<RichTextLabel>().unwrap_or_else(|node| {
+        godot_print!("getting text inside container");
+        node.get_node_as("RichTextLabel")
+    });
+
     let target_x = if is_picked { 64.0 } else { 0.0 };
 
     let target_col = {
@@ -197,6 +202,5 @@ fn _tween_choice(is_picked: bool, node: Gd<RichTextLabel>) {
     )
     .unwrap();
 
-    // make it wavy (or not) :3
     bbcode_toggle(node, CHOICE_WAVE_BBCODE, is_picked);
 }
