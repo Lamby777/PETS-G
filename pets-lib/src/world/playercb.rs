@@ -47,7 +47,7 @@ impl PlayerCB {
     /// * Menus
     pub fn can_move(&self) -> bool {
         let dbox = DialogBox::singleton();
-        let dbox_active = !dbox.bind().is_active();
+        let dbox_active = dbox.bind().is_active();
 
         // NOTE don't refactor this function to be smaller.
         // the line below will get more complex soon...
