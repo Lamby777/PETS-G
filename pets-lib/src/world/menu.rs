@@ -74,6 +74,7 @@ impl IPanel for WorldMenu {
     fn ready(&mut self) {
         let callable = self.base().callable("on_choice_picked");
         self.choices.connect("selection_confirmed".into(), callable);
+
         self.choices.bind_mut().disable();
     }
 
