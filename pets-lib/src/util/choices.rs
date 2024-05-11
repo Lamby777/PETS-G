@@ -100,7 +100,7 @@ impl ChoiceAgent {
     pub fn focus_first(&mut self) {
         let mut choices = self.choice_labels();
         let guard = self.base_mut();
-        choices[0].grab_focus();
+        choices[0].call_deferred("grab_focus".into(), &[]);
         drop(guard);
     }
 
