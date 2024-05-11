@@ -3,6 +3,7 @@
 //!
 
 use dialogical::prelude::*;
+use godot::engine::global::Side;
 use godot::engine::tween::TransitionType;
 use godot::engine::{
     AnimationPlayer, CanvasLayer, Control, HBoxContainer, IPanelContainer,
@@ -237,6 +238,7 @@ impl DialogBox {
                 self.recreate_choice_labels(&choices);
                 self.tween_choices_wave(true);
                 self.awaiting_choice = true;
+                self.choice_agent.bind_mut().focus_first();
             }
 
             Label(label) => self.run_label(&label),
@@ -441,6 +443,30 @@ impl DialogBox {
         for (i, choice) in choices.iter().enumerate() {
             let dchoice = DChoice::new_container(i, &choice.text);
             cont.add_child(dchoice.clone().upcast());
+        }
+
+        self.set_choice_label_focus_directions();
+    }
+
+    pub fn set_choice_label_focus_directions(&self) {
+        let nodes = self.choice_nodes();
+        let Some(mut previous) = nodes.last().map(Gd::clone) else {
+            // if no choices, there's nothing to set
+            return;
+        };
+
+        // loop should cycle back to start before ending
+        let len = nodes.len();
+        for mut node in nodes.into_iter().cycle().take(len) {
+            let own_path = node.get_path();
+            let prev_path = previous.get_path();
+
+            previous.set_focus_next(own_path.clone());
+            previous.set_focus_neighbor(Side::RIGHT, own_path);
+            node.set_focus_previous(prev_path.clone());
+            node.set_focus_neighbor(Side::LEFT, prev_path);
+
+            previous = node;
         }
     }
 

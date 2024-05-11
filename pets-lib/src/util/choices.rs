@@ -152,6 +152,10 @@ impl INode for ChoiceAgent {
                 return;
             }
 
+            godot_print!(
+                "focusing first choice on {} because nothing is focused",
+                self.base().get_parent().unwrap().get_name()
+            );
             self.focus_first();
 
             mark_input_handled(&self.base());
