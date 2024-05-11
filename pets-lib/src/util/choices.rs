@@ -48,18 +48,21 @@ impl ChoiceAgent {
 
     #[func]
     pub fn _tween_choice_on(&mut self, choice: Gd<Control>) {
-        let newly_focused = choice.get_name().to_string();
+        let name = choice.get_name().to_string();
 
-        self.base_mut().emit_signal("selection_changed".into(), &[
-            newly_focused.to_variant(),
-        ]);
-        self.focused = Some(newly_focused);
+        self.base_mut()
+            .emit_signal("selection_focused".into(), &[name.to_variant()]);
+        self.focused = Some(name);
 
         _tween_choice(true, choice);
     }
 
     #[func]
-    pub fn _tween_choice_off(choice: Gd<Control>) {
+    pub fn _tween_choice_off(&mut self, choice: Gd<Control>) {
+        let name = choice.get_name().to_string();
+        self.base_mut()
+            .emit_signal("selection_unfocused".into(), &[name.to_variant()]);
+
         _tween_choice(false, choice);
     }
 
@@ -100,7 +103,10 @@ impl ChoiceAgent {
     }
 
     #[signal]
-    fn selection_changed(choice: GString) {}
+    fn selection_focused(choice: GString) {}
+
+    #[signal]
+    fn selection_unfocused(choice: GString) {}
 
     #[signal]
     fn selection_confirmed(choice: GString) {}

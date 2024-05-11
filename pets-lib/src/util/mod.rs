@@ -108,6 +108,7 @@ pub fn prefix_mod(target: &str, prefix: &str, active: bool) -> String {
 }
 
 /// shorthand to do some tweeneroonies :3
+/// `time` is in seconds
 pub fn tween<NP, V>(
     mut node: Gd<Node>,
     property: NP,

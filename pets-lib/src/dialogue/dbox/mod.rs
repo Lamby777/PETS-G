@@ -5,8 +5,8 @@
 use dialogical::prelude::*;
 use godot::engine::tween::TransitionType;
 use godot::engine::{
-    AnimationPlayer, CanvasLayer, HBoxContainer, IPanelContainer, InputEvent,
-    PanelContainer, RichTextLabel, Tween,
+    AnimationPlayer, CanvasLayer, Control, HBoxContainer, IPanelContainer,
+    InputEvent, PanelContainer, RichTextLabel, Tween,
 };
 use godot::prelude::*;
 
@@ -291,12 +291,40 @@ impl DialogBox {
     }
 }
 
+fn tween_choice(args: GArgs) -> GReturn {
+    let choice: Gd<Control> = args[0].to();
+    let focused: bool = args[1].to();
+
+    tween(
+        choice.upcast(),
+        "position:y",
+        None,
+        if focused { 40.0 } else { 0.0 },
+        0.5,
+        TransitionType::QUAD,
+    )
+    .unwrap();
+
+    Ok(Variant::nil())
+}
+
 #[godot_api]
 impl IPanelContainer for DialogBox {
     fn ready(&mut self) {
         let callable = self.base().callable("on_choice_picked");
         self.choice_agent
             .connect("selection_confirmed".into(), callable);
+
+        // connect focus enter/exit
+        let callable = Callable::from_fn("", tween_choice);
+        let focused = callable.bindv(varray![true.to_variant()]);
+        let unfocused = callable.bindv(varray![false.to_variant()]);
+
+        self.choice_agent
+            .connect("selection_focused".into(), focused);
+        self.choice_agent
+            .connect("selection_unfocused".into(), unfocused);
+
         self.choice_agent.bind_mut().disable();
     }
 
