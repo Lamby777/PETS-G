@@ -295,6 +295,9 @@ fn tween_choice(args: GArgs) -> GReturn {
     let choice: Gd<Control> = args[0].to();
     let focused: bool = args[1].to();
 
+    let focused_txt = if focused { "focused" } else { "unfocused" };
+    godot_print!("{}: {}", focused_txt, choice.get_name());
+
     tween(
         choice.upcast(),
         "position:y",
