@@ -405,20 +405,12 @@ impl DialogBox {
     pub fn recreate_choice_labels(&mut self, choices: &[DialogueChoice]) {
         self.free_choice_labels();
 
-        let mut container = self.choice_container();
+        let mut cont = self.choice_container();
 
-        let _new_nodes = choices
-            .iter()
-            .enumerate()
-            .map(|(i, choice)| {
-                let dchoice = DChoice::new_container(i, &choice.text);
-                container.add_child(dchoice.clone().upcast());
-                dchoice
-            })
-            .collect::<Vec<_>>();
-
-        // TODO
-        // self.choices.replace_vec(new_nodes);
+        for (i, choice) in choices.iter().enumerate() {
+            let dchoice = DChoice::new_container(i, &choice.text);
+            cont.add_child(dchoice.clone().upcast());
+        }
     }
 
     pub fn choice_nodes(&self) -> Vec<Gd<DChoice>> {
