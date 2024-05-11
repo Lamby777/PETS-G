@@ -1,8 +1,11 @@
-[gd_scene format=3 uid="uid://ckyanktf41aox"]
+[gd_scene load_steps=2 format=3 uid="uid://ckyanktf41aox"]
+
+[ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_nq50x"]
 
 [node name="DChoice" type="DChoice"]
-offset_right = 200.0
+offset_right = 1181.0
 offset_bottom = 200.0
+theme = ExtResource("1_nq50x")
 
 [node name="Label" type="RichTextLabel" parent="."]
 layout_mode = 2
