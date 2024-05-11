@@ -148,8 +148,11 @@ impl INode for ChoiceAgent {
                 || is_pressed("ui_left")
                 || is_pressed("ui_right"))
             {
-                // skip out if it wasn't directional input
-                return;
+                return; // skip out if it wasn't directional input
+            }
+
+            if self.choice_labels().is_empty() {
+                return; // if no choices, return
             }
 
             godot_print!(
