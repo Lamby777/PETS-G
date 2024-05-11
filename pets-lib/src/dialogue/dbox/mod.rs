@@ -18,6 +18,57 @@ mod placeholders;
 use dchoice::DChoice;
 use placeholders::process_placeholders;
 
+/// Turn a Speaker into a displayable name
+///
+/// Either the name of the speaker or a special name
+/// if it's a narrator or unknown speaker
+pub fn spk_display(spk: &Speaker) -> String {
+    use Speaker::*;
+
+    match spk {
+        Named(ref v) => v,
+        Narrator => NARRATOR_DISPLAYNAME,
+        Unknown => UNKNOWN_DISPLAYNAME,
+    }
+    .to_owned()
+}
+
+#[derive(Clone)]
+pub struct MetaPair<T> {
+    pub temporary: T,
+    pub permanent: T,
+}
+
+impl<T> MetaPair<T> {
+    pub fn from_cloned(v: T) -> Self
+    where
+        T: Clone,
+    {
+        Self {
+            temporary: v.clone(),
+            permanent: v,
+        }
+    }
+
+    /// matches over a `Metaline` to update a field depending on
+    /// whether it's pageonly, permanent, or nochange
+    pub fn set_from<'a>(&mut self, meta: &'a Metaline<T>)
+    where
+        T: Clone,
+    {
+        use Metaline::*;
+        self.temporary = match meta {
+            PageOnly(ref v) => v,
+            Permanent(ref v) => {
+                self.permanent = v.clone();
+                v
+            }
+            NoChange => &self.permanent,
+        }
+        .clone();
+    }
+}
+
 #[derive(GodotClass)]
 #[class(init, base=PanelContainer)]
 pub struct DialogBox {
@@ -406,56 +457,5 @@ impl DialogBox {
             // set timer
             set_timeout(DBOX_CHOICE_WAVE_TIME * i as f64, choice_slide_up);
         }
-    }
-}
-
-/// Turn a Speaker into a displayable name
-///
-/// Either the name of the speaker or a special name
-/// if it's a narrator or unknown speaker
-pub fn spk_display(spk: &Speaker) -> String {
-    use Speaker::*;
-
-    match spk {
-        Named(ref v) => v,
-        Narrator => NARRATOR_DISPLAYNAME,
-        Unknown => UNKNOWN_DISPLAYNAME,
-    }
-    .to_owned()
-}
-
-#[derive(Clone)]
-pub struct MetaPair<T> {
-    pub temporary: T,
-    pub permanent: T,
-}
-
-impl<T> MetaPair<T> {
-    pub fn from_cloned(v: T) -> Self
-    where
-        T: Clone,
-    {
-        Self {
-            temporary: v.clone(),
-            permanent: v,
-        }
-    }
-
-    /// matches over a `Metaline` to update a field depending on
-    /// whether it's pageonly, permanent, or nochange
-    pub fn set_from<'a>(&mut self, meta: &'a Metaline<T>)
-    where
-        T: Clone,
-    {
-        use Metaline::*;
-        self.temporary = match meta {
-            PageOnly(ref v) => v,
-            Permanent(ref v) => {
-                self.permanent = v.clone();
-                v
-            }
-            NoChange => &self.permanent,
-        }
-        .clone();
     }
 }
