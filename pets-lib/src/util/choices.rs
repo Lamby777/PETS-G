@@ -7,6 +7,7 @@ use crate::consts::choice_lists::*;
 use crate::prelude::*;
 
 use godot::engine::control::FocusMode;
+use godot::engine::object::ConnectFlags;
 use godot::engine::{Control, InputEvent, RichTextLabel};
 use godot::prelude::*;
 
@@ -39,10 +40,10 @@ impl ChoiceAgent {
     }
 
     pub fn choice_labels(&self) -> Vec<Gd<Control>> {
-        godot_print!(
-            "getting choice labels for {}",
-            self.base().get_parent().unwrap().get_name()
-        );
+        // godot_print!(
+        //     "getting choice labels for {}",
+        //     self.base().get_parent().unwrap().get_name()
+        // );
 
         let choices: Vec<Gd<Control>> = self
             .parent()
@@ -51,10 +52,10 @@ impl ChoiceAgent {
             .filter_map(|x| x.try_cast().ok())
             .collect();
 
-        godot_print!(
-            "{:?}",
-            choices.iter().map(|x| x.get_name()).collect::<Vec<_>>()
-        );
+        // godot_print!(
+        //     "{:?}",
+        //     choices.iter().map(|x| x.get_name()).collect::<Vec<_>>()
+        // );
 
         choices
     }
@@ -105,14 +106,19 @@ impl ChoiceAgent {
 
     #[func]
     pub fn set_focus_modes(&self) {
+        godot_print!("1a");
         let mode = match self.disabled {
             true => FocusMode::NONE,
             false => FocusMode::ALL,
         };
 
-        self.choice_labels()
-            .iter_mut()
-            .for_each(|x| x.set_focus_mode(mode));
+        for mut label in self.choice_labels() {
+            godot_print!("1b1");
+            label.set_focus_mode(mode);
+            godot_print!("1b2");
+        }
+
+        godot_print!("1c");
     }
 
     #[signal]
@@ -142,7 +148,10 @@ impl INode for ChoiceAgent {
                 .bindv(varray![choice.to_variant()]);
 
             choice.connect("focus_entered".into(), entered);
-            choice.connect("focus_exited".into(), exited);
+            choice
+                .connect_ex("focus_exited".into(), exited)
+                .flags(ConnectFlags::DEFERRED.ord() as u32)
+                .done();
         }
 
         self.set_focus_modes()
@@ -168,13 +177,14 @@ impl INode for ChoiceAgent {
                 return; // if no choices, return
             }
 
+            mark_input_handled(&self.base());
+
             godot_print!(
                 "focusing first choice on {} because nothing is focused",
                 self.base().get_parent().unwrap().get_name()
             );
             self.focus_first();
 
-            mark_input_handled(&self.base());
             return;
         }
 
