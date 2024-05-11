@@ -83,6 +83,10 @@ impl IPanel for WorldMenu {
 
     fn input(&mut self, event: Gd<InputEvent>) {
         if event.is_action_pressed("menu".into()) {
+            if !PlayerCB::singleton().bind().can_move() {
+                return; // you can only open the menu if you can walk
+            }
+
             mark_input_handled(&self.base());
 
             self.toggle_open();
