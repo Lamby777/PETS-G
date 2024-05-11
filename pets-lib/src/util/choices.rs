@@ -52,7 +52,7 @@ impl ChoiceAgent {
 
         self.base_mut()
             .emit_signal("selection_focused".into(), &[name.to_variant()]);
-        self.focused = Some(name);
+        self.focused = Some(name.clone());
 
         _tween_choice(true, choice);
     }
@@ -159,6 +159,7 @@ impl INode for ChoiceAgent {
             self.focus_first();
 
             mark_input_handled(&self.base());
+            return;
         }
 
         if is_pressed("ui_accept")
@@ -175,6 +176,9 @@ impl INode for ChoiceAgent {
 
 // TODO vertical tweening
 fn _tween_choice(is_picked: bool, node: Gd<Control>) {
+    let on_off = if is_picked { "on" } else { "off" };
+    godot_print!("tweening {} {}", node.get_name(), on_off);
+
     let node = node.try_cast::<RichTextLabel>().unwrap_or_else(|node| {
         godot_print!("getting text inside container");
         node.get_node_as("RichTextLabel")
