@@ -147,7 +147,11 @@ impl INode for ChoiceAgent {
                 .callable("_tween_choice_off")
                 .bindv(varray![choice.to_variant()]);
 
-            choice.connect("focus_entered".into(), entered);
+            // choice.connect("focus_entered".into(), entered);
+            choice
+                .connect_ex("focus_entered".into(), entered)
+                .flags(ConnectFlags::DEFERRED.ord() as u32)
+                .done();
             choice
                 .connect_ex("focus_exited".into(), exited)
                 .flags(ConnectFlags::DEFERRED.ord() as u32)
