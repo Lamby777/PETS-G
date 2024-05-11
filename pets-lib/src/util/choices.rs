@@ -39,11 +39,24 @@ impl ChoiceAgent {
     }
 
     pub fn choice_labels(&self) -> Vec<Gd<Control>> {
-        self.parent()
+        godot_print!(
+            "getting choice labels for {}",
+            self.base().get_parent().unwrap().get_name()
+        );
+
+        let choices: Vec<Gd<Control>> = self
+            .parent()
             .get_children()
             .iter_shared()
             .filter_map(|x| x.try_cast().ok())
-            .collect()
+            .collect();
+
+        godot_print!(
+            "{:?}",
+            choices.iter().map(|x| x.get_name()).collect::<Vec<_>>()
+        );
+
+        choices
     }
 
     #[func]
