@@ -262,6 +262,8 @@ impl DialogBox {
 
     #[func]
     pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
+        godot_print!("picked choice: {}", choice.get_name());
+
         // TODO HACK
         let picked_i = index_of_child_with_name::<DChoice, _>(
             self.choice_container(),
@@ -295,8 +297,6 @@ impl DialogBox {
                 self.run_label(label);
             }
         }
-
-        self.choice_agent.bind_mut().disable();
     }
 }
 
@@ -320,7 +320,8 @@ impl IPanelContainer for DialogBox {
     fn ready(&mut self) {
         let mut connect = |name: &str, method: &str| {
             let callable = self.base().callable(method);
-            self.choice_agent.connect(name.into(), callable);
+            // self.choice_agent.connect(name.into(), callable);
+            connect_deferred(&mut self.choice_agent, name.into(), callable);
         };
 
         connect("selection_confirmed", "on_choice_picked");
