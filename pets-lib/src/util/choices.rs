@@ -19,7 +19,7 @@ pub struct ChoiceAgent {
     base: Base<Node>,
 
     /// Name of the currently focused choice
-    focused: Option<String>,
+    focused: Option<Gd<Control>>,
 
     callable_map: HashMap<Gd<Node>, (Callable, Callable)>,
 
@@ -55,20 +55,21 @@ impl ChoiceAgent {
             return;
         }
 
-        let name = choice.get_name().to_string();
-
         self.base_mut()
-            .emit_signal("selection_focused".into(), &[name.to_variant()]);
-        self.focused = Some(name.clone());
+            .emit_signal("selection_focused".into(), &[choice
+                .clone()
+                .to_variant()]);
+        self.focused = Some(choice.clone());
 
         _tween_choice(true, choice);
     }
 
     #[func]
     pub fn _tween_choice_off(&mut self, choice: Gd<Control>) {
-        let name = choice.get_name().to_string();
         self.base_mut()
-            .emit_signal("selection_unfocused".into(), &[name.to_variant()]);
+            .emit_signal("selection_unfocused".into(), &[choice
+                .clone()
+                .to_variant()]);
 
         _tween_choice(false, choice);
     }
@@ -110,13 +111,13 @@ impl ChoiceAgent {
     }
 
     #[signal]
-    fn selection_focused(choice: GString) {}
+    fn selection_focused(choice: Gd<Control>) {}
 
     #[signal]
-    fn selection_unfocused(choice: GString) {}
+    fn selection_unfocused(choice: Gd<Control>) {}
 
     #[signal]
-    fn selection_confirmed(choice: GString) {}
+    fn selection_confirmed(choice: Gd<Control>) {}
 
     #[func]
     pub fn bind_callables(&mut self) {

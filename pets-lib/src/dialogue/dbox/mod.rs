@@ -6,8 +6,8 @@ use dialogical::prelude::*;
 use godot::engine::global::Side;
 use godot::engine::tween::TransitionType;
 use godot::engine::{
-    AnimationPlayer, CanvasLayer, HBoxContainer, IPanelContainer, InputEvent,
-    PanelContainer, RichTextLabel, Tween,
+    AnimationPlayer, CanvasLayer, Control, HBoxContainer, IPanelContainer,
+    InputEvent, PanelContainer, RichTextLabel, Tween,
 };
 use godot::prelude::*;
 
@@ -251,22 +251,21 @@ impl DialogBox {
     }
 
     #[func]
-    pub fn on_choice_focused(&self, choice: GString) {
-        let node = self.choice_container().get_node_as::<DChoice>(&choice);
-        tween_choice(node, true);
+    pub fn on_choice_focused(&self, choice: Gd<Control>) {
+        tween_choice(choice.cast(), true);
     }
 
     #[func]
-    pub fn on_choice_unfocused(&self, choice: GString) {
-        let node = self.choice_container().get_node_as::<DChoice>(&choice);
-        tween_choice(node, false);
+    pub fn on_choice_unfocused(&self, choice: Gd<Control>) {
+        tween_choice(choice.cast(), false);
     }
 
     #[func]
-    pub fn on_choice_picked(&mut self, choice: GString) {
+    pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
+        // TODO HACK
         let picked_i = index_of_child_with_name::<DChoice, _>(
             self.choice_container(),
-            choice, // the name
+            choice.get_name().into(), // the name
         )
         .expect("Could not find index of choice node!");
 

@@ -3,7 +3,7 @@
 //! the GDExtension side that runs during battles.
 //!
 
-use godot::engine::AnimationPlayer;
+use godot::engine::{AnimationPlayer, Control};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -59,8 +59,8 @@ impl BattleEngine {
     }
 
     #[func]
-    pub fn on_choice_picked(&self, choice: GString) {
-        match choice.to_string().as_str() {
+    pub fn on_choice_picked(&self, choice: Gd<Control>) {
+        match choice.get_name().to_string().as_str() {
             "Attack" => todo!(),
             "Skills" => todo!(),
             "Items" => todo!(),
