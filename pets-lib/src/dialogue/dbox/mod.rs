@@ -349,8 +349,6 @@ impl IPanelContainer for DialogBox {
         }
 
         if self.awaiting_choice() {
-            mark_input_handled(&self.base());
-            // TODO self.process_choice_input();
             return;
         }
 
