@@ -120,12 +120,9 @@ impl BattleEngine {
     #[func]
     pub fn on_choice_picked(&self, choice: Gd<Control>) {
         match choice.get_name().to_string().as_str() {
-            // no longer a reason for "Attack" to exist because
-            // the menu is toggleable so closing it = attack
-            "IDK" => todo!(),
-
             "Skills" => todo!(),
             "Items" => todo!(),
+            "Swap" => todo!(),
 
             "Run" => {
                 // TODO roll, don't always succeed
