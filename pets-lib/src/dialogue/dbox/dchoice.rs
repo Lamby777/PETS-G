@@ -35,7 +35,7 @@ impl DChoice {
         let tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
 
         tween(
-            self.txt_label().upcast(),
+            self.txt_label(),
             "position:y",
             None,
             tw_end,

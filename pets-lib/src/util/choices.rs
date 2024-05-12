@@ -229,7 +229,7 @@ fn _tween_choice(is_picked: bool, node: Gd<Control>) {
 
     // tween x
     let t1 = tween(
-        node.clone().upcast(),
+        node.clone(),
         "position:x",
         None,
         target_x,
@@ -239,7 +239,7 @@ fn _tween_choice(is_picked: bool, node: Gd<Control>) {
 
     // tween color
     let t2 = tween(
-        node.clone().upcast(),
+        node.clone(),
         "theme_override_colors/default_color",
         None,
         target_col,
