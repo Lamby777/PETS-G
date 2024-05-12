@@ -123,36 +123,20 @@ impl ChoiceAgent {
     #[signal]
     fn selection_confirmed(choice: Gd<Control>) {}
 
-    #[func]
-    pub fn bind_callables(&mut self) {
-        // get rid of old bindings to prevent duplicate calls
-        self.unbind_callables();
+    pub fn bind_callable<N: Inherits<Control>>(&mut self, choice: &mut Gd<N>) {
+        let choice = &mut choice.clone().upcast();
 
-        for choice in &mut self.choice_labels() {
-            if !choice.is_inside_tree() {
-                godot_warn!("wtf? {}", choice.get_name());
-                continue;
-            }
+        let entered = self
+            .base()
+            .callable("_tween_choice_on")
+            .bindv(varray![choice.to_variant()]);
+        let exited = self
+            .base()
+            .callable("_tween_choice_off")
+            .bindv(varray![choice.to_variant()]);
 
-            let entered = self
-                .base()
-                .callable("_tween_choice_on")
-                .bindv(varray![choice.to_variant()]);
-
-            let exited = self
-                .base()
-                .callable("_tween_choice_off")
-                .bindv(varray![choice.to_variant()]);
-
-            connect_deferred(choice, "focus_entered", entered.clone());
-            connect_deferred(choice, "focus_exited", exited.clone());
-
-            godot_print!("binding callables for {}", choice.get_name());
-            self.callable_map
-                .insert(choice.clone().upcast(), (entered, exited));
-
-            godot_print!("bound callables for {}", choice.get_name());
-        }
+        connect_deferred(choice, "focus_entered", entered.clone());
+        connect_deferred(choice, "focus_exited", exited.clone());
     }
 
     #[func]
@@ -178,7 +162,6 @@ impl ChoiceAgent {
 #[godot_api]
 impl INode for ChoiceAgent {
     fn ready(&mut self) {
-        self.bind_callables();
         self.set_focus_modes()
     }
 

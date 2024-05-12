@@ -444,11 +444,15 @@ impl DialogBox {
         let mut cont = self.choice_container();
 
         for (i, choice) in choices.iter().enumerate() {
-            let dchoice = DChoice::new_container(i, &choice.text);
+            let mut dchoice = DChoice::new_container(i, &choice.text);
+
+            godot_print!("binding callables for {}", dchoice.get_name());
+            self.choice_agent.bind_mut().bind_callable(&mut dchoice);
+            godot_print!("bound callables for {}", dchoice.get_name());
+
             cont.add_child(dchoice.clone().upcast());
         }
 
-        self.choice_agent.bind_mut().bind_callables();
         self.set_choice_label_focus_directions();
     }
 
