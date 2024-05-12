@@ -100,7 +100,13 @@ impl ChoiceAgent {
         let mut choices = self.choice_labels();
         let guard = self.base_mut();
 
-        godot_print!("deferred grab focus on {}", choices[0].get_name());
+        let mode = choices[0].get_focus_mode();
+        godot_print!(
+            "deferred grab focus on {}, it's in {:?} mode",
+            choices[0].get_name(),
+            mode
+        );
+
         choices[0].call_deferred("grab_focus".into(), &[]);
 
         drop(guard);
