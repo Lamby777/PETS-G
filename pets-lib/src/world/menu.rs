@@ -47,12 +47,9 @@ impl WorldMenu {
         // set focus mode
         let mut choices = self.choices.bind_mut();
 
-        godot_print!("1");
         choices.set_disabled(!open);
         if open {
-            godot_print!("2");
             choices.focus_first();
-            godot_print!("3");
         }
     }
 

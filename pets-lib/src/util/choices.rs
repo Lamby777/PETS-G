@@ -114,19 +114,14 @@ impl ChoiceAgent {
 
     #[func]
     pub fn set_focus_modes(&self) {
-        godot_print!("1a");
         let mode = match self.disabled {
             true => FocusMode::NONE,
             false => FocusMode::ALL,
         };
 
         for mut label in self.choice_labels() {
-            godot_print!("1b1");
             label.set_focus_mode(mode);
-            godot_print!("1b2");
         }
-
-        godot_print!("1c");
     }
 
     #[signal]
