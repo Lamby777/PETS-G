@@ -119,6 +119,11 @@ impl ChoiceAgent {
         self.unbind_callables();
 
         for choice in &mut self.choice_labels() {
+            if !choice.is_inside_tree() {
+                godot_print!("wtf? {}", choice.get_name());
+                continue;
+            }
+
             let entered = self
                 .base()
                 .callable("_tween_choice_on")
@@ -131,9 +136,10 @@ impl ChoiceAgent {
 
             connect_deferred(choice, "focus_entered", entered.clone());
             connect_deferred(choice, "focus_exited", exited.clone());
-
             self.callable_map
                 .insert(choice.clone().upcast(), (entered, exited));
+
+            godot_print!("bound callables for {}", choice.get_name());
         }
     }
 
@@ -152,6 +158,7 @@ impl ChoiceAgent {
 
             choice.disconnect("focus_entered".into(), entered.clone());
             choice.disconnect("focus_exited".into(), exited.clone());
+            self.callable_map.remove(&choice.clone().upcast());
         }
     }
 }
