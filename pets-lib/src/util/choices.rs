@@ -71,6 +71,10 @@ impl ChoiceAgent {
                 .clone()
                 .to_variant()]);
 
+        if self.focused == Some(choice.clone()) {
+            self.focused = None;
+        }
+
         _tween_choice(false, choice);
     }
 
@@ -126,7 +130,7 @@ impl ChoiceAgent {
 
         for choice in &mut self.choice_labels() {
             if !choice.is_inside_tree() {
-                godot_print!("wtf? {}", choice.get_name());
+                godot_warn!("wtf? {}", choice.get_name());
                 continue;
             }
 
@@ -142,6 +146,8 @@ impl ChoiceAgent {
 
             connect_deferred(choice, "focus_entered", entered.clone());
             connect_deferred(choice, "focus_exited", exited.clone());
+
+            godot_print!("binding callables for {}", choice.get_name());
             self.callable_map
                 .insert(choice.clone().upcast(), (entered, exited));
 
@@ -202,9 +208,16 @@ impl INode for ChoiceAgent {
             return;
         }
 
-        if is_pressed("ui_accept")
-            && let Some(focused) = &self.focused.clone()
-        {
+        if is_pressed("ui_accept") {
+            if let Some(focused) = &self.focused
+                && !focused.is_inside_tree()
+            {
+                godot_warn!("focused choice is not inside tree, returning");
+                return;
+            }
+
+            // we know it's safe to unwrap here
+            let focused = self.focused.clone().unwrap();
             mark_input_handled(&self.base());
 
             self.base_mut().emit_signal("selection_confirmed".into(), &[
