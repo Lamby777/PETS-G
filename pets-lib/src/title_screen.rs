@@ -6,6 +6,7 @@
 //! - Cherry, 2:54 AM, 10/5/2023 | <3
 //!
 
+use godot::engine::Control;
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -22,8 +23,8 @@ struct TitleScreen {
 #[godot_api]
 impl TitleScreen {
     #[func]
-    pub fn on_choice_picked(&self, choice: GString) {
-        match choice.to_string().as_str() {
+    pub fn on_choice_picked(&self, choice: Gd<Control>) {
+        match choice.get_name().to_string().as_str() {
             "Play" => {
                 // TODO should animate the menu boxes flying
                 // off into the right, and the camera goes left
