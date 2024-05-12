@@ -6,8 +6,8 @@ use dialogical::prelude::*;
 use godot::engine::global::Side;
 use godot::engine::tween::TransitionType;
 use godot::engine::{
-    AnimationPlayer, CanvasLayer, Control, HBoxContainer, IPanelContainer,
-    InputEvent, PanelContainer, RichTextLabel, Tween,
+    AnimationPlayer, CanvasLayer, HBoxContainer, IPanelContainer, InputEvent,
+    PanelContainer, RichTextLabel, Tween,
 };
 use godot::prelude::*;
 
@@ -254,6 +254,18 @@ impl DialogBox {
     }
 
     #[func]
+    pub fn on_choice_focused(&self, choice: GString) {
+        let node = self.choice_container().get_node_as::<DChoice>(&choice);
+        tween_choice(node, true);
+    }
+
+    #[func]
+    pub fn on_choice_unfocused(&self, choice: GString) {
+        let node = self.choice_container().get_node_as::<DChoice>(&choice);
+        tween_choice(node, false);
+    }
+
+    #[func]
     pub fn on_choice_picked(&self, choice: GString) {
         // TODO process input without Wrapped<>
         // Pick(picked_i, _) => {
@@ -289,10 +301,7 @@ impl DialogBox {
     }
 }
 
-fn tween_choice(args: GArgs) -> GReturn {
-    let choice: Gd<Control> = args[0].to();
-    let focused: bool = args[1].to();
-
+fn tween_choice(choice: Gd<DChoice>, focused: bool) {
     let focused_txt = if focused { "focused" } else { "unfocused" };
     godot_print!("{}: {}", focused_txt, choice.get_name());
 
@@ -305,26 +314,19 @@ fn tween_choice(args: GArgs) -> GReturn {
         TransitionType::QUAD,
     )
     .unwrap();
-
-    Ok(Variant::nil())
 }
 
 #[godot_api]
 impl IPanelContainer for DialogBox {
     fn ready(&mut self) {
-        let callable = self.base().callable("on_choice_picked");
-        self.choice_agent
-            .connect("selection_confirmed".into(), callable);
+        let mut connect = |name: &str, method: &str| {
+            let callable = self.base().callable(method);
+            self.choice_agent.connect(name.into(), callable);
+        };
 
-        // connect focus enter/exit
-        let callable = Callable::from_fn("", tween_choice);
-        let focused = callable.bindv(varray![true.to_variant()]);
-        let unfocused = callable.bindv(varray![false.to_variant()]);
-
-        self.choice_agent
-            .connect("selection_focused".into(), focused);
-        self.choice_agent
-            .connect("selection_unfocused".into(), unfocused);
+        connect("selection_confirmed", "on_choice_picked");
+        connect("selection_focused", "on_choice_focused");
+        connect("selection_unfocused", "on_choice_unfocused");
 
         self.choice_agent.bind_mut().disable();
     }
