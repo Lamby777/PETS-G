@@ -21,6 +21,8 @@ pub struct ChoiceAgent {
     /// Name of the currently focused choice
     focused: Option<String>,
 
+    callable_map: HashMap<Gd<Node>, (Callable, Callable)>,
+
     #[export]
     #[init(default = CHOICE_WAVE_BBCODE.into())]
     bbcode: GString,
@@ -132,14 +134,13 @@ impl ChoiceAgent {
 
     #[signal]
     fn selection_confirmed(choice: GString) {}
-}
 
-#[godot_api]
-impl INode for ChoiceAgent {
-    fn ready(&mut self) {
-        let mut choices = self.choice_labels();
+    #[func]
+    pub fn bind_callables(&mut self) {
+        // get rid of old bindings to prevent duplicate calls
+        self.unbind_callables();
 
-        for choice in &mut choices {
+        for choice in &mut self.choice_labels() {
             let entered = self
                 .base()
                 .callable("_tween_choice_on")
@@ -150,11 +151,41 @@ impl INode for ChoiceAgent {
                 .callable("_tween_choice_off")
                 .bindv(varray![choice.to_variant()]);
 
-            // choice.connect("focus_entered".into(), entered);
-            connect_deferred(choice, "focus_entered", entered);
-            connect_deferred(choice, "focus_exited", exited);
-        }
+            connect_deferred(choice, "focus_entered", entered.clone());
+            connect_deferred(choice, "focus_exited", exited.clone());
 
+            self.callable_map
+                .insert(choice.clone().upcast(), (entered, exited));
+        }
+    }
+
+    #[func]
+    pub fn unbind_callables(&mut self) {
+        for mut choice in self.choice_labels() {
+            let entry = self.callable_map.get(&choice.clone().upcast());
+            let Some((entered, exited)) = entry else {
+                godot_print!(
+                    "unbind_callables: no callables found for {}",
+                    choice.get_name()
+                );
+                continue;
+            };
+
+            godot_print!(
+                "unbind_callables: CALLABLES FOUND for {}",
+                choice.get_name()
+            );
+
+            choice.disconnect("focus_entered".into(), entered.clone());
+            choice.disconnect("focus_exited".into(), exited.clone());
+        }
+    }
+}
+
+#[godot_api]
+impl INode for ChoiceAgent {
+    fn ready(&mut self) {
+        self.bind_callables();
         self.set_focus_modes()
     }
 
