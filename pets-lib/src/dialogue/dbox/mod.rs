@@ -431,7 +431,7 @@ impl DialogBox {
         let children = subchildren_of_type::<DChoice, _>(cont.clone());
 
         for mut node in children {
-            node.set_name("deez".into());
+            node.set_name("deleted".into());
             node.queue_free();
             cont.remove_child(node.upcast());
         }
