@@ -79,7 +79,6 @@ pub struct DialogBox {
     current_ix: Option<Interaction>,
     current_page_number: usize,
     active: bool,
-    awaiting_choice: bool,
 
     #[init(default = onready_node(&base, "VBox/Choices/ChoiceAgent"))]
     choice_agent: OnReady<Gd<ChoiceAgent>>,
@@ -192,10 +191,6 @@ impl DialogBox {
         } else {
             anim.play_backwards()
         }
-
-        // set focus mode
-        let mut choices = self.choice_agent.bind_mut();
-        choices.set_disabled(!open);
     }
 
     pub fn run_label(&mut self, label: &Label) {
@@ -237,8 +232,9 @@ impl DialogBox {
             Choices(choices) => {
                 self.recreate_choice_labels(&choices);
                 self.tween_choices_wave(true);
-                self.awaiting_choice = true;
-                self.choice_agent.bind_mut().focus_first();
+
+                let mut choices = self.choice_agent.bind_mut();
+                choices.focus_first();
             }
 
             Label(label) => self.run_label(&label),
@@ -282,7 +278,7 @@ impl DialogBox {
         //         }
         //     }
         //
-        //     self.awaiting_choice = false;
+        //     self.choice_agent.bind_mut().disable();
         // }
         match choice.to_string().as_str() {
             "Inventory" => todo!(),
@@ -350,7 +346,7 @@ impl IPanelContainer for DialogBox {
             }
         }
 
-        if self.awaiting_choice {
+        if self.awaiting_choice() {
             mark_input_handled(&self.base());
             // TODO self.process_choice_input();
             return;
@@ -366,6 +362,10 @@ impl IPanelContainer for DialogBox {
 /// shorter methods that are sorta self-explanatory
 /// moving 'em here to avoid clutter up above
 impl DialogBox {
+    fn awaiting_choice(&self) -> bool {
+        !self.choice_agent.bind().get_disabled()
+    }
+
     /// Get the speaker name label
     fn spk_txt(&self) -> Gd<RichTextLabel> {
         self.base().get_node_as("VBox/SpeakerName")
@@ -404,7 +404,7 @@ impl DialogBox {
             if let DialogueEnding::Choices(choices) = ending {
                 self.recreate_choice_labels(&choices);
                 self.tween_choices_wave(true);
-                self.awaiting_choice = true;
+                self.choice_agent.bind_mut().enable();
             }
         }
     }
