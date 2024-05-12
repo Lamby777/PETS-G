@@ -448,6 +448,8 @@ impl DialogBox {
         self.set_choice_label_focus_directions();
     }
 
+    /// makes it so that all the choice labels refer to each
+    /// other in their focus neighbor properties
     pub fn set_choice_label_focus_directions(&self) {
         let nodes = self.choice_nodes();
         let Some(mut previous) = nodes.last().map(Gd::clone) else {
