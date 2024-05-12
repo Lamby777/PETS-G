@@ -206,33 +206,11 @@ layout_mode = 2
 
 [node name="ChoiceAgent" type="ChoiceAgent" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 
-[node name="IDK" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
+[node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 clip_contents = false
 layout_mode = 2
 offset_right = 432.0
 offset_bottom = 94.0
-focus_neighbor_top = NodePath("../Run")
-focus_neighbor_bottom = NodePath("../Skills")
-focus_next = NodePath("../Skills")
-focus_previous = NodePath("../Run")
-focus_mode = 2
-theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 80
-bbcode_enabled = true
-text = "IDK"
-fit_content = true
-
-[node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
-clip_contents = false
-layout_mode = 2
-offset_top = 104.0
-offset_right = 432.0
-offset_bottom = 198.0
-focus_neighbor_top = NodePath("../IDK")
-focus_neighbor_bottom = NodePath("../Items")
-focus_next = NodePath("../Items")
-focus_previous = NodePath("../IDK")
-focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
@@ -242,18 +220,25 @@ fit_content = true
 [node name="Items" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 clip_contents = false
 layout_mode = 2
-offset_top = 208.0
+offset_top = 104.0
 offset_right = 432.0
-offset_bottom = 302.0
-focus_neighbor_top = NodePath("../Skills")
-focus_neighbor_bottom = NodePath("../Run")
-focus_next = NodePath("../Run")
-focus_previous = NodePath("../Skills")
-focus_mode = 2
+offset_bottom = 198.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Items"
+fit_content = true
+
+[node name="Swap" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
+clip_contents = false
+layout_mode = 2
+offset_top = 208.0
+offset_right = 432.0
+offset_bottom = 302.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "Swap"
 fit_content = true
 
 [node name="Run" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
@@ -262,11 +247,6 @@ layout_mode = 2
 offset_top = 312.0
 offset_right = 432.0
 offset_bottom = 406.0
-focus_neighbor_top = NodePath("../Items")
-focus_neighbor_bottom = NodePath("../IDK")
-focus_next = NodePath("../IDK")
-focus_previous = NodePath("../Items")
-focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
