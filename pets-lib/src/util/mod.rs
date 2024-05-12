@@ -134,8 +134,8 @@ pub fn prefix_mod(target: &str, prefix: &str, active: bool) -> String {
 
 /// shorthand to do some tweeneroonies :3
 /// `time` is in seconds
-pub fn tween<NP, V>(
-    mut node: Gd<Node>,
+pub fn tween<NP, V, N>(
+    mut node: Gd<N>,
     property: NP,
     start_value: Option<V>,
     end_value: V,
@@ -145,13 +145,14 @@ pub fn tween<NP, V>(
 where
     NP: Into<NodePath>,
     V: ToGodot,
+    N: Inherits<Node> + Inherits<Object>,
 {
     let res: Option<_> = try {
-        let mut tween = node.create_tween()?;
+        let mut tween = node.upcast_mut::<Node>().create_tween()?;
 
         let mut property = tween
             .tween_property(
-                node.clone().upcast(),
+                node.upcast::<Object>(),
                 property.into(),
                 end_value.to_variant(),
                 time,

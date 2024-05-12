@@ -140,7 +140,7 @@ impl DialogBox {
     /// See <https://github.com/Lamby777/PETS-G/issues/50>
     pub fn tween_txt_visibility(&mut self) {
         let tw = tween(
-            self.msg_txt().upcast(),
+            self.msg_txt(),
             "visible_ratio",
             Some(0.0),
             1.0,
@@ -306,7 +306,7 @@ fn tween_choice(choice: Gd<DChoice>, focused: bool) {
     godot_print!("{}: {}", focused_txt, choice.get_name());
 
     tween(
-        choice.upcast(),
+        choice,
         "position:y",
         None,
         if focused { 40.0 } else { 0.0 },
