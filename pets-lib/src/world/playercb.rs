@@ -1,5 +1,5 @@
 use godot::engine::{
-    CanvasLayer, CharacterBody2D, ColorRect, ICharacterBody2D, ShaderMaterial,
+    CharacterBody2D, ColorRect, ICharacterBody2D, ShaderMaterial,
 };
 use godot::prelude::*;
 
@@ -34,10 +34,12 @@ impl PlayerCB {
         current_scene().get_node_as("%PlayerCB")
     }
 
+    /// Get the fx rectangle that follows the player
     pub fn fx_rect() -> Gd<ColorRect> {
         Self::singleton().get_node_as("BattleIntroRect")
     }
 
+    /// Get the shader material of the fx rect
     pub fn fx_material() -> Gd<ShaderMaterial> {
         Self::fx_rect().get_material().unwrap().cast()
     }
