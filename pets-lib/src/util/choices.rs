@@ -147,7 +147,6 @@ impl ChoiceAgent {
                 .get_signal_connection_list(signal_name.into())
                 .iter_shared()
                 .for_each(|dict| {
-                    godot_print!("unbind: found signal {:?}", dict);
                     // let signal = dict.get("signal").unwrap();
                     let callable = dict.get("callable").unwrap();
 
@@ -210,9 +209,6 @@ impl INode for ChoiceAgent {
 
 // TODO vertical tweening
 fn _tween_choice(is_picked: bool, node: Gd<Control>) {
-    let on_off = if is_picked { "on" } else { "off" };
-    godot_print!("tweening {} {}", node.get_name(), on_off);
-
     if !node.is_inside_tree() {
         godot_print!("node to tween is not inside tree, returning");
         return;
