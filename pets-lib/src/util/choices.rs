@@ -7,7 +7,6 @@ use crate::consts::choice_lists::*;
 use crate::prelude::*;
 
 use godot::engine::control::FocusMode;
-use godot::engine::object::ConnectFlags;
 use godot::engine::{Control, InputEvent, RichTextLabel};
 use godot::prelude::*;
 
@@ -151,14 +150,8 @@ impl INode for ChoiceAgent {
                 .bindv(varray![choice.to_variant()]);
 
             // choice.connect("focus_entered".into(), entered);
-            choice
-                .connect_ex("focus_entered".into(), entered)
-                .flags(ConnectFlags::DEFERRED.ord() as u32)
-                .done();
-            choice
-                .connect_ex("focus_exited".into(), exited)
-                .flags(ConnectFlags::DEFERRED.ord() as u32)
-                .done();
+            connect_deferred(choice, "focus_entered", entered);
+            connect_deferred(choice, "focus_exited", exited);
         }
 
         self.set_focus_modes()
