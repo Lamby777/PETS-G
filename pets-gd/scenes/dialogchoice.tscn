@@ -7,7 +7,7 @@ offset_right = 1181.0
 offset_bottom = 200.0
 theme = ExtResource("1_nq50x")
 
-[node name="Label" type="RichTextLabel" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)

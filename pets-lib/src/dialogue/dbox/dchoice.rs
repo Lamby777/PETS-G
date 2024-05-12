@@ -27,7 +27,7 @@ impl DChoice {
     }
 
     pub fn txt_label(&self) -> Gd<RichTextLabel> {
-        self.base().get_node_as("Label")
+        self.base().get_node_as("RichTextLabel")
     }
 
     /// tween the contained text label in/out of the window
