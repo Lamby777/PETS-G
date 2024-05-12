@@ -449,6 +449,7 @@ impl DialogBox {
             cont.add_child(dchoice.clone().upcast());
         }
 
+        self.choice_agent.bind_mut().bind_callables();
         self.set_choice_label_focus_directions();
     }
 

@@ -151,8 +151,10 @@ impl ChoiceAgent {
                 .callable("_tween_choice_off")
                 .bindv(varray![choice.to_variant()]);
 
-            connect_deferred(choice, "focus_entered", entered.clone());
-            connect_deferred(choice, "focus_exited", exited.clone());
+            choice.connect("focus_entered".into(), entered.clone());
+            choice.connect("focus_exited".into(), exited.clone());
+            // connect_deferred(choice, "focus_entered", entered.clone());
+            // connect_deferred(choice, "focus_exited", exited.clone());
 
             self.callable_map
                 .insert(choice.clone().upcast(), (entered, exited));
