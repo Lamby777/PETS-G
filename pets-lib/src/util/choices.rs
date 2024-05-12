@@ -41,24 +41,11 @@ impl ChoiceAgent {
     }
 
     pub fn choice_labels(&self) -> Vec<Gd<Control>> {
-        // godot_print!(
-        //     "getting choice labels for {}",
-        //     self.base().get_parent().unwrap().get_name()
-        // );
-
-        let choices: Vec<Gd<Control>> = self
-            .parent()
+        self.parent()
             .get_children()
             .iter_shared()
             .filter_map(|x| x.try_cast().ok())
-            .collect();
-
-        // godot_print!(
-        //     "{:?}",
-        //     choices.iter().map(|x| x.get_name()).collect::<Vec<_>>()
-        // );
-
-        choices
+            .collect()
     }
 
     #[func]
@@ -101,11 +88,7 @@ impl ChoiceAgent {
     pub fn focus_first(&mut self) {
         let mut choices = self.choice_labels();
         let guard = self.base_mut();
-
-        godot_print!("grabbing focus on {}", choices[0].get_name(),);
-        // choices[0].grab_focus();
         choices[0].call_deferred("grab_focus".into(), &[]);
-
         drop(guard);
     }
 
@@ -159,14 +142,13 @@ impl ChoiceAgent {
         for mut choice in self.choice_labels() {
             let entry = self.callable_map.get(&choice.clone().upcast());
             let Some((entered, exited)) = entry else {
-                godot_print!(
-                    "unbind: no old callables found for {}",
-                    choice.get_name()
-                );
                 continue;
             };
 
-            godot_print!("unbind: CALLABLES FOUND for {}", choice.get_name());
+            godot_print!(
+                "unbind: removing old callables found on {}",
+                choice.get_name()
+            );
 
             choice.disconnect("focus_entered".into(), entered.clone());
             choice.disconnect("focus_exited".into(), exited.clone());
@@ -202,11 +184,6 @@ impl INode for ChoiceAgent {
             }
 
             mark_input_handled(&self.base());
-
-            godot_print!(
-                "focusing first choice on {} because nothing is focused",
-                self.base().get_parent().unwrap().get_name()
-            );
             self.focus_first();
 
             return;
@@ -234,10 +211,9 @@ fn _tween_choice(is_picked: bool, node: Gd<Control>) {
         return;
     }
 
-    let node = node.try_cast::<RichTextLabel>().unwrap_or_else(|node| {
-        godot_print!("getting text inside container");
-        node.get_node_as("RichTextLabel")
-    });
+    let node = node
+        .try_cast::<RichTextLabel>()
+        .unwrap_or_else(|node| node.get_node_as("RichTextLabel"));
 
     let target_x = if is_picked { 64.0 } else { 0.0 };
 

@@ -232,9 +232,6 @@ impl DialogBox {
             Choices(choices) => {
                 self.recreate_choice_labels(&choices);
                 self.tween_choices_wave(true);
-
-                // let mut choices = self.choice_agent.bind_mut();
-                // choices.focus_first();
             }
 
             Label(label) => self.run_label(&label),
@@ -255,14 +252,12 @@ impl DialogBox {
 
     #[func]
     pub fn on_choice_focused(&self, choice: GString) {
-        godot_print!("focused: {}", choice);
         let node = self.choice_container().get_node_as::<DChoice>(&choice);
         tween_choice(node, true);
     }
 
     #[func]
     pub fn on_choice_unfocused(&self, choice: GString) {
-        godot_print!("unfocused: {}", choice);
         let node = self.choice_container().get_node_as::<DChoice>(&choice);
         tween_choice(node, false);
     }
