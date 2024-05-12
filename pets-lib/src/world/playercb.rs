@@ -1,5 +1,5 @@
 use godot::engine::{
-    CharacterBody2D, ColorRect, ICharacterBody2D, ShaderMaterial,
+    CanvasLayer, CharacterBody2D, ColorRect, ICharacterBody2D, ShaderMaterial,
 };
 use godot::prelude::*;
 
@@ -24,6 +24,8 @@ pub struct PlayerCB {
 
     #[init(default = LimiQ::new(2000))]
     past_rotations: LimiQ<Vector2>,
+
+    pub in_battle: bool,
 }
 
 #[godot_api]
@@ -46,12 +48,17 @@ impl PlayerCB {
     /// * Cutscenes
     /// * Menus
     pub fn can_move(&self) -> bool {
-        let dbox = DialogBox::singleton();
-        let dbox_active = dbox.bind().is_active();
+        // dialogue box open? no moving!
+        if DialogBox::singleton().bind().is_active() {
+            return false;
+        }
 
-        // NOTE don't refactor this function to be smaller.
-        // the line below will get more complex soon...
-        !dbox_active
+        // in battle? no moving!
+        if self.in_battle {
+            return false;
+        }
+
+        true
     }
 
     /// Set character positions based on past pos/rot

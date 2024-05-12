@@ -151,7 +151,7 @@ impl ICharacterBody2D for WalkingEnemy {
             return;
         }
 
-        if !self.is_player_in_sight() {
+        if !self.is_player_in_sight() || self.touched_player {
             // if far from player, play idle and face forward
             self.anim_move(AnimOptions {
                 moving: false,
