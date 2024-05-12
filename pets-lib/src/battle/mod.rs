@@ -3,7 +3,7 @@
 //! the GDExtension side that runs during battles.
 //!
 
-use godot::engine::{AnimationPlayer, Control};
+use godot::engine::{AnimationPlayer, Control, InputEvent};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -18,23 +18,32 @@ mod skills;
 mod rhythm;
 
 #[allow(unused)]
+#[derive(PartialEq)]
+enum MenuSection {
+    Main,
+    Item,
+    Skill,
+}
+
+#[allow(unused)]
 #[derive(Default, PartialEq)]
 enum BattleState {
+    /// Few seconds countdown before the music starts
     #[default]
-    /// Picking one of the options below
-    Menu,
+    Intro,
 
     /// Dodging attacks while clicking to the beat
-    Attack,
+    Attack {
+        /// Running away from battle?
+        ///
+        /// While running away, you won't be able
+        /// to fight back, but once the countdown
+        /// is over, you'll escape the fight.
+        running: bool,
+    },
 
-    /// Selecting a skill to use
-    Skill,
-
-    /// Selecting an item to use
-    Item,
-
-    /// Run away from the battle
-    Run,
+    /// Has the menu open
+    Menu(MenuSection),
 }
 
 #[allow(unused)]
@@ -53,15 +62,68 @@ pub struct BattleEngine {
 
 #[godot_api]
 impl BattleEngine {
+    /// slide the battle screen into view
     #[func]
     pub fn animate_in(&mut self) {
         //
     }
 
+    fn open_dualmenu(&mut self) {
+        let mut anim = self.dualmenu_animator();
+        anim.set_assigned_animation("dualmenu_open".into());
+        anim.play();
+
+        self.state = BattleState::Menu(MenuSection::Main);
+
+        // enable the choice list
+        let mut choices = self.choices.bind_mut();
+        choices.enable();
+        choices.focus_nth(0);
+    }
+
+    fn close_dualmenu(&mut self) {
+        let mut anim = self.dualmenu_animator();
+        anim.set_assigned_animation("dualmenu_open".into());
+        anim.play_backwards();
+
+        self.state = BattleState::Attack { running: false };
+
+        // enable the choice list
+        self.choices.bind_mut().disable();
+    }
+
+    fn toggle_dualmenu(&mut self) {
+        use BattleState::*;
+
+        match self.state {
+            // no menu while running away or in intro
+            Intro | Attack { running: true } => return,
+
+            // close menu if open
+            Menu(_) => self.close_dualmenu(),
+
+            // open menu if closed
+            // (exhaustive match in case we add more states later)
+            Attack { running: false } => self.open_dualmenu(),
+        }
+    }
+
+    pub fn dualmenu(&self) -> Gd<Control> {
+        self.base().get_node_as::<Control>("Menu/DualMenu")
+    }
+
+    pub fn dualmenu_animator(&self) -> Gd<AnimationPlayer> {
+        self.dualmenu()
+            .get_node_as::<AnimationPlayer>("AnimationPlayer")
+    }
+
     #[func]
     pub fn on_choice_picked(&self, choice: Gd<Control>) {
         match choice.get_name().to_string().as_str() {
-            "Attack" => todo!(),
+            // no longer a reason for "Attack" to exist because
+            // the menu is toggleable so closing it = attack
+            "IDK" => todo!(),
+
             "Skills" => todo!(),
             "Items" => todo!(),
 
@@ -84,6 +146,15 @@ impl INode2D for BattleEngine {
     fn ready(&mut self) {
         let callable = self.base().callable("on_choice_picked");
         self.choices.connect("selection_confirmed".into(), callable);
+
+        // TODO delay before intro is over
+        self.state = BattleState::Attack { running: false };
+    }
+
+    fn input(&mut self, event: Gd<InputEvent>) {
+        if event.is_action_pressed("menu".into()) {
+            self.toggle_dualmenu();
+        }
     }
 
     fn process(&mut self, _delta: f64) {

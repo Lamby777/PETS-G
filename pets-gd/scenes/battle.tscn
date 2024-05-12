@@ -59,6 +59,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_0hj2l"]
 resource_name = "dualmenu_open"
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -66,7 +67,7 @@ tracks/0/path = NodePath("Menu/DualMenu/LeftPanel:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-1600, -604), Vector2(-1024, -604)]
@@ -78,7 +79,7 @@ tracks/1/path = NodePath("Menu/DualMenu/RightPanel:position")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1024, -604), Vector2(448, -604)]
@@ -90,7 +91,7 @@ tracks/2/path = NodePath("Menu/DualMenu/RightPanel/Margins:theme_override_consta
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [24, -512]
@@ -205,7 +206,7 @@ layout_mode = 2
 
 [node name="ChoiceAgent" type="ChoiceAgent" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 
-[node name="Attack" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
+[node name="IDK" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 clip_contents = false
 layout_mode = 2
 offset_right = 432.0
@@ -218,7 +219,7 @@ focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
-text = "Attack"
+text = "IDK"
 fit_content = true
 
 [node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
@@ -227,10 +228,10 @@ layout_mode = 2
 offset_top = 104.0
 offset_right = 432.0
 offset_bottom = 198.0
-focus_neighbor_top = NodePath("../Attack")
+focus_neighbor_top = NodePath("../IDK")
 focus_neighbor_bottom = NodePath("../Items")
 focus_next = NodePath("../Items")
-focus_previous = NodePath("../Attack")
+focus_previous = NodePath("../IDK")
 focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
@@ -262,8 +263,8 @@ offset_top = 312.0
 offset_right = 432.0
 offset_bottom = 406.0
 focus_neighbor_top = NodePath("../Items")
-focus_neighbor_bottom = NodePath("../Attack")
-focus_next = NodePath("../Attack")
+focus_neighbor_bottom = NodePath("../IDK")
+focus_next = NodePath("../IDK")
 focus_previous = NodePath("../Items")
 focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
@@ -405,7 +406,10 @@ text = "[right]168"
 fit_content = true
 autowrap_mode = 0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/DualMenu"]
+root_node = NodePath("../../..")
 libraries = {
 "": SubResource("AnimationLibrary_730bq")
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
