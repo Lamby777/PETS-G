@@ -147,11 +147,6 @@ impl ChoiceAgent {
     {
         let choice = choice.upcast_mut::<Control>();
 
-        godot_print!(
-            "unbind: removing old callables found on {}",
-            choice.get_name()
-        );
-
         let mut unbind = |signal_name: &str| {
             choice
                 .get_signal_connection_list(signal_name.into())
