@@ -15,9 +15,6 @@ Are you smart?
 > Definitely not
 @ Rodrick Sign #1 >> DefNot
 
-> Probably not
-@ Rodrick Sign #1 >> ProbNot
-
 ---
 % Rodrick Sign #1 >> Nope
 NAME Rodrick Sign Co.
@@ -33,15 +30,6 @@ NAME Rodrick Sign Co.
 VOX Default
 
 Yeah, I definitely didn't think so.
-
-@ Rodrick Sign #1 >> Exit
-
----
-% Rodrick Sign #1 >> ProbNot
-NAME Rodrick Sign Co.
-VOX Default
-
-Yeah, I probably didn't think so.
 
 @ Rodrick Sign #1 >> Exit
 

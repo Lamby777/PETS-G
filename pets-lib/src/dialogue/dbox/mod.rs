@@ -349,6 +349,8 @@ impl IPanelContainer for DialogBox {
         }
 
         if self.awaiting_choice() {
+            // TODO NOTE this used to handle stuff but like...
+            // i'm not sure if the early return is still necessary
             return;
         }
 
