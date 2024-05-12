@@ -301,8 +301,8 @@ impl DialogBox {
 }
 
 fn tween_choice(choice: Gd<DChoice>, focused: bool) {
-    let focused_txt = if focused { "focused" } else { "unfocused" };
-    godot_print!("{}: {}", focused_txt, choice.get_name());
+    // let focused_txt = if focused { "focused" } else { "unfocused" };
+    // godot_print!("{}: {}", focused_txt, choice.get_name());
 
     tween(
         choice,
