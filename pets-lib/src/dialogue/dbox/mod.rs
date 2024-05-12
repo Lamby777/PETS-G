@@ -433,6 +433,7 @@ impl DialogBox {
         for mut node in children {
             node.set_name("deleted".into());
             node.queue_free();
+            self.choice_agent.bind_mut().unbind_callables_for(&mut node);
             cont.remove_child(node.upcast());
         }
     }
@@ -447,7 +448,9 @@ impl DialogBox {
             let mut dchoice = DChoice::new_container(i, &choice.text);
 
             godot_print!("binding callables for {}", dchoice.get_name());
-            self.choice_agent.bind_mut().bind_callable(&mut dchoice);
+            self.choice_agent
+                .bind_mut()
+                .bind_callables_for(&mut dchoice);
             godot_print!("bound callables for {}", dchoice.get_name());
 
             cont.add_child(dchoice.clone().upcast());
