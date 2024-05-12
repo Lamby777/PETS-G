@@ -233,8 +233,8 @@ impl DialogBox {
                 self.recreate_choice_labels(&choices);
                 self.tween_choices_wave(true);
 
-                let mut choices = self.choice_agent.bind_mut();
-                choices.focus_first();
+                // let mut choices = self.choice_agent.bind_mut();
+                // choices.focus_first();
             }
 
             Label(label) => self.run_label(&label),
@@ -268,38 +268,44 @@ impl DialogBox {
     }
 
     #[func]
-    pub fn on_choice_picked(&self, choice: GString) {
-        // TODO process input without Wrapped<>
-        // Pick(picked_i, _) => {
-        //     // we know the ending has to be `Choices` and not a label or end
-        //     let ending = self.current_ix_ending().unwrap().clone();
-        //     let DialogueEnding::Choices(choices) = ending else {
-        //         unreachable!()
-        //     };
-        //
-        //     match &choices[picked_i].label {
-        //         // no label means end the interaction
-        //         None => self.end_interaction(),
-        //
-        //         Some(label) => {
-        //             let dchoice = &self.choices[picked_i];
-        //             let txt = dchoice.bind().txt_label();
-        //
-        //             tween_choice_to(false, txt);
-        //             self.tween_choices_wave(false);
-        //
-        //             self.run_label(label);
-        //         }
-        //     }
-        //
-        //     self.choice_agent.bind_mut().disable();
-        // }
-        match choice.to_string().as_str() {
-            "Inventory" => todo!(),
-            "DebugQuit" => godot_tree().quit(),
-
-            _ => unreachable!(),
+    pub fn on_choice_picked(&mut self, choice: GString) {
+        fn index_of_child_named(name: GString, node: &Node) -> Option<usize> {
+            node.get_children()
+                .iter_shared()
+                .position(|n| n.get_name() == name.clone().into())
         }
+
+        let picked_i = index_of_child_named(choice, &self.choice_container())
+            .expect("Could not find choice index");
+
+        // we know the ending has to be `Choices` and not a label or end
+        let ending = self.current_ix_ending().unwrap().clone();
+        let DialogueEnding::Choices(choices) = ending else {
+            unreachable!()
+        };
+
+        match &choices[picked_i].label {
+            // no label means end the interaction
+            None => self.end_interaction(),
+
+            Some(label) => {
+                let dchoice = &self
+                    .choice_agent
+                    .bind()
+                    .choice_labels()
+                    .get(picked_i)
+                    .unwrap()
+                    .clone()
+                    .cast::<DChoice>();
+
+                tween_choice(dchoice.clone(), false);
+                self.tween_choices_wave(false);
+
+                self.run_label(label);
+            }
+        }
+
+        self.choice_agent.bind_mut().disable();
     }
 }
 
