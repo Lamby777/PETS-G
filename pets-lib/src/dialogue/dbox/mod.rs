@@ -264,13 +264,10 @@ impl DialogBox {
     pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
         godot_print!("picked choice: {}", choice.get_name());
 
-        // TODO HACK
-        let picked_i = index_of_child_with_name::<DChoice, _>(
-            self.choice_container(),
-            choice.get_name().into(), // the name
-        )
-        .expect("Could not find index of choice node!");
-
+        // NOTE convention is that the agent is BEFORE the labels
+        let picked_i = (choice.get_index() - 1) as usize;
+        // godot_print!(">> {} @{}", choice.get_name(), picked_i);
+        
         // we know the ending has to be `Choices` and not a label or end
         let ending = self.current_ix_ending().unwrap().clone();
         let DialogueEnding::Choices(choices) = ending else {

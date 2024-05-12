@@ -61,6 +61,8 @@ offset_top = 64.0
 offset_right = 80.0
 offset_bottom = 464.0
 
+[node name="ChoiceAgent" type="ChoiceAgent" parent="Choices"]
+
 [node name="Inventory" type="RichTextLabel" parent="Choices"]
 clip_contents = false
 layout_mode = 2
@@ -93,5 +95,3 @@ theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "Quit"
 fit_content = true
-
-[node name="ChoiceAgent" type="ChoiceAgent" parent="Choices"]
