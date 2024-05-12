@@ -21,7 +21,7 @@ where
     Filter: Inherits<Node>,
     N: Inherits<Node>,
 {
-    subchildren_of_type::<Filter>(node.upcast())
+    subchildren_of_type::<Filter, _>(node.upcast())
         .iter()
         .position(|n| n.upcast_ref().get_name() == name.clone().into())
 }
@@ -65,15 +65,17 @@ where
 /// Returns a vector. Use `subchildren_of_type_array` for a godot array.
 ///
 /// bugfix later: it won't find children of nodes that are the correct type
-pub fn subchildren_of_type<T>(parent: Gd<Node>) -> Vec<Gd<T>>
+pub fn subchildren_of_type<T, Par>(parent: Gd<Par>) -> Vec<Gd<T>>
 where
+    Par: Inherits<Node>,
     T: Inherits<Node>,
 {
     let mut res = vec![];
+    let parent = parent.upcast_ref();
 
     for node in parent.get_children().iter_shared() {
         let Ok(node) = node.clone().try_cast::<T>() else {
-            let children = subchildren_of_type::<T>(node);
+            let children = subchildren_of_type::<T, _>(node);
             res.extend(children);
             continue;
         };

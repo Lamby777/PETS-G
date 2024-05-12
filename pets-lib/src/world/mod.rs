@@ -169,7 +169,7 @@ impl World {
 impl INode2D for World {
     fn ready(&mut self) {
         let room = self.room.clone();
-        let mzones = subchildren_of_type::<MusicZone>(room.upcast());
+        let mzones = subchildren_of_type::<MusicZone, _>(room);
 
         for mut zone in mzones {
             let on_exit = self.base().callable("on_exit");
