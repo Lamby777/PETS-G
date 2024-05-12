@@ -102,13 +102,8 @@ impl ChoiceAgent {
         let mut choices = self.choice_labels();
         let guard = self.base_mut();
 
-        let mode = choices[0].get_focus_mode();
-        godot_print!(
-            "deferred grab focus on {}, it's in {:?} mode",
-            choices[0].get_name(),
-            mode
-        );
-
+        godot_print!("grabbing focus on {}", choices[0].get_name(),);
+        // choices[0].grab_focus();
         choices[0].call_deferred("grab_focus".into(), &[]);
 
         drop(guard);
@@ -151,10 +146,8 @@ impl ChoiceAgent {
                 .callable("_tween_choice_off")
                 .bindv(varray![choice.to_variant()]);
 
-            choice.connect("focus_entered".into(), entered.clone());
-            choice.connect("focus_exited".into(), exited.clone());
-            // connect_deferred(choice, "focus_entered", entered.clone());
-            // connect_deferred(choice, "focus_exited", exited.clone());
+            connect_deferred(choice, "focus_entered", entered.clone());
+            connect_deferred(choice, "focus_exited", exited.clone());
 
             self.callable_map
                 .insert(choice.clone().upcast(), (entered, exited));
@@ -167,16 +160,13 @@ impl ChoiceAgent {
             let entry = self.callable_map.get(&choice.clone().upcast());
             let Some((entered, exited)) = entry else {
                 godot_print!(
-                    "unbind_callables: no callables found for {}",
+                    "unbind: no old callables found for {}",
                     choice.get_name()
                 );
                 continue;
             };
 
-            godot_print!(
-                "unbind_callables: CALLABLES FOUND for {}",
-                choice.get_name()
-            );
+            godot_print!("unbind: CALLABLES FOUND for {}", choice.get_name());
 
             choice.disconnect("focus_entered".into(), entered.clone());
             choice.disconnect("focus_exited".into(), exited.clone());
