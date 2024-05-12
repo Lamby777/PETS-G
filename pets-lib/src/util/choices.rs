@@ -48,11 +48,6 @@ impl ChoiceAgent {
 
     #[func]
     pub fn _tween_choice_on(&mut self, choice: Gd<Control>) {
-        if !choice.is_inside_tree() {
-            godot_warn!("bug, pls fuck off it's 1am");
-            return;
-        }
-
         self.base_mut()
             .emit_signal("selection_focused".into(), &[choice
                 .clone()
@@ -202,13 +197,6 @@ impl INode for ChoiceAgent {
         }
 
         if is_pressed("ui_accept") {
-            if let Some(focused) = &self.focused
-                && !focused.is_inside_tree()
-            {
-                godot_warn!("focused choice is not inside tree, returning");
-                return;
-            }
-
             // we know it's safe to unwrap here
             let focused = self.focused.clone().unwrap();
             mark_input_handled(&self.base());
