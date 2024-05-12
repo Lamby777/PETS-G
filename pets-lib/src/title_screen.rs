@@ -6,7 +6,6 @@
 //! - Cherry, 2:54 AM, 10/5/2023 | <3
 //!
 
-use godot::engine::object::ConnectFlags;
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -53,9 +52,6 @@ impl TitleScreen {
 impl INode2D for TitleScreen {
     fn ready(&mut self) {
         let callable = self.base().callable("on_choice_picked");
-        self.choices
-            .connect_ex("selection_confirmed".into(), callable)
-            .flags(ConnectFlags::DEFERRED.ord() as u32)
-            .done();
+        connect_deferred(&mut self.choices, "selection_confirmed", callable);
     }
 }

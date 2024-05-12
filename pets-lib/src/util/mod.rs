@@ -7,9 +7,20 @@ pub mod choices;
 pub mod limiq;
 pub mod singleton;
 
+use godot::engine::object::ConnectFlags;
 use godot::engine::tween::TransitionType;
 use godot::engine::{Engine, RichTextLabel, Theme, Tween};
 use godot::prelude::*;
+
+pub fn connect_deferred<T>(node: &mut Gd<T>, signal: &str, callable: Callable)
+where
+    T: Inherits<Object>,
+{
+    node.upcast_mut()
+        .connect_ex(signal.into(), callable)
+        .flags(ConnectFlags::DEFERRED.ord() as u32)
+        .done();
+}
 
 /// Like setTimeout in JS, using godot timers.
 /// Uses SECONDS, not ms.
