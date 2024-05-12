@@ -50,6 +50,11 @@ impl ChoiceAgent {
 
     #[func]
     pub fn _tween_choice_on(&mut self, choice: Gd<Control>) {
+        if !choice.is_inside_tree() {
+            godot_warn!("bug, pls fuck off it's 1am");
+            return;
+        }
+
         let name = choice.get_name().to_string();
 
         self.base_mut()
