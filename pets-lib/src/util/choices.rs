@@ -100,7 +100,10 @@ impl ChoiceAgent {
     pub fn focus_first(&mut self) {
         let mut choices = self.choice_labels();
         let guard = self.base_mut();
+
+        godot_print!("deferred grab focus on {}", choices[0].get_name());
         choices[0].call_deferred("grab_focus".into(), &[]);
+
         drop(guard);
     }
 
@@ -209,6 +212,11 @@ fn _tween_choice(is_picked: bool, node: Gd<Control>) {
     let on_off = if is_picked { "on" } else { "off" };
     godot_print!("tweening {} {}", node.get_name(), on_off);
 
+    if !node.is_inside_tree() {
+        godot_print!("node to tween is not inside tree, returning");
+        return;
+    }
+
     let node = node.try_cast::<RichTextLabel>().unwrap_or_else(|node| {
         godot_print!("getting text inside container");
         node.get_node_as("RichTextLabel")
@@ -227,26 +235,29 @@ fn _tween_choice(is_picked: bool, node: Gd<Control>) {
     };
 
     // tween x
-    tween(
+    let t1 = tween(
         node.clone().upcast(),
         "position:x",
         None,
         target_x,
         CHOICE_TWEEN_TIME,
         CHOICE_TWEEN_TRANS,
-    )
-    .unwrap();
+    );
 
     // tween color
-    tween(
+    let t2 = tween(
         node.clone().upcast(),
         "theme_override_colors/default_color",
         None,
         target_col,
         CHOICE_TWEEN_TIME,
         CHOICE_TWEEN_TRANS,
-    )
-    .unwrap();
+    );
+
+    // if either errored...
+    if t1.and(t2).is_err() {
+        godot_warn!("failed to tween choice!");
+    }
 
     bbcode_toggle(node, CHOICE_WAVE_BBCODE, is_picked);
 }
