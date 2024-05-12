@@ -93,10 +93,10 @@ impl ChoiceAgent {
     }
 
     #[func]
-    pub fn focus_first(&mut self) {
+    pub fn focus_nth(&mut self, n: u32) {
         let mut choices = self.choice_labels();
         let guard = self.base_mut();
-        choices[0].call_deferred("grab_focus".into(), &[]);
+        choices[n as usize].call_deferred("grab_focus".into(), &[]);
         drop(guard);
     }
 
@@ -196,7 +196,7 @@ impl INode for ChoiceAgent {
             }
 
             mark_input_handled(&self.base());
-            self.focus_first();
+            self.focus_nth(0);
 
             return;
         }

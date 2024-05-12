@@ -49,7 +49,7 @@ impl WorldMenu {
 
         choices.set_disabled(!open);
         if open {
-            choices.focus_first();
+            choices.focus_nth(0);
         }
     }
 
