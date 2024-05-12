@@ -12,6 +12,20 @@ use godot::engine::tween::TransitionType;
 use godot::engine::{Engine, RichTextLabel, Theme, Tween};
 use godot::prelude::*;
 
+/// Find n where the nth child of type `Filter` is named `name`.
+pub fn index_of_child_with_name<Filter, N>(
+    node: Gd<N>,
+    name: GString,
+) -> Option<usize>
+where
+    Filter: Inherits<Node>,
+    N: Inherits<Node>,
+{
+    subchildren_of_type::<Filter>(node.upcast())
+        .iter()
+        .position(|n| n.upcast_ref().get_name() == name.clone().into())
+}
+
 pub fn connect_deferred<T>(node: &mut Gd<T>, signal: &str, callable: Callable)
 where
     T: Inherits<Object>,

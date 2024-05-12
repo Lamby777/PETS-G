@@ -264,14 +264,11 @@ impl DialogBox {
 
     #[func]
     pub fn on_choice_picked(&mut self, choice: GString) {
-        fn index_of_child_named(name: GString, node: &Node) -> Option<usize> {
-            node.get_children()
-                .iter_shared()
-                .position(|n| n.get_name() == name.clone().into())
-        }
-
-        let picked_i = index_of_child_named(choice, &self.choice_container())
-            .expect("Could not find choice index");
+        let picked_i = index_of_child_with_name::<DChoice, _>(
+            self.choice_container(),
+            choice, // the name
+        )
+        .expect("Could not find index of choice node!");
 
         // we know the ending has to be `Choices` and not a label or end
         let ending = self.current_ix_ending().unwrap().clone();
