@@ -416,9 +416,9 @@ graph_offset = Vector2(-79, 13)
 [node name="Dubs" type="PCharNode"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -8)
 scale = Vector2(4, 4)
 texture = ExtResource("1_xd3eq")
+offset = Vector2(0, -2)
 hframes = 9
 vframes = 6
 frame = 1
@@ -431,6 +431,5 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_ty6r4")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)

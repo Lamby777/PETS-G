@@ -416,9 +416,9 @@ graph_offset = Vector2(-79, 13)
 [node name="AgentE" type="PCharNode"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 4)
 scale = Vector2(4, 4)
 texture = ExtResource("1_1r638")
+offset = Vector2(0, 1)
 hframes = 8
 vframes = 8
 frame = 1
@@ -429,9 +429,6 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ih35l")
-}
 tree_root = SubResource("AnimationNodeStateMachine_ty6r4")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(0, 0)
