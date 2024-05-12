@@ -6,6 +6,7 @@
 //! - Cherry, 2:54 AM, 10/5/2023 | <3
 //!
 
+use godot::engine::object::ConnectFlags;
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -28,12 +29,7 @@ impl TitleScreen {
                 // TODO should animate the menu boxes flying
                 // off into the right, and the camera goes left
 
-                // bandaid fix of waiting to avoid changing the
-                // scene on the same tick as the event cancel.
-                // remove this when the intro animation is done
-                set_timeout(0.01, || {
-                    change_scene!("world");
-                });
+                change_scene!("world");
             }
 
             "Options" => {
@@ -57,6 +53,9 @@ impl TitleScreen {
 impl INode2D for TitleScreen {
     fn ready(&mut self) {
         let callable = self.base().callable("on_choice_picked");
-        self.choices.connect("selection_confirmed".into(), callable);
+        self.choices
+            .connect_ex("selection_confirmed".into(), callable)
+            .flags(ConnectFlags::DEFERRED.ord() as u32)
+            .done();
     }
 }
