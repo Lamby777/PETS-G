@@ -83,6 +83,8 @@ impl World {
     pub fn start_battle(eid: GString) {
         let world = current_scene();
 
+        PlayerCB::singleton().bind_mut().in_battle = true;
+
         let mat = PlayerCB::fx_material();
         let fade_len = mat.get_shader_parameter("LENGTH".into()).to::<f64>();
 

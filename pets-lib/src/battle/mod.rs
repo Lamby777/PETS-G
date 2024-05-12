@@ -67,6 +67,10 @@ impl BattleEngine {
 
             "Run" => {
                 // TODO roll, don't always succeed
+                PlayerCB::singleton().bind_mut().in_battle = false;
+
+                // TODO don't change scenes, just remove the battle
+                // stuff since it's all overlayed on top of the world
                 change_scene!("world");
             }
 
