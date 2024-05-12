@@ -125,6 +125,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 
+[node name="ChoiceAgent" type="ChoiceAgent" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
+
 [node name="Attack" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 clip_contents = false
 layout_mode = 2
@@ -191,8 +193,6 @@ theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Run"
 fit_content = true
-
-[node name="ChoiceAgent" type="ChoiceAgent" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 
 [node name="RightPanel" type="PanelContainer" parent="Menu/DualMenu"]
 layout_mode = 1

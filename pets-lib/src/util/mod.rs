@@ -13,7 +13,7 @@ use godot::engine::{Engine, RichTextLabel, Theme, Tween};
 use godot::prelude::*;
 
 /// Find n where the nth child of type `Filter` is named `name`.
-pub fn index_of_child_with_name<Filter, N>(
+pub fn _index_of_child_with_name<Filter, N>(
     node: Gd<N>,
     name: GString,
 ) -> Option<usize>
