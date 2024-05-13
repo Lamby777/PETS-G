@@ -165,7 +165,7 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -1600.0
 offset_top = -604.0
-offset_right = -1024.0
+offset_right = -1088.0
 offset_bottom = 612.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -183,7 +183,7 @@ theme_override_constants/separation = 40
 
 [node name="Portrait" type="PanelContainer" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
 z_index = 1
-custom_minimum_size = Vector2(432, 223)
+custom_minimum_size = Vector2(368, 200)
 layout_mode = 2
 theme_type_variation = &"FramePanelContainer"
 
@@ -194,10 +194,10 @@ layout_mode = 2
 [node name="Texture" type="TextureRect" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Portrait/Clipper"]
 z_index = -1
 layout_mode = 2
-offset_right = 418.0
-offset_bottom = 209.0
+offset_right = 370.0
+offset_bottom = 185.0
 texture = ExtResource("6_pjho4")
-expand_mode = 5
+expand_mode = 2
 
 [node name="BattleChoices" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
 unique_name_in_owner = true
@@ -255,13 +255,16 @@ fit_content = true
 
 [node name="RightPanel" type="PanelContainer" parent="Menu/DualMenu"]
 layout_mode = 1
-anchors_preset = 4
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = 1024.0
 offset_top = -604.0
 offset_right = 1600.0
 offset_bottom = 612.0
+grow_horizontal = 0
 grow_vertical = 2
 
 [node name="Margins" type="MarginContainer" parent="Menu/DualMenu/RightPanel"]
