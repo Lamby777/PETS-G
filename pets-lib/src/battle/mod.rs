@@ -65,7 +65,8 @@ impl BattleEngine {
     /// slide the battle screen into view
     #[func]
     pub fn animate_in(&mut self) {
-        //
+        self.animator.set_assigned_animation("fade_in".into());
+        self.animator.play();
     }
 
     fn open_dualmenu(&mut self) {
