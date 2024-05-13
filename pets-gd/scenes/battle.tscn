@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://kgl5788x405y"]
+[gd_scene load_steps=12 format=3 uid="uid://kgl5788x405y"]
 
 [ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="2_0m4jp"]
+[ext_resource type="Shader" path="res://themes/vdrugs/common.gdshader" id="2_5b7lm"]
 [ext_resource type="Texture2D" uid="uid://he44mug8lejt" path="res://assets/textures/misc/BattleIcons.png" id="3_k3xai"]
 [ext_resource type="AudioStream" uid="uid://bobf56v1g63p4" path="res://assets/music/battle/alright.ogg" id="4_l6m5j"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="5_hcsfj"]
@@ -13,10 +14,7 @@ shader_parameter/speed = 2.0
 shader_parameter/angle = 47.788
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88ovb"]
-shader = ExtResource("2_0m4jp")
-shader_parameter/strength = 1.0
-shader_parameter/speed = 2.0
-shader_parameter/angle = 47.9
+shader = ExtResource("2_5b7lm")
 
 [sub_resource type="Animation" id="Animation_lk11u"]
 length = 0.001
@@ -135,7 +133,6 @@ vframes = 2
 
 [node name="BattleMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_l6m5j")
-autoplay = true
 
 [node name="Menu" type="Control" parent="."]
 layout_mode = 3
