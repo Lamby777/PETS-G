@@ -62,7 +62,7 @@ pub struct BattleEngine {
 
 #[godot_api]
 impl BattleEngine {
-    /// slide the battle screen into view
+    /// slowly fade out the black rectangle over the battle scene
     #[func]
     pub fn animate_in(&mut self) {
         self.animator.set_assigned_animation("fade_in".into());
