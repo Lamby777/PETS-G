@@ -25,7 +25,6 @@ enum MenuSection {
     Skill,
 }
 
-#[allow(unused)]
 #[derive(Default, PartialEq)]
 enum BattleState {
     /// Few seconds countdown before the music starts
@@ -46,7 +45,6 @@ enum BattleState {
     Menu(MenuSection),
 }
 
-#[allow(unused)]
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
 pub struct BattleEngine {
