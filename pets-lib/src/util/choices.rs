@@ -22,6 +22,18 @@ pub struct ChoiceAgent {
     focused: Option<Gd<Control>>,
 
     #[export]
+    #[init(default = "position:x".into())]
+    tween_property: NodePath,
+
+    #[export]
+    #[init(default = 0.0)]
+    tween_normal_value: real,
+
+    #[export]
+    #[init(default = 64.0)]
+    tween_focused_value: real,
+
+    #[export]
     #[init(default = CHOICE_WAVE_BBCODE.into())]
     bbcode: GString,
 
@@ -32,6 +44,57 @@ pub struct ChoiceAgent {
 
 #[godot_api]
 impl ChoiceAgent {
+    // TODO vertical tweening
+    fn _tween_choice(is_picked: bool, node: Gd<Control>) {
+        if !node.is_inside_tree() {
+            godot_print!("node to tween is not inside tree, returning");
+            return;
+        }
+
+        let node = node
+            .try_cast::<RichTextLabel>()
+            .unwrap_or_else(|node| node.get_node_as("RichTextLabel"));
+
+        let target_x = if is_picked { 64.0 } else { 0.0 };
+
+        let target_col = {
+            let col = if is_picked {
+                "font_selected_color"
+            } else {
+                "default_color"
+            };
+
+            default_theme().get_color(col.into(), "RichTextLabel".into())
+        };
+
+        // tween x
+        let t1 = tween(
+            node.clone(),
+            "position:x",
+            None,
+            target_x,
+            CHOICE_TWEEN_TIME,
+            CHOICE_TWEEN_TRANS,
+        );
+
+        // tween color
+        let t2 = tween(
+            node.clone(),
+            "theme_override_colors/default_color",
+            None,
+            target_col,
+            CHOICE_TWEEN_TIME,
+            CHOICE_TWEEN_TRANS,
+        );
+
+        // if either errored...
+        if t1.and(t2).is_err() {
+            godot_warn!("failed to tween choice!");
+        }
+
+        bbcode_toggle(node, CHOICE_WAVE_BBCODE, is_picked);
+    }
+
     pub fn parent(&self) -> Gd<Node> {
         self.base()
             .get_parent()
@@ -54,7 +117,7 @@ impl ChoiceAgent {
                 .to_variant()]);
         self.focused = Some(choice.clone());
 
-        _tween_choice(true, choice);
+        Self::_tween_choice(true, choice);
     }
 
     #[func]
@@ -68,7 +131,7 @@ impl ChoiceAgent {
             self.focused = None;
         }
 
-        _tween_choice(false, choice);
+        Self::_tween_choice(false, choice);
     }
 
     #[func]
@@ -205,55 +268,4 @@ impl INode for ChoiceAgent {
             ]);
         }
     }
-}
-
-// TODO vertical tweening
-fn _tween_choice(is_picked: bool, node: Gd<Control>) {
-    if !node.is_inside_tree() {
-        godot_print!("node to tween is not inside tree, returning");
-        return;
-    }
-
-    let node = node
-        .try_cast::<RichTextLabel>()
-        .unwrap_or_else(|node| node.get_node_as("RichTextLabel"));
-
-    let target_x = if is_picked { 64.0 } else { 0.0 };
-
-    let target_col = {
-        let col = if is_picked {
-            "font_selected_color"
-        } else {
-            "default_color"
-        };
-
-        default_theme().get_color(col.into(), "RichTextLabel".into())
-    };
-
-    // tween x
-    let t1 = tween(
-        node.clone(),
-        "position:x",
-        None,
-        target_x,
-        CHOICE_TWEEN_TIME,
-        CHOICE_TWEEN_TRANS,
-    );
-
-    // tween color
-    let t2 = tween(
-        node.clone(),
-        "theme_override_colors/default_color",
-        None,
-        target_col,
-        CHOICE_TWEEN_TIME,
-        CHOICE_TWEEN_TRANS,
-    );
-
-    // if either errored...
-    if t1.and(t2).is_err() {
-        godot_warn!("failed to tween choice!");
-    }
-
-    bbcode_toggle(node, CHOICE_WAVE_BBCODE, is_picked);
 }
