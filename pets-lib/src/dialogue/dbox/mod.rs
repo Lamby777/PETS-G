@@ -261,16 +261,6 @@ impl DialogBox {
     }
 
     #[func]
-    pub fn on_choice_focused(&self, choice: Gd<Control>) {
-        tween_choice(choice.cast(), true);
-    }
-
-    #[func]
-    pub fn on_choice_unfocused(&self, choice: Gd<Control>) {
-        tween_choice(choice.cast(), false);
-    }
-
-    #[func]
     pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
         godot_print!("picked choice: {}", choice.get_name());
 
@@ -289,37 +279,23 @@ impl DialogBox {
             None => self.end_interaction(),
 
             Some(label) => {
-                let dchoice = &self
+                // untween the focused choice (wtf?)
+                let dchoice = self
                     .choice_agent
                     .bind()
                     .choice_labels()
                     .get(picked_i)
                     .unwrap()
                     .clone()
-                    .cast::<DChoice>();
+                    .cast::<Control>();
 
-                tween_choice(dchoice.clone(), false);
+                self.choice_agent.bind_mut()._tween_choice_off(dchoice);
                 self.tween_choices_wave(false);
 
                 self.run_label(label);
             }
         }
     }
-}
-
-fn tween_choice(choice: Gd<DChoice>, focused: bool) {
-    // let focused_txt = if focused { "focused" } else { "unfocused" };
-    // godot_print!("{}: {}", focused_txt, choice.get_name());
-
-    tween(
-        choice,
-        "position:y",
-        None,
-        if focused { 40.0 } else { 0.0 },
-        0.5,
-        TransitionType::QUAD,
-    )
-    .unwrap();
 }
 
 #[godot_api]
@@ -460,6 +436,38 @@ impl DialogBox {
                 .bind_callables_for(&mut dchoice);
 
             cont.add_child(dchoice.clone().upcast());
+
+            // put label below the window
+            dchoice.bind().put_label_under();
+
+            godot_print!("recreated");
+            godot_print!("size {}", dchoice.get_size());
+            godot_print!("pos  {}", dchoice.get_position());
+            godot_print!("text size {}", dchoice.bind().txt_label().get_size());
+            godot_print!(
+                "text pos  {}\n",
+                dchoice.bind().txt_label().get_position()
+            );
+
+            let dchoice_id = dchoice.instance_id();
+            set_timeout(0.001, move || {
+                let dchoice =
+                    Gd::<DChoice>::try_from_instance_id(dchoice_id).unwrap();
+
+                godot_print!("delay passed");
+                godot_print!("size {}", dchoice.get_size());
+                godot_print!("pos  {}", dchoice.get_position());
+
+                godot_print!(
+                    "text size {}",
+                    dchoice.bind().txt_label().get_size()
+                );
+
+                godot_print!(
+                    "text pos  {}\n",
+                    dchoice.bind().txt_label().get_position()
+                );
+            });
         }
 
         self.set_choice_label_focus_directions();
@@ -504,9 +512,7 @@ impl DialogBox {
         for (i, cont) in choices.iter().enumerate() {
             // if moving up, start below the window
             if up {
-                cont.bind()
-                    .txt_label()
-                    .set_position(Vector2::new(0.0, DBOX_CHOICE_HEIGHT));
+                cont.bind().put_label_under();
             }
 
             // we can't move the label into the closure because of

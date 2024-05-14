@@ -66,14 +66,14 @@ bbcode_enabled = true
 text = "Cap'n Winthrus"
 
 [node name="Content" type="RichTextLabel" parent="VBox"]
-custom_minimum_size = Vector2(0, 230)
+custom_minimum_size = Vector2(0, 220)
 layout_mode = 2
+theme_override_font_sizes/normal_font_size = 44
 bbcode_enabled = true
 text = "sussy gussy straight outta ohio weebux fortnite livvy dunne rizzed up baby gronk gaming skibidi toilet gyatt sigma coquette floofy ahoy matey ;-; can i get a meow meow in the chat >w< ^w^ :3 :3 :3 :3"
 
 [node name="Choices" type="HBoxContainer" parent="VBox"]
-clip_contents = true
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
