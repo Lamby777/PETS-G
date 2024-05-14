@@ -1,4 +1,3 @@
-//
 //!
 //! General-purpose Godot/Rust helper stuff
 //!
@@ -11,6 +10,10 @@ use godot::engine::object::ConnectFlags;
 use godot::engine::tween::TransitionType;
 use godot::engine::{Engine, RichTextLabel, Theme, Tween};
 use godot::prelude::*;
+
+pub fn start_ix(name: impl Into<String>) {
+    DialogBox::singleton().bind_mut().start_ix(name.into());
+}
 
 /// Find n where the nth child of type `Filter` is named `name`.
 pub fn _index_of_child_with_name<Filter, N>(
@@ -184,6 +187,7 @@ pub fn current_scene() -> Gd<Node> {
 }
 
 pub use crate::change_scene;
+use crate::DialogBox;
 #[macro_export]
 macro_rules! change_scene {
     ($scene:expr) => {

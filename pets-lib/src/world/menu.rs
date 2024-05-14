@@ -5,16 +5,8 @@
 
 use godot::engine::{AnimationPlayer, Control, IPanel, InputEvent, Panel};
 use godot::prelude::*;
-use num_enum::TryFromPrimitive;
 
 use crate::prelude::*;
-
-#[derive(Clone, Copy, Debug, TryFromPrimitive)]
-#[repr(usize)]
-enum Choice {
-    Inventory,
-    DebugQuit,
-}
 
 #[derive(GodotClass)]
 #[class(init, base=Panel)]
@@ -54,15 +46,29 @@ impl WorldMenu {
     }
 
     #[func]
+    pub fn open(&mut self) {
+        self.open_or_close(true);
+    }
+
+    #[func]
+    pub fn close(&mut self) {
+        self.open_or_close(false);
+    }
+
+    #[func]
     pub fn toggle_open(&mut self) {
         self.open_or_close(!self.opened);
     }
 
     #[func]
-    pub fn on_choice_picked(&self, choice: Gd<Control>) {
+    pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
         match choice.get_name().to_string().as_str() {
             "Inventory" => todo!(),
             "DebugQuit" => godot_tree().quit(),
+            "DebugMenu" => {
+                self.close();
+                start_ix("Debug Menu")
+            }
 
             _ => unreachable!(),
         }

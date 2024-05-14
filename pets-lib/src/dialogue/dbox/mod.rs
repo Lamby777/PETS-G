@@ -123,7 +123,7 @@ impl DialogBox {
         );
 
         self.set_ix(ix.clone());
-        self.open_or_close(true);
+        self.open();
     }
 
     #[func]
@@ -193,6 +193,16 @@ impl DialogBox {
         }
     }
 
+    #[func]
+    pub fn open(&mut self) {
+        self.open_or_close(true);
+    }
+
+    #[func]
+    pub fn close(&mut self) {
+        self.open_or_close(false);
+    }
+
     pub fn run_label(&mut self, label: &Label) {
         use Label::*;
 
@@ -221,7 +231,7 @@ impl DialogBox {
         self.current_page_number = 0;
         self.current_ix = None;
         self.tween_choices_wave(false);
-        self.open_or_close(false);
+        self.close();
     }
 
     pub fn run_ix_ending(&mut self) {
@@ -267,7 +277,7 @@ impl DialogBox {
         // NOTE convention is that the agent is BEFORE the labels
         let picked_i = (choice.get_index() - 1) as usize;
         // godot_print!(">> {} @{}", choice.get_name(), picked_i);
-        
+
         // we know the ending has to be `Choices` and not a label or end
         let ending = self.current_ix_ending().unwrap().clone();
         let DialogueEnding::Choices(choices) = ending else {
