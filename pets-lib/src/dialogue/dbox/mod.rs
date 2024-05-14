@@ -280,16 +280,16 @@ impl DialogBox {
 
             Some(label) => {
                 // untween the focused choice (wtf?)
-                let dchoice = self
-                    .choice_agent
-                    .bind()
-                    .choice_labels()
-                    .get(picked_i)
-                    .unwrap()
-                    .clone()
-                    .cast::<Control>();
+                // let dchoice = self
+                //     .choice_agent
+                //     .bind()
+                //     .choice_labels()
+                //     .get(picked_i)
+                //     .unwrap()
+                //     .clone()
+                //     .cast::<Control>();
 
-                self.choice_agent.bind_mut()._tween_choice_off(dchoice);
+                // self.choice_agent.bind_mut()._tween_choice_off(dchoice);
                 self.tween_choices_wave(false);
 
                 self.run_label(label);
