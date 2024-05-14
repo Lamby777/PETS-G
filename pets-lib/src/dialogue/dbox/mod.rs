@@ -439,35 +439,6 @@ impl DialogBox {
 
             // put label below the window
             dchoice.bind().put_label_under();
-
-            godot_print!("recreated");
-            godot_print!("size {}", dchoice.get_size());
-            godot_print!("pos  {}", dchoice.get_position());
-            godot_print!("text size {}", dchoice.bind().txt_label().get_size());
-            godot_print!(
-                "text pos  {}\n",
-                dchoice.bind().txt_label().get_position()
-            );
-
-            let dchoice_id = dchoice.instance_id();
-            set_timeout(0.001, move || {
-                let dchoice =
-                    Gd::<DChoice>::try_from_instance_id(dchoice_id).unwrap();
-
-                godot_print!("delay passed");
-                godot_print!("size {}", dchoice.get_size());
-                godot_print!("pos  {}", dchoice.get_position());
-
-                godot_print!(
-                    "text size {}",
-                    dchoice.bind().txt_label().get_size()
-                );
-
-                godot_print!(
-                    "text pos  {}\n",
-                    dchoice.bind().txt_label().get_position()
-                );
-            });
         }
 
         self.set_choice_label_focus_directions();

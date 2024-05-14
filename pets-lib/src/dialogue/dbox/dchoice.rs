@@ -72,8 +72,8 @@ impl IMarginContainer for DChoice {
         let label = self.txt_label();
         let label_size = Vector2 {
             x: label.get_size().x,
-            y: label.get_size().y + 20.0,
-            // y: self.base().get_size().y,
+            // y: label.get_size().y + 20.0,
+            y: self.base().get_size().y,
         };
 
         let mut base = self.base_mut();
