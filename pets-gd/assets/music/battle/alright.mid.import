@@ -1,0 +1,15 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://d03x5b20brbdb"
+path="res://.godot/imported/alright.mid-3585ca3e8b59497fb725bf6497b0f0cb.res"
+
+[deps]
+
+source_file="res://assets/music/battle/alright.mid"
+dest_files=["res://.godot/imported/alright.mid-3585ca3e8b59497fb725bf6497b0f0cb.res"]
+
+[params]
+
+only_notes=false
