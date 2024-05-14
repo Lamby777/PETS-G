@@ -57,7 +57,7 @@ pub mod dialogue {
 
     pub const DBOX_CHOICE_TWEEN_TIME: f64 = choice_lists::CHOICE_TWEEN_TIME;
     pub const DBOX_CHOICE_TWEEN_TRANS: TransitionType = DBOX_TWEEN_TRANS;
-    pub const DBOX_CHOICE_HEIGHT: f32 = 60.0;
+    pub const DBOX_CHOICE_HEIGHT: f32 = 70.0;
     pub const DBOX_CHOICE_WAVE_TIME: f64 = 0.1;
 
     pub const _DBOX_SELECTION_BBCODE: &str = WAVE_BBCODE;

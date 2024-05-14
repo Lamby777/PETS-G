@@ -4,7 +4,7 @@
 
 [node name="DChoice" type="DChoice"]
 offset_right = 1181.0
-offset_bottom = 200.0
+offset_bottom = 86.0
 theme = ExtResource("1_nq50x")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]

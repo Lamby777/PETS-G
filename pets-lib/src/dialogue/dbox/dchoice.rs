@@ -45,6 +45,11 @@ impl DChoice {
         .unwrap();
     }
 
+    pub fn put_label_under(&self) {
+        self.txt_label()
+            .set_position(Vector2::new(0.0, DBOX_CHOICE_HEIGHT));
+    }
+
     /// create a new choice label with default settings
     pub fn new_container(i: usize, text: &str) -> Gd<Self> {
         let scene = load::<PackedScene>("res://scenes/dialogchoice.tscn");
@@ -67,14 +72,15 @@ impl IMarginContainer for DChoice {
         let label = self.txt_label();
         let label_size = Vector2 {
             x: label.get_size().x,
-            y: self.base().get_size().y,
+            y: label.get_size().y + 20.0,
+            // y: self.base().get_size().y,
         };
 
         let mut base = self.base_mut();
         base.set_size(label_size);
-        base.fit_child_in_rect(label.upcast(), Rect2 {
-            position: Vector2::ZERO,
-            size: label_size,
-        });
+        // base.fit_child_in_rect(label.upcast(), Rect2 {
+        //     position: Vector2::ZERO,
+        //     size: label_size,
+        // });
     }
 }
