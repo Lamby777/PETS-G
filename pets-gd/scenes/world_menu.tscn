@@ -56,9 +56,9 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 3
 anchors_preset = 0
-offset_left = 24.0
+offset_left = 32.0
 offset_top = 64.0
-offset_right = 24.0
+offset_right = 32.0
 offset_bottom = 464.0
 
 [node name="ChoiceAgent" type="ChoiceAgent" parent="Choices"]
@@ -66,8 +66,7 @@ offset_bottom = 464.0
 [node name="Inventory" type="RichTextLabel" parent="Choices"]
 clip_contents = false
 layout_mode = 2
-offset_left = 8.0
-offset_right = 296.0
+offset_right = 288.0
 offset_bottom = 64.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 48
@@ -78,9 +77,8 @@ fit_content = true
 [node name="DebugMenu" type="RichTextLabel" parent="Choices"]
 clip_contents = false
 layout_mode = 0
-offset_left = 8.0
 offset_top = 64.0
-offset_right = 296.0
+offset_right = 288.0
 offset_bottom = 128.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 48
@@ -91,9 +89,8 @@ fit_content = true
 [node name="DebugQuit" type="RichTextLabel" parent="Choices"]
 clip_contents = false
 layout_mode = 2
-offset_left = 8.0
 offset_top = 128.0
-offset_right = 296.0
+offset_right = 288.0
 offset_bottom = 192.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 48

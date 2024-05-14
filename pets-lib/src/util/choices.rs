@@ -44,8 +44,7 @@ pub struct ChoiceAgent {
 
 #[godot_api]
 impl ChoiceAgent {
-    // TODO vertical tweening
-    fn _tween_choice(is_picked: bool, node: Gd<Control>) {
+    fn _tween_choice(&self, is_picked: bool, node: Gd<Control>) {
         if !node.is_inside_tree() {
             godot_print!("node to tween is not inside tree, returning");
             return;
@@ -55,8 +54,12 @@ impl ChoiceAgent {
             .try_cast::<RichTextLabel>()
             .unwrap_or_else(|node| node.get_node_as("RichTextLabel"));
 
-        let target_x = if is_picked { 64.0 } else { 0.0 };
+        let target_val = match is_picked {
+            true => self.tween_focused_value,
+            false => self.tween_normal_value,
+        };
 
+        // color stuff
         let target_col = {
             let col = if is_picked {
                 "font_selected_color"
@@ -67,12 +70,12 @@ impl ChoiceAgent {
             default_theme().get_color(col.into(), "RichTextLabel".into())
         };
 
-        // tween x
+        // tween the custom param
         let t1 = tween(
             node.clone(),
-            "position:x",
+            self.tween_property.clone(),
             None,
-            target_x,
+            target_val,
             CHOICE_TWEEN_TIME,
             CHOICE_TWEEN_TRANS,
         );
@@ -117,7 +120,7 @@ impl ChoiceAgent {
                 .to_variant()]);
         self.focused = Some(choice.clone());
 
-        Self::_tween_choice(true, choice);
+        self._tween_choice(true, choice);
     }
 
     #[func]
@@ -131,7 +134,7 @@ impl ChoiceAgent {
             self.focused = None;
         }
 
-        Self::_tween_choice(false, choice);
+        self._tween_choice(false, choice);
     }
 
     #[func]
