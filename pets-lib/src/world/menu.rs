@@ -62,13 +62,12 @@ impl WorldMenu {
 
     #[func]
     pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
+        self.close();
+
         match choice.get_name().to_string().as_str() {
             "Inventory" => todo!(),
             "DebugQuit" => godot_tree().quit(),
-            "DebugMenu" => {
-                self.close();
-                start_ix("Debug Menu")
-            }
+            "DebugMenu" => start_ix("Debug Menu"),
 
             _ => unreachable!(),
         }
