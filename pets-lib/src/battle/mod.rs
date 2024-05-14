@@ -15,9 +15,6 @@ mod stat_translation;
 mod skills;
 
 #[allow(unused)]
-mod rhythm;
-
-#[allow(unused)]
 #[derive(PartialEq)]
 enum MenuSection {
     Main,
