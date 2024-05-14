@@ -15,7 +15,6 @@ dialogical = "*"
 godot = { git = "https://github.com/godot-rust/gdext", branch = "master", features = ["experimental-threads"]}
 indoc = "2.0.4"
 libdx = "2.1.1"
-midly = "0.5.3"
 # llm = { git = "https://github.com/rustformers/llm" , branch = "main" }
 num_enum = "0.7.1"
 rand = "0.8.5"

@@ -14,6 +14,7 @@ mod stat_translation;
 #[allow(unused)]
 mod skills;
 
+#[allow(unused)]
 mod rhythm;
 
 #[allow(unused)]

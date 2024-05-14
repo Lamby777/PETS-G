@@ -1,32 +1,62 @@
 //!
 //! Rhythms for the battle system...
 //!
-//! EDIT: We're using MIDI now.
-//! No more reinventing the wheel.
-//! No fun allowed.
+//! These type defs will probably also be used for
+//! developing an open-source P/E/T/S rhythm editor.
 //!
 
-use derived_deref::*;
-use midly::Smf;
+// TODO add a way to deserialize from file, to allow for
+// custom rhythms and modding.
 
-#[derive(Deref, DerefMut)]
-pub struct PetsRhythm<'a>(Smf<'a>);
+/// Things that can happen within a track section...
+/// Right now, it's just a note, but maybe...
+enum RhythmEvent {
+    /// A note that the player must hit
+    Note {
+        /// Delay after this note, before going on to the
+        /// next one (delay is in notes, not seconds)
+        length: f64,
+    },
 
-impl PetsRhythm<'_> {
-    pub fn new(smf: Smf) -> Self {
-        Self(smf)
-    }
+    /// A note that deals extra damage when played
+    /// (potentially more difficult timing, too?)
+    PowerChord {
+        /// Delay after this note, before going on to the
+        /// next one (delay is in notes, not seconds)
+        length: f64,
 
-    /// Give a time and this function will find you the first
-    /// note before that position in the track.
-    pub fn last_played_note(smf: &Smf, time: u32) -> ! {
-        let beat = beat_track(smf);
+        /// The multiplier for damage dealt
+        multiplier: f64,
+    },
+}
 
-        todo!()
-    }
+/// "Parts" of a track. Tracks can switch tempo
+struct RhythmSection {
+    start_time: f64,          // Start time of the section in seconds
+    end_time: f64,            // End time of the section in seconds
+    tempo: f64,               // Tempo in beats per minute
+    events: Vec<RhythmEvent>, // List of events within this section
+}
 
-    // getter for finding the beat track out of all the tracks
-    fn beat_track(smf: &Smf) -> ! {
-        todo!()
-    }
+/// One track's information, for rhythm purposes
+///
+/// Ideally, we wouldn't have to do it, but maybe
+/// it would be easier to just Box::leak() this if
+/// it gets too complicated to worry about lifetimes.
+///
+/// The only reason this is a runtime thing is to
+/// make things easier for modders. Making rhythms
+/// hard-coded in the compiled binary would kinda
+/// suck for them. It might even be better performance-wise
+/// to just leak all the tracks at load-time instead of
+/// having them lazily loaded, but we'll see.
+struct TrackRhythm<'a> {
+    name: String,
+    creator: String,
+
+    /// Split sections of a track, for tempo shifts and
+    /// potentially other stuff in the future.
+    // Since sections can repeat, we don't want to .clone()
+    // all over the place for repetitive stuff.
+    section: Vec<&'a RhythmSection>,
 }
