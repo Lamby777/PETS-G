@@ -149,24 +149,48 @@ impl BattleEngine {
         };
 
         self.rhythm_state = on.then_some(notetype);
+
+        if on {
+            let timer = &mut self.rhythm_timer;
+            timer.set_wait_time(0.5);
+            timer.start();
+        }
     }
 
     /// when player tries to attack on a beat
     #[func]
     pub fn on_player_note_hit(&mut self) {
+        let hit = self.try_attack();
+
+        if !hit {
+            godot_print!("player missed the note, trying again in 20ms");
+            let this_id = self.base().instance_id();
+            set_timeout(0.02, move || {
+                let this = Gd::<Self>::try_from_instance_id(this_id).unwrap();
+                this.bind().try_attack();
+            });
+        }
+    }
+
+    /// Returns whether or not it hit, so you can test a
+    /// second time later in case it was early
+    fn try_attack(&self) -> bool {
         use NoteType::*;
 
         let Some(state) = &self.rhythm_state else {
             // TODO
             godot_print!("player clicked late/early");
-            return;
+            return false;
         };
 
         match state {
             Hit => {
+                // TODO
                 godot_print!("player hit the note");
             }
         }
+
+        true
     }
 }
 
@@ -175,6 +199,9 @@ impl INode2D for BattleEngine {
     fn ready(&mut self) {
         let callable = self.base().callable("on_choice_picked");
         self.choices.connect("selection_confirmed".into(), callable);
+
+        let callable = self.base().callable("note_end");
+        self.rhythm_timer.connect("timeout".into(), callable);
 
         // TODO delay before intro is over
         self.state = BattleState::Attack { running: false };
