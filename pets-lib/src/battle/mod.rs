@@ -152,7 +152,7 @@ impl BattleEngine {
 
         if on {
             let timer = &mut self.rhythm_timer;
-            timer.set_wait_time(0.5);
+            timer.set_wait_time(0.04);
             timer.start();
         }
     }
@@ -170,6 +170,11 @@ impl BattleEngine {
                 this.bind().try_attack();
             });
         }
+    }
+
+    #[func]
+    pub fn on_note_end(&mut self) {
+        self.rhythm_state = None;
     }
 
     /// Returns whether or not it hit, so you can test a
@@ -200,7 +205,7 @@ impl INode2D for BattleEngine {
         let callable = self.base().callable("on_choice_picked");
         self.choices.connect("selection_confirmed".into(), callable);
 
-        let callable = self.base().callable("note_end");
+        let callable = self.base().callable("on_note_end");
         self.rhythm_timer.connect("timeout".into(), callable);
 
         // TODO delay before intro is over
