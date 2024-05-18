@@ -4,6 +4,7 @@
 //!
 
 use godot::engine::{AnimationPlayer, Control, InputEvent, Timer};
+use godot::obj::WithBaseField;
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -162,12 +163,20 @@ impl BattleEngine {
     pub fn on_player_note_hit(&mut self) {
         let hit = self.try_attack();
 
-        if !hit {
+        if hit {
+            godot_print!("player hit the note!");
+        } else {
             godot_print!("player missed the note, trying again in 20ms");
             let this_id = self.base().instance_id();
             set_timeout(0.02, move || {
-                let this = Gd::<Self>::try_from_instance_id(this_id).unwrap();
-                this.bind().try_attack();
+                let mut this =
+                    Gd::<Self>::try_from_instance_id(this_id).unwrap();
+                let hit = this.bind_mut().try_attack();
+                if hit {
+                    godot_print!("counting the hit as early, but valid!");
+                } else {
+                    godot_print!("player missed the note again");
+                }
             });
         }
     }
@@ -179,19 +188,17 @@ impl BattleEngine {
 
     /// Returns whether or not it hit, so you can test a
     /// second time later in case it was early
-    fn try_attack(&self) -> bool {
+    fn try_attack(&mut self) -> bool {
         use NoteType::*;
 
         let Some(state) = &self.rhythm_state else {
-            // TODO
-            godot_print!("player clicked late/early");
             return false;
         };
 
         match state {
             Hit => {
-                // TODO
-                godot_print!("player hit the note");
+                let pos = self.base().get_position() + Vector2::new(10.0, 0.0);
+                self.base_mut().set_position(pos);
             }
         }
 
