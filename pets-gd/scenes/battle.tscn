@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://kgl5788x405y"]
+[gd_scene load_steps=19 format=3 uid="uid://kgl5788x405y"]
 
 [ext_resource type="Shader" path="res://themes/opacity.gdshader" id="1_3pmac"]
 [ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="2_0m4jp"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bobf56v1g63p4" path="res://assets/music/battle/alright.ogg" id="4_l6m5j"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="5_hcsfj"]
 [ext_resource type="Texture2D" uid="uid://cx24dyfnh30ag" path="res://assets/textures/portraits/Ethan.png" id="6_pjho4"]
+[ext_resource type="MidiResource" uid="uid://d03x5b20brbdb" path="res://assets/music/battle/alright.mid" id="8_cjd10"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w1wwc"]
 shader = ExtResource("2_0m4jp")
@@ -142,6 +143,28 @@ _data = {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lgbmi"]
 shader = ExtResource("1_3pmac")
 shader_parameter/opacity = 0.0
+
+[sub_resource type="GDScript" id="GDScript_g4lt7"]
+resource_name = "BattleMidi"
+script/source = "extends MidiPlayer
+
+@onready var parent = get_parent()
+
+func _ready():
+  note.connect(my_note_callback)
+  play()
+
+func my_note_callback(event, track):
+  if track != 2:
+    return
+  
+  var note = event['note']
+  
+  if (event['subtype'] == MIDI_MESSAGE_NOTE_ON): # note on
+    parent.on_note_hit(true, note)
+  elif (event['subtype'] == MIDI_MESSAGE_NOTE_OFF): # note off
+    parent.on_note_hit(false, note)
+"
 
 [node name="BattleEngine" type="BattleEngine"]
 
@@ -445,3 +468,8 @@ material = SubResource("ShaderMaterial_lgbmi")
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
+
+[node name="BattleMidi" type="MidiPlayer" parent="."]
+midi = ExtResource("8_cjd10")
+loop = true
+script = SubResource("GDScript_g4lt7")
