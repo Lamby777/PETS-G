@@ -8,6 +8,9 @@ use godot::prelude::*;
 
 use crate::prelude::*;
 
+use self::notes::NoteType;
+
+mod notes;
 mod player;
 mod stat_translation;
 
@@ -130,6 +133,18 @@ impl BattleEngine {
             }
 
             _ => unreachable!(),
+        }
+    }
+
+    #[func]
+    pub fn on_note_hit(&mut self, on: bool, note: u8) {
+        godot_print!("Note hit: {} (on: {})", note, on);
+        let Some(_note) = NoteType::from_note(note) else {
+            return;
+        };
+
+        if !on {
+            return;
         }
     }
 }

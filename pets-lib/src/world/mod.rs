@@ -21,6 +21,8 @@ pub use menu::WorldMenu;
 pub use music_zone::MusicZone;
 pub use playercb::PlayerCB;
 
+use self::enemy_node::WalkingEnemy;
+
 // just for testing
 // use a value provided by the mz later on...
 const AUDIO_FADE_TIME: real = 0.5;
@@ -119,6 +121,13 @@ impl World {
 
         layer.add_child(scene.clone().upcast());
         scene.bind_mut().animate_in();
+
+        // it's a performance thing
+        PlayerCB::singleton().set_process(false);
+        {
+            subchildren_of_type::<WalkingEnemy, _>(self.to_gd());
+        }
+        // self.base_mut().set_process(false);
     }
 
     #[func]
