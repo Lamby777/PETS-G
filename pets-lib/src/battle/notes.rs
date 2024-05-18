@@ -1,6 +1,8 @@
 #[derive(Debug)]
 /// The game's MIDI files have a special code for what each
 /// pitch means in terms of in-game beats.
+///
+/// This type explains what kind of note is being played.
 pub enum NoteType {
     /// Note that must be hit
     Hit,

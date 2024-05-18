@@ -161,9 +161,9 @@ func my_note_callback(event, track):
   var note = event['note']
   
   if (event['subtype'] == MIDI_MESSAGE_NOTE_ON): # note on
-    parent.on_note_hit(true, note)
+    parent.on_note_event(true, note)
   elif (event['subtype'] == MIDI_MESSAGE_NOTE_OFF): # note off
-    parent.on_note_hit(false, note)
+    parent.on_note_event(false, note)
 "
 
 [node name="BattleEngine" type="BattleEngine"]
@@ -473,3 +473,5 @@ color = Color(0, 0, 0, 1)
 midi = ExtResource("8_cjd10")
 loop = true
 script = SubResource("GDScript_g4lt7")
+
+[node name="RhythmTimer" type="Timer" parent="."]
