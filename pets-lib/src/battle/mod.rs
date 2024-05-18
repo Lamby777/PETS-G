@@ -145,13 +145,10 @@ impl BattleEngine {
     pub fn on_note_event(&mut self, on: bool, note: u8) {
         godot_print!("Note hit: {} (on: {})", note, on);
         let Some(notetype) = NoteType::from_note(note) else {
-            return;
+            panic!("invalid midi note with code {}", note);
         };
 
-        self.rhythm_state = match on {
-            true => Some(notetype),
-            false => None,
-        }
+        self.rhythm_state = on.then_some(notetype);
     }
 
     /// when player tries to attack on a beat
