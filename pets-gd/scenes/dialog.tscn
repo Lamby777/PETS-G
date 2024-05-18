@@ -44,9 +44,9 @@ clip_contents = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 256.0
+offset_left = -704.0
 offset_top = 1200.0
-offset_right = 1664.0
+offset_right = 704.0
 offset_bottom = 1646.0
 grow_horizontal = 2
 pivot_offset = Vector2(704, 220)
@@ -80,7 +80,7 @@ size_flags_vertical = 0
 theme_override_constants/separation = 60
 
 [node name="ChoiceAgent" type="ChoiceAgent" parent="VBox/Choices"]
-tween_property = NodePath("position:y")
+tween_property = "position:y"
 tween_focused_value = -16.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
