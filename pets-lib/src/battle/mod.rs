@@ -3,7 +3,7 @@
 //! the GDExtension side that runs during battles.
 //!
 
-use godot::engine::{AnimationPlayer, Control, InputEvent};
+use godot::engine::{AnimationPlayer, Control, InputEvent, Timer};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -50,6 +50,11 @@ enum BattleState {
 pub struct BattleEngine {
     base: Base<Node2D>,
     state: BattleState,
+
+    rhythm_state: Option<NoteType>,
+
+    #[init(default = onready_node(&base, "RhythmTimer"))]
+    rhythm_timer: OnReady<Gd<Timer>>,
 
     #[init(default = onready_node(&base, "%BattleChoices/ChoiceAgent"))]
     choices: OnReady<Gd<ChoiceAgent>>,
@@ -137,14 +142,33 @@ impl BattleEngine {
     }
 
     #[func]
-    pub fn on_note_hit(&mut self, on: bool, note: u8) {
+    pub fn on_note_event(&mut self, on: bool, note: u8) {
         godot_print!("Note hit: {} (on: {})", note, on);
-        let Some(_note) = NoteType::from_note(note) else {
+        let Some(notetype) = NoteType::from_note(note) else {
             return;
         };
 
-        if !on {
+        self.rhythm_state = match on {
+            true => Some(notetype),
+            false => None,
+        }
+    }
+
+    /// when player tries to attack on a beat
+    #[func]
+    pub fn on_player_note_hit(&mut self) {
+        use NoteType::*;
+
+        let Some(state) = &self.rhythm_state else {
+            // TODO
+            godot_print!("player clicked late/early");
             return;
+        };
+
+        match state {
+            Hit => {
+                godot_print!("player hit the note");
+            }
         }
     }
 }
@@ -162,6 +186,8 @@ impl INode2D for BattleEngine {
     fn input(&mut self, event: Gd<InputEvent>) {
         if event.is_action_pressed("menu".into()) {
             self.toggle_dualmenu();
+        } else if event.is_action_pressed("ui_accept".into()) {
+            self.on_player_note_hit();
         }
     }
 
