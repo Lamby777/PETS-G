@@ -6,7 +6,7 @@ use crate::consts::battle::*;
 use crate::prelude::*;
 
 use godot::engine::utilities::randf_range;
-use godot::engine::{AnimationPlayer, AudioStream, CanvasLayer};
+use godot::engine::{AnimationPlayer, AudioServer, AudioStream, CanvasLayer};
 use godot::prelude::*;
 
 mod enemy_node;
@@ -20,8 +20,6 @@ pub use interaction::{InteractionManager, InteractionZone};
 pub use menu::WorldMenu;
 pub use music_zone::MusicZone;
 pub use playercb::PlayerCB;
-
-use self::enemy_node::WalkingEnemy;
 
 // just for testing
 // use a value provided by the mz later on...
@@ -67,6 +65,7 @@ fn generate_random_mod() -> Vector2 {
 }
 
 fn cue_battle_intro_fx() {
+    // start the cool shader rectangle thing
     let mut rect = PlayerCB::fx_rect();
     let mut mat = PlayerCB::fx_material();
     rect.call("reset_shader_timer".into(), &[]);
@@ -114,7 +113,7 @@ impl World {
         self.base_mut()
             .emit_signal("battle_intro_done".into(), &[_eid.to_variant()]);
 
-        let mut layer = current_scene().get_node_as::<CanvasLayer>(LAYER_NAME);
+        let mut layer = self.base().get_node_as::<CanvasLayer>(LAYER_NAME);
 
         // load the scene
         let mut scene = self.instantiate_battle_scene();
@@ -122,12 +121,13 @@ impl World {
         layer.add_child(scene.clone().upcast());
         scene.bind_mut().animate_in();
 
+        AudioServer::singleton().set_bus_mute(1, true);
+
         // it's a performance thing
-        PlayerCB::singleton().set_process(false);
+        // PlayerCB::singleton().set_process(false);
         {
-            subchildren_of_type::<WalkingEnemy, _>(self.to_gd());
+            // subchildren_of_type::<WalkingEnemy, _>(self.to_gd());
         }
-        // self.base_mut().set_process(false);
     }
 
     #[func]
@@ -169,9 +169,10 @@ impl World {
     }
 
     #[func]
-    fn crossfade_audio_to_null(&mut self) {
+    pub fn crossfade_audio_to_null(&mut self) {
         self.crossfade_audio_into(None);
         self.current_mz = None;
+        // TODO set current_mz once again once the battle is over
     }
 }
 

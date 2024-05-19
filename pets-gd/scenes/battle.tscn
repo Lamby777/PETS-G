@@ -174,7 +174,7 @@ func on_loop():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
   var time = asp.get_playback_position() + AudioServer.get_time_since_last_mix()
   
   # Compensate for output latency.
@@ -192,12 +192,12 @@ func my_note_callback(event, track):
   if track != 2:
     return
   
-  var note = event['note']
+  var ev_note = event['note']
   
   if (event['subtype'] == MIDI_MESSAGE_NOTE_ON): # note on
-    parent.on_note_event(true, note)
+    parent.on_note_event(true, ev_note)
   elif (event['subtype'] == MIDI_MESSAGE_NOTE_OFF): # note off
-    parent.on_note_event(false, note)
+    parent.on_note_event(false, ev_note)
 "
 
 [node name="BattleEngine" type="BattleEngine"]

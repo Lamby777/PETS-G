@@ -91,8 +91,10 @@ battle_scene = ExtResource("1_37bcu")
 
 [node name="FadeOut" type="AudioStreamPlayer" parent="ZoneAudio"]
 autoplay = true
+bus = &"ZoneMusic"
 
 [node name="Active" type="AudioStreamPlayer" parent="ZoneAudio"]
+bus = &"ZoneMusic"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ZoneAudio"]
 libraries = {
@@ -104,8 +106,8 @@ libraries = {
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="DialogBox" parent="UILayer" instance=ExtResource("2_lgtmm")]
-offset_left = 256.0
-offset_right = 1664.0
+offset_left = -704.0
+offset_right = 704.0
 
 [node name="WorldMenu" parent="UILayer" instance=ExtResource("2_6orff")]
 
