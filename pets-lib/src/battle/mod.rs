@@ -145,7 +145,7 @@ impl BattleEngine {
             "Swap" => todo!(),
 
             "Run" => {
-                // TODO roll, don't always succeed
+                // TODO implement running mechanic described earlier
                 PlayerCB::singleton().bind_mut().in_battle = false;
 
                 // TODO don't change scenes, just remove the battle
@@ -264,8 +264,6 @@ impl INode2D for BattleEngine {
         let callable = self.base().callable("on_note_end");
         self.rhythm_timer.connect("timeout".into(), callable);
 
-        // use the rhythm timer as an intro countdown...
-        // kinda a hack but whatever
         let mut intro_timer = Timer::new_alloc();
         self.base_mut().add_child(intro_timer.clone().upcast());
 
