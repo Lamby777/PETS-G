@@ -81,6 +81,14 @@ impl World {
     #[signal]
     fn battle_intro_done(eid: GString) {}
 
+    fn mute_audio_bus(mute_world: bool) {
+        let (muted, unmuted) = if mute_world { (1, 2) } else { (2, 1) };
+
+        let mut srv = AudioServer::singleton();
+        srv.set_bus_mute(muted, true);
+        srv.set_bus_mute(unmuted, false);
+    }
+
     pub fn start_battle(eid: GString) {
         PlayerCB::singleton().bind_mut().in_battle = true;
         let world = current_scene();
@@ -121,7 +129,7 @@ impl World {
         layer.add_child(scene.clone().upcast());
         scene.bind_mut().animate_in();
 
-        AudioServer::singleton().set_bus_mute(1, true);
+        Self::mute_audio_bus(true);
 
         // it's a performance thing
         // PlayerCB::singleton().set_process(false);
