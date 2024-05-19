@@ -4,9 +4,7 @@
 //!
 
 use godot::engine::object::ConnectFlags;
-use godot::engine::{
-    AnimationPlayer, Control, InputEvent, SceneTreeTimer, Timer,
-};
+use godot::engine::{AnimationPlayer, Control, InputEvent, Timer};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -29,10 +27,12 @@ enum MenuSection {
 }
 
 /// How long after a note off event to still consider clicks valid
-const LENIENCY_AFTER_BEAT: f64 = 0.08;
+const LENIENCY_AFTER_BEAT: f64 = 0.02;
 
 /// How long to wait after a click to check if it was early
-const LENIENCY_BEFORE_BEAT: f64 = 0.08;
+const LENIENCY_BEFORE_BEAT: f64 = 0.02;
+
+const INTRO_COUNTDOWN_SEC: f64 = 3.0;
 
 #[derive(Default, PartialEq)]
 enum BattleState {
@@ -62,7 +62,9 @@ pub struct BattleEngine {
 
     rhythm_state: Option<NoteType>,
     player_clicked: bool,
-    player_click_timeout: Option<Gd<SceneTreeTimer>>,
+
+    #[init(default = OnReady::manual())]
+    player_click_timeout: OnReady<Gd<Timer>>,
 
     #[init(default = onready_node(&base, "BattleMusic"))]
     music: OnReady<Gd<AudioStreamPlayer>>,
@@ -106,7 +108,7 @@ impl BattleEngine {
 
         self.state = BattleState::Attack { running: false };
 
-        // enable the choice list
+        // disable the choice list
         self.choices.bind_mut().disable();
     }
 
@@ -157,10 +159,12 @@ impl BattleEngine {
 
     /// Called when the player successfully hits a note
     fn on_successful_attack(&mut self) {
+        godot_print!("hit");
         self.offset_pos(0, -20);
     }
 
     fn on_flop_attack(&mut self) {
+        godot_print!("flop");
         self.offset_pos(0, 20);
     }
 
@@ -182,6 +186,8 @@ impl BattleEngine {
         if on {
             self.on_note_start();
         } else {
+            self.offset_pos(-20, 0);
+
             // if note off received, give X ms of leeway after the
             // ending for them to still hit the note
             let timer = &mut self.rhythm_timer;
@@ -209,9 +215,9 @@ impl BattleEngine {
         } else {
             self.player_clicked = true;
 
-            let callable = self.base().callable("on_early_leniency_expired");
-            let timer = set_timeout_callable(LENIENCY_BEFORE_BEAT, callable);
-            self.player_click_timeout = Some(timer);
+            self.player_click_timeout
+                .set_wait_time(LENIENCY_BEFORE_BEAT);
+            self.player_click_timeout.start();
         }
     }
 
@@ -225,12 +231,7 @@ impl BattleEngine {
             // true, that means the timer isn't over, so we should count
             // it as close enough to be valid!
             self.player_clicked = false;
-
-            self.player_click_timeout
-                .take()
-                .unwrap() // we know it's Some(_)
-                .upcast::<Object>()
-                .free();
+            self.player_click_timeout.stop();
 
             self.on_successful_attack();
         }
@@ -238,7 +239,6 @@ impl BattleEngine {
 
     #[func]
     pub fn on_note_end(&mut self) {
-        self.offset_pos(-20, 0);
         self.rhythm_state = None;
     }
 
@@ -255,6 +255,9 @@ impl BattleEngine {
 #[godot_api]
 impl INode2D for BattleEngine {
     fn ready(&mut self) {
+        self.choices.bind_mut().disable();
+
+        // TODO refactor this dogshit LOL
         let callable = self.base().callable("on_choice_picked");
         self.choices.connect("selection_confirmed".into(), callable);
 
@@ -266,7 +269,7 @@ impl INode2D for BattleEngine {
         let mut intro_timer = Timer::new_alloc();
         self.base_mut().add_child(intro_timer.clone().upcast());
 
-        intro_timer.set_wait_time(5.0);
+        intro_timer.set_wait_time(INTRO_COUNTDOWN_SEC);
         intro_timer.start();
 
         let callable = self.base().callable("intro_over");
@@ -274,6 +277,15 @@ impl INode2D for BattleEngine {
             .connect_ex("timeout".into(), callable)
             .flags(ConnectFlags::ONE_SHOT.ord() as u32)
             .done();
+
+        let mut click_timer = Timer::new_alloc();
+        self.base_mut().add_child(click_timer.clone().upcast());
+        let callable = self.base().callable("on_early_leniency_expired");
+        click_timer
+            .connect_ex("timeout".into(), callable)
+            .flags(ConnectFlags::ONE_SHOT.ord() as u32)
+            .done();
+        self.player_click_timeout.init(click_timer);
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
