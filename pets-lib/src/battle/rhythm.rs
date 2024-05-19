@@ -2,7 +2,7 @@
 //! Data structures related to rhythm in battle
 //!
 
-#[derive(Debug)]
+#[derive(Clone, Copy, Debug)]
 /// The game's MIDI files have a special code for what each
 /// pitch means in terms of in-game beats.
 ///
@@ -24,11 +24,12 @@ impl NoteType {
 #[derive(Debug, Default)]
 pub struct RhythmState {
     pub player_clicked: bool,
-    pub note_type: Option<NoteType>,
+    pub note: Option<NoteType>,
 }
 
 impl RhythmState {
-    pub fn note_on(&self) -> bool {
-        self.note_type.is_some()
+    /// Set back to default state
+    pub fn reset(&mut self) {
+        *self = Self::default();
     }
 }
