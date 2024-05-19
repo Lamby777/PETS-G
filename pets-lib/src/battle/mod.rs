@@ -9,14 +9,13 @@ use godot::prelude::*;
 
 use crate::prelude::*;
 
-use self::notes::NoteType;
-
-mod notes;
 mod player;
-mod stat_translation;
-
+mod rhythm;
 #[allow(unused)]
 mod skills;
+mod stat_translation;
+
+use rhythm::*;
 
 #[allow(unused)]
 #[derive(PartialEq)]
@@ -27,10 +26,10 @@ enum MenuSection {
 }
 
 /// How long after a note off event to still consider clicks valid
-const LENIENCY_AFTER_BEAT: f64 = 0.02;
+const LENIENCY_AFTER_BEAT: f64 = 0.0002;
 
 /// How long to wait after a click to check if it was early
-const LENIENCY_BEFORE_BEAT: f64 = 0.02;
+const LENIENCY_BEFORE_BEAT: f64 = 0.0002;
 
 const INTRO_COUNTDOWN_SEC: f64 = 3.0;
 
@@ -60,17 +59,18 @@ pub struct BattleEngine {
     base: Base<Node2D>,
     state: BattleState,
 
-    rhythm_state: Option<NoteType>,
-    player_clicked: bool,
+    rhythm: RhythmState,
 
+    /// timer that is in charge of turning `player_clicked` to false
     #[init(default = OnReady::manual())]
-    player_click_timeout: OnReady<Gd<Timer>>,
+    post_click_timer: OnReady<Gd<Timer>>,
+
+    /// timer that gets fired a little bit after the note off event
+    #[init(default = onready_node(&base, "RhythmTimer"))]
+    note_end_timer: OnReady<Gd<Timer>>,
 
     #[init(default = onready_node(&base, "BattleMusic"))]
     music: OnReady<Gd<AudioStreamPlayer>>,
-
-    #[init(default = onready_node(&base, "RhythmTimer"))]
-    rhythm_timer: OnReady<Gd<Timer>>,
 
     #[init(default = onready_node(&base, "%BattleChoices/ChoiceAgent"))]
     choices: OnReady<Gd<ChoiceAgent>>,
@@ -181,7 +181,7 @@ impl BattleEngine {
             panic!("invalid midi note with code {}", note);
         };
 
-        self.rhythm_state = on.then_some(notetype);
+        self.rhythm.note_type = on.then_some(notetype);
 
         if on {
             self.on_note_start();
@@ -190,7 +190,7 @@ impl BattleEngine {
 
             // if note off received, give X ms of leeway after the
             // ending for them to still hit the note
-            let timer = &mut self.rhythm_timer;
+            let timer = &mut self.note_end_timer;
             timer.set_wait_time(LENIENCY_AFTER_BEAT);
             timer.start();
             // the timer calls `on_note_end` when it finishes
@@ -199,7 +199,7 @@ impl BattleEngine {
 
     #[func]
     pub fn on_early_leniency_expired(&mut self) {
-        self.player_clicked = false;
+        self.rhythm.player_clicked = false;
         self.on_flop_attack(); // too early/late
     }
 
@@ -207,31 +207,31 @@ impl BattleEngine {
     #[func]
     pub fn on_player_note_hit(&mut self) {
         // if rhythm_state is None, it means the player shouldn't click
-        let hit = self.rhythm_state.is_some();
+        let hit = self.rhythm.note_on();
 
         if hit {
             self.on_successful_attack();
             self.on_note_end();
         } else {
-            self.player_clicked = true;
+            self.rhythm.player_clicked = true;
 
-            self.player_click_timeout
-                .set_wait_time(LENIENCY_BEFORE_BEAT);
-            self.player_click_timeout.start();
+            self.post_click_timer.set_wait_time(LENIENCY_BEFORE_BEAT);
+            self.post_click_timer.start();
         }
     }
 
     #[func]
     pub fn on_note_start(&mut self) {
         self.offset_pos(20, 0);
-        self.rhythm_timer.stop();
 
-        if self.player_clicked {
+        if self.rhythm.player_clicked {
+            self.note_end_timer.stop();
+
             // if the player clicked early but `player_clicked` is still
             // true, that means the timer isn't over, so we should count
             // it as close enough to be valid!
-            self.player_clicked = false;
-            self.player_click_timeout.stop();
+            self.rhythm.player_clicked = false;
+            self.post_click_timer.stop();
 
             self.on_successful_attack();
         }
@@ -239,7 +239,7 @@ impl BattleEngine {
 
     #[func]
     pub fn on_note_end(&mut self) {
-        self.rhythm_state = None;
+        self.rhythm.note_type = None;
     }
 
     #[func]
@@ -262,7 +262,7 @@ impl INode2D for BattleEngine {
         self.choices.connect("selection_confirmed".into(), callable);
 
         let callable = self.base().callable("on_note_end");
-        self.rhythm_timer.connect("timeout".into(), callable);
+        self.note_end_timer.connect("timeout".into(), callable);
 
         let mut intro_timer = Timer::new_alloc();
         self.base_mut().add_child(intro_timer.clone().upcast());
@@ -283,7 +283,7 @@ impl INode2D for BattleEngine {
             .connect_ex("timeout".into(), callable)
             .flags(ConnectFlags::ONE_SHOT.ord() as u32)
             .done();
-        self.player_click_timeout.init(click_timer);
+        self.post_click_timer.init(click_timer);
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
