@@ -7,7 +7,6 @@ use godot::engine::object::ConnectFlags;
 use godot::engine::{
     AnimationPlayer, Control, InputEvent, SceneTreeTimer, Timer,
 };
-use godot::obj::WithBaseField;
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -181,20 +180,21 @@ impl BattleEngine {
         self.rhythm_state = on.then_some(notetype);
 
         if on {
-            self.offset_pos(20, 0);
+            self.on_note_start();
         } else {
             // if note off received, give X ms of leeway after the
             // ending for them to still hit the note
             let timer = &mut self.rhythm_timer;
             timer.set_wait_time(LENIENCY_AFTER_BEAT);
             timer.start();
+            // the timer calls `on_note_end` when it finishes
         }
     }
 
     #[func]
     pub fn on_early_leniency_expired(&mut self) {
         self.player_clicked = false;
-        self.on_flop_attack();
+        self.on_flop_attack(); // too early/late
     }
 
     /// when player tries to attack on a beat
@@ -211,8 +211,28 @@ impl BattleEngine {
 
             let callable = self.base().callable("on_early_leniency_expired");
             let timer = set_timeout_callable(LENIENCY_BEFORE_BEAT, callable);
-
             self.player_click_timeout = Some(timer);
+        }
+    }
+
+    #[func]
+    pub fn on_note_start(&mut self) {
+        self.offset_pos(20, 0);
+        self.rhythm_timer.stop();
+
+        if self.player_clicked {
+            // if the player clicked early but `player_clicked` is still
+            // true, that means the timer isn't over, so we should count
+            // it as close enough to be valid!
+            self.player_clicked = false;
+
+            self.player_click_timeout
+                .take()
+                .unwrap() // we know it's Some(_)
+                .upcast::<Object>()
+                .free();
+
+            self.on_successful_attack();
         }
     }
 
@@ -243,11 +263,14 @@ impl INode2D for BattleEngine {
 
         // use the rhythm timer as an intro countdown...
         // kinda a hack but whatever
-        self.rhythm_timer.set_wait_time(5.0);
-        self.rhythm_timer.start();
+        let mut intro_timer = Timer::new_alloc();
+        self.base_mut().add_child(intro_timer.clone().upcast());
+
+        intro_timer.set_wait_time(5.0);
+        intro_timer.start();
 
         let callable = self.base().callable("intro_over");
-        self.rhythm_timer
+        intro_timer
             .connect_ex("timeout".into(), callable)
             .flags(ConnectFlags::ONE_SHOT.ord() as u32)
             .done();
