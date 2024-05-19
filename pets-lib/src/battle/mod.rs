@@ -26,6 +26,9 @@ enum MenuSection {
     Skill,
 }
 
+const LENIENCY_AFTER_BEAT: f64 = 0.02;
+const LENIENCY_BEFORE_BEAT: f64 = 0.02;
+
 #[derive(Default, PartialEq)]
 enum BattleState {
     /// Few seconds countdown before the music starts
@@ -151,11 +154,24 @@ impl BattleEngine {
 
         self.rhythm_state = on.then_some(notetype);
 
-        if on {
+        if !on {
+            // if note off received, give X ms of leeway after the
+            // ending for them to still hit the note
             let timer = &mut self.rhythm_timer;
-            timer.set_wait_time(0.04);
+            timer.set_wait_time(LENIENCY_AFTER_BEAT);
             timer.start();
         }
+    }
+
+    /// Called when the player successfully hits a note
+    fn on_successful_attack(&mut self) {
+        let pos = self.base().get_position() + Vector2::new(10.0, 0.0);
+        self.base_mut().set_position(pos);
+    }
+
+    fn on_flop_attack(&mut self) {
+        let pos = self.base().get_position() + Vector2::new(-10.0, 0.0);
+        self.base_mut().set_position(pos);
     }
 
     /// when player tries to attack on a beat
@@ -165,17 +181,20 @@ impl BattleEngine {
 
         if hit {
             godot_print!("player hit the note!");
+            self.on_successful_attack();
         } else {
             godot_print!("player missed the note, trying again in 20ms");
             let this_id = self.base().instance_id();
-            set_timeout(0.02, move || {
+            set_timeout(LENIENCY_BEFORE_BEAT, move || {
                 let mut this =
                     Gd::<Self>::try_from_instance_id(this_id).unwrap();
                 let hit = this.bind_mut().try_attack();
                 if hit {
                     godot_print!("counting the hit as early, but valid!");
+                    this.bind_mut().on_successful_attack();
                 } else {
                     godot_print!("player missed the note again");
+                    this.bind_mut().on_flop_attack();
                 }
             });
         }
