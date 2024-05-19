@@ -3,6 +3,7 @@
 //! the GDExtension side that runs during battles.
 //!
 
+use godot::engine::object::ConnectFlags;
 use godot::engine::{AnimationPlayer, Control, InputEvent, Timer};
 use godot::obj::WithBaseField;
 use godot::prelude::*;
@@ -26,8 +27,11 @@ enum MenuSection {
     Skill,
 }
 
-const LENIENCY_AFTER_BEAT: f64 = 0.02;
-const LENIENCY_BEFORE_BEAT: f64 = 0.02;
+/// How long after a note off event to still consider clicks valid
+const LENIENCY_AFTER_BEAT: f64 = 0.08;
+
+/// How long to wait after a click to check if it was early
+const LENIENCY_BEFORE_BEAT: f64 = 0.08;
 
 #[derive(Default, PartialEq)]
 enum BattleState {
@@ -56,6 +60,9 @@ pub struct BattleEngine {
     state: BattleState,
 
     rhythm_state: Option<NoteType>,
+
+    #[init(default = onready_node(&base, "BattleMusic"))]
+    music: OnReady<Gd<AudioStreamPlayer>>,
 
     #[init(default = onready_node(&base, "RhythmTimer"))]
     rhythm_timer: OnReady<Gd<Timer>>,
@@ -147,14 +154,16 @@ impl BattleEngine {
 
     #[func]
     pub fn on_note_event(&mut self, on: bool, note: u8) {
-        godot_print!("Note hit: {} (on: {})", note, on);
+        godot_print!("Note event: {} (on: {})", note, on);
         let Some(notetype) = NoteType::from_note(note) else {
             panic!("invalid midi note with code {}", note);
         };
 
         self.rhythm_state = on.then_some(notetype);
 
-        if !on {
+        if on {
+            self.offset_pos(20, 0);
+        } else {
             // if note off received, give X ms of leeway after the
             // ending for them to still hit the note
             let timer = &mut self.rhythm_timer;
@@ -165,12 +174,16 @@ impl BattleEngine {
 
     /// Called when the player successfully hits a note
     fn on_successful_attack(&mut self) {
-        let pos = self.base().get_position() + Vector2::new(10.0, 0.0);
-        self.base_mut().set_position(pos);
+        self.offset_pos(0, -20);
     }
 
     fn on_flop_attack(&mut self) {
-        let pos = self.base().get_position() + Vector2::new(-10.0, 0.0);
+        self.offset_pos(0, 20);
+    }
+
+    /// FOR DEBUGGING PURPOSES!!!
+    fn offset_pos(&mut self, x: i32, y: i32) {
+        let pos = self.base().get_position() + Vector2::new(x as f32, y as f32);
         self.base_mut().set_position(pos);
     }
 
@@ -180,11 +193,13 @@ impl BattleEngine {
         let hit = self.try_attack();
 
         if hit {
-            godot_print!("player hit the note!");
+            // godot_print!("player hit the note!");
             self.on_successful_attack();
         } else {
-            godot_print!("player missed the note, trying again in 20ms");
+            // godot_print!("player missed the note, trying again in a bit");
             let this_id = self.base().instance_id();
+
+            // TODO cancel the previous timeout if one exists
             set_timeout(LENIENCY_BEFORE_BEAT, move || {
                 let mut this =
                     Gd::<Self>::try_from_instance_id(this_id).unwrap();
@@ -193,7 +208,7 @@ impl BattleEngine {
                     godot_print!("counting the hit as early, but valid!");
                     this.bind_mut().on_successful_attack();
                 } else {
-                    godot_print!("player missed the note again");
+                    // godot_print!("player missed the note again");
                     this.bind_mut().on_flop_attack();
                 }
             });
@@ -202,26 +217,23 @@ impl BattleEngine {
 
     #[func]
     pub fn on_note_end(&mut self) {
+        self.offset_pos(-20, 0);
         self.rhythm_state = None;
     }
 
     /// Returns whether or not it hit, so you can test a
     /// second time later in case it was early
     fn try_attack(&mut self) -> bool {
-        use NoteType::*;
+        self.rhythm_state.is_some()
+    }
 
-        let Some(state) = &self.rhythm_state else {
-            return false;
-        };
+    #[func]
+    pub fn intro_over(&mut self) {
+        // change state from intro to attack
+        self.state = BattleState::Attack { running: false };
 
-        match state {
-            Hit => {
-                let pos = self.base().get_position() + Vector2::new(10.0, 0.0);
-                self.base_mut().set_position(pos);
-            }
-        }
-
-        true
+        // play the battle music
+        self.music.play();
     }
 }
 
@@ -234,8 +246,16 @@ impl INode2D for BattleEngine {
         let callable = self.base().callable("on_note_end");
         self.rhythm_timer.connect("timeout".into(), callable);
 
-        // TODO delay before intro is over
-        self.state = BattleState::Attack { running: false };
+        // use the rhythm timer as an intro countdown...
+        // kinda a hack but whatever
+        self.rhythm_timer.set_wait_time(5.0);
+        self.rhythm_timer.start();
+
+        let callable = self.base().callable("intro_over");
+        self.rhythm_timer
+            .connect_ex("timeout".into(), callable)
+            .flags(ConnectFlags::ONE_SHOT.ord() as u32)
+            .done();
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
