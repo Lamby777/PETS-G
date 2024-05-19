@@ -106,6 +106,8 @@ libraries = {
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="DialogBox" parent="UILayer" instance=ExtResource("2_lgtmm")]
+offset_left = -704.0
+offset_right = 704.0
 
 [node name="WorldMenu" parent="UILayer" instance=ExtResource("2_6orff")]
 
@@ -132,7 +134,7 @@ script = ExtResource("4_jple0")
 y_sort_enabled = true
 
 [node name="Mouse1" parent="YSort/Room" instance=ExtResource("10_30w80")]
-position = Vector2(840, 776)
+position = Vector2(888, 376)
 
 [node name="DecoBushes" type="Node2D" parent="YSort/Room"]
 y_sort_enabled = true
