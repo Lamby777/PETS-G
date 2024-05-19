@@ -509,3 +509,4 @@ loop = true
 script = SubResource("GDScript_g4lt7")
 
 [node name="RhythmTimer" type="Timer" parent="."]
+one_shot = true
