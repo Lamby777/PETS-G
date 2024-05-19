@@ -4,7 +4,9 @@
 //!
 
 use godot::engine::object::ConnectFlags;
-use godot::engine::{AnimationPlayer, Control, InputEvent, Timer};
+use godot::engine::{
+    AnimationPlayer, Control, InputEvent, SceneTreeTimer, Timer,
+};
 use godot::obj::WithBaseField;
 use godot::prelude::*;
 
@@ -60,6 +62,8 @@ pub struct BattleEngine {
     state: BattleState,
 
     rhythm_state: Option<NoteType>,
+    player_clicked: bool,
+    player_click_timeout: Option<Gd<SceneTreeTimer>>,
 
     #[init(default = onready_node(&base, "BattleMusic"))]
     music: OnReady<Gd<AudioStreamPlayer>>,
@@ -152,6 +156,21 @@ impl BattleEngine {
         }
     }
 
+    /// Called when the player successfully hits a note
+    fn on_successful_attack(&mut self) {
+        self.offset_pos(0, -20);
+    }
+
+    fn on_flop_attack(&mut self) {
+        self.offset_pos(0, 20);
+    }
+
+    /// FOR DEBUGGING PURPOSES!!!
+    fn offset_pos(&mut self, x: i32, y: i32) {
+        let pos = self.base().get_position() + Vector2::new(x as f32, y as f32);
+        self.base_mut().set_position(pos);
+    }
+
     #[func]
     pub fn on_note_event(&mut self, on: bool, note: u8) {
         godot_print!("Note event: {} (on: {})", note, on);
@@ -172,46 +191,28 @@ impl BattleEngine {
         }
     }
 
-    /// Called when the player successfully hits a note
-    fn on_successful_attack(&mut self) {
-        self.offset_pos(0, -20);
-    }
-
-    fn on_flop_attack(&mut self) {
-        self.offset_pos(0, 20);
-    }
-
-    /// FOR DEBUGGING PURPOSES!!!
-    fn offset_pos(&mut self, x: i32, y: i32) {
-        let pos = self.base().get_position() + Vector2::new(x as f32, y as f32);
-        self.base_mut().set_position(pos);
+    #[func]
+    pub fn on_early_leniency_expired(&mut self) {
+        self.player_clicked = false;
+        self.on_flop_attack();
     }
 
     /// when player tries to attack on a beat
     #[func]
     pub fn on_player_note_hit(&mut self) {
-        let hit = self.try_attack();
+        // if rhythm_state is None, it means the player shouldn't click
+        let hit = self.rhythm_state.is_some();
 
         if hit {
-            // godot_print!("player hit the note!");
             self.on_successful_attack();
+            self.on_note_end();
         } else {
-            // godot_print!("player missed the note, trying again in a bit");
-            let this_id = self.base().instance_id();
+            self.player_clicked = true;
 
-            // TODO cancel the previous timeout if one exists
-            set_timeout(LENIENCY_BEFORE_BEAT, move || {
-                let mut this =
-                    Gd::<Self>::try_from_instance_id(this_id).unwrap();
-                let hit = this.bind_mut().try_attack();
-                if hit {
-                    godot_print!("counting the hit as early, but valid!");
-                    this.bind_mut().on_successful_attack();
-                } else {
-                    // godot_print!("player missed the note again");
-                    this.bind_mut().on_flop_attack();
-                }
-            });
+            let callable = self.base().callable("on_early_leniency_expired");
+            let timer = set_timeout_callable(LENIENCY_BEFORE_BEAT, callable);
+
+            self.player_click_timeout = Some(timer);
         }
     }
 
@@ -219,12 +220,6 @@ impl BattleEngine {
     pub fn on_note_end(&mut self) {
         self.offset_pos(-20, 0);
         self.rhythm_state = None;
-    }
-
-    /// Returns whether or not it hit, so you can test a
-    /// second time later in case it was early
-    fn try_attack(&mut self) -> bool {
-        self.rhythm_state.is_some()
     }
 
     #[func]

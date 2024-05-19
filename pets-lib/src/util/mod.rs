@@ -8,7 +8,7 @@ pub mod singleton;
 
 use godot::engine::object::ConnectFlags;
 use godot::engine::tween::TransitionType;
-use godot::engine::{Engine, RichTextLabel, Theme, Tween};
+use godot::engine::{Engine, RichTextLabel, SceneTreeTimer, Theme, Tween};
 use godot::prelude::*;
 
 pub fn start_ix(name: impl Into<String>) {
@@ -41,17 +41,27 @@ where
 
 /// Like setTimeout in JS, using godot timers.
 /// Uses SECONDS, not ms.
-pub fn set_timeout<F>(time_sec: f64, mut func: F)
+pub fn set_timeout<F>(time_sec: f64, mut func: F) -> Gd<SceneTreeTimer>
 where
     F: FnMut() + Sync + Send + 'static,
 {
-    godot_tree().create_timer(time_sec).unwrap().connect(
-        "timeout".into(),
-        Callable::from_fn("timeout", move |_| {
-            func();
-            Ok(Variant::nil())
-        }),
-    );
+    let callable = Callable::from_fn("timeout", move |_| {
+        func();
+        Ok(Variant::nil())
+    });
+
+    set_timeout_callable(time_sec, callable)
+}
+
+/// Like `set_timeout`, but accepts a `Callable` instead of a closure.
+pub fn set_timeout_callable(
+    time_sec: f64,
+    callable: Callable,
+) -> Gd<SceneTreeTimer> {
+    let mut timer = godot_tree().create_timer(time_sec).unwrap();
+    timer.connect("timeout".into(), callable);
+
+    timer
 }
 
 pub fn mark_input_handled<T>(node: &Gd<T>)
