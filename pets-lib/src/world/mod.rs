@@ -98,14 +98,10 @@ impl World {
 
         set_timeout(INTRO_FADE_PREDELAY, cue_battle_intro_fx);
 
-        let cue = world
+        let cue_scene = world
             .callable("cue_battle_scene")
             .bindv((&[eid.to_variant()]).into());
-
-        godot_tree()
-            .create_timer(INTRO_FADE_PREDELAY + fade_len)
-            .unwrap()
-            .connect("timeout".into(), cue);
+        set_timeout_callable(INTRO_FADE_PREDELAY + fade_len, cue_scene);
     }
 
     fn instantiate_battle_scene(&self) -> Gd<BattleEngine> {
