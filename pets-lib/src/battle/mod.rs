@@ -160,19 +160,6 @@ impl BattleEngine {
     }
 
     // ------------------------------------------------------------
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
-
-    /// Called when the player successfully hits a note
-    fn on_successful_attack(&mut self) {
-        godot_print!("hit");
-        self.offset_pos(0, -20);
-    }
-
-    fn on_flop_attack(&mut self) {
-        godot_print!("flop");
-        self.offset_pos(0, 20);
-    }
 
     /// FOR DEBUGGING PURPOSES!!!
     fn offset_pos(&mut self, x: i32, y: i32) {
@@ -180,19 +167,72 @@ impl BattleEngine {
         self.base_mut().set_position(pos);
     }
 
+    /// Called when the player successfully hits a note
+    fn on_successful_attack(&mut self) {
+        godot_print!("hit");
+        self.offset_pos(0, -20);
+
+        self.rhythm.reset();
+    }
+
+    fn on_flop_attack(&mut self) {
+        godot_print!("flop");
+        self.offset_pos(0, 20);
+
+        self.rhythm.player_clicked = false;
+    }
+
     // ------------------------------------------------------------
 
     #[func]
-    pub fn on_early_leniency_expired(&mut self) {}
+    pub fn on_note_on(&mut self, note: u8) {
+        self.rhythm.note = Some(NoteType::from_note(note));
+
+        if self.rhythm.player_clicked {
+            godot_print!("player clicked early but still valid");
+            self.on_successful_attack();
+        }
+    }
 
     #[func]
-    pub fn on_player_note_hit(&mut self) {}
+    pub fn on_note_off(&mut self, _note: u8) {
+        // if the player clicked too early, we'll give them a little bit of leniency
+        // to still count it as a hit
+        let timer = &mut self.note_off_timer;
+        timer.set_wait_time(LENIENCY_RADIUS);
+        timer.start();
+        // When the timer is over, `close_beat` will be called
+    }
 
     #[func]
-    pub fn on_note_on(&mut self, note: u8) {}
+    pub fn close_beat(&mut self) {
+        self.rhythm.note = None;
+    }
 
     #[func]
-    pub fn on_note_off(&mut self, _note: u8) {}
+    pub fn on_early_leniency_expired(&mut self) {
+        self.on_flop_attack();
+    }
+
+    #[func]
+    pub fn on_player_clicked(&mut self) {
+        if self.rhythm.player_clicked {
+            return;
+        };
+
+        if let Some(_note) = self.rhythm.note.take() {
+            // if note is on, it's a hit
+            self.on_successful_attack();
+        } else {
+            // else, set the player click flag on so if a note happens soon,
+            // it will count as a hit.
+            self.rhythm.player_clicked = true;
+
+            let timer = &mut self.post_click_timer;
+            timer.set_wait_time(LENIENCY_RADIUS);
+            timer.start();
+        }
+    }
 
     // ------------------------------------------------------------
 
@@ -218,30 +258,33 @@ impl INode2D for BattleEngine {
         let callable = self.base().callable("on_choice_picked");
         self.choices.connect("selection_confirmed".into(), callable);
 
-        let callable = self.base().callable("on_note_off");
+        let callable = self.base().callable("close_beat");
         self.note_off_timer.connect("timeout".into(), callable);
 
-        let mut intro_timer = Timer::new_alloc();
-        self.base_mut().add_child(intro_timer.clone().upcast());
+        {
+            // intro countdown timer setup
+            let mut timer = Timer::new_alloc();
+            self.base_mut().add_child(timer.clone().upcast());
+            timer.set_wait_time(INTRO_COUNTDOWN_SEC);
+            timer.start();
+            let callable = self.base().callable("intro_over");
+            timer
+                .connect_ex("timeout".into(), callable)
+                .flags(ConnectFlags::ONE_SHOT.ord() as u32)
+                .done();
+        }
 
-        intro_timer.set_wait_time(INTRO_COUNTDOWN_SEC);
-        intro_timer.start();
+        {
+            // early click timer setup
+            let mut timer = Timer::new_alloc();
+            timer.set_one_shot(true);
+            self.base_mut().add_child(timer.clone().upcast());
+            let callable = self.base().callable("on_early_leniency_expired");
+            timer.connect("timeout".into(), callable);
+            self.post_click_timer.init(timer);
+        }
 
-        let callable = self.base().callable("intro_over");
-        intro_timer
-            .connect_ex("timeout".into(), callable)
-            .flags(ConnectFlags::ONE_SHOT.ord() as u32)
-            .done();
-
-        let mut click_timer = Timer::new_alloc();
-        click_timer.set_one_shot(true);
-        self.base_mut().add_child(click_timer.clone().upcast());
-        let callable = self.base().callable("on_early_leniency_expired");
-        click_timer.connect("timeout".into(), callable);
-        self.post_click_timer.init(click_timer);
-
-        let track = BattleTrack::new_from_name("alright");
-        self.track.init(track);
+        self.track.init(BattleTrack::new_from_name("alright"));
 
         // let callable = self.base().callable("on_note_event");
     }
@@ -250,7 +293,7 @@ impl INode2D for BattleEngine {
         if event.is_action_pressed("menu".into()) {
             self.toggle_dualmenu();
         } else if event.is_action_pressed("ui_accept".into()) {
-            self.on_player_note_hit();
+            self.on_player_clicked();
         }
     }
 
