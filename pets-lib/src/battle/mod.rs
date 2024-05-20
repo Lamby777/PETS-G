@@ -16,9 +16,8 @@ mod rhythm;
 mod skills;
 mod stat_translation;
 
+use midi::BattleTrack;
 use rhythm::*;
-
-use self::midi::BattleTrack;
 
 #[allow(unused)]
 #[derive(PartialEq)]
