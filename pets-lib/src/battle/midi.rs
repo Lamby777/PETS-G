@@ -4,7 +4,6 @@
 //! game-related code.
 //!
 
-use crate::battle::NoteType;
 use crate::prelude::*;
 
 use ribbons::unwrap_fmt;
@@ -79,7 +78,7 @@ pub struct BattleTrack {
 }
 
 impl BattleTrack {
-    pub fn receiver(&self) -> Gd<MidiReceiver> {
+    pub fn _receiver(&self) -> Gd<MidiReceiver> {
         self.player.con.clone()
     }
 

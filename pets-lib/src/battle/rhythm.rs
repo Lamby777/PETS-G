@@ -13,6 +13,10 @@ pub enum NoteType {
 }
 
 impl NoteType {
+    /// Convert a `u8` from MIDI to its equivalent `NoteType`
+    ///
+    /// Panics if the note is invalid, for ergonomics.
+    /// Use `try_from_note` if you want to handle the error.
     pub fn from_note(note: u8) -> Self {
         ribbons::unwrap_fmt!(
             Self::try_from_note(note),
