@@ -18,6 +18,8 @@ mod stat_translation;
 
 use rhythm::*;
 
+use self::midi::BattleTrack;
+
 #[allow(unused)]
 #[derive(PartialEq)]
 enum MenuSection {
@@ -58,6 +60,9 @@ pub struct BattleEngine {
     state: BattleState,
 
     rhythm: RhythmState,
+
+    #[init(default = OnReady::manual())]
+    track: OnReady<BattleTrack>,
 
     /// timer that is in charge of turning `player_clicked` to false
     #[init(default = OnReady::manual())]
@@ -242,6 +247,9 @@ impl BattleEngine {
 
         // play the battle music
         self.music.play();
+
+        let sheet = &self.track.sheet.clone();
+        self.track.player.play(&sheet);
     }
 }
 
