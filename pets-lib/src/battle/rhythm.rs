@@ -9,13 +9,23 @@
 /// This type explains what kind of note is being played.
 pub enum NoteType {
     /// Note that must be hit
-    Hit,
+    Hit = 60,
 }
 
 impl NoteType {
-    pub fn from_note(note: u8) -> Option<Self> {
+    pub fn from_note(note: u8) -> Self {
+        ribbons::unwrap_fmt!(
+            Self::try_from_note(note),
+            "invalid midi note with code {}",
+            note
+        )
+    }
+
+    pub fn try_from_note(note: u8) -> Option<Self> {
+        use NoteType::*;
+
         Some(match note {
-            60 => Self::Hit,
+            60 => Hit,
             _ => return None,
         })
     }

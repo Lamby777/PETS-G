@@ -177,28 +177,6 @@ impl BattleEngine {
     }
 
     #[func]
-    pub fn on_note_event(&mut self, on: bool, note: u8) {
-        godot_print!("Note event: {} (on: {})", note, on);
-        let Some(notetype) = NoteType::from_note(note) else {
-            panic!("invalid midi note with code {}", note);
-        };
-
-        if on {
-            self.rhythm.note = Some(notetype);
-            self.on_note_start();
-        } else {
-            self.offset_pos(-20, 0);
-
-            // if note off received, give X ms of leeway after the
-            // ending for them to still hit the note
-            let timer = &mut self.note_end_timer;
-            timer.set_wait_time(LENIENCY_RADIUS);
-            timer.start();
-            // the timer calls `on_note_end` when it finishes
-        }
-    }
-
-    #[func]
     pub fn on_early_leniency_expired(&mut self) {
         self.rhythm.player_clicked = false;
         self.on_flop_attack();
@@ -207,8 +185,8 @@ impl BattleEngine {
     /// when player tries to attack on a beat
     #[func]
     pub fn on_player_note_hit(&mut self) {
-        if let Some(_) = self.rhythm.note {
-            self.on_note_end();
+        if let Some(note) = self.rhythm.note {
+            self.on_note_off(note as u8);
             self.on_successful_attack();
         } else {
             self.rhythm.player_clicked = true;
@@ -219,7 +197,7 @@ impl BattleEngine {
     }
 
     #[func]
-    pub fn on_note_start(&mut self) {
+    pub fn on_note_on(&mut self, note: u8) {
         self.offset_pos(20, 0);
 
         if self.rhythm.player_clicked {
@@ -229,13 +207,13 @@ impl BattleEngine {
             // if the player clicked early but `player_clicked` is still
             // true, that means the timer isn't over, so we should count
             // it as close enough to be valid!
-            self.on_note_end();
+            self.on_note_off(note);
             self.on_successful_attack();
         }
     }
 
     #[func]
-    pub fn on_note_end(&mut self) {
+    pub fn on_note_off(&mut self, _note: u8) {
         self.rhythm.reset();
     }
 
@@ -285,6 +263,8 @@ impl INode2D for BattleEngine {
 
         let track = BattleTrack::new_from_name("alright");
         self.track.init(track);
+
+        // let callable = self.base().callable("on_note_event");
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
