@@ -4,6 +4,7 @@
 //! game-related code.
 //!
 
+use crate::battle::NoteType;
 use crate::prelude::*;
 
 use ribbons::unwrap_fmt;
@@ -31,9 +32,42 @@ pub struct MidiReceiver {
 }
 
 impl Connection for GdExt<MidiReceiver> {
-    fn play(&mut self, _event: MidiEvent) -> bool {
-        todo!()
+    fn play(&mut self, event: MidiEvent) -> bool {
+        use midly::MidiMessage::*;
+
+        match event.message {
+            NoteOn { key, vel: _ } => {
+                self.bind_mut().on_note_event(true, key.into());
+            }
+
+            NoteOff { key, vel: _ } => {
+                self.bind_mut().on_note_event(false, key.into());
+            }
+
+            _ => {}
+        }
+
+        true
     }
+}
+
+impl MidiReceiver {
+    pub fn on_note_event(&mut self, on: bool, note: u8) {
+        godot_print!("Note event: {} (on: {})", note, on);
+
+        let signal = if on { "note_on" } else { "note_off" };
+        self.base_mut()
+            .emit_signal(signal.into(), &[note.to_variant()]);
+    }
+}
+
+#[godot_api]
+impl MidiReceiver {
+    #[signal]
+    fn note_on(note: u8) {}
+
+    #[signal]
+    fn note_off(note: u8) {}
 }
 
 #[godot_api]
