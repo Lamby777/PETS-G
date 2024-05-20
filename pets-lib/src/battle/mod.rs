@@ -285,7 +285,6 @@ impl INode2D for BattleEngine {
         }
 
         self.track.init(BattleTrack::new_from_name("alright"));
-
         // let callable = self.base().callable("on_note_event");
     }
 
