@@ -27,26 +27,17 @@ impl InteractionZone {
     }
 
     #[func]
-    fn on_enter_or_exit(&mut self, entered: bool) {
-        let zone = self.base().clone().cast();
-        let mut im = InteractionManager::singleton();
-        let mut im = im.bind_mut();
-
-        if entered {
-            im.register_zone(zone);
-        } else {
-            im.unregister_zone(zone);
-        }
-    }
-
-    #[func]
     fn on_entered(&mut self, _body: Gd<Node2D>) {
-        self.on_enter_or_exit(true);
+        InteractionManager::singleton()
+            .bind_mut()
+            .register_zone(self.to_gd());
     }
 
     #[func]
     fn on_exited(&mut self, _body: Gd<Node2D>) {
-        self.on_enter_or_exit(false);
+        InteractionManager::singleton()
+            .bind_mut()
+            .unregister_zone(self.to_gd());
     }
 }
 
