@@ -25,13 +25,10 @@ enum MenuSection {
     Skill,
 }
 
-/// How long after a note off event to still consider clicks valid
-const LENIENCY_AFTER_BEAT: f64 = 0.008;
-
-/// How long to wait after a click to check if it was early
-const LENIENCY_BEFORE_BEAT: f64 = 0.05;
-
 const INTRO_COUNTDOWN_SEC: f64 = 3.0;
+
+/// How long before/after a beat to still consider clicks valid
+const LENIENCY_RADIUS: f64 = 0.01;
 
 #[derive(Default, PartialEq)]
 enum BattleState {
@@ -190,7 +187,7 @@ impl BattleEngine {
             // if note off received, give X ms of leeway after the
             // ending for them to still hit the note
             let timer = &mut self.note_end_timer;
-            timer.set_wait_time(LENIENCY_AFTER_BEAT);
+            timer.set_wait_time(LENIENCY_RADIUS);
             timer.start();
             // the timer calls `on_note_end` when it finishes
         }
@@ -211,7 +208,7 @@ impl BattleEngine {
         } else {
             self.rhythm.player_clicked = true;
 
-            self.post_click_timer.set_wait_time(LENIENCY_BEFORE_BEAT);
+            self.post_click_timer.set_wait_time(LENIENCY_RADIUS);
             self.post_click_timer.start();
         }
     }
