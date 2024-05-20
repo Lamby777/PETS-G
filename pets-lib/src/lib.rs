@@ -54,6 +54,9 @@ mod prelude {
     pub use crate::choices::ChoiceAgent;
     pub use crate::singleton::Autoload;
 
+    // re-exports
+    pub use nodi::midly;
+
     // is this bad practice? no clue and idc honestly
     // it's convenient with no real caveat, therefore...
     pub use anyhow::{anyhow, Result};
