@@ -6,10 +6,14 @@ pub mod choices;
 pub mod limiq;
 pub mod singleton;
 
+use derived_deref::{Deref, DerefMut};
 use godot::engine::object::ConnectFlags;
 use godot::engine::tween::TransitionType;
 use godot::engine::{Engine, RichTextLabel, SceneTreeTimer, Theme, Tween};
 use godot::prelude::*;
+
+#[derive(Deref, DerefMut)]
+pub struct GdExt<T: GodotClass>(pub Gd<T>); // lol
 
 pub fn start_ix(name: impl Into<String>) {
     DialogBox::singleton().bind_mut().start_ix(name.into());

@@ -11,6 +11,7 @@ use std::io::Read;
 
 use godot::engine::file_access::ModeFlags;
 use godot::engine::GFile;
+use godot::prelude::*;
 
 use midly::Smf;
 use nodi::timers::Ticker;
@@ -20,16 +21,29 @@ use nodi::{Connection, MidiEvent, Player, Sheet};
 ///
 /// Acts like a MIDI player but instead of playing stuff,
 /// it sends note events to the battle engine.
-pub struct MidiReceiver;
-impl Connection for MidiReceiver {
+///
+/// It is implemented as a Godot `Node` so that it can send
+/// signals n stuff, and be a child of the `BattleEngine`.
+#[derive(GodotClass)]
+#[class(init, base=Node)]
+pub struct MidiReceiver {
+    base: Base<Node>,
+}
+
+impl Connection for GdExt<MidiReceiver> {
     fn play(&mut self, _event: MidiEvent) -> bool {
         todo!()
     }
 }
 
+#[godot_api]
+impl INode for MidiReceiver {
+    //
+}
+
 pub struct BattleTrack {
     pub sheet: Sheet,
-    pub player: Player<Ticker, MidiReceiver>,
+    pub player: Player<Ticker, GdExt<MidiReceiver>>,
 }
 
 impl BattleTrack {
@@ -47,7 +61,8 @@ impl BattleTrack {
 
         let sheet = Sheet::sequential(&tracks);
         let ticker = Ticker::new(ticks.into());
-        let player = Player::new(ticker, MidiReceiver);
+        let receiver = GdExt(MidiReceiver::new_alloc());
+        let player = Player::new(ticker, receiver);
 
         BattleTrack { sheet, player }
     }
