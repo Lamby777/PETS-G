@@ -22,6 +22,7 @@ ribbons = "0.1.0"
 serde = {version = "1.0.188", features = ["derive"] }
 strum = { version = "0.26.1", features = ["derive"] }
 typetag = "0.2.15"
+wmidi = "4.0.10"
 
 [build-dependencies]
 dialogical = "*"
