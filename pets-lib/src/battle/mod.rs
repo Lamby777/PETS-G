@@ -7,6 +7,8 @@ use godot::engine::object::ConnectFlags;
 use godot::engine::{AnimationPlayer, Control, InputEvent, Timer};
 use godot::prelude::*;
 
+use wmidi as midi;
+
 use crate::prelude::*;
 
 mod player;
