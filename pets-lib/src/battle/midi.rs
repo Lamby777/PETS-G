@@ -5,23 +5,33 @@
 //!
 
 use crate::prelude::*;
+
+use ribbons::unwrap_fmt;
 use std::io::Read;
 
 use godot::engine::file_access::ModeFlags;
 use godot::engine::GFile;
+
 use midly::Smf;
+use nodi::timers::Ticker;
 use nodi::Sheet;
-use ribbons::unwrap_fmt;
 
 /// Just pass in the name of the track. No file extension.
 ///
 /// # Memory Leak
 /// See [`from_godot_path`] docs for more information.
-pub fn battle_music<'a>(track_name: &str) -> Sheet {
+pub fn battle_music<'a>(track_name: &str) -> (Ticker, Sheet) {
     let path = format!("res://assets/music/battle/{}.mid", track_name);
-    let Smf { header: _, tracks } = from_godot_path(&path);
+    let Smf { header, tracks } = from_godot_path(&path);
 
-    Sheet::sequential(&tracks)
+    let midly::Timing::Metrical(ticks) = header.timing else {
+        panic!("P/E/T/S only supports metrical timing MIDI files.");
+    };
+
+    let sheet = Sheet::sequential(&tracks);
+    let ticker = Ticker::new(ticks.into());
+
+    (ticker, sheet)
 }
 
 /// Parse a MIDI file from a Godot path
