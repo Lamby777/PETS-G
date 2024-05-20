@@ -4,6 +4,8 @@
 //! game-related code.
 //!
 
+use crate::prelude::*;
+
 use std::io::Read;
 
 use godot::engine::file_access::ModeFlags;
