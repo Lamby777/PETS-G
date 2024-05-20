@@ -26,10 +26,10 @@ enum MenuSection {
 }
 
 /// How long after a note off event to still consider clicks valid
-const LENIENCY_AFTER_BEAT: f64 = 0.002;
+const LENIENCY_AFTER_BEAT: f64 = 0.008;
 
 /// How long to wait after a click to check if it was early
-const LENIENCY_BEFORE_BEAT: f64 = 0.008;
+const LENIENCY_BEFORE_BEAT: f64 = 0.05;
 
 const INTRO_COUNTDOWN_SEC: f64 = 3.0;
 
