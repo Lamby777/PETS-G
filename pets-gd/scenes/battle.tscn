@@ -152,10 +152,10 @@ script/source = "extends MidiPlayer
 @onready var asp = $\"../BattleMusic\"
 
 var last_time = 0
+@export var TIME_OFFSET = 0.0
 
 func _ready():
   note.connect(my_note_callback)
-  manual_process = true
   play()
   
   if loop:
@@ -173,12 +173,13 @@ func on_loop():
   asp.play()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
   var time = asp.get_playback_position() + AudioServer.get_time_since_last_mix()
   
   # Compensate for output latency.
   time -= AudioServer.get_output_latency()
+
+  time += TIME_OFFSET
 
   # tick the midi player with the delta from our audio stream player
   # this syncs the midi player with the audio server
@@ -506,7 +507,9 @@ color = Color(0, 0, 0, 1)
 [node name="BattleMidi" type="MidiPlayer" parent="."]
 midi = ExtResource("8_cjd10")
 loop = true
+manual_process = true
 script = SubResource("GDScript_g4lt7")
+TIME_OFFSET = 0.14
 
 [node name="RhythmTimer" type="Timer" parent="."]
 one_shot = true
