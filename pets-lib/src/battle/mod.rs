@@ -16,7 +16,7 @@ mod rhythm;
 mod skills;
 mod stat_translation;
 
-use midi::BattleTrack;
+use midi::{BattleTrack, MidiReceiver};
 use rhythm::*;
 
 #[allow(unused)]
@@ -244,8 +244,15 @@ impl BattleEngine {
         // play the battle music
         self.music.play();
 
-        let sheet = &self.track.sheet.clone();
-        self.track.player.play(&sheet);
+        let sheet = self.track.sheet.clone();
+        let iid = self.track.receiver.instance_id();
+        let ticker = self.track.ticker.clone();
+
+        thread::spawn(move || {
+            let receiver = GdExt(Gd::<MidiReceiver>::from_instance_id(iid));
+
+            nodi::Player::new(ticker, receiver).play(&sheet);
+        });
     }
 }
 
@@ -285,7 +292,13 @@ impl INode2D for BattleEngine {
         }
 
         self.track.init(BattleTrack::new_from_name("alright"));
-        // let callable = self.base().callable("on_note_event");
+
+        let note_on = self.base().callable("on_note_on");
+        let note_off = self.base().callable("on_note_off");
+
+        let receiver = &mut self.track.receiver;
+        receiver.connect("note_on".into(), note_on);
+        receiver.connect("note_off".into(), note_off);
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
