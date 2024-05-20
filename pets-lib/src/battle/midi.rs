@@ -93,7 +93,7 @@ impl BattleTrack {
             panic!("P/E/T/S only supports metrical timing MIDI files.");
         };
 
-        let sheet = Sheet::sequential(&tracks);
+        let sheet = Sheet::parallel(&tracks);
         let ticker = Ticker::new(ticks.into());
         // let ticker = Ticker::try_from(header.timing).unwrap();
         let receiver = GdExt(MidiReceiver::new_alloc());
@@ -129,13 +129,3 @@ impl BattleTrack {
         smf
     }
 }
-
-// pub fn ticker_and_id<T>(
-//     player: Player<T, GdExt<MidiReceiver>>,
-// ) -> (T, InstanceId)
-// where
-//     T: nodi::Timer,
-// {
-//     let iid = player.con.instance_id();
-//     (ticker, iid)
-// }
