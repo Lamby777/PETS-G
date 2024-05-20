@@ -37,9 +37,7 @@ impl Connection for GdExt<MidiReceiver> {
 }
 
 #[godot_api]
-impl INode for MidiReceiver {
-    //
-}
+impl INode for MidiReceiver {}
 
 pub struct BattleTrack {
     pub sheet: Sheet,
@@ -47,6 +45,10 @@ pub struct BattleTrack {
 }
 
 impl BattleTrack {
+    pub fn receiver(&self) -> Gd<MidiReceiver> {
+        self.player.con.clone()
+    }
+
     /// Just pass in the name of the track. No file extension.
     ///
     /// # Memory Leak
