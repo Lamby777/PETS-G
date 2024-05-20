@@ -37,7 +37,7 @@ project/assembly_name="P-E-T-S"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/discord-sdk-gd/plugin.cfg", "res://addons/godot_midi/plugin.cfg")
+enabled=PackedStringArray("res://addons/discord-sdk-gd/plugin.cfg")
 
 [file_customization]
 

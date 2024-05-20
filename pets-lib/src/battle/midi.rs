@@ -109,11 +109,14 @@ impl BattleTrack {
     /// Don't run this a gazillion times. It's not expected
     /// to have more than like 200 battle themes in the entire game.
     fn from_godot_path<'a>(path: &str) -> Smf<'a> {
+        godot_print!("Reading MIDI file: {:?}", path);
         let file = GFile::open(path, ModeFlags::READ);
         let mut file = unwrap_fmt!(file, "Failed to open MIDI file: {}", path);
 
         let mut data = vec![];
         unwrap_fmt!(file.read(&mut data), "Failed to read MIDI file: {}", path);
+
+        dbg!(&data);
 
         Smf::parse(data.leak()).expect("Failed to parse MIDI file")
     }

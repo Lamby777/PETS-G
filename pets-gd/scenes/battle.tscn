@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://kgl5788x405y"]
+[gd_scene load_steps=17 format=3 uid="uid://kgl5788x405y"]
 
 [ext_resource type="Shader" path="res://themes/opacity.gdshader" id="1_3pmac"]
 [ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="2_0m4jp"]
@@ -7,7 +7,6 @@
 [ext_resource type="AudioStream" uid="uid://bobf56v1g63p4" path="res://assets/music/battle/alright.ogg" id="4_l6m5j"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="5_hcsfj"]
 [ext_resource type="Texture2D" uid="uid://cx24dyfnh30ag" path="res://assets/textures/portraits/Ethan.png" id="6_pjho4"]
-[ext_resource type="MidiResource" uid="uid://d03x5b20brbdb" path="res://assets/music/battle/alright.mid" id="8_cjd10"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w1wwc"]
 shader = ExtResource("2_0m4jp")
@@ -143,63 +142,6 @@ _data = {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lgbmi"]
 shader = ExtResource("1_3pmac")
 shader_parameter/opacity = 0.0
-
-[sub_resource type="GDScript" id="GDScript_g4lt7"]
-resource_name = "BattleMidi"
-script/source = "extends MidiPlayer
-
-@onready var parent = get_parent()
-@onready var asp = $\"../BattleMusic\"
-
-var last_time = 0
-@export var TIME_OFFSET = 0.0
-
-func _ready():
-  note.connect(my_note_callback)
-  play()
-  
-  if loop:
-    asp.finished.connect(on_loop)
-
-func on_loop():
-  # loop midi player
-  print(\"Looping MIDI\")
-  last_time = 0
-  current_time = 0
-  stop() # resets time
-  
-  # play midi along with audio stream
-  play()
-  asp.play()
-
-
-func _process(_delta):
-  var time = asp.get_playback_position() + AudioServer.get_time_since_last_mix()
-  
-  # Compensate for output latency.
-  time -= AudioServer.get_output_latency()
-
-  time += TIME_OFFSET
-
-  # tick the midi player with the delta from our audio stream player
-  # this syncs the midi player with the audio server
-  # this is a more accurate way of doing it than using the delta from _process
-  var asp_delta = time - last_time
-  last_time = time
-  process_delta(asp_delta)
-
-
-func my_note_callback(event, track):
-  if track != 2:
-    return
-  
-  var ev_note = event['note']
-  
-  if (event['subtype'] == MIDI_MESSAGE_NOTE_ON): # note on
-    parent.on_note_event(true, ev_note)
-  elif (event['subtype'] == MIDI_MESSAGE_NOTE_OFF): # note off
-    parent.on_note_event(false, ev_note)
-"
 
 [node name="BattleEngine" type="BattleEngine"]
 
@@ -503,13 +445,6 @@ material = SubResource("ShaderMaterial_lgbmi")
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
-
-[node name="BattleMidi" type="MidiPlayer" parent="."]
-midi = ExtResource("8_cjd10")
-loop = true
-manual_process = true
-script = SubResource("GDScript_g4lt7")
-TIME_OFFSET = 0.14
 
 [node name="RhythmTimer" type="Timer" parent="."]
 one_shot = true
