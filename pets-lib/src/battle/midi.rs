@@ -30,7 +30,7 @@ pub struct MidiReceiver {
     base: Base<Node>,
 }
 
-impl Connection for GdExt<MidiReceiver> {
+impl Connection for GdW<MidiReceiver> {
     fn play(&mut self, event: MidiEvent) -> bool {
         use midly::MidiMessage::*;
 
@@ -77,7 +77,7 @@ impl INode for MidiReceiver {}
 pub struct BattleTrack {
     pub sheet: Sheet,
     pub ticker: Ticker,
-    pub receiver: GdExt<MidiReceiver>,
+    pub receiver: GdW<MidiReceiver>,
 }
 
 impl BattleTrack {
@@ -96,7 +96,7 @@ impl BattleTrack {
         let sheet = Sheet::parallel(&tracks);
         let ticker = Ticker::new(ticks.into());
         // let ticker = Ticker::try_from(header.timing).unwrap();
-        let receiver = GdExt(MidiReceiver::new_alloc());
+        let receiver = GdW(MidiReceiver::new_alloc());
 
         BattleTrack {
             sheet,
