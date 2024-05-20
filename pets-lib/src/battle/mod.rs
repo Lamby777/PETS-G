@@ -282,6 +282,9 @@ impl INode2D for BattleEngine {
         let callable = self.base().callable("on_early_leniency_expired");
         click_timer.connect("timeout".into(), callable);
         self.post_click_timer.init(click_timer);
+
+        let track = BattleTrack::new_from_name("alright");
+        self.track.init(track);
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
