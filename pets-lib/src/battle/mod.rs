@@ -9,7 +9,7 @@ use godot::prelude::*;
 
 use crate::prelude::*;
 
-mod midireader;
+mod midi;
 mod player;
 mod rhythm;
 #[allow(unused)]
