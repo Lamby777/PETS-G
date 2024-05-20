@@ -250,8 +250,9 @@ impl BattleEngine {
 
         thread::spawn(move || {
             let receiver = GdExt(Gd::<MidiReceiver>::from_instance_id(iid));
+            let mut player = nodi::Player::new(ticker, receiver);
 
-            nodi::Player::new(ticker, receiver).play(&sheet);
+            player.play(&sheet);
         });
     }
 }
