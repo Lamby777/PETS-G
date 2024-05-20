@@ -13,7 +13,8 @@ use godot::engine::{Engine, RichTextLabel, SceneTreeTimer, Theme, Tween};
 use godot::prelude::*;
 
 #[derive(Deref, DerefMut)]
-pub struct GdExt<T: GodotClass>(pub Gd<T>); // lol
+/// Wrapper around Gd<T> so I can implement external traits on godot stuff
+pub struct GdW<T: GodotClass>(pub Gd<T>);
 
 pub fn start_ix(name: impl Into<String>) {
     DialogBox::singleton().bind_mut().start_ix(name.into());

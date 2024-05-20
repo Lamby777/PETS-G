@@ -249,7 +249,7 @@ impl BattleEngine {
         let ticker = self.track.ticker.clone();
 
         thread::spawn(move || {
-            let receiver = GdExt(Gd::<MidiReceiver>::from_instance_id(iid));
+            let receiver = GdW(Gd::<MidiReceiver>::from_instance_id(iid));
             let mut player = nodi::Player::new(ticker, receiver);
 
             player.play(&sheet);
