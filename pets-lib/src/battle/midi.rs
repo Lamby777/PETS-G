@@ -95,6 +95,7 @@ impl BattleTrack {
 
         let sheet = Sheet::sequential(&tracks);
         let ticker = Ticker::new(ticks.into());
+        // let ticker = Ticker::try_from(header.timing).unwrap();
         let receiver = GdExt(MidiReceiver::new_alloc());
 
         BattleTrack {

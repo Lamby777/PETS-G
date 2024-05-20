@@ -244,8 +244,8 @@ impl BattleEngine {
         // play the battle music
         self.music.play();
 
-        let sheet = self.track.sheet.clone();
         let iid = self.track.receiver.instance_id();
+        let sheet = self.track.sheet.clone();
         let ticker = self.track.ticker.clone();
 
         thread::spawn(move || {
@@ -296,9 +296,10 @@ impl INode2D for BattleEngine {
         let note_on = self.base().callable("on_note_on");
         let note_off = self.base().callable("on_note_off");
 
-        let receiver = &mut self.track.receiver;
+        let mut receiver = self.track.receiver.clone();
         receiver.connect("note_on".into(), note_on);
         receiver.connect("note_off".into(), note_off);
+        self.base_mut().add_child(receiver.upcast());
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
