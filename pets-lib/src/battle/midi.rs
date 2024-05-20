@@ -15,7 +15,7 @@ use godot::prelude::*;
 
 use midly::Smf;
 use nodi::timers::Ticker;
-use nodi::{Connection, MidiEvent, Player, Sheet};
+use nodi::{Connection, MidiEvent, Sheet};
 
 /// Receives MIDI events and handles them for P/E/T/S
 ///
@@ -33,6 +33,8 @@ pub struct MidiReceiver {
 impl Connection for GdExt<MidiReceiver> {
     fn play(&mut self, event: MidiEvent) -> bool {
         use midly::MidiMessage::*;
+
+        godot_print!("Midi event: {:?}", &event.message);
 
         match event.message {
             NoteOn { key, vel: _ } => {
@@ -74,14 +76,11 @@ impl INode for MidiReceiver {}
 
 pub struct BattleTrack {
     pub sheet: Sheet,
-    pub player: Player<Ticker, GdExt<MidiReceiver>>,
+    pub ticker: Ticker,
+    pub receiver: GdExt<MidiReceiver>,
 }
 
 impl BattleTrack {
-    pub fn _receiver(&self) -> Gd<MidiReceiver> {
-        self.player.con.clone()
-    }
-
     /// Just pass in the name of the track. No file extension.
     ///
     /// # Memory Leak
@@ -97,9 +96,12 @@ impl BattleTrack {
         let sheet = Sheet::sequential(&tracks);
         let ticker = Ticker::new(ticks.into());
         let receiver = GdExt(MidiReceiver::new_alloc());
-        let player = Player::new(ticker, receiver);
 
-        BattleTrack { sheet, player }
+        BattleTrack {
+            sheet,
+            ticker,
+            receiver,
+        }
     }
 
     /// Parse a MIDI file from a Godot path
@@ -120,6 +122,19 @@ impl BattleTrack {
             path
         );
 
-        Smf::parse(data.leak()).expect("Failed to parse MIDI file")
+        let smf = Smf::parse(data.leak()).expect("Failed to parse MIDI file");
+        godot_print!("Successfully read the MIDI file!");
+
+        smf
     }
 }
+
+// pub fn ticker_and_id<T>(
+//     player: Player<T, GdExt<MidiReceiver>>,
+// ) -> (T, InstanceId)
+// where
+//     T: nodi::Timer,
+// {
+//     let iid = player.con.instance_id();
+//     (ticker, iid)
+// }

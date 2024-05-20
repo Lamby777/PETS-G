@@ -69,9 +69,9 @@ mod prelude {
     pub use std::collections::{HashMap, HashSet};
     pub use std::convert::Infallible;
     pub use std::fmt::{self, Debug, Display};
-    pub use std::io;
     pub use std::path::{Path, PathBuf};
     pub use std::rc::Rc;
+    pub use std::{io, thread};
 }
 
 struct PetsLib;
