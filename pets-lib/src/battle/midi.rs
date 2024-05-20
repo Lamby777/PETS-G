@@ -114,9 +114,11 @@ impl BattleTrack {
         let mut file = unwrap_fmt!(file, "Failed to open MIDI file: {}", path);
 
         let mut data = vec![];
-        unwrap_fmt!(file.read(&mut data), "Failed to read MIDI file: {}", path);
-
-        dbg!(&data);
+        unwrap_fmt!(
+            file.read_to_end(&mut data),
+            "Failed to read MIDI file: {}",
+            path
+        );
 
         Smf::parse(data.leak()).expect("Failed to parse MIDI file")
     }
