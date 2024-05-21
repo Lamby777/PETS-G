@@ -51,17 +51,12 @@ impl PlayerCB {
     /// * Cutscenes
     /// * Menus
     pub fn can_move(&self) -> bool {
-        // dialogue box open? no moving!
-        if DialogBox::singleton().bind().is_active() {
-            return false;
-        }
+        // PRAISE SHORT-CIRCUIT EVALUATION!!
+        let cant_move = DialogBox::singleton().bind().is_active()
+            || self.in_battle
+            || self.tpbeacon_debounce;
 
-        // in battle? no moving!
-        if self.in_battle {
-            return false;
-        }
-
-        true
+        !cant_move
     }
 
     /// Set character positions based on past pos/rot
