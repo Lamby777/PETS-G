@@ -6,6 +6,7 @@
 use godot::engine::{Area2D, IArea2D};
 use godot::prelude::*;
 
+use crate::consts::playercb::*;
 use crate::prelude::*;
 
 #[derive(GodotClass)]
@@ -38,8 +39,24 @@ impl InteractionZone {
 
         let target = &self.beacon_target;
         if !target.is_empty() {
-            let target_node = self.base().get_node_as(target.clone());
-            tp_to_beacon(target_node);
+            let mut pcb = PlayerCB::singleton();
+            {
+                let mut pcb = pcb.bind_mut();
+                if pcb.tpbeacon_debounce {
+                    return;
+                }
+
+                pcb.tpbeacon_debounce = true;
+                set_timeout(TP_BEACON_COOLDOWN, || {
+                    PlayerCB::singleton().bind_mut().tpbeacon_debounce = false;
+                });
+            }
+
+            let target_node = self.base().get_node_as::<Node2D>(target.clone());
+            let target_pos = target_node.get_global_position();
+
+            // teleport the player
+            pcb.set_global_position(target_pos);
 
             return;
         }
@@ -67,11 +84,6 @@ impl InteractionZone {
             .bind_mut()
             .unregister_zone(self.to_gd());
     }
-}
-
-fn tp_to_beacon(target: Gd<Node2D>) {
-    let pos = target.get_global_position();
-    PlayerCB::singleton().set_global_position(pos);
 }
 
 #[godot_api]

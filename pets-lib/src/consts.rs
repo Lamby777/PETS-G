@@ -37,6 +37,8 @@ pub mod playercb {
 
     // Distance between party members
     pub const PERSONAL_SPACE: usize = 15;
+
+    pub const TP_BEACON_COOLDOWN: f64 = 0.1;
 }
 
 pub mod dialogue {

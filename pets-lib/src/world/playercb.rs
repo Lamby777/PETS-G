@@ -26,6 +26,7 @@ pub struct PlayerCB {
     past_rotations: LimiQ<Vector2>,
 
     pub in_battle: bool,
+    pub tpbeacon_debounce: bool,
 }
 
 #[godot_api]
