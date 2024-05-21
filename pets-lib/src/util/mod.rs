@@ -26,7 +26,7 @@ pub use crate::connect;
 /// ```
 #[macro_export]
 macro_rules! connect {
-    ($($con_node:expr,$signal:expr,$cal_node:expr,$cal_name:expr);* $(;)?) => {
+    ($($con_node:expr,$signal:expr=>$cal_node:expr,$cal_name:expr);* $(;)?) => {
         $({
             let callable = $cal_node.callable($cal_name);
             $con_node.connect($signal.into(), callable);
