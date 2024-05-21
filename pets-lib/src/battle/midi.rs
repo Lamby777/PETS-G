@@ -57,8 +57,10 @@ impl MidiReceiver {
         godot_print!("Note event: {} (on: {})", note, on);
 
         let signal = if on { "note_on" } else { "note_off" };
-        self.base_mut()
-            .emit_signal(signal.into(), &[note.to_variant()]);
+        self.base_mut().call_deferred("emit_signal".into(), &[
+            signal.to_variant(),
+            note.to_variant(),
+        ]);
     }
 }
 
