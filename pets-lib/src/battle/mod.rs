@@ -192,17 +192,21 @@ impl BattleEngine {
             godot_print!("player clicked early but still valid");
             self.on_successful_attack();
         }
-    }
 
-    #[func]
-    pub fn on_note_off(&mut self, _note: u8) {
-        // if the player clicked too early, we'll give them a little
-        // bit of leniency to still count it as a hit
         let timer = &mut self.note_off_timer;
         timer.set_wait_time(LENIENCY_RADIUS);
         timer.start();
-        // When the timer is over, `close_beat` will be called
     }
+
+    // #[func]
+    // pub fn on_note_off(&mut self, _note: u8) {
+    //     // if the player clicked too early, we'll give them a little
+    //     // bit of leniency to still count it as a hit
+    //     let timer = &mut self.note_off_timer;
+    //     timer.set_wait_time(LENIENCY_RADIUS);
+    //     timer.start();
+    //     // When the timer is over, `close_beat` will be called
+    // }
 
     #[func]
     pub fn close_beat(&mut self) {
@@ -299,11 +303,11 @@ impl INode2D for BattleEngine {
         self.track.init(BattleTrack::new_from_name("alright"));
 
         let note_on = self.base().callable("on_note_on");
-        let note_off = self.base().callable("on_note_off");
+        // let note_off = self.base().callable("on_note_off");
 
         let mut receiver = self.track.receiver.clone();
         receiver.connect("note_on".into(), note_on);
-        receiver.connect("note_off".into(), note_off);
+        // receiver.connect("note_off".into(), note_off);
         self.base_mut().add_child(receiver.upcast());
     }
 
