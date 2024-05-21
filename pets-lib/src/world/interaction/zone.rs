@@ -39,26 +39,7 @@ impl InteractionZone {
 
         let target = &self.beacon_target;
         if !target.is_empty() {
-            let mut pcb = PlayerCB::singleton();
-            {
-                let mut pcb = pcb.bind_mut();
-                if pcb.tpbeacon_debounce {
-                    return;
-                }
-
-                pcb.tpbeacon_debounce = true;
-                set_timeout(TP_BEACON_COOLDOWN, || {
-                    PlayerCB::singleton().bind_mut().tpbeacon_debounce = false;
-                });
-            }
-
-            let target_node = self.base().get_node_as::<Node2D>(target.clone());
-            let target_pos = target_node.get_global_position();
-
-            // teleport the player
-            pcb.set_global_position(target_pos);
-
-            return;
+            self.tp_player_to_beacon(target);
         }
     }
 
@@ -83,6 +64,29 @@ impl InteractionZone {
         InteractionManager::singleton()
             .bind_mut()
             .unregister_zone(self.to_gd());
+    }
+
+    fn tp_player_to_beacon(&self, target: &NodePath) {
+        let mut pcb = PlayerCB::singleton();
+        {
+            let mut pcb = pcb.bind_mut();
+            if pcb.tpbeacon_debounce {
+                return;
+            }
+
+            pcb.tpbeacon_debounce = true;
+            set_timeout(TP_BEACON_COOLDOWN, || {
+                PlayerCB::singleton().bind_mut().tpbeacon_debounce = false;
+            });
+        }
+
+        let target_node = self.base().get_node_as::<Node2D>(target.clone());
+        let target_pos = target_node.get_global_position();
+
+        // teleport the player
+        pcb.set_global_position(target_pos);
+
+        return;
     }
 }
 
