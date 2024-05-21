@@ -37,8 +37,6 @@ impl Connection for GdW<MidiReceiver> {
     fn play(&mut self, event: MidiEvent) -> bool {
         use midly::MidiMessage::*;
 
-        // godot_print!("Midi event: {:?}", &event.message);
-
         match event.message {
             NoteOn { key, vel: _ } => {
                 self.bind_mut().on_note_event(true, key.into());
@@ -57,8 +55,6 @@ impl Connection for GdW<MidiReceiver> {
 
 impl MidiReceiver {
     pub fn on_note_event(&mut self, on: bool, note: u8) {
-        // godot_print!("Note event: {} (on: {})", note, on);
-
         let signal = if on { "note_on" } else { "note_off" };
         self.base_mut().call_deferred("emit_signal".into(), &[
             signal.to_variant(),
