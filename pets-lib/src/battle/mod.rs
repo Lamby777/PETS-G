@@ -257,13 +257,7 @@ impl BattleEngine {
 impl INode2D for BattleEngine {
     fn ready(&mut self) {
         self.choices.bind_mut().disable();
-
-        // TODO refactor this dogshit LOL
-        let callable = self.base().callable("on_choice_picked");
-        self.choices.connect("selection_confirmed".into(), callable);
-
-        let callable = self.base().callable("close_beat");
-        self.note_off_timer.connect("timeout".into(), callable);
+        self.track.init(BattleTrack::new_from_name("alright"));
 
         {
             // intro countdown timer setup
@@ -278,21 +272,25 @@ impl INode2D for BattleEngine {
                 .done();
         }
 
-        {
-            // early click timer setup
-            let mut timer = Timer::new_alloc();
-            timer.set_one_shot(true);
-            self.base_mut().add_child(timer.clone().upcast());
-            let callable = self.base().callable("on_early_leniency_expired");
-            timer.connect("timeout".into(), callable);
-            self.post_click_timer.init(timer);
+        // early click timer setup
+        let mut timer = Timer::new_alloc();
+        timer.set_one_shot(true);
+        self.base_mut().add_child(timer.clone().upcast());
+        self.post_click_timer.init(timer);
+
+        connect! {
+            self.choices, "selection_confirmed" =>
+            self.base(), "on_choice_picked";
+
+            self.note_off_timer, "timeout" =>
+            self.base(), "close_beat";
+
+            self.post_click_timer, "timeout" =>
+            self.base(), "on_early_leniency_expired";
+
+            self.track.receiver, "note_on" =>
+            self.base(), "on_note_on";
         }
-
-        self.track.init(BattleTrack::new_from_name("alright"));
-
-        let note_on = self.base().callable("on_note_on");
-        let mut receiver = self.track.receiver.clone();
-        receiver.connect("note_on".into(), note_on);
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
