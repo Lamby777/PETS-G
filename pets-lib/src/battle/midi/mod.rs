@@ -6,6 +6,9 @@
 
 use crate::prelude::*;
 
+mod accurate_timer;
+use accurate_timer::AccurateTimer;
+
 use ribbons::unwrap_fmt;
 use std::io::Read;
 
@@ -78,7 +81,7 @@ impl INode for MidiReceiver {}
 
 pub struct BattleTrack {
     pub sheet: Sheet,
-    pub ticker: Ticker,
+    pub ticker: AccurateTimer<Ticker>,
     pub receiver: GdW<MidiReceiver>,
 }
 
@@ -96,7 +99,7 @@ impl BattleTrack {
         };
 
         let sheet = Sheet::parallel(&tracks);
-        let ticker = Ticker::new(ticks.into());
+        let ticker = AccurateTimer::new(Ticker::new(ticks.into()));
         // let ticker = Ticker::try_from(header.timing).unwrap();
         let receiver = GdW(MidiReceiver::new_alloc());
 

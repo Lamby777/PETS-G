@@ -30,7 +30,7 @@ enum MenuSection {
 const INTRO_COUNTDOWN_SEC: f64 = 3.0;
 
 /// How long before/after a beat to still consider clicks valid
-const LENIENCY_RADIUS: f64 = 0.01;
+const LENIENCY_RADIUS: f64 = 0.06;
 
 #[derive(Default, PartialEq)]
 enum BattleState {
@@ -196,8 +196,8 @@ impl BattleEngine {
 
     #[func]
     pub fn on_note_off(&mut self, _note: u8) {
-        // if the player clicked too early, we'll give them a little bit of leniency
-        // to still count it as a hit
+        // if the player clicked too early, we'll give them a little
+        // bit of leniency to still count it as a hit
         let timer = &mut self.note_off_timer;
         timer.set_wait_time(LENIENCY_RADIUS);
         timer.start();
@@ -211,7 +211,11 @@ impl BattleEngine {
 
     #[func]
     pub fn on_early_leniency_expired(&mut self) {
-        self.on_flop_attack();
+        if self.rhythm.player_clicked {
+            self.on_flop_attack();
+        }
+
+        self.rhythm.player_clicked = false;
     }
 
     #[func]
