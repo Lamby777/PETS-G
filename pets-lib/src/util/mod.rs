@@ -174,6 +174,34 @@ pub fn prefix_mod(target: &str, prefix: &str, active: bool) -> String {
     }
 }
 
+pub fn tween_method<V>(
+    callable: Callable,
+    start_value: V,
+    end_value: V,
+    time: f64,
+    trans: TransitionType,
+) -> Result<Gd<Tween>, ()>
+where
+    V: ToGodot,
+{
+    let res: Option<_> = try {
+        let mut tween = godot_tree().create_tween()?;
+
+        tween
+            .tween_method(
+                callable,
+                start_value.to_variant(),
+                end_value.to_variant(),
+                time,
+            )?
+            .set_trans(trans);
+
+        tween
+    };
+
+    res.ok_or(())
+}
+
 /// shorthand to do some tweeneroonies :3
 /// `time` is in seconds
 pub fn tween<NP, V, N>(
