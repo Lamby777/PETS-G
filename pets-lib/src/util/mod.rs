@@ -12,6 +12,28 @@ use godot::engine::tween::TransitionType;
 use godot::engine::{Engine, RichTextLabel, SceneTreeTimer, Theme, Tween};
 use godot::prelude::*;
 
+pub use crate::connect;
+/// Macro to connect stuff without using the annoying 2-line
+/// `let callable = xxxxx` syntax.
+///
+/// Usage:
+/// ```
+/// connect! {
+///     node_to_connect_to,       "signal_name",
+///     node_containing_callable, "callable_name";
+///     // ... repeat as many as you like
+/// }
+/// ```
+#[macro_export]
+macro_rules! connect {
+    ($($con_node:expr,$signal:expr,$cal_node:expr,$cal_name:expr);* $(;)?) => {
+        $({
+            let callable = $cal_node.callable($cal_name);
+            $con_node.connect($signal.into(), callable);
+        })*
+    };
+}
+
 #[derive(Deref, DerefMut)]
 /// Wrapper around Gd<T> so I can implement external traits on godot stuff
 pub struct GdW<T: GodotClass>(pub Gd<T>);
