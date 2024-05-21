@@ -67,6 +67,8 @@ impl InteractionZone {
     }
 
     fn tp_player_to_beacon(&self, target: &NodePath) {
+        fade_to_black(true);
+
         let mut pcb = PlayerCB::singleton();
         {
             let mut pcb = pcb.bind_mut();
@@ -75,19 +77,30 @@ impl InteractionZone {
             }
 
             pcb.tpbeacon_debounce = true;
-            set_timeout(TP_BEACON_COOLDOWN, || {
-                PlayerCB::singleton().bind_mut().tpbeacon_debounce = false;
-            });
         }
 
         let target_node = self.base().get_node_as::<Node2D>(target.clone());
         let target_pos = target_node.get_global_position();
 
-        // teleport the player
-        pcb.set_global_position(target_pos);
+        set_timeout(TP_BEACON_BLACK_IN, move || {
+            // after the screen is black, teleport the player
+            PlayerCB::singleton().set_global_position(target_pos);
 
-        return;
+            set_timeout(TP_BEACON_BLACK_HOLD, || {
+                // when it's time to fade the black away, do it.
+                fade_to_black(false);
+
+                set_timeout(TP_BEACON_BLACK_OUT, || {
+                    // finally, reset the debounce when the black is gone
+                    PlayerCB::singleton().bind_mut().tpbeacon_debounce = false;
+                });
+            });
+        });
     }
+}
+
+fn fade_to_black(fade_in: bool) {
+    todo!()
 }
 
 #[godot_api]
