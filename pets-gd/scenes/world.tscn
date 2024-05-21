@@ -177,6 +177,7 @@ collision_mask = 9
 [node name="Teleporter" parent="YSort/Room/DecoBushes/BushHeart/Bush1" instance=ExtResource("5_uar2c")]
 beacon_target = NodePath("../../Bush2/Teleporter")
 auto_interact = true
+scale = Vector2(0.5, 0.5)
 
 [node name="Bush2" parent="YSort/Room/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
 position = Vector2(-150, 1600)
@@ -185,6 +186,7 @@ collision_mask = 9
 [node name="Teleporter" parent="YSort/Room/DecoBushes/BushHeart/Bush2" instance=ExtResource("5_uar2c")]
 beacon_target = NodePath("../../Bush1/Teleporter")
 auto_interact = true
+scale = Vector2(0.5, 0.5)
 
 [node name="Bush3" parent="YSort/Room/DecoBushes/BushHeart" instance=ExtResource("2_87c4u")]
 position = Vector2(300, 1460)
