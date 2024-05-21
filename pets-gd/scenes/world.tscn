@@ -157,13 +157,11 @@ collision_mask = 9
 
 [node name="TPLeftOut" parent="YSort/Room/TeleporterDemo" instance=ExtResource("5_uar2c")]
 beacon_target = NodePath("../TPLeftIn")
-auto_interact = true
 position = Vector2(-344, 0)
 scale = Vector2(0.5, 0.5)
 
 [node name="TPLeftIn" parent="YSort/Room/TeleporterDemo" instance=ExtResource("5_uar2c")]
 beacon_target = NodePath("../TPLeftOut")
-auto_interact = true
 position = Vector2(-216, 0)
 scale = Vector2(0.5, 0.5)
 
