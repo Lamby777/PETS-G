@@ -30,7 +30,8 @@ enum MenuSection {
 const INTRO_COUNTDOWN_SEC: f64 = 3.0;
 
 /// How long before/after a beat to still consider clicks valid
-const LENIENCY_RADIUS: f64 = 0.06;
+const LENIENCY_PRE: f64 = 0.12;
+const LENIENCY_POST: f64 = 0.04;
 
 #[derive(Default, PartialEq)]
 enum BattleState {
@@ -194,7 +195,7 @@ impl BattleEngine {
         }
 
         let timer = &mut self.note_off_timer;
-        timer.set_wait_time(LENIENCY_RADIUS);
+        timer.set_wait_time(LENIENCY_POST);
         timer.start();
     }
 
@@ -237,7 +238,7 @@ impl BattleEngine {
             self.rhythm.player_clicked = true;
 
             let timer = &mut self.post_click_timer;
-            timer.set_wait_time(LENIENCY_RADIUS);
+            timer.set_wait_time(LENIENCY_PRE);
             timer.start();
         }
     }
