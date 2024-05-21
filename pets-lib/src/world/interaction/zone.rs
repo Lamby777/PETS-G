@@ -3,7 +3,8 @@
 //! an interaction when within range
 //!
 
-use godot::engine::{Area2D, IArea2D};
+use godot::engine::tween::TransitionType;
+use godot::engine::{Area2D, ColorRect, IArea2D, ShaderMaterial};
 use godot::prelude::*;
 
 use crate::consts::playercb::*;
@@ -67,7 +68,7 @@ impl InteractionZone {
     }
 
     fn tp_player_to_beacon(&self, target: &NodePath) {
-        fade_to_black(true);
+        fade_black(true);
 
         let mut pcb = PlayerCB::singleton();
         {
@@ -88,7 +89,7 @@ impl InteractionZone {
 
             set_timeout(TP_BEACON_BLACK_HOLD, || {
                 // when it's time to fade the black away, do it.
-                fade_to_black(false);
+                fade_black(false);
 
                 set_timeout(TP_BEACON_BLACK_OUT, || {
                     // finally, reset the debounce when the black is gone
@@ -99,8 +100,35 @@ impl InteractionZone {
     }
 }
 
-fn fade_to_black(fade_in: bool) {
-    todo!()
+fn fade_black(visible: bool) {
+    let node = current_scene().get_node_as::<ColorRect>("%BeaconFade");
+
+    let material = node.get_material().unwrap().cast::<ShaderMaterial>();
+    let material_id = material.instance_id();
+
+    let callable = Callable::from_fn("set_shader_value", move |args| {
+        let mut material = Gd::<ShaderMaterial>::from_instance_id(material_id);
+        material.set_shader_parameter("opacity".into(), args[0].clone());
+
+        // ...
+        Ok(Variant::nil())
+    });
+
+    let (end_value, tween_time) = match visible {
+        true => (1.0, TP_BEACON_BLACK_IN),
+        false => (0.0, TP_BEACON_BLACK_OUT),
+    };
+
+    let start_value = material.get_shader_parameter("opacity".into());
+
+    tween_method(
+        callable,
+        start_value,
+        end_value.to_variant(),
+        tween_time,
+        TransitionType::QUAD,
+    )
+    .unwrap();
 }
 
 #[godot_api]
