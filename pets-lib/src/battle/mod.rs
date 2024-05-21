@@ -30,8 +30,8 @@ enum MenuSection {
 const INTRO_COUNTDOWN_SEC: f64 = 3.0;
 
 /// How long before/after a beat to still consider clicks valid
-const LENIENCY_PRE: f64 = 0.12;
-const LENIENCY_POST: f64 = 0.04;
+const LENIENCY_PRE: f64 = 0.08;
+const LENIENCY_POST: f64 = 0.02;
 
 #[derive(Default, PartialEq)]
 enum BattleState {
@@ -170,14 +170,14 @@ impl BattleEngine {
 
     /// Called when the player successfully hits a note
     fn on_successful_attack(&mut self) {
-        godot_print!("hit");
+        // godot_print!("hit");
         self.offset_pos(0, -20);
 
         self.rhythm.reset();
     }
 
     fn on_flop_attack(&mut self) {
-        godot_print!("flop");
+        // godot_print!("flop");
         self.offset_pos(0, 20);
 
         self.rhythm.player_clicked = false;
@@ -190,7 +190,7 @@ impl BattleEngine {
         self.rhythm.note = Some(NoteType::from_note(note));
 
         if self.rhythm.player_clicked {
-            godot_print!("player clicked early but still valid");
+            // godot_print!("player clicked early but still valid");
             self.on_successful_attack();
         }
 
