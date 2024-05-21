@@ -111,6 +111,7 @@ libraries = {
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="BeaconFade" type="ColorRect" parent="UILayer"]
+unique_name_in_owner = true
 top_level = true
 material = SubResource("ShaderMaterial_uyk0u")
 offset_right = 1920.0
