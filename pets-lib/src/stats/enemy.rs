@@ -35,6 +35,10 @@ impl EnemyData {
 }
 
 impl Battler for EnemyData {
+    fn id(&self) -> String {
+        self.id.clone()
+    }
+
     fn hp_mut(&mut self) -> &mut IntegralStat {
         &mut self.battle_stats.hp
     }

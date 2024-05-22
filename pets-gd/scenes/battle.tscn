@@ -231,7 +231,8 @@ theme_type_variation = &"FramePanelContainer"
 clip_contents = true
 layout_mode = 2
 
-[node name="Texture" type="TextureRect" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Portrait/Clipper"]
+[node name="PortraitTexture" type="TextureRect" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Portrait/Clipper"]
+unique_name_in_owner = true
 z_index = -1
 layout_mode = 2
 offset_right = 370.0

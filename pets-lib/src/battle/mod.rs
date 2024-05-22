@@ -4,9 +4,12 @@
 //!
 
 use godot::engine::object::ConnectFlags;
-use godot::engine::{AnimationPlayer, Control, InputEvent, Timer};
+use godot::engine::{
+    AnimationPlayer, Control, InputEvent, Texture2D, TextureRect, Timer,
+};
 use godot::prelude::*;
 
+use crate::consts::battle::*;
 use crate::prelude::*;
 
 mod midi;
@@ -157,12 +160,31 @@ impl BattleEngine {
             .get_node_as::<AnimationPlayer>("AnimationPlayer")
     }
 
+    pub fn swap_party_member(&mut self, new_index: usize) {
+        self.current_party_member = new_index;
+        let id = self.battlers.good_guys[new_index].id();
+        godot_print!("Swapped to party member `{}`", id);
+
+        let path = format!("res://assets/textures/portraits/{}.png", id);
+
+        let portrait =
+            self.base().get_node_as::<TextureRect>("%PortraitTexture");
+        portrait.get_texture().unwrap().set_path(path.into());
+    }
+
     #[func]
-    pub fn on_choice_picked(&self, choice: Gd<Control>) {
+    pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
         match choice.get_name().to_string().as_str() {
             "Skills" => todo!(),
             "Items" => todo!(),
-            "Swap" => todo!(),
+            "Swap" => {
+                let mut next = self.current_party_member + 1;
+                if next >= BATTLE_PARTY_SIZE {
+                    next = 0;
+                }
+
+                self.swap_party_member(next);
+            }
 
             "Run" => {
                 // TODO implement running mechanic described earlier
