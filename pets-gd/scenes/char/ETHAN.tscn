@@ -413,7 +413,7 @@ states/Start/position = Vector2(127, 109)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji4br"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_q0w5r"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_hpdl1")]
 graph_offset = Vector2(-79, 13)
 
-[node name="AgentE" type="PCharNode"]
+[node name="ETHAN" type="PCharNode"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)

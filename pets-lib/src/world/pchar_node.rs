@@ -51,7 +51,7 @@ macro_rules! load_pchar_scenes_under {
 #[macro_export]
 macro_rules! load_pchar_scene_under {
     ($parent:expr, $name:expr) => {{
-        let path = concat!("res://scenes/char/", $name, ".tscn");
+        let path = format!("res://scenes/char/{}.tscn", $name);
         let packed = load::<PackedScene>(path);
         let inst = packed.instantiate_as::<PCharNode>();
         $parent.base_mut().add_child(inst.clone().upcast());
