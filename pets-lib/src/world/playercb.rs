@@ -59,10 +59,6 @@ impl PlayerCB {
         !cant_move
     }
 
-    pub fn push_position(&mut self, pos: Vector2) {
-        self.past_positions.push(pos);
-    }
-
     /// Set character positions based on past pos/rot
     pub fn move_chars(&mut self, moving: bool) {
         if self.past_positions.len() == 0 {
@@ -77,6 +73,26 @@ impl PlayerCB {
             let mut ch = ch.bind_mut();
             ch.anim_move(moving, *self.past_rotations.get_or_last(nth));
         }
+    }
+
+    pub fn teleport(
+        &mut self,
+        pos: Vector2,
+        rot: Option<Vector2>,
+        clear_past: bool,
+    ) {
+        if clear_past {
+            self.past_positions.clear();
+            self.past_rotations.clear();
+        } else {
+            self.past_positions.push(pos);
+
+            let rot = rot.unwrap_or(self.last_rot());
+            self.past_rotations.push(rot);
+        }
+
+        self.move_chars(false);
+        self.base_mut().set_global_position(pos);
     }
 
     /// Do all the movement calculations that need to run every tick.
@@ -121,11 +137,15 @@ impl PlayerCB {
             self.past_rotations.push(if moving {
                 input_vector
             } else {
-                self.past_rotations.get(0).cloned().unwrap_or(Vector2::ZERO)
+                self.last_rot()
             })
         }
 
         moving
+    }
+
+    fn last_rot(&self) -> Vector2 {
+        self.past_rotations.get(0).cloned().unwrap_or(Vector2::ZERO)
     }
 }
 
