@@ -34,6 +34,12 @@ macro_rules! connect {
     };
 }
 
+/// Returns the singleton instance of `PlayerCB`.
+/// So common that I might as well abbreviate it. :P
+pub fn pcb() -> Gd<PlayerCB> {
+    PlayerCB::singleton()
+}
+
 #[derive(Deref, DerefMut)]
 /// Wrapper around Gd<T> so I can implement external traits on godot stuff
 pub struct GdW<T: GodotClass>(pub Gd<T>);
@@ -252,7 +258,7 @@ pub fn current_scene() -> Gd<Node> {
 }
 
 pub use crate::change_scene;
-use crate::DialogBox;
+use crate::{DialogBox, PlayerCB};
 #[macro_export]
 macro_rules! change_scene {
     ($scene:expr) => {

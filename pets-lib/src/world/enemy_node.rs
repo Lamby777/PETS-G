@@ -77,11 +77,8 @@ impl WalkingEnemy {
     }
 
     pub fn distance_to_player(&self) -> real {
-        let pcb = PlayerCB::singleton();
-        let pcb_pos = pcb.get_global_position();
         let self_pos = self.base().get_global_position();
-
-        self_pos.distance_to(pcb_pos)
+        self_pos.distance_to(pcb().get_global_position())
     }
 
     pub fn is_player_in_sight(&self) -> bool {
@@ -90,8 +87,7 @@ impl WalkingEnemy {
 
     /// Returns the positions of the enemy and the player
     fn self_pos_pcb_pos(&self) -> ((real, real), (real, real)) {
-        let pcb = PlayerCB::singleton();
-        let pcb_pos = pcb.get_global_position();
+        let pcb_pos = pcb().get_global_position();
         let self_pos = self.base().get_global_position();
         (self_pos.to_tuple(), pcb_pos.to_tuple())
     }
@@ -101,7 +97,7 @@ impl WalkingEnemy {
         {
             let mut base = self.base_mut();
 
-            let pcb_pos = PlayerCB::singleton().get_position();
+            let pcb_pos = pcb().get_position();
             let own_pos = base.get_position();
 
             let target_pos = (pcb_pos - own_pos).normalized();
