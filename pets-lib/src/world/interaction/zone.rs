@@ -85,7 +85,13 @@ impl InteractionZone {
 
         set_timeout(TP_BEACON_BLACK_IN, move || {
             // after the screen is black, teleport the player
-            PlayerCB::singleton().set_global_position(target_pos);
+            let mut pcb = PlayerCB::singleton();
+            {
+                let mut pcb = pcb.bind_mut();
+                pcb.push_position(target_pos);
+                pcb.move_chars(false);
+            }
+            pcb.set_global_position(target_pos);
 
             set_timeout(TP_BEACON_BLACK_HOLD, || {
                 // when it's time to fade the black away, do it.
