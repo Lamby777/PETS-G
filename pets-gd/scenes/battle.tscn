@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://ck0eoifj1plwe" path="res://assets/sounds/click1.wav" id="4_icqrr"]
 [ext_resource type="AudioStream" uid="uid://bobf56v1g63p4" path="res://assets/music/battle/alright.ogg" id="4_l6m5j"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="5_hcsfj"]
-[ext_resource type="Texture2D" uid="uid://cx24dyfnh30ag" path="res://assets/textures/portraits/Ethan.png" id="6_pjho4"]
+[ext_resource type="Texture2D" uid="uid://cx24dyfnh30ag" path="res://assets/textures/portraits/ETHAN.png" id="6_abown"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w1wwc"]
 shader = ExtResource("2_0m4jp")
@@ -236,7 +236,7 @@ z_index = -1
 layout_mode = 2
 offset_right = 370.0
 offset_bottom = 185.0
-texture = ExtResource("6_pjho4")
+texture = ExtResource("6_abown")
 expand_mode = 2
 
 [node name="BattleChoices" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]

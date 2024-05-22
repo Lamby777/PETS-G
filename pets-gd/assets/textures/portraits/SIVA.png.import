@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cen46nku4n24r"
-path="res://.godot/imported/Siva.png-81457296efe85cb16dd81cd848042f00.ctex"
+path="res://.godot/imported/SIVA.png-895445c6853734dce337dcd624eb9840.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/portraits/Siva.png"
-dest_files=["res://.godot/imported/Siva.png-81457296efe85cb16dd81cd848042f00.ctex"]
+source_file="res://assets/textures/portraits/SIVA.png"
+dest_files=["res://.godot/imported/SIVA.png-895445c6853734dce337dcd624eb9840.ctex"]
 
 [params]
 
