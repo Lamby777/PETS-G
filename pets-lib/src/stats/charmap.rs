@@ -5,7 +5,13 @@ pub type CharMap = HashMap<String, RefCell<CharData>>;
 /// CharMap with all characters having the same exact stats
 pub fn uniform_charmap() -> CharMap {
     PChar::ALL.iter().fold(CharMap::new(), |mut map, chname| {
-        map.insert(chname.to_string(), RefCell::new(CharData::default()));
+        map.insert(
+            chname.to_string(),
+            RefCell::new(CharData {
+                id: (*chname).to_owned(),
+                ..Default::default()
+            }),
+        );
         map
     })
 }

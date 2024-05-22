@@ -12,7 +12,7 @@ concat-idents = "1.1.5"
 derive_more = "0.99.17"
 derived-deref = "2.1.0"
 dialogical = "*"
-godot = { git = "https://github.com/godot-rust/gdext", branch = "master", features = ["experimental-threads"]}
+godot = { git = "https://github.com/godot-rust/gdext", branch = "master", features = ["experimental-threads", "experimental-godot-api"]}
 indoc = "2.0.4"
 libdx = "2.1.1"
 nodi = "1.0.0"
