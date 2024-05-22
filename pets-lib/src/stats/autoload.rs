@@ -19,6 +19,27 @@ pub struct StatsInterface {
     statcalcs: CharStatCalcs,
 }
 
+#[godot_api]
+impl StatsInterface {
+    // #[func]
+    pub fn get_character(&self, ch: &str) -> CharData {
+        self.save
+            .chars
+            .get(ch)
+            .expect("key should be a valid PChar name")
+            .clone()
+            .take()
+    }
+
+    /// Get the list of stat calculation functions for a given character
+    pub fn get_statcalc(&self, ch: &str) -> Rc<StatCalcList> {
+        self.statcalcs
+            .get(ch)
+            .expect("key should be a valid PChar name")
+            .clone()
+    }
+}
+
 /// name the function `x_of`, where `x` is the stat name
 /// for example, `si.natural_speed_of(PChar::ETHAN)`
 macro_rules! impl_stat_getters_on_si {
@@ -31,7 +52,7 @@ macro_rules! impl_stat_getters_on_si {
                 pub fn fn_name(&self, pchar: &str) -> IntegralStat {
                     // get character level
                     let ch = self.get_character(pchar);
-                    let lvl = ch.borrow().level;
+                    let lvl = ch.level;
 
                     // get calculation fn for character
                     let calcs = self.get_statcalc(pchar);
@@ -60,26 +81,6 @@ impl_stat_getters_on_si! {
 
 impl Autoload for StatsInterface {
     const AUTOLOAD_NAME: &'static str = "Stats";
-}
-
-#[godot_api]
-impl StatsInterface {
-    // #[func]
-    pub fn get_character(&self, ch: &str) -> RefCell<CharData> {
-        self.save
-            .chars
-            .get(ch)
-            .expect("key should be a valid PChar name")
-            .clone()
-    }
-
-    /// Get the list of stat calculation functions for a given character
-    pub fn get_statcalc(&self, ch: &str) -> Rc<StatCalcList> {
-        self.statcalcs
-            .get(ch)
-            .expect("key should be a valid PChar name")
-            .clone()
-    }
 }
 
 #[godot_api]

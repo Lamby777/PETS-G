@@ -37,6 +37,23 @@ impl PlayerCB {
         current_scene().get_node_as("%PlayerCB")
     }
 
+    pub fn party_ids(&self) -> Vec<String> {
+        self.party
+            .iter()
+            .map(|v| v.get_name().to_string())
+            .collect()
+    }
+
+    pub fn party_chardata(&self) -> Vec<CharData> {
+        let si = StatsInterface::singleton();
+        let si = si.bind();
+
+        self.party_ids()
+            .into_iter()
+            .map(|id| si.get_character(&id))
+            .collect()
+    }
+
     /// Get the fx rectangle that follows the player
     pub fn fx_rect() -> Gd<ColorRect> {
         Self::singleton().get_node_as("BattleIntroRect")
