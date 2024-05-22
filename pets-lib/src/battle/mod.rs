@@ -165,7 +165,7 @@ impl BattleEngine {
 
             "Run" => {
                 // TODO implement running mechanic described earlier
-                PlayerCB::singleton().bind_mut().battling.clear();
+                pcb().bind_mut().battling.clear();
 
                 // TODO don't change scenes, just remove the battle
                 // stuff since it's all overlayed on top of the world

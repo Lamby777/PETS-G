@@ -39,7 +39,7 @@ impl InteractionManager {
 
     /// Sorts the zones by distance from the player
     pub fn sort_zones_by_distance(&mut self) {
-        let pcb_pos = PlayerCB::singleton().get_position();
+        let pcb_pos = pcb().get_position();
 
         self.zones.sort_by(|zone_a, zone_b| {
             let a = zone_a.get_global_position().distance_squared_to(pcb_pos);
@@ -76,8 +76,7 @@ impl INode2D for InteractionManager {
     fn unhandled_input(&mut self, event: Gd<InputEvent>) {
         if event.is_action_pressed("ui_accept".into()) {
             {
-                let pcb = PlayerCB::singleton();
-                if !pcb.bind().can_move() {
+                if !pcb().bind().can_move() {
                     // can't interact with stuff if you're
                     // not allowed to move.
                     return;

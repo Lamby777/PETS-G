@@ -90,10 +90,7 @@ impl World {
     }
 
     pub fn start_battle(eid: GString) {
-        PlayerCB::singleton()
-            .bind_mut()
-            .battling
-            .push(eid.to_string());
+        pcb().bind_mut().battling.push(eid.to_string());
         let world = current_scene();
 
         let mat = PlayerCB::fx_material();
@@ -131,7 +128,7 @@ impl World {
         Self::mute_audio_bus(true);
 
         // it's a performance thing
-        // PlayerCB::singleton().set_process(false);
+        // pcb().set_process(false);
         {
             // subchildren_of_type::<WalkingEnemy, _>(self.to_gd());
         }

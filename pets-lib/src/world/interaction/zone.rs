@@ -70,8 +70,8 @@ impl InteractionZone {
     fn tp_player_to_beacon(&self, target: &NodePath) {
         fade_black(true);
 
-        let mut pcb = PlayerCB::singleton();
         {
+            let mut pcb = pcb();
             let mut pcb = pcb.bind_mut();
             if pcb.tpbeacon_debounce {
                 return;
@@ -85,9 +85,7 @@ impl InteractionZone {
 
         set_timeout(TP_BEACON_BLACK_IN, move || {
             // after the screen is black, teleport the player
-            PlayerCB::singleton()
-                .bind_mut()
-                .teleport(target_pos, None, false);
+            pcb().bind_mut().teleport(target_pos, None, false);
 
             set_timeout(TP_BEACON_BLACK_HOLD, || {
                 // when it's time to fade the black away, do it.
@@ -95,7 +93,7 @@ impl InteractionZone {
 
                 set_timeout(TP_BEACON_BLACK_OUT, || {
                     // finally, reset the debounce when the black is gone
-                    PlayerCB::singleton().bind_mut().tpbeacon_debounce = false;
+                    pcb().bind_mut().tpbeacon_debounce = false;
                 });
             });
         });
