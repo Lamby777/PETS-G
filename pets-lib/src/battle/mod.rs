@@ -292,9 +292,17 @@ impl INode2D for BattleEngine {
         self.choices.bind_mut().disable();
         self.track.init(BattleTrack::new_from_name("alright"));
 
+        let good_guys = pcb()
+            .bind()
+            .party_chardata()
+            .into_iter()
+            .map(Box::new)
+            .map(|v| v as Box<dyn Battler>) // wtf
+            .collect();
+
         self.battlers.init(Battlers {
-            good_guys: todo!(),
-            bad_guys: todo!(),
+            good_guys,
+            bad_guys: vec![], // TODO
         });
 
         {
