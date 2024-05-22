@@ -25,7 +25,7 @@ pub struct PlayerCB {
     #[init(default = LimiQ::new(2000))]
     past_rotations: LimiQ<Vector2>,
 
-    pub in_battle: bool,
+    pub battling: bool,
     pub tpbeacon_debounce: bool,
 }
 
@@ -53,7 +53,7 @@ impl PlayerCB {
     pub fn can_move(&self) -> bool {
         // PRAISE SHORT-CIRCUIT EVALUATION!!
         let cant_move = DialogBox::singleton().bind().is_active()
-            || self.in_battle
+            || self.battling
             || self.tpbeacon_debounce;
 
         !cant_move
