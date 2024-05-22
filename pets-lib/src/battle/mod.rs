@@ -19,6 +19,15 @@ mod stat_translation;
 use midi::{BattleTrack, MidiReceiver};
 use rhythm::*;
 
+#[derive(Debug)]
+enum AttackFlopReason {
+    /// The beat was not clicked
+    Skipped,
+
+    /// The player clicked outside of a beat window
+    PoorTiming,
+}
+
 #[allow(unused)]
 #[derive(PartialEq)]
 enum MenuSection {
@@ -57,8 +66,8 @@ enum BattleState {
 #[class(init, base=Node2D)]
 pub struct BattleEngine {
     base: Base<Node2D>,
-    state: BattleState,
 
+    state: BattleState,
     rhythm: RhythmState,
 
     #[init(default = OnReady::manual())]
@@ -179,7 +188,11 @@ impl BattleEngine {
         self.rhythm.reset();
     }
 
-    fn on_attack_flop(&mut self) {
+    fn on_attack_flop(&mut self, reason: AttackFlopReason) {
+        // we'll use it later for telling the user why
+        // the attack failed, but for now it's just a debug print
+        godot_print!("Flop reason: {:?}", reason);
+
         self.offset_pos(0, 20);
 
         self.rhythm.player_clicked = false;
@@ -210,14 +223,16 @@ impl BattleEngine {
     pub fn close_beat(&mut self) {
         // If there was an unclicked note, it's a flop
         if self.rhythm.note.take().is_some() {
-            self.on_attack_flop();
+            self.on_attack_flop(AttackFlopReason::Skipped);
         }
     }
 
     #[func]
     pub fn on_early_leniency_expired(&mut self) {
+        // If the player clicked early and there was no note
+        // shortly after it, it's a flop
         if self.rhythm.player_clicked {
-            self.on_attack_flop();
+            self.on_attack_flop(AttackFlopReason::PoorTiming);
         }
 
         self.rhythm.player_clicked = false;
