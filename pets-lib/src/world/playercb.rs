@@ -8,6 +8,7 @@ use crate::load_pchar_scenes_under;
 use crate::prelude::*;
 
 use super::pchar_node::PCharNode;
+use super::BATTLE_PARTY_SIZE;
 
 /// This scene contains the "player" aka the invisible
 /// entity that is moved around with WASD. It also contains
@@ -174,6 +175,7 @@ impl PlayerCB {
     pub fn good_guys_battlers(&self) -> Vec<Box<dyn Battler>> {
         self.party_chardata()
             .into_iter()
+            .take(BATTLE_PARTY_SIZE)
             .map(|v| Box::new(v) as Box<dyn Battler>)
             .collect()
     }
