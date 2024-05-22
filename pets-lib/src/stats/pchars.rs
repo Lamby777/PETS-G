@@ -70,8 +70,8 @@ impl PChar {
         // Important Goober people
         MYLO,  // HQ
         CALYX, // Ren
-        RAINE, // VUE arc
-        TAINE, // VUE arc
+        RAINE, // GLUE arc
+        TAINE, // GLUE arc
 
         // Shopkeepers
         CHERRY,      // Cherry's Cherries
