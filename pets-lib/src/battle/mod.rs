@@ -246,10 +246,12 @@ impl BattleEngine {
     pub fn intro_over(&mut self) {
         // change state from intro to attack
         self.state = BattleState::Attack { running: false };
+        self.play_battle_music();
+    }
 
-        // play the battle music
+    #[func]
+    fn play_battle_music(&mut self) {
         self.music.play();
-
         let iid = self.track.receiver.instance_id();
         let sheet = self.track.sheet.clone();
         let ticker = self.track.ticker.clone();
@@ -300,6 +302,9 @@ impl INode2D for BattleEngine {
 
             self.track.receiver, "note_on" =>
             self.base(), "on_note_on";
+
+            self.music, "finished" =>
+            self.base(), "play_battle_music";
         }
     }
 
