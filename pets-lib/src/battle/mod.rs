@@ -165,7 +165,7 @@ impl BattleEngine {
 
             "Run" => {
                 // TODO implement running mechanic described earlier
-                PlayerCB::singleton().bind_mut().battling = false;
+                PlayerCB::singleton().bind_mut().battling.clear();
 
                 // TODO don't change scenes, just remove the battle
                 // stuff since it's all overlayed on top of the world
@@ -291,7 +291,11 @@ impl INode2D for BattleEngine {
     fn ready(&mut self) {
         self.choices.bind_mut().disable();
         self.track.init(BattleTrack::new_from_name("alright"));
-        self.battlers.init(todo!());
+
+        self.battlers.init(Battlers {
+            good_guys: todo!(),
+            bad_guys: todo!(),
+        });
 
         {
             // intro countdown timer setup
