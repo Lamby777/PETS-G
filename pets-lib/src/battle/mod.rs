@@ -72,6 +72,10 @@ pub struct BattleEngine {
     #[init(default = onready_node(&base, "RhythmTimer"))]
     note_off_timer: OnReady<Gd<Timer>>,
 
+    /// Metronome-like thingy
+    #[init(default = onready_node(&base, "ClickSFX"))]
+    clicksfx: OnReady<Gd<AudioStreamPlayer>>,
+
     #[init(default = onready_node(&base, "BattleMusic"))]
     music: OnReady<Gd<AudioStreamPlayer>>,
 
@@ -191,9 +195,11 @@ impl BattleEngine {
             self.on_successful_attack();
         }
 
-        self.base()
-            .get_node_as::<AudioStreamPlayer>("ClickSFX")
-            .play();
+        // let mut stream = AudioStream::new_gd();
+        // stream.set_path("res://assets/sounds/click1.wav".into());
+        // self.clicksfx.set_stream(stream);
+
+        self.clicksfx.play();
 
         let timer = &mut self.note_off_timer;
         timer.set_wait_time(LENIENCY_POST);
