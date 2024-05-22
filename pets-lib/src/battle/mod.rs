@@ -173,13 +173,13 @@ impl BattleEngine {
     }
 
     /// Called when the player successfully hits a note
-    fn on_successful_attack(&mut self) {
+    fn on_attack_hit(&mut self) {
         self.offset_pos(0, -20);
 
         self.rhythm.reset();
     }
 
-    fn on_flop_attack(&mut self) {
+    fn on_attack_flop(&mut self) {
         self.offset_pos(0, 20);
 
         self.rhythm.player_clicked = false;
@@ -192,7 +192,7 @@ impl BattleEngine {
         self.rhythm.note = Some(NoteType::from_note(note));
 
         if self.rhythm.player_clicked {
-            self.on_successful_attack();
+            self.on_attack_hit();
         }
 
         // let mut stream = AudioStream::new_gd();
@@ -210,14 +210,14 @@ impl BattleEngine {
     pub fn close_beat(&mut self) {
         // If there was an unclicked note, it's a flop
         if self.rhythm.note.take().is_some() {
-            self.on_flop_attack();
+            self.on_attack_flop();
         }
     }
 
     #[func]
     pub fn on_early_leniency_expired(&mut self) {
         if self.rhythm.player_clicked {
-            self.on_flop_attack();
+            self.on_attack_flop();
         }
 
         self.rhythm.player_clicked = false;
@@ -231,7 +231,7 @@ impl BattleEngine {
 
         if let Some(_note) = self.rhythm.note.take() {
             // if note is on, it's a hit
-            self.on_successful_attack();
+            self.on_attack_hit();
         } else {
             // else, set the player click flag on so if a note happens soon,
             // it will count as a hit.
