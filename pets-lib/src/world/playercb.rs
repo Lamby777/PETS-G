@@ -59,8 +59,12 @@ impl PlayerCB {
         !cant_move
     }
 
+    pub fn push_position(&mut self, pos: Vector2) {
+        self.past_positions.push(pos);
+    }
+
     /// Set character positions based on past pos/rot
-    fn move_chars(&mut self, moving: bool) {
+    pub fn move_chars(&mut self, moving: bool) {
         if self.past_positions.len() == 0 {
             return;
         }
