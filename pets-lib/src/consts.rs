@@ -21,6 +21,10 @@ pub mod type_aliases {
 pub mod battle {
     pub const LAYER_NAME: &str = "BattleLayer";
 
+    /// The first [this number] characters in the party
+    /// are the ones that you get to use in battle.
+    pub const BATTLE_PARTY_SIZE: usize = 4;
+
     pub const INTRO_FADE_PREDELAY: f64 = 0.5;
     pub const EFFECT_CHANCE_LIKELY: f64 = 0.8;
     pub const EFFECT_CHANCE_RARE: f64 = 0.1;
