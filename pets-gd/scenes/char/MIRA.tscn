@@ -1,6 +1,6 @@
-[gd_scene load_steps=42 format=3 uid="uid://boar8shvtnbun"]
+[gd_scene load_steps=42 format=3 uid="uid://cxsuw4livvm0x"]
 
-[ext_resource type="Texture2D" uid="uid://bu8yhsiu4q5ul" path="res://assets/textures/char/main/Terra.png" id="1_s1oxq"]
+[ext_resource type="Texture2D" uid="uid://ckevm0iwhu0q2" path="res://assets/textures/char/nats/Yusamira.png" id="1_gumsw"]
 
 [sub_resource type="Animation" id="Animation_6g0wi"]
 resource_name = "IdleD"
@@ -406,21 +406,21 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ty6r4"]
 resource_local_to_scene = true
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_p4qdk")
-states/Idle/position = Vector2(381, 100)
+states/Idle/position = Vector2(382, 100)
 states/Run/node = SubResource("AnimationNodeBlendSpace2D_ptivh")
 states/Run/position = Vector2(580, 100)
 states/Start/position = Vector2(127, 109)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji4br"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_q0w5r"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_hpdl1")]
 graph_offset = Vector2(-79, 13)
 
-[node name="AgentT" type="PCharNode"]
+[node name="MIRA" type="PCharNode"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
-texture = ExtResource("1_s1oxq")
-offset = Vector2(0, -2)
-hframes = 9
-vframes = 7
+texture = ExtResource("1_gumsw")
+offset = Vector2(0, -4)
+hframes = 8
+vframes = 8
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -177,12 +177,12 @@ impl ICharacterBody2D for PlayerCB {
     fn ready(&mut self) {
         self.party = load_pchar_scenes_under!(
             self;
-            "agent_e",
-            "agent_s",
-            "agent_t",
-            "mira",
-            "dubs",
-            "yoyo",
+            PChar::ETHAN,
+            PChar::SIVA,
+            PChar::TERRA,
+            PChar::MIRA,
+            PChar::DYLAN,
+            PChar::LEO,
         );
     }
 

@@ -1,6 +1,6 @@
-[gd_scene load_steps=42 format=3 uid="uid://d4imn80kum4yr"]
+[gd_scene load_steps=42 format=3 uid="uid://boar8shvtnbun"]
 
-[ext_resource type="Texture2D" uid="uid://cdkt4ln568maa" path="res://assets/textures/char/nats/Dylan.png" id="1_xd3eq"]
+[ext_resource type="Texture2D" uid="uid://bu8yhsiu4q5ul" path="res://assets/textures/char/main/Terra.png" id="1_s1oxq"]
 
 [sub_resource type="Animation" id="Animation_6g0wi"]
 resource_name = "IdleD"
@@ -413,14 +413,14 @@ states/Start/position = Vector2(127, 109)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji4br"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_q0w5r"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_hpdl1")]
 graph_offset = Vector2(-79, 13)
 
-[node name="Dubs" type="PCharNode"]
+[node name="TERRA" type="PCharNode"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
-texture = ExtResource("1_xd3eq")
+texture = ExtResource("1_s1oxq")
 offset = Vector2(0, -2)
 hframes = 9
-vframes = 6
+vframes = 7
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
