@@ -191,6 +191,10 @@ impl BattleEngine {
             self.on_successful_attack();
         }
 
+        self.base()
+            .get_node_as::<AudioStreamPlayer>("ClickSFX")
+            .play();
+
         let timer = &mut self.note_off_timer;
         timer.set_wait_time(LENIENCY_POST);
         timer.start();
