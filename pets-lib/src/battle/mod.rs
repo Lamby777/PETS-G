@@ -4,9 +4,7 @@
 //!
 
 use godot::engine::object::ConnectFlags;
-use godot::engine::{
-    AnimationPlayer, Control, InputEvent, Texture2D, TextureRect, Timer,
-};
+use godot::engine::{AnimationPlayer, Control, InputEvent, TextureRect, Timer};
 use godot::prelude::*;
 
 use crate::consts::battle::*;
@@ -201,25 +199,16 @@ impl BattleEngine {
 
     // ------------------------------------------------------------
 
-    /// FOR DEBUGGING PURPOSES!!!
-    fn offset_pos(&mut self, x: i32, y: i32) {
-        let pos = self.base().get_position() + Vector2::new(x as f32, y as f32);
-        self.base_mut().set_position(pos);
-    }
-
     /// Called when the player successfully hits a note
     fn on_attack_hit(&mut self) {
-        self.offset_pos(0, -20);
-
         self.rhythm.reset();
     }
 
     fn on_attack_flop(&mut self, reason: AttackFlopReason) {
         // we'll use it later for telling the user why
         // the attack failed, but for now it's just a debug print
-        godot_print!("Flop reason: {:?}", reason);
-
-        self.offset_pos(0, 20);
+        // godot_print!("Flop reason: {:?}", reason);
+        let _ = reason;
 
         self.rhythm.player_clicked = false;
     }
