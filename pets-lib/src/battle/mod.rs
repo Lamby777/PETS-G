@@ -72,6 +72,7 @@ pub struct BattleEngine {
 
     #[init(default = OnReady::manual())]
     battlers: OnReady<Battlers>,
+    current_party_member: usize,
 
     #[init(default = OnReady::manual())]
     track: OnReady<BattleTrack>,
@@ -296,13 +297,20 @@ impl INode2D for BattleEngine {
             .bind()
             .party_chardata()
             .into_iter()
-            .map(Box::new)
-            .map(|v| v as Box<dyn Battler>) // wtf
+            .map(|v| Box::new(v) as Box<dyn Battler>)
+            .collect();
+
+        let bad_guys = pcb()
+            .bind()
+            .battling
+            .iter()
+            .map(|eid| EnemyData::from_id(eid))
+            .map(|v| Box::new(v) as Box<dyn Battler>)
             .collect();
 
         self.battlers.init(Battlers {
             good_guys,
-            bad_guys: vec![], // TODO
+            bad_guys,
         });
 
         {
