@@ -37,6 +37,10 @@ pub mod playercb {
 
     // Distance between party members
     pub const PERSONAL_SPACE: usize = 15;
+
+    pub const TP_BEACON_BLACK_IN: f64 = 0.2;
+    pub const TP_BEACON_BLACK_HOLD: f64 = 0.3;
+    pub const TP_BEACON_BLACK_OUT: f64 = 0.2;
 }
 
 pub mod dialogue {

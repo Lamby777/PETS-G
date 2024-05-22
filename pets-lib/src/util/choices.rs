@@ -23,7 +23,7 @@ pub struct ChoiceAgent {
 
     #[export]
     #[init(default = "position:x".into())]
-    tween_property: NodePath,
+    tween_property: GString,
 
     #[export]
     #[init(default = 0.0)]

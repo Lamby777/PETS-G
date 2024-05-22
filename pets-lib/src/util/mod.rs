@@ -6,10 +6,37 @@ pub mod choices;
 pub mod limiq;
 pub mod singleton;
 
+use derived_deref::{Deref, DerefMut};
 use godot::engine::object::ConnectFlags;
 use godot::engine::tween::TransitionType;
-use godot::engine::{Engine, RichTextLabel, Theme, Tween};
+use godot::engine::{Engine, RichTextLabel, SceneTreeTimer, Theme, Tween};
 use godot::prelude::*;
+
+pub use crate::connect;
+/// Macro to connect stuff without using the annoying 2-line
+/// `let callable = xxxxx` syntax.
+///
+/// Usage:
+/// ```
+/// connect! {
+///     node_to_connect_to,       "signal_name",
+///     node_containing_callable, "callable_name";
+///     // ... repeat as many as you like
+/// }
+/// ```
+#[macro_export]
+macro_rules! connect {
+    ($($con_node:expr,$signal:expr=>$cal_node:expr,$cal_name:expr);* $(;)?) => {
+        $({
+            let callable = $cal_node.callable($cal_name);
+            $con_node.connect($signal.into(), callable);
+        })*
+    };
+}
+
+#[derive(Deref, DerefMut)]
+/// Wrapper around Gd<T> so I can implement external traits on godot stuff
+pub struct GdW<T: GodotClass>(pub Gd<T>);
 
 pub fn start_ix(name: impl Into<String>) {
     DialogBox::singleton().bind_mut().start_ix(name.into());
@@ -41,17 +68,27 @@ where
 
 /// Like setTimeout in JS, using godot timers.
 /// Uses SECONDS, not ms.
-pub fn set_timeout<F>(time_sec: f64, mut func: F)
+pub fn set_timeout<F>(time_sec: f64, mut func: F) -> Gd<SceneTreeTimer>
 where
     F: FnMut() + Sync + Send + 'static,
 {
-    godot_tree().create_timer(time_sec).unwrap().connect(
-        "timeout".into(),
-        Callable::from_fn("timeout", move |_| {
-            func();
-            Ok(Variant::nil())
-        }),
-    );
+    let callable = Callable::from_fn("timeout", move |_| {
+        func();
+        Ok(Variant::nil())
+    });
+
+    set_timeout_callable(time_sec, callable)
+}
+
+/// Like `set_timeout`, but accepts a `Callable` instead of a closure.
+pub fn set_timeout_callable(
+    time_sec: f64,
+    callable: Callable,
+) -> Gd<SceneTreeTimer> {
+    let mut timer = godot_tree().create_timer(time_sec).unwrap();
+    timer.connect("timeout".into(), callable);
+
+    timer
 }
 
 pub fn mark_input_handled<T>(node: &Gd<T>)
@@ -135,6 +172,34 @@ pub fn prefix_mod(target: &str, prefix: &str, active: bool) -> String {
         let st: String = target.into();
         st[prefix.len()..].to_owned()
     }
+}
+
+pub fn tween_method<V>(
+    callable: Callable,
+    start_value: V,
+    end_value: V,
+    time: f64,
+    trans: TransitionType,
+) -> Result<Gd<Tween>, ()>
+where
+    V: ToGodot,
+{
+    let res: Option<_> = try {
+        let mut tween = godot_tree().create_tween()?;
+
+        tween
+            .tween_method(
+                callable,
+                start_value.to_variant(),
+                end_value.to_variant(),
+                time,
+            )?
+            .set_trans(trans);
+
+        tween
+    };
+
+    res.ok_or(())
 }
 
 /// shorthand to do some tweeneroonies :3

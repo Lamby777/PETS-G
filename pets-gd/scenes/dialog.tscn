@@ -80,7 +80,7 @@ size_flags_vertical = 0
 theme_override_constants/separation = 60
 
 [node name="ChoiceAgent" type="ChoiceAgent" parent="VBox/Choices"]
-tween_property = NodePath("position:y")
+tween_property = "position:y"
 tween_focused_value = -16.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

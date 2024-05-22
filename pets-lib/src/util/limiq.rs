@@ -38,6 +38,10 @@ impl<T> LimiQ<T> {
     pub fn get_or_last(&self, i: usize) -> &T {
         &self.buffer[std::cmp::min(i, self.buffer.len() - 1)]
     }
+
+    pub fn clear(&mut self) {
+        self.buffer.clear();
+    }
 }
 
 impl<T> std::ops::Index<usize> for LimiQ<T> {

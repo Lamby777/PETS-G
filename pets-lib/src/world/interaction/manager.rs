@@ -3,7 +3,7 @@
 //! Shows the input prompt and handles the action if pressed.
 //!
 
-use godot::engine::{InputEvent, RichTextLabel};
+use godot::engine::{Control, InputEvent};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -14,7 +14,7 @@ pub struct InteractionManager {
     base: Base<Node2D>,
 
     #[init(default = onready_node(&base, "Prompt"))]
-    prompt_txt: OnReady<Gd<RichTextLabel>>,
+    prompt: OnReady<Gd<Control>>,
 
     /// All interaction zones the player is inside
     zones: Vec<Gd<InteractionZone>>,
@@ -64,14 +64,13 @@ impl INode2D for InteractionManager {
 
         let Some(zone) = self.closest_zone() else {
             // if no zones, hide the prompt
-            self.prompt_txt.hide();
+            self.prompt.hide();
             return;
         };
 
         // move the prompt to the zone
-        self.prompt_txt.show();
-        self.prompt_txt
-            .set_position(zone.get_position() + Vector2::new(0.0, -50.0));
+        self.prompt.show();
+        self.prompt.set_global_position(zone.get_global_position());
     }
 
     fn unhandled_input(&mut self, event: Gd<InputEvent>) {

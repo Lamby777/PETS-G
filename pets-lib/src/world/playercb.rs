@@ -26,6 +26,7 @@ pub struct PlayerCB {
     past_rotations: LimiQ<Vector2>,
 
     pub in_battle: bool,
+    pub tpbeacon_debounce: bool,
 }
 
 #[godot_api]
@@ -50,21 +51,16 @@ impl PlayerCB {
     /// * Cutscenes
     /// * Menus
     pub fn can_move(&self) -> bool {
-        // dialogue box open? no moving!
-        if DialogBox::singleton().bind().is_active() {
-            return false;
-        }
+        // PRAISE SHORT-CIRCUIT EVALUATION!!
+        let cant_move = DialogBox::singleton().bind().is_active()
+            || self.in_battle
+            || self.tpbeacon_debounce;
 
-        // in battle? no moving!
-        if self.in_battle {
-            return false;
-        }
-
-        true
+        !cant_move
     }
 
     /// Set character positions based on past pos/rot
-    fn move_chars(&mut self, moving: bool) {
+    pub fn move_chars(&mut self, moving: bool) {
         if self.past_positions.len() == 0 {
             return;
         }
@@ -77,6 +73,26 @@ impl PlayerCB {
             let mut ch = ch.bind_mut();
             ch.anim_move(moving, *self.past_rotations.get_or_last(nth));
         }
+    }
+
+    pub fn teleport(
+        &mut self,
+        pos: Vector2,
+        rot: Option<Vector2>,
+        clear_past: bool,
+    ) {
+        if clear_past {
+            self.past_positions.clear();
+            self.past_rotations.clear();
+        } else {
+            self.past_positions.push(pos);
+
+            let rot = rot.unwrap_or(self.last_rot());
+            self.past_rotations.push(rot);
+        }
+
+        self.move_chars(false);
+        self.base_mut().set_global_position(pos);
     }
 
     /// Do all the movement calculations that need to run every tick.
@@ -121,11 +137,15 @@ impl PlayerCB {
             self.past_rotations.push(if moving {
                 input_vector
             } else {
-                self.past_rotations.get(0).cloned().unwrap_or(Vector2::ZERO)
+                self.last_rot()
             })
         }
 
         moving
+    }
+
+    fn last_rot(&self) -> Vector2 {
+        self.past_rotations.get(0).cloned().unwrap_or(Vector2::ZERO)
     }
 }
 

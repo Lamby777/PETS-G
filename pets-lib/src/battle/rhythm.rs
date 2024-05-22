@@ -1,62 +1,49 @@
 //!
-//! Rhythms for the battle system...
-//!
-//! These type defs will probably also be used for
-//! developing an open-source P/E/T/S rhythm editor.
+//! Data structures related to rhythm in battle
 //!
 
-// TODO add a way to deserialize from file, to allow for
-// custom rhythms and modding.
-
-/// Things that can happen within a track section...
-/// Right now, it's just a note, but maybe...
-enum RhythmEvent {
-    /// A note that the player must hit
-    Note {
-        /// Delay after this note, before going on to the
-        /// next one (delay is in notes, not seconds)
-        length: f64,
-    },
-
-    /// A note that deals extra damage when played
-    /// (potentially more difficult timing, too?)
-    PowerChord {
-        /// Delay after this note, before going on to the
-        /// next one (delay is in notes, not seconds)
-        length: f64,
-
-        /// The multiplier for damage dealt
-        multiplier: f64,
-    },
+#[derive(Clone, Copy, Debug)]
+/// The game's MIDI files have a special code for what each
+/// pitch means in terms of in-game beats.
+///
+/// This type explains what kind of note is being played.
+pub enum NoteType {
+    /// Note that must be hit
+    Hit = 60,
 }
 
-/// "Parts" of a track. Tracks can switch tempo
-struct RhythmSection {
-    start_time: f64,          // Start time of the section in seconds
-    end_time: f64,            // End time of the section in seconds
-    tempo: f64,               // Tempo in beats per minute
-    events: Vec<RhythmEvent>, // List of events within this section
+impl NoteType {
+    /// Convert a `u8` from MIDI to its equivalent `NoteType`
+    ///
+    /// Panics if the note is invalid, for ergonomics.
+    /// Use `try_from_note` if you want to handle the error.
+    pub fn from_note(note: u8) -> Self {
+        ribbons::unwrap_fmt!(
+            Self::try_from_note(note),
+            "invalid midi note with code {}",
+            note
+        )
+    }
+
+    pub fn try_from_note(note: u8) -> Option<Self> {
+        use NoteType::*;
+
+        Some(match note {
+            60 => Hit,
+            _ => return None,
+        })
+    }
 }
 
-/// One track's information, for rhythm purposes
-///
-/// Ideally, we wouldn't have to do it, but maybe
-/// it would be easier to just Box::leak() this if
-/// it gets too complicated to worry about lifetimes.
-///
-/// The only reason this is a runtime thing is to
-/// make things easier for modders. Making rhythms
-/// hard-coded in the compiled binary would kinda
-/// suck for them. It might even be better performance-wise
-/// to just leak all the tracks at load-time instead of
-/// having them lazily loaded, but we'll see.
-struct TrackRhythm<'a> {
-    name: String,
-    creator: String,
+#[derive(Debug, Default)]
+pub struct RhythmState {
+    pub player_clicked: bool,
+    pub note: Option<NoteType>,
+}
 
-    /// Split sections of a track, for tempo shifts and
-    /// potentially other stuff in the future.
-    // Since sections can repeat, we don't want to .clone()
-    // all over the place for repetitive stuff.
-    section: Vec<&'a RhythmSection>,
+impl RhythmState {
+    /// Set back to default state
+    pub fn reset(&mut self) {
+        *self = Self::default();
+    }
 }

@@ -54,6 +54,9 @@ mod prelude {
     pub use crate::choices::ChoiceAgent;
     pub use crate::singleton::Autoload;
 
+    // re-exports
+    pub use nodi::midly;
+
     // is this bad practice? no clue and idc honestly
     // it's convenient with no real caveat, therefore...
     pub use anyhow::{anyhow, Result};
@@ -67,9 +70,9 @@ mod prelude {
     pub use std::collections::{HashMap, HashSet};
     pub use std::convert::Infallible;
     pub use std::fmt::{self, Debug, Display};
-    pub use std::io;
     pub use std::path::{Path, PathBuf};
     pub use std::rc::Rc;
+    pub use std::{io, thread};
 }
 
 struct PetsLib;
