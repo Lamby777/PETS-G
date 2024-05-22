@@ -170,6 +170,28 @@ impl PlayerCB {
     fn last_rot(&self) -> Vector2 {
         self.past_rotations.get(0).cloned().unwrap_or(Vector2::ZERO)
     }
+
+    pub fn good_guys_battlers(&self) -> Vec<Box<dyn Battler>> {
+        self.party_chardata()
+            .into_iter()
+            .map(|v| Box::new(v) as Box<dyn Battler>)
+            .collect()
+    }
+
+    pub fn bad_guys_battlers(&self) -> Vec<Box<dyn Battler>> {
+        self.battling
+            .iter()
+            .map(|eid| EnemyData::from_id(eid))
+            .map(|v| Box::new(v) as Box<dyn Battler>)
+            .collect()
+    }
+
+    pub fn new_battlers(&self) -> Battlers {
+        Battlers {
+            good_guys: self.good_guys_battlers(),
+            bad_guys: self.bad_guys_battlers(),
+        }
+    }
 }
 
 #[godot_api]
