@@ -292,26 +292,7 @@ impl INode2D for BattleEngine {
     fn ready(&mut self) {
         self.choices.bind_mut().disable();
         self.track.init(BattleTrack::new_from_name("alright"));
-
-        let good_guys = pcb()
-            .bind()
-            .party_chardata()
-            .into_iter()
-            .map(|v| Box::new(v) as Box<dyn Battler>)
-            .collect();
-
-        let bad_guys = pcb()
-            .bind()
-            .battling
-            .iter()
-            .map(|eid| EnemyData::from_id(eid))
-            .map(|v| Box::new(v) as Box<dyn Battler>)
-            .collect();
-
-        self.battlers.init(Battlers {
-            good_guys,
-            bad_guys,
-        });
+        self.battlers.init(pcb().bind().new_battlers());
 
         {
             // intro countdown timer setup
