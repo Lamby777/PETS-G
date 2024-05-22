@@ -79,3 +79,8 @@ pub trait Battler {
         self.status_effects().contains(&effect)
     }
 }
+
+pub struct Battlers {
+    pub _good_guys: Vec<Box<dyn Battler>>,
+    pub _bad_guys: Vec<Box<dyn Battler>>,
+}

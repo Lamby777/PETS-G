@@ -71,6 +71,9 @@ pub struct BattleEngine {
     rhythm: RhythmState,
 
     #[init(default = OnReady::manual())]
+    battlers: OnReady<Battlers>,
+
+    #[init(default = OnReady::manual())]
     track: OnReady<BattleTrack>,
 
     /// timer that is in charge of turning `player_clicked` to false
@@ -162,7 +165,7 @@ impl BattleEngine {
 
             "Run" => {
                 // TODO implement running mechanic described earlier
-                PlayerCB::singleton().bind_mut().in_battle = false;
+                PlayerCB::singleton().bind_mut().battling = false;
 
                 // TODO don't change scenes, just remove the battle
                 // stuff since it's all overlayed on top of the world
@@ -288,6 +291,7 @@ impl INode2D for BattleEngine {
     fn ready(&mut self) {
         self.choices.bind_mut().disable();
         self.track.init(BattleTrack::new_from_name("alright"));
+        self.battlers.init(todo!());
 
         {
             // intro countdown timer setup

@@ -90,7 +90,7 @@ impl World {
     }
 
     pub fn start_battle(eid: GString) {
-        PlayerCB::singleton().bind_mut().in_battle = true;
+        PlayerCB::singleton().bind_mut().battling = true;
         let world = current_scene();
 
         let mat = PlayerCB::fx_material();
