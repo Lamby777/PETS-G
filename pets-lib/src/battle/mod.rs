@@ -208,7 +208,10 @@ impl BattleEngine {
 
     #[func]
     pub fn close_beat(&mut self) {
-        self.rhythm.note = None;
+        // If there was an unclicked note, it's a flop
+        if self.rhythm.note.take().is_some() {
+            self.on_flop_attack();
+        }
     }
 
     #[func]
