@@ -118,7 +118,15 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
+[node name="Inventory" type="Control" parent="UILayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
 [node name="DialogBox" parent="UILayer" instance=ExtResource("2_lgtmm")]
+offset_left = -704.0
+offset_right = 704.0
 
 [node name="WorldMenu" parent="UILayer" instance=ExtResource("2_6orff")]
 
