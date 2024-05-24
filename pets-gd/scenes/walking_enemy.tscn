@@ -30,7 +30,7 @@ animations = [{
 size = Vector2(39.9995, 80.0003)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yogbq"]
-radius = 192.0
+radius = 128.25
 
 [node name="WalkingEnemy" type="WalkingEnemy"]
 enemy_id = "A_NONNY_MOUSE"
