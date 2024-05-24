@@ -4,7 +4,9 @@
 //!
 
 use godot::engine::object::ConnectFlags;
-use godot::engine::{AnimationPlayer, Control, InputEvent, TextureRect, Timer};
+use godot::engine::{
+    AnimationPlayer, Control, InputEvent, Texture2D, TextureRect, Timer,
+};
 use godot::prelude::*;
 
 use crate::consts::battle::*;
@@ -163,11 +165,12 @@ impl BattleEngine {
         let id = self.battlers.good_guys[new_index].id();
         godot_print!("Swapped to party member `{}`", id);
 
-        let path = format!("res://assets/textures/portraits/{}.png", id);
-
-        let portrait =
+        let mut portrait =
             self.base().get_node_as::<TextureRect>("%PortraitTexture");
-        portrait.get_texture().unwrap().set_path(path.into());
+
+        let path = format!("res://assets/textures/portraits/{}.png", id);
+        let texture = load::<Texture2D>(path);
+        portrait.set_texture(texture);
     }
 
     #[func]
