@@ -120,6 +120,7 @@ offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
 [node name="Inventory" parent="UILayer" instance=ExtResource("3_jwkdy")]
+unique_name_in_owner = true
 
 [node name="DialogBox" parent="UILayer" instance=ExtResource("2_lgtmm")]
 offset_left = -704.0
