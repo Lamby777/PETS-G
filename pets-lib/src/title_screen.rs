@@ -52,7 +52,7 @@ impl TitleScreen {
             "Play" => {
                 self.anim_out();
 
-                set_timeout(4.0, || {
+                set_timeout(1.5, || {
                     change_scene!("world");
                 });
             }
