@@ -1,7 +1,20 @@
-[gd_scene format=3 uid="uid://clpj4pxq1ulin"]
+[gd_scene load_steps=3 format=3 uid="uid://clpj4pxq1ulin"]
+
+[ext_resource type="Shader" path="res://themes/opacity.gdshader" id="1_ghbm4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j36xs"]
+shader = ExtResource("1_ghbm4")
+shader_parameter/opacity = 0.0
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
+
+[node name="BGDarken" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_j36xs")
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
