@@ -6,30 +6,55 @@
 //! - Cherry, 2:54 AM, 10/5/2023 | <3
 //!
 
-use godot::engine::Control;
+use godot::engine::tween::TransitionType;
+use godot::engine::{AnimationPlayer, ColorRect, Control, PanelContainer};
 use godot::prelude::*;
 
 use crate::prelude::*;
+
+const CREDITS_TWEEN_TIME: f64 = 0.5;
+const BLACK_FADE_TIME: f64 = 1.0;
 
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
 struct TitleScreen {
     base: Base<Node2D>,
 
-    #[init(default = onready_node(&base, "Background/MenuChoices/ChoiceAgent"))]
+    #[init(default = onready_node(&base, "%MenuChoices/ChoiceAgent"))]
     choices: OnReady<Gd<ChoiceAgent>>,
+
+    credits_up: bool,
 }
 
 #[godot_api]
 impl TitleScreen {
+    fn credits_panel(&self) -> Gd<PanelContainer> {
+        self.base().get_node_as("%CreditsPanel")
+    }
+
+    fn black(&self) -> Gd<ColorRect> {
+        self.base().get_node_as("%BlackFade")
+    }
+
+    fn anim_out(&self) {
+        fade_black(self.black(), true, BLACK_FADE_TIME);
+
+        let mut anim = self
+            .base()
+            .get_node_as::<AnimationPlayer>("MoveRight/AnimationPlayer");
+        anim.set_assigned_animation("main_menu_outro".into());
+        anim.play();
+    }
+
     #[func]
-    pub fn on_choice_picked(&self, choice: Gd<Control>) {
+    pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
         match choice.get_name().to_string().as_str() {
             "Play" => {
-                // TODO should animate the menu boxes flying
-                // off into the right, and the camera goes left
+                self.anim_out();
 
-                change_scene!("world");
+                set_timeout(4.0, || {
+                    change_scene!("world");
+                });
             }
 
             "Options" => {
@@ -38,11 +63,32 @@ impl TitleScreen {
             }
 
             "Credits" => {
-                // should pull up credits box
-                todo!()
+                let panel = self.credits_panel();
+                self.credits_up = !self.credits_up;
+
+                let y = match self.credits_up {
+                    true => 0.0,
+                    false => 768.0,
+                };
+
+                tween(
+                    panel,
+                    "position:y",
+                    None,
+                    y,
+                    CREDITS_TWEEN_TIME,
+                    TransitionType::QUAD,
+                )
+                .unwrap();
             }
 
-            "Quit" => godot_tree().quit(),
+            "Quit" => {
+                self.anim_out();
+
+                set_timeout(1.1, || {
+                    godot_tree().quit();
+                });
+            }
 
             _ => unreachable!(),
         }

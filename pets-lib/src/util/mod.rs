@@ -9,8 +9,44 @@ pub mod singleton;
 use derived_deref::{Deref, DerefMut};
 use godot::engine::object::ConnectFlags;
 use godot::engine::tween::TransitionType;
-use godot::engine::{Engine, RichTextLabel, SceneTreeTimer, Theme, Tween};
+use godot::engine::{
+    ColorRect, Engine, RichTextLabel, SceneTreeTimer, ShaderMaterial, Theme,
+    Tween,
+};
 use godot::prelude::*;
+
+/// Convenience function to fade opacity shaders on/off
+pub fn fade_black<N>(black: Gd<N>, visible: bool, tween_time: f64)
+where
+    N: GodotClass + Inherits<ColorRect>,
+{
+    let material = black
+        .upcast_ref()
+        .get_material()
+        .unwrap()
+        .cast::<ShaderMaterial>();
+    let material_id = material.instance_id();
+
+    let callable = Callable::from_fn("set_shader_value", move |args| {
+        let mut material = Gd::<ShaderMaterial>::from_instance_id(material_id);
+        material.set_shader_parameter("opacity".into(), args[0].clone());
+
+        Ok(Variant::nil())
+    });
+
+    let end_value = visible as u8 as f64;
+
+    let start_value = material.get_shader_parameter("opacity".into());
+
+    tween_method(
+        callable,
+        start_value,
+        end_value.to_variant(),
+        tween_time,
+        TransitionType::QUAD,
+    )
+    .unwrap();
+}
 
 pub use crate::connect;
 /// Macro to connect stuff without using the annoying 2-line
