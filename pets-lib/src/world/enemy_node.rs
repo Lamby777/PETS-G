@@ -43,15 +43,6 @@ pub struct WalkingEnemy {
 impl WalkingEnemy {
     /// Set the animation of the enemy
     ///
-    /// # Arguments
-    ///
-    /// * `moving` - If true, plays running anims, else idle.
-    /// * `flipped` - If true, flips the sprite horizontally.
-    /// * `backwards` - If true, play backwards-facing sprites.
-    ///
-    /// The running sprites are drawn by default facing left.
-    /// `flipped` should be true if the enemy is facing right.
-    ///
     /// Backwards should be used if the enemy is below the player
     /// in terms of Y position, so they'd be running up the screen.
     fn anim_move(&mut self, opts: AnimOptions) {
