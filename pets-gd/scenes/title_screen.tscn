@@ -1,8 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://ben252ibtpchc"]
+[gd_scene load_steps=10 format=3 uid="uid://ben252ibtpchc"]
 
 [ext_resource type="AudioStream" uid="uid://bu1akc5wvo0wo" path="res://assets/music/menu/titlebreeze.ogg" id="1_06t4m"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="3_gc66u"]
 [ext_resource type="AudioStream" uid="uid://4puxvjdkmpho" path="res://assets/sounds/petsgamestart.wav" id="4_1uee5"]
+[ext_resource type="Shader" path="res://themes/opacity.gdshader" id="4_gkpis"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tovj7"]
+shader = ExtResource("4_gkpis")
+shader_parameter/opacity = 0.0
 
 [sub_resource type="Animation" id="Animation_khffc"]
 length = 0.001
@@ -494,6 +499,23 @@ theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Quit"
+
+[node name="BlackFade" type="ColorRect" parent="MoveRight"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_tovj7")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1920.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_gc66u")
+color = Color(0.0666667, 0.0666667, 0.105882, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MoveRight"]
 libraries = {
