@@ -33,7 +33,7 @@ pub struct PlayerCB {
     pub in_water: bool,
 
     #[init(default = 1.0)]
-    pub water_speed_mod: f64,
+    pub water_speed_mod: real,
 }
 
 #[godot_api]
@@ -141,7 +141,7 @@ impl PlayerCB {
 
         let target_pos = if moving {
             let spr = if sprinting { SPRINT_COEFFICIENT } else { 1.0 };
-            input_vector * MAX_SPEED * spr
+            input_vector * MAX_SPEED * spr * self.water_speed_mod
         } else {
             Vector2::ZERO
         };
