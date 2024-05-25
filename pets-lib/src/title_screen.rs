@@ -6,7 +6,7 @@
 //! - Cherry, 2:54 AM, 10/5/2023 | <3
 //!
 
-use godot::engine::{AnimationPlayer, Control};
+use godot::engine::{AnimationPlayer, Control, PanelContainer};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -18,12 +18,18 @@ struct TitleScreen {
 
     #[init(default = onready_node(&base, "%MenuChoices/ChoiceAgent"))]
     choices: OnReady<Gd<ChoiceAgent>>,
+
+    credits_up: bool,
 }
 
 #[godot_api]
 impl TitleScreen {
+    fn credits_panel(&self) -> Gd<PanelContainer> {
+        self.base().get_node_as("%CreditsPanel")
+    }
+
     #[func]
-    pub fn on_choice_picked(&self, choice: Gd<Control>) {
+    pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
         match choice.get_name().to_string().as_str() {
             "Play" => {
                 // TODO should animate the menu boxes flying
@@ -46,8 +52,25 @@ impl TitleScreen {
             }
 
             "Credits" => {
-                // should pull up credits box
-                todo!()
+                use crate::consts::dialogue::*;
+
+                let panel = self.credits_panel();
+                self.credits_up = !self.credits_up;
+
+                let y = match self.credits_up {
+                    true => 0.0,
+                    false => 768.0,
+                };
+
+                tween(
+                    panel,
+                    "position:y",
+                    None,
+                    y,
+                    DBOX_TWEEN_TIME,
+                    DBOX_TWEEN_TRANS,
+                )
+                .unwrap();
             }
 
             "Quit" => godot_tree().quit(),
