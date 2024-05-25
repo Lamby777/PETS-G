@@ -125,6 +125,8 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 
 [node name="DialogBox" parent="UILayer" instance=ExtResource("2_lgtmm")]
+offset_left = -704.0
+offset_right = 704.0
 
 [node name="WorldMenu" parent="UILayer" instance=ExtResource("2_6orff")]
 
@@ -281,6 +283,20 @@ collision_mask = 9
 position = Vector2(900, 1300)
 collision_mask = 9
 
+[node name="RodrickSign" parent="YSort/Room" instance=ExtResource("6_w4dbq")]
+position = Vector2(192, 64)
+collision_mask = 9
+
+[node name="InteractionZone" parent="YSort/Room/RodrickSign" instance=ExtResource("5_uar2c")]
+interaction_id = "Rodrick Sign #1"
+
+[node name="MZ_CV_Outdoors" parent="YSort/Room" instance=ExtResource("9_tt2ie")]
+music = ExtResource("5_x7nbf")
+
+[node name="CollisionPolygon2D" parent="YSort/Room/MZ_CV_Outdoors" index="0"]
+visible = false
+polygon = PackedVector2Array(-59.0769, -19.6923, 59.0769, -19.6923, 59.0769, 59.0769, -59.0769, 59.0769)
+
 [node name="TileMap" type="TileMap" parent="YSort/Room"]
 y_sort_enabled = true
 scale = Vector2(4, 4)
@@ -302,19 +318,9 @@ layer_3/name = "Stone"
 layer_3/y_sort_origin = -11
 layer_3/z_index = -3
 layer_3/tile_data = PackedInt32Array()
-
-[node name="RodrickSign" parent="YSort/Room" instance=ExtResource("6_w4dbq")]
-position = Vector2(192, 64)
-collision_mask = 9
-
-[node name="InteractionZone" parent="YSort/Room/RodrickSign" instance=ExtResource("5_uar2c")]
-interaction_id = "Rodrick Sign #1"
-
-[node name="MZ_CV_Outdoors" parent="YSort/Room" instance=ExtResource("9_tt2ie")]
-music = ExtResource("5_x7nbf")
-
-[node name="CollisionPolygon2D" parent="YSort/Room/MZ_CV_Outdoors" index="0"]
-visible = false
-polygon = PackedVector2Array(-59.0769, -19.6923, 59.0769, -19.6923, 59.0769, 59.0769, -59.0769, 59.0769)
+layer_4/name = "Water (Grass)"
+layer_4/y_sort_origin = -11
+layer_4/z_index = -4
+layer_4/tile_data = PackedInt32Array(983046, 65540, 1, 983047, 65540, 1, 1048583, 65540, 1, 1048582, 65540, 1, 1048581, 65540, 1, 983045, 65540, 1, 917509, 65540, 0, 917510, 65540, 0, 917511, 65540, 0, 983048, 65540, 1, 1048584, 65540, 1, 917512, 65540, 0, 983049, 131076, 1, 1048585, 131076, 1, 917513, 131076, 0, 1114121, 131076, 1, 1114120, 65540, 1, 1114119, 65540, 1, 1114118, 65540, 1, 1114117, 65540, 1, 1179657, 131076, 2, 1179656, 65540, 2, 1179655, 65540, 2, 1179654, 65540, 2, 1179653, 65540, 2, 1179652, 65540, 2, 1114116, 65540, 1, 1048580, 65540, 1, 1179651, 4, 2, 1114115, 4, 1, 1048579, 4, 1, 983043, 4, 1, 983044, 65540, 1, 917507, 4, 0, 917508, 65540, 0)
 
 [editable path="YSort/Room/MZ_CV_Outdoors"]
