@@ -413,7 +413,7 @@ impl DialogBox {
         for mut node in children {
             node.set_name("deleted".into());
             node.queue_free();
-            self.choice_agent.bind_mut().unbind_callables_for(&mut node);
+            ChoiceAgent::unbind_callables_for(&mut node);
             cont.remove_child(node.upcast());
         }
     }

@@ -190,9 +190,9 @@ impl ChoiceAgent {
 
     pub fn bind_callables_for<N>(&mut self, choice: &mut Gd<N>)
     where
-        N: Inherits<Control>,
+        N: Inherits<Node>,
     {
-        self.unbind_callables_for(choice);
+        Self::unbind_callables_for(choice);
         let choice = &mut choice.clone().upcast();
 
         let entered = self
@@ -208,26 +208,12 @@ impl ChoiceAgent {
         connect_deferred(choice, "focus_exited", exited.clone());
     }
 
-    pub fn unbind_callables_for<N>(&mut self, choice: &mut Gd<N>)
+    pub fn unbind_callables_for<N>(choice: &mut Gd<N>)
     where
-        N: Inherits<Control>,
+        N: Inherits<Node>,
     {
-        let choice = choice.upcast_mut::<Control>();
-
-        let mut unbind = |signal_name: &str| {
-            choice
-                .get_signal_connection_list(signal_name.into())
-                .iter_shared()
-                .for_each(|dict| {
-                    // let signal = dict.get("signal").unwrap();
-                    let callable = dict.get("callable").unwrap();
-
-                    choice.disconnect(signal_name.into(), callable.to());
-                })
-        };
-
-        unbind("focus_entered");
-        unbind("focus_exited");
+        disconnect_signal(choice, "focus_entered");
+        disconnect_signal(choice, "focus_exited");
     }
 }
 

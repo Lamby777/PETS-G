@@ -30,6 +30,10 @@ pub struct PlayerCB {
     pub battling: Vec<String>,
 
     pub tpbeacon_debounce: bool,
+    pub in_water: bool,
+
+    #[init(default = 1.0)]
+    pub water_speed_mod: f64,
 }
 
 #[godot_api]

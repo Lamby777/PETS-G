@@ -47,8 +47,7 @@ mod prelude {
     pub use crate::dialogue::{ix_map, DialogBox};
     pub use crate::functions::{call_global, callv_global};
     pub use crate::world::{
-        InteractionManager, InteractionZone, MusicZone, PlayerCB, World,
-        WorldMenu,
+        InteractionManager, InteractionZone, PlayerCB, World, WorldMenu,
     };
 
     pub use crate::choices::ChoiceAgent;

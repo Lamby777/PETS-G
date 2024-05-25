@@ -12,13 +12,16 @@ use godot::prelude::*;
 mod enemy_node;
 mod interaction;
 mod menu; // mod menu?? are you hacking?!!! ban ban report >:3
-mod music_zone;
 mod pchar_node;
 mod playercb;
 
+mod music_zone;
+mod water_zone;
+use music_zone::MusicZone;
+use water_zone::WaterZone;
+
 pub use interaction::{InteractionManager, InteractionZone};
 pub use menu::WorldMenu;
-pub use music_zone::MusicZone;
 pub use playercb::PlayerCB;
 
 // just for testing
@@ -76,8 +79,14 @@ fn cue_battle_intro_fx() {
     rect.set_visible(true);
 }
 
+// Due to a gdext limitation, you can only have 1 `#[godot_api]` custom `impl` block.
+// There's gonna be a LOT of methods ahead, so look for these comment markers that
+// split the code into sections.
+
 #[godot_api]
 impl World {
+    // ---------------------------------------- Battle stuff
+
     #[signal]
     fn battle_intro_done(eid: GString) {}
 
@@ -129,18 +138,20 @@ impl World {
 
         // it's a performance thing
         // pcb().set_process(false);
-        {
-            // subchildren_of_type::<WalkingEnemy, _>(self.to_gd());
-        }
+        // {
+        //     subchildren_of_type::<WalkingEnemy, _>(self.to_gd());
+        // }
     }
 
+    // ---------------------------------------- MusicZone stuff
+
     #[func]
-    fn on_exit(&mut self, _pcb: Gd<Node2D>) {
+    fn on_mz_exit(&mut self, _pcb: Gd<Node2D>) {
         self.crossfade_audio_to_null();
     }
 
     #[func]
-    fn on_enter(&mut self, _pcb: Gd<Node2D>, zone: Gd<MusicZone>) {
+    fn on_mz_enter(&mut self, _pcb: Gd<Node2D>, zone: Gd<MusicZone>) {
         godot_print!("Entering new MusicZone: {}", zone.get_name());
         self.crossfade_audio_into(zone.bind().music.clone());
         self.current_mz = Some(zone);
@@ -178,23 +189,43 @@ impl World {
         self.current_mz = None;
         // TODO set current_mz once again once the battle is over
     }
-}
 
-#[godot_api]
-impl INode2D for World {
-    fn ready(&mut self) {
+    // ---------------------------------------- WaterZone stuff
+
+    #[func]
+    pub fn on_water_enter(&mut self, _pcb: Gd<Node2D>, zone: Gd<WaterZone>) {
+        let mut pcb = pcb();
+        pcb.bind_mut().in_water = true;
+        pcb.bind_mut().water_speed_mod = zone.bind().speed_modulation;
+    }
+
+    #[func]
+    pub fn on_water_exit(&mut self, _pcb: Gd<Node2D>) {
+        let mut pcb = pcb();
+        pcb.bind_mut().in_water = false;
+        pcb.bind_mut().water_speed_mod = 1.0;
+    }
+
+    // ---------------------------------------- General zone stuff
+
+    fn reconnect_musiczones(&mut self) {
         let room = self.room.clone();
         let mzones = subchildren_of_type::<MusicZone, _>(room);
 
         for mut zone in mzones {
-            let on_exit = self.base().callable("on_exit");
-            let on_enter = self
+            let on_mz_exit = self.base().callable("on_mz_exit");
+            let on_mz_enter = self
                 .base()
-                .callable("on_enter")
+                .callable("on_mz_enter")
                 .bindv((&[zone.to_variant()]).into());
 
-            zone.connect("body_entered".into(), on_enter);
-            zone.connect("body_exited".into(), on_exit);
+            zone.connect("body_entered".into(), on_mz_enter);
+            zone.connect("body_exited".into(), on_mz_exit);
         }
     }
+}
+
+#[godot_api]
+impl INode2D for World {
+    fn ready(&mut self) {}
 }
