@@ -15,6 +15,23 @@ use godot::engine::{
 };
 use godot::prelude::*;
 
+pub fn disconnect_signal<N, SN>(node: &mut Gd<N>, signal: SN)
+where
+    N: Inherits<Node>,
+    SN: Into<StringName> + Copy,
+{
+    let node = node.upcast_mut::<Node>();
+
+    node.get_signal_connection_list(signal.into())
+        .iter_shared()
+        .for_each(|dict| {
+            // let signal = dict.get("signal").unwrap();
+            let callable = dict.get("callable").unwrap();
+
+            node.disconnect(signal.into(), callable.to());
+        })
+}
+
 /// Convenience function to fade opacity shaders on/off
 pub fn fade_black<N>(black: Gd<N>, visible: bool, tween_time: f64)
 where
