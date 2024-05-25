@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://p2uymvf88jt7"]
+[gd_scene load_steps=22 format=3 uid="uid://p2uymvf88jt7"]
 
 [ext_resource type="PackedScene" uid="uid://kgl5788x405y" path="res://scenes/battle.tscn" id="1_37bcu"]
 [ext_resource type="PackedScene" uid="uid://c8hhg8v5ls70u" path="res://scenes/world_menu.tscn" id="2_6orff"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c0jehwow4ein4" path="res://scenes/interaction_manager.tscn" id="2_uh12s"]
 [ext_resource type="TileSet" uid="uid://dtft48lqhsjgr" path="res://assets/tilesets/cliff-dirt/tileset_cliff-dirt.tres" id="3_14512"]
 [ext_resource type="Shader" path="res://themes/encounter.gdshader" id="3_a3d4r"]
+[ext_resource type="PackedScene" uid="uid://clpj4pxq1ulin" path="res://scenes/inventory.tscn" id="3_jwkdy"]
 [ext_resource type="Script" path="res://scenes/BattleIntroRect.gd" id="4_jple0"]
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="5_uar2c"]
 [ext_resource type="AudioStream" uid="uid://b83wws3dajmi5" path="res://assets/music/zone/routingout.ogg" id="5_x7nbf"]
@@ -118,13 +119,11 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
-[node name="Inventory" type="Control" parent="UILayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+[node name="Inventory" parent="UILayer" instance=ExtResource("3_jwkdy")]
 
 [node name="DialogBox" parent="UILayer" instance=ExtResource("2_lgtmm")]
+offset_left = -704.0
+offset_right = 704.0
 
 [node name="WorldMenu" parent="UILayer" instance=ExtResource("2_6orff")]
 

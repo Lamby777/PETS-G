@@ -20,6 +20,13 @@ pub fn fade_black<N>(black: Gd<N>, visible: bool, tween_time: f64)
 where
     N: GodotClass + Inherits<ColorRect>,
 {
+    fade_black_f64(black, visible as u8 as f64, tween_time)
+}
+
+pub fn fade_black_f64<N>(black: Gd<N>, visible: f64, tween_time: f64)
+where
+    N: GodotClass + Inherits<ColorRect>,
+{
     let material = black
         .upcast_ref()
         .get_material()
@@ -34,14 +41,12 @@ where
         Ok(Variant::nil())
     });
 
-    let end_value = visible as u8 as f64;
-
     let start_value = material.get_shader_parameter("opacity".into());
 
     tween_method(
         callable,
         start_value,
-        end_value.to_variant(),
+        visible.to_variant(),
         tween_time,
         TransitionType::QUAD,
     )
