@@ -7,12 +7,13 @@
 //!
 
 use godot::engine::tween::TransitionType;
-use godot::engine::{AnimationPlayer, Control, PanelContainer};
+use godot::engine::{AnimationPlayer, ColorRect, Control, PanelContainer};
 use godot::prelude::*;
 
 use crate::prelude::*;
 
 const CREDITS_TWEEN_TIME: f64 = 0.5;
+const BLACK_FADE_TIME: f64 = 1.0;
 
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
@@ -31,7 +32,13 @@ impl TitleScreen {
         self.base().get_node_as("%CreditsPanel")
     }
 
+    fn black(&self) -> Gd<ColorRect> {
+        self.base().get_node_as("%BlackFade")
+    }
+
     fn anim_out(&self) {
+        fade_black(self.black(), true, BLACK_FADE_TIME);
+
         let mut anim = self
             .base()
             .get_node_as::<AnimationPlayer>("MoveRight/AnimationPlayer");
@@ -78,7 +85,7 @@ impl TitleScreen {
             "Quit" => {
                 self.anim_out();
 
-                set_timeout(2.0, || {
+                set_timeout(1.1, || {
                     godot_tree().quit();
                 });
             }
