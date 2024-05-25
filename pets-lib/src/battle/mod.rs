@@ -20,6 +20,7 @@ mod skills;
 mod stat_translation;
 
 use midi::{BattleTrack, MidiReceiver};
+use player::BattleIcon;
 use rhythm::*;
 
 #[derive(Debug)]
@@ -100,6 +101,9 @@ pub struct BattleEngine {
 
     #[init(default = onready_node(&base, "AnimationPlayer"))]
     animator: OnReady<Gd<AnimationPlayer>>,
+
+    #[init(default = onready_node(&base, "BattleIcon"))]
+    icon: OnReady<Gd<BattleIcon>>,
 }
 
 #[godot_api]
@@ -165,6 +169,10 @@ impl BattleEngine {
         let id = self.battlers.good_guys[new_index].id();
         godot_print!("Swapped to party member `{}`", id);
 
+        // set battle icon sprite
+        self.icon.bind_mut().set_icon(&id);
+
+        // set battle portrait texture
         let mut portrait =
             self.base().get_node_as::<TextureRect>("%PortraitTexture");
 
