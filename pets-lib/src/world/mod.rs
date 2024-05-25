@@ -213,6 +213,9 @@ impl World {
         let mzones = subchildren_of_type::<MusicZone, _>(room);
 
         for mut zone in mzones {
+            disconnect_signal(&mut zone, "body_entered");
+            disconnect_signal(&mut zone, "body_exited");
+
             let on_mz_exit = self.base().callable("on_mz_exit");
             let on_mz_enter = self
                 .base()
@@ -223,9 +226,31 @@ impl World {
             zone.connect("body_exited".into(), on_mz_exit);
         }
     }
+
+    fn reconnect_waterzones(&mut self) {
+        let room = self.room.clone();
+        let wzones = subchildren_of_type::<WaterZone, _>(room);
+
+        for mut zone in wzones {
+            disconnect_signal(&mut zone, "body_entered");
+            disconnect_signal(&mut zone, "body_exited");
+
+            let on_water_exit = self.base().callable("on_water_exit");
+            let on_water_enter = self
+                .base()
+                .callable("on_water_enter")
+                .bindv((&[zone.to_variant()]).into());
+
+            zone.connect("body_entered".into(), on_water_enter);
+            zone.connect("body_exited".into(), on_water_exit);
+        }
+    }
 }
 
 #[godot_api]
 impl INode2D for World {
-    fn ready(&mut self) {}
+    fn ready(&mut self) {
+        self.reconnect_musiczones();
+        self.reconnect_waterzones();
+    }
 }
