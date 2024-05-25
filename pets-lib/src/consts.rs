@@ -56,7 +56,7 @@ pub mod dialogue {
 
     pub const UI_LAYER_NAME: &str = "UILayer";
     pub const DBOX_NODE_NAME: &str = "DialogBox";
-    pub const _DBOX_TWEEN_TIME: f64 = 0.5;
+    pub const DBOX_TWEEN_TIME: f64 = 0.5;
     pub const DBOX_TWEEN_TRANS: TransitionType = TransitionType::QUAD;
 
     /// distance the dialog box is from the bottom of the screen
@@ -66,7 +66,7 @@ pub mod dialogue {
     pub const DBOX_CHOICE_TWEEN_TIME: f64 = choice_lists::CHOICE_TWEEN_TIME;
     pub const DBOX_CHOICE_TWEEN_TRANS: TransitionType = DBOX_TWEEN_TRANS;
     pub const DBOX_CHOICE_HEIGHT: f32 = 70.0;
-    pub const DBOX_CHOICE_WAVE_TIME: f64 = 0.1;
+    pub const DBOX_CHOICE_WAVE_TIME: f64 = 0.5;
 
     pub const _DBOX_SELECTION_BBCODE: &str = WAVE_BBCODE;
 }
