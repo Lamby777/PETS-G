@@ -149,11 +149,7 @@ impl DialogBox {
         );
 
         // panic if tween failed
-        if tw.is_ok() {
-            self.text_tween = tw.ok();
-        } else {
-            panic!("Failed to tween text visibility!");
-        }
+        self.text_tween = Some(tw.unwrap());
     }
 
     /// sets the speaker and message labels to the given page
