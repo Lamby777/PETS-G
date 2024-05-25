@@ -31,18 +31,19 @@ impl TitleScreen {
         self.base().get_node_as("%CreditsPanel")
     }
 
+    fn anim_out(&self) {
+        let mut anim = self
+            .base()
+            .get_node_as::<AnimationPlayer>("MoveRight/AnimationPlayer");
+        anim.set_assigned_animation("main_menu_outro".into());
+        anim.play();
+    }
+
     #[func]
     pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
         match choice.get_name().to_string().as_str() {
             "Play" => {
-                // TODO should animate the menu boxes flying
-                // off into the right, and the camera goes left
-
-                let mut anim = self.base().get_node_as::<AnimationPlayer>(
-                    "MoveRight/AnimationPlayer",
-                );
-                anim.set_assigned_animation("main_menu_outro".into());
-                anim.play();
+                self.anim_out();
 
                 set_timeout(4.0, || {
                     change_scene!("world");
@@ -74,7 +75,13 @@ impl TitleScreen {
                 .unwrap();
             }
 
-            "Quit" => godot_tree().quit(),
+            "Quit" => {
+                self.anim_out();
+
+                set_timeout(2.0, || {
+                    godot_tree().quit();
+                });
+            }
 
             _ => unreachable!(),
         }
