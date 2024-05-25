@@ -102,6 +102,18 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector2(64, 320)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_po2ip"]
 resource_name = "main_menu_intro"
@@ -297,10 +309,22 @@ tracks/7/path = NodePath("MenuChoices:position")
 tracks/7/interp = 2
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 1, 1.1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(64, 320), Vector2(-440, 320), Vector2(-440, 320), Vector2(-440, 1464)]
+"values": [Vector2(64, 320), Vector2(-2400, 320)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".:position")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1920, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qpnwk"]
@@ -319,10 +343,19 @@ autoplay = true
 [node name="StartSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_1uee5")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="MoveRight" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("3_gc66u")
+
+[node name="Background" type="ColorRect" parent="MoveRight"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -1920.0
 offset_right = 1920.0
 offset_bottom = 1080.0
 grow_horizontal = 2
@@ -331,16 +364,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("3_gc66u")
 color = Color(0.0666667, 0.0666667, 0.105882, 1)
-metadata/_edit_lock_ = true
 
-[node name="CreditsBox" type="Panel" parent="Background"]
+[node name="CreditsBox" type="Panel" parent="MoveRight"]
 layout_mode = 0
 offset_left = 960.0
 offset_top = 1152.0
 offset_right = 1792.0
 offset_bottom = 1472.0
 
-[node name="BottomSlashPanel" type="Panel" parent="Background"]
+[node name="BottomSlashPanel" type="Panel" parent="MoveRight"]
 layout_mode = 0
 offset_left = 1024.0
 offset_top = 1096.0
@@ -348,24 +380,25 @@ offset_right = 2009.99
 offset_bottom = 1394.0
 rotation = -0.261799
 
-[node name="Horizon" type="Control" parent="Background"]
+[node name="Horizon" type="Control" parent="MoveRight"]
+layout_mode = 3
 anchors_preset = 0
 
-[node name="TopLine" type="Panel" parent="Background/Horizon"]
+[node name="TopLine" type="Panel" parent="MoveRight/Horizon"]
 layout_mode = 0
 offset_left = -64.0
 offset_top = -72.0
 offset_right = 1984.0
 offset_bottom = 56.0
 
-[node name="BottomLine" type="Panel" parent="Background/Horizon"]
+[node name="BottomLine" type="Panel" parent="MoveRight/Horizon"]
 layout_mode = 0
 offset_left = -64.0
 offset_top = 1024.0
 offset_right = 1984.0
 offset_bottom = 1152.0
 
-[node name="SlashPanel2" type="Panel" parent="Background"]
+[node name="SlashPanel2" type="Panel" parent="MoveRight"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 1736.0
@@ -373,7 +406,7 @@ offset_right = 1286.0
 offset_bottom = 2359.01
 rotation = -2.09439
 
-[node name="SlashPanel" type="Panel" parent="Background"]
+[node name="SlashPanel" type="Panel" parent="MoveRight"]
 layout_mode = 0
 offset_left = -210.0
 offset_top = 1066.0
@@ -381,16 +414,18 @@ offset_right = 1036.0
 offset_bottom = 1689.0
 rotation = -1.39589
 
-[node name="MenuChoices" type="Control" parent="Background"]
+[node name="MenuChoices" type="Control" parent="MoveRight"]
+unique_name_in_owner = true
+layout_mode = 3
 anchors_preset = 0
 offset_left = 64.0
 offset_top = 320.0
 offset_right = 104.0
 offset_bottom = 360.0
 
-[node name="ChoiceAgent" type="ChoiceAgent" parent="Background/MenuChoices"]
+[node name="ChoiceAgent" type="ChoiceAgent" parent="MoveRight/MenuChoices"]
 
-[node name="Play" type="RichTextLabel" parent="Background/MenuChoices"]
+[node name="Play" type="RichTextLabel" parent="MoveRight/MenuChoices"]
 clip_contents = false
 layout_mode = 0
 offset_right = 456.0
@@ -405,7 +440,7 @@ theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Play"
 
-[node name="Options" type="RichTextLabel" parent="Background/MenuChoices"]
+[node name="Options" type="RichTextLabel" parent="MoveRight/MenuChoices"]
 clip_contents = false
 layout_mode = 0
 offset_top = 128.0
@@ -421,7 +456,7 @@ theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Options"
 
-[node name="Credits" type="RichTextLabel" parent="Background/MenuChoices"]
+[node name="Credits" type="RichTextLabel" parent="MoveRight/MenuChoices"]
 clip_contents = false
 layout_mode = 0
 offset_top = 256.0
@@ -437,7 +472,7 @@ theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Credits"
 
-[node name="Quit" type="RichTextLabel" parent="Background/MenuChoices"]
+[node name="Quit" type="RichTextLabel" parent="MoveRight/MenuChoices"]
 clip_contents = false
 layout_mode = 0
 offset_top = 384.0
@@ -453,7 +488,7 @@ theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Quit"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MoveRight"]
 libraries = {
 "": SubResource("AnimationLibrary_qpnwk")
 }

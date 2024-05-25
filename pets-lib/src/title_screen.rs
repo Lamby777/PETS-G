@@ -6,7 +6,7 @@
 //! - Cherry, 2:54 AM, 10/5/2023 | <3
 //!
 
-use godot::engine::Control;
+use godot::engine::{AnimationPlayer, Control};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -16,7 +16,7 @@ use crate::prelude::*;
 struct TitleScreen {
     base: Base<Node2D>,
 
-    #[init(default = onready_node(&base, "Background/MenuChoices/ChoiceAgent"))]
+    #[init(default = onready_node(&base, "%MenuChoices/ChoiceAgent"))]
     choices: OnReady<Gd<ChoiceAgent>>,
 }
 
@@ -29,7 +29,15 @@ impl TitleScreen {
                 // TODO should animate the menu boxes flying
                 // off into the right, and the camera goes left
 
-                change_scene!("world");
+                let mut anim = self.base().get_node_as::<AnimationPlayer>(
+                    "MoveRight/AnimationPlayer",
+                );
+                anim.set_assigned_animation("main_menu_outro".into());
+                anim.play();
+
+                set_timeout(4.0, || {
+                    change_scene!("world");
+                });
             }
 
             "Options" => {
