@@ -6,10 +6,13 @@
 //! - Cherry, 2:54 AM, 10/5/2023 | <3
 //!
 
+use godot::engine::tween::TransitionType;
 use godot::engine::{AnimationPlayer, Control, PanelContainer};
 use godot::prelude::*;
 
 use crate::prelude::*;
+
+const CREDITS_TWEEN_TIME: f64 = 0.5;
 
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
@@ -52,8 +55,6 @@ impl TitleScreen {
             }
 
             "Credits" => {
-                use crate::consts::dialogue::*;
-
                 let panel = self.credits_panel();
                 self.credits_up = !self.credits_up;
 
@@ -67,8 +68,8 @@ impl TitleScreen {
                     "position:y",
                     None,
                     y,
-                    DBOX_TWEEN_TIME,
-                    DBOX_TWEEN_TRANS,
+                    CREDITS_TWEEN_TIME,
+                    TransitionType::QUAD,
                 )
                 .unwrap();
             }
