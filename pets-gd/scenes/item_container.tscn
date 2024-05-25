@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://btmwdhpxxjkn"]
+
+[ext_resource type="Texture2D" uid="uid://crxp0fa3kco2o" path="res://assets/textures/items/terra-precision-shotgun.png" id="1_wkpjl"]
+
+[sub_resource type="GDScript" id="GDScript_yffjx"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	global_rotation = 0
+"
+
+[node name="ItemContainer" type="MarginContainer"]
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Node2D" type="Node2D" parent="PanelContainer"]
+script = SubResource("GDScript_yffjx")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/Node2D"]
+offset_right = 33.0
+offset_bottom = 33.0
+texture = ExtResource("1_wkpjl")
+stretch_mode = 5

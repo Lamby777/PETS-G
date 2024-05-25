@@ -60,12 +60,21 @@ impl WorldMenu {
         self.open_or_close(!self.opened);
     }
 
+    fn inventory_node(&self) -> Gd<Control> {
+        current_scene().get_node_as("UILayer/Inventory")
+    }
+
+    fn open_inventory(&mut self) {
+        self.inventory_node()
+            .call("open".into(), &[true.to_variant()]);
+    }
+
     #[func]
     pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
         self.close();
 
         match choice.get_name().to_string().as_str() {
-            "Inventory" => todo!(),
+            "Inventory" => self.open_inventory(),
             "DebugQuit" => godot_tree().quit(),
             "DebugMenu" => start_ix("Debug Menu"),
 
