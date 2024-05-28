@@ -5,8 +5,12 @@
 
 use crate::prelude::*;
 
-use godot::engine::DirAccess;
 use std::cell::OnceCell;
+use std::io::Read as _;
+
+use godot::engine::file_access::ModeFlags;
+use godot::engine::DirAccess;
+use godot::prelude::*;
 
 mod inv;
 
@@ -14,29 +18,65 @@ pub use inv::ItemList;
 
 pub const ITEM_REGISTRY: OnceCell<HashMap<String, Item>> = OnceCell::new();
 
-/// Load a list of files from one of many registry files
-pub fn load_item_registry_part(filename: &str) -> HashMap<String, Item> {
-    let content = "STFU RUSTC, `todo!()` SHOULD SILENCE WARNINGS, NOT MAKE EM!";
+/// Find all the modded items from modded registries.
+///
+/// # Memory
+///
+///  This function leaks memory. It only runs once, and it's for
+///  mods anyway, so it shouldn't be a big deal. I just typically
+///  put a warning label on any function that leaks memory, so here
+///  it is. You've been warned.
+pub fn find_modded_items() -> Vec<Item> {
+    // make the folder in case it doesn't exist yet
+    DirAccess::open("user://".into())
+        .unwrap()
+        .make_dir("mod-items".into());
 
+    let Some(mut dir) = DirAccess::open("user://mod-items/".into()) else {
+        println!("Could not open `mod-items`, no modded items were loaded.");
+        return vec![];
+    };
+
+    dir.get_files()
+        .to_vec()
+        .into_iter()
+        .filter_map(|v| read_item_registry(&v.to_string()))
+        .flatten()
+        .collect()
+}
+
+pub fn read_item_registry(path: &str) -> Option<Vec<Item>> {
+    let mut file = GFile::open(path, ModeFlags::READ).ok()?;
+
+    let mut content = vec![];
+    file.read_to_end(&mut content).ok()?;
+    if content.len() > 100_000_000 {
+        godot_warn!("{} mod_items.txt is too large! (over 100MB, wtf?)", path);
+        godot_warn!("None of your modded items will be loaded!");
+        return None;
+    }
+
+    let content = String::from_utf8(content).ok()?;
     ribbons::unwrap_fmt!(
-        toml::from_str(content),
+        toml::from_str(&content),
         "items file {} has wrong TOML contents",
-        filename
+        path
     )
 }
 
 pub fn load_item_registry(scan_folders: &[&str]) {
-    let items = HashMap::new();
-
-    let load_items = |path: &str| {
-        let mut new_items = load_item_registry_part(filename);
-        items.extend(new_items.drain());
-    };
+    let mut items = HashMap::new();
 
     // scan the vanilla items
     {
-        let _dir =
-            DirAccess::open("res://assets/itemregistries/{}".into()).unwrap();
+        let mut dir =
+            DirAccess::open("res://assets/itemregistries".into()).unwrap();
+
+        for file in dir.get_files().to_vec() {
+            let entries = read_item_registry(&file.to_string()).expect(
+                "Error loading vanilla items. THIS IS A BUG, please report!",
+            );
+        }
     }
 
     // scan for modded item paths
@@ -47,10 +87,7 @@ pub fn load_item_registry(scan_folders: &[&str]) {
     ITEM_REGISTRY.set(items).expect("item registry already set");
 }
 
-/// A single item definition, stored in item hashtable for lookup.
-// Or maybe just in a vector... and there can be a function
-// that looks up the item by searching the vector for an Item
-// with the correct `name` property?
+/// A single item definition, stored in a vector for lookup.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Item {
     /// The category of the item. This affects how you can use it in-game.
