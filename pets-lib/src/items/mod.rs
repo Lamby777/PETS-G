@@ -16,7 +16,7 @@ mod inv;
 
 pub use inv::ItemList;
 
-pub const ITEM_REGISTRY: OnceCell<HashMap<String, Item>> = OnceCell::new();
+pub const ITEM_REGISTRY: OnceCell<Vec<Item>> = OnceCell::new();
 
 /// Find all the modded items from modded registries.
 ///
@@ -64,27 +64,31 @@ pub fn read_item_registry(path: &str) -> Option<Vec<Item>> {
     )
 }
 
-pub fn load_item_registry(scan_folders: &[&str]) {
-    let mut items = HashMap::new();
+/// Initializes `ITEM_REGISTRY` by scanning for vanilla and
+/// modded item registries and combining the list of items.
+pub fn load_item_registry() {
+    let mut dir =
+        DirAccess::open("res://assets/itemregistries".into()).unwrap();
 
-    // scan the vanilla items
-    {
-        let mut dir =
-            DirAccess::open("res://assets/itemregistries".into()).unwrap();
-
-        for file in dir.get_files().to_vec() {
-            let entries = read_item_registry(&file.to_string()).expect(
+    // scan the vanilla items folder
+    let mut items = dir
+        .get_files()
+        .to_vec()
+        .into_iter()
+        .map(|file| {
+            read_item_registry(&file.to_string()).expect(
                 "Error loading vanilla items. THIS IS A BUG, please report!",
-            );
-        }
-    }
+            )
+        })
+        .flatten()
+        .collect::<Vec<_>>();
 
     // scan for modded item paths
-    for _dir in scan_folders {
-        // scan read files without res://
-    }
+    items.extend(find_modded_items());
 
-    ITEM_REGISTRY.set(items).expect("item registry already set");
+    ITEM_REGISTRY
+        .set(items)
+        .expect("item registry already set. this is a bug!");
 }
 
 /// A single item definition, stored in a vector for lookup.
