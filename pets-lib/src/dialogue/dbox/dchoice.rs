@@ -65,7 +65,7 @@ impl DChoice {
 #[godot_api]
 impl IMarginContainer for DChoice {
     fn on_notification(&mut self, what: ContainerNotification) {
-        if what != ContainerNotification::SortChildren {
+        if what != ContainerNotification::SORT_CHILDREN {
             return;
         }
 
