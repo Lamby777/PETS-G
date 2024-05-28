@@ -5,9 +5,47 @@
 
 use crate::prelude::*;
 
+use godot::engine::DirAccess;
+use std::cell::OnceCell;
+
 mod inv;
 
 pub use inv::ItemList;
+
+pub const ITEM_REGISTRY: OnceCell<HashMap<String, Item>> = OnceCell::new();
+
+/// Load a list of files from one of many registry files
+pub fn load_item_registry_part(filename: &str) -> HashMap<String, Item> {
+    let content = "STFU RUSTC, `todo!()` SHOULD SILENCE WARNINGS, NOT MAKE EM!";
+
+    ribbons::unwrap_fmt!(
+        toml::from_str(content),
+        "items file {} has wrong TOML contents",
+        filename
+    )
+}
+
+pub fn load_item_registry(scan_folders: &[&str]) {
+    let items = HashMap::new();
+
+    let load_items = |path: &str| {
+        let mut new_items = load_item_registry_part(filename);
+        items.extend(new_items.drain());
+    };
+
+    // scan the vanilla items
+    {
+        let _dir =
+            DirAccess::open("res://assets/itemregistries/{}".into()).unwrap();
+    }
+
+    // scan for modded item paths
+    for _dir in scan_folders {
+        // scan read files without res://
+    }
+
+    ITEM_REGISTRY.set(items).expect("item registry already set");
+}
 
 /// A single item definition, stored in item hashtable for lookup.
 // Or maybe just in a vector... and there can be a function

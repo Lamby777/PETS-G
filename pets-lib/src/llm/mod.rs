@@ -9,6 +9,8 @@ use io::Write;
 use llm::models::Bloom;
 use llm::{InferenceFeedback, InferenceResponse, Model as _, Prompt};
 
+// default model taken from
+// https://huggingface.co/rustformers/bloom-ggml/blob/main/bloom-1b7-q4_0.bin
 const LLM_PATH_RES: &str = "res://assets/default-model.llm";
 const LLM_PATH_USER: &str = "user://model.llm";
 

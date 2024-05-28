@@ -2,10 +2,39 @@
 //! Singleton for accessing player stats in GDScript.
 //!
 
+use std::io::Read;
+
+use godot::engine::file_access::ModeFlags;
 use godot::prelude::*;
 
 use super::charmap::default_charmap;
 use crate::prelude::*;
+
+/// # Memory
+///
+///  This function leaks memory. It only runs once, and also has a
+///  100MB cap on the size of the file it reads, so it shouldn't be
+///  a big deal. I just typically put a warning label on any function
+///  that leaks memory, so here it is. You've been warned.
+pub fn find_modded_item_paths() -> Option<Vec<&'static str>> {
+    let mut file = GFile::open("user://mod_items.txt", ModeFlags::READ).ok()?;
+
+    let mut content = vec![];
+    file.read_to_end(&mut content).ok()?;
+    if content.len() > 100_000_000 {
+        godot_warn!("mod_items.txt is too large! (over 100MB, wtf?)");
+        godot_warn!("None of your modded items will be loaded!");
+        return None;
+    }
+
+    let content = String::from_utf8(content).ok()?;
+
+    let paths = content
+        .lines()
+        .map(|v| &*String::leak(v.to_owned()))
+        .collect();
+    Some(paths)
+}
 
 #[derive(GodotClass)]
 #[class(base=Object)]
@@ -90,6 +119,11 @@ impl IObject for StatsInterface {
         // picks a save file instead of "new"
         let (charmap, statcalcs) = default_charmap();
         let save = SaveFile { chars: charmap };
+
+        match find_modded_item_paths() {
+            Some(v) => load_item_registry(&v),
+            None => godot_print!("There was an issue loading modded items..."),
+        }
 
         Self {
             base,
