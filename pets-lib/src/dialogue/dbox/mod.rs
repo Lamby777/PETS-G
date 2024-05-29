@@ -258,8 +258,6 @@ impl DialogBox {
 
     #[func]
     pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
-        godot_print!("picked choice: {}", choice.get_name());
-
         // NOTE convention is that the agent is BEFORE the labels
         let picked_i = (choice.get_index() - 1) as usize;
         // godot_print!(">> {} @{}", choice.get_name(), picked_i);
