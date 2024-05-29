@@ -8,6 +8,8 @@ use godot::prelude::*;
 
 use crate::prelude::*;
 
+use super::inv_node::InventoryNode;
+
 #[derive(GodotClass)]
 #[class(init, base=Panel)]
 pub struct WorldMenu {
@@ -60,13 +62,12 @@ impl WorldMenu {
         self.open_or_close(!self.opened);
     }
 
-    fn inventory_node(&self) -> Gd<Control> {
+    fn inventory_node(&self) -> Gd<InventoryNode> {
         current_scene().get_node_as("UILayer/Inventory")
     }
 
     fn open_inventory(&mut self) {
-        self.inventory_node()
-            .call("open".into(), &[true.to_variant()]);
+        self.inventory_node().bind_mut().open(true);
     }
 
     #[func]

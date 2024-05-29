@@ -11,6 +11,7 @@ use godot::prelude::*;
 
 mod enemy_node;
 mod interaction;
+mod inv_node;
 mod menu; // mod menu?? are you hacking?!!! ban ban report >:3
 mod pchar_node;
 mod playercb;
