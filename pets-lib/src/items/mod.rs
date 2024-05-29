@@ -67,6 +67,30 @@ pub fn read_item_registry(path: &str) -> Option<Vec<Item>> {
 /// Initializes `ITEM_REGISTRY` by scanning for vanilla and
 /// modded item registries and combining the list of items.
 pub fn load_item_registry() {
+    let table = vec![Item {
+        category: ItemCat::Equipment {
+            category: EquipmentCat::Weapon,
+            offsets: InherentStats {
+                max_hp: 0,
+                max_energy: 0,
+                attack: 0,
+                defense: 0,
+                speed: 0,
+                stability: 0,
+                delta: 0,
+                epsilon: 0,
+                lambda: Some(0),
+                max_mana: Some(0),
+            },
+        },
+
+        attributes: vec![ItemAttribute::Melee, ItemAttribute::Blade],
+        name: "Sword".into(),
+        description: "A sharp sword.".into(),
+    }];
+    let example = toml::to_string(&table).unwrap();
+    println!("{}", example);
+
     let mut dir =
         DirAccess::open("res://assets/itemregistries".into()).unwrap();
 
@@ -76,6 +100,7 @@ pub fn load_item_registry() {
         .to_vec()
         .into_iter()
         .map(|file| {
+            println!("Reading vanilla item registry: {}", file);
             read_item_registry(&file.to_string()).expect(
                 "Error loading vanilla items. THIS IS A BUG, please report!",
             )
