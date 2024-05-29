@@ -57,7 +57,6 @@ fn debug_item(_args: GArgs) -> GReturn {
     let inv = &mut si.bind_mut().save.inventory;
 
     inv.push(TRUSTY_RUSTY.clone());
-    godot_print!("Inventory: {:?}", inv);
 
     Ok(Variant::nil())
 }

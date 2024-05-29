@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://clpj4pxq1ulin"]
+[gd_scene load_steps=8 format=3 uid="uid://clpj4pxq1ulin"]
 
 [ext_resource type="Shader" path="res://themes/opacity.gdshader" id="1_ghbm4"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_yb1iv"]
-[ext_resource type="Script" path="res://scenes/inventory.gd" id="2_f4y1t"]
 [ext_resource type="PackedScene" uid="uid://btmwdhpxxjkn" path="res://scenes/item_container.tscn" id="3_8obkk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j36xs"]
@@ -118,13 +117,10 @@ _data = {
 "open_inv": SubResource("Animation_bvf1n")
 }
 
-[node name="Inventory" type="Control"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Inventory" type="InventoryNode"]
 offset_right = 1920.0
 offset_bottom = 1080.0
 theme = ExtResource("1_yb1iv")
-script = ExtResource("2_f4y1t")
 
 [node name="BGDarken" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_j36xs")
