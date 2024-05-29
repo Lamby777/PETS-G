@@ -1,0 +1,27 @@
+[
+    {
+        "id": "trusty_rusty_pistol",
+        "attributes": [
+            "Cheap",
+            "Ranged",
+            "Firearm"
+        ],
+        "category": {
+            "Equipment": {
+                "category": "Weapon",
+                "offsets": {
+                    "max_hp": 0,
+                    "max_energy": 0,
+                    "attack": 0,
+                    "defense": 0,
+                    "speed": 0,
+                    "stability": 0,
+                    "delta": 0,
+                    "epsilon": 0,
+                    "lambda": 0,
+                    "max_mana": 0
+                }
+            }
+        }
+    }
+]
