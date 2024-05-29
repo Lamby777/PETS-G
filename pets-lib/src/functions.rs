@@ -53,7 +53,11 @@ fn debug_battle(_args: GArgs) -> GReturn {
 fn debug_item(_args: GArgs) -> GReturn {
     end_interaction();
 
-    si().bind_mut().save.inventory.push(TRUSTY_RUSTY.clone());
+    let mut si = si();
+    let inv = &mut si.bind_mut().save.inventory;
+
+    inv.push(TRUSTY_RUSTY.clone());
+    godot_print!("Inventory: {:?}", inv);
 
     Ok(Variant::nil())
 }
