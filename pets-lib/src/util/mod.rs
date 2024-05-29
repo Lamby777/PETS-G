@@ -19,7 +19,7 @@ use godot::prelude::*;
 
 /// For debugging purposes. Delete later.
 pub static TRUSTY_RUSTY: LazyLock<Item> = LazyLock::new(|| Item {
-    id: "Trusty Rusty Pistol".into(),
+    id: "trusty_rusty_pistol".into(),
     attributes: vec![
         ItemAttribute::Cheap,
         ItemAttribute::Ranged,
