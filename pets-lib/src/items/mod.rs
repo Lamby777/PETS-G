@@ -33,7 +33,7 @@ pub fn find_modded_items() -> Vec<Item> {
         .make_dir("mod-items".into());
 
     let Some(mut dir) = DirAccess::open("user://mod-items/".into()) else {
-        println!("Could not open `mod-items`, no modded items were loaded.");
+        godot_warn!("Could not open `mod-items`, no modded items were loaded.");
         return vec![];
     };
 
@@ -76,13 +76,13 @@ pub fn load_item_registry() {
         .to_vec()
         .into_iter()
         .map(|fname| {
-            println!("Reading vanilla item registry: {}", fname);
+            godot_print!("Reading vanilla item registry: {}", fname);
             let path = format!("res://assets/itemregistries/{}", fname);
             let items = read_item_registry(&path).expect(
                 "Error loading vanilla items. THIS IS A BUG, please report!",
             );
 
-            println!("Vanilla registry {} read!", fname);
+            godot_print!("Vanilla registry {} read!", fname);
             items
         })
         .flatten()
@@ -92,6 +92,8 @@ pub fn load_item_registry() {
     items.extend(find_modded_items());
 
     ITEM_REGISTRY.set(items).unwrap();
+
+    godot_print!("Finished reading item registries.\n\n");
 }
 
 /// A single item definition, stored in a vector for lookup.
