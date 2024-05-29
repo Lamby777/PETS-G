@@ -12,10 +12,10 @@
                 "offsets": {
                     "max_hp": 0,
                     "max_energy": 0,
-                    "attack": 0,
+                    "attack": 2,
                     "defense": 0,
-                    "speed": 0,
-                    "stability": 0,
+                    "speed": 3,
+                    "stability": 1,
                     "delta": 0,
                     "epsilon": 0,
                     "lambda": 0,
