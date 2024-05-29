@@ -58,8 +58,8 @@ pub fn read_item_registry(path: &str) -> Option<Vec<Item>> {
 
     let content = String::from_utf8(content).ok()?;
     ribbons::unwrap_fmt!(
-        toml::from_str(&content),
-        "items file {} has wrong TOML contents",
+        serde_json::from_str(&content),
+        "items file {} has wrong JSON contents",
         path
     )
 }
@@ -67,30 +67,6 @@ pub fn read_item_registry(path: &str) -> Option<Vec<Item>> {
 /// Initializes `ITEM_REGISTRY` by scanning for vanilla and
 /// modded item registries and combining the list of items.
 pub fn load_item_registry() {
-    let table = vec![Item {
-        category: ItemCat::Equipment {
-            category: EquipmentCat::Weapon,
-            offsets: InherentStats {
-                max_hp: 0,
-                max_energy: 0,
-                attack: 0,
-                defense: 0,
-                speed: 0,
-                stability: 0,
-                delta: 0,
-                epsilon: 0,
-                lambda: Some(0),
-                max_mana: Some(0),
-            },
-        },
-
-        attributes: vec![ItemAttribute::Melee, ItemAttribute::Blade],
-        name: "Sword".into(),
-        description: "A sharp sword.".into(),
-    }];
-    let example = toml::to_string(&table).unwrap();
-    println!("{}", example);
-
     let mut dir =
         DirAccess::open("res://assets/itemregistries".into()).unwrap();
 
@@ -99,11 +75,15 @@ pub fn load_item_registry() {
         .get_files()
         .to_vec()
         .into_iter()
-        .map(|file| {
-            println!("Reading vanilla item registry: {}", file);
-            read_item_registry(&file.to_string()).expect(
+        .map(|fname| {
+            println!("Reading vanilla item registry: {}", fname);
+            let path = format!("res://assets/itemregistries/{}", fname);
+            let items = read_item_registry(&path).expect(
                 "Error loading vanilla items. THIS IS A BUG, please report!",
-            )
+            );
+
+            println!("Vanilla registry {} read!", fname);
+            items
         })
         .flatten()
         .collect::<Vec<_>>();
@@ -111,16 +91,13 @@ pub fn load_item_registry() {
     // scan for modded item paths
     items.extend(find_modded_items());
 
-    ITEM_REGISTRY
-        .set(items)
-        .expect("item registry already set. this is a bug!");
+    ITEM_REGISTRY.set(items).unwrap();
 }
 
 /// A single item definition, stored in a vector for lookup.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Item {
-    /// The category of the item. This affects how you can use it in-game.
-    category: ItemCat,
+    id: String,
 
     /// Things that describe what the item does or is
     ///
@@ -128,8 +105,8 @@ pub struct Item {
     /// shopkeeper price calculations, etc.
     attributes: Vec<ItemAttribute>,
 
-    name: String,
-    description: String,
+    /// The category of the item. This affects how you can use it in-game.
+    category: ItemCat,
 }
 
 // more derive spam :D
