@@ -50,12 +50,9 @@ impl PlayerCB {
     }
 
     pub fn party_chardata(&self) -> Vec<CharData> {
-        let si = StatsInterface::singleton();
-        let si = si.bind();
-
         self.party_ids()
             .into_iter()
-            .map(|id| si.get_character(&id))
+            .map(|id| si().bind().get_character(&id))
             .collect()
     }
 

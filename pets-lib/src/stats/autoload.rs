@@ -13,7 +13,7 @@ pub struct StatsInterface {
     base: Base<Object>,
 
     /// Hash map of info on all the different characters in the game.
-    save: SaveFile,
+    pub save: SaveFile,
 
     /// Hash map of function pointers for calculating stats
     statcalcs: CharStatCalcs,
