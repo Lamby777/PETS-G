@@ -7,17 +7,23 @@ use crate::prelude::*;
 use godot::engine::file_access::ModeFlags;
 use godot::engine::FileAccess;
 
+use super::charmap::default_charmap;
+
 /// All the data saved to one of the save file slots
 #[derive(Serialize, Deserialize)]
 pub struct SaveFile {
     pub chars: CharMap,
+    pub inventory: Vec<Item>,
 }
 
 #[allow(unused)]
 impl SaveFile {
-    pub fn new_empty() -> Self {
+    pub fn fresh() -> Self {
+        let (chars, _) = default_charmap();
+
         Self {
-            chars: CharMap::new(),
+            chars,
+            inventory: vec![],
         }
     }
 
