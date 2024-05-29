@@ -88,8 +88,8 @@ impl IObject for StatsInterface {
     fn init(base: Base<Object>) -> Self {
         // start an empty save file, but load other if the player
         // picks a save file instead of "new"
-        let (charmap, statcalcs) = default_charmap();
-        let save = SaveFile { chars: charmap };
+        let (_, statcalcs) = default_charmap();
+        let save = SaveFile::fresh();
 
         load_item_registry();
 

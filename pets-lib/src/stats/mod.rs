@@ -46,9 +46,6 @@ pub struct CharData {
     /// Status effects the character has
     pub status_effects: HashSet<StatusEffect>,
 
-    /// Items this character is holding
-    pub inventory: Vec<Item>,
-
     /// Equipment this character is wearing/using
     ///
     /// # Important
@@ -201,7 +198,6 @@ impl Default for CharData {
             inherent_stats: Default::default(),
             battle_stats: Default::default(),
             status_effects: Default::default(),
-            inventory: Default::default(),
             equipment: Default::default(),
         }
     }
