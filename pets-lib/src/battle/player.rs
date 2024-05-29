@@ -96,8 +96,7 @@ impl BattleIcon {
 #[godot_api]
 impl INode2D for BattleIcon {
     fn ready(&mut self) {
-        let si = StatsInterface::singleton();
-        let ch_speed = si.bind().natural_speed_of(PChar::ETHAN);
+        let ch_speed = si().bind().natural_speed_of(PChar::ETHAN);
         self.speed = to_battle::speed(ch_speed);
     }
 

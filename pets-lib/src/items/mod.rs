@@ -97,16 +97,16 @@ pub fn load_item_registry() {
 /// A single item definition, stored in a vector for lookup.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Item {
-    id: String,
+    pub id: String,
 
     /// Things that describe what the item does or is
     ///
     /// This may be used for weaknesses/resistances, sorting purposes,
     /// shopkeeper price calculations, etc.
-    attributes: Vec<ItemAttribute>,
+    pub attributes: Vec<ItemAttribute>,
 
     /// The category of the item. This affects how you can use it in-game.
-    category: ItemCat,
+    pub category: ItemCat,
 }
 
 // more derive spam :D

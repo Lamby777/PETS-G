@@ -6,6 +6,8 @@ pub mod choices;
 pub mod limiq;
 pub mod singleton;
 
+use std::sync::LazyLock;
+
 use derived_deref::{Deref, DerefMut};
 use godot::engine::object::ConnectFlags;
 use godot::engine::tween::TransitionType;
@@ -14,6 +16,31 @@ use godot::engine::{
     Tween,
 };
 use godot::prelude::*;
+
+/// For debugging purposes. Delete later.
+pub static TRUSTY_RUSTY: LazyLock<Item> = LazyLock::new(|| Item {
+    id: "Trusty Rusty Pistol".into(),
+    attributes: vec![
+        ItemAttribute::Cheap,
+        ItemAttribute::Ranged,
+        ItemAttribute::Firearm,
+    ],
+    category: ItemCat::Equipment {
+        category: EquipmentCat::Weapon,
+        offsets: InherentStats {
+            max_hp: 0,
+            max_energy: 0,
+            attack: 2,
+            defense: 0,
+            speed: 3,
+            stability: 1,
+            delta: 0,
+            epsilon: 0,
+            lambda: Some(0),
+            max_mana: Some(0),
+        },
+    },
+});
 
 /// Convenience function to fade opacity shaders on/off
 pub fn fade_black<N>(black: Gd<N>, visible: bool, tween_time: f64)
@@ -79,6 +106,10 @@ macro_rules! connect {
 /// So common that I might as well abbreviate it. :P
 pub fn pcb() -> Gd<PlayerCB> {
     PlayerCB::singleton()
+}
+
+pub fn si() -> Gd<StatsInterface> {
+    StatsInterface::singleton()
 }
 
 #[derive(Deref, DerefMut)]
@@ -299,7 +330,10 @@ pub fn current_scene() -> Gd<Node> {
 }
 
 pub use crate::change_scene;
-use crate::{DialogBox, PlayerCB};
+use crate::{
+    Autoload as _, DialogBox, EquipmentCat, InherentStats, Item, ItemAttribute,
+    ItemCat, PlayerCB, StatsInterface,
+};
 #[macro_export]
 macro_rules! change_scene {
     ($scene:expr) => {

@@ -53,7 +53,7 @@ fn debug_battle(_args: GArgs) -> GReturn {
 fn debug_item(_args: GArgs) -> GReturn {
     end_interaction();
 
-    // TODO give player an item
+    si().bind_mut().save.inventory.push(TRUSTY_RUSTY.clone());
 
     Ok(Variant::nil())
 }
