@@ -75,7 +75,7 @@ impl InventoryNode {
 #[godot_api]
 impl IControl for InventoryNode {
     fn input(&mut self, event: Gd<InputEvent>) {
-        if !self.is_open {
+        if !self.is_open || self.anim.is_playing() {
             return;
         }
 

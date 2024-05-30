@@ -135,23 +135,6 @@ tracks/4/keys = {
 "values": [Vector2(0, -176), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_qnask"]
-resource_name = "shift_right"
-length = 0.0833342
-step = 0.00833333
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Line/SlideControl:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.075, 0.0833333),
-"transitions": PackedFloat32Array(0.554786, 55.7152, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(-176, 0), Vector2(0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_52u0v"]
 resource_name = "shift_left"
 length = 0.0833342
@@ -167,6 +150,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.554786, 55.7152, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(176, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qnask"]
+resource_name = "shift_right"
+length = 0.0833342
+step = 0.00833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Line/SlideControl:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.0833333),
+"transitions": PackedFloat32Array(0.554786, 55.7152, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-176, 0), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_28ffd"]
