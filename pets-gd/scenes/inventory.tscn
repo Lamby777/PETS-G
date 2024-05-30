@@ -20,7 +20,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2072, 160)]
+"values": [Vector2(2072, 424)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -58,10 +58,22 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(2400, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Ticker:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1648, -160)]
+}
 
 [sub_resource type="Animation" id="Animation_bvf1n"]
 resource_name = "open_inv"
-length = 1.5
+length = 1.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -69,7 +81,7 @@ tracks/0/path = NodePath("Line:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(2072, 424), Vector2(216, -120)]
@@ -81,7 +93,7 @@ tracks/1/path = NodePath("Line:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 0.166563]
@@ -93,7 +105,7 @@ tracks/2/path = NodePath("BGDarken:material:shader_parameter/opacity")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 0.4]
@@ -105,10 +117,22 @@ tracks/3/path = NodePath("Line/SlideControl:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.7, 1.4),
+"times": PackedFloat32Array(0.4, 1.1),
 "transitions": PackedFloat32Array(0.392292, 1),
 "update": 0,
 "values": [Vector2(2400, 0), Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Ticker:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.9, 1.2),
+"transitions": PackedFloat32Array(0.517632, 1),
+"update": 0,
+"values": [Vector2(1648, -160), Vector2(1648, -24)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_28ffd"]
@@ -130,12 +154,19 @@ offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
+[node name="Ticker" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 1648.0
+offset_top = -160.0
+offset_right = 1704.0
+offset_bottom = -16.0
+
 [node name="Line" type="Panel" parent="."]
 layout_mode = 1
 offset_left = 2072.0
-offset_top = 160.0
+offset_top = 424.0
 offset_right = 3992.0
-offset_bottom = 216.0
+offset_bottom = 480.0
 
 [node name="SlideControl" type="Control" parent="Line"]
 anchors_preset = 0
@@ -144,6 +175,7 @@ offset_right = 2440.0
 offset_bottom = 40.0
 
 [node name="ItemsRow" type="HBoxContainer" parent="Line/SlideControl"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(2240, 160)
 layout_mode = 2
 offset_left = -160.0
@@ -186,6 +218,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="ItemContainer12" parent="Line/SlideControl/ItemsRow" instance=ExtResource("3_8obkk")]
+layout_mode = 2
+
+[node name="ItemContainer13" parent="Line/SlideControl/ItemsRow" instance=ExtResource("3_8obkk")]
 layout_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
