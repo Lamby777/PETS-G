@@ -79,19 +79,21 @@ impl IControl for InventoryNode {
             return;
         }
 
-        if event.is_action_pressed("menu".into()) {
+        let is_pressed = |name: &str| event.is_action_pressed(name.into());
+
+        if is_pressed("menu") {
             self.open(false);
 
             return mark_input_handled(&self.base());
         }
 
-        if event.is_action_pressed("ui_right".into()) {
+        if is_pressed("ui_right") || is_pressed("ui_down") {
             self.cycle_items(true);
 
             return mark_input_handled(&self.base());
         }
 
-        if event.is_action_pressed("ui_left".into()) {
+        if is_pressed("ui_left") || is_pressed("ui_up") {
             self.cycle_items(false);
 
             return mark_input_handled(&self.base());
