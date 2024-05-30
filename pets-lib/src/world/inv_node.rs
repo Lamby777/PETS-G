@@ -1,5 +1,7 @@
 use crate::prelude::*;
-use godot::engine::{AnimationPlayer, Control, IControl, InputEvent};
+use godot::engine::{
+    AnimationPlayer, Control, HBoxContainer, IControl, InputEvent,
+};
 use godot::prelude::*;
 
 #[derive(GodotClass)]
@@ -11,6 +13,9 @@ pub struct InventoryNode {
 
     #[init(default = onready_node(&base, "AnimationPlayer"))]
     anim: OnReady<Gd<AnimationPlayer>>,
+
+    #[init(default = onready_node(&base, "%ItemsRow"))]
+    row: OnReady<Gd<HBoxContainer>>,
 }
 
 #[godot_api]
@@ -42,8 +47,6 @@ impl IControl for InventoryNode {
         }
 
         if event.is_action_pressed("menu".into()) {
-            println!("Input: {:?}", event);
-
             self.open(false);
             mark_input_handled(&self.base());
         }
