@@ -7,6 +7,7 @@ use crate::consts::playercb::*;
 use crate::load_pchar_scenes_under;
 use crate::prelude::*;
 
+use super::inv_node::InventoryNode;
 use super::pchar_node::PCharNode;
 use super::BATTLE_PARTY_SIZE;
 
@@ -74,6 +75,7 @@ impl PlayerCB {
     pub fn can_move(&self) -> bool {
         // PRAISE SHORT-CIRCUIT EVALUATION!!
         let cant_move = DialogBox::singleton().bind().is_active()
+            || InventoryNode::try_singleton().unwrap().bind().is_open()
             || self.is_in_battle()
             || self.tpbeacon_debounce;
 

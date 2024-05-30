@@ -32,8 +32,9 @@ script = SubResource("GDScript_yffjx")
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/Node2D"]
 custom_minimum_size = Vector2(160, 160)
-offset_left = -16.0
-offset_right = 144.0
-offset_bottom = 160.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 152.0
+offset_bottom = 152.0
 texture = ExtResource("1_wkpjl")
 stretch_mode = 5

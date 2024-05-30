@@ -117,7 +117,7 @@ _data = {
 "open_inv": SubResource("Animation_bvf1n")
 }
 
-[node name="Inventory" type="InventoryNode"]
+[node name="InventoryNode" type="InventoryNode"]
 offset_right = 1920.0
 offset_bottom = 1080.0
 theme = ExtResource("1_yb1iv")
