@@ -61,7 +61,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Text:position")
+tracks/4/path = NodePath("InventoryText:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -125,7 +125,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Text:position")
+tracks/4/path = NodePath("InventoryText:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -197,14 +197,15 @@ offset_top = -160.0
 offset_right = 1712.0
 offset_bottom = -16.0
 
-[node name="Text" type="BoxContainer" parent="."]
+[node name="InventoryText" type="BoxContainer" parent="."]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(1920, 0)
 layout_mode = 0
 offset_top = -176.0
 offset_right = 1920.0
 theme_override_constants/separation = 0
 
-[node name="ItemName" type="MarginContainer" parent="Text"]
+[node name="ItemName" type="MarginContainer" parent="InventoryText"]
 custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 32
@@ -212,18 +213,18 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Text/ItemName"]
+[node name="RichTextLabel" type="RichTextLabel" parent="InventoryText/ItemName"]
 layout_mode = 2
 size_flags_vertical = 4
 bbcode_enabled = true
 text = "[center]Item Name"
 fit_content = true
 
-[node name="MidPadding" type="MarginContainer" parent="Text"]
+[node name="MidPadding" type="MarginContainer" parent="InventoryText"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 
-[node name="ItemDesc" type="MarginContainer" parent="Text"]
+[node name="ItemDesc" type="MarginContainer" parent="InventoryText"]
 custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 32
@@ -231,7 +232,7 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Text/ItemDesc"]
+[node name="RichTextLabel" type="RichTextLabel" parent="InventoryText/ItemDesc"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/normal_font_size = 36
