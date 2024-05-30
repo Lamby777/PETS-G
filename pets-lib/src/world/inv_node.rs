@@ -1,6 +1,7 @@
 use crate::prelude::*;
 use godot::engine::{
     AnimationPlayer, Control, HBoxContainer, IControl, InputEvent,
+    RichTextLabel,
 };
 use godot::prelude::*;
 
@@ -9,6 +10,7 @@ use godot::prelude::*;
 pub struct InventoryNode {
     base: Base<Control>,
 
+    current_index: usize,
     is_open: bool,
 
     #[init(default = onready_node(&base, "AnimationPlayer"))]
@@ -26,6 +28,37 @@ impl InventoryNode {
 
     pub fn try_singleton() -> Option<Gd<InventoryNode>> {
         current_scene().try_get_node_as("%Inventory")
+    }
+
+    pub fn text_container(&self) -> Gd<HBoxContainer> {
+        self.base().get_node_as("%InventoryText")
+    }
+
+    pub fn update_text_labels(&mut self) {
+        let cont = self.text_container();
+        let name_txt =
+            cont.get_node_as::<RichTextLabel>("ItemName/RichTextLabel");
+        let desc_txt =
+            cont.get_node_as::<RichTextLabel>("ItemDesc/RichTextLabel");
+
+        // TODO get data of item currently selected
+    }
+
+    pub fn cycle_items(&mut self, right: bool) {
+        let offset = match right {
+            true => 1,
+            false => -1,
+        };
+
+        // let inventory_length = todo!();
+        // self.current_index = (self.current_index + offset) % inventory_length;
+
+        let animation = match right {
+            true => "shift_right".into(),
+            false => "shift_left".into(),
+        };
+        self.anim.set_assigned_animation(animation);
+        self.anim.play();
     }
 
     pub fn open(&mut self, open: bool) {
@@ -48,7 +81,20 @@ impl IControl for InventoryNode {
 
         if event.is_action_pressed("menu".into()) {
             self.open(false);
-            mark_input_handled(&self.base());
+
+            return mark_input_handled(&self.base());
+        }
+
+        if event.is_action_pressed("ui_right".into()) {
+            self.cycle_items(true);
+
+            return mark_input_handled(&self.base());
+        }
+
+        if event.is_action_pressed("ui_left".into()) {
+            self.cycle_items(false);
+
+            return mark_input_handled(&self.base());
         }
     }
 }
