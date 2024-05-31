@@ -53,10 +53,8 @@ fn debug_battle(_args: GArgs) -> GReturn {
 fn debug_item(_args: GArgs) -> GReturn {
     end_interaction();
 
-    let mut si = si();
-    let inv = &mut si.bind_mut().save.inventory;
-
-    inv.push(TRUSTY_RUSTY.clone());
+    let inv = si().bind_mut().save.inventory.clone();
+    inv.borrow_mut().push(TRUSTY_RUSTY.clone());
 
     Ok(Variant::nil())
 }

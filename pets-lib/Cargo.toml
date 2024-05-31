@@ -19,7 +19,7 @@ nodi = "1.0.0"
 # llm = { git = "https://github.com/rustformers/llm" , branch = "main" }
 rand = "0.8.5"
 ribbons = "0.1.0"
-serde = {version = "1.0.188", features = ["derive"] }
+serde = {version = "1.0.188", features = ["derive", "rc"] }
 serde_json = "1.0.117"
 strum = { version = "0.26.1", features = ["derive"] }
 typetag = "0.2.15"
