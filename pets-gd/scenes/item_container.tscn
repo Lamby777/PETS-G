@@ -1,6 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://btmwdhpxxjkn"]
+[gd_scene load_steps=4 format=3 uid="uid://btmwdhpxxjkn"]
 
 [ext_resource type="Texture2D" uid="uid://crxp0fa3kco2o" path="res://assets/textures/items/terra-precision-shotgun.png" id="1_wkpjl"]
+
+[sub_resource type="GDScript" id="GDScript_c1aim"]
+script/source = "extends MarginContainer
+
+func set_texture(texture: Texture2D):
+	$PanelContainer/Node2D/TextureRect.texture = texture
+"
 
 [sub_resource type="GDScript" id="GDScript_yffjx"]
 script/source = "extends Node2D
@@ -22,6 +29,7 @@ theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
+script = SubResource("GDScript_c1aim")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2

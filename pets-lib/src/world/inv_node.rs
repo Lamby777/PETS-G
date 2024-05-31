@@ -1,7 +1,8 @@
 use crate::prelude::*;
+use godot::engine::object::ConnectFlags;
 use godot::engine::{
     AnimationPlayer, Control, HBoxContainer, IControl, InputEvent,
-    RichTextLabel,
+    MarginContainer, RichTextLabel,
 };
 use godot::prelude::*;
 
@@ -22,6 +23,10 @@ pub struct InventoryNode {
 
 #[godot_api]
 impl InventoryNode {
+    fn inventory() -> Rc<RefCell<Vec<Item>>> {
+        si().bind().save.inventory.clone()
+    }
+
     pub fn is_open(&self) -> bool {
         self.is_open
     }
@@ -30,18 +35,50 @@ impl InventoryNode {
         current_scene().try_get_node_as("%Inventory")
     }
 
-    pub fn text_container(&self) -> Gd<HBoxContainer> {
+    fn text_container(&self) -> Gd<HBoxContainer> {
         self.base().get_node_as("%InventoryText")
     }
 
-    pub fn update_text_labels(&mut self) {
+    fn item_icon(&self, index: usize) -> Gd<MarginContainer> {
+        if index >= self.row.get_child_count() as usize {
+            panic!("Index out of bounds: {}", index);
+        }
+
+        self.row.get_node_as(format!("ItemContainer{}", index))
+    }
+
+    fn update_text_labels(&mut self) {
         let cont = self.text_container();
-        let name_txt =
+        let _name_txt =
             cont.get_node_as::<RichTextLabel>("ItemName/RichTextLabel");
-        let desc_txt =
+        let _desc_txt =
             cont.get_node_as::<RichTextLabel>("ItemDesc/RichTextLabel");
 
         // TODO get data of item currently selected
+    }
+
+    #[func]
+    fn update_item_icons(&mut self) {
+        let child_count = self.row.get_child_count() as usize;
+        let inv = Self::inventory();
+        let inv = inv.borrow();
+
+        for i in 1..=child_count {
+            let mut icon_cont = self.item_icon(i);
+            let index = self.current_index + i - (child_count / 2);
+
+            let item = inv.get(index);
+
+            let Some(item) = item else {
+                // clear texture
+                icon_cont.call("set_texture".into(), &[]);
+                continue;
+            };
+
+            let item_id = &item.id;
+            let texture = todo!();
+            icon_cont.call("set_texture".into(), &[]);
+        }
     }
 
     pub fn cycle_items(&mut self, right: bool) {
@@ -50,8 +87,16 @@ impl InventoryNode {
             false => -1,
         };
 
-        // let inventory_length = todo!();
-        // self.current_index = (self.current_index + offset) % inventory_length;
+        let inventory_length = Self::inventory().borrow().len() as i32;
+        let mut new_index = self.current_index as i32 + offset;
+
+        if new_index < 0 {
+            new_index = inventory_length - 1;
+        } else if new_index >= inventory_length {
+            new_index = 0;
+        }
+
+        self.current_index = new_index as usize;
 
         let animation = match right {
             true => "shift_right".into(),
@@ -59,6 +104,13 @@ impl InventoryNode {
         };
         self.anim.set_assigned_animation(animation);
         self.anim.play();
+
+        // update icons once anim is over
+        let callable = self.base().callable("update_item_icons");
+        self.anim
+            .connect_ex("animation_finished".into(), callable)
+            .flags(ConnectFlags::ONE_SHOT.ord() as u32)
+            .done();
     }
 
     pub fn open(&mut self, open: bool) {

@@ -13,7 +13,7 @@ use super::charmap::default_charmap;
 #[derive(Serialize, Deserialize)]
 pub struct SaveFile {
     pub chars: CharMap,
-    pub inventory: Vec<Item>,
+    pub inventory: Rc<RefCell<Vec<Item>>>,
 }
 
 #[allow(unused)]
@@ -23,7 +23,7 @@ impl SaveFile {
 
         Self {
             chars,
-            inventory: vec![],
+            inventory: Rc::new(RefCell::new(vec![])),
         }
     }
 
