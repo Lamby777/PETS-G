@@ -14,13 +14,13 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Line:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2072, 424)]
+"values": [Vector2(2072, 200)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -50,13 +50,13 @@ tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("Ticker:position")
-tracks/3/interp = 1
+tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1648, -160)]
+"values": [Vector2(928, -160)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -192,9 +192,9 @@ metadata/_edit_lock_ = true
 
 [node name="Ticker" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 1648.0
+offset_left = 928.0
 offset_top = -160.0
-offset_right = 1712.0
+offset_right = 992.0
 offset_bottom = -16.0
 
 [node name="InventoryText" type="BoxContainer" parent="."]
@@ -243,9 +243,9 @@ fit_content = true
 [node name="Line" type="Panel" parent="."]
 layout_mode = 1
 offset_left = 2072.0
-offset_top = 424.0
+offset_top = 200.0
 offset_right = 4024.0
-offset_bottom = 480.0
+offset_bottom = 256.0
 
 [node name="SlideControl" type="Control" parent="Line"]
 anchors_preset = 0
