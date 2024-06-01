@@ -65,8 +65,10 @@ impl InventoryNode {
             return;
         };
 
-        name_txt.set_text(tr!("ITEM_NAME_{a}", a = item.id));
-        desc_txt.set_text(tr!("ITEM_DESC_{a}", a = item.id));
+        let name = tr!("ITEM_NAME_{a}", a = item.id);
+        let desc = tr!("ITEM_DESC_{a}", a = item.id);
+        name_txt.set_text(format!("[center]{}[/center]", name).into());
+        desc_txt.set_text(format!("[center]{}[/center]", desc).into());
     }
 
     #[func]

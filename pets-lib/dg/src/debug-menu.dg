@@ -1,6 +1,12 @@
 % Debug Menu
-NAME Mira's Debug Menu
+###
+
+Link NAME Mira's Debug Menu
 VOX Mira
+
+###
+---
+NAME Mira's Debug Menu
 
 What's up? Hard at work debugging?
 
@@ -18,7 +24,6 @@ $ debug_battle
 ---
 % Debug Menu >> Page2
 NAME Mira's Debug Menu
-VOX Mira
 
 Alright then. How about these?
 
@@ -29,26 +34,15 @@ Alright then. How about these?
 ---
 % Debug Menu >> Item
 NAME Mira's Debug Menu
-VOX Mira
 
 What do you need?
-
-# > Stick
-# $ debug_item_stick
 
 > Rusty
 $ debug_item_rusty
 
-# > S7
-# $ debug_item_s7
-
-# > Shotgun
-# $ debug_item_shotgun
-
 ---
 % Debug Menu >> After Item
 NAME Mira's Debug Menu
-VOX Mira
 
 Here you go!
 
