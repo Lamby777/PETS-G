@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crxp0fa3kco2o"
-path="res://.godot/imported/terra-precision-shotgun.png-9d1776496a9f41aa91b3e6c836d209a5.ctex"
+uid="uid://c45ggpncy2tum"
+path="res://.godot/imported/ts_slick7.png-e5f939641fc47e5aae83b09449db1339.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/items/terra-precision-shotgun.png"
-dest_files=["res://.godot/imported/terra-precision-shotgun.png-9d1776496a9f41aa91b3e6c836d209a5.ctex"]
+source_file="res://assets/textures/items/ts_slick7.png"
+dest_files=["res://.godot/imported/ts_slick7.png-e5f939641fc47e5aae83b09449db1339.ctex"]
 
 [params]
 
