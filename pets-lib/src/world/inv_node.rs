@@ -1,8 +1,8 @@
 use crate::prelude::*;
 use godot::engine::object::ConnectFlags;
 use godot::engine::{
-    AnimationPlayer, Control, HBoxContainer, IControl, InputEvent,
-    MarginContainer, RichTextLabel,
+    AnimationPlayer, BoxContainer, Control, HBoxContainer, IControl,
+    InputEvent, MarginContainer, RichTextLabel,
 };
 use godot::prelude::*;
 
@@ -35,7 +35,7 @@ impl InventoryNode {
         current_scene().try_get_node_as("%Inventory")
     }
 
-    fn text_container(&self) -> Gd<HBoxContainer> {
+    fn text_container(&self) -> Gd<BoxContainer> {
         self.base().get_node_as("%InventoryText")
     }
 
@@ -58,7 +58,7 @@ impl InventoryNode {
     }
 
     #[func]
-    fn update_item_icons(&mut self, _anim_name: Variant) {
+    fn update_item_icons(&mut self) {
         let child_count = self.row.get_child_count();
         let inv = Self::inventory();
         let inv = inv.borrow();
@@ -81,8 +81,8 @@ impl InventoryNode {
     }
 
     #[func]
-    fn on_cycle_done(&mut self) {
-        self.update_item_icons(Variant::nil());
+    fn on_cycle_done(&mut self, _anim_name: Variant) {
+        self.update_item_icons();
         self.update_text_labels();
     }
 
@@ -124,7 +124,7 @@ impl InventoryNode {
 
         match open {
             true => {
-                self.update_item_icons(Variant::nil());
+                self.update_item_icons();
                 self.anim.play()
             }
             false => self.anim.play_backwards(),

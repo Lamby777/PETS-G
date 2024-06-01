@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhl6esu6cceys"
-path="res://.godot/imported/mira-pocket-knife.png-ee4d806003e20a01d6f0c45748375936.ctex"
+uid="uid://de2oupc1spjtf"
+path="res://.godot/imported/mira_ts_slick7.png-53cc3b1de34c6750018ebca7e12fc238.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/items/mira-pocket-knife.png"
-dest_files=["res://.godot/imported/mira-pocket-knife.png-ee4d806003e20a01d6f0c45748375936.ctex"]
+source_file="res://assets/textures/items/mira_ts_slick7.png"
+dest_files=["res://.godot/imported/mira_ts_slick7.png-53cc3b1de34c6750018ebca7e12fc238.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://btmwdhpxxjkn"]
 
-[ext_resource type="Texture2D" uid="uid://crxp0fa3kco2o" path="res://assets/textures/items/terra-precision-shotgun.png" id="1_wkpjl"]
+[ext_resource type="Texture2D" uid="uid://crxp0fa3kco2o" path="res://assets/textures/items/terra_precision_shotgun.png" id="1_r6rt7"]
 
 [sub_resource type="GDScript" id="GDScript_c1aim"]
 script/source = "extends MarginContainer
@@ -53,5 +53,5 @@ offset_left = -8.0
 offset_top = -8.0
 offset_right = 152.0
 offset_bottom = 152.0
-texture = ExtResource("1_wkpjl")
+texture = ExtResource("1_r6rt7")
 stretch_mode = 5
