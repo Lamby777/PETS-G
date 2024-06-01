@@ -152,6 +152,10 @@ menu={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://i18n/translations.en_US.translation")
+
 [layer_names]
 
 2d_physics/layer_1="walls"
