@@ -4,7 +4,9 @@ use godot::engine::{
     AnimationPlayer, BoxContainer, Control, HBoxContainer, IControl,
     InputEvent, MarginContainer, RichTextLabel,
 };
+
 use godot::prelude::*;
+use godot::tools::tr;
 
 #[derive(GodotClass)]
 #[class(init, base=Control)]
@@ -49,12 +51,23 @@ impl InventoryNode {
 
     fn update_text_labels(&mut self) {
         let cont = self.text_container();
-        let _name_txt =
+        let mut name_txt =
             cont.get_node_as::<RichTextLabel>("ItemName/RichTextLabel");
-        let _desc_txt =
+        let mut desc_txt =
             cont.get_node_as::<RichTextLabel>("ItemDesc/RichTextLabel");
 
+        let inv = Self::inventory();
+        let inv = inv.borrow();
+
+        let Some(item) = inv.get(self.current_index) else {
+            name_txt.set_text("".into());
+            desc_txt.set_text("".into());
+            return;
+        };
+
         // TODO get data of item currently selected
+        name_txt.set_text(tr!("ITEM_NAME_{a}", a = item.id));
+        desc_txt.set_text(tr!("ITEM_DESC_{a}", a = item.id));
     }
 
     #[func]
