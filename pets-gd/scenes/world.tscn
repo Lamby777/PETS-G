@@ -151,6 +151,10 @@ y_sort_enabled = true
 [node name="Mouse1" parent="YSort/Room" instance=ExtResource("10_30w80")]
 position = Vector2(888, 376)
 
+[node name="DebugItem" parent="YSort/Room" instance=ExtResource("5_uar2c")]
+interaction_id = "Debug Menu >> Item"
+position = Vector2(-192, 64)
+
 [node name="TeleporterDemo" type="Node2D" parent="YSort/Room"]
 position = Vector2(-1216, 864)
 
