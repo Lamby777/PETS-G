@@ -65,7 +65,6 @@ impl InventoryNode {
             return;
         };
 
-        // TODO get data of item currently selected
         name_txt.set_text(tr!("ITEM_NAME_{a}", a = item.id));
         desc_txt.set_text(tr!("ITEM_DESC_{a}", a = item.id));
     }
@@ -137,7 +136,7 @@ impl InventoryNode {
 
         match open {
             true => {
-                self.update_item_icons();
+                self.on_cycle_done(Variant::nil());
                 self.anim.play()
             }
             false => self.anim.play_backwards(),
