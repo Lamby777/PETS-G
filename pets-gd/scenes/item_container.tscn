@@ -5,8 +5,17 @@
 [sub_resource type="GDScript" id="GDScript_c1aim"]
 script/source = "extends MarginContainer
 
-func set_texture(texture: Texture2D):
-	$PanelContainer/Node2D/TextureRect.texture = texture
+@onready var icon = $PanelContainer/Node2D/TextureRect
+
+func set_texture(texture):
+	if texture == null:
+		icon.hide()
+		return
+	
+	icon.show()
+	
+	var path = \"res://assets/textures/items/\" + texture + \".png\"
+	icon.texture = load(path)
 "
 
 [sub_resource type="GDScript" id="GDScript_yffjx"]

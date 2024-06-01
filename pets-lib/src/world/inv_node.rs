@@ -40,7 +40,7 @@ impl InventoryNode {
     }
 
     fn item_icon(&self, index: usize) -> Gd<MarginContainer> {
-        if index >= self.row.get_child_count() as usize {
+        if index > self.row.get_child_count() as usize {
             panic!("Index out of bounds: {}", index);
         }
 
@@ -58,26 +58,25 @@ impl InventoryNode {
     }
 
     #[func]
-    fn update_item_icons(&mut self) {
-        let child_count = self.row.get_child_count() as usize;
+    fn update_item_icons(&mut self, _anim_name: Variant) {
+        let child_count = self.row.get_child_count();
         let inv = Self::inventory();
         let inv = inv.borrow();
 
         for i in 1..=child_count {
-            let mut icon_cont = self.item_icon(i);
-            let index = self.current_index + i - (child_count / 2);
+            let mut icon_cont = self.item_icon(i as usize);
 
-            let item = inv.get(index);
-
-            let Some(item) = item else {
-                // clear texture
-                icon_cont.call("set_texture".into(), &[]);
+            let index: i32 = self.current_index as i32 + i - (child_count / 1);
+            if index < 0 || index >= inv.len() as i32 {
+                icon_cont.call("set_texture".into(), &[Variant::nil()]);
                 continue;
-            };
+            }
 
-            let item_id = &item.id;
-            let texture = todo!();
-            icon_cont.call("set_texture".into(), &[]);
+            let item = inv.get(index as usize);
+
+            let texture =
+                item.map_or(Variant::nil(), |item| item.id.to_variant());
+            icon_cont.call("set_texture".into(), &[texture]);
         }
     }
 
@@ -118,7 +117,10 @@ impl InventoryNode {
         self.anim.set_assigned_animation("open_inv".into());
 
         match open {
-            true => self.anim.play(),
+            true => {
+                self.update_item_icons(Variant::nil());
+                self.anim.play()
+            }
             false => self.anim.play_backwards(),
         }
     }
