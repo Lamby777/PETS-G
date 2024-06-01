@@ -8,15 +8,15 @@ What's up? Hard at work debugging?
 $ debug_battle
 
 > Item
-$ debug_item
+@ Debug Menu >> Item
 
 > Nah...
 
 > Pg. 2
-@ Debug Menu >> 1
+@ Debug Menu >> Page2
 
 ---
-% Debug Menu >> 1
+% Debug Menu >> Page2
 NAME Mira's Debug Menu
 VOX Mira
 
@@ -25,5 +25,31 @@ Alright then. How about these?
 > Test1
 > Test2
 > Test3
+
+---
+% Debug Menu >> Item
+NAME Mira's Debug Menu
+VOX Mira
+
+What do you need?
+
+# > Stick
+# $ debug_item_stick
+
+> Rusty
+$ debug_item_rusty
+
+# > S7
+# $ debug_item_s7
+
+# > Shotgun
+# $ debug_item_shotgun
+
+---
+% Debug Menu >> After Item
+NAME Mira's Debug Menu
+VOX Mira
+
+Here you go!
 
 ---

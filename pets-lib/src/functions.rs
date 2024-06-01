@@ -10,6 +10,11 @@ fn end_interaction() {
         .end_interaction();
 }
 
+fn give_item(item: Item) {
+    let inv = si().bind_mut().save.inventory.clone();
+    inv.borrow_mut().push(item);
+}
+
 macro_rules! add_callables {
     ($table:expr; { $($fn_name:ident),* $(,)? }) => {
         $(
@@ -40,7 +45,7 @@ const FUNCTIONS: LazyCell<FnTable> = LazyCell::new(|| {
     let mut table = HashMap::new();
     add_callables!(table; {
         debug_battle,
-        debug_item,
+        debug_item_rusty,
     });
 
     table
@@ -53,11 +58,14 @@ fn debug_battle(_args: GArgs) -> GReturn {
     Ok(Variant::nil())
 }
 
-fn debug_item(_args: GArgs) -> GReturn {
+fn after_debug_item() {
     end_interaction();
+    start_ix("Debug Menu >> After Item");
+}
 
-    let inv = si().bind_mut().save.inventory.clone();
-    inv.borrow_mut().push(TRUSTY_RUSTY.clone());
+fn debug_item_rusty(_args: GArgs) -> GReturn {
+    give_item(TRUSTY_RUSTY.clone());
+    after_debug_item();
 
     Ok(Variant::nil())
 }
