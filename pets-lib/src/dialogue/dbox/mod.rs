@@ -6,8 +6,8 @@ use dialogical::prelude::*;
 use godot::engine::global::Side;
 use godot::engine::tween::TransitionType;
 use godot::engine::{
-    AnimationPlayer, CanvasLayer, Control, HBoxContainer, IPanelContainer,
-    InputEvent, PanelContainer, RichTextLabel, Tween,
+    AnimationPlayer, Control, HBoxContainer, IPanelContainer, InputEvent,
+    PanelContainer, RichTextLabel, Tween,
 };
 use godot::prelude::*;
 
@@ -127,13 +127,9 @@ impl DialogBox {
     }
 
     #[func]
-    pub fn singleton() -> Gd<Self> {
-        let ui_layer =
-            current_scene().get_node_as::<CanvasLayer>(UI_LAYER_NAME);
-
-        ui_layer
-            .try_get_node_as::<DialogBox>(DBOX_NODE_NAME)
-            .expect("no dbox found")
+    pub fn try_singleton() -> Option<Gd<Self>> {
+        let path = format!("{}/{}", UI_LAYER_NAME, DBOX_NODE_NAME);
+        current_scene().try_get_node_as::<DialogBox>(path)
     }
 
     /// Start tweening a text's visible characters from 0% to 100% visible...

@@ -62,12 +62,11 @@ impl WorldMenu {
         self.open_or_close(!self.opened);
     }
 
-    fn inventory_node(&self) -> Gd<InventoryNode> {
-        current_scene().get_node_as("UILayer/Inventory")
-    }
-
     fn open_inventory(&mut self) {
-        self.inventory_node().bind_mut().open(true);
+        InventoryNode::try_singleton()
+            .unwrap()
+            .bind_mut()
+            .open(true);
     }
 
     #[func]

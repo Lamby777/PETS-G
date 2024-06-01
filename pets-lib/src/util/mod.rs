@@ -105,9 +105,11 @@ macro_rules! connect {
 /// Returns the singleton instance of `PlayerCB`.
 /// So common that I might as well abbreviate it. :P
 pub fn pcb() -> Gd<PlayerCB> {
-    PlayerCB::singleton()
+    PlayerCB::try_singleton().unwrap()
 }
 
+/// Returns the singleton instance `StatsInterface`.
+/// So common that I might as well abbreviate it. :P
 pub fn si() -> Gd<StatsInterface> {
     StatsInterface::singleton()
 }
@@ -117,7 +119,10 @@ pub fn si() -> Gd<StatsInterface> {
 pub struct GdW<T: GodotClass>(pub Gd<T>);
 
 pub fn start_ix(name: impl Into<String>) {
-    DialogBox::singleton().bind_mut().start_ix(name.into());
+    DialogBox::try_singleton()
+        .unwrap()
+        .bind_mut()
+        .start_ix(name.into());
 }
 
 /// Find n where the nth child of type `Filter` is named `name`.
