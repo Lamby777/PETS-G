@@ -50,7 +50,8 @@ impl InteractionZone {
             return;
         }
 
-        InteractionManager::singleton()
+        InteractionManager::try_singleton()
+            .unwrap()
             .bind_mut()
             .register_zone(self.to_gd());
     }
@@ -61,7 +62,8 @@ impl InteractionZone {
             return;
         }
 
-        InteractionManager::singleton()
+        InteractionManager::try_singleton()
+            .unwrap()
             .bind_mut()
             .unregister_zone(self.to_gd());
     }

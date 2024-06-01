@@ -33,8 +33,8 @@ impl InteractionManager {
     }
 
     /// "ummm ackshually, this is not a singleton"
-    pub fn singleton() -> Gd<Self> {
-        current_scene().get_node_as("%InteractionManager")
+    pub fn try_singleton() -> Option<Gd<Self>> {
+        current_scene().try_get_node_as("%InteractionManager")
     }
 
     /// Sorts the zones by distance from the player
