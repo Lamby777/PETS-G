@@ -80,6 +80,12 @@ impl InventoryNode {
         }
     }
 
+    #[func]
+    fn on_cycle_done(&mut self) {
+        self.update_item_icons(Variant::nil());
+        self.update_text_labels();
+    }
+
     pub fn cycle_items(&mut self, right: bool) {
         let offset = match right {
             true => 1,
@@ -105,7 +111,7 @@ impl InventoryNode {
         self.anim.play();
 
         // update icons once anim is over
-        let callable = self.base().callable("update_item_icons");
+        let callable = self.base().callable("on_cycle_done");
         self.anim
             .connect_ex("animation_finished".into(), callable)
             .flags(ConnectFlags::ONE_SHOT.ord() as u32)
