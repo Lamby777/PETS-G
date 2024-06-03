@@ -38,7 +38,7 @@ NAME Mira's Debug Menu
 What do you need?
 
 > Rusty
-$ debug_item_rusty
+$ debug_item trusty_rusty_pistol
 
 ---
 % Debug Menu >> After Item
