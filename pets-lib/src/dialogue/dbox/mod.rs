@@ -210,9 +210,13 @@ impl DialogBox {
                 self.set_ix(new_ix.clone());
             }
 
-            Function(fn_id) => {
+            Function(fn_id, args) => {
                 let guard = self.base_mut();
-                let _ = call_global(fn_id).unwrap();
+                let args = args
+                    .into_iter()
+                    .map(|v| v.to_variant())
+                    .collect::<VariantArray>();
+                let _ = callv_global(fn_id, args).unwrap();
                 drop(guard);
             }
         }

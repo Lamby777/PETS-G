@@ -32,12 +32,15 @@ pub fn call_global(id: &str) -> GReturn {
 }
 
 /// Call a function registered in the global function table.
-pub fn callv_global(id: &str, args: VariantArray) -> GReturn {
+pub fn callv_global(func_id: &str, args: VariantArray) -> GReturn {
     let funcs = FUNCTIONS;
-    let func = funcs.get(id);
-    let func = unwrap_fmt!(func, "no function named {}", id);
+    let func = funcs.get(func_id);
+    let func = unwrap_fmt!(func, "no function named {}", func_id);
+
+    println!("{}", args.front().unwrap().to::<String>());
 
     let res = func.callv(args);
+    println!("5");
     Ok(res)
 }
 
@@ -45,7 +48,7 @@ const FUNCTIONS: LazyCell<FnTable> = LazyCell::new(|| {
     let mut table = HashMap::new();
     add_callables!(table; {
         debug_battle,
-        debug_item_rusty,
+        debug_item,
     });
 
     table
@@ -58,14 +61,26 @@ fn debug_battle(_args: GArgs) -> GReturn {
     Ok(Variant::nil())
 }
 
-fn after_debug_item() {
+fn debug_item(args: GArgs) -> GReturn {
+    for arg in args {
+        println!("giving a {}", arg.to::<String>());
+
+        let item_id = arg.to::<String>();
+
+        // why tf do i have to do this?
+        let item = ITEM_REGISTRY
+            .get()
+            .unwrap()
+            .iter()
+            .find(|i| i.id == item_id);
+
+        let item = ribbons::unwrap_fmt!(item, "no item with id {}", item_id);
+
+        give_item(item.clone());
+    }
+
     end_interaction();
     start_ix("Debug Menu >> After Item");
-}
-
-fn debug_item_rusty(_args: GArgs) -> GReturn {
-    give_item(TRUSTY_RUSTY.clone());
-    after_debug_item();
 
     Ok(Variant::nil())
 }

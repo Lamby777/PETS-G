@@ -5,8 +5,8 @@
 
 use crate::prelude::*;
 
-use std::cell::OnceCell;
 use std::io::Read as _;
+use std::sync::OnceLock;
 
 use godot::engine::file_access::ModeFlags;
 use godot::engine::DirAccess;
@@ -16,7 +16,7 @@ mod inv;
 
 pub use inv::ItemList;
 
-pub const ITEM_REGISTRY: OnceCell<Vec<Item>> = OnceCell::new();
+pub static ITEM_REGISTRY: OnceLock<Vec<Item>> = OnceLock::new();
 
 /// Find all the modded items from modded registries.
 ///
@@ -91,9 +91,10 @@ pub fn load_item_registry() {
     // scan for modded item paths
     items.extend(find_modded_items());
 
-    ITEM_REGISTRY.set(items).unwrap();
-
     godot_print!("Finished reading item registries.\n\n");
+
+    ITEM_REGISTRY.set(items).unwrap();
+    godot_print!("`ITEM_REGISTRY` initialized!");
 }
 
 /// A single item definition, stored in a vector for lookup.
