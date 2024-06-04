@@ -2,7 +2,9 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct AttackSkill {
-    pub name: String,
+    /// translation key to the skill's name
+    pub tr_key: String,
+
     pub element: Element,
     pub power: u8,
     pub plural: bool,
@@ -10,9 +12,9 @@ pub struct AttackSkill {
 }
 
 impl AttackSkill {
-    pub fn new(name: &str, element: Element, power: u8) -> Self {
+    pub fn new(tr_key: &str, element: Element, power: u8) -> Self {
         Self {
-            name: name.to_owned(),
+            tr_key: tr_key.to_owned(),
             element,
             power,
             plural: false,
@@ -57,7 +59,7 @@ impl AttackSkill {
 #[typetag::serde]
 impl SkillFamily for AttackSkill {
     fn name(&self) -> String {
-        self.name.clone()
+        tr!("{}", self.tr_key.clone()).to_string()
     }
 
     /// Panics if neither damage nor effect are present

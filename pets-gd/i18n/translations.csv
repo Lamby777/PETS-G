@@ -16,3 +16,27 @@ SKILL_PSI_REWIRE_DESC,              Gamble away {percent} of your mana for the r
 SKILL_RECOVERY_HP_AMOUNT_DESC,      Heals {amount} of the target's HP.
 SKILL_RECOVERY_HP_PERCENT_DESC,     Heals {percent}% of the target's HP.
 SKILL_RECOVERY_STATUS_DESC,         Heals status effects up to {rating}★.
+,
+SKILL_ATTACK_FIRE_DMG_NAME,         Caustics
+SKILL_ATTACK_FIRE_FX_NAME,          Flame
+SKILL_ATTACK_ICE_DMG_NAME,          Hail
+SKILL_ATTACK_ICE_FX_NAME,           Freeze
+SKILL_ATTACK_ELECTRIC_DMG_NAME,     Zap
+SKILL_ATTACK_ELECTRIC_FX_NAME,      Numb
+SKILL_ATTACK_WIND_DMG_NAME,         Gust
+SKILL_ATTACK_WIND_FX_NAME,          Daze
+SKILL_ATTACK_EARTH_DMG_NAME,        Quake
+SKILL_ATTACK_EARTH_FX_NAME,         Ground
+SKILL_ATTACK_PSI_DMG_NAME,          Psi
+SKILL_ATTACK_PSI_FX_NAME,           Brainwash
+SKILL_ATTACK_SPIRIT_DMG_NAME,       Vex
+SKILL_ATTACK_SPIRIT_FX_NAME,        Curse
+,
+SKILL_ATTACK_FUZZ_NAME,             PK Fuzz
+SKILL_ATTACK_WHIP_NAME,             PK Whip
+,
+SKILL_ATTACK_TIER_A,                A
+SKILL_ATTACK_TIER_B,                B
+SKILL_ATTACK_TIER_C,                C
+SKILL_ATTACK_TIER_D,                D
+SKILL_ATTACK_TIER_E,                E
