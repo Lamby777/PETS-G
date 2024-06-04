@@ -80,7 +80,7 @@ impl InventoryNode {
         for i in 1..=child_count {
             let mut icon_cont = self.item_icon(i as usize);
 
-            let index: i32 = self.current_index as i32 + i - (child_count / 1);
+            let index: i32 = self.current_index as i32 + i - (child_count / 2);
             if index < 0 || index >= inv.len() as i32 {
                 icon_cont.call("set_texture".into(), &[Variant::nil()]);
                 continue;
