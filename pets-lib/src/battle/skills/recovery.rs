@@ -19,15 +19,24 @@ impl RecoveryType {
 
         match self {
             HPAmount { amount, .. } => {
-                format!("Heals {} HP.", amount)
+                let template = tr!("SKILL_RECOVERY_HP_AMOUNT_DESC");
+                template
+                    .to_string()
+                    .replace("{amount}", &amount.to_string())
             }
 
             HPPercent { percent, .. } => {
-                format!("Heals {}% of the target's HP.", percent)
+                let template = tr!("SKILL_RECOVERY_HP_PERCENT_DESC");
+                template
+                    .to_string()
+                    .replace("{percent}", &percent.to_string())
             }
 
             Status { rating, .. } => {
-                format!("Heals status effects up to {}★.", rating)
+                let template = tr!("SKILL_RECOVERY_STATUS_DESC");
+                template
+                    .to_string()
+                    .replace("{rating}", &rating.to_string())
             }
         }
     }
