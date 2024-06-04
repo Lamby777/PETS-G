@@ -13,11 +13,16 @@ pub enum RecoveryType {
     Status { rating: u8 },
 }
 
-impl RecoveryType {
-    fn describe(&self) -> String {
+#[typetag::serde]
+impl SkillFamily for RecoverySkill {
+    fn name(&self) -> String {
+        self.name.clone()
+    }
+
+    fn description(&self) -> String {
         use RecoveryType::*;
 
-        match self {
+        match self.recovery {
             HPAmount { amount, .. } => {
                 let template = tr!("SKILL_RECOVERY_HP_AMOUNT_DESC");
                 template
@@ -39,17 +44,6 @@ impl RecoveryType {
                     .replace("{rating}", &rating.to_string())
             }
         }
-    }
-}
-
-#[typetag::serde]
-impl SkillFamily for RecoverySkill {
-    fn name(&self) -> String {
-        self.name.clone()
-    }
-
-    fn description(&self) -> String {
-        self.recovery.describe()
     }
 
     fn base_cost(&self) -> u32 {
