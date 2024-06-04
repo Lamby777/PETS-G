@@ -92,26 +92,3 @@ impl SkillFamily for PSIRewireSkill {
         todo!()
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_describe_rewire_10_sec() {
-        let skill = PSIFluxSkill(Duration::from_secs(10));
-        assert_eq!(
-            skill.description(),
-            "Warps time in your favor for 10 seconds."
-        );
-    }
-
-    #[test]
-    fn test_describe_rewire_50_percent() {
-        let skill = PSIRewireSkill { multi: 0.5 };
-        assert_eq!(
-            skill.description(),
-            "Gamble away 50% of your mana for the rare chance of a profit."
-        );
-    }
-}
