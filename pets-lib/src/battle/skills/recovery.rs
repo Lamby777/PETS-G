@@ -24,24 +24,15 @@ impl SkillFamily for RecoverySkill {
 
         match self.recovery {
             HPAmount { amount, .. } => {
-                let template = tr!("SKILL_RECOVERY_HP_AMOUNT_DESC");
-                template
-                    .to_string()
-                    .replace("{amount}", &amount.to_string())
+                tr_replace!("SKILL_RECOVERY_HP_AMOUNT_DESC"; amount)
             }
 
             HPPercent { percent, .. } => {
-                let template = tr!("SKILL_RECOVERY_HP_PERCENT_DESC");
-                template
-                    .to_string()
-                    .replace("{percent}", &percent.to_string())
+                tr_replace!("SKILL_RECOVERY_HP_PERCENT_DESC"; percent)
             }
 
             Status { rating, .. } => {
-                let template = tr!("SKILL_RECOVERY_STATUS_DESC");
-                template
-                    .to_string()
-                    .replace("{rating}", &rating.to_string())
+                tr_replace!("SKILL_RECOVERY_STATUS_DESC"; rating)
             }
         }
     }
