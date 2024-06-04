@@ -1,12 +1,12 @@
 % Debug Menu
 ###
 
-Link NAME Mira's Debug Menu
+Link NAME Agent Cascade
 VOX Mira
 
 ###
 ---
-NAME Mira's Debug Menu
+NAME Agent Cascade
 
 What's up? Hard at work debugging?
 
@@ -23,7 +23,7 @@ $ debug_battle
 
 ---
 % Debug Menu >> Page2
-NAME Mira's Debug Menu
+NAME Agent Cascade
 
 Alright then. How about these?
 
@@ -33,7 +33,7 @@ Alright then. How about these?
 
 ---
 % Debug Menu >> Item
-NAME Mira's Debug Menu
+NAME Agent Cascade
 
 What do you need?
 
@@ -45,7 +45,7 @@ $ debug_item trusty_rusty_pistol 5
 
 ---
 % Debug Menu >> After Item
-NAME Mira's Debug Menu
+NAME Agent Cascade
 
 Here you go!
 
