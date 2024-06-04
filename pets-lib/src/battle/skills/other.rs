@@ -12,9 +12,7 @@ impl SkillFamily for PSIFluxSkill {
 
     fn description(&self) -> String {
         let time = self.0.as_secs().to_string();
-        let template = tr!("SKILL_PSI_FLUX_DESC");
-
-        template.to_string().replace("{seconds}", &time)
+        tr_replace!("SKILL_PSI_FLUX_DESC"; time)
     }
 
     fn base_cost(&self) -> u32 {
@@ -73,9 +71,7 @@ impl SkillFamily for PSIRewireSkill {
 
     fn description(&self) -> String {
         let percent = self.multi_as_percent_str();
-        let template = tr!("SKILL_PSI_REWIRE_DESC");
-
-        template.to_string().replace("{percent}", &percent)
+        tr_replace!("SKILL_PSI_REWIRE_DESC"; percent)
     }
 
     fn base_cost(&self) -> u32 {

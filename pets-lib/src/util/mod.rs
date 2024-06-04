@@ -55,6 +55,33 @@ where
     .unwrap();
 }
 
+pub use crate::tr_replace;
+/// Macro to call tr! and format the result.
+///
+/// Usage:
+/// ```
+/// tr_replace! {
+///     "TRANSLATION_KEY";
+///     "{format_key}" => "its replacement",
+///     // ... repeat as many as you like
+/// }
+/// ```
+#[macro_export]
+macro_rules! tr_replace {
+    ($tr_key:expr; $($key:ident),* $(,)?) => {{
+        let engine = godot::engine::Engine::singleton();
+
+        let template = engine.tr($tr_key.into()).to_string();
+        $(
+        let key = concat!("{", stringify!($key), "}");
+        let val = &$key.to_string();
+        let template = template.replace(key, val);
+        )*
+
+        template
+    }};
+}
+
 pub use crate::connect;
 /// Macro to connect stuff without using the annoying 2-line
 /// `let callable = xxxxx` syntax.
