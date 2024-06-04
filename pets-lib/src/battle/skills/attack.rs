@@ -73,7 +73,7 @@ impl SkillFamily for AttackSkill {
         };
 
         if self.plural {
-            format!("{} Targets all enemies!", p1)
+            tr!("{part1} Targets all enemies!", part1 = p1).to_string()
         } else {
             p1
         }
@@ -136,6 +136,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore = "uses tr!"]
     fn test_describe_molotov_cocktail() {
         let skill = AttackSkill::new("Flare C", Element::Fire, 0)
             .with_effect(StatusEffect::Burning, EffectChance::Guaranteed)

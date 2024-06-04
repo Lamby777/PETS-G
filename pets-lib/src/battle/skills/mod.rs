@@ -3,6 +3,8 @@ use crate::prelude::*;
 
 use std::fmt;
 
+use godot::engine::Engine;
+use godot::tools::tr;
 use strum::{EnumIter, IntoEnumIterator};
 
 mod status_effects;
