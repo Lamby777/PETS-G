@@ -147,6 +147,10 @@ impl InventoryNode {
 
 #[godot_api]
 impl IControl for InventoryNode {
+    fn ready(&mut self) {
+        self.base_mut().show();
+    }
+
     fn input(&mut self, event: Gd<InputEvent>) {
         if !self.is_open || self.anim.is_playing() {
             return;
