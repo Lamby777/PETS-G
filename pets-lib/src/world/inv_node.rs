@@ -80,7 +80,8 @@ impl InventoryNode {
         for i in 1..=child_count {
             let mut icon_cont = self.item_icon(i as usize);
 
-            let index: i32 = self.current_index as i32 + i - (child_count / 2);
+            let index: i32 =
+                self.current_index as i32 + i - (child_count / 2) - 1;
             if index < 0 || index >= inv.len() as i32 {
                 icon_cont.call("set_texture".into(), &[Variant::nil()]);
                 continue;
@@ -107,12 +108,10 @@ impl InventoryNode {
         };
 
         let inventory_length = Self::inventory().borrow().len() as i32;
-        let mut new_index = self.current_index as i32 + offset;
+        let new_index = self.current_index as i32 + offset;
 
-        if new_index < 0 {
-            new_index = inventory_length - 1;
-        } else if new_index >= inventory_length {
-            new_index = 0;
+        if new_index < 0 || new_index >= inventory_length {
+            return;
         }
 
         self.current_index = new_index as usize;

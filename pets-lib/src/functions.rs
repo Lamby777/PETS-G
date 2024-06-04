@@ -40,7 +40,6 @@ pub fn callv_global(func_id: &str, args: VariantArray) -> GReturn {
     println!("{}", args.front().unwrap().to::<String>());
 
     let res = func.callv(args);
-    println!("5");
     Ok(res)
 }
 
@@ -62,20 +61,30 @@ fn debug_battle(_args: GArgs) -> GReturn {
 }
 
 fn debug_item(args: GArgs) -> GReturn {
-    for arg in args {
-        println!("giving a {}", arg.to::<String>());
+    let item_id = args[0].to::<String>();
 
-        let item_id = arg.to::<String>();
+    dbg!(&args);
 
-        // why tf do i have to do this?
-        let item = ITEM_REGISTRY
-            .get()
-            .unwrap()
-            .iter()
-            .find(|i| i.id == item_id);
+    let quantity = args
+        .get(1)
+        .map(|v| v.try_to::<String>().ok())
+        .flatten()
+        .map(|v| v.parse().ok())
+        .flatten()
+        .unwrap_or(1);
 
-        let item = ribbons::unwrap_fmt!(item, "no item with id {}", item_id);
+    println!("giving a {} (x{})", item_id, quantity);
 
+    // why tf do i have to do this?
+    let item = ITEM_REGISTRY
+        .get()
+        .unwrap()
+        .iter()
+        .find(|i| i.id == item_id);
+
+    let item = ribbons::unwrap_fmt!(item, "no item with id {}", item_id);
+
+    for _ in 0..quantity {
         give_item(item.clone());
     }
 
