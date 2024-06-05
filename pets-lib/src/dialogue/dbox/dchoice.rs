@@ -7,7 +7,7 @@
 //!
 
 use godot::engine::notify::ContainerNotification;
-use godot::engine::{Engine, IMarginContainer, MarginContainer, RichTextLabel};
+use godot::engine::{IMarginContainer, MarginContainer, RichTextLabel};
 use godot::prelude::*;
 
 use crate::consts::dialogue::*;
@@ -23,8 +23,7 @@ pub struct DChoice {
 impl DChoice {
     #[func]
     pub fn set_text_tr(&mut self, text: GString) {
-        let tr = Engine::singleton().tr(text.into());
-        self.txt_label().set_text(tr);
+        self.txt_label().set_text(tr(text));
     }
 
     pub fn txt_label(&self) -> Gd<RichTextLabel> {

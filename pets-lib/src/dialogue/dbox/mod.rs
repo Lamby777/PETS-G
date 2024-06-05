@@ -6,11 +6,10 @@ use dialogical::prelude::*;
 use godot::engine::global::Side;
 use godot::engine::tween::TransitionType;
 use godot::engine::{
-    AnimationPlayer, Control, Engine, HBoxContainer, IPanelContainer,
-    InputEvent, PanelContainer, RichTextLabel, Tween,
+    AnimationPlayer, Control, HBoxContainer, IPanelContainer, InputEvent,
+    PanelContainer, RichTextLabel, Tween,
 };
 use godot::prelude::*;
-use godot::tools::tr;
 
 use crate::consts::dialogue::*;
 use crate::prelude::*;
@@ -27,11 +26,11 @@ use placeholders::process_placeholders;
 pub fn spk_display(spk: &Speaker) -> GString {
     use Speaker::*;
 
-    match spk {
-        Named(v) => Engine::singleton().tr(v.into()),
-        Narrator => tr!("DG_SPK_NARRATOR"),
-        Unknown => tr!("DG_SPK_UNKNOWN"),
-    }
+    tr(match spk {
+        Named(v) => v,
+        Narrator => "DG_SPK_NARRATOR",
+        Unknown => "DG_SPK_UNKNOWN",
+    })
 }
 
 #[derive(Clone)]
@@ -168,7 +167,7 @@ impl DialogBox {
 
         let page = ix.pages.get(pageno);
         let page = unwrap_fmt!(page, "Page #{} out of range!", pageno);
-        let content = Engine::singleton().tr(page.content.clone().into());
+        let content = tr(page.content.clone());
 
         process_placeholders(&content.to_string()).into()
     }
