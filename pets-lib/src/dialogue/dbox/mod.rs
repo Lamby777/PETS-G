@@ -91,16 +91,6 @@ pub struct DialogBox {
     /// The tween that makes characters in the message
     /// become visible one by one
     text_tween: Option<Gd<Tween>>,
-
-    // independent from any interaction-related stuff,
-    // these are the actual strings that are displayed
-    //
-    // you can set these directly if you're doing something
-    // that's not part of an interaction
-    #[init(default = "Cherry".into())]
-    spk_txt: GString,
-    #[init(default = "[wave amp=50 freq=6]Hello, World![/wave]".into())]
-    msg_txt: GString,
 }
 
 #[godot_api]
@@ -108,8 +98,8 @@ impl DialogBox {
     #[func]
     pub fn do_draw(&mut self) {
         self.goto_current_page();
-        self.spk_txt().set_text(self.spk_txt.clone());
-        self.msg_txt().set_text(self.msg_txt.clone());
+        self.spk_txt().set_text(self.translated_speaker());
+        self.msg_txt().set_text(self.translated_message());
         self.tween_txt_visibility();
     }
 
@@ -157,15 +147,30 @@ impl DialogBox {
             let ix = ix.clone();
             let page = ix.pages.get(pageno);
             let page = unwrap_fmt!(page, "Page #{} out of range!", pageno);
-            let content = Engine::singleton().tr(page.content.clone().into());
 
             self.update_meta(&page.metadata);
-            self.spk_txt = spk_display(&self.speaker.temporary).into();
-            self.msg_txt = process_placeholders(&content.to_string()).into();
-        } else {
-            self.spk_txt = "".into();
-            self.msg_txt = "".into();
+        }
+    }
+
+    fn translated_speaker(&self) -> GString {
+        if self.current_ix.is_none() {
+            return "".into();
+        }
+
+        spk_display(&self.speaker.temporary)
+    }
+
+    fn translated_message(&self) -> GString {
+        let pageno = self.current_page_number;
+        let Some(ix) = self.current_ix.as_ref() else {
+            return "".into();
         };
+
+        let page = ix.pages.get(pageno);
+        let page = unwrap_fmt!(page, "Page #{} out of range!", pageno);
+        let content = Engine::singleton().tr(page.content.clone().into());
+
+        process_placeholders(&content.to_string()).into()
     }
 
     fn anim_player(&self) -> Gd<AnimationPlayer> {
