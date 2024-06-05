@@ -155,6 +155,7 @@ menu={
 [internationalization]
 
 locale/translations=PackedStringArray("res://i18n/translations.en_US.translation")
+locale/fallback="en_US"
 
 [layer_names]
 
