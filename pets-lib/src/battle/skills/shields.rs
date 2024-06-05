@@ -1,3 +1,5 @@
+use godot::builtin::GString;
+
 use super::*;
 
 /// What kind of damage does the shield block?
@@ -80,16 +82,16 @@ impl ShieldSkill {
         }
 
         if multi == 0.0 {
-            "impenetrable "
+            "impenetrable"
         } else if multi <= 0.3 {
-            "sturdy "
+            "sturdy"
         } else if multi <= 0.7 {
-            ""
+            "fair"
         } else if multi <= 1.0 {
-            "weak "
+            "weak"
         } else {
             // if your shield powers have been weakened past 1.0...
-            "nullified "
+            "nullified"
         }
     }
 
@@ -108,24 +110,49 @@ impl ShieldSkill {
     pub fn set_affinity(&mut self, aff: ShieldAffinity) {
         self.affinity = aff.coerce_specific().unwrap_or(aff);
     }
+
+    /// "Wide" or "Narrow"
+    fn shield_width_str(&self) -> GString {
+        match self.plural {
+            true => tr!("SKILL_SHIELD_WIDTH_WIDE"),
+            false => tr!("SKILL_SHIELD_WIDTH_NARROW"),
+        }
+    }
+
+    /// "Shield" or "Mirror"
+    fn shield_type_str(&self) -> GString {
+        match self.reflect {
+            true => tr!("SKILL_SHIELD_NAME_MIRROR"),
+            false => tr!("SKILL_SHIELD_NAME_SHIELD"),
+        }
+    }
 }
 
 #[typetag::serde]
 impl SkillFamily for ShieldSkill {
     fn name(&self) -> String {
-        let name = if self.reflect { "Mirror" } else { "Shield" };
-        let width = if self.plural { "Wide " } else { "" };
-        let aff = self.affinity.describe();
+        let name = self.shield_type_str();
+        let width = self.shield_width_str();
+        let affinity = self.affinity.describe();
 
-        format!("{aff} {width}{name}")
+        tr_replace! {
+            "SKILL_SHIELD_NAME";
+            affinity, width, name,
+        }
     }
 
     fn description(&self) -> String {
         use ShieldAffinity::*;
 
+        let name = self.shield_type_str();
         let potency = ShieldSkill::multi_to_str(self.multiplier);
-        let reflectivity = if self.reflect { "reflects" } else { "blocks" };
-        let width = if self.plural { "wide " } else { "" };
+        let width = self.shield_width_str();
+
+        let reflect_action = match self.reflect {
+            true => tr!("SKILL_SHIELD_REFLECTIVITY_TRUE"),
+            false => tr!("SKILL_SHIELD_REFLECTIVITY_FALSE"),
+        };
+
         let affinity = match &self.affinity {
             Specific(elements) => {
                 let iter = elements.iter().map(|x| x.describe());
@@ -138,10 +165,10 @@ impl SkillFamily for ShieldSkill {
             Physical => "physical".to_owned(),
         };
 
-        let part1 = format!(
-            "Casts a {}{}shield that {} {} damage",
-            width, potency, reflectivity, affinity
-        );
+        let part1 = tr_replace! {
+            "SKILL_SHIELD_DESC";
+            width, potency, name, reflect_action, affinity,
+        };
 
         match self.hits {
             0 => format!("{}. It probably won't last...", potency),
