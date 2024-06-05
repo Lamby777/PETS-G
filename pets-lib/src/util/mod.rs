@@ -17,6 +17,10 @@ use godot::engine::{
 };
 use godot::prelude::*;
 
+pub fn tr(text: impl Into<StringName>) -> GString {
+    Engine::singleton().tr(text.into())
+}
+
 /// Convenience function to fade opacity shaders on/off
 pub fn fade_black<N>(black: Gd<N>, visible: bool, tween_time: f64)
 where
@@ -69,9 +73,7 @@ pub use crate::tr_replace;
 #[macro_export]
 macro_rules! tr_replace {
     ($tr_key:expr; $($key:ident),* $(,)?) => {{
-        let engine = godot::engine::Engine::singleton();
-
-        let template = engine.tr($tr_key.into()).to_string();
+        let template = $crate::util::tr($tr_key).to_string();
         $(
         let key = concat!("{", stringify!($key), "}");
         let val = &$key.to_string();
