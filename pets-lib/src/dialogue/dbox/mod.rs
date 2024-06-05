@@ -6,10 +6,11 @@ use dialogical::prelude::*;
 use godot::engine::global::Side;
 use godot::engine::tween::TransitionType;
 use godot::engine::{
-    AnimationPlayer, Control, HBoxContainer, IPanelContainer, InputEvent,
-    PanelContainer, RichTextLabel, Tween,
+    AnimationPlayer, Control, Engine, HBoxContainer, IPanelContainer,
+    InputEvent, PanelContainer, RichTextLabel, Tween,
 };
 use godot::prelude::*;
+use godot::tools::tr;
 
 use crate::consts::dialogue::*;
 use crate::prelude::*;
@@ -23,15 +24,14 @@ use placeholders::process_placeholders;
 ///
 /// Either the name of the speaker or a special name
 /// if it's a narrator or unknown speaker
-pub fn spk_display(spk: &Speaker) -> String {
+pub fn spk_display(spk: &Speaker) -> GString {
     use Speaker::*;
 
     match spk {
-        Named(ref v) => v,
-        Narrator => NARRATOR_DISPLAYNAME,
-        Unknown => UNKNOWN_DISPLAYNAME,
+        Named(v) => Engine::singleton().tr(v.into()),
+        Narrator => tr!("DG_SPK_NARRATOR"),
+        Unknown => tr!("DG_SPK_UNKNOWN"),
     }
-    .to_owned()
 }
 
 #[derive(Clone)]
@@ -157,10 +157,11 @@ impl DialogBox {
             let ix = ix.clone();
             let page = ix.pages.get(pageno);
             let page = unwrap_fmt!(page, "Page #{} out of range!", pageno);
+            let content = Engine::singleton().tr(page.content.clone().into());
 
             self.update_meta(&page.metadata);
             self.spk_txt = spk_display(&self.speaker.temporary).into();
-            self.msg_txt = process_placeholders(&page.content).into();
+            self.msg_txt = process_placeholders(&content.to_string()).into();
         } else {
             self.spk_txt = "".into();
             self.msg_txt = "".into();

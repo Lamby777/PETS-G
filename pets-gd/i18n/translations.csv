@@ -1,83 +1,95 @@
-key,                                en_US
-
-ITEM_NAME_trusty_rusty_pistol,      Trusty Rusty Pistol
-ITEM_DESC_trusty_rusty_pistol,      Pretty unsafe! Deals poor damage.
-ITEM_NAME_ts_slick7,                TS Slick7
-ITEM_DESC_ts_slick7,                Tactical Supreme’s latest model. Deals decent damage.
-ITEM_NAME_stick,                    Stick
-ITEM_DESC_stick,                    Some stick you found off the sidewalk. Looks cool.
-ITEM_NAME_terra_precision_shotgun,  Precision Shotgun
-ITEM_DESC_terra_precision_shotgun,  A weapon for Terra. Massive damage at the cost of reload time.
-
-ELEMENT_NAME_Blade,                 Blade,
-ELEMENT_NAME_Kinetic,               Kinetic,
-ELEMENT_NAME_Fire,                  Fire,
-ELEMENT_NAME_Ice,                   Ice,
-ELEMENT_NAME_Electric,              Electric,
-ELEMENT_NAME_Wind,                  Wind,
-ELEMENT_NAME_Earth,                 Earth,
-ELEMENT_NAME_Psi,                   Psychic,
-ELEMENT_NAME_Spirit,                Spirit,
-ELEMENT_NAME_Fuzz,                  Fuzz,
-ELEMENT_NAME_Whip,                  Whip,
-
-ELEMENT_ADJ_Blade,                  Slash,
-ELEMENT_ADJ_Kinetic,                Kinetic,
-ELEMENT_ADJ_Fire,                   Fire-based,
-ELEMENT_ADJ_Ice,                    Ice-based,
-ELEMENT_ADJ_Electric,               Electric,
-ELEMENT_ADJ_Wind,                   Wind-based,
-ELEMENT_ADJ_Earth,                  Earth-based,
-ELEMENT_ADJ_Psi,                    Psychic,
-ELEMENT_ADJ_Spirit,                 Supernatural,
-ELEMENT_ADJ_Fuzz,                   Fuzzy,
-ELEMENT_ADJ_Whip,                   Whip,
-
-SKILL_PSI_FLUX_NAME,                PSI Flux
-SKILL_PSI_FLUX_DESC,                Warps time in your favor for {seconds} seconds.
-SKILL_PSI_REWIRE_NAME,              PSI Rewire
-SKILL_PSI_REWIRE_DESC,              Gamble away {percent} of your mana for the rare chance of a profit.
-SKILL_RECOVERY_HP_AMOUNT_DESC,      Heals {amount} of the target's HP.
-SKILL_RECOVERY_HP_PERCENT_DESC,     Heals {percent}% of the target's HP.
-SKILL_RECOVERY_STATUS_DESC,         Heals status effects up to {rating}★.
-
-SKILL_ATTACK_FIRE_DMG_NAME,         Caustics
-SKILL_ATTACK_FIRE_FX_NAME,          Flame
-SKILL_ATTACK_ICE_DMG_NAME,          Hail
-SKILL_ATTACK_ICE_FX_NAME,           Freeze
-SKILL_ATTACK_ELECTRIC_DMG_NAME,     Zap
-SKILL_ATTACK_ELECTRIC_FX_NAME,      Numb
-SKILL_ATTACK_WIND_DMG_NAME,         Gust
-SKILL_ATTACK_WIND_FX_NAME,          Daze
-SKILL_ATTACK_EARTH_DMG_NAME,        Quake
-SKILL_ATTACK_EARTH_FX_NAME,         Ground
-SKILL_ATTACK_PSI_DMG_NAME,          Psi
-SKILL_ATTACK_PSI_FX_NAME,           Brainwash
-SKILL_ATTACK_SPIRIT_DMG_NAME,       Vex
-SKILL_ATTACK_SPIRIT_FX_NAME,        Curse
-SKILL_ATTACK_FUZZ_NAME,             PK Fuzz
-SKILL_ATTACK_WHIP_NAME,             PK Whip
-
-SKILL_ATTACK_TIER_1,                A
-SKILL_ATTACK_TIER_2,                B
-SKILL_ATTACK_TIER_3,                C
-SKILL_ATTACK_TIER_4,                D
-SKILL_ATTACK_TIER_5,                E
-
-SKILL_ATTACK_FX_CHANCE_ALWAYS,      Always inflicts {fx}.
-SKILL_ATTACK_FX_CHANCE_HIGH,        High chance of inflicting {fx}.
-SKILL_ATTACK_FX_CHANCE_LOW,         May inflict {fx}.
-
-SKILL_SHIELD_NAME,                  {affinity} {width} {name}
-SKILL_SHIELD_DESC,                  Casts a {width} {potency} {name} that {reflect_action} {affinity} damage.
-SKILL_SHIELD_WIDTH_WIDE,            wide
-SKILL_SHIELD_WIDTH_NARROW,          narrow
-SKILL_SHIELD_POTENCY_IMPENETRABLE,  impenetrable
-SKILL_SHIELD_POTENCY_STURDY,        sturdy
-SKILL_SHIELD_POTENCY_FAIR,          fair
-SKILL_SHIELD_POTENCY_WEAK,          weak
-SKILL_SHIELD_POTENCY_NULLIFIED,     nullified
-SKILL_SHIELD_REFLECTIVITY_FALSE,    blocks
-SKILL_SHIELD_REFLECTIVITY_TRUE,     reflects
-SKILL_SHIELD_NAME_MIRROR,           Mirror
-SKILL_SHIELD_NAME_SHIELD,           Shield
+key,en_US
+,
+ITEM_NAME_trusty_rusty_pistol,Trusty Rusty Pistol
+ITEM_DESC_trusty_rusty_pistol,Pretty unsafe! Deals poor damage.
+ITEM_NAME_ts_slick7,TS Slick7
+ITEM_DESC_ts_slick7,Tactical Supreme’s latest model. Deals decent damage.
+ITEM_NAME_stick,Stick
+ITEM_DESC_stick,Some stick you found off the sidewalk. Looks cool.
+ITEM_NAME_terra_precision_shotgun,Precision Shotgun
+ITEM_DESC_terra_precision_shotgun,A weapon for Terra. Massive damage at the cost of reload time.
+,
+ELEMENT_NAME_Blade,Blade
+ELEMENT_NAME_Kinetic,Kinetic
+ELEMENT_NAME_Fire,Fire
+ELEMENT_NAME_Ice,Ice
+ELEMENT_NAME_Electric,Electric
+ELEMENT_NAME_Wind,Wind
+ELEMENT_NAME_Earth,Earth
+ELEMENT_NAME_Psi,Psychic
+ELEMENT_NAME_Spirit,Spirit
+ELEMENT_NAME_Fuzz,Fuzz
+ELEMENT_NAME_Whip,Whip
+,
+ELEMENT_ADJ_Blade,Slash
+ELEMENT_ADJ_Kinetic,Kinetic
+ELEMENT_ADJ_Fire,Fire-based
+ELEMENT_ADJ_Ice,Ice-based
+ELEMENT_ADJ_Electric,Electric
+ELEMENT_ADJ_Wind,Wind-based
+ELEMENT_ADJ_Earth,Earth-based
+ELEMENT_ADJ_Psi,Psychic
+ELEMENT_ADJ_Spirit,Supernatural
+ELEMENT_ADJ_Fuzz,Fuzzy
+ELEMENT_ADJ_Whip,Whip
+,
+SKILL_PSI_FLUX_NAME,PSI Flux
+SKILL_PSI_FLUX_DESC,Warps time in your favor for {seconds} seconds.
+SKILL_PSI_REWIRE_NAME,PSI Rewire
+SKILL_PSI_REWIRE_DESC,Gamble away {percent} of your mana for the rare chance of a profit.
+SKILL_RECOVERY_HP_AMOUNT_DESC,Heals {amount} of the target's HP.
+SKILL_RECOVERY_HP_PERCENT_DESC,Heals {percent}% of the target's HP.
+SKILL_RECOVERY_STATUS_DESC,Heals status effects up to {rating}★.
+,
+SKILL_ATTACK_FIRE_DMG_NAME,Caustics
+SKILL_ATTACK_FIRE_FX_NAME,Flame
+SKILL_ATTACK_ICE_DMG_NAME,Hail
+SKILL_ATTACK_ICE_FX_NAME,Freeze
+SKILL_ATTACK_ELECTRIC_DMG_NAME,Zap
+SKILL_ATTACK_ELECTRIC_FX_NAME,Numb
+SKILL_ATTACK_WIND_DMG_NAME,Gust
+SKILL_ATTACK_WIND_FX_NAME,Daze
+SKILL_ATTACK_EARTH_DMG_NAME,Quake
+SKILL_ATTACK_EARTH_FX_NAME,Ground
+SKILL_ATTACK_PSI_DMG_NAME,Psi
+SKILL_ATTACK_PSI_FX_NAME,Brainwash
+SKILL_ATTACK_SPIRIT_DMG_NAME,Vex
+SKILL_ATTACK_SPIRIT_FX_NAME,Curse
+SKILL_ATTACK_FUZZ_NAME,PK Fuzz
+SKILL_ATTACK_WHIP_NAME,PK Whip
+,
+SKILL_ATTACK_TIER_1,A
+SKILL_ATTACK_TIER_2,B
+SKILL_ATTACK_TIER_3,C
+SKILL_ATTACK_TIER_4,D
+SKILL_ATTACK_TIER_5,E
+,
+SKILL_ATTACK_FX_CHANCE_ALWAYS,Always inflicts {fx}.
+SKILL_ATTACK_FX_CHANCE_HIGH,High chance of inflicting {fx}.
+SKILL_ATTACK_FX_CHANCE_LOW,May inflict {fx}.
+,
+SKILL_SHIELD_NAME,{affinity} {width} {name}
+SKILL_SHIELD_DESC,Casts a {width} {potency} {name} that {reflect_action} {affinity} damage.
+SKILL_SHIELD_WIDTH_WIDE,wide
+SKILL_SHIELD_WIDTH_NARROW,narrow
+SKILL_SHIELD_POTENCY_IMPENETRABLE,impenetrable
+SKILL_SHIELD_POTENCY_STURDY,sturdy
+SKILL_SHIELD_POTENCY_FAIR,fair
+SKILL_SHIELD_POTENCY_WEAK,weak
+SKILL_SHIELD_POTENCY_NULLIFIED,nullified
+SKILL_SHIELD_REFLECTIVITY_FALSE,blocks
+SKILL_SHIELD_REFLECTIVITY_TRUE,reflects
+SKILL_SHIELD_NAME_MIRROR,Mirror
+SKILL_SHIELD_NAME_SHIELD,Shield
+,
+DG_SPK_NARRATOR,
+DG_SPK_UNKNOWN,???
+DG_SPK_RODRICK,"Rodrick Sign Co."
+,
+DG_RODRICK1_SOYOURE,"So... you're reading a sign, eh? Well..."
+DG_RODRICK1_AREYOUSMART,"Are you smart?"
+DG_RODRICK1_NOPE,"Nope."
+DG_RODRICK1_DEFNOT,"Definitely not."
+DG_RODRICK1_DIDNT,"Yeah, I didn't think so."
+DG_RODRICK1_DEFDIDNT,"Yeah, I definitely didn't think so."
+DG_RODRICK1_COMEBACK,"Come back when you're smart."
