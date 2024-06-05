@@ -40,3 +40,7 @@ SKILL_ATTACK_TIER_B,                B
 SKILL_ATTACK_TIER_C,                C
 SKILL_ATTACK_TIER_D,                D
 SKILL_ATTACK_TIER_E,                E
+,
+SKILL_ATTACK_FX_CHANCE_ALWAYS,      Always inflicts {fx}.
+SKILL_ATTACK_FX_CHANCE_HIGH,        High chance of inflicting {fx}.
+SKILL_ATTACK_FX_CHANCE_LOW,         May inflict {fx}.
