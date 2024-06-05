@@ -87,9 +87,9 @@ DG_SPK_UNKNOWN,???
 DG_SPK_RODRICK,"Rodrick Sign Co."
 ,
 DG_RODRICK1_SOYOURE,"So... you're reading a sign, eh? Well..."
-DG_RODRICK1_AREYOUSMART,"Are you smart?"
-DG_RODRICK1_NOPE,"Nope."
-DG_RODRICK1_DEFNOT,"Definitely not."
+DG_RODRICK1_AREYOUSMART,Are you smart?
+DG_RODRICK1_NOPE,Nope.
+DG_RODRICK1_DEFNOT,Definitely not.
 DG_RODRICK1_DIDNT,"Yeah, I didn't think so."
 DG_RODRICK1_DEFDIDNT,"Yeah, I definitely didn't think so."
-DG_RODRICK1_COMEBACK,"Come back when you're smart."
+DG_RODRICK1_COMEBACK,Come back when you're smart.
