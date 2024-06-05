@@ -62,7 +62,7 @@ pub use crate::tr_replace;
 /// ```
 /// tr_replace! {
 ///     "TRANSLATION_KEY";
-///     "{format_key}" => "its replacement",
+///     format_key,
 ///     // ... repeat as many as you like
 /// }
 /// ```
