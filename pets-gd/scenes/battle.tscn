@@ -146,6 +146,15 @@ shader_parameter/opacity = 0.0
 
 [node name="BattleEngine" type="BattleEngine"]
 
+[node name="BattleMusic" type="BattleMusic" parent="."]
+stream = ExtResource("4_l6m5j")
+
+[node name="ClickSFX" type="AudioStreamPlayer" parent="BattleMusic"]
+stream = ExtResource("4_icqrr")
+
+[node name="RhythmTimer" type="Timer" parent="BattleMusic"]
+one_shot = true
+
 [node name="VideoDrugs" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -173,9 +182,6 @@ scale = Vector2(8, 8)
 texture = ExtResource("3_k3xai")
 hframes = 5
 vframes = 2
-
-[node name="BattleMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_l6m5j")
 
 [node name="Menu" type="Control" parent="."]
 layout_mode = 3
@@ -447,9 +453,3 @@ material = SubResource("ShaderMaterial_lgbmi")
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
-
-[node name="RhythmTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="ClickSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_icqrr")
