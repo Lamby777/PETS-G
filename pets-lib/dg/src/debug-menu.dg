@@ -55,6 +55,7 @@ Here you go!
 % Debug Menu >> Skill
 NAME Agent Cascade
 
-Skill Info Here
+Player Name: [PLAYER]\n
+Skill Name: {SKILL_NAME}
 
 ---
