@@ -152,10 +152,15 @@ pub fn start_ix(name: impl Into<String>) {
         .start_ix(name.into());
 }
 
-pub fn _start_ix_replace(
-    name: impl Into<String>,
-    replace: &[(String, String)],
-) {
+pub fn start_ix_replace<S>(name: impl Into<String>, replace: &[(S, S)])
+where
+    S: Into<String> + Clone,
+{
+    let replace = replace
+        .iter()
+        .map(|(a, b)| (a.clone().into(), b.clone().into()))
+        .collect::<Vec<_>>();
+
     DialogBox::try_singleton()
         .unwrap()
         .bind_mut()

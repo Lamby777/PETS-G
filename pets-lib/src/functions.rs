@@ -37,8 +37,6 @@ pub fn callv_global(func_id: &str, args: VariantArray) -> GReturn {
     let func = funcs.get(func_id);
     let func = unwrap_fmt!(func, "no function named {}", func_id);
 
-    println!("{}", args.front().unwrap().to::<String>());
-
     let res = func.callv(args);
     Ok(res)
 }
@@ -56,7 +54,7 @@ const FUNCTIONS: LazyCell<FnTable> = LazyCell::new(|| {
 
 fn debug_skill(_args: GArgs) -> GReturn {
     end_interaction();
-    start_ix("Debug Menu >> Skill");
+    start_ix_replace("Debug Menu >> Skill", &[("{SKILL_NAME}", "Caustics A")]);
 
     Ok(Variant::nil())
 }
