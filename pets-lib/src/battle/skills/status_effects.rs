@@ -19,8 +19,8 @@ impl ChanceOfEffect {
     }
 
     pub fn describe(&self) -> String {
-        let chance = self.chance.describe();
-        format!("{} {}.", chance, self.effect)
+        let template = self.chance.description_tr_template();
+        template.replace("{fx}", &self.effect.to_string())
     }
 }
 
@@ -32,16 +32,17 @@ pub enum EffectChance {
 }
 
 impl EffectChance {
-    /// User-facing string for the chance of a status effect
-    /// To be used in skill descriptions
-    pub fn describe(&self) -> &str {
+    /// Translation template for the chance of a status
+    /// effect To be used in skill descriptions
+    pub fn description_tr_template(&self) -> String {
         use EffectChance::*;
 
-        match self {
-            Guaranteed => "Always inflicts",
-            Common => "High chance of inflicting",
-            Rare => "Low chance of inflicting",
-        }
+        (match self {
+            Guaranteed => tr!("SKILL_ATTACK_FX_CHANCE_ALWAYS"),
+            Common => tr!("SKILL_ATTACK_FX_CHANCE_HIGH"),
+            Rare => tr!("SKILL_ATTACK_FX_CHANCE_LOW"),
+        })
+        .into()
     }
 }
 

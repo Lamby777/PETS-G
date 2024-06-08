@@ -5,27 +5,111 @@
 
 use crate::prelude::*;
 
+use std::io::Read as _;
+use std::sync::OnceLock;
+
+use godot::engine::file_access::ModeFlags;
+use godot::engine::DirAccess;
+use godot::prelude::*;
+
 mod inv;
 
 pub use inv::ItemList;
 
-/// A single item definition, stored in item hashtable for lookup.
-// Or maybe just in a vector... and there can be a function
-// that looks up the item by searching the vector for an Item
-// with the correct `name` property?
+pub static ITEM_REGISTRY: OnceLock<Vec<Item>> = OnceLock::new();
+
+/// Find all the modded items from modded registries.
+///
+/// # Memory
+///
+///  This function leaks memory. It only runs once, and it's for
+///  mods anyway, so it shouldn't be a big deal. I just typically
+///  put a warning label on any function that leaks memory, so here
+///  it is. You've been warned.
+pub fn find_modded_items() -> Vec<Item> {
+    // make the folder in case it doesn't exist yet
+    DirAccess::open("user://".into())
+        .unwrap()
+        .make_dir("mod-items".into());
+
+    let Some(mut dir) = DirAccess::open("user://mod-items/".into()) else {
+        godot_warn!("Could not open `mod-items`, no modded items were loaded.");
+        return vec![];
+    };
+
+    dir.get_files()
+        .to_vec()
+        .into_iter()
+        .filter_map(|v| read_item_registry(&v.to_string()))
+        .flatten()
+        .collect()
+}
+
+pub fn read_item_registry(path: &str) -> Option<Vec<Item>> {
+    let mut file = GFile::open(path, ModeFlags::READ).ok()?;
+
+    let mut content = vec![];
+    file.read_to_end(&mut content).ok()?;
+    if content.len() > 100_000_000 {
+        godot_warn!("{} mod_items.txt is too large! (over 100MB, wtf?)", path);
+        godot_warn!("None of your modded items will be loaded!");
+        return None;
+    }
+
+    let content = String::from_utf8(content).ok()?;
+    ribbons::unwrap_fmt!(
+        serde_json::from_str(&content),
+        "items file {} has wrong JSON contents",
+        path
+    )
+}
+
+/// Initializes `ITEM_REGISTRY` by scanning for vanilla and
+/// modded item registries and combining the list of items.
+pub fn load_item_registry() {
+    let mut dir =
+        DirAccess::open("res://assets/itemregistries".into()).unwrap();
+
+    // scan the vanilla items folder
+    let mut items = dir
+        .get_files()
+        .to_vec()
+        .into_iter()
+        .map(|fname| {
+            godot_print!("Reading vanilla item registry: {}", fname);
+            let path = format!("res://assets/itemregistries/{}", fname);
+            let items = read_item_registry(&path).expect(
+                "Error loading vanilla items. THIS IS A BUG, please report!",
+            );
+
+            godot_print!("Vanilla registry {} read!", fname);
+            items
+        })
+        .flatten()
+        .collect::<Vec<_>>();
+
+    // scan for modded item paths
+    items.extend(find_modded_items());
+
+    godot_print!("Finished reading item registries.\n\n");
+
+    ITEM_REGISTRY.set(items).unwrap();
+    godot_print!("`ITEM_REGISTRY` initialized!");
+}
+
+/// A single item definition, stored in a vector for lookup.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Item {
-    /// The category of the item. This affects how you can use it in-game.
-    category: ItemCat,
+    pub id: String,
 
     /// Things that describe what the item does or is
     ///
     /// This may be used for weaknesses/resistances, sorting purposes,
     /// shopkeeper price calculations, etc.
-    attributes: Vec<ItemAttribute>,
+    pub attributes: Vec<ItemAttribute>,
 
-    name: String,
-    description: String,
+    /// The category of the item. This affects how you can use it in-game.
+    pub category: ItemCat,
 }
 
 // more derive spam :D

@@ -1,6 +1,12 @@
 % Debug Menu
-NAME Mira's Debug Menu
+###
+
+Link NAME Agent Cascade
 VOX Mira
+
+###
+---
+NAME Agent Cascade
 
 What's up? Hard at work debugging?
 
@@ -8,22 +14,39 @@ What's up? Hard at work debugging?
 $ debug_battle
 
 > Item
-$ debug_item
+@ Debug Menu >> Item
 
 > Nah...
 
 > Pg. 2
-@ Debug Menu >> 1
+@ Debug Menu >> Page2
 
 ---
-% Debug Menu >> 1
-NAME Mira's Debug Menu
-VOX Mira
+% Debug Menu >> Page2
+NAME Agent Cascade
 
 Alright then. How about these?
 
 > Test1
 > Test2
 > Test3
+
+---
+% Debug Menu >> Item
+NAME Agent Cascade
+
+What do you need?
+
+> Rusty
+$ debug_item trusty_rusty_pistol
+
+> 5 Rusties
+$ debug_item trusty_rusty_pistol 5
+
+---
+% Debug Menu >> After Item
+NAME Agent Cascade
+
+Here you go!
 
 ---

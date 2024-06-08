@@ -1,44 +1,46 @@
 % Rodrick Sign #1
-NAME Rodrick Sign Co.
+###
+
+Link NAME DG_SPK_RODRICK
 VOX Default
 
-So... you're reading a sign, eh?\n
-Well...
+###
+---
+NAME DG_SPK_RODRICK
+
+DG_RODRICK1_SOYOURE
 
 ---
 
-Are you smart?
+DG_RODRICK1_AREYOUSMART
 
-> Nope
+> DG_RODRICK1_NOPE
 @ Rodrick Sign #1 >> Nope
 
-> Definitely not
+> DG_RODRICK1_DEFNOT
 @ Rodrick Sign #1 >> DefNot
 
 ---
 % Rodrick Sign #1 >> Nope
-NAME Rodrick Sign Co.
-VOX Default
+NAME DG_SPK_RODRICK
 
-Yeah, I didn't think so.
+DG_RODRICK1_DIDNT
 
 @ Rodrick Sign #1 >> Exit
 
 ---
 % Rodrick Sign #1 >> DefNot
-NAME Rodrick Sign Co.
-VOX Default
+NAME DG_SPK_RODRICK
 
-Yeah, I definitely didn't think so.
+DG_RODRICK1_DEFDIDNT
 
 @ Rodrick Sign #1 >> Exit
 
 ---
 % Rodrick Sign #1 >> Exit
-NAME Rodrick Sign Co.
-VOX Default
+NAME DG_SPK_RODRICK
 
-Come back when you're smart.
+DG_RODRICK1_COMEBACK
 
 ---
 

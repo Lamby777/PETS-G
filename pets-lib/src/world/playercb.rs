@@ -7,6 +7,7 @@ use crate::consts::playercb::*;
 use crate::load_pchar_scenes_under;
 use crate::prelude::*;
 
+use super::inv_node::InventoryNode;
 use super::pchar_node::PCharNode;
 use super::BATTLE_PARTY_SIZE;
 
@@ -38,8 +39,8 @@ pub struct PlayerCB {
 
 #[godot_api]
 impl PlayerCB {
-    pub fn singleton() -> Gd<Self> {
-        current_scene().get_node_as("%PlayerCB")
+    pub fn try_singleton() -> Option<Gd<Self>> {
+        current_scene().try_get_node_as("%PlayerCB")
     }
 
     pub fn party_ids(&self) -> Vec<String> {
@@ -50,18 +51,17 @@ impl PlayerCB {
     }
 
     pub fn party_chardata(&self) -> Vec<CharData> {
-        let si = StatsInterface::singleton();
-        let si = si.bind();
-
         self.party_ids()
             .into_iter()
-            .map(|id| si.get_character(&id))
+            .map(|id| si().bind().get_character(&id))
             .collect()
     }
 
     /// Get the fx rectangle that follows the player
     pub fn fx_rect() -> Gd<ColorRect> {
-        Self::singleton().get_node_as("BattleIntroRect")
+        Self::try_singleton()
+            .unwrap()
+            .get_node_as("BattleIntroRect")
     }
 
     /// Get the shader material of the fx rect
@@ -76,7 +76,11 @@ impl PlayerCB {
     /// * Menus
     pub fn can_move(&self) -> bool {
         // PRAISE SHORT-CIRCUIT EVALUATION!!
-        let cant_move = DialogBox::singleton().bind().is_active()
+        let dbox_is_active =
+            DialogBox::try_singleton().map_or(false, |v| v.bind().is_active());
+
+        let cant_move = dbox_is_active
+            || InventoryNode::try_singleton().unwrap().bind().is_open()
             || self.is_in_battle()
             || self.tpbeacon_debounce;
 

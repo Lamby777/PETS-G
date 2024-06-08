@@ -6,8 +6,8 @@ use dialogical::prelude::*;
 use godot::engine::global::Side;
 use godot::engine::tween::TransitionType;
 use godot::engine::{
-    AnimationPlayer, CanvasLayer, Control, HBoxContainer, IPanelContainer,
-    InputEvent, PanelContainer, RichTextLabel, Tween,
+    AnimationPlayer, Control, HBoxContainer, IPanelContainer, InputEvent,
+    PanelContainer, RichTextLabel, Tween,
 };
 use godot::prelude::*;
 
@@ -23,15 +23,14 @@ use placeholders::process_placeholders;
 ///
 /// Either the name of the speaker or a special name
 /// if it's a narrator or unknown speaker
-pub fn spk_display(spk: &Speaker) -> String {
+pub fn spk_display(spk: &Speaker) -> GString {
     use Speaker::*;
 
-    match spk {
-        Named(ref v) => v,
-        Narrator => NARRATOR_DISPLAYNAME,
-        Unknown => UNKNOWN_DISPLAYNAME,
-    }
-    .to_owned()
+    tr(match spk {
+        Named(v) => v,
+        Narrator => "DG_SPK_NARRATOR",
+        Unknown => "DG_SPK_UNKNOWN",
+    })
 }
 
 #[derive(Clone)]
@@ -91,16 +90,6 @@ pub struct DialogBox {
     /// The tween that makes characters in the message
     /// become visible one by one
     text_tween: Option<Gd<Tween>>,
-
-    // independent from any interaction-related stuff,
-    // these are the actual strings that are displayed
-    //
-    // you can set these directly if you're doing something
-    // that's not part of an interaction
-    #[init(default = "Cherry".into())]
-    spk_txt: GString,
-    #[init(default = "[wave amp=50 freq=6]Hello, World![/wave]".into())]
-    msg_txt: GString,
 }
 
 #[godot_api]
@@ -108,8 +97,8 @@ impl DialogBox {
     #[func]
     pub fn do_draw(&mut self) {
         self.goto_current_page();
-        self.spk_txt().set_text(self.spk_txt.clone());
-        self.msg_txt().set_text(self.msg_txt.clone());
+        self.spk_txt().set_text(self.translated_speaker());
+        self.msg_txt().set_text(self.translated_message());
         self.tween_txt_visibility();
     }
 
@@ -127,13 +116,9 @@ impl DialogBox {
     }
 
     #[func]
-    pub fn singleton() -> Gd<Self> {
-        let ui_layer =
-            current_scene().get_node_as::<CanvasLayer>(UI_LAYER_NAME);
-
-        ui_layer
-            .try_get_node_as::<DialogBox>(DBOX_NODE_NAME)
-            .expect("no dbox found")
+    pub fn try_singleton() -> Option<Gd<Self>> {
+        let path = format!("{}/{}", UI_LAYER_NAME, DBOX_NODE_NAME);
+        current_scene().try_get_node_as::<DialogBox>(path)
     }
 
     /// Start tweening a text's visible characters from 0% to 100% visible...
@@ -163,12 +148,28 @@ impl DialogBox {
             let page = unwrap_fmt!(page, "Page #{} out of range!", pageno);
 
             self.update_meta(&page.metadata);
-            self.spk_txt = spk_display(&self.speaker.temporary).into();
-            self.msg_txt = process_placeholders(&page.content).into();
-        } else {
-            self.spk_txt = "".into();
-            self.msg_txt = "".into();
+        }
+    }
+
+    fn translated_speaker(&self) -> GString {
+        if self.current_ix.is_none() {
+            return "".into();
+        }
+
+        spk_display(&self.speaker.temporary)
+    }
+
+    fn translated_message(&self) -> GString {
+        let pageno = self.current_page_number;
+        let Some(ix) = self.current_ix.as_ref() else {
+            return "".into();
         };
+
+        let page = ix.pages.get(pageno);
+        let page = unwrap_fmt!(page, "Page #{} out of range!", pageno);
+        let content = tr(page.content.clone());
+
+        process_placeholders(&content.to_string()).into()
     }
 
     fn anim_player(&self) -> Gd<AnimationPlayer> {
@@ -214,9 +215,13 @@ impl DialogBox {
                 self.set_ix(new_ix.clone());
             }
 
-            Function(fn_id) => {
+            Function(fn_id, args) => {
                 let guard = self.base_mut();
-                let _ = call_global(fn_id).unwrap();
+                let args = args
+                    .into_iter()
+                    .map(|v| v.to_variant())
+                    .collect::<VariantArray>();
+                let _ = callv_global(fn_id, args).unwrap();
                 drop(guard);
             }
         }
@@ -258,8 +263,6 @@ impl DialogBox {
 
     #[func]
     pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
-        godot_print!("picked choice: {}", choice.get_name());
-
         // NOTE convention is that the agent is BEFORE the labels
         let picked_i = (choice.get_index() - 1) as usize;
         // godot_print!(">> {} @{}", choice.get_name(), picked_i);

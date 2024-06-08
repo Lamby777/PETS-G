@@ -6,6 +6,8 @@ pub mod choices;
 pub mod limiq;
 pub mod singleton;
 
+use crate::{Autoload as _, DialogBox, PlayerCB, StatsInterface};
+
 use derived_deref::{Deref, DerefMut};
 use godot::engine::object::ConnectFlags;
 use godot::engine::tween::TransitionType;
@@ -32,8 +34,19 @@ where
         })
 }
 
+pub fn tr(text: impl Into<StringName>) -> GString {
+    Engine::singleton().tr(text.into())
+}
+
 /// Convenience function to fade opacity shaders on/off
 pub fn fade_black<N>(black: Gd<N>, visible: bool, tween_time: f64)
+where
+    N: GodotClass + Inherits<ColorRect>,
+{
+    fade_black_f64(black, visible as u8 as f64, tween_time)
+}
+
+pub fn fade_black_f64<N>(black: Gd<N>, visible: f64, tween_time: f64)
 where
     N: GodotClass + Inherits<ColorRect>,
 {
@@ -51,18 +64,41 @@ where
         Ok(Variant::nil())
     });
 
-    let end_value = visible as u8 as f64;
-
     let start_value = material.get_shader_parameter("opacity".into());
 
     tween_method(
         callable,
         start_value,
-        end_value.to_variant(),
+        visible.to_variant(),
         tween_time,
         TransitionType::QUAD,
     )
     .unwrap();
+}
+
+pub use crate::tr_replace;
+/// Macro to call tr! and format the result.
+///
+/// Usage:
+/// ```
+/// tr_replace! {
+///     "TRANSLATION_KEY";
+///     format_key,
+///     // ... repeat as many as you like
+/// }
+/// ```
+#[macro_export]
+macro_rules! tr_replace {
+    ($tr_key:expr; $($key:ident),* $(,)?) => {{
+        let template = $crate::util::tr($tr_key).to_string();
+        $(
+        let key = concat!("{", stringify!($key), "}");
+        let val = &$key.to_string();
+        let template = template.replace(key, val);
+        )*
+
+        template
+    }};
 }
 
 pub use crate::connect;
@@ -90,7 +126,13 @@ macro_rules! connect {
 /// Returns the singleton instance of `PlayerCB`.
 /// So common that I might as well abbreviate it. :P
 pub fn pcb() -> Gd<PlayerCB> {
-    PlayerCB::singleton()
+    PlayerCB::try_singleton().unwrap()
+}
+
+/// Returns the singleton instance `StatsInterface`.
+/// So common that I might as well abbreviate it. :P
+pub fn si() -> Gd<StatsInterface> {
+    StatsInterface::singleton()
 }
 
 #[derive(Deref, DerefMut)]
@@ -98,7 +140,10 @@ pub fn pcb() -> Gd<PlayerCB> {
 pub struct GdW<T: GodotClass>(pub Gd<T>);
 
 pub fn start_ix(name: impl Into<String>) {
-    DialogBox::singleton().bind_mut().start_ix(name.into());
+    DialogBox::try_singleton()
+        .unwrap()
+        .bind_mut()
+        .start_ix(name.into());
 }
 
 /// Find n where the nth child of type `Filter` is named `name`.
@@ -311,7 +356,6 @@ pub fn current_scene() -> Gd<Node> {
 }
 
 pub use crate::change_scene;
-use crate::{DialogBox, PlayerCB};
 #[macro_export]
 macro_rules! change_scene {
     ($scene:expr) => {

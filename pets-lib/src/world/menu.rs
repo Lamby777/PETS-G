@@ -8,6 +8,8 @@ use godot::prelude::*;
 
 use crate::prelude::*;
 
+use super::inv_node::InventoryNode;
+
 #[derive(GodotClass)]
 #[class(init, base=Panel)]
 pub struct WorldMenu {
@@ -60,12 +62,19 @@ impl WorldMenu {
         self.open_or_close(!self.opened);
     }
 
+    fn open_inventory(&mut self) {
+        InventoryNode::try_singleton()
+            .unwrap()
+            .bind_mut()
+            .open(true);
+    }
+
     #[func]
     pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
         self.close();
 
         match choice.get_name().to_string().as_str() {
-            "Inventory" => todo!(),
+            "Inventory" => self.open_inventory(),
             "DebugQuit" => godot_tree().quit(),
             "DebugMenu" => start_ix("Debug Menu"),
 

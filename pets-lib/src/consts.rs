@@ -50,8 +50,6 @@ pub mod playercb {
 pub mod dialogue {
     use super::*;
 
-    pub const NARRATOR_DISPLAYNAME: &str = "";
-    pub const UNKNOWN_DISPLAYNAME: &str = "???";
     pub const DEFAULT_VOX: &str = "_";
 
     pub const UI_LAYER_NAME: &str = "UILayer";

@@ -4,7 +4,15 @@ use crate::prelude::*;
 use godot::prelude::*;
 
 fn end_interaction() {
-    DialogBox::singleton().bind_mut().end_interaction();
+    DialogBox::try_singleton()
+        .unwrap()
+        .bind_mut()
+        .end_interaction();
+}
+
+fn give_item(item: Item) {
+    let inv = si().bind_mut().save.inventory.clone();
+    inv.borrow_mut().push(item);
 }
 
 macro_rules! add_callables {
@@ -24,10 +32,12 @@ pub fn call_global(id: &str) -> GReturn {
 }
 
 /// Call a function registered in the global function table.
-pub fn callv_global(id: &str, args: VariantArray) -> GReturn {
+pub fn callv_global(func_id: &str, args: VariantArray) -> GReturn {
     let funcs = FUNCTIONS;
-    let func = funcs.get(id);
-    let func = unwrap_fmt!(func, "no function named {}", id);
+    let func = funcs.get(func_id);
+    let func = unwrap_fmt!(func, "no function named {}", func_id);
+
+    println!("{}", args.front().unwrap().to::<String>());
 
     let res = func.callv(args);
     Ok(res)
@@ -50,10 +60,36 @@ fn debug_battle(_args: GArgs) -> GReturn {
     Ok(Variant::nil())
 }
 
-fn debug_item(_args: GArgs) -> GReturn {
-    end_interaction();
+fn debug_item(args: GArgs) -> GReturn {
+    let item_id = args[0].to::<String>();
 
-    // TODO give player an item
+    dbg!(&args);
+
+    let quantity = args
+        .get(1)
+        .map(|v| v.try_to::<String>().ok())
+        .flatten()
+        .map(|v| v.parse().ok())
+        .flatten()
+        .unwrap_or(1);
+
+    println!("giving a {} (x{})", item_id, quantity);
+
+    // why tf do i have to do this?
+    let item = ITEM_REGISTRY
+        .get()
+        .unwrap()
+        .iter()
+        .find(|i| i.id == item_id);
+
+    let item = ribbons::unwrap_fmt!(item, "no item with id {}", item_id);
+
+    for _ in 0..quantity {
+        give_item(item.clone());
+    }
+
+    end_interaction();
+    start_ix("Debug Menu >> After Item");
 
     Ok(Variant::nil())
 }

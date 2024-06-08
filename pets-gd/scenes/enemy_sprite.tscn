@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://ywn8h01im5gx"]
+
+[ext_resource type="Texture2D" uid="uid://ced0gmuos2khr" path="res://assets/textures/enemies/anonm2.png" id="1_ef2js"]
+[ext_resource type="Texture2D" uid="uid://bo13i8l87s648" path="res://assets/textures/enemies/anonm2-run1.png" id="2_wlkn7"]
+[ext_resource type="Texture2D" uid="uid://q7m5bv0gpud" path="res://assets/textures/enemies/anonm2-run2.png" id="3_u8ffr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hs7pi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ef2js")
+}],
+"loop": true,
+"name": &"A_NONNY_MOUSE-Idle",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wlkn7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_u8ffr")
+}],
+"loop": true,
+"name": &"A_NONNY_MOUSE-Run",
+"speed": 6.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_hs7pi")
+animation = &"A_NONNY_MOUSE-Idle"

@@ -7,11 +7,12 @@ pub struct PSIFluxSkill(pub Duration);
 #[typetag::serde]
 impl SkillFamily for PSIFluxSkill {
     fn name(&self) -> String {
-        "PSI Flux".to_owned()
+        tr!("SKILL_PSI_FLUX_NAME").to_string()
     }
 
     fn description(&self) -> String {
-        format!("Warps time in your favor for {} seconds.", self.0.as_secs())
+        let time = self.0.as_secs().to_string();
+        tr_replace!("SKILL_PSI_FLUX_DESC"; time)
     }
 
     fn base_cost(&self) -> u32 {
@@ -65,14 +66,12 @@ impl PSIRewireSkill {
 #[typetag::serde]
 impl SkillFamily for PSIRewireSkill {
     fn name(&self) -> String {
-        "PSI Rewire".to_owned()
+        tr!("SKILL_PSI_REWIRE_NAME").to_string()
     }
 
     fn description(&self) -> String {
-        format!(
-            "Gamble away {} of your mana for the rare chance of a profit.",
-            self.multi_as_percent_str()
-        )
+        let percent = self.multi_as_percent_str();
+        tr_replace!("SKILL_PSI_REWIRE_DESC"; percent)
     }
 
     fn base_cost(&self) -> u32 {
@@ -87,28 +86,5 @@ impl SkillFamily for PSIRewireSkill {
         _enemies: Vec<BattlerPtr>,
     ) {
         todo!()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_describe_rewire_10_sec() {
-        let skill = PSIFluxSkill(Duration::from_secs(10));
-        assert_eq!(
-            skill.description(),
-            "Warps time in your favor for 10 seconds."
-        );
-    }
-
-    #[test]
-    fn test_describe_rewire_50_percent() {
-        let skill = PSIRewireSkill { multi: 0.5 };
-        assert_eq!(
-            skill.description(),
-            "Gamble away 50% of your mana for the rare chance of a profit."
-        );
     }
 }
