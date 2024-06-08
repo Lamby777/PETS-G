@@ -27,11 +27,22 @@ pub struct PCharNode {
 impl PCharNode {
     #[func]
     pub fn anim_move(&mut self, moving: bool, inputs: Vector2) {
-        let mode_str = if moving { "Run" } else { "Idle" };
+        let mode_str = self.anim_mode_str(moving);
         let anim_path = format!("parameters/{mode_str}/blend_position");
 
         self.anim_tree.set(anim_path.into(), Variant::from(inputs));
         self.anim_state.travel(mode_str.into());
+    }
+
+    fn anim_mode_str(&self, moving: bool) -> &'static str {
+        if true {
+            return "Wade";
+        }
+
+        match moving {
+            true => "Run",
+            false => "Idle",
+        }
     }
 }
 
