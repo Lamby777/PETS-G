@@ -2,6 +2,8 @@
 //! Data structures related to rhythm in battle
 //!
 
+use godot::prelude::*;
+
 #[derive(Clone, Copy, Debug)]
 /// The game's MIDI files have a special code for what each
 /// pitch means in terms of in-game beats.
@@ -47,3 +49,15 @@ impl RhythmState {
         *self = Self::default();
     }
 }
+
+#[derive(GodotClass)]
+#[class(init, base=AudioStreamPlayer)]
+pub struct BattleMusic {
+    base: Base<AudioStreamPlayer>,
+}
+
+#[godot_api]
+impl BattleMusic {}
+
+#[godot_api]
+impl IAudioStreamPlayer for BattleMusic {}
