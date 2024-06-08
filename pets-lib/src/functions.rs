@@ -48,10 +48,18 @@ const FUNCTIONS: LazyCell<FnTable> = LazyCell::new(|| {
     add_callables!(table; {
         debug_battle,
         debug_item,
+        debug_skill,
     });
 
     table
 });
+
+fn debug_skill(_args: GArgs) -> GReturn {
+    end_interaction();
+    start_ix("Debug Menu >> Skill");
+
+    Ok(Variant::nil())
+}
 
 fn debug_battle(_args: GArgs) -> GReturn {
     end_interaction();

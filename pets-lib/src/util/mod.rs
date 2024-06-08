@@ -146,6 +146,16 @@ pub fn start_ix(name: impl Into<String>) {
         .start_ix(name.into());
 }
 
+pub fn _start_ix_replace(
+    name: impl Into<String>,
+    replace: &[(String, String)],
+) {
+    DialogBox::try_singleton()
+        .unwrap()
+        .bind_mut()
+        .start_ix_replace(name.into(), replace.to_vec());
+}
+
 /// Find n where the nth child of type `Filter` is named `name`.
 pub fn _index_of_child_with_name<Filter, N>(
     node: Gd<N>,
