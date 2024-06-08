@@ -19,20 +19,6 @@ mod placeholders;
 use dchoice::DChoice;
 use placeholders::process_placeholders;
 
-/// Turn a Speaker into a displayable name
-///
-/// Either the name of the speaker or a special name
-/// if it's a narrator or unknown speaker
-pub fn spk_display(spk: &Speaker) -> GString {
-    use Speaker::*;
-
-    tr(match spk {
-        Named(v) => v,
-        Narrator => "DG_SPK_NARRATOR",
-        Unknown => "DG_SPK_UNKNOWN",
-    })
-}
-
 #[derive(Clone)]
 pub struct MetaPair<T> {
     pub temporary: T,
@@ -78,6 +64,7 @@ pub struct DialogBox {
     current_ix: Option<Interaction>,
     current_page_number: usize,
     active: bool,
+    replaces: Vec<(String, String)>,
 
     #[init(default = onready_node(&base, "VBox/Choices/ChoiceAgent"))]
     choice_agent: OnReady<Gd<ChoiceAgent>>,
@@ -164,7 +151,13 @@ impl DialogBox {
             return "".into();
         }
 
-        spk_display(&self.speaker.temporary)
+        use Speaker::*;
+
+        tr(match &self.speaker.temporary {
+            Named(v) => replace_str_all(v, &self.replaces),
+            Narrator => "DG_SPK_NARRATOR".to_owned(),
+            Unknown => "DG_SPK_UNKNOWN".to_owned(),
+        })
     }
 
     fn translated_message(&self) -> GString {
@@ -175,9 +168,12 @@ impl DialogBox {
 
         let page = ix.pages.get(pageno);
         let page = unwrap_fmt!(page, "Page #{} out of range!", pageno);
-        let content = tr(page.content.clone());
 
-        process_placeholders(&content.to_string()).into()
+        let content = page.content.clone();
+        let content = replace_str_all(&content, &self.replaces);
+        let content = tr(content).to_string();
+
+        process_placeholders(&content).into()
     }
 
     fn anim_player(&self) -> Gd<AnimationPlayer> {
@@ -386,9 +382,10 @@ impl DialogBox {
         ix.pages.len() == 1
     }
 
-    fn set_ix(&mut self, ix: Interaction, _replace: Vec<(String, String)>) {
+    fn set_ix(&mut self, ix: Interaction, replaces: Vec<(String, String)>) {
         self.current_ix = Some(ix);
         self.current_page_number = 0;
+        self.replaces = replaces;
         self.do_draw();
 
         if self.is_one_page() {
