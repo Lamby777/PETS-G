@@ -16,10 +16,10 @@ $ debug_battle
 > Item
 @ Debug Menu >> Item
 
-> Nah...
-
 > Pg. 2
 @ Debug Menu >> Page2
+
+> Nah...
 
 ---
 % Debug Menu >> Page2
@@ -27,7 +27,9 @@ NAME Agent Cascade
 
 Alright then. How about these?
 
-> Test1
+> Skill Desc
+$ debug_skill
+
 > Test2
 > Test3
 
@@ -48,5 +50,11 @@ $ debug_item trusty_rusty_pistol 5
 NAME Agent Cascade
 
 Here you go!
+
+---
+% Debug Menu >> Skill
+NAME Agent Cascade
+
+Skill Info Here
 
 ---

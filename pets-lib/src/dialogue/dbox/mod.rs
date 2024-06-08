@@ -104,6 +104,14 @@ impl DialogBox {
 
     #[func]
     pub fn start_ix(&mut self, ix_id: String) {
+        self.start_ix_replace(ix_id, vec![]);
+    }
+
+    pub fn start_ix_replace(
+        &mut self,
+        ix_id: String,
+        replace: Vec<(String, String)>,
+    ) {
         let ix = ix_map().get(&ix_id);
         let ix = unwrap_fmt!(
             ix,
@@ -111,7 +119,7 @@ impl DialogBox {
             ix_id,
         );
 
-        self.set_ix(ix.clone());
+        self.set_ix(ix.clone(), replace);
         self.open();
     }
 
@@ -212,7 +220,7 @@ impl DialogBox {
                     ix_id,
                 );
 
-                self.set_ix(new_ix.clone());
+                self.set_ix(new_ix.clone(), vec![]);
             }
 
             Function(fn_id, args) => {
@@ -378,7 +386,7 @@ impl DialogBox {
         ix.pages.len() == 1
     }
 
-    pub fn set_ix(&mut self, ix: Interaction) {
+    fn set_ix(&mut self, ix: Interaction, _replace: Vec<(String, String)>) {
         self.current_ix = Some(ix);
         self.current_page_number = 0;
         self.do_draw();
