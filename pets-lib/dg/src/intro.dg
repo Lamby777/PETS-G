@@ -1,0 +1,44 @@
+% Intro #1
+###
+
+Link NAME [ETHAN]
+VOX Default
+
+Link NAME [MOM]
+VOX Default
+
+Link NAME [DAD]
+VOX Default
+
+###
+---
+NAME [MOM]
+
+DG_INTRO1_COMEUNPACK
+
+---
+% Intro #2
+NAME [MOM]
+
+DG_INTRO2_OVERHERE
+
+> DG_INTRO2_GREAT
+@ Intro #2 >> Great
+
+> DG_INTRO2_ALRIGHT
+@ Intro #2 >> Alright
+
+---
+% Intro #2 >> Great
+NAME [MOM]
+
+DG_INTRO2_GREAT_MOM
+
+---
+% Intro #2 >> Alright
+NAME [MOM]
+
+DG_INTRO2_ALRIGHT_MOM
+
+---
+
