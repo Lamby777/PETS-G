@@ -37,6 +37,8 @@ impl AttackSkill {
     }
 
     fn describe_damage(&self) -> Option<String> {
+        let element = self.element.describe();
+
         // i love rust ^w^
         if let Some(0 | 6..) = self.power {
             panic!("power should be `Some(1..=5)` or `None`");
@@ -44,9 +46,10 @@ impl AttackSkill {
 
         let power = self.power?.to_string();
         let adjective = format!("SKILL_ATTACK_POWER_{}", power);
+
         Some(tr_replace! {
             "SKILL_ATTACK_POWER_DESCRIBE";
-            adjective
+            adjective, element
         })
     }
 }
@@ -62,17 +65,28 @@ impl SkillFamily for AttackSkill {
         let dmg = self.describe_damage();
         let fx = self.status_effect.as_ref().map(|fx| fx.describe());
 
-        let p1 = match (dmg, fx) {
-            (Some(dmg), Some(fx)) => format!("{} {}", dmg, fx),
+        let part1 = match (dmg, fx) {
+            // Combine both damage and effect descriptions
+            (Some(dmg), Some(fx)) => tr_replace! {
+                "SKILL_ATTACK_DESCRIBE_COMBINED";
+                dmg, fx
+            },
+
+            // Use whichever is present
             (Some(dmg), None) => dmg,
             (None, Some(fx)) => fx,
+
+            // Can't have an attack that does 0 damage and no effect
             (None, None) => panic!("no damage or effect to format"),
         };
 
         if self.plural {
-            tr!("{part1} Targets all enemies!", part1 = p1).to_string()
+            tr_replace! {
+                "SKILL_ATTACK_PLURAL_DESC";
+                part1
+            }
         } else {
-            p1
+            part1
         }
     }
 
