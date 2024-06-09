@@ -1,3 +1,5 @@
+use godot::prelude::*;
+
 use super::skills::Element;
 use crate::prelude::*;
 
@@ -38,15 +40,19 @@ impl Affinities {
             return None;
         })
     }
+}
 
-    pub fn describe(&self) -> &str {
+impl Describe for Affinities {
+    fn describe(&self) -> GString {
         use Affinities::*;
 
+        // TODO use `tr`
         match self {
             Specific(_) => "Specialized",
             AllElements => "Almighty",
             Magical => "Magical",
             Physical => "Physical",
         }
+        .into()
     }
 }

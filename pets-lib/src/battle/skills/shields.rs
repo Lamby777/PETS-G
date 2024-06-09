@@ -109,7 +109,7 @@ impl SkillFamily for ShieldSkill {
 
         let affinity = match &self.affinity {
             Specific(elements) => {
-                let iter = elements.iter().map(|x| x.describe_adj());
+                let iter = elements.iter().map(|x| x.adjective());
                 join_words(iter, "and", Some("only"))
                     .expect("shield of many elements has empty block list")
             }

@@ -37,7 +37,7 @@ impl AttackSkill {
     }
 
     fn describe_damage(&self) -> Option<String> {
-        let element = self.element.describe_adj();
+        let element = self.element.adjective();
 
         // i love rust ^w^
         if let Some(0 | 6..) = self.power {
@@ -79,10 +79,11 @@ impl SkillFamily for AttackSkill {
             (Some(dmg), Some(fx)) => tr_replace! {
                 "SKILL_ATTACK_DESCRIBE_COMBINED";
                 dmg, fx
-            },
+            }
+            .into(),
 
             // Use whichever is present
-            (Some(dmg), None) => dmg,
+            (Some(dmg), None) => dmg.into(),
             (None, Some(fx)) => fx,
 
             // Can't have an attack that does 0 damage and no effect
@@ -95,7 +96,7 @@ impl SkillFamily for AttackSkill {
                 part1
             }
         } else {
-            part1
+            part1.to_string()
         }
     }
 
