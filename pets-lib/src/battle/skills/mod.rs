@@ -107,22 +107,7 @@ impl Element {
 
     /// User-facing string for formatting the element of a skill
     /// Handles the "edge cases" of grammar like "Fuzz" => "Fuzzy"
-    pub fn describe(&self) -> String {
-        use Element::*;
-
-        match self {
-            Blade => "Slash",
-            Kinetic => "Kinetic",
-
-            Electric => "Electric",
-            Psi => "Psychic",
-            Spirit => "Supernatural",
-
-            Fuzz => "Fuzzy",
-            Whip => "Whip",
-
-            _ => return format!("{}-based", self),
-        }
-        .to_owned()
+    pub fn describe_adj(&self) -> GString {
+        tr(&format!("ELEMENT_ADJ_{:?}", self))
     }
 }
