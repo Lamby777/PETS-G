@@ -8,12 +8,14 @@ use godot::engine::file_access::ModeFlags;
 use godot::engine::FileAccess;
 
 use super::charmap::default_charmap;
+use super::scrapbook::Scrapbook;
 
 /// All the data saved to one of the save file slots
 #[derive(Serialize, Deserialize)]
 pub struct SaveFile {
     pub chars: CharMap,
     pub inventory: Rc<RefCell<Vec<Item>>>,
+    pub scrapbook: Scrapbook,
 }
 
 #[allow(unused)]
@@ -24,6 +26,7 @@ impl SaveFile {
         Self {
             chars,
             inventory: Rc::new(RefCell::new(vec![])),
+            scrapbook: Scrapbook::empty(),
         }
     }
 
