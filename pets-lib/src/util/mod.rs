@@ -3,6 +3,7 @@
 //!
 
 pub mod choices;
+pub mod describe;
 pub mod limiq;
 pub mod singleton;
 
