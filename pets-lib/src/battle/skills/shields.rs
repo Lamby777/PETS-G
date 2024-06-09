@@ -7,10 +7,6 @@ use super::*;
 #[derive(Serialize, Deserialize)]
 pub struct ShieldSkill {
     /// Element of the shield
-    ///
-    /// Use `set_affinity` to set this, not directly.
-    /// The setter will handle converting lists of specific
-    /// elements into more general affinities where possible.
     pub affinity: Affinities,
 
     /// How many hits the shield can take
@@ -61,10 +57,6 @@ impl ShieldSkill {
         })
     }
 
-    pub fn set_affinity(&mut self, aff: Affinities) {
-        self.affinity = aff.coerce_specific().unwrap_or(aff);
-    }
-
     /// "Wide" or "Narrow"
     fn shield_width_str(&self) -> GString {
         tr(match self.plural {
@@ -96,27 +88,14 @@ impl SkillFamily for ShieldSkill {
     }
 
     fn description(&self) -> String {
-        use Affinities::*;
-
         let name = self.shield_type_str();
+        let affinity = self.affinity.describe();
         let potency = ShieldSkill::multi_description(self.multiplier);
         let width = self.shield_width_str();
 
         let reflect_action = match self.reflect {
             true => tr!("SKILL_SHIELD_REFLECTIVITY_TRUE"),
             false => tr!("SKILL_SHIELD_REFLECTIVITY_FALSE"),
-        };
-
-        let affinity = match &self.affinity {
-            Specific(elements) => {
-                let iter = elements.iter().map(|x| x.adjective());
-                join_words(iter, "and", Some("only"))
-                    .expect("shield of many elements has empty block list")
-            }
-
-            AllElements => "all kinds of".to_owned(),
-            Magical => "magical".to_owned(),
-            Physical => "physical".to_owned(),
         };
 
         let part1 = tr_replace! {
