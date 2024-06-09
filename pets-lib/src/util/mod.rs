@@ -7,6 +7,7 @@ pub mod describe;
 pub mod limiq;
 pub mod singleton;
 
+pub use crate::describe::Describe;
 use crate::{Autoload as _, DialogBox, PlayerCB, StatsInterface};
 
 use derived_deref::{Deref, DerefMut};
