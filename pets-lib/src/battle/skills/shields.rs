@@ -79,7 +79,7 @@ impl SkillFamily for ShieldSkill {
     fn name(&self) -> String {
         let name = self.shield_type_str();
         let width = self.shield_width_str();
-        let affinity = self.affinity.describe();
+        let affinity = describe_damage_blocked(&self.affinity);
 
         tr_replace! {
             "SKILL_SHIELD_NAME";
