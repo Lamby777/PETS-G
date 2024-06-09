@@ -199,7 +199,8 @@ offset_bottom = -16.0
 
 [node name="InventoryText" type="BoxContainer" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(1920, 0)
+clip_contents = true
+custom_minimum_size = Vector2(1920, 168)
 layout_mode = 0
 offset_top = -176.0
 offset_right = 1920.0

@@ -6,13 +6,13 @@ pub struct AttackSkill {
     pub tr_key: String,
 
     pub element: Element,
-    pub power: u8,
+    pub power: Option<u8>,
     pub plural: bool,
-    pub status_effect: Option<ChanceOfEffect>,
+    pub status_effect: Option<EffectAndChance>,
 }
 
 impl AttackSkill {
-    pub fn new(tr_key: &str, element: Element, power: u8) -> Self {
+    pub fn new(tr_key: &str, element: Element, power: Option<u8>) -> Self {
         Self {
             tr_key: tr_key.to_owned(),
             element,
@@ -27,7 +27,7 @@ impl AttackSkill {
         effect: StatusEffect,
         chance: EffectChance,
     ) -> Self {
-        self.status_effect = Some(ChanceOfEffect::new(effect, chance));
+        self.status_effect = Some(EffectAndChance::new(effect, chance));
         self
     }
 
@@ -36,22 +36,19 @@ impl AttackSkill {
         self
     }
 
-    fn describe_power(&self) -> Option<&str> {
-        Some(match self.power {
-            0 => return None,
-            1 => "faint",
-            2 => "weak",
-            3 => "medium",
-            4 => "strong",
-            5 => "massive",
-            _ => unreachable!(),
-        })
-    }
-
     fn describe_damage(&self) -> Option<String> {
-        self.describe_power().map(|power| {
-            let element = self.element.describe();
-            format!("Deals {} {} damage.", power, element)
+        let element = self.element.describe_adj();
+
+        // i love rust ^w^
+        if let Some(0 | 6..) = self.power {
+            panic!("power should be `Some(1..=5)` or `None`");
+        }
+
+        let adjective = tr(&format!("SKILL_ATTACK_POWER_{}", self.power?));
+
+        Some(tr_replace! {
+            "SKILL_ATTACK_POWER_DESCRIBE";
+            adjective, element
         })
     }
 }
@@ -59,7 +56,17 @@ impl AttackSkill {
 #[typetag::serde]
 impl SkillFamily for AttackSkill {
     fn name(&self) -> String {
-        tr!("{}", self.tr_key.clone()).to_string()
+        let family = tr!("{}", self.tr_key.clone());
+        let power = self.power.map(|p| tr(&format!("SKILL_ATTACK_TIER_{}", p)));
+
+        match power {
+            Some(power) => tr_replace! {
+                "SKILL_ATTACK_NAME_COMBINED";
+                family, power
+            },
+
+            None => family.to_string(),
+        }
     }
 
     /// Panics if neither damage nor effect are present
@@ -67,17 +74,28 @@ impl SkillFamily for AttackSkill {
         let dmg = self.describe_damage();
         let fx = self.status_effect.as_ref().map(|fx| fx.describe());
 
-        let p1 = match (dmg, fx) {
-            (Some(dmg), Some(fx)) => format!("{} {}", dmg, fx),
+        let part1 = match (dmg, fx) {
+            // Combine both damage and effect descriptions
+            (Some(dmg), Some(fx)) => tr_replace! {
+                "SKILL_ATTACK_DESCRIBE_COMBINED";
+                dmg, fx
+            },
+
+            // Use whichever is present
             (Some(dmg), None) => dmg,
             (None, Some(fx)) => fx,
+
+            // Can't have an attack that does 0 damage and no effect
             (None, None) => panic!("no damage or effect to format"),
         };
 
         if self.plural {
-            tr!("{part1} Targets all enemies!", part1 = p1).to_string()
+            tr_replace! {
+                "SKILL_ATTACK_PLURAL_DESC";
+                part1
+            }
         } else {
-            p1
+            part1
         }
     }
 
@@ -99,54 +117,3 @@ impl SkillFamily for AttackSkill {
         todo!();
     }
 }
-
-// #[cfg(test)]
-// mod tests {
-//     use super::*;
-//
-//     #[test]
-//     fn test_describe_dmg_low_chance_effect() {
-//         let skill = AttackSkill::new("Caustics C", Element::Fire, 3)
-//             .with_effect(StatusEffect::Burning, EffectChance::Rare);
-//
-//         assert_eq!(
-//             skill.description(),
-//             "Deals medium Fire-based damage. Low chance of inflicting On Fire."
-//         );
-//     }
-//
-//     #[test]
-//     fn test_describe_dmg() {
-//         let skill = AttackSkill::new("Caustics A", Element::Fire, 1);
-//
-//         assert_eq!(skill.description(), "Deals faint Fire-based damage.");
-//     }
-//
-//     #[test]
-//     fn test_describe_high_chance_effect() {
-//         let skill = AttackSkill::new("Flame B", Element::Fire, 0)
-//             .with_effect(StatusEffect::Burning, EffectChance::Common);
-//
-//         assert_eq!(skill.description(), "High chance of inflicting On Fire.");
-//     }
-//
-//     #[test]
-//     fn test_describe_dmg_nonbased() {
-//         let skill = AttackSkill::new("Psi D", Element::Psi, 4);
-//
-//         assert_eq!(skill.description(), "Deals strong Psychic damage.");
-//     }
-//
-//     #[test]
-//     #[ignore = "uses tr!"]
-//     fn test_describe_molotov_cocktail() {
-//         let skill = AttackSkill::new("Flare C", Element::Fire, 0)
-//             .with_effect(StatusEffect::Burning, EffectChance::Guaranteed)
-//             .make_plural();
-//
-//         assert_eq!(
-//             skill.description(),
-//             "Always inflicts On Fire. Targets all enemies!"
-//         );
-//     }
-// }

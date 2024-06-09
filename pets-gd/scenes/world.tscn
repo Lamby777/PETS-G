@@ -123,6 +123,8 @@ unique_name_in_owner = true
 visible = false
 
 [node name="DialogBox" parent="UILayer" instance=ExtResource("2_lgtmm")]
+offset_left = -704.0
+offset_right = 704.0
 
 [node name="WorldMenu" parent="UILayer" instance=ExtResource("2_6orff")]
 
@@ -158,7 +160,7 @@ position = Vector2(416, 1056)
 scale = Vector2(3, -2)
 
 [node name="DebugItem" parent="YSort/Room" instance=ExtResource("5_uar2c")]
-interaction_id = "Debug Menu >> Item"
+function_name = "debug_skill"
 position = Vector2(-192, 64)
 
 [node name="TeleporterDemo" type="Node2D" parent="YSort/Room"]

@@ -59,7 +59,7 @@ pub struct ShieldSkill {
     /// Use `set_affinity` to set this, not directly.
     /// The setter will handle converting lists of specific
     /// elements into more general affinities where possible.
-    affinity: ShieldAffinity,
+    pub affinity: ShieldAffinity,
 
     /// How many hits the shield can take
     pub hits: u8,
@@ -76,35 +76,37 @@ pub struct ShieldSkill {
 }
 
 impl ShieldSkill {
-    fn multi_to_str(multi: f64) -> &'static str {
+    fn multi_description(multi: f64) -> GString {
         if multi < 0.0 {
             panic!("shield with negative multiplier");
         }
 
-        if multi == 0.0 {
-            "impenetrable"
+        let key = if multi == 0.0 {
+            "SKILL_SHIELD_POTENCY_IMPENETRABLE"
         } else if multi <= 0.3 {
-            "sturdy"
+            "SKILL_SHIELD_POTENCY_STURDY"
         } else if multi <= 0.7 {
-            "fair"
+            "SKILL_SHIELD_POTENCY_FAIR"
         } else if multi <= 1.0 {
-            "weak"
+            "SKILL_SHIELD_POTENCY_WEAK"
         } else {
             // if your shield powers have been weakened past 1.0...
-            "nullified"
-        }
+            "SKILL_SHIELD_POTENCY_NULLIFIED"
+        };
+
+        tr(key)
     }
 
-    fn hits_to_str(hits: u8) -> &'static str {
-        match hits {
-            0 => unreachable!("shield that can't withstand any hits"),
-            1 => "once",
-            2..=3 => "a couple times",
-            4..=6 => "several times",
-            7..=10 => "many times",
-            11..=15 => "for a while",
-            _ => unreachable!("shield that can withstand over 15 hits"),
-        }
+    fn hits_to_str(hits: u8) -> GString {
+        tr(match hits {
+            0 => "SKILL_SHIELD_HITS_NONE",
+            1 => "SKILL_SHIELD_HITS_ONE",
+            2..=3 => "SKILL_SHIELD_HITS_COUPLE",
+            4..=6 => "SKILL_SHIELD_HITS_SEVERAL",
+            7..=10 => "SKILL_SHIELD_HITS_MANY",
+            11.. => "SKILL_SHIELD_HITS_WHILE",
+            // _ => unreachable!("shield that can withstand over 15 hits"),
+        })
     }
 
     pub fn set_affinity(&mut self, aff: ShieldAffinity) {
@@ -113,18 +115,18 @@ impl ShieldSkill {
 
     /// "Wide" or "Narrow"
     fn shield_width_str(&self) -> GString {
-        match self.plural {
-            true => tr!("SKILL_SHIELD_WIDTH_WIDE"),
-            false => tr!("SKILL_SHIELD_WIDTH_NARROW"),
-        }
+        tr(match self.plural {
+            true => "SKILL_SHIELD_WIDTH_WIDE",
+            false => "SKILL_SHIELD_WIDTH_NARROW",
+        })
     }
 
     /// "Shield" or "Mirror"
     fn shield_type_str(&self) -> GString {
-        match self.reflect {
-            true => tr!("SKILL_SHIELD_NAME_MIRROR"),
-            false => tr!("SKILL_SHIELD_NAME_SHIELD"),
-        }
+        tr(match self.reflect {
+            true => "SKILL_SHIELD_NAME_MIRROR",
+            false => "SKILL_SHIELD_NAME_SHIELD",
+        })
     }
 }
 
@@ -145,7 +147,7 @@ impl SkillFamily for ShieldSkill {
         use ShieldAffinity::*;
 
         let name = self.shield_type_str();
-        let potency = ShieldSkill::multi_to_str(self.multiplier);
+        let potency = ShieldSkill::multi_description(self.multiplier);
         let width = self.shield_width_str();
 
         let reflect_action = match self.reflect {
@@ -155,7 +157,7 @@ impl SkillFamily for ShieldSkill {
 
         let affinity = match &self.affinity {
             Specific(elements) => {
-                let iter = elements.iter().map(|x| x.describe());
+                let iter = elements.iter().map(|x| x.describe_adj());
                 join_words(iter, "and", Some("only"))
                     .expect("shield of many elements has empty block list")
             }
@@ -170,12 +172,10 @@ impl SkillFamily for ShieldSkill {
             width, potency, name, reflect_action, affinity,
         };
 
-        match self.hits {
-            0 => format!("{}. It probably won't last...", potency),
-            hits => {
-                let hits = ShieldSkill::hits_to_str(hits);
-                format!("{} {}.", part1, hits)
-            }
+        let hits_str = ShieldSkill::hits_to_str(self.hits);
+        tr_replace! {
+            "SKILL_SHIELD_COMBINE_PARTS";
+            part1, hits_str
         }
     }
 

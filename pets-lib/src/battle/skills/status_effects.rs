@@ -8,19 +8,19 @@ use super::*;
 
 /// status effect from a skill, and its chances
 #[derive(Serialize, Deserialize)]
-pub struct ChanceOfEffect {
+pub struct EffectAndChance {
     pub effect: StatusEffect,
     pub chance: EffectChance,
 }
 
-impl ChanceOfEffect {
+impl EffectAndChance {
     pub fn new(effect: StatusEffect, chance: EffectChance) -> Self {
         Self { effect, chance }
     }
 
     pub fn describe(&self) -> String {
-        let template = self.chance.description_tr_template();
-        template.replace("{fx}", &self.effect.to_string())
+        let fx = self.effect.to_string();
+        tr_replace! { self.chance.description_tr_template(); fx }
     }
 }
 
@@ -33,7 +33,7 @@ pub enum EffectChance {
 
 impl EffectChance {
     /// Translation template for the chance of a status
-    /// effect To be used in skill descriptions
+    /// effect to be used in skill descriptions
     pub fn description_tr_template(&self) -> String {
         use EffectChance::*;
 

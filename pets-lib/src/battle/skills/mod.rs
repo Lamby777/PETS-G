@@ -3,7 +3,7 @@ use crate::prelude::*;
 
 use std::fmt;
 
-use godot::engine::Engine;
+use godot::prelude::*;
 use godot::tools::tr;
 use strum::{EnumIter, IntoEnumIterator};
 
@@ -15,7 +15,12 @@ mod buffs;
 mod other;
 mod recovery;
 mod shields;
-mod support;
+
+pub(crate) use attack::AttackSkill;
+pub(crate) use buffs::BuffSkill;
+pub(crate) use other::{PSIFluxSkill, PSIRewireSkill};
+pub(crate) use recovery::RecoverySkill;
+pub(crate) use shields::{ShieldAffinity, ShieldSkill};
 
 type BattlerPtr = Rc<RefCell<dyn Battler>>;
 
@@ -102,22 +107,7 @@ impl Element {
 
     /// User-facing string for formatting the element of a skill
     /// Handles the "edge cases" of grammar like "Fuzz" => "Fuzzy"
-    pub fn describe(&self) -> String {
-        use Element::*;
-
-        match self {
-            Blade => "Slash",
-            Kinetic => "Kinetic",
-
-            Electric => "Electric",
-            Psi => "Psychic",
-            Spirit => "Supernatural",
-
-            Fuzz => "Fuzzy",
-            Whip => "Whip",
-
-            _ => return format!("{}-based", self),
-        }
-        .to_owned()
+    pub fn describe_adj(&self) -> GString {
+        tr(&format!("ELEMENT_ADJ_{:?}", self))
     }
 }

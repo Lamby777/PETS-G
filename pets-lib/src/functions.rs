@@ -1,5 +1,6 @@
 use std::cell::LazyCell;
 
+use crate::battle::skills::{AttackSkill, Element, SkillFamily as _};
 use crate::prelude::*;
 use godot::prelude::*;
 
@@ -37,8 +38,6 @@ pub fn callv_global(func_id: &str, args: VariantArray) -> GReturn {
     let func = funcs.get(func_id);
     let func = unwrap_fmt!(func, "no function named {}", func_id);
 
-    println!("{}", args.front().unwrap().to::<String>());
-
     let res = func.callv(args);
     Ok(res)
 }
@@ -48,10 +47,30 @@ const FUNCTIONS: LazyCell<FnTable> = LazyCell::new(|| {
     add_callables!(table; {
         debug_battle,
         debug_item,
+        debug_skill,
     });
 
     table
 });
+
+fn debug_skill(_args: GArgs) -> GReturn {
+    end_interaction();
+
+    let skill = AttackSkill {
+        tr_key: "SKILL_ATTACK_FIRE_DMG_NAME".to_owned(),
+        element: Element::Fire,
+        power: Some(1),
+        plural: true,
+        status_effect: None,
+    };
+
+    start_ix_replace("Debug Menu >> Skill", &[
+        ("{SKILL_NAME}".to_owned(), skill.name()),
+        ("{SKILL_DESC}".to_owned(), skill.description()),
+    ]);
+
+    Ok(Variant::nil())
+}
 
 fn debug_battle(_args: GArgs) -> GReturn {
     end_interaction();

@@ -17,6 +17,12 @@ use godot::engine::{
 };
 use godot::prelude::*;
 
+pub fn replace_str_all(text: &str, replaces: &[(String, String)]) -> String {
+    replaces
+        .into_iter()
+        .fold(text.to_owned(), |text, (from, to)| text.replace(from, to))
+}
+
 pub fn disconnect_signal<N, SN>(node: &mut Gd<N>, signal: SN)
 where
     N: Inherits<Node>,
@@ -144,6 +150,21 @@ pub fn start_ix(name: impl Into<String>) {
         .unwrap()
         .bind_mut()
         .start_ix(name.into());
+}
+
+pub fn start_ix_replace<S>(name: impl Into<String>, replace: &[(S, S)])
+where
+    S: Into<String> + Clone,
+{
+    let replace = replace
+        .iter()
+        .map(|(a, b)| (a.clone().into(), b.clone().into()))
+        .collect::<Vec<_>>();
+
+    DialogBox::try_singleton()
+        .unwrap()
+        .bind_mut()
+        .start_ix_replace(name.into(), replace.to_vec());
 }
 
 /// Find n where the nth child of type `Filter` is named `name`.
