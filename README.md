@@ -16,7 +16,7 @@ control of your own hardware overly complicated... and is also open-source! <3
 
 ---
 
-On Godot version 4.2.1
+On Godot version 4.2.2
 
 Using [godot-rust/gdext](https://github.com/godot-rust/gdextension) for most of
 the stuff, because of the type system. Prefer GDScript for things that probably
