@@ -44,8 +44,7 @@ impl AttackSkill {
             panic!("power should be `Some(1..=5)` or `None`");
         }
 
-        let power = self.power?.to_string();
-        let adjective = tr(&format!("SKILL_ATTACK_POWER_{}", power));
+        let adjective = tr(&format!("SKILL_ATTACK_POWER_{}", self.power?));
 
         Some(tr_replace! {
             "SKILL_ATTACK_POWER_DESCRIBE";
@@ -57,7 +56,17 @@ impl AttackSkill {
 #[typetag::serde]
 impl SkillFamily for AttackSkill {
     fn name(&self) -> String {
-        tr!("{}", self.tr_key.clone()).to_string()
+        let family = tr!("{}", self.tr_key.clone());
+        let power = self.power.map(|p| tr(&format!("SKILL_ATTACK_TIER_{}", p)));
+
+        match power {
+            Some(power) => tr_replace! {
+                "SKILL_ATTACK_NAME_COMBINED";
+                family, power
+            },
+
+            None => family.to_string(),
+        }
     }
 
     /// Panics if neither damage nor effect are present
