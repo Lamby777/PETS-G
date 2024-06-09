@@ -59,7 +59,7 @@ pub struct ShieldSkill {
     /// Use `set_affinity` to set this, not directly.
     /// The setter will handle converting lists of specific
     /// elements into more general affinities where possible.
-    affinity: ShieldAffinity,
+    pub affinity: ShieldAffinity,
 
     /// How many hits the shield can take
     pub hits: u8,
@@ -76,23 +76,25 @@ pub struct ShieldSkill {
 }
 
 impl ShieldSkill {
-    fn multi_to_str(multi: f64) -> &'static str {
+    fn multi_description(multi: f64) -> GString {
         if multi < 0.0 {
             panic!("shield with negative multiplier");
         }
 
-        if multi == 0.0 {
-            "impenetrable"
+        let key = if multi == 0.0 {
+            "SKILL_SHIELD_POTENCY_IMPENETRABLE"
         } else if multi <= 0.3 {
-            "sturdy"
+            "SKILL_SHIELD_POTENCY_STURDY"
         } else if multi <= 0.7 {
-            "fair"
+            "SKILL_SHIELD_POTENCY_FAIR"
         } else if multi <= 1.0 {
-            "weak"
+            "SKILL_SHIELD_POTENCY_WEAK"
         } else {
             // if your shield powers have been weakened past 1.0...
-            "nullified"
-        }
+            "SKILL_SHIELD_POTENCY_NULLIFIED"
+        };
+
+        tr(key)
     }
 
     fn hits_to_str(hits: u8) -> &'static str {
@@ -145,7 +147,7 @@ impl SkillFamily for ShieldSkill {
         use ShieldAffinity::*;
 
         let name = self.shield_type_str();
-        let potency = ShieldSkill::multi_to_str(self.multiplier);
+        let potency = ShieldSkill::multi_description(self.multiplier);
         let width = self.shield_width_str();
 
         let reflect_action = match self.reflect {

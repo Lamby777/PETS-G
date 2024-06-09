@@ -16,7 +16,7 @@ mod midi;
 mod player;
 mod rhythm;
 #[allow(unused)]
-mod skills;
+pub mod skills;
 mod stat_translation;
 
 use player::BattleIcon;
