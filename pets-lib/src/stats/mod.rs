@@ -166,6 +166,9 @@ pub enum StatusEffect {
 
     /// Less lenient music timing.
     Tired,
+
+    /// No physical attacks, but PK is fine
+    Disarmed,
 }
 
 impl Display for StatusEffect {
