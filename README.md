@@ -39,11 +39,11 @@ You're probably gonna want to spend most of your time in the `pets-lib` folder.
 This is where the Rust side of the codebase is in. The `pets-gd` folder has the
 Godot project, but that's edited with the actual Godot editor.
 
-There are 2 quickstart scripts in `pets-lib` for my CLI text editor bois. The
-`run` script just opens the main scene with whatever arguments you give. The
-`battle` one similarly just opens the battle scene. This is pretty nice for
-testing purposes, but don't worry about reloading each time... Hot reloads are
-now supported.
+There's a quickstart script in `pets-lib` for my CLI text editor bois. The
+`run` script just opens the main scene with whatever arguments you give. This
+is pretty nice for testing purposes, but don't worry about reloading the editor
+each time... Hot reloads are now supported. You should only have to reload it when
+making a new class or changing fields on a class, or anything along those lines.
 
 Refer to
 [this wiki page](https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html)
