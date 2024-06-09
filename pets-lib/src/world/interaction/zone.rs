@@ -18,6 +18,10 @@ pub struct InteractionZone {
     interaction_id: GString,
 
     #[export]
+    /// The function (from the global functions table) that gets called
+    function_name: GString,
+
+    #[export]
     /// The beacon this one sends you to
     beacon_target: NodePath,
 
@@ -33,8 +37,20 @@ impl InteractionZone {
         if !ix_id.is_empty() {
             start_ix(ix_id);
 
-            // A zone can't be both a beacon AND an interaction
+            // Interactions take priority, you can't have
+            // functions or beacons at the same time as an interaction.
+            // If you want to run code before an interaction, you can
+            // use a function that later starts the interaction using
+            // a call to `start_ix()`
             return;
+        }
+
+        let fn_id = self.function_name.to_string();
+        if !fn_id.is_empty() {
+            call_global(&fn_id).unwrap();
+
+            // Functions and beacons can coexist.
+            // Don't `return` here.
         }
 
         let target = &self.beacon_target;
