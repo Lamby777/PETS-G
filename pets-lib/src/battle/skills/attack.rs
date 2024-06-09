@@ -8,7 +8,7 @@ pub struct AttackSkill {
     pub element: Element,
     pub power: u8,
     pub plural: bool,
-    pub status_effect: Option<ChanceOfEffect>,
+    pub status_effect: Option<EffectAndChance>,
 }
 
 impl AttackSkill {
@@ -27,7 +27,7 @@ impl AttackSkill {
         effect: StatusEffect,
         chance: EffectChance,
     ) -> Self {
-        self.status_effect = Some(ChanceOfEffect::new(effect, chance));
+        self.status_effect = Some(EffectAndChance::new(effect, chance));
         self
     }
 
