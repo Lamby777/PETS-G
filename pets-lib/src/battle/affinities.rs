@@ -3,18 +3,29 @@ use godot::prelude::*;
 use super::skills::Element;
 use crate::prelude::*;
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, Copy, Serialize, Deserialize)]
 pub enum AffinityPower {
-    Reflect,
-    Null,
-    Strong,
     Weak,
+    Strong,
+    Nullify,
+    Reflect,
 }
 
 #[derive(Serialize, Deserialize)]
-pub struct Affinities(pub HashMap<Element, AffinityPower>);
+pub struct Affinities(HashMap<Element, AffinityPower>);
+
+impl Default for Affinities {
+    fn default() -> Self {
+        Self(HashMap::new())
+    }
+}
 
 impl Affinities {
+    /// Check an affinity. Returns `None` if the affinity is neutral.
+    pub fn _get(&self, element: Element) -> Option<AffinityPower> {
+        self.0.get(&element).copied()
+    }
+
     pub fn describe_shield(&self) -> GString {
         "Specialized".into()
     }
