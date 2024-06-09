@@ -81,6 +81,10 @@ SKILL_ATTACK_FX_CHANCE_LOW,May inflict {fx}.
 ,
 SKILL_SHIELD_NAME,{affinity} {width} {name}
 SKILL_SHIELD_DESC,Casts a {width} {potency} {name} that {reflect_action} {affinity} damage.
+SKILL_SHIELD_PHYSICAL_DESC,physical
+SKILL_SHIELD_MAGICAL_DESC,magical
+SKILL_SHIELD_UNIQUE_DESC,magical and unique
+SKILL_SHIELD_SPECIALIZED_DESC,certain types of
 SKILL_SHIELD_WIDTH_WIDE,Wide
 SKILL_SHIELD_WIDTH_NARROW,Narrow
 SKILL_SHIELD_POTENCY_IMPENETRABLE,Impenetrable

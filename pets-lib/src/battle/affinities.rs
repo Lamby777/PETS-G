@@ -26,13 +26,36 @@ impl Affinities {
         self.0.get(&element).copied()
     }
 
-    pub fn describe_shield(&self) -> GString {
-        "Specialized".into()
-    }
-}
+    pub fn describe_damage_blocked(&self) -> GString {
+        if self.is_physical_shield() {
+            return tr("SKILL_SHIELD_PHYSICAL_DESC");
+        }
 
-impl Describe for Affinities {
-    fn describe(&self) -> GString {
-        todo!()
+        if self.is_magical_shield() {
+            return tr("SKILL_SHIELD_MAGICAL_DESC");
+        }
+
+        if self.is_unique_shield() {
+            return tr("SKILL_SHIELD_UNIQUE_DESC");
+        }
+
+        tr("SKILL_SHIELD_SPECIALIZED_DESC")
+    }
+
+    fn has_all_types(&self, types: &[Element]) -> bool {
+        let map = &self.0;
+        types.len() == map.len() && types.iter().all(|e| map.contains_key(e))
+    }
+
+    fn is_physical_shield(&self) -> bool {
+        self.has_all_types(&Element::list_physical())
+    }
+
+    fn is_magical_shield(&self) -> bool {
+        self.has_all_types(&Element::list_magical())
+    }
+
+    fn is_unique_shield(&self) -> bool {
+        self.has_all_types(&Element::list_magical_and_unique())
     }
 }

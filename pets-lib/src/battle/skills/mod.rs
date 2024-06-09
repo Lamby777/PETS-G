@@ -87,8 +87,13 @@ impl Element {
         Element::iter().filter(Self::is_physical).collect()
     }
 
-    /// Includes unique elements!
     pub fn list_magical() -> Vec<Element> {
+        Element::iter()
+            .filter(|v| v.is_magical() && !v.is_unique())
+            .collect()
+    }
+
+    pub fn list_magical_and_unique() -> Vec<Element> {
         Element::iter().filter(Self::is_magical).collect()
     }
 
