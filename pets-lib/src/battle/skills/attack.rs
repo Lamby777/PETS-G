@@ -37,7 +37,7 @@ impl AttackSkill {
     }
 
     fn describe_damage(&self) -> Option<String> {
-        let element = self.element.describe();
+        let element = self.element.describe_adj();
 
         // i love rust ^w^
         if let Some(0 | 6..) = self.power {
@@ -45,7 +45,7 @@ impl AttackSkill {
         }
 
         let power = self.power?.to_string();
-        let adjective = format!("SKILL_ATTACK_POWER_{}", power);
+        let adjective = tr(&format!("SKILL_ATTACK_POWER_{}", power));
 
         Some(tr_replace! {
             "SKILL_ATTACK_POWER_DESCRIBE";
