@@ -89,7 +89,7 @@ impl SkillFamily for ShieldSkill {
 
     fn description(&self) -> String {
         let name = self.shield_type_str();
-        let affinity = self.affinity.describe();
+        let affinity = self.affinity.describe_shield();
         let potency = ShieldSkill::multi_description(self.multiplier);
         let width = self.shield_width_str();
 
