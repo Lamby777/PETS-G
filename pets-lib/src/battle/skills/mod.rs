@@ -3,7 +3,7 @@ use crate::prelude::*;
 
 use std::fmt;
 
-use godot::engine::Engine;
+use godot::prelude::*;
 use godot::tools::tr;
 use strum::{EnumIter, IntoEnumIterator};
 

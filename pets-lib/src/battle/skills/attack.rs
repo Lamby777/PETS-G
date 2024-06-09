@@ -36,21 +36,17 @@ impl AttackSkill {
         self
     }
 
-    fn describe_power(&self) -> Option<&str> {
-        Some(match self.power? {
-            1 => "faint",
-            2 => "weak",
-            3 => "medium",
-            4 => "strong",
-            5 => "massive",
-            _ => unreachable!(),
-        })
-    }
-
     fn describe_damage(&self) -> Option<String> {
-        self.describe_power().map(|power| {
-            let element = self.element.describe();
-            format!("Deals {} {} damage.", power, element)
+        // i love rust ^w^
+        if let Some(0 | 6..) = self.power {
+            panic!("power should be `Some(1..=5)` or `None`");
+        }
+
+        let power = self.power?.to_string();
+        let adjective = format!("SKILL_ATTACK_POWER_{}", power);
+        Some(tr_replace! {
+            "SKILL_ATTACK_POWER_DESCRIBE";
+            adjective
         })
     }
 }
