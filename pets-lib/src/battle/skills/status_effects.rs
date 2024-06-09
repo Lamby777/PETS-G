@@ -8,12 +8,12 @@ use super::*;
 
 /// status effect from a skill, and its chances
 #[derive(Serialize, Deserialize)]
-pub struct ChanceOfEffect {
+pub struct EffectAndChance {
     pub effect: StatusEffect,
     pub chance: EffectChance,
 }
 
-impl ChanceOfEffect {
+impl EffectAndChance {
     pub fn new(effect: StatusEffect, chance: EffectChance) -> Self {
         Self { effect, chance }
     }
