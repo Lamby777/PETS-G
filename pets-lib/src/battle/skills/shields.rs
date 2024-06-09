@@ -89,7 +89,7 @@ impl SkillFamily for ShieldSkill {
 
     fn description(&self) -> String {
         let name = self.shield_type_str();
-        let affinity = self.affinity.describe_damage_blocked();
+        let affinity = describe_damage_blocked(&self.affinity);
         let potency = ShieldSkill::multi_description(self.multiplier);
         let width = self.shield_width_str();
 
@@ -125,114 +125,30 @@ impl SkillFamily for ShieldSkill {
     }
 }
 
-// #[cfg(test)]
-// mod tests {
-//     use super::*;
-//     use Element::*;
-//
-//     #[test]
-//     fn test_describe_impenetrable_all_elements() {
-//         let skill = ShieldSkill {
-//             affinity: ShieldAffinity::AllElements,
-//             hits: 1,
-//             multiplier: 0.2,
-//             reflect: false,
-//             plural: false,
-//         };
-//
-//         assert_eq!(skill.name(), "Almighty Shield");
-//         assert_eq!(
-//             skill.description(),
-//             "Casts a sturdy shield that blocks all kinds of damage once."
-//         );
-//     }
-//
-//     #[test]
-//     fn test_describe_7hit_reflective_magical() {
-//         let skill = ShieldSkill {
-//             affinity: ShieldAffinity::Magical,
-//             hits: 7,
-//             multiplier: 0.8,
-//             reflect: true,
-//             plural: false,
-//         };
-//
-//         assert_eq!(skill.name(), "Magical Mirror");
-//         assert_eq!(
-//             skill.description(),
-//             "Casts a weak shield that reflects magical damage many times."
-//         );
-//     }
-//
-//     #[test]
-//     fn test_describe_two_specific_elements() {
-//         let skill = ShieldSkill {
-//             affinity: ShieldAffinity::Specific(vec![Psi, Spirit]),
-//             hits: 3,
-//             multiplier: 0.5,
-//             reflect: false,
-//             plural: false,
-//         };
-//
-//         assert_eq!(
-//             skill.description(),
-//             "Casts a shield that blocks Psychic and Supernatural damage a couple times."
-//         );
-//     }
-//
-//     #[test]
-//     fn test_describe_many_specific_elements() {
-//         let skill = ShieldSkill {
-//             affinity: ShieldAffinity::Specific(vec![Fire, Psi, Ice, Spirit]),
-//             hits: 3,
-//             multiplier: 0.5,
-//             reflect: false,
-//             plural: false,
-//         };
-//
-//         assert_eq!(
-//             skill.description(),
-//             indoc! {"Casts a shield that blocks Fire-based, Psychic, \
-//             Ice-based, and Supernatural damage a couple times."}
-//         );
-//     }
-//
-//     #[test]
-//     fn test_describe_wide_one_specific_element() {
-//         let skill = ShieldSkill {
-//             affinity: ShieldAffinity::Specific(vec![Fuzz]),
-//             hits: 3,
-//             multiplier: 0.5,
-//             reflect: false,
-//             plural: true,
-//         };
-//
-//         assert_eq!(skill.name(), "Specialized Wide Shield");
-//         assert_eq!(
-//             skill.description(),
-//             "Casts a wide shield that blocks only Fuzzy damage a couple times."
-//         );
-//     }
-//
-//     #[test]
-//     fn test_describe_physical_as_specific() {
-//         let mut skill = ShieldSkill {
-//             affinity: ShieldAffinity::Magical,
-//             hits: 3,
-//             multiplier: 0.5,
-//             reflect: false,
-//             plural: true,
-//         };
-//
-//         assert_eq!(skill.name(), "Magical Wide Shield");
-//
-//         let new_aff = ShieldAffinity::Specific(Element::list_physical());
-//         skill.set_affinity(new_aff);
-//
-//         assert_eq!(skill.name(), "Physical Wide Shield");
-//         assert_eq!(
-//             skill.description(),
-//             "Casts a wide shield that blocks physical damage a couple times."
-//         );
-//     }
-// }
+pub fn describe_damage_blocked(aff: &Affinities) -> GString {
+    if is_physical_shield(&aff) {
+        return tr("SKILL_SHIELD_PHYSICAL_DESC");
+    }
+
+    if is_magical_shield(&aff) {
+        return tr("SKILL_SHIELD_MAGICAL_DESC");
+    }
+
+    if is_unique_shield(&aff) {
+        return tr("SKILL_SHIELD_UNIQUE_DESC");
+    }
+
+    tr("SKILL_SHIELD_SPECIALIZED_DESC")
+}
+
+fn is_physical_shield(aff: &Affinities) -> bool {
+    aff.only_has_all_types(&Element::list_physical())
+}
+
+fn is_magical_shield(aff: &Affinities) -> bool {
+    aff.only_has_all_types(&Element::list_magical())
+}
+
+fn is_unique_shield(aff: &Affinities) -> bool {
+    aff.only_has_all_types(&Element::list_magical_and_unique())
+}
