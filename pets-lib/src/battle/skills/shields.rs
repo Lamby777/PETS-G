@@ -97,16 +97,16 @@ impl ShieldSkill {
         tr(key)
     }
 
-    fn hits_to_str(hits: u8) -> &'static str {
-        match hits {
-            0 => unreachable!("shield that can't withstand any hits"),
-            1 => "once",
-            2..=3 => "a couple times",
-            4..=6 => "several times",
-            7..=10 => "many times",
-            11..=15 => "for a while",
-            _ => unreachable!("shield that can withstand over 15 hits"),
-        }
+    fn hits_to_str(hits: u8) -> GString {
+        tr(match hits {
+            0 => "SKILL_SHIELD_HITS_NONE",
+            1 => "SKILL_SHIELD_HITS_ONE",
+            2..=3 => "SKILL_SHIELD_HITS_COUPLE",
+            4..=6 => "SKILL_SHIELD_HITS_SEVERAL",
+            7..=10 => "SKILL_SHIELD_HITS_MANY",
+            11.. => "SKILL_SHIELD_HITS_WHILE",
+            // _ => unreachable!("shield that can withstand over 15 hits"),
+        })
     }
 
     pub fn set_affinity(&mut self, aff: ShieldAffinity) {
@@ -115,18 +115,18 @@ impl ShieldSkill {
 
     /// "Wide" or "Narrow"
     fn shield_width_str(&self) -> GString {
-        match self.plural {
-            true => tr!("SKILL_SHIELD_WIDTH_WIDE"),
-            false => tr!("SKILL_SHIELD_WIDTH_NARROW"),
-        }
+        tr(match self.plural {
+            true => "SKILL_SHIELD_WIDTH_WIDE",
+            false => "SKILL_SHIELD_WIDTH_NARROW",
+        })
     }
 
     /// "Shield" or "Mirror"
     fn shield_type_str(&self) -> GString {
-        match self.reflect {
-            true => tr!("SKILL_SHIELD_NAME_MIRROR"),
-            false => tr!("SKILL_SHIELD_NAME_SHIELD"),
-        }
+        tr(match self.reflect {
+            true => "SKILL_SHIELD_NAME_MIRROR",
+            false => "SKILL_SHIELD_NAME_SHIELD",
+        })
     }
 }
 
@@ -172,12 +172,10 @@ impl SkillFamily for ShieldSkill {
             width, potency, name, reflect_action, affinity,
         };
 
-        match self.hits {
-            0 => format!("{}. It probably won't last...", potency),
-            hits => {
-                let hits = ShieldSkill::hits_to_str(hits);
-                format!("{} {}.", part1, hits)
-            }
+        let hits_str = ShieldSkill::hits_to_str(self.hits);
+        tr_replace! {
+            "SKILL_SHIELD_COMBINE_PARTS";
+            part1, hits_str
         }
     }
 

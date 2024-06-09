@@ -81,6 +81,13 @@ SKILL_SHIELD_REFLECTIVITY_FALSE,blocks
 SKILL_SHIELD_REFLECTIVITY_TRUE,reflects
 SKILL_SHIELD_NAME_MIRROR,Mirror
 SKILL_SHIELD_NAME_SHIELD,Shield
+SKILL_SHIELD_HITS_NONE,It probably won't last...
+SKILL_SHIELD_HITS_ONE,It could stand one hit... probably.
+SKILL_SHIELD_HITS_COUPLE,It could likely stand a couple hits.
+SKILL_SHIELD_HITS_SEVERAL,It could stand several hits.
+SKILL_SHIELD_HITS_MANY,It could easily stand quite a few hits.
+SKILL_SHIELD_HITS_WHILE,It'd take enemies a while to break through this one.
+SKILL_SHIELD_COMBINE_PARTS,{part1} {hits_str}
 ,
 DG_SPK_NARRATOR,
 DG_SPK_UNKNOWN,???
