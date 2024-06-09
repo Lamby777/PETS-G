@@ -3,6 +3,7 @@ use godot::prelude::*;
 use super::skills::Element;
 use crate::prelude::*;
 
+#[derive(Serialize, Deserialize)]
 pub enum AffinityPower {
     Reflect,
     Null,
@@ -11,9 +12,7 @@ pub enum AffinityPower {
 }
 
 #[derive(Serialize, Deserialize)]
-pub struct Affinities {
-    inner: Vec<Element>,
-}
+pub struct Affinities(pub HashMap<Element, AffinityPower>);
 
 impl Affinities {
     pub fn describe_shield(&self) -> GString {

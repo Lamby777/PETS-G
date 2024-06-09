@@ -45,6 +45,7 @@ pub trait SkillFamily {
     Copy,
     Debug,
     Eq,
+    Hash,
     Ord,
     PartialEq,
     PartialOrd,
