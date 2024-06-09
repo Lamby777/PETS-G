@@ -20,7 +20,7 @@ pub(crate) use attack::AttackSkill;
 pub(crate) use buffs::BuffSkill;
 pub(crate) use other::{PSIFluxSkill, PSIRewireSkill};
 pub(crate) use recovery::RecoverySkill;
-pub(crate) use shields::{ShieldAffinity, ShieldSkill};
+pub(crate) use shields::ShieldSkill;
 
 type BattlerPtr = Rc<RefCell<dyn Battler>>;
 
