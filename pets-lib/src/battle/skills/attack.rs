@@ -6,13 +6,13 @@ pub struct AttackSkill {
     pub tr_key: String,
 
     pub element: Element,
-    pub power: u8,
+    pub power: Option<u8>,
     pub plural: bool,
     pub status_effect: Option<EffectAndChance>,
 }
 
 impl AttackSkill {
-    pub fn new(tr_key: &str, element: Element, power: u8) -> Self {
+    pub fn new(tr_key: &str, element: Element, power: Option<u8>) -> Self {
         Self {
             tr_key: tr_key.to_owned(),
             element,
@@ -37,8 +37,7 @@ impl AttackSkill {
     }
 
     fn describe_power(&self) -> Option<&str> {
-        Some(match self.power {
-            0 => return None,
+        Some(match self.power? {
             1 => "faint",
             2 => "weak",
             3 => "medium",
