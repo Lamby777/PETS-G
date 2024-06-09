@@ -1,5 +1,8 @@
 use std::cell::LazyCell;
 
+use crate::battle::skills::{
+    Element, ShieldAffinity, ShieldSkill, SkillFamily as _,
+};
 use crate::prelude::*;
 use godot::prelude::*;
 
@@ -54,7 +57,22 @@ const FUNCTIONS: LazyCell<FnTable> = LazyCell::new(|| {
 
 fn debug_skill(_args: GArgs) -> GReturn {
     end_interaction();
-    start_ix_replace("Debug Menu >> Skill", &[("{SKILL_NAME}", "Caustics A")]);
+
+    let mut skill = ShieldSkill {
+        affinity: ShieldAffinity::AllElements,
+        hits: 1,
+        multiplier: 0.2,
+        reflect: false,
+        plural: false,
+    };
+
+    use Element::*;
+    skill.set_affinity(ShieldAffinity::Specific(vec![Fire, Psi, Spirit]));
+
+    start_ix_replace("Debug Menu >> Skill", &[
+        ("{SKILL_NAME}".to_owned(), skill.name()),
+        ("{SKILL_DESC}".to_owned(), skill.description()),
+    ]);
 
     Ok(Variant::nil())
 }
