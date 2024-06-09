@@ -12,6 +12,7 @@ use godot::prelude::*;
 use crate::consts::battle::*;
 use crate::prelude::*;
 
+mod affinities;
 mod midi;
 mod player;
 mod rhythm;

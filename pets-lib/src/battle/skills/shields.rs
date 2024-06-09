@@ -1,56 +1,8 @@
 use godot::builtin::GString;
 
+use crate::battle::affinities::Affinities;
+
 use super::*;
-
-/// What kind of damage does the shield block?
-#[derive(Serialize, Deserialize)]
-pub enum ShieldAffinity {
-    Physical,
-    Magical,
-    AllElements,
-
-    Specific(Vec<Element>),
-}
-
-impl ShieldAffinity {
-    /// Attempts to convert an explicit list of elements like
-    /// [Blade, Kinetic] into a more general variant like Physical
-    fn coerce_specific(&self) -> Option<Self> {
-        use ShieldAffinity::*;
-
-        let Specific(elements) = self else {
-            panic!("attempt to `coerce_specific` a non-specific shield");
-        };
-
-        // we don't need to sort the other vectors we're comparing to,
-        // because sorting this one will sort based on enum variant order
-        // and the enum iterators happen to also iterate in order...
-        // (at least i sure hope they do)
-        let mut sorted = elements.clone();
-        sorted.sort();
-
-        Some(if sorted == Element::list_all() {
-            AllElements
-        } else if sorted == Element::list_physical() {
-            Physical
-        } else if sorted == Element::list_magical() {
-            Magical
-        } else {
-            return None;
-        })
-    }
-
-    fn describe(&self) -> &str {
-        use ShieldAffinity::*;
-
-        match self {
-            Specific(_) => "Specialized",
-            AllElements => "Almighty",
-            Magical => "Magical",
-            Physical => "Physical",
-        }
-    }
-}
 
 #[derive(Serialize, Deserialize)]
 pub struct ShieldSkill {
@@ -59,7 +11,7 @@ pub struct ShieldSkill {
     /// Use `set_affinity` to set this, not directly.
     /// The setter will handle converting lists of specific
     /// elements into more general affinities where possible.
-    pub affinity: ShieldAffinity,
+    pub affinity: Affinities,
 
     /// How many hits the shield can take
     pub hits: u8,
@@ -109,7 +61,7 @@ impl ShieldSkill {
         })
     }
 
-    pub fn set_affinity(&mut self, aff: ShieldAffinity) {
+    pub fn set_affinity(&mut self, aff: Affinities) {
         self.affinity = aff.coerce_specific().unwrap_or(aff);
     }
 
@@ -144,7 +96,7 @@ impl SkillFamily for ShieldSkill {
     }
 
     fn description(&self) -> String {
-        use ShieldAffinity::*;
+        use Affinities::*;
 
         let name = self.shield_type_str();
         let potency = ShieldSkill::multi_description(self.multiplier);
