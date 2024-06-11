@@ -25,10 +25,9 @@ impl AnimationPlayerExt for AnimationPlayer {
     /// Play the selected animation from the start.
     /// Plays backwards if `forward` is false.
     fn play_forwards(&mut self, forward: bool) {
-        if forward {
-            self.play();
-        } else {
-            self.play_backwards();
+        match forward {
+            true => self.play(),
+            false => self.play_backwards(),
         }
     }
 
