@@ -183,15 +183,7 @@ impl DialogBox {
     #[func]
     pub fn open_or_close(&mut self, open: bool) {
         self.active = open;
-
-        let mut anim = self.anim_player();
-        anim.set_assigned_animation("open".into());
-
-        if open {
-            anim.play();
-        } else {
-            anim.play_backwards()
-        }
+        self.anim_player().play_animation_forwards("open", open);
     }
 
     #[func]

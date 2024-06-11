@@ -133,15 +133,11 @@ impl InventoryNode {
 
     pub fn open(&mut self, open: bool) {
         self.is_open = open;
-        self.anim.set_assigned_animation("open_inv".into());
-
-        match open {
-            true => {
-                self.on_cycle_done(Variant::nil());
-                self.anim.play()
-            }
-            false => self.anim.play_backwards(),
+        if open {
+            self.on_cycle_done(Variant::nil());
         }
+
+        self.anim.play_animation_forwards("open_inv", open);
     }
 }
 
