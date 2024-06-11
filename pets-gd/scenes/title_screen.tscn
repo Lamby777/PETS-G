@@ -470,6 +470,7 @@ disabled = true
 [node name="0" type="PanelContainer" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
 custom_minimum_size = Vector2(194, 194)
 layout_mode = 2
+metadata/ChoiceAgentIgnore = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/0"]
 layout_mode = 2
