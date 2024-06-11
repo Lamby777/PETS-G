@@ -76,7 +76,10 @@ impl TitleScreen {
             .get_node_as::<AnimationPlayer>("../AnimationPlayer");
 
         anim.set_assigned_animation("open".into());
-        anim.play_ex().from_end(!show).done();
+        match show {
+            true => anim.play(),
+            false => anim.play_backwards(),
+        }
     }
 
     #[func]
