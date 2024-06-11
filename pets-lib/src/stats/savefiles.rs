@@ -16,7 +16,7 @@ fn save_path(slot: u8) -> String {
 }
 
 /// All the data saved to one of the save file slots
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize)]
 pub struct SaveFile {
     pub chars: CharMap,
     pub inventory: Rc<RefCell<Vec<Item>>>,

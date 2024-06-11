@@ -7,7 +7,10 @@
 //!
 
 use godot::engine::tween::TransitionType;
-use godot::engine::{AnimationPlayer, ColorRect, Control, PanelContainer};
+use godot::engine::{
+    AnimationPlayer, ColorRect, Control, HBoxContainer, PanelContainer,
+};
+use godot::obj::WithBaseField;
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -24,6 +27,9 @@ struct TitleScreen {
     choices: OnReady<Gd<ChoiceAgent>>,
 
     credits_up: bool,
+
+    #[init(default = onready_node(&base, "%SaveFilesContainer"))]
+    save_button_cont: OnReady<Gd<HBoxContainer>>,
 }
 
 #[godot_api]
@@ -46,15 +52,38 @@ impl TitleScreen {
         anim.play();
     }
 
+    fn start_game(&self) {
+        self.anim_out();
+
+        set_timeout(1.5, || {
+            change_scene!("world");
+        });
+    }
+
+    #[func]
+    fn on_save_file_picked(&mut self, slot: u64) {
+        godot_print!("{}", slot);
+
+        let save = SaveFile::load_from(slot as u8).unwrap();
+        si().bind_mut().load_save_state(&save);
+
+        self.start_game();
+    }
+
+    fn show_save_files(&mut self, show: bool) {
+        let mut anim = self
+            .save_button_cont
+            .get_node_as::<AnimationPlayer>("../AnimationPlayer");
+
+        anim.set_assigned_animation("open".into());
+        anim.play_ex().from_end(!show).done();
+    }
+
     #[func]
     pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
         match choice.get_name().to_string().as_str() {
             "Play" => {
-                self.anim_out();
-
-                set_timeout(1.5, || {
-                    change_scene!("world");
-                });
+                self.show_save_files(true);
             }
 
             "Options" => {
@@ -93,6 +122,15 @@ impl TitleScreen {
             _ => unreachable!(),
         }
     }
+
+    fn save_buttons(&self) -> Vec<Gd<PanelContainer>> {
+        self.save_button_cont
+            .get_children()
+            .iter_shared()
+            .skip(1) // skip the partially-shown decoration one
+            .map(Gd::cast)
+            .collect()
+    }
 }
 
 #[godot_api]
@@ -100,5 +138,12 @@ impl INode2D for TitleScreen {
     fn ready(&mut self) {
         let callable = self.base().callable("on_choice_picked");
         connect_deferred(&mut self.choices, "selection_confirmed", callable);
+
+        let _callable = self.base().callable("on_save_file_picked");
+
+        // for (i, mut v) in self.save_buttons().into_iter().enumerate() {
+        //     let callable = callable.bindv(varray![i as u64 + 1]);
+        //     v.connect("".into(), callable);
+        // }
     }
 }
