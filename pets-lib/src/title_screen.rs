@@ -8,7 +8,8 @@
 
 use godot::engine::tween::TransitionType;
 use godot::engine::{
-    AnimationPlayer, ColorRect, Control, HBoxContainer, PanelContainer,
+    AnimationPlayer, ColorRect, Control, HBoxContainer, InputEvent,
+    PanelContainer,
 };
 use godot::obj::WithBaseField;
 use godot::prelude::*;
@@ -30,6 +31,9 @@ struct TitleScreen {
 
     #[init(default = onready_node(&base, "%SaveFilesContainer"))]
     save_button_cont: OnReady<Gd<HBoxContainer>>,
+
+    #[init(default = onready_node(&base, "%SaveFilesContainer/ChoiceAgent"))]
+    save_choices: OnReady<Gd<ChoiceAgent>>,
 }
 
 #[godot_api]
@@ -75,7 +79,9 @@ impl TitleScreen {
             .save_button_cont
             .get_node_as::<AnimationPlayer>("../AnimationPlayer");
 
-        anim.play_animation_forwards("open", show)
+        anim.play_animation_forwards("open", show);
+        self.save_choices.bind_mut().set_disabled(!show);
+        self.choices.bind_mut().set_disabled(show);
     }
 
     #[func]
@@ -122,6 +128,10 @@ impl TitleScreen {
         }
     }
 
+    fn save_files_shown(&self) -> bool {
+        !self.save_choices.bind().get_disabled()
+    }
+
     fn save_buttons(&self) -> Vec<Gd<PanelContainer>> {
         self.save_button_cont
             .get_children()
@@ -144,5 +154,13 @@ impl INode2D for TitleScreen {
         //     let callable = callable.bindv(varray![i as u64 + 1]);
         //     v.connect("".into(), callable);
         // }
+    }
+
+    fn input(&mut self, event: Gd<InputEvent>) {
+        if event.is_action_pressed("ui_cancel".into())
+            && self.save_files_shown()
+        {
+            self.show_save_files(false);
+        }
     }
 }

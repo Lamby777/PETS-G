@@ -114,7 +114,11 @@ impl ChoiceAgent {
         self.parent()
             .get_children()
             .iter_shared()
-            .filter_map(|x| x.try_cast().ok())
+            .filter_map(|x| x.try_cast::<Control>().ok())
+            .filter(|x| {
+                !(x.has_meta("ChoiceAgentIgnore".into())
+                    && x.get_meta("ChoiceAgentIgnore".into()).to::<bool>())
+            })
             .collect()
     }
 
