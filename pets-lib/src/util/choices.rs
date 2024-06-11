@@ -146,6 +146,7 @@ impl ChoiceAgent {
     #[func]
     pub fn set_disabled(&mut self, disabled: bool) {
         self.disabled = disabled;
+
         self.set_focus_modes();
     }
 
@@ -169,6 +170,10 @@ impl ChoiceAgent {
 
     #[func]
     pub fn set_focus_modes(&self) {
+        if !self.base().is_inside_tree() {
+            return;
+        }
+
         let mode = match self.disabled {
             true => FocusMode::NONE,
             false => FocusMode::ALL,
@@ -224,7 +229,7 @@ impl INode for ChoiceAgent {
             self.bind_callables_for(&mut node.cast::<Control>());
         }
 
-        self.set_focus_modes()
+        self.set_focus_modes();
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {

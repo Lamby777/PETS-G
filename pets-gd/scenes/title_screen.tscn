@@ -465,8 +465,6 @@ layout_mode = 2
 alignment = 1
 
 [node name="ChoiceAgent" type="ChoiceAgent" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
-tween_property = ""
-tween_focused_value = 0.0
 disabled = true
 
 [node name="0" type="PanelContainer" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
