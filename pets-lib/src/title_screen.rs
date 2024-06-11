@@ -83,6 +83,7 @@ impl TitleScreen {
         match choice.get_name().to_string().as_str() {
             "Play" => {
                 self.show_save_files(true);
+                self.start_game()
             }
 
             "Options" => {
