@@ -4,11 +4,13 @@
 
 pub mod choices;
 mod describe;
+mod extensions;
 pub mod limiq;
 mod node_stuff;
 pub mod singleton;
 
 pub use describe::Describe;
+pub use extensions::*;
 pub use node_stuff::*;
 
 use crate::DialogBox;
@@ -96,15 +98,4 @@ pub fn set_timeout_callable(
     timer.connect("timeout".into(), callable);
 
     timer
-}
-
-pub trait Vector2Ext {
-    fn to_tuple(&self) -> (f32, f32);
-}
-
-impl Vector2Ext for Vector2 {
-    /// Convert the godot Vector2 into a tuple of x and y.
-    fn to_tuple(&self) -> (f32, f32) {
-        (self.x, self.y)
-    }
 }
