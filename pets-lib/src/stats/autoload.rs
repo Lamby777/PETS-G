@@ -21,6 +21,10 @@ pub struct StatsInterface {
 
 #[godot_api]
 impl StatsInterface {
+    pub fn load_save_state(&mut self, save: &SaveFile) {
+        self.save = save.clone();
+    }
+
     // #[func]
     pub fn get_character(&self, ch: &str) -> CharData {
         self.save

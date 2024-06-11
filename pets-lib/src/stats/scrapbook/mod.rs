@@ -2,7 +2,7 @@ use crate::prelude::*;
 
 use std::collections::{HashMap, HashSet};
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize)]
 pub struct Scrapbook {
     // just IDs, will match up with the actual content and
     // count as unlocked if the ID is in here
@@ -28,7 +28,7 @@ impl Scrapbook {
     }
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize)]
 pub struct BattleMemory {
     /// KV pairs of the enemy's ID and what the player knows about it.
     pub entries: HashMap<String, BattleMemoryEntry>,
@@ -40,7 +40,7 @@ pub struct BattleMemory {
     pub tracks: HashSet<String>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize)]
 pub struct BattleMemoryEntry {
     sprite_front: bool,
     sprite_back: bool,
