@@ -22,7 +22,8 @@ pub trait AnimationPlayerExt {
 }
 
 impl AnimationPlayerExt for AnimationPlayer {
-    /// Play the animation from the start.
+    /// Play the selected animation from the start.
+    /// Plays backwards if `forward` is false.
     fn play_forwards(&mut self, forward: bool) {
         if forward {
             self.play();
@@ -31,6 +32,8 @@ impl AnimationPlayerExt for AnimationPlayer {
         }
     }
 
+    /// Play the specified animation from the start.
+    /// Plays backwards if `forward` is false.
     fn play_animation_forwards(
         &mut self,
         anim: impl Into<GString>,
