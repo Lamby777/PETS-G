@@ -1,34 +1,39 @@
+use godot::prelude::*;
+
 use crate::prelude::*;
 
 pub type QuestPhase = u32;
 
+/// Map of the quest ID -> its phase
+/// For saving purposes.
 #[derive(Deref, DerefMut, Serialize, Deserialize)]
-pub struct Quests(HashMap<String, Quest>);
+pub struct Quests(HashMap<String, QuestPhase>);
 
 impl Quests {
     pub fn fresh() -> Self {
-        let mut this = HashMap::new();
-        let quest = Quest::new(12);
-        this.insert("MAIN_STORY".to_string(), quest);
-
-        Self(this)
+        Self(HashMap::new())
     }
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(GodotClass)]
+#[class(init, base=Resource)]
 pub struct Quest {
+    base: Base<Resource>,
+
+    #[export]
+    quest_id: GString,
+
+    #[export]
+    #[init(default = 0)]
     pub phase: QuestPhase,
+
+    #[export]
+    #[init(default = 1)]
     final_phase: QuestPhase,
 }
 
+#[godot_api]
 impl Quest {
-    pub fn new(final_phase: QuestPhase) -> Self {
-        Self {
-            phase: 0,
-            final_phase,
-        }
-    }
-
     pub fn final_phase(&self) -> QuestPhase {
         self.final_phase
     }
