@@ -1,5 +1,7 @@
 use crate::prelude::*;
 
+pub type QuestPhase = u32;
+
 #[derive(Deref, DerefMut, Serialize, Deserialize)]
 pub struct Quests(HashMap<String, Quest>);
 
@@ -15,19 +17,19 @@ impl Quests {
 
 #[derive(Serialize, Deserialize)]
 pub struct Quest {
-    pub phase: u32,
-    final_phase: u32,
+    pub phase: QuestPhase,
+    final_phase: QuestPhase,
 }
 
 impl Quest {
-    pub fn new(final_phase: u32) -> Self {
+    pub fn new(final_phase: QuestPhase) -> Self {
         Self {
             phase: 0,
             final_phase,
         }
     }
 
-    pub fn final_phase(&self) -> u32 {
+    pub fn final_phase(&self) -> QuestPhase {
         self.final_phase
     }
 
