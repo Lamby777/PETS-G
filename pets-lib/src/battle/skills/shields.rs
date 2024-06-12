@@ -1,7 +1,5 @@
 use godot::builtin::GString;
 
-use crate::battle::affinities::Affinities;
-
 use super::*;
 
 #[derive(Serialize, Deserialize)]

@@ -83,6 +83,15 @@ pub struct DialogBox {
 impl DialogBox {
     #[func]
     pub fn do_draw(&mut self) {
+        let ending = self.current_ix_ending().cloned();
+        if self.is_on_or_past_last_page()
+            && let Some(DialogueEnding::Choices(choices)) = ending
+        {
+            self.recreate_choice_labels(&choices);
+            self.tween_choices_wave(true);
+            self.choice_agent.bind_mut().enable();
+        }
+
         self.goto_current_page();
         self.spk_txt().set_text(self.translated_speaker());
         self.msg_txt().set_text(self.translated_message());
@@ -105,6 +114,8 @@ impl DialogBox {
             "Could not find interaction \"{}\" in the interaction map",
             ix_id,
         );
+
+        dbg!(&ix);
 
         self.set_ix(ix.clone(), replace);
         self.open();
@@ -236,11 +247,7 @@ impl DialogBox {
 
         let ending = self.current_ix_ending().unwrap().clone();
         match ending {
-            Choices(choices) => {
-                self.recreate_choice_labels(&choices);
-                self.tween_choices_wave(true);
-            }
-
+            Choices(_) => (), // it's handled in `on_choice_picked`
             Label(label) => self.run_label(&label),
             End => self.end_interaction(),
         }
@@ -248,10 +255,10 @@ impl DialogBox {
 
     fn on_accept(&mut self) {
         // go to next page
-        self.current_page_number += 1;
-
         if self.is_on_or_past_last_page() {
             self.run_ix_ending();
+        } else {
+            self.current_page_number += 1;
         }
 
         self.do_draw();
@@ -369,29 +376,18 @@ impl DialogBox {
         self.active
     }
 
-    pub fn is_one_page(&self) -> bool {
-        let ix = self.current_ix.as_ref().unwrap();
-        ix.pages.len() == 1
-    }
-
     fn set_ix(&mut self, ix: Interaction, replaces: Vec<(String, String)>) {
         self.current_ix = Some(ix);
         self.current_page_number = 0;
         self.replaces = replaces;
         self.do_draw();
-
-        if self.is_one_page() {
-            let ending = self.current_ix_ending().unwrap().clone();
-            if let DialogueEnding::Choices(choices) = ending {
-                self.recreate_choice_labels(&choices);
-                self.tween_choices_wave(true);
-                self.choice_agent.bind_mut().enable();
-            }
-        }
     }
 
     pub fn is_on_or_past_last_page(&self) -> bool {
-        let ix = self.current_ix.as_ref().unwrap();
+        let Some(ix) = self.current_ix.as_ref() else {
+            return false;
+        };
+
         self.current_page_number >= ix.pages.len() - 1
     }
 

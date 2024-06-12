@@ -3,10 +3,19 @@ use crate::prelude::*;
 
 #[derive(Clone, Copy, Serialize, Deserialize)]
 pub enum AffinityPower {
+    /// The receiver is weak to this type of damage
     Weak,
+
+    /// The receiver is strong against this type of damage
     Strong,
+
+    /// The receiver nullifies this type of damage
     Nullify,
+
+    /// The receiver converts this damage into extra health
     Heal,
+
+    /// The receiver reflects this type of damage back to the attacker
     Reflect,
 }
 
@@ -35,6 +44,10 @@ impl Default for Affinities {
 }
 
 impl Affinities {
+    pub fn new(affinities: HashMap<Element, AffinityPower>) -> Self {
+        Self(affinities)
+    }
+
     /// Check an affinity. Returns `None` if the affinity is neutral.
     pub fn _get(&self, element: Element) -> Option<AffinityPower> {
         self.0.get(&element).copied()
