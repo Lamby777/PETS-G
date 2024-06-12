@@ -15,9 +15,6 @@ pub struct Quest {
     #[export]
     #[init(default = 1)]
     final_phase: QuestPhase,
-    // #[export]
-    // #[init(default = false)]
-    // pub active: bool,
 }
 
 #[godot_api]
