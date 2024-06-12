@@ -43,7 +43,7 @@ mod prelude {
     pub use crate::stats::*;
     pub use crate::util::*;
 
-    pub use crate::battle::BattleEngine;
+    pub use crate::battle::{Affinities, AffinityPower, BattleEngine};
     pub use crate::dialogue::{ix_map, DialogBox};
     pub use crate::functions::{call_global, callv_global};
     pub use crate::world::{
