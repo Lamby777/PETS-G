@@ -30,7 +30,7 @@ struct TitleScreen {
     credits_up: bool,
 
     #[init(default = onready_node(&base, "%SaveFilesContainer"))]
-    save_button_cont: OnReady<Gd<HBoxContainer>>,
+    save_button_cont: OnReady<Gd<Control>>,
 
     #[init(default = onready_node(&base, "%SaveFilesContainer/ChoiceAgent"))]
     save_choices: OnReady<Gd<ChoiceAgent>>,
