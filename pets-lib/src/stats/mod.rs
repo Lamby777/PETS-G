@@ -21,7 +21,7 @@ pub use battler::{Battler, Battlers};
 pub use charmap::CharMap;
 pub use enemy::EnemyData;
 pub use pchars::{EnemyID, PChar};
-pub use quests::{QuestPhase, Quests};
+pub use quests::Quests;
 pub use savefiles::SaveFile;
 pub use statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
 
