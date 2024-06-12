@@ -115,8 +115,6 @@ impl DialogBox {
             ix_id,
         );
 
-        dbg!(&ix);
-
         self.set_ix(ix.clone(), replace);
         self.open();
     }
