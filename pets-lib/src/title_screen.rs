@@ -65,7 +65,8 @@ impl TitleScreen {
     }
 
     #[func]
-    fn on_save_file_picked(&mut self, slot: u64) {
+    fn on_save_file_picked(&mut self, choice: Gd<Control>) {
+        let slot = choice.get_name().to_string().parse::<usize>().unwrap();
         godot_print!("{}", slot);
 
         let save = SaveFile::load_from(slot as u8).unwrap();
@@ -148,12 +149,9 @@ impl INode2D for TitleScreen {
         let callable = self.base().callable("on_choice_picked");
         connect_deferred(&mut self.choices, "selection_confirmed", callable);
 
-        let _callable = self.base().callable("on_save_file_picked");
-
-        // for (i, mut v) in self.save_buttons().into_iter().enumerate() {
-        //     let callable = callable.bindv(varray![i as u64 + 1]);
-        //     v.connect("".into(), callable);
-        // }
+        let callable = self.base().callable("on_save_file_picked");
+        self.save_choices
+            .connect("selection_confirmed".into(), callable);
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
