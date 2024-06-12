@@ -27,12 +27,27 @@ pub struct InteractionZone {
 
     #[export]
     auto_interact: bool,
+
+    #[export]
+    /// Change a value of a quest?
+    notify_quest: GString,
+
+    #[export]
+    quest_value: QuestPhase,
 }
 
 #[godot_api]
 impl InteractionZone {
     #[func]
     pub fn interact(&self) {
+        // first, notify quests if needed
+        if !self.notify_quest.is_empty() {
+            let mut si = si();
+            let quests = &mut si.bind_mut().save.quests;
+            let quest = quests.get_mut(&self.notify_quest.to_string()).unwrap();
+            quest.phase = self.quest_value;
+        }
+
         let ix_id = self.interaction_id.to_string();
         if !ix_id.is_empty() {
             start_ix(ix_id);
