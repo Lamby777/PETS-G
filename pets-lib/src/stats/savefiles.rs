@@ -21,7 +21,7 @@ pub struct SaveFile {
     pub chars: CharMap,
     pub inventory: Rc<RefCell<Vec<Item>>>,
     pub scrapbook: Scrapbook,
-    pub quests: Quests,
+    pub quests: HashMap<String, QuestPhase>,
 }
 
 #[allow(unused)]
@@ -33,7 +33,7 @@ impl SaveFile {
             chars,
             inventory: Rc::new(RefCell::new(vec![])),
             scrapbook: Scrapbook::empty(),
-            quests: Quests::fresh(),
+            quests: HashMap::new(),
         }
     }
 
