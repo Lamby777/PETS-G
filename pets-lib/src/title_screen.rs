@@ -66,7 +66,6 @@ impl TitleScreen {
     #[func]
     fn on_save_file_picked(&mut self, choice: Gd<Control>) {
         let slot = choice.get_name().to_string().parse::<usize>().unwrap();
-        godot_print!("{}", slot);
 
         let save = SaveFile::load_from(slot as u8).unwrap();
         si().bind_mut().load_save_state(save);

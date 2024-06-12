@@ -38,6 +38,16 @@ impl SaveFile {
     }
 
     pub fn load_from(save_slot: u8) -> io::Result<Self> {
+        let new_save = Self::fresh();
+        new_save.write_to(save_slot);
+
+        // SKIP THIS SHIT FOR DEBUG PURPOSES
+        return Ok(new_save);
+
+        // ----------------------------------------
+        // ----------------------------------------
+        // ----------------------------------------
+
         let path = save_path(save_slot);
         let Ok(mut file) = GFile::open(path, ModeFlags::READ) else {
             let new_save = Self::fresh();
@@ -50,7 +60,8 @@ impl SaveFile {
         let content = String::from_utf8(content).unwrap();
 
         // TODO load save file
-        todo!()
+        // todo!()
+        Ok(serde_json::from_str(&content).unwrap())
     }
 
     pub fn write_to(&self, save_slot: u8) {

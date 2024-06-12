@@ -159,7 +159,6 @@ position = Vector2(888, 376)
 [node name="DebugItem" parent="YSort/Room" instance=ExtResource("5_uar2c")]
 function_name = "debug_skill"
 position = Vector2(-192, 64)
-script = ExtResource("13_w40m0")
 
 [node name="TeleporterDemo" type="Node2D" parent="YSort/Room"]
 position = Vector2(-1216, 864)
