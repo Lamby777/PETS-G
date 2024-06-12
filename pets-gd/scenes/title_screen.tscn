@@ -465,10 +465,9 @@ layout_mode = 2
 
 [node name="ChoiceAgent" type="ChoiceAgent" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
 tween_property = "position:y"
-tween_focused_value = 24.0
 disabled = true
 
-[node name="0" type="PanelContainer" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
+[node name="0" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
 custom_minimum_size = Vector2(194, 194)
 layout_mode = 2
 offset_right = 194.0
@@ -477,11 +476,16 @@ metadata/ChoiceAgentIgnore = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/0"]
 layout_mode = 2
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 170.0
+offset_bottom = 170.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 120
 bbcode_enabled = true
 text = "[center]-"
 
-[node name="1" type="PanelContainer" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
+[node name="1" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
 custom_minimum_size = Vector2(194, 194)
 layout_mode = 2
 offset_left = 198.0
@@ -490,11 +494,16 @@ offset_bottom = 194.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/1"]
 layout_mode = 2
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 170.0
+offset_bottom = 170.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 120
 bbcode_enabled = true
 text = "[center]1"
 
-[node name="2" type="PanelContainer" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
+[node name="2" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
 custom_minimum_size = Vector2(194, 194)
 layout_mode = 2
 offset_left = 396.0
@@ -503,11 +512,16 @@ offset_bottom = 194.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/2"]
 layout_mode = 2
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 170.0
+offset_bottom = 170.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 120
 bbcode_enabled = true
 text = "[center]2"
 
-[node name="3" type="PanelContainer" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
+[node name="3" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
 custom_minimum_size = Vector2(194, 194)
 layout_mode = 2
 offset_left = 594.0
@@ -516,6 +530,11 @@ offset_bottom = 194.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/3"]
 layout_mode = 2
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 170.0
+offset_bottom = 170.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 120
 bbcode_enabled = true
 text = "[center]3"
