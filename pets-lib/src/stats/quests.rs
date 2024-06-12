@@ -4,12 +4,9 @@ use godot::prelude::*;
 pub type QuestPhase = i32;
 
 #[derive(GodotClass)]
-#[class(init, base=Resource)]
+#[class(init, base=Node)]
 pub struct Quest {
-    base: Base<Resource>,
-
-    #[export]
-    quest_id: GString,
+    base: Base<Node>,
 
     #[export]
     #[init(default = 0)]
@@ -18,6 +15,9 @@ pub struct Quest {
     #[export]
     #[init(default = 1)]
     final_phase: QuestPhase,
+    // #[export]
+    // #[init(default = false)]
+    // pub active: bool,
 }
 
 #[godot_api]
@@ -30,5 +30,10 @@ impl Quest {
     #[func]
     pub fn is_complete(&self) -> bool {
         self.phase >= self.final_phase
+    }
+
+    #[func]
+    pub fn quest_name(&self) -> GString {
+        self.base().get_name().into()
     }
 }
