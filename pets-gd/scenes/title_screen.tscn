@@ -1,9 +1,46 @@
-[gd_scene load_steps=10 format=3 uid="uid://ben252ibtpchc"]
+[gd_scene load_steps=13 format=3 uid="uid://ben252ibtpchc"]
 
 [ext_resource type="AudioStream" uid="uid://bu1akc5wvo0wo" path="res://assets/music/menu/titlebreeze.ogg" id="1_06t4m"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="3_gc66u"]
 [ext_resource type="AudioStream" uid="uid://4puxvjdkmpho" path="res://assets/sounds/petsgamestart.wav" id="4_1uee5"]
 [ext_resource type="Shader" path="res://themes/opacity.gdshader" id="4_gkpis"]
+
+[sub_resource type="Animation" id="Animation_uejll"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-869, 258)]
+}
+
+[sub_resource type="Animation" id="Animation_4x3vx"]
+resource_name = "open"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.420448, 1),
+"update": 0,
+"values": [Vector2(-869, 258), Vector2(371, 258)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i3drf"]
+_data = {
+"RESET": SubResource("Animation_uejll"),
+"open": SubResource("Animation_4x3vx")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tovj7"]
 shader = ExtResource("4_gkpis")
@@ -369,6 +406,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("3_gc66u")
 color = Color(0.0666667, 0.0666667, 0.105882, 1)
+metadata/_edit_lock_ = true
 
 [node name="Credits" type="Control" parent="MoveRight"]
 anchors_preset = 0
@@ -409,6 +447,102 @@ offset_left = -64.0
 offset_top = 1024.0
 offset_right = 1984.0
 offset_bottom = 1152.0
+
+[node name="SaveFilesPanel" type="PanelContainer" parent="MoveRight"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -869.0
+offset_top = 238.0
+offset_right = -33.0
+offset_bottom = 480.0
+grow_vertical = 2
+
+[node name="SaveFilesContainer" type="Control" parent="MoveRight/SaveFilesPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ChoiceAgent" type="ChoiceAgent" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
+tween_property = "position:y"
+disabled = true
+
+[node name="0" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
+custom_minimum_size = Vector2(194, 194)
+layout_mode = 2
+offset_right = 194.0
+offset_bottom = 194.0
+metadata/ChoiceAgentIgnore = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/0"]
+layout_mode = 2
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 170.0
+offset_bottom = 170.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_font_sizes/normal_font_size = 120
+bbcode_enabled = true
+text = "[center]-"
+
+[node name="1" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
+custom_minimum_size = Vector2(194, 194)
+layout_mode = 2
+offset_left = 198.0
+offset_right = 392.0
+offset_bottom = 194.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/1"]
+layout_mode = 2
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 170.0
+offset_bottom = 170.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_font_sizes/normal_font_size = 120
+bbcode_enabled = true
+text = "[center]1"
+
+[node name="2" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
+custom_minimum_size = Vector2(194, 194)
+layout_mode = 2
+offset_left = 396.0
+offset_right = 590.0
+offset_bottom = 194.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/2"]
+layout_mode = 2
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 170.0
+offset_bottom = 170.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_font_sizes/normal_font_size = 120
+bbcode_enabled = true
+text = "[center]2"
+
+[node name="3" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
+custom_minimum_size = Vector2(194, 194)
+layout_mode = 2
+offset_left = 594.0
+offset_right = 788.0
+offset_bottom = 194.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/3"]
+layout_mode = 2
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 170.0
+offset_bottom = 170.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_font_sizes/normal_font_size = 120
+bbcode_enabled = true
+text = "[center]3"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MoveRight/SaveFilesPanel"]
+libraries = {
+"": SubResource("AnimationLibrary_i3drf")
+}
 
 [node name="SlashPanel2" type="Panel" parent="MoveRight"]
 layout_mode = 0
@@ -516,6 +650,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("3_gc66u")
 color = Color(0.0666667, 0.0666667, 0.105882, 1)
+metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MoveRight"]
 libraries = {

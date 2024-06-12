@@ -12,6 +12,7 @@ use godot::prelude::*;
 use crate::consts::battle::*;
 use crate::prelude::*;
 
+mod affinities;
 mod midi;
 mod player;
 mod rhythm;
@@ -95,9 +96,8 @@ impl BattleEngine {
     }
 
     fn open_dualmenu(&mut self) {
-        let mut anim = self.dualmenu_animator();
-        anim.set_assigned_animation("dualmenu_open".into());
-        anim.play();
+        self.dualmenu_animator()
+            .play_animation_forwards("dualmenu_open", true);
 
         self.state = BattleState::Menu(MenuSection::Main);
 
@@ -108,9 +108,8 @@ impl BattleEngine {
     }
 
     fn close_dualmenu(&mut self) {
-        let mut anim = self.dualmenu_animator();
-        anim.set_assigned_animation("dualmenu_open".into());
-        anim.play_backwards();
+        self.dualmenu_animator()
+            .play_animation_forwards("dualmenu_open", false);
 
         self.state = BattleState::Attack { running: false };
 

@@ -20,7 +20,7 @@ pub(crate) use attack::AttackSkill;
 pub(crate) use buffs::BuffSkill;
 pub(crate) use other::{PSIFluxSkill, PSIRewireSkill};
 pub(crate) use recovery::RecoverySkill;
-pub(crate) use shields::{ShieldAffinity, ShieldSkill};
+pub(crate) use shields::ShieldSkill;
 
 type BattlerPtr = Rc<RefCell<dyn Battler>>;
 
@@ -45,6 +45,7 @@ pub trait SkillFamily {
     Copy,
     Debug,
     Eq,
+    Hash,
     Ord,
     PartialEq,
     PartialOrd,
@@ -86,8 +87,13 @@ impl Element {
         Element::iter().filter(Self::is_physical).collect()
     }
 
-    /// Includes unique elements!
     pub fn list_magical() -> Vec<Element> {
+        Element::iter()
+            .filter(|v| v.is_magical() && !v.is_unique())
+            .collect()
+    }
+
+    pub fn list_magical_and_unique() -> Vec<Element> {
         Element::iter().filter(Self::is_magical).collect()
     }
 
@@ -107,7 +113,7 @@ impl Element {
 
     /// User-facing string for formatting the element of a skill
     /// Handles the "edge cases" of grammar like "Fuzz" => "Fuzzy"
-    pub fn describe_adj(&self) -> GString {
+    pub fn adjective(&self) -> GString {
         tr(&format!("ELEMENT_ADJ_{:?}", self))
     }
 }

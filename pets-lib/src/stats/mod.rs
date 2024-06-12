@@ -11,6 +11,7 @@ mod charmap;
 mod enemy;
 mod pchars;
 mod savefiles;
+pub mod scrapbook;
 mod statcalc;
 
 // re-export some crap from ^^^

@@ -29,14 +29,7 @@ impl WorldMenu {
     fn open_or_close(&mut self, open: bool) {
         self.opened = open;
 
-        let mut anim = self.anim_player();
-        anim.set_assigned_animation("open".into());
-
-        if open {
-            anim.play();
-        } else {
-            anim.play_backwards()
-        }
+        self.anim_player().play_animation_forwards("open", open);
 
         // set focus mode
         let mut choices = self.choices.bind_mut();

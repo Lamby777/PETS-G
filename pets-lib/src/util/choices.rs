@@ -40,6 +40,10 @@ pub struct ChoiceAgent {
     #[export]
     #[var(get, set = set_disabled)]
     disabled: bool,
+
+    #[export]
+    #[init(default = ".".into())]
+    tween_target_relative: GString,
 }
 
 #[godot_api]
@@ -50,9 +54,16 @@ impl ChoiceAgent {
             return;
         }
 
-        let node = node
+        let target =
+            node.get_node_as::<Node>(self.tween_target_relative.clone());
+
+        // either the node itself is a text label OR check if it
+        // has a child to tween
+        let txtlabel = target
+            .clone()
             .try_cast::<RichTextLabel>()
-            .unwrap_or_else(|node| node.get_node_as("RichTextLabel"));
+            .ok()
+            .or_else(|| node.try_get_node_as("RichTextLabel"));
 
         let target_val = match is_picked {
             true => self.tween_focused_value,
@@ -60,32 +71,38 @@ impl ChoiceAgent {
         };
 
         // color stuff
-        let target_col = {
-            let col = if is_picked {
-                "font_selected_color"
-            } else {
-                "default_color"
+        let t1 = if let Some(label) = txtlabel {
+            let target_col = {
+                let col = match is_picked {
+                    true => "font_selected_color",
+                    false => "default_color",
+                };
+
+                default_theme().get_color(col.into(), "RichTextLabel".into())
             };
 
-            default_theme().get_color(col.into(), "RichTextLabel".into())
+            let t1 = tween(
+                label.clone(),
+                "theme_override_colors/default_color",
+                None,
+                target_col,
+                CHOICE_TWEEN_TIME,
+                CHOICE_TWEEN_TRANS,
+            )
+            .map(|_| ());
+
+            bbcode_toggle(label, CHOICE_WAVE_BBCODE, is_picked);
+            t1
+        } else {
+            Ok(())
         };
 
         // tween the custom param
-        let t1 = tween(
-            node.clone(),
+        let t2 = tween(
+            target.clone(),
             self.tween_property.clone(),
             None,
             target_val,
-            CHOICE_TWEEN_TIME,
-            CHOICE_TWEEN_TRANS,
-        );
-
-        // tween color
-        let t2 = tween(
-            node.clone(),
-            "theme_override_colors/default_color",
-            None,
-            target_col,
             CHOICE_TWEEN_TIME,
             CHOICE_TWEEN_TRANS,
         );
@@ -94,8 +111,6 @@ impl ChoiceAgent {
         if t1.and(t2).is_err() {
             godot_warn!("failed to tween choice!");
         }
-
-        bbcode_toggle(node, CHOICE_WAVE_BBCODE, is_picked);
     }
 
     // pub fn tween_all(&self, is_picked: bool) {
@@ -114,7 +129,11 @@ impl ChoiceAgent {
         self.parent()
             .get_children()
             .iter_shared()
-            .filter_map(|x| x.try_cast().ok())
+            .filter_map(|x| x.try_cast::<Control>().ok())
+            .filter(|x| {
+                !(x.has_meta("ChoiceAgentIgnore".into())
+                    && x.get_meta("ChoiceAgentIgnore".into()).to::<bool>())
+            })
             .collect()
     }
 
@@ -146,6 +165,7 @@ impl ChoiceAgent {
     #[func]
     pub fn set_disabled(&mut self, disabled: bool) {
         self.disabled = disabled;
+
         self.set_focus_modes();
     }
 
@@ -169,6 +189,10 @@ impl ChoiceAgent {
 
     #[func]
     pub fn set_focus_modes(&self) {
+        if !self.base().is_inside_tree() {
+            return;
+        }
+
         let mode = match self.disabled {
             true => FocusMode::NONE,
             false => FocusMode::ALL,
@@ -224,7 +248,7 @@ impl INode for ChoiceAgent {
             self.bind_callables_for(&mut node.cast::<Control>());
         }
 
-        self.set_focus_modes()
+        self.set_focus_modes();
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
