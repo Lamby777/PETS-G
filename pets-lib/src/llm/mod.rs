@@ -35,8 +35,6 @@ fn prep_llm_path() -> Result<PathBuf> {
     let file = file?;
 
     let path = file.path_absolute().to_string();
-    dbg!(&path);
-
     path.parse()
         .map_err(|e| anyhow!("Failed to parse path: {}", e))
 }

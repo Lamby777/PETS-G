@@ -112,8 +112,6 @@ fn debug_item(args: GArgs) -> GReturn {
         .flatten()
         .unwrap_or(1);
 
-    println!("giving a {} (x{})", item_id, quantity);
-
     // why tf do i have to do this?
     let item = ITEM_REGISTRY
         .get()
