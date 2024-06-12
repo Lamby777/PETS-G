@@ -8,8 +8,7 @@
 
 use godot::engine::tween::TransitionType;
 use godot::engine::{
-    AnimationPlayer, ColorRect, Control, HBoxContainer, InputEvent,
-    PanelContainer,
+    AnimationPlayer, ColorRect, Control, InputEvent, PanelContainer,
 };
 use godot::obj::WithBaseField;
 use godot::prelude::*;
@@ -133,14 +132,14 @@ impl TitleScreen {
         !self.save_choices.bind().get_disabled()
     }
 
-    fn save_buttons(&self) -> Vec<Gd<PanelContainer>> {
-        self.save_button_cont
-            .get_children()
-            .iter_shared()
-            .skip(1) // skip the partially-shown decoration one
-            .map(Gd::cast)
-            .collect()
-    }
+    // fn save_buttons(&self) -> Vec<Gd<PanelContainer>> {
+    //     self.save_button_cont
+    //         .get_children()
+    //         .iter_shared()
+    //         .skip(1) // skip the partially-shown decoration one
+    //         .map(Gd::cast)
+    //         .collect()
+    // }
 }
 
 #[godot_api]
