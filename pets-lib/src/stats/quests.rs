@@ -1,19 +1,7 @@
 use godot::prelude::*;
+// use crate::prelude::*;
 
-use crate::prelude::*;
-
-pub type QuestPhase = u32;
-
-/// Map of the quest ID -> its phase
-/// For saving purposes.
-#[derive(Deref, DerefMut, Serialize, Deserialize)]
-pub struct Quests(HashMap<String, QuestPhase>);
-
-impl Quests {
-    pub fn fresh() -> Self {
-        Self(HashMap::new())
-    }
-}
+pub type QuestPhase = i32;
 
 #[derive(GodotClass)]
 #[class(init, base=Resource)]
@@ -34,10 +22,12 @@ pub struct Quest {
 
 #[godot_api]
 impl Quest {
+    #[func]
     pub fn final_phase(&self) -> QuestPhase {
         self.final_phase
     }
 
+    #[func]
     pub fn is_complete(&self) -> bool {
         self.phase >= self.final_phase
     }

@@ -35,6 +35,16 @@ impl StatsInterface {
             .take()
     }
 
+    #[func]
+    pub fn get_quest_phase(&self, quest_id: GString) -> QuestPhase {
+        *self.save.quests.get(&quest_id.to_string()).unwrap_or(&-1)
+    }
+
+    #[func]
+    pub fn set_quest_phase(&mut self, quest_id: GString, phase: QuestPhase) {
+        self.save.quests.insert(quest_id.to_string(), phase);
+    }
+
     /// Get the list of stat calculation functions for a given character
     pub fn get_statcalc(&self, ch: &str) -> Rc<StatCalcList> {
         self.statcalcs
