@@ -77,11 +77,11 @@ impl SkillFamily for ShieldSkill {
     fn name(&self) -> String {
         let name = self.shield_type_str();
         let width = self.shield_width_str();
-        let affinity = describe_damage_blocked(&self.affinity);
+        let adjective = describe_shield_adjective(&self.affinity);
 
         tr_replace! {
             "SKILL_SHIELD_NAME";
-            affinity, width, name,
+            adjective, width, name,
         }
     }
 
@@ -121,6 +121,22 @@ impl SkillFamily for ShieldSkill {
     ) {
         todo!()
     }
+}
+
+pub fn describe_shield_adjective(aff: &Affinities) -> GString {
+    if is_physical_shield(&aff) {
+        return tr("SKILL_SHIELD_PHYSICAL_ADJ");
+    }
+
+    if is_magical_shield(&aff) {
+        return tr("SKILL_SHIELD_MAGICAL_ADJ");
+    }
+
+    if is_unique_shield(&aff) {
+        return tr("SKILL_SHIELD_UNIQUE_ADJ");
+    }
+
+    tr("SKILL_SHIELD_SPECIALIZED_ADJ")
 }
 
 pub fn describe_damage_blocked(aff: &Affinities) -> GString {
