@@ -37,7 +37,11 @@ impl SaveFile {
 
     pub fn load_from(save_slot: u8) -> io::Result<Self> {
         let path = save_path(save_slot);
-        let mut file = GFile::open(path, ModeFlags::READ)?;
+        let Ok(mut file) = GFile::open(path, ModeFlags::READ) else {
+            let new_save = Self::fresh();
+            new_save.write_to(save_slot);
+            return Ok(new_save);
+        };
 
         let mut content = vec![];
         file.read_to_end(&mut content);
