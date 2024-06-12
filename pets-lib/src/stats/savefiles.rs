@@ -16,11 +16,12 @@ fn save_path(slot: u8) -> String {
 }
 
 /// All the data saved to one of the save file slots
-#[derive(Clone, Serialize, Deserialize)]
+#[derive(Serialize, Deserialize)]
 pub struct SaveFile {
     pub chars: CharMap,
     pub inventory: Rc<RefCell<Vec<Item>>>,
     pub scrapbook: Scrapbook,
+    pub quests: Vec<Quest>,
 }
 
 #[allow(unused)]
@@ -32,6 +33,7 @@ impl SaveFile {
             chars,
             inventory: Rc::new(RefCell::new(vec![])),
             scrapbook: Scrapbook::empty(),
+            quests: vec![],
         }
     }
 

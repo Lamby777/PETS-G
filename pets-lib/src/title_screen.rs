@@ -69,7 +69,7 @@ impl TitleScreen {
         godot_print!("{}", slot);
 
         let save = SaveFile::load_from(slot as u8).unwrap();
-        si().bind_mut().load_save_state(&save);
+        si().bind_mut().load_save_state(save);
 
         self.start_game();
     }
