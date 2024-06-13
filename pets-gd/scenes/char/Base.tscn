@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://c0rycajg7lpiw"]
+[gd_scene load_steps=39 format=3 uid="uid://c0rycajg7lpiw"]
 
 [ext_resource type="Texture2D" uid="uid://d8m1gigeptqj" path="res://assets/textures/char/main/Ethan.png" id="1_j248l"]
 [ext_resource type="AnimationLibrary" uid="uid://dl8yjukwl5mpf" path="res://assets/animations/PCharNode.res" id="2_misv4"]
@@ -159,6 +159,9 @@ states/Wade/position = Vector2(433, 247)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji4br"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_q0w5r"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_hpdl1"), "Idle", "Wade", SubResource("AnimationNodeStateMachineTransition_xnsgn"), "Wade", "Idle", SubResource("AnimationNodeStateMachineTransition_6f020"), "Wade", "Run", SubResource("AnimationNodeStateMachineTransition_gx0ab"), "Run", "Wade", SubResource("AnimationNodeStateMachineTransition_4a04c")]
 graph_offset = Vector2(-79, 13)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iqy0m"]
+size = Vector2(48, 32)
+
 [node name="PCharNode" type="PCharNode"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -174,9 +177,16 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-active = false
 tree_root = SubResource("AnimationNodeStateMachine_5ckr2")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Idle/blend_position = Vector2(0, 0)
+parameters/Idle/blend_position = Vector2(0.0048368, 0.32996)
 parameters/Run/blend_position = Vector2(0, 0)
-parameters/Wade/blend_position = Vector2(0, 0)
+parameters/Wade/blend_position = Vector2(-0.279323, 0.402834)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_iqy0m")

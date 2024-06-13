@@ -1,5 +1,6 @@
 use godot::engine::{
-    AnimationNodeStateMachinePlayback, AnimationPlayer, AnimationTree, Sprite2D,
+    AnimationNodeStateMachinePlayback, AnimationPlayer, AnimationTree, Area2D,
+    Sprite2D,
 };
 use godot::prelude::*;
 
@@ -19,6 +20,9 @@ pub struct PCharNode {
     #[init(default = onready_node(&base, "AnimationTree"))]
     anim_tree: OnReady<Gd<AnimationTree>>,
 
+    #[init(default = onready_node(&base, "Area2D"))]
+    area: OnReady<Gd<Area2D>>,
+
     #[init(default = OnReady::manual())]
     anim_state: OnReady<Gd<AnimationNodeStateMachinePlayback>>,
 }
@@ -27,17 +31,25 @@ pub struct PCharNode {
 impl PCharNode {
     #[func]
     pub fn anim_move(&mut self, moving: bool, inputs: Vector2) {
+        // change the animationtree state machine to the correct mode
         let mode_str = self.anim_mode_str(moving);
-        let anim_path = format!("parameters/{mode_str}/blend_position");
-
-        self.anim_tree.set(anim_path.into(), Variant::from(inputs));
         self.anim_state.travel(mode_str.into());
+
+        // set the blend position
+        let blend_pos_field = format!("parameters/{mode_str}/blend_position");
+        self.anim_tree
+            .set(blend_pos_field.into(), Variant::from(inputs));
     }
 
     fn anim_mode_str(&self, moving: bool) -> &'static str {
-        // if true {
-        //     return "Wade";
-        // }
+        let overlapping_areas = self.area.get_overlapping_areas();
+        let overlaps = overlapping_areas
+            .iter_shared()
+            .any(|area| area.is_in_group("water".into()));
+
+        if overlaps {
+            return "Wade";
+        }
 
         match moving {
             true => "Run",
