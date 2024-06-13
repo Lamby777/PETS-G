@@ -95,6 +95,7 @@ impl DialogBox {
         self.msg_txt().set_text(self.translated_message());
 
         self.msg_txt().set_visible_characters(0);
+        self.text_visibility_timer.start();
     }
 
     #[func]
@@ -127,13 +128,22 @@ impl DialogBox {
     /// See <https://github.com/Lamby777/PETS-G/issues/50>
     #[func]
     pub fn text_visibility_tick(&mut self) {
-        if self.is_done_showing_text() {
-            return;
-        }
-
         let mut label = self.msg_txt();
         let visible = label.get_visible_characters();
         label.set_visible_characters(visible + 1);
+
+        // if the next char is whitespace or punctuation, wait longer
+        let text = label.get_text().chars().iter().collect::<String>();
+        let delay_til_next = match text.chars().nth(visible as usize + 2) {
+            Some(next_ch) if next_ch == PAUSE_CHAR => PAUSE_CHAR_DELAY,
+            Some(next_ch) if next_ch.is_whitespace() => WHITESPACE_DELAY,
+            Some(next_ch) if next_ch.is_ascii_punctuation() => PUNCT_DELAY,
+
+            _ => TEXT_VISIBILITY_DELAY,
+        };
+
+        self.text_visibility_timer.set_wait_time(delay_til_next);
+        self.text_visibility_timer.start();
     }
 
     pub fn is_done_showing_text(&self) -> bool {
@@ -312,9 +322,8 @@ impl IPanelContainer for DialogBox {
             "timeout".into(),
             self.base().callable("text_visibility_tick"),
         );
-        timer.set_one_shot(false);
+        timer.set_one_shot(true);
         self.base_mut().add_child(timer.clone().upcast());
-        timer.start();
         self.text_visibility_timer.init(timer);
     }
 

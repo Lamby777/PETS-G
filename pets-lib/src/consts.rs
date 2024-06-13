@@ -51,7 +51,12 @@ pub mod dialogue {
     use super::*;
 
     pub const DEFAULT_VOX: &str = "_";
-    pub const TEXT_VISIBILITY_DELAY: f64 = 0.035;
+
+    pub const TEXT_VISIBILITY_DELAY: f64 = 0.015;
+    pub const PAUSE_CHAR: char = '​';
+    pub const PAUSE_CHAR_DELAY: f64 = 0.1;
+    pub const PUNCT_DELAY: f64 = 0.1;
+    pub const WHITESPACE_DELAY: f64 = 0.03;
 
     pub const UI_LAYER_NAME: &str = "UILayer";
     pub const DBOX_NODE_NAME: &str = "DialogBox";
