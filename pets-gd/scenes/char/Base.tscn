@@ -167,6 +167,7 @@ size = Vector2(48, 32)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
 texture = ExtResource("1_j248l")
+offset = Vector2(0, -2)
 hframes = 8
 vframes = 8
 frame = 1
