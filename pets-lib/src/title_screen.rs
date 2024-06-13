@@ -46,7 +46,7 @@ impl TitleScreen {
     }
 
     fn anim_out(&self) {
-        fade_black(self.black(), true, BLACK_FADE_TIME);
+        fade_black(&self.black(), true, BLACK_FADE_TIME);
 
         let mut anim = self
             .base()

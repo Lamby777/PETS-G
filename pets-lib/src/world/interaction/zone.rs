@@ -87,7 +87,7 @@ impl InteractionZone {
     fn tp_player_to_beacon(&self, target: &NodePath) {
         let black = self.base().get_node_as::<ColorRect>("%BeaconFade");
 
-        fade_black(black, true, TP_BEACON_BLACK_IN);
+        fade_black(&black, true, TP_BEACON_BLACK_IN);
 
         {
             let mut pcb = pcb();
@@ -101,10 +101,7 @@ impl InteractionZone {
 
         let target_node = self.base().get_node_as::<Node2D>(target.clone());
         let target_pos = target_node.get_global_position();
-        let black_id = self
-            .base()
-            .get_node_as::<ColorRect>("%BeaconFade")
-            .instance_id();
+        let black_id = black.instance_id();
 
         set_timeout(TP_BEACON_BLACK_IN, move || {
             // after the screen is black, teleport the player
@@ -113,7 +110,7 @@ impl InteractionZone {
             set_timeout(TP_BEACON_BLACK_HOLD, move || {
                 // when it's time to fade the black away, do it.
                 let black = Gd::<ColorRect>::from_instance_id(black_id);
-                fade_black(black, false, TP_BEACON_BLACK_OUT);
+                fade_black(&black, false, TP_BEACON_BLACK_OUT);
 
                 set_timeout(TP_BEACON_BLACK_OUT, || {
                     // finally, reset the debounce when the black is gone
