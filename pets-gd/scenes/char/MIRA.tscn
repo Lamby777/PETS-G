@@ -163,7 +163,7 @@ graph_offset = Vector2(-79, 13)
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_ld7rf")
-offset = Vector2(0, -2)
+offset = Vector2(0, -4)
 
 [node name="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeStateMachine_4htcc")
