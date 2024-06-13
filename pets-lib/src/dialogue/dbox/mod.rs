@@ -6,7 +6,7 @@ use dialogical::prelude::*;
 use godot::engine::global::Side;
 use godot::engine::{
     AnimationPlayer, Control, HBoxContainer, IPanelContainer, InputEvent,
-    PanelContainer, RichTextLabel,
+    PanelContainer, RichTextLabel, Timer,
 };
 use godot::prelude::*;
 
@@ -72,6 +72,9 @@ pub struct DialogBox {
     speaker: MetaPair<Speaker>,
     #[init(default = MetaPair::from_cloned(DEFAULT_VOX.to_owned()))]
     vox: MetaPair<String>,
+
+    #[init(default = OnReady::manual())]
+    text_visibility_timer: OnReady<Gd<Timer>>,
 }
 
 #[godot_api]
@@ -124,15 +127,15 @@ impl DialogBox {
     /// See <https://github.com/Lamby777/PETS-G/issues/50>
     #[func]
     pub fn text_visibility_tick(&mut self) {
+        if self.is_done_showing_text() {
+            return;
+        }
+
         let mut label = self.msg_txt();
         let visible = label.get_visible_characters();
-
-        if !self.is_done_showing_text() {
-            label.set_visible_characters(visible + 1);
-        }
+        label.set_visible_characters(visible + 1);
     }
 
-    #[func]
     pub fn is_done_showing_text(&self) -> bool {
         let label = self.msg_txt();
         label.get_visible_characters() >= label.get_text().len() as i32
@@ -269,7 +272,6 @@ impl DialogBox {
     pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
         // NOTE convention is that the agent is BEFORE the labels
         let picked_i = (choice.get_index() - 1) as usize;
-        // godot_print!(">> {} @{}", choice.get_name(), picked_i);
 
         // we know the ending has to be `Choices` and not a label or end
         let ending = self.current_ix_ending().unwrap().clone();
@@ -282,19 +284,7 @@ impl DialogBox {
             None => self.end_interaction(),
 
             Some(label) => {
-                // untween the focused choice (wtf?)
-                // let dchoice = self
-                //     .choice_agent
-                //     .bind()
-                //     .choice_labels()
-                //     .get(picked_i)
-                //     .unwrap()
-                //     .clone()
-                //     .cast::<Control>();
-
-                // self.choice_agent.bind_mut()._tween_choice_off(dchoice);
                 self.tween_choices_wave(false);
-
                 self.run_label(label);
             }
         }
@@ -315,6 +305,17 @@ impl IPanelContainer for DialogBox {
         connect("selection_unfocused", "on_choice_unfocused");
 
         self.choice_agent.bind_mut().disable();
+
+        let mut timer = Timer::new_alloc();
+        timer.set_wait_time(TEXT_VISIBILITY_DELAY);
+        timer.connect(
+            "timeout".into(),
+            self.base().callable("text_visibility_tick"),
+        );
+        timer.set_one_shot(false);
+        self.base_mut().add_child(timer.clone().upcast());
+        timer.start();
+        self.text_visibility_timer.init(timer);
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
