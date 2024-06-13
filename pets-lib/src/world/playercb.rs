@@ -215,6 +215,7 @@ impl ICharacterBody2D for PlayerCB {
             PChar::MIRA,
             PChar::DYLAN,
             PChar::LEO,
+            PChar::LYEMBO,
         );
     }
 
