@@ -1,0 +1,170 @@
+[gd_scene load_steps=9 format=3 uid="uid://pefjtfxt6buk"]
+
+[ext_resource type="PackedScene" uid="uid://dk214wpitbhju" path="res://scenes/walking_enemy.tscn" id="1_p8bu8"]
+[ext_resource type="PackedScene" uid="uid://xena0e3suwve" path="res://scenes/water_zone.tscn" id="2_gejdc"]
+[ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="3_u3son"]
+[ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/builds/bush_long.tscn" id="4_oeswr"]
+[ext_resource type="PackedScene" uid="uid://drxvvfvnc7awr" path="res://scenes/builds/rodrick_sign.tscn" id="5_fy24m"]
+[ext_resource type="PackedScene" uid="uid://c5mnxr4iyqch7" path="res://scenes/music_zone.tscn" id="6_18qsr"]
+[ext_resource type="AudioStream" uid="uid://b83wws3dajmi5" path="res://assets/music/zone/routingout.ogg" id="7_5kf8t"]
+[ext_resource type="PackedScene" uid="uid://spoekr5ja5vg" path="res://scenes/rooms/_Base_Tilemap.tscn" id="8_trxub"]
+
+[node name="Room" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Mouse1" parent="." instance=ExtResource("1_p8bu8")]
+position = Vector2(888, 376)
+
+[node name="WaterZone" parent="." instance=ExtResource("2_gejdc")]
+position = Vector2(416, 1056)
+scale = Vector2(3, -2)
+
+[node name="DebugItem" parent="." instance=ExtResource("3_u3son")]
+function_name = "debug_skill"
+position = Vector2(-192, 64)
+
+[node name="TeleporterDemo" type="Node2D" parent="."]
+position = Vector2(-1216, 864)
+
+[node name="TPRightIn" parent="TeleporterDemo" instance=ExtResource("3_u3son")]
+beacon_target = NodePath("../TPRightOut")
+auto_interact = true
+position = Vector2(216, 0)
+scale = Vector2(0.5, 0.5)
+
+[node name="TPRightOut" parent="TeleporterDemo" instance=ExtResource("3_u3son")]
+beacon_target = NodePath("../TPRightIn")
+auto_interact = true
+position = Vector2(344, 0)
+scale = Vector2(0.5, 0.5)
+
+[node name="RightBush" parent="TeleporterDemo" instance=ExtResource("4_oeswr")]
+position = Vector2(360, 0)
+collision_mask = 9
+
+[node name="TPLeftOut" parent="TeleporterDemo" instance=ExtResource("3_u3son")]
+beacon_target = NodePath("../TPLeftIn")
+position = Vector2(-344, 0)
+scale = Vector2(0.5, 0.5)
+
+[node name="TPLeftIn" parent="TeleporterDemo" instance=ExtResource("3_u3son")]
+beacon_target = NodePath("../TPLeftOut")
+position = Vector2(-216, 0)
+scale = Vector2(0.5, 0.5)
+
+[node name="LeftBush" parent="TeleporterDemo" instance=ExtResource("4_oeswr")]
+position = Vector2(-360, 0)
+collision_mask = 9
+
+[node name="DecoBushes" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="BushTriangle" type="Node2D" parent="DecoBushes"]
+y_sort_enabled = true
+position = Vector2(-32, 0)
+
+[node name="BushMid" parent="DecoBushes/BushTriangle" instance=ExtResource("4_oeswr")]
+position = Vector2(0, 900)
+collision_mask = 9
+
+[node name="Bush1" parent="DecoBushes/BushTriangle" instance=ExtResource("4_oeswr")]
+position = Vector2(-150, 700)
+collision_mask = 9
+
+[node name="Bush2" parent="DecoBushes/BushTriangle" instance=ExtResource("4_oeswr")]
+position = Vector2(150, 700)
+collision_mask = 9
+
+[node name="Bush3" parent="DecoBushes/BushTriangle" instance=ExtResource("4_oeswr")]
+position = Vector2(-300, 500)
+collision_mask = 9
+
+[node name="Bush4" parent="DecoBushes/BushTriangle" instance=ExtResource("4_oeswr")]
+position = Vector2(300, 500)
+collision_mask = 9
+
+[node name="BushHeart" type="Node2D" parent="DecoBushes"]
+y_sort_enabled = true
+
+[node name="Middle" parent="DecoBushes/BushHeart" instance=ExtResource("4_oeswr")]
+y_sort_enabled = true
+position = Vector2(0, 1800)
+collision_mask = 9
+
+[node name="Bush1" parent="DecoBushes/BushHeart" instance=ExtResource("4_oeswr")]
+position = Vector2(150, 1600)
+collision_mask = 9
+
+[node name="Bush2" parent="DecoBushes/BushHeart" instance=ExtResource("4_oeswr")]
+position = Vector2(-150, 1600)
+collision_mask = 9
+
+[node name="Bush3" parent="DecoBushes/BushHeart" instance=ExtResource("4_oeswr")]
+position = Vector2(300, 1460)
+collision_mask = 9
+
+[node name="Bush4" parent="DecoBushes/BushHeart" instance=ExtResource("4_oeswr")]
+position = Vector2(-300, 1460)
+collision_mask = 9
+
+[node name="Bush5" parent="DecoBushes/BushHeart" instance=ExtResource("4_oeswr")]
+position = Vector2(450, 1600)
+collision_mask = 9
+
+[node name="Bush6" parent="DecoBushes/BushHeart" instance=ExtResource("4_oeswr")]
+position = Vector2(-450, 1600)
+collision_mask = 9
+
+[node name="Bush7" parent="DecoBushes/BushHeart" instance=ExtResource("4_oeswr")]
+position = Vector2(540, 1800)
+collision_mask = 9
+
+[node name="Bush8" parent="DecoBushes/BushHeart" instance=ExtResource("4_oeswr")]
+position = Vector2(-540, 1800)
+collision_mask = 9
+
+[node name="Bush9" parent="DecoBushes/BushHeart" instance=ExtResource("4_oeswr")]
+position = Vector2(450, 2000)
+collision_mask = 9
+
+[node name="Bush10" parent="DecoBushes/BushHeart" instance=ExtResource("4_oeswr")]
+position = Vector2(-450, 2000)
+collision_mask = 9
+
+[node name="Bush11" parent="DecoBushes/BushHeart" instance=ExtResource("4_oeswr")]
+position = Vector2(270, 2200)
+collision_mask = 9
+
+[node name="Bush12" parent="DecoBushes/BushHeart" instance=ExtResource("4_oeswr")]
+position = Vector2(-270, 2200)
+collision_mask = 9
+
+[node name="Bush18" parent="DecoBushes/BushHeart" instance=ExtResource("4_oeswr")]
+position = Vector2(0, 2340)
+collision_mask = 9
+
+[node name="BushLong" parent="DecoBushes" instance=ExtResource("4_oeswr")]
+position = Vector2(-900, 1300)
+collision_mask = 9
+
+[node name="BushLong2" parent="DecoBushes" instance=ExtResource("4_oeswr")]
+position = Vector2(900, 1300)
+collision_mask = 9
+
+[node name="RodrickSign" parent="." instance=ExtResource("5_fy24m")]
+position = Vector2(192, 64)
+collision_mask = 9
+
+[node name="InteractionZone" parent="RodrickSign" instance=ExtResource("3_u3son")]
+interaction_id = "Rodrick Sign #1"
+
+[node name="MZ_CV_Outdoors" parent="." instance=ExtResource("6_18qsr")]
+music = ExtResource("7_5kf8t")
+
+[node name="CollisionPolygon2D" parent="MZ_CV_Outdoors" index="0"]
+visible = false
+polygon = PackedVector2Array(-59.0769, -19.6923, 59.0769, -19.6923, 59.0769, 59.0769, -59.0769, 59.0769)
+
+[node name="TileMap" parent="." instance=ExtResource("8_trxub")]
+
+[editable path="MZ_CV_Outdoors"]
