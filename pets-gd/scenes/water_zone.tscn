@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://xena0e3suwve"]
 
-[node name="WaterZone" type="WaterZone"]
-collision_layer = 0
+[node name="WaterZone" type="WaterZone" groups=["water"]]
+collision_layer = 16
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

@@ -163,6 +163,7 @@ locale/fallback="en_US"
 2d_physics/layer_2="player"
 2d_physics/layer_3="ix_zones"
 2d_physics/layer_4="enemies"
+2d_physics/layer_5="water"
 
 [rendering]
 
