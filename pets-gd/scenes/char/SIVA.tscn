@@ -1,8 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://5pp7bf4f52af"]
+[gd_scene load_steps=38 format=3 uid="uid://bixe2r406kurm"]
 
-[ext_resource type="Texture2D" uid="uid://ciurawgpv2g88" path="res://assets/textures/char/main/Siva.png" id="1_pqmdc"]
-[ext_resource type="AnimationLibrary" uid="uid://dl8yjukwl5mpf" path="res://assets/animations/PCharNode.res" id="2_pmvhj"]
-[ext_resource type="PackedScene" uid="uid://cwnwmo72ju0rr" path="res://scenes/pchar_animation_tree.tscn" id="3_ati2c"]
+[ext_resource type="PackedScene" uid="uid://c0rycajg7lpiw" path="res://scenes/char/Base.tscn" id="1_mdh08"]
+[ext_resource type="Texture2D" uid="uid://ciurawgpv2g88" path="res://assets/textures/char/main/Siva.png" id="2_yvaiy"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r24ka"]
 animation = &"PCharNode/IdleL"
@@ -90,7 +89,47 @@ blend_point_7/node = SubResource("AnimationNodeAnimation_7k2u3")
 blend_point_7/pos = Vector2(-0.6, 0.6)
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bsvl2"]
+animation = &"PCharNode/WadeD"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_usdgn"]
+animation = &"PCharNode/WadeL"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_te7nv"]
+animation = &"PCharNode/WadeDL"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0ygm1"]
+animation = &"PCharNode/WadeUL"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e3gil"]
+animation = &"PCharNode/WadeU"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wpgm4"]
+animation = &"PCharNode/WadeR"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3b8xn"]
+animation = &"PCharNode/WadeDR"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eoqki"]
+animation = &"PCharNode/WadeUR"
+
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_hw4lr"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_bsvl2")
+blend_point_0/pos = Vector2(0, 0.9)
+blend_point_1/node = SubResource("AnimationNodeAnimation_usdgn")
+blend_point_1/pos = Vector2(-0.9, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_te7nv")
+blend_point_2/pos = Vector2(-0.6, 0.6)
+blend_point_3/node = SubResource("AnimationNodeAnimation_0ygm1")
+blend_point_3/pos = Vector2(-0.6, -0.6)
+blend_point_4/node = SubResource("AnimationNodeAnimation_e3gil")
+blend_point_4/pos = Vector2(0, -0.9)
+blend_point_5/node = SubResource("AnimationNodeAnimation_wpgm4")
+blend_point_5/pos = Vector2(0.9, 0)
+blend_point_6/node = SubResource("AnimationNodeAnimation_3b8xn")
+blend_point_6/pos = Vector2(0.6, 0.6)
+blend_point_7/node = SubResource("AnimationNodeAnimation_eoqki")
+blend_point_7/pos = Vector2(0.6, -0.6)
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ji4br"]
 
@@ -107,8 +146,9 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4a04c"]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_sup0e"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4htcc"]
 resource_local_to_scene = true
+states/End/position = Vector2(856, 117.6)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_p4qdk")
 states/Idle/position = Vector2(327.4, 84.8)
 states/Run/node = SubResource("AnimationNodeBlendSpace2D_ptivh")
@@ -119,20 +159,12 @@ states/Wade/position = Vector2(433, 247)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji4br"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_q0w5r"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_hpdl1"), "Idle", "Wade", SubResource("AnimationNodeStateMachineTransition_xnsgn"), "Wade", "Idle", SubResource("AnimationNodeStateMachineTransition_6f020"), "Wade", "Run", SubResource("AnimationNodeStateMachineTransition_gx0ab"), "Run", "Wade", SubResource("AnimationNodeStateMachineTransition_4a04c")]
 graph_offset = Vector2(-79, 13)
 
-[node name="SIVA" type="PCharNode"]
+[node name="SIVA" instance=ExtResource("1_mdh08")]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(4, 4)
-texture = ExtResource("1_pqmdc")
-offset = Vector2(0, -2)
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_yvaiy")
 hframes = 9
 vframes = 6
-frame = 22
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"PCharNode": ExtResource("2_pmvhj")
-}
-
-[node name="AnimationTree" parent="." instance=ExtResource("3_ati2c")]
-tree_root = SubResource("AnimationNodeStateMachine_sup0e")
+[node name="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeStateMachine_4htcc")

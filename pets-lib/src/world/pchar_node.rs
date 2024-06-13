@@ -35,9 +35,9 @@ impl PCharNode {
     }
 
     fn anim_mode_str(&self, moving: bool) -> &'static str {
-        if true {
-            return "Wade";
-        }
+        // if true {
+        //     return "Wade";
+        // }
 
         match moving {
             true => "Run",
