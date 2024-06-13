@@ -85,7 +85,7 @@ impl InteractionZone {
     }
 
     fn tp_player_to_beacon(&self, target: &NodePath) {
-        let black = self.base().get_node_as::<ColorRect>("%BeaconFade");
+        let black = current_scene().get_node_as::<ColorRect>("%BeaconFade");
 
         fade_black(&black, true, TP_BEACON_BLACK_IN);
 
