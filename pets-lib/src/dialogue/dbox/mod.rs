@@ -4,10 +4,9 @@
 
 use dialogical::prelude::*;
 use godot::engine::global::Side;
-use godot::engine::tween::TransitionType;
 use godot::engine::{
     AnimationPlayer, Control, HBoxContainer, IPanelContainer, InputEvent,
-    PanelContainer, RichTextLabel, Tween,
+    PanelContainer, RichTextLabel, Timer,
 };
 use godot::prelude::*;
 
@@ -74,19 +73,28 @@ pub struct DialogBox {
     #[init(default = MetaPair::from_cloned(DEFAULT_VOX.to_owned()))]
     vox: MetaPair<String>,
 
-    /// The tween that makes characters in the message
-    /// become visible one by one
-    text_tween: Option<Gd<Tween>>,
+    #[init(default = OnReady::manual())]
+    text_visibility_timer: OnReady<Gd<Timer>>,
 }
 
 #[godot_api]
 impl DialogBox {
     #[func]
     pub fn do_draw(&mut self) {
+        let ending = self.current_ix_ending().cloned();
+        if self.is_on_or_past_last_page()
+            && let Some(DialogueEnding::Choices(choices)) = ending
+        {
+            self.recreate_choice_labels(&choices);
+            self.tween_choices_wave(true);
+            self.choice_agent.bind_mut().enable();
+        }
+
         self.goto_current_page();
         self.spk_txt().set_text(self.translated_speaker());
         self.msg_txt().set_text(self.translated_message());
-        self.tween_txt_visibility();
+
+        self.msg_txt().set_visible_characters(0);
     }
 
     #[func]
@@ -116,20 +124,27 @@ impl DialogBox {
         current_scene().try_get_node_as::<DialogBox>(path)
     }
 
-    /// Start tweening a text's visible characters from 0% to 100% visible...
     /// See <https://github.com/Lamby777/PETS-G/issues/50>
-    pub fn tween_txt_visibility(&mut self) {
-        let tw = tween(
-            self.msg_txt(),
-            "visible_ratio",
-            Some(0.0),
-            1.0,
-            1.0,
-            TransitionType::QUAD,
-        );
+    #[func]
+    pub fn text_visibility_tick(&mut self) {
+        if self.is_done_showing_text() {
+            return;
+        }
 
-        // panic if tween failed
-        self.text_tween = Some(tw.unwrap());
+        let mut label = self.msg_txt();
+        let visible = label.get_visible_characters();
+        label.set_visible_characters(visible + 1);
+    }
+
+    pub fn is_done_showing_text(&self) -> bool {
+        let label = self.msg_txt();
+        label.get_visible_characters() >= label.get_text().len() as i32
+    }
+
+    pub fn skip_text_visibility(&mut self) {
+        let mut label = self.msg_txt();
+        let len = label.get_text().len() as i32;
+        label.set_visible_characters(len);
     }
 
     /// sets the speaker and message labels to the given page
@@ -183,15 +198,7 @@ impl DialogBox {
     #[func]
     pub fn open_or_close(&mut self, open: bool) {
         self.active = open;
-
-        let mut anim = self.anim_player();
-        anim.set_assigned_animation("open".into());
-
-        if open {
-            anim.play();
-        } else {
-            anim.play_backwards()
-        }
+        self.anim_player().play_animation_forwards("open", open);
     }
 
     #[func]
@@ -244,11 +251,7 @@ impl DialogBox {
 
         let ending = self.current_ix_ending().unwrap().clone();
         match ending {
-            Choices(choices) => {
-                self.recreate_choice_labels(&choices);
-                self.tween_choices_wave(true);
-            }
-
+            Choices(_) => (), // it's handled in `on_choice_picked`
             Label(label) => self.run_label(&label),
             End => self.end_interaction(),
         }
@@ -256,10 +259,10 @@ impl DialogBox {
 
     fn on_accept(&mut self) {
         // go to next page
-        self.current_page_number += 1;
-
         if self.is_on_or_past_last_page() {
             self.run_ix_ending();
+        } else {
+            self.current_page_number += 1;
         }
 
         self.do_draw();
@@ -269,7 +272,6 @@ impl DialogBox {
     pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
         // NOTE convention is that the agent is BEFORE the labels
         let picked_i = (choice.get_index() - 1) as usize;
-        // godot_print!(">> {} @{}", choice.get_name(), picked_i);
 
         // we know the ending has to be `Choices` and not a label or end
         let ending = self.current_ix_ending().unwrap().clone();
@@ -282,19 +284,7 @@ impl DialogBox {
             None => self.end_interaction(),
 
             Some(label) => {
-                // untween the focused choice (wtf?)
-                // let dchoice = self
-                //     .choice_agent
-                //     .bind()
-                //     .choice_labels()
-                //     .get(picked_i)
-                //     .unwrap()
-                //     .clone()
-                //     .cast::<Control>();
-
-                // self.choice_agent.bind_mut()._tween_choice_off(dchoice);
                 self.tween_choices_wave(false);
-
                 self.run_label(label);
             }
         }
@@ -315,6 +305,17 @@ impl IPanelContainer for DialogBox {
         connect("selection_unfocused", "on_choice_unfocused");
 
         self.choice_agent.bind_mut().disable();
+
+        let mut timer = Timer::new_alloc();
+        timer.set_wait_time(TEXT_VISIBILITY_DELAY);
+        timer.connect(
+            "timeout".into(),
+            self.base().callable("text_visibility_tick"),
+        );
+        timer.set_one_shot(false);
+        self.base_mut().add_child(timer.clone().upcast());
+        timer.start();
+        self.text_visibility_timer.init(timer);
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
@@ -324,14 +325,9 @@ impl IPanelContainer for DialogBox {
             return;
         }
 
-        if confirming && let Some(mut tw) = self.text_tween.take() {
-            if tw.is_running() {
-                // if tweening, skip it and return early
-                tw.pause();
-                tw.custom_step(1.0);
-                tw.kill();
-                return;
-            }
+        if confirming && !self.is_done_showing_text() {
+            self.skip_text_visibility();
+            return;
         }
 
         if self.awaiting_choice() {
@@ -377,29 +373,18 @@ impl DialogBox {
         self.active
     }
 
-    pub fn is_one_page(&self) -> bool {
-        let ix = self.current_ix.as_ref().unwrap();
-        ix.pages.len() == 1
-    }
-
     fn set_ix(&mut self, ix: Interaction, replaces: Vec<(String, String)>) {
         self.current_ix = Some(ix);
         self.current_page_number = 0;
         self.replaces = replaces;
         self.do_draw();
-
-        if self.is_one_page() {
-            let ending = self.current_ix_ending().unwrap().clone();
-            if let DialogueEnding::Choices(choices) = ending {
-                self.recreate_choice_labels(&choices);
-                self.tween_choices_wave(true);
-                self.choice_agent.bind_mut().enable();
-            }
-        }
     }
 
     pub fn is_on_or_past_last_page(&self) -> bool {
-        let ix = self.current_ix.as_ref().unwrap();
+        let Some(ix) = self.current_ix.as_ref() else {
+            return false;
+        };
+
         self.current_page_number >= ix.pages.len() - 1
     }
 

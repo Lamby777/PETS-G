@@ -1,6 +1,8 @@
 use std::cell::LazyCell;
 
-use crate::battle::skills::{AttackSkill, Element, SkillFamily as _};
+use crate::battle::skills::{
+    AttackSkill, Element, ShieldSkill, SkillFamily as _,
+};
 use crate::prelude::*;
 use godot::prelude::*;
 
@@ -56,7 +58,7 @@ const FUNCTIONS: LazyCell<FnTable> = LazyCell::new(|| {
 fn debug_skill(_args: GArgs) -> GReturn {
     end_interaction();
 
-    let skill = AttackSkill {
+    let skill1 = AttackSkill {
         tr_key: "SKILL_ATTACK_FIRE_DMG_NAME".to_owned(),
         element: Element::Fire,
         power: Some(1),
@@ -64,9 +66,29 @@ fn debug_skill(_args: GArgs) -> GReturn {
         status_effect: None,
     };
 
+    let aff = {
+        let mut map = HashMap::new();
+        map.insert(Element::Fire, AffinityPower::Weak);
+        map.insert(Element::Fuzz, AffinityPower::Strong);
+        map.insert(Element::Wind, AffinityPower::Nullify);
+        map.insert(Element::Spirit, AffinityPower::Heal);
+        map.insert(Element::Ice, AffinityPower::Reflect);
+        Affinities::new(map)
+    };
+
+    let skill2 = ShieldSkill {
+        affinity: aff,
+        hits: 1,
+        multiplier: 0.2,
+        reflect: false,
+        plural: false,
+    };
+
     start_ix_replace("Debug Menu >> Skill", &[
-        ("{SKILL_NAME}".to_owned(), skill.name()),
-        ("{SKILL_DESC}".to_owned(), skill.description()),
+        ("{SKILL_NAME1}".to_owned(), skill1.name()),
+        ("{SKILL_DESC1}".to_owned(), skill1.description()),
+        ("{SKILL_NAME2}".to_owned(), skill2.name()),
+        ("{SKILL_DESC2}".to_owned(), skill2.description()),
     ]);
 
     Ok(Variant::nil())
@@ -82,8 +104,6 @@ fn debug_battle(_args: GArgs) -> GReturn {
 fn debug_item(args: GArgs) -> GReturn {
     let item_id = args[0].to::<String>();
 
-    dbg!(&args);
-
     let quantity = args
         .get(1)
         .map(|v| v.try_to::<String>().ok())
@@ -91,8 +111,6 @@ fn debug_item(args: GArgs) -> GReturn {
         .map(|v| v.parse().ok())
         .flatten()
         .unwrap_or(1);
-
-    println!("giving a {} (x{})", item_id, quantity);
 
     // why tf do i have to do this?
     let item = ITEM_REGISTRY

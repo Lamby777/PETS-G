@@ -21,6 +21,10 @@ pub struct StatsInterface {
 
 #[godot_api]
 impl StatsInterface {
+    pub fn load_save_state(&mut self, save: SaveFile) {
+        self.save = save;
+    }
+
     // #[func]
     pub fn get_character(&self, ch: &str) -> CharData {
         self.save
@@ -29,6 +33,16 @@ impl StatsInterface {
             .expect("key should be a valid PChar name")
             .clone()
             .take()
+    }
+
+    #[func]
+    pub fn get_quest_phase(&self, quest_id: GString) -> QuestPhase {
+        *self.save.quests.get(&quest_id.to_string()).unwrap_or(&-1)
+    }
+
+    #[func]
+    pub fn set_quest_phase(&mut self, quest_id: GString, phase: QuestPhase) {
+        self.save.quests.insert(quest_id.to_string(), phase);
     }
 
     /// Get the list of stat calculation functions for a given character

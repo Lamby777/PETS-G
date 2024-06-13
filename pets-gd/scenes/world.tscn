@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://p2uymvf88jt7"]
+[gd_scene load_steps=24 format=3 uid="uid://p2uymvf88jt7"]
 
 [ext_resource type="PackedScene" uid="uid://kgl5788x405y" path="res://scenes/battle.tscn" id="1_37bcu"]
 [ext_resource type="PackedScene" uid="uid://c8hhg8v5ls70u" path="res://scenes/world_menu.tscn" id="2_6orff"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://c5mnxr4iyqch7" path="res://scenes/music_zone.tscn" id="9_tt2ie"]
 [ext_resource type="PackedScene" uid="uid://xena0e3suwve" path="res://scenes/water_zone.tscn" id="10_5nom4"]
 [ext_resource type="PackedScene" uid="uid://dk214wpitbhju" path="res://scenes/walking_enemy.tscn" id="10_30w80"]
+[ext_resource type="Script" path="res://quests/intro1.gd" id="13_w40m0"]
 
 [sub_resource type="Animation" id="Animation_2m57u"]
 length = 0.001
@@ -330,5 +331,12 @@ layer_4/name = "Water (Grass)"
 layer_4/y_sort_origin = -11
 layer_4/z_index = -4
 layer_4/tile_data = PackedInt32Array(983046, 65540, 1, 983047, 65540, 1, 1048583, 65540, 1, 1048582, 65540, 1, 1048581, 65540, 1, 983045, 65540, 1, 917509, 65540, 0, 917510, 65540, 0, 917511, 65540, 0, 983048, 65540, 1, 1048584, 65540, 1, 917512, 65540, 0, 983049, 131076, 1, 1048585, 131076, 1, 917513, 131076, 0, 1114121, 131076, 1, 1114120, 65540, 1, 1114119, 65540, 1, 1114118, 65540, 1, 1114117, 65540, 1, 1179657, 131076, 2, 1179656, 65540, 2, 1179655, 65540, 2, 1179654, 65540, 2, 1179653, 65540, 2, 1179652, 65540, 2, 1114116, 65540, 1, 1048580, 65540, 1, 1179651, 4, 2, 1114115, 4, 1, 1048579, 4, 1, 983043, 4, 1, 983044, 65540, 1, 917507, 4, 0, 917508, 65540, 0)
+
+[node name="Quests" type="Node" parent="."]
+process_mode = 4
+
+[node name="Intro1" type="Quest" parent="Quests"]
+process_mode = 3
+script = ExtResource("13_w40m0")
 
 [editable path="YSort/Room/MZ_CV_Outdoors"]

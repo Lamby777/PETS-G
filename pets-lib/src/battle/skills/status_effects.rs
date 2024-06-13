@@ -17,10 +17,12 @@ impl EffectAndChance {
     pub fn new(effect: StatusEffect, chance: EffectChance) -> Self {
         Self { effect, chance }
     }
+}
 
-    pub fn describe(&self) -> String {
+impl Describe for EffectAndChance {
+    fn describe(&self) -> GString {
         let fx = self.effect.to_string();
-        tr_replace! { self.chance.description_tr_template(); fx }
+        tr_replace! { self.chance.description_tr_template(); fx }.into()
     }
 }
 

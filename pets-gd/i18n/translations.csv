@@ -79,8 +79,18 @@ SKILL_ATTACK_FX_CHANCE_ALWAYS,Always inflicts {fx}.
 SKILL_ATTACK_FX_CHANCE_HIGH,High chance of inflicting {fx}.
 SKILL_ATTACK_FX_CHANCE_LOW,May inflict {fx}.
 ,
-SKILL_SHIELD_NAME,{affinity} {width} {name}
+SKILL_SHIELD_NAME,{adjective} {width} {name}
 SKILL_SHIELD_DESC,Casts a {width} {potency} {name} that {reflect_action} {affinity} damage.
+,
+SKILL_SHIELD_PHYSICAL_ADJ,Physical
+SKILL_SHIELD_MAGICAL_ADJ,Magical
+SKILL_SHIELD_UNIQUE_ADJ,Forceful
+SKILL_SHIELD_SPECIALIZED_ADJ,Strange
+SKILL_SHIELD_PHYSICAL_DESC,physical
+SKILL_SHIELD_MAGICAL_DESC,magical
+SKILL_SHIELD_UNIQUE_DESC,magical and unique
+SKILL_SHIELD_SPECIALIZED_DESC,certain types of
+,
 SKILL_SHIELD_WIDTH_WIDE,Wide
 SKILL_SHIELD_WIDTH_NARROW,Narrow
 SKILL_SHIELD_POTENCY_IMPENETRABLE,Impenetrable
@@ -111,3 +121,11 @@ DG_RODRICK1_DEFNOT,Definitely not.
 DG_RODRICK1_DIDNT,"Yeah, I didn't think so."
 DG_RODRICK1_DEFDIDNT,"Yeah, I definitely didn't think so."
 DG_RODRICK1_COMEBACK,Come back when you're smart.
+,
+DG_INTRO1_COMEUNPACK,"[ETHAN], we're unpacking your stuff! Come help!"
+,
+DG_INTRO2_OVERHERE,Over here! This is your new room! What do you think?
+DG_INTRO2_GREAT,It's great!
+DG_INTRO2_ALRIGHT,It's alright...
+DG_INTRO2_GREAT_MOM,"Well, I'm glad you like it! I hope you'll be comfortable here."
+DG_INTRO2_ALRIGHT_MOM,"I know it's not much, but I hope you'll be comfortable here."

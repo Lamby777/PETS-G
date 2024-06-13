@@ -10,7 +10,9 @@ mod battler;
 mod charmap;
 mod enemy;
 mod pchars;
+mod quests;
 mod savefiles;
+pub mod scrapbook;
 mod statcalc;
 
 // re-export some crap from ^^^
@@ -19,6 +21,7 @@ pub use battler::{Battler, Battlers};
 pub use charmap::CharMap;
 pub use enemy::EnemyData;
 pub use pchars::{EnemyID, PChar};
+pub use quests::QuestPhase;
 pub use savefiles::SaveFile;
 pub use statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
 
