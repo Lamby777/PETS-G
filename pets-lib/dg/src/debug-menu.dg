@@ -30,7 +30,9 @@ Alright then. How about these?
 > Skill Desc
 $ debug_skill
 
-> Test2
+> Pauses
+@ Debug Menu >> Pauses
+
 > Test3
 
 ---
@@ -64,4 +66,10 @@ Skill Name: {SKILL_NAME2}\n
 Skill Desc: {SKILL_DESC2}
 
 ---
+% Debug Menu >> Pauses
+NAME Isaac
+VOX _
+
+Flint...​​​​​​​​​​\n
+Where did you last see Hinawa?
 

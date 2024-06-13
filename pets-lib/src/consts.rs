@@ -51,6 +51,7 @@ pub mod dialogue {
     use super::*;
 
     pub const DEFAULT_VOX: &str = "_";
+    pub const PAUSE_CHAR: char = '​';
 
     pub const UI_LAYER_NAME: &str = "UILayer";
     pub const DBOX_NODE_NAME: &str = "DialogBox";

@@ -4,10 +4,9 @@
 
 use dialogical::prelude::*;
 use godot::engine::global::Side;
-use godot::engine::tween::TransitionType;
 use godot::engine::{
     AnimationPlayer, Control, HBoxContainer, IPanelContainer, InputEvent,
-    PanelContainer, RichTextLabel, Tween,
+    PanelContainer, RichTextLabel,
 };
 use godot::prelude::*;
 
@@ -73,10 +72,6 @@ pub struct DialogBox {
     speaker: MetaPair<Speaker>,
     #[init(default = MetaPair::from_cloned(DEFAULT_VOX.to_owned()))]
     vox: MetaPair<String>,
-
-    /// The tween that makes characters in the message
-    /// become visible one by one
-    text_tween: Option<Gd<Tween>>,
 }
 
 #[godot_api]
@@ -95,7 +90,8 @@ impl DialogBox {
         self.goto_current_page();
         self.spk_txt().set_text(self.translated_speaker());
         self.msg_txt().set_text(self.translated_message());
-        self.tween_txt_visibility();
+
+        self.msg_txt().set_visible_characters(0);
     }
 
     #[func]
@@ -125,20 +121,27 @@ impl DialogBox {
         current_scene().try_get_node_as::<DialogBox>(path)
     }
 
-    /// Start tweening a text's visible characters from 0% to 100% visible...
     /// See <https://github.com/Lamby777/PETS-G/issues/50>
-    pub fn tween_txt_visibility(&mut self) {
-        let tw = tween(
-            self.msg_txt(),
-            "visible_ratio",
-            Some(0.0),
-            1.0,
-            1.0,
-            TransitionType::QUAD,
-        );
+    #[func]
+    pub fn text_visibility_tick(&mut self) {
+        let mut label = self.msg_txt();
+        let visible = label.get_visible_characters();
 
-        // panic if tween failed
-        self.text_tween = Some(tw.unwrap());
+        if !self.is_done_showing_text() {
+            label.set_visible_characters(visible + 1);
+        }
+    }
+
+    #[func]
+    pub fn is_done_showing_text(&self) -> bool {
+        let label = self.msg_txt();
+        label.get_visible_characters() >= label.get_text().len() as i32
+    }
+
+    pub fn skip_text_visibility(&mut self) {
+        let mut label = self.msg_txt();
+        let len = label.get_text().len() as i32;
+        label.set_visible_characters(len);
     }
 
     /// sets the speaker and message labels to the given page
@@ -321,14 +324,9 @@ impl IPanelContainer for DialogBox {
             return;
         }
 
-        if confirming && let Some(mut tw) = self.text_tween.take() {
-            if tw.is_running() {
-                // if tweening, skip it and return early
-                tw.pause();
-                tw.custom_step(1.0);
-                tw.kill();
-                return;
-            }
+        if confirming && !self.is_done_showing_text() {
+            self.skip_text_visibility();
+            return;
         }
 
         if self.awaiting_choice() {
