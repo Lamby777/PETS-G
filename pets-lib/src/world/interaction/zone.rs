@@ -9,6 +9,10 @@ use godot::prelude::*;
 use crate::consts::playercb::*;
 use crate::prelude::*;
 
+fn room() -> Gd<Node2D> {
+    current_scene().get_node_as("YSort/Room")
+}
+
 #[derive(GodotClass)]
 #[class(init, base=Area2D)]
 pub struct InteractionZone {
@@ -27,7 +31,8 @@ pub struct InteractionZone {
 
     #[export]
     /// The beacon this one sends you to
-    beacon_target: NodePath,
+    /// Path is relative to `Room/`
+    beacon_target: GString,
 
     #[export]
     auto_interact: bool,
@@ -90,7 +95,7 @@ impl InteractionZone {
 
     fn tp_player_to_beacon(
         &self,
-        target: &NodePath,
+        target: &GString,
         target_scene: Option<&Gd<PackedScene>>,
     ) {
         let black = current_scene().get_node_as::<ColorRect>("%BeaconFade");
@@ -107,17 +112,24 @@ impl InteractionZone {
             pcb.tpbeacon_debounce = true;
         }
 
-        let target_node = self.base().get_node_as::<Node2D>(target.clone());
+        let target_node = room().get_node_as::<Node2D>(target);
         let target_pos = target_node.get_global_position();
         let black_id = black.instance_id();
 
-        let scene =
+        let scene_id =
             target_scene.map(|s| s.instantiate().unwrap().instance_id());
 
         set_timeout(TP_BEACON_BLACK_IN, move || {
             // once the screen is black, swap rooms if necessary
-            if let Some(_scene) = scene {
-                // get_tree().change_scene_to(scene);
+            if let Some(scene_id) = scene_id {
+                let scene = Gd::from_instance_id(scene_id);
+                let mut room = room();
+                for mut child in room.get_children().iter_shared() {
+                    room.remove_child(child.clone());
+                    child.queue_free();
+                }
+
+                room.replace_by(scene);
             }
 
             // after the screen is black, teleport the player
