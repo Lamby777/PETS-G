@@ -22,6 +22,10 @@ pub struct InteractionZone {
     function_name: GString,
 
     #[export]
+    /// The scene the beacon belongs to
+    beacon_target_scene: Option<Gd<PackedScene>>,
+
+    #[export]
     /// The beacon this one sends you to
     beacon_target: NodePath,
 
@@ -55,7 +59,7 @@ impl InteractionZone {
 
         let target = &self.beacon_target;
         if !target.is_empty() {
-            self.tp_player_to_beacon(target);
+            self.tp_player_to_beacon(target, self.beacon_target_scene.as_ref());
         }
     }
 
@@ -84,7 +88,11 @@ impl InteractionZone {
             .unregister_zone(self.to_gd());
     }
 
-    fn tp_player_to_beacon(&self, target: &NodePath) {
+    fn tp_player_to_beacon(
+        &self,
+        target: &NodePath,
+        target_scene: Option<&Gd<PackedScene>>,
+    ) {
         let black = current_scene().get_node_as::<ColorRect>("%BeaconFade");
 
         fade_black(&black, true, TP_BEACON_BLACK_IN);
@@ -103,7 +111,15 @@ impl InteractionZone {
         let target_pos = target_node.get_global_position();
         let black_id = black.instance_id();
 
+        let scene =
+            target_scene.map(|s| s.instantiate().unwrap().instance_id());
+
         set_timeout(TP_BEACON_BLACK_IN, move || {
+            // once the screen is black, swap rooms if necessary
+            if let Some(_scene) = scene {
+                // get_tree().change_scene_to(scene);
+            }
+
             // after the screen is black, teleport the player
             pcb().bind_mut().teleport(target_pos, None, false);
 
