@@ -159,7 +159,7 @@ states/Wade/position = Vector2(433, 247)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji4br"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_q0w5r"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_hpdl1"), "Idle", "Wade", SubResource("AnimationNodeStateMachineTransition_xnsgn"), "Wade", "Idle", SubResource("AnimationNodeStateMachineTransition_6f020"), "Wade", "Run", SubResource("AnimationNodeStateMachineTransition_gx0ab"), "Run", "Wade", SubResource("AnimationNodeStateMachineTransition_4a04c")]
 graph_offset = Vector2(-79, 13)
 
-[node name="DYLAN" instance=ExtResource("1_y7x8p")]
+[node name="LYEMBO" instance=ExtResource("1_y7x8p")]
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_wy23g")

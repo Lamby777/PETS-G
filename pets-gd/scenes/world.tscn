@@ -72,10 +72,6 @@ _data = {
 "crossfade": SubResource("Animation_k4si3")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uyk0u"]
-shader = ExtResource("2_6uro0")
-shader_parameter/opacity = 0.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3xdh0"]
 shader = ExtResource("3_a3d4r")
 shader_parameter/DEBUG_MODE = false
@@ -84,6 +80,10 @@ shader_parameter/LENGTH = 1.0
 shader_parameter/start_time = 0.0
 shader_parameter/current_time = 0.0
 shader_parameter/rand_mod = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uyk0u"]
+shader = ExtResource("2_6uro0")
+shader_parameter/opacity = 0.0
 
 [node name="Overworld" type="World"]
 battle_scene = ExtResource("1_37bcu")
@@ -101,24 +101,6 @@ bus = &"ZoneMusic"
 libraries = {
 "": SubResource("AnimationLibrary_fv7du")
 }
-
-[node name="UILayer" type="CanvasLayer" parent="."]
-
-[node name="BeaconFade" type="ColorRect" parent="UILayer"]
-unique_name_in_owner = true
-top_level = true
-material = SubResource("ShaderMaterial_uyk0u")
-offset_right = 1920.0
-offset_bottom = 1080.0
-color = Color(0, 0, 0, 1)
-
-[node name="Inventory" parent="UILayer" instance=ExtResource("3_jwkdy")]
-unique_name_in_owner = true
-visible = false
-
-[node name="DialogBox" parent="UILayer" instance=ExtResource("2_lgtmm")]
-
-[node name="WorldMenu" parent="UILayer" instance=ExtResource("2_6orff")]
 
 [node name="InteractionManager" parent="." instance=ExtResource("2_uh12s")]
 unique_name_in_owner = true
@@ -142,6 +124,26 @@ offset_bottom = 540.0
 script = ExtResource("4_jple0")
 
 [node name="Room" parent="YSort" instance=ExtResource("10_kug7e")]
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="BeaconFade" type="ColorRect" parent="UILayer"]
+unique_name_in_owner = true
+top_level = true
+material = SubResource("ShaderMaterial_uyk0u")
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="Inventory" parent="UILayer" instance=ExtResource("3_jwkdy")]
+unique_name_in_owner = true
+visible = false
+
+[node name="DialogBox" parent="UILayer" instance=ExtResource("2_lgtmm")]
+offset_left = -704.0
+offset_right = 704.0
+
+[node name="WorldMenu" parent="UILayer" instance=ExtResource("2_6orff")]
 
 [node name="Quests" type="Node" parent="."]
 process_mode = 4
