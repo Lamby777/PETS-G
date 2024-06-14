@@ -131,6 +131,10 @@ impl InteractionZone {
                 }
 
                 room.replace_by(scene);
+
+                let mut world = current_scene().cast::<World>();
+                world.call_deferred("reconnect_musiczones".into(), &[]);
+                world.call_deferred("reconnect_waterzones".into(), &[]);
             }
 
             let target_node = room().get_node_as::<Node2D>(target.clone());

@@ -209,6 +209,7 @@ impl World {
 
     // ---------------------------------------- General zone stuff
 
+    #[func]
     fn reconnect_musiczones(&mut self) {
         let room = self.room.clone();
         let mzones = subchildren_of_type::<MusicZone, _>(room);
@@ -228,6 +229,7 @@ impl World {
         }
     }
 
+    #[func]
     fn reconnect_waterzones(&mut self) {
         let room = self.room.clone();
         let wzones = subchildren_of_type::<WaterZone, _>(room);
