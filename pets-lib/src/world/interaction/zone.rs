@@ -98,6 +98,7 @@ impl InteractionZone {
         target: &GString,
         target_scene: Option<&Gd<PackedScene>>,
     ) {
+        let target = target.to_string();
         let black = current_scene().get_node_as::<ColorRect>("%BeaconFade");
 
         fade_black(&black, true, TP_BEACON_BLACK_IN);
@@ -112,8 +113,6 @@ impl InteractionZone {
             pcb.tpbeacon_debounce = true;
         }
 
-        let target_node = room().get_node_as::<Node2D>(target);
-        let target_pos = target_node.get_global_position();
         let black_id = black.instance_id();
 
         let scene_id =
@@ -131,6 +130,9 @@ impl InteractionZone {
 
                 room.replace_by(scene);
             }
+
+            let target_node = room().get_node_as::<Node2D>(target.clone());
+            let target_pos = target_node.get_global_position();
 
             // after the screen is black, teleport the player
             pcb().bind_mut().teleport(target_pos, None, false);

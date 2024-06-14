@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7x12nyqelw1f"]
+[gd_scene load_steps=8 format=3 uid="uid://c7x12nyqelw1f"]
 
 [ext_resource type="PackedScene" uid="uid://pefjtfxt6buk" path="res://scenes/rooms/_Base.tscn" id="1_ls6vf"]
 [ext_resource type="PackedScene" uid="uid://dk214wpitbhju" path="res://scenes/walking_enemy.tscn" id="2_2qq46"]
 [ext_resource type="PackedScene" uid="uid://xena0e3suwve" path="res://scenes/water_zone.tscn" id="3_bqhqn"]
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="4_vwc65"]
+[ext_resource type="PackedScene" uid="uid://hflql51x7i61" path="res://scenes/rooms/cv-houses.tscn" id="5_oqps0"]
 [ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/builds/bush_long.tscn" id="5_txn6p"]
 [ext_resource type="PackedScene" uid="uid://drxvvfvnc7awr" path="res://scenes/builds/rodrick_sign.tscn" id="6_eminc"]
 
@@ -26,7 +27,13 @@ scale = Vector2(3, -2)
 function_name = "debug_skill"
 position = Vector2(-192, 64)
 
-[node name="TeleporterDemo" type="Node2D" parent="." index="4"]
+[node name="House" parent="." index="4" instance=ExtResource("4_vwc65")]
+beacon_target_scene = ExtResource("5_oqps0")
+beacon_target = "Entrance"
+position = Vector2(-32, 896)
+scale = Vector2(0.5, 0.5)
+
+[node name="TeleporterDemo" type="Node2D" parent="." index="5"]
 position = Vector2(-1216, 864)
 
 [node name="TPRightIn" parent="TeleporterDemo" index="0" instance=ExtResource("4_vwc65")]
@@ -59,7 +66,7 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(-360, 0)
 collision_mask = 9
 
-[node name="DecoBushes" type="Node2D" parent="." index="5"]
+[node name="DecoBushes" type="Node2D" parent="." index="6"]
 y_sort_enabled = true
 
 [node name="BushTriangle" type="Node2D" parent="DecoBushes" index="0"]
@@ -154,7 +161,7 @@ collision_mask = 9
 position = Vector2(900, 1300)
 collision_mask = 9
 
-[node name="RodrickSign" parent="." index="6" instance=ExtResource("6_eminc")]
+[node name="RodrickSign" parent="." index="7" instance=ExtResource("6_eminc")]
 position = Vector2(192, 64)
 collision_mask = 9
 
