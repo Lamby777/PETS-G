@@ -2,7 +2,7 @@
 /// Basically just "base stats" as a function
 use crate::prelude::*;
 
-pub type CharStatCalcs = HashMap<String, Rc<StatCalcList>>;
+pub type CharStatCalcs = HashMap<PChar, Rc<StatCalcList>>;
 
 /// Function that computes a stat of type T, given a level
 pub type StatCalcFn<T> = fn(IntegralStat) -> T;

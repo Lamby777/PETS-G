@@ -1,14 +1,16 @@
+use strum::IntoEnumIterator as _;
+
 use crate::prelude::*;
 
-pub type CharMap = HashMap<String, RefCell<CharData>>;
+pub type CharMap = HashMap<PChar, RefCell<CharData>>;
 
 /// CharMap with all characters having the same exact stats
 pub fn uniform_charmap() -> CharMap {
-    PChar::ALL.iter().fold(CharMap::new(), |mut map, chname| {
+    PChar::iter().fold(CharMap::new(), |mut map, chname| {
         map.insert(
-            chname.to_string(),
+            chname,
             RefCell::new(CharData {
-                id: (*chname).to_owned(),
+                id: chname,
                 ..Default::default()
             }),
         );
@@ -18,12 +20,10 @@ pub fn uniform_charmap() -> CharMap {
 
 /// The default stat calculation functions for all characters
 pub fn uniform_statcalcmap() -> CharStatCalcs {
-    PChar::ALL
-        .iter()
-        .fold(CharStatCalcs::new(), |mut calcs, chname| {
-            calcs.insert(chname.to_string(), Rc::new(StatCalcList::default()));
-            calcs
-        })
+    PChar::iter().fold(CharStatCalcs::new(), |mut calcs, chname| {
+        calcs.insert(chname, Rc::new(StatCalcList::default()));
+        calcs
+    })
 }
 
 /// "Jat Chippity goes hard"
@@ -36,14 +36,14 @@ macro_rules! ch_unique_registry {
     }),* $(,)?) => {
         $(
             let character = PChar::$character;
-            $map.entry(character.to_owned()).and_modify(|pchar| {
+            $map.entry(character).and_modify(|pchar| {
                 let mut pchar = pchar.borrow_mut();
                 $(
                     pchar.$field$(.$property)? = $value;
                 )*
             });
 
-            $calcs.insert(character.to_owned(), {
+            $calcs.insert(character, {
                 let calcs = StatCalcList {
                     $(
                         $base: StatCalcFn::from($base_fn as fn(_) -> _),
@@ -103,7 +103,7 @@ mod tests {
     #[test]
     fn ch_unique_charmap_works() {
         let (charmap, _) = default_charmap();
-        let ethan = charmap.get(PChar::ETHAN).unwrap();
+        let ethan = charmap.get(&PChar::ETHAN).unwrap();
         let ethan = ethan.borrow();
         assert_eq!(ethan.display_name, "Ethan");
         // assert_eq!(ethan.base_stats.max_hp, 12);
@@ -129,7 +129,7 @@ mod tests {
             },
         }
 
-        let calcs = calcs.get(PChar::ETHAN).unwrap();
+        let calcs = calcs.get(&PChar::ETHAN).unwrap();
         assert_eq!((calcs.max_hp)(20), 14);
         assert_eq!((calcs.max_mana)(40), Some(41));
     }
