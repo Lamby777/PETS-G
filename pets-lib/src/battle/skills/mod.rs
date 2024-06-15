@@ -5,7 +5,7 @@ use std::fmt;
 
 use godot::prelude::*;
 use godot::tools::tr;
-use strum::{EnumIter, IntoEnumIterator};
+use strum::{EnumIter, IntoEnumIterator as _};
 
 mod status_effects;
 use status_effects::*;

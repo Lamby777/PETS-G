@@ -4,8 +4,6 @@ use super::*;
 /// have. For example, an enemy doesn't need to have a
 /// "level," but it does need to have HP and status effects.
 pub trait Battler {
-    fn id(&self) -> String;
-
     fn hp_mut(&mut self) -> &mut IntegralStat;
     fn status_effects(&self) -> &HashSet<StatusEffect>;
     fn status_effects_mut(&mut self) -> &mut HashSet<StatusEffect>;
