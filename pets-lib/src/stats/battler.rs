@@ -1,9 +1,13 @@
+use crate::battle::skills::BattlerPtr;
+
 use super::*;
 
 /// Trait for stuff that both party members and enemies
 /// have. For example, an enemy doesn't need to have a
 /// "level," but it does need to have HP and status effects.
 pub trait Battler {
+    fn id(&self) -> String;
+
     fn hp_mut(&mut self) -> &mut IntegralStat;
     fn status_effects(&self) -> &HashSet<StatusEffect>;
     fn status_effects_mut(&mut self) -> &mut HashSet<StatusEffect>;
@@ -82,5 +86,5 @@ pub trait Battler {
 
 pub struct Battlers {
     pub good_guys: Vec<Box<dyn Battler>>,
-    pub _bad_guys: Vec<Box<dyn Battler>>,
+    pub _bad_guys: Vec<BattlerPtr>,
 }

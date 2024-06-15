@@ -62,6 +62,10 @@ pub struct CharData {
 }
 
 impl Battler for CharData {
+    fn id(&self) -> String {
+        self.id.to_string()
+    }
+
     fn hp_mut(&mut self) -> &mut IntegralStat {
         &mut self.battle_stats.hp
     }

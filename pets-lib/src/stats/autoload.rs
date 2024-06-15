@@ -65,11 +65,11 @@ macro_rules! impl_stat_getters_on_si {
                 /// not including equips or consumables
                 pub fn fn_name(&self, pchar: PChar) -> IntegralStat {
                     // get character level
-                    let ch = self.get_character(pchar);
+                    let ch = self.get_character(&pchar);
                     let lvl = ch.level;
 
                     // get calculation fn for character
-                    let calcs = self.get_statcalc(pchar);
+                    let calcs = self.get_statcalc(&pchar);
 
                     // calculate the stat
                     (calcs.speed)(lvl)

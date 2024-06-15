@@ -22,7 +22,7 @@ pub(crate) use other::{PSIFluxSkill, PSIRewireSkill};
 pub(crate) use recovery::RecoverySkill;
 pub(crate) use shields::ShieldSkill;
 
-type BattlerPtr = Rc<RefCell<dyn Battler>>;
+pub(crate) type BattlerPtr = Rc<RefCell<dyn Battler>>;
 
 #[typetag::serde(tag = "type")]
 pub trait SkillFamily {
