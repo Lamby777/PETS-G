@@ -47,8 +47,8 @@ pub struct BattleIcon {
 
 #[godot_api]
 impl BattleIcon {
-    fn pchar_to_frame(pchar_id: &str) -> i32 {
-        match pchar_id {
+    fn pchar_to_frame(pchar: PChar) -> i32 {
+        match pchar {
             PChar::ETHAN => 0,
             PChar::TERRA => 1,
             PChar::SIVA => 2,
@@ -57,15 +57,15 @@ impl BattleIcon {
             PChar::FUZZY => 8,
 
             _ => {
-                godot_warn!("PChar {} doesn't have a battle icon (yet). Defaulting to Ethan's icon.", pchar_id);
+                godot_warn!("PChar {} doesn't have a battle icon (yet). Defaulting to Ethan's icon.", pchar);
                 0
             }
         }
     }
 
-    pub fn set_icon(&mut self, pchar_id: &str) {
+    pub fn set_icon(&mut self, pchar: PChar) {
         let mut sprite = self.base().get_node_as::<Sprite2D>("Sprite2D");
-        sprite.set_frame(Self::pchar_to_frame(pchar_id));
+        sprite.set_frame(Self::pchar_to_frame(pchar));
     }
 
     fn process_movement(&mut self, delta: f64) {
