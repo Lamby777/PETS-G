@@ -26,7 +26,7 @@ impl StatsInterface {
     }
 
     // #[func]
-    pub fn get_character(&self, ch: &str) -> CharData {
+    pub fn get_character(&self, ch: &PChar) -> CharData {
         self.save
             .chars
             .get(ch)
@@ -46,7 +46,7 @@ impl StatsInterface {
     }
 
     /// Get the list of stat calculation functions for a given character
-    pub fn get_statcalc(&self, ch: &str) -> Rc<StatCalcList> {
+    pub fn get_statcalc(&self, ch: &PChar) -> Rc<StatCalcList> {
         self.statcalcs
             .get(ch)
             .expect("key should be a valid PChar name")
@@ -63,7 +63,7 @@ macro_rules! impl_stat_getters_on_si {
             concat_idents::concat_idents!(fn_name = natural_, $stat, _of {
                 /// Get the stat of a given character at a level,
                 /// not including equips or consumables
-                pub fn fn_name(&self, pchar: &str) -> IntegralStat {
+                pub fn fn_name(&self, pchar: PChar) -> IntegralStat {
                     // get character level
                     let ch = self.get_character(pchar);
                     let lvl = ch.level;
