@@ -11,6 +11,10 @@ use crate::prelude::*;
 pub struct PCharNode {
     base: Base<Node2D>,
 
+    #[export]
+    #[init(default = PChar::DEVON)]
+    pchar: PChar,
+
     #[init(default = onready_node(&base, "Sprite2D"))]
     sprite: OnReady<Gd<Sprite2D>>,
 

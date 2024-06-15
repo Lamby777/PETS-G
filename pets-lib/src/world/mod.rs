@@ -99,8 +99,9 @@ impl World {
         srv.set_bus_mute(unmuted, false);
     }
 
-    pub fn start_battle(eid: GString) {
-        pcb().bind_mut().battling.push(eid.to_string());
+    pub fn start_battle(eid: &EnemyID) {
+        let enemy_data = todo!();
+        pcb().bind_mut().battling.push(enemy_data);
         let world = current_scene();
 
         let mat = PlayerCB::fx_material();

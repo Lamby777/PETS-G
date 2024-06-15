@@ -81,8 +81,18 @@ impl Display for PChar {
 }
 
 #[allow(unused, non_camel_case_types)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
+#[derive(Serialize, Deserialize, EnumIter)]
+#[derive(GodotConvert, Var, Export)]
+#[godot(via = GString)]
 pub enum EnemyID {
     A_NONNY_MOUSE,
     COPPER_CROW,
     XLR8,
+}
+
+impl Display for EnemyID {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{:?}", self)
+    }
 }

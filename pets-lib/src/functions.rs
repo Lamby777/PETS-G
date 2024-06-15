@@ -97,7 +97,7 @@ fn debug_skill(_args: GArgs) -> GReturn {
 fn debug_battle(_args: GArgs) -> GReturn {
     end_interaction();
 
-    World::start_battle(EnemyID::A_NONNY_MOUSE.into());
+    World::start_battle(&EnemyID::A_NONNY_MOUSE);
     Ok(Variant::nil())
 }
 
