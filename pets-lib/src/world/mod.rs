@@ -93,8 +93,25 @@ impl Singleton for World {
 
 #[godot_api]
 impl World {
+    // ---------------------------------------- Room stuff
+
     pub fn room() -> Gd<Node2D> {
         World::singleton().bind().room.clone()
+    }
+
+    pub fn change_room(&mut self, new_room: Gd<Node2D>) {
+        let old_room = &mut self.room;
+
+        for mut child in old_room.get_children().iter_shared() {
+            old_room.remove_child(child.clone());
+            child.queue_free();
+        }
+
+        old_room.replace_by(new_room.clone().upcast());
+
+        let mut world = self.base_mut();
+        world.call_deferred("reconnect_musiczones".into(), &[]);
+        world.call_deferred("reconnect_waterzones".into(), &[]);
     }
 
     // ---------------------------------------- Battle stuff

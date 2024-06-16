@@ -117,18 +117,8 @@ impl InteractionZone {
         set_timeout(TP_BEACON_BLACK_IN, move || {
             // once the screen is black, swap rooms if necessary
             if let Some(scene_id) = scene_id {
-                let scene = Gd::from_instance_id(scene_id);
-                let mut room = World::room();
-                for mut child in room.get_children().iter_shared() {
-                    room.remove_child(child.clone());
-                    child.queue_free();
-                }
-
-                room.replace_by(scene);
-
-                let mut world = World::singleton();
-                world.call_deferred("reconnect_musiczones".into(), &[]);
-                world.call_deferred("reconnect_waterzones".into(), &[]);
+                let new_room_scene = Gd::from_instance_id(scene_id);
+                World::singleton().bind_mut().change_room(new_room_scene);
             }
 
             let target_node =
