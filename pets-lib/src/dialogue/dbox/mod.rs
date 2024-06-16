@@ -122,7 +122,7 @@ impl DialogBox {
     #[func]
     pub fn try_singleton() -> Option<Gd<Self>> {
         let path = format!("{}/{}", UI_LAYER_NAME, DBOX_NODE_NAME);
-        current_scene().try_get_node_as::<DialogBox>(path)
+        World::singleton().try_get_node_as::<DialogBox>(path)
     }
 
     /// See <https://github.com/Lamby777/PETS-G/issues/50>

@@ -29,29 +29,6 @@ pub use playercb::PlayerCB;
 // use a value provided by the mz later on...
 const AUDIO_FADE_TIME: real = 0.5;
 
-#[derive(GodotClass)]
-#[class(init, base=Node2D)]
-pub struct World {
-    base: Base<Node2D>,
-
-    #[init(default = onready_node(&base, "YSort/Room"))]
-    room: OnReady<Gd<Node2D>>,
-
-    #[init(default = onready_node(&base, "ZoneAudio/Active"))]
-    active_audio: OnReady<Gd<AudioStreamPlayer>>,
-
-    #[init(default = onready_node(&base, "ZoneAudio/FadeOut"))]
-    fading_audio: OnReady<Gd<AudioStreamPlayer>>,
-
-    #[init(default = onready_node(&base, "ZoneAudio/AnimationPlayer"))]
-    fade_animator: OnReady<Gd<AnimationPlayer>>,
-
-    current_mz: Option<Gd<MusicZone>>,
-
-    #[export]
-    battle_scene: Option<Gd<PackedScene>>,
-}
-
 fn set_or_stop_audio(
     src: Option<Gd<AudioStream>>,
     mut audio: Gd<AudioStreamPlayer>,
@@ -80,12 +57,41 @@ fn cue_battle_intro_fx() {
     rect.set_visible(true);
 }
 
+#[derive(GodotClass)]
+#[class(init, base=Node2D)]
+pub struct World {
+    base: Base<Node2D>,
+
+    #[init(default = onready_node(&base, "YSort/Room"))]
+    room: OnReady<Gd<Node2D>>,
+
+    #[init(default = onready_node(&base, "ZoneAudio/Active"))]
+    active_audio: OnReady<Gd<AudioStreamPlayer>>,
+
+    #[init(default = onready_node(&base, "ZoneAudio/FadeOut"))]
+    fading_audio: OnReady<Gd<AudioStreamPlayer>>,
+
+    #[init(default = onready_node(&base, "ZoneAudio/AnimationPlayer"))]
+    fade_animator: OnReady<Gd<AnimationPlayer>>,
+
+    current_mz: Option<Gd<MusicZone>>,
+
+    #[export]
+    battle_scene: Option<Gd<PackedScene>>,
+}
+
 // Due to a gdext limitation, you can only have 1 `#[godot_api]` custom `impl` block.
 // There's gonna be a LOT of methods ahead, so look for these comment markers that
 // split the code into sections.
 
 #[godot_api]
 impl World {
+    /// Get the world node, or panic if not currently in the world scene.
+    #[func]
+    pub fn singleton() -> Gd<Self> {
+        current_scene().cast::<Self>()
+    }
+
     // ---------------------------------------- Battle stuff
 
     #[signal]
@@ -105,7 +111,7 @@ impl World {
             .bind_mut()
             .battling
             .push(Rc::new(RefCell::new(enemy_data)));
-        let world = current_scene();
+        let world = World::singleton();
 
         let mat = PlayerCB::fx_material();
         let fade_len = mat.get_shader_parameter("LENGTH".into()).to::<f64>();

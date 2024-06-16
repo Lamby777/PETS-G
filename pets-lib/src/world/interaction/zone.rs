@@ -10,7 +10,7 @@ use crate::consts::playercb::*;
 use crate::prelude::*;
 
 fn room() -> Gd<Node2D> {
-    current_scene().get_node_as("YSort/Room")
+    World::singleton().bind_mut().room.clone()
 }
 
 #[derive(GodotClass)]
@@ -98,7 +98,7 @@ impl InteractionZone {
         let target_scene =
             Some(target_scene.to_string()).filter(|s| !s.is_empty());
 
-        let black = current_scene().get_node_as::<ColorRect>("%BeaconFade");
+        let black = World::singleton().get_node_as::<ColorRect>("%BeaconFade");
         fade_black(&black, true, TP_BEACON_BLACK_IN);
 
         {
@@ -132,7 +132,7 @@ impl InteractionZone {
 
                 room.replace_by(scene);
 
-                let mut world = current_scene().cast::<World>();
+                let mut world = World::singleton();
                 world.call_deferred("reconnect_musiczones".into(), &[]);
                 world.call_deferred("reconnect_waterzones".into(), &[]);
             }
