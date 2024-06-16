@@ -23,6 +23,12 @@ pub struct InventoryNode {
     row: OnReady<Gd<HBoxContainer>>,
 }
 
+impl Singleton for InventoryNode {
+    fn singleton() -> Gd<Self> {
+        World::singleton().get_node_as("%Inventory")
+    }
+}
+
 #[godot_api]
 impl InventoryNode {
     fn inventory() -> Rc<RefCell<Vec<Item>>> {
@@ -31,10 +37,6 @@ impl InventoryNode {
 
     pub fn is_open(&self) -> bool {
         self.is_open
-    }
-
-    pub fn singleton() -> Gd<InventoryNode> {
-        current_scene().get_node_as("%Inventory")
     }
 
     fn text_container(&self) -> Gd<BoxContainer> {

@@ -20,6 +20,12 @@ pub struct InteractionManager {
     zones: Vec<Gd<InteractionZone>>,
 }
 
+impl Singleton for InteractionManager {
+    fn singleton() -> Gd<Self> {
+        World::singleton().get_node_as("%InteractionManager")
+    }
+}
+
 #[godot_api]
 impl InteractionManager {
     #[func]
@@ -30,10 +36,6 @@ impl InteractionManager {
     #[func]
     pub fn unregister_zone(&mut self, obj: Gd<InteractionZone>) {
         self.zones.retain(|v| *v != obj);
-    }
-
-    pub fn singleton() -> Gd<Self> {
-        World::singleton().get_node_as("%InteractionManager")
     }
 
     /// Sorts the zones by distance from the player
