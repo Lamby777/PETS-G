@@ -93,6 +93,10 @@ impl Singleton for World {
 
 #[godot_api]
 impl World {
+    pub fn room() -> Gd<Node2D> {
+        World::singleton().bind().room.clone()
+    }
+
     // ---------------------------------------- Battle stuff
 
     #[signal]
