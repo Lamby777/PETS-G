@@ -43,15 +43,12 @@ impl PlayerCB {
         current_scene().try_get_node_as("%PlayerCB")
     }
 
-    pub fn party_ids(&self) -> Vec<String> {
-        self.party
-            .iter()
-            .map(|v| v.get_name().to_string())
-            .collect()
+    pub fn party_pchars(&self) -> Vec<PChar> {
+        self.party.iter().map(|v| v.bind().pchar).collect()
     }
 
     pub fn party_chardata(&self) -> Vec<CharData> {
-        self.party_ids()
+        self.party_pchars()
             .into_iter()
             .map(|id| si().bind().get_character(&id))
             .collect()
