@@ -1,4 +1,4 @@
-use crate::{Autoload as _, PlayerCB, StatsInterface};
+use crate::prelude::*;
 
 use derived_deref::{Deref, DerefMut};
 use godot::engine::object::ConnectFlags;
