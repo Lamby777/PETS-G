@@ -56,10 +56,7 @@ impl WorldMenu {
     }
 
     fn open_inventory(&mut self) {
-        InventoryNode::try_singleton()
-            .unwrap()
-            .bind_mut()
-            .open(true);
+        InventoryNode::singleton().bind_mut().open(true);
     }
 
     #[func]

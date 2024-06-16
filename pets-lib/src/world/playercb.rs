@@ -39,8 +39,8 @@ pub struct PlayerCB {
 
 #[godot_api]
 impl PlayerCB {
-    pub fn try_singleton() -> Option<Gd<Self>> {
-        current_scene().try_get_node_as("%PlayerCB")
+    pub fn singleton() -> Gd<Self> {
+        current_scene().get_node_as("%PlayerCB")
     }
 
     pub fn party_pchars(&self) -> Vec<PChar> {
@@ -56,9 +56,7 @@ impl PlayerCB {
 
     /// Get the fx rectangle that follows the player
     pub fn fx_rect() -> Gd<ColorRect> {
-        Self::try_singleton()
-            .unwrap()
-            .get_node_as("BattleIntroRect")
+        Self::singleton().get_node_as("BattleIntroRect")
     }
 
     /// Get the shader material of the fx rect
@@ -73,11 +71,10 @@ impl PlayerCB {
     /// * Menus
     pub fn can_move(&self) -> bool {
         // PRAISE SHORT-CIRCUIT EVALUATION!!
-        let dbox_is_active =
-            DialogBox::try_singleton().map_or(false, |v| v.bind().is_active());
+        let dbox_is_active = DialogBox::singleton().bind().is_active();
 
         let cant_move = dbox_is_active
-            || InventoryNode::try_singleton().unwrap().bind().is_open()
+            || InventoryNode::singleton().bind().is_open()
             || self.is_in_battle()
             || self.tpbeacon_debounce;
 

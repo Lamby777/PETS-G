@@ -54,10 +54,7 @@ macro_rules! tr_replace {
 }
 
 pub fn start_ix(name: impl Into<String>) {
-    DialogBox::try_singleton()
-        .unwrap()
-        .bind_mut()
-        .start_ix(name.into());
+    DialogBox::singleton().bind_mut().start_ix(name.into());
 }
 
 pub fn start_ix_replace<S>(name: impl Into<String>, replace: &[(S, S)])
@@ -69,8 +66,7 @@ where
         .map(|(a, b)| (a.clone().into(), b.clone().into()))
         .collect::<Vec<_>>();
 
-    DialogBox::try_singleton()
-        .unwrap()
+    DialogBox::singleton()
         .bind_mut()
         .start_ix_replace(name.into(), replace.to_vec());
 }

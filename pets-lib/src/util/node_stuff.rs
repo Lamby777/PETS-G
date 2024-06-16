@@ -137,7 +137,7 @@ where
 /// Returns the singleton instance of `PlayerCB`.
 /// So common that I might as well abbreviate it. :P
 pub fn pcb() -> Gd<PlayerCB> {
-    PlayerCB::try_singleton().unwrap()
+    PlayerCB::singleton()
 }
 
 /// Returns the singleton instance `StatsInterface`.

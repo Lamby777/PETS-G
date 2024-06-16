@@ -7,10 +7,7 @@ use crate::prelude::*;
 use godot::prelude::*;
 
 fn end_interaction() {
-    DialogBox::try_singleton()
-        .unwrap()
-        .bind_mut()
-        .end_interaction();
+    DialogBox::singleton().bind_mut().end_interaction();
 }
 
 fn give_item(item: Item) {
