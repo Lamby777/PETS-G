@@ -32,9 +32,8 @@ impl InteractionManager {
         self.zones.retain(|v| *v != obj);
     }
 
-    /// "ummm ackshually, this is not a singleton"
     pub fn try_singleton() -> Option<Gd<Self>> {
-        current_scene().try_get_node_as("%InteractionManager")
+        World::singleton().try_get_node_as("%InteractionManager")
     }
 
     /// Sorts the zones by distance from the player
