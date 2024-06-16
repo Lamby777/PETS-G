@@ -9,7 +9,6 @@ size = Vector2(39.9995, 80.0003)
 radius = 128.25
 
 [node name="WalkingEnemy" type="WalkingEnemy"]
-enemy_id = "A_NONNY_MOUSE"
 sight_range = 850.0
 max_speed = 200.0
 y_sort_enabled = true
