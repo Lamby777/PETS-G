@@ -62,9 +62,6 @@ fn cue_battle_intro_fx() {
 pub struct World {
     base: Base<Node2D>,
 
-    #[init(default = onready_node(&base, "YSort/Room"))]
-    room: OnReady<Gd<Node2D>>,
-
     #[init(default = onready_node(&base, "ZoneAudio/Active"))]
     active_audio: OnReady<Gd<AudioStreamPlayer>>,
 
@@ -96,11 +93,11 @@ impl World {
     // ---------------------------------------- Room stuff
 
     pub fn room() -> Gd<Node2D> {
-        World::singleton().bind().room.clone()
+        World::singleton().get_node_as("YSort/Room")
     }
 
     pub fn change_room(&mut self, new_room: Gd<Node2D>) {
-        let old_room = &mut self.room;
+        let mut old_room = Self::room();
 
         for mut child in old_room.get_children().iter_shared() {
             old_room.remove_child(child.clone());
@@ -243,7 +240,7 @@ impl World {
 
     #[func]
     fn reconnect_musiczones(&mut self) {
-        let room = self.room.clone();
+        let room = Self::room();
         let mzones = subchildren_of_type::<MusicZone, _>(room);
 
         for mut zone in mzones {
@@ -263,7 +260,7 @@ impl World {
 
     #[func]
     fn reconnect_waterzones(&mut self) {
-        let room = self.room.clone();
+        let room = Self::room();
         let wzones = subchildren_of_type::<WaterZone, _>(room);
 
         for mut zone in wzones {
