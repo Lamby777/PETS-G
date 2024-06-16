@@ -145,17 +145,18 @@ impl BattleEngine {
 
     pub fn swap_party_member(&mut self, new_index: usize) {
         self.current_party_member = new_index;
-        let id = self.battlers.good_guys[new_index].id();
-        godot_print!("Swapped to party member `{}`", id);
+        let pchar = self.battlers.good_guys[new_index].id();
+        let pchar = PChar::from_godot(pchar.into());
+        godot_print!("Swapped to party member `{}`", pchar);
 
         // set battle icon sprite
-        self.icon.bind_mut().set_icon(&id);
+        self.icon.bind_mut().set_icon(pchar);
 
         // set battle portrait texture
         let mut portrait =
             self.base().get_node_as::<TextureRect>("%PortraitTexture");
 
-        let path = format!("res://assets/textures/portraits/{}.png", id);
+        let path = format!("res://assets/textures/portraits/{}.png", pchar);
         let texture = load::<Texture2D>(path);
         portrait.set_texture(texture);
     }

@@ -10,7 +10,6 @@ pub struct ItemDrops {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct EnemyData {
     pub id: String,
-
     pub inherent_stats: InherentStats,
     pub battle_stats: BattleStats,
 
@@ -20,11 +19,9 @@ pub struct EnemyData {
 }
 
 impl EnemyData {
-    pub fn from_id(id: &str) -> Self {
+    pub fn from_id(id: EnemyID) -> Self {
         Self {
             id: id.to_string(),
-
-            // TODO
             inherent_stats: InherentStats::default(),
             battle_stats: BattleStats::default(),
             status_effects: HashSet::new(),
