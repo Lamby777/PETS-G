@@ -120,9 +120,9 @@ impl DialogBox {
     }
 
     #[func]
-    pub fn try_singleton() -> Option<Gd<Self>> {
+    pub fn singleton() -> Gd<Self> {
         let path = format!("{}/{}", UI_LAYER_NAME, DBOX_NODE_NAME);
-        World::singleton().try_get_node_as::<DialogBox>(path)
+        World::singleton().get_node_as::<DialogBox>(path)
     }
 
     /// See <https://github.com/Lamby777/PETS-G/issues/50>

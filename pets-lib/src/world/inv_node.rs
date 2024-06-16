@@ -33,8 +33,8 @@ impl InventoryNode {
         self.is_open
     }
 
-    pub fn try_singleton() -> Option<Gd<InventoryNode>> {
-        current_scene().try_get_node_as("%Inventory")
+    pub fn singleton() -> Gd<InventoryNode> {
+        current_scene().get_node_as("%Inventory")
     }
 
     fn text_container(&self) -> Gd<BoxContainer> {
