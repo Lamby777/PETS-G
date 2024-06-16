@@ -9,10 +9,6 @@ use godot::prelude::*;
 use crate::consts::playercb::*;
 use crate::prelude::*;
 
-fn room() -> Gd<Node2D> {
-    World::singleton().bind_mut().room.clone()
-}
-
 #[derive(GodotClass)]
 #[class(init, base=Area2D)]
 pub struct InteractionZone {
@@ -122,7 +118,7 @@ impl InteractionZone {
             // once the screen is black, swap rooms if necessary
             if let Some(scene_id) = scene_id {
                 let scene = Gd::from_instance_id(scene_id);
-                let mut room = room();
+                let mut room = World::room();
                 for mut child in room.get_children().iter_shared() {
                     room.remove_child(child.clone());
                     child.queue_free();
@@ -135,7 +131,8 @@ impl InteractionZone {
                 world.call_deferred("reconnect_waterzones".into(), &[]);
             }
 
-            let target_node = room().get_node_as::<Node2D>(target.clone());
+            let target_node =
+                World::room().get_node_as::<Node2D>(target.clone());
             let target_pos = target_node.get_global_position();
 
             // after the screen is black, teleport the player
