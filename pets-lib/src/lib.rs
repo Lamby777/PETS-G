@@ -51,7 +51,7 @@ mod prelude {
     };
 
     pub use crate::choices::ChoiceAgent;
-    pub use crate::singleton::Autoload;
+    pub use crate::singleton::{GodotAutoload, Singleton};
 
     // re-exports
     pub use nodi::midly;
@@ -86,7 +86,7 @@ unsafe impl ExtensionLibrary for PetsLib {
         libdx::foreach_static!(
             [
                 StatsInterface,
-            ] => Autoload, register
+            ] => GodotAutoload, register
         );
     }
 
@@ -98,7 +98,7 @@ unsafe impl ExtensionLibrary for PetsLib {
         libdx::foreach_static!(
             [
                 StatsInterface,
-            ] => Autoload, unregister
+            ] => GodotAutoload, unregister
         );
     }
 }

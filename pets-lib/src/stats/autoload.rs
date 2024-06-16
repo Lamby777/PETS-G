@@ -93,7 +93,7 @@ impl_stat_getters_on_si! {
     max_mana,
 }
 
-impl Autoload for StatsInterface {
+impl GodotAutoload for StatsInterface {
     const AUTOLOAD_NAME: &'static str = "Stats";
 }
 
