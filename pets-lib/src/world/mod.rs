@@ -100,8 +100,11 @@ impl World {
     }
 
     pub fn start_battle(eid: &EnemyID) {
-        let enemy_data = todo!();
-        pcb().bind_mut().battling.push(enemy_data);
+        let enemy_data = EnemyData::from_id(*eid);
+        pcb()
+            .bind_mut()
+            .battling
+            .push(Rc::new(RefCell::new(enemy_data)));
         let world = current_scene();
 
         let mat = PlayerCB::fx_material();

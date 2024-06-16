@@ -13,7 +13,7 @@ pub struct PCharNode {
 
     #[export]
     #[init(default = PChar::DEVON)]
-    pchar: PChar,
+    pub pchar: PChar,
 
     #[init(default = onready_node(&base, "Sprite2D"))]
     sprite: OnReady<Gd<Sprite2D>>,
