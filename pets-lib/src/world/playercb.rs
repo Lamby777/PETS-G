@@ -128,14 +128,12 @@ impl PlayerCB {
     /// Returns whether the player is moving or not.
     fn calc_movements(&mut self, delta: f64) -> bool {
         let input = Input::singleton();
-        let input_vector = input
-            .get_vector(
-                "left".into(),
-                "right".into(),
-                "up".into(),
-                "down".into(),
-            )
-            .normalized();
+        let input_vector = normalized!(input.get_vector(
+            "left".into(),
+            "right".into(),
+            "up".into(),
+            "down".into(),
+        ));
         let sprinting = input.is_action_pressed("sprint".into());
         let moving = input_vector != Vector2::ZERO;
 

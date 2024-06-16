@@ -18,6 +18,20 @@ use crate::prelude::*;
 use godot::engine::{Engine, SceneTreeTimer};
 use godot::prelude::*;
 
+// this is a macro so we can easily expand it and delete the definition
+// when `gdext` adds new methods for allowing zero vectors
+pub use crate::normalized;
+#[macro_export]
+macro_rules! normalized {
+    ($vector:expr) => {{
+        if $vector == Vector2::ZERO {
+            Vector2::ZERO
+        } else {
+            Vector2::normalized($vector)
+        }
+    }};
+}
+
 pub fn replace_str_all(text: &str, replaces: &[(String, String)]) -> String {
     replaces
         .into_iter()
