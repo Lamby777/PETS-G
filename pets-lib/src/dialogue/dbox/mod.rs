@@ -77,6 +77,13 @@ pub struct DialogBox {
     text_visibility_timer: OnReady<Gd<Timer>>,
 }
 
+impl Singleton for DialogBox {
+    fn singleton() -> Gd<Self> {
+        let path = format!("{}/{}", UI_LAYER_NAME, DBOX_NODE_NAME);
+        World::singleton().get_node_as::<DialogBox>(path)
+    }
+}
+
 #[godot_api]
 impl DialogBox {
     #[func]
@@ -117,12 +124,6 @@ impl DialogBox {
 
         self.set_ix(ix.clone(), replace);
         self.open();
-    }
-
-    #[func]
-    pub fn singleton() -> Gd<Self> {
-        let path = format!("{}/{}", UI_LAYER_NAME, DBOX_NODE_NAME);
-        World::singleton().get_node_as::<DialogBox>(path)
     }
 
     /// See <https://github.com/Lamby777/PETS-G/issues/50>

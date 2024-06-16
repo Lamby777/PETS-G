@@ -37,12 +37,14 @@ pub struct PlayerCB {
     pub water_speed_mod: real,
 }
 
+impl Singleton for PlayerCB {
+    fn singleton() -> Gd<Self> {
+        World::singleton().get_node_as("%PlayerCB")
+    }
+}
+
 #[godot_api]
 impl PlayerCB {
-    pub fn singleton() -> Gd<Self> {
-        current_scene().get_node_as("%PlayerCB")
-    }
-
     pub fn party_pchars(&self) -> Vec<PChar> {
         self.party.iter().map(|v| v.bind().pchar).collect()
     }

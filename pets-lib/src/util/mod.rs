@@ -13,7 +13,7 @@ pub use describe::Describe;
 pub use extensions::*;
 pub use node_stuff::*;
 
-use crate::DialogBox;
+use crate::prelude::*;
 
 use godot::engine::{Engine, SceneTreeTimer};
 use godot::prelude::*;
