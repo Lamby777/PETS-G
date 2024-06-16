@@ -18,7 +18,8 @@ pub struct WalkingEnemy {
     base: Base<CharacterBody2D>,
 
     #[export]
-    enemy_id: GString,
+    #[init(default = EnemyID::A_NONNY_MOUSE)]
+    enemy_id: EnemyID,
 
     #[export]
     sight_range: real,
@@ -114,19 +115,13 @@ impl WalkingEnemy {
         self.touched_player = true;
 
         godot_print!("Player touched enemy: {}", self.enemy_id);
-        World::start_battle(self.enemy_id.clone());
+        World::start_battle(&self.enemy_id);
     }
 }
 
 #[godot_api]
 impl ICharacterBody2D for WalkingEnemy {
     fn ready(&mut self) {
-        // check to make sure it's a valid enemy id
-        let enemy_id = self.enemy_id.to_string();
-        if !EnemyID::ALL.contains(&enemy_id.as_str()) {
-            panic!("Invalid enemy id: {}", enemy_id);
-        }
-
         let callable = self.base().callable("on_player_touched");
         self.range.connect("body_entered".into(), callable);
 

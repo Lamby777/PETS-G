@@ -5,7 +5,7 @@ use std::fmt;
 
 use godot::prelude::*;
 use godot::tools::tr;
-use strum::{EnumIter, IntoEnumIterator};
+use strum::{EnumIter, IntoEnumIterator as _};
 
 mod status_effects;
 use status_effects::*;
@@ -22,7 +22,7 @@ pub(crate) use other::{PSIFluxSkill, PSIRewireSkill};
 pub(crate) use recovery::RecoverySkill;
 pub(crate) use shields::ShieldSkill;
 
-type BattlerPtr = Rc<RefCell<dyn Battler>>;
+pub(crate) type BattlerPtr = Rc<RefCell<dyn Battler>>;
 
 #[typetag::serde(tag = "type")]
 pub trait SkillFamily {

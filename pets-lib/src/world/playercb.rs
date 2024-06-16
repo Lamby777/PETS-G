@@ -28,7 +28,7 @@ pub struct PlayerCB {
     past_rotations: LimiQ<Vector2>,
 
     /// The enemies that are currently in battle with you
-    pub battling: Vec<String>,
+    pub battling: Vec<Rc<RefCell<EnemyData>>>,
 
     pub tpbeacon_debounce: bool,
     pub in_water: bool,
@@ -43,15 +43,12 @@ impl PlayerCB {
         current_scene().try_get_node_as("%PlayerCB")
     }
 
-    pub fn party_ids(&self) -> Vec<String> {
-        self.party
-            .iter()
-            .map(|v| v.get_name().to_string())
-            .collect()
+    pub fn party_pchars(&self) -> Vec<PChar> {
+        self.party.iter().map(|v| v.bind().pchar).collect()
     }
 
     pub fn party_chardata(&self) -> Vec<CharData> {
-        self.party_ids()
+        self.party_pchars()
             .into_iter()
             .map(|id| si().bind().get_character(&id))
             .collect()
@@ -188,11 +185,11 @@ impl PlayerCB {
             .collect()
     }
 
-    pub fn bad_guys_battlers(&self) -> Vec<Box<dyn Battler>> {
+    pub fn bad_guys_battlers(&self) -> Vec<Rc<RefCell<dyn Battler>>> {
         self.battling
             .iter()
-            .map(|eid| EnemyData::from_id(eid))
-            .map(|v| Box::new(v) as Box<dyn Battler>)
+            .cloned()
+            .map(|v| v as Rc<RefCell<dyn Battler>>)
             .collect()
     }
 

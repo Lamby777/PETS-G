@@ -36,7 +36,7 @@ pub struct BattleStats {
 /// All the information the game needs to know about a character
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct CharData {
-    pub id: String,
+    pub id: PChar,
 
     /// Name of the character, as picked by the user
     /// ⚠️⚠️⚠️ See <https://github.com/Lamby777/PETS-G/issues/23>
@@ -63,7 +63,7 @@ pub struct CharData {
 
 impl Battler for CharData {
     fn id(&self) -> String {
-        self.id.clone()
+        self.id.to_string()
     }
 
     fn hp_mut(&mut self) -> &mut IntegralStat {
@@ -195,7 +195,7 @@ impl Display for StatusEffect {
 impl Default for CharData {
     fn default() -> Self {
         CharData {
-            id: PChar::DEVON.to_owned(),
+            id: PChar::DEVON,
             display_name: "Chicken Nugget".to_owned(),
             level: 1,
 
