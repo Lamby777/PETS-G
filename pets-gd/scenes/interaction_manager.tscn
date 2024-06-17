@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://c0jehwow4ein4"]
+[gd_scene load_steps=3 format=3 uid="uid://c0jehwow4ein4"]
+
+[ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_ftgx8"]
+[ext_resource type="Texture2D" uid="uid://bvo6u7sgk2qe4" path="res://icon.png" id="1_jju8u"]
 
 [node name="InteractionManager" type="InteractionManager"]
 
@@ -8,21 +11,35 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Action" type="RichTextLabel" parent="Prompt"]
+[node name="PanelContainer" type="PanelContainer" parent="Prompt"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -248.0
-offset_top = -88.0
-offset_right = 208.0
-offset_bottom = 48.0
+anchors_preset = -1
+offset_left = -160.0
+offset_top = -288.0
+offset_right = 160.0
+offset_bottom = -192.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ftgx8")
+
+[node name="BoxContainer" type="BoxContainer" parent="Prompt/PanelContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Prompt/PanelContainer/BoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_jju8u")
+expand_mode = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="Prompt/PanelContainer/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Action" type="RichTextLabel" parent="Prompt/PanelContainer/BoxContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
-text = "[center]C to interact"
+text = "Interact"
+fit_content = true
 autowrap_mode = 0
