@@ -64,6 +64,19 @@ impl InteractionManager {
             .get_node_as::<RichTextLabel>("%Action")
             .set_text(tr(key));
     }
+
+    fn move_prompt_to_zone(&mut self, zone: Gd<InteractionZone>) {
+        let custom_path = zone.bind().get_prompt_location();
+
+        let pos = if custom_path.is_empty() {
+            zone.get_global_position()
+        } else {
+            zone.get_node_as::<Node2D>(custom_path)
+                .get_global_position()
+        };
+
+        self.prompt.set_global_position(pos);
+    }
 }
 
 #[godot_api]
@@ -78,10 +91,10 @@ impl INode for InteractionManager {
         };
 
         // move the prompt to the zone
-        let prompt_tr_key = zone.bind().prompt_translation_key.clone();
+        let prompt_tr_key = zone.bind().get_prompt_translation_key();
         self.set_prompt_text(prompt_tr_key);
         self.prompt.show();
-        self.prompt.set_global_position(zone.get_global_position());
+        self.move_prompt_to_zone(zone);
     }
 
     fn unhandled_input(&mut self, event: Gd<InputEvent>) {

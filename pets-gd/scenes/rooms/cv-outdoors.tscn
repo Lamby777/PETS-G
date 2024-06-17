@@ -24,6 +24,10 @@ scale = Vector2(3, -2)
 
 [node name="DebugItem" parent="." index="3" instance=ExtResource("4_vwc65")]
 function_name = "debug_skill"
+prompt_location = NodePath("Node2D")
+position = Vector2(-192, 64)
+
+[node name="Node2D" type="Node2D" parent="DebugItem" index="1"]
 position = Vector2(-192, 64)
 
 [node name="House" parent="." index="4" instance=ExtResource("4_vwc65")]
