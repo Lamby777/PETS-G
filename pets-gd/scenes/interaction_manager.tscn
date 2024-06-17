@@ -8,7 +8,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Prompt"]
+[node name="Action" type="RichTextLabel" parent="Prompt"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
