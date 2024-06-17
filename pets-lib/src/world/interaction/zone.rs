@@ -32,6 +32,10 @@ pub struct InteractionZone {
 
     #[export]
     auto_interact: bool,
+
+    #[export]
+    #[init(default = "INTERACT".into())]
+    prompt_translation_key: GString,
 }
 
 #[godot_api]

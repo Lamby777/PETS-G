@@ -80,7 +80,9 @@ pub struct World {
 impl Singleton for World {
     /// Get the world node, or panic if not currently in the world scene.
     fn singleton() -> Gd<Self> {
-        current_scene().cast::<Self>()
+        current_scene()
+            .try_cast::<Self>()
+            .expect("not in the world scene")
     }
 }
 
