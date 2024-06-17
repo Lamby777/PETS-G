@@ -61,7 +61,7 @@ impl InteractionManager {
         let key = format!("IZ_INTERACT_{}", action);
 
         self.prompt
-            .get_node_as::<RichTextLabel>("Action")
+            .get_node_as::<RichTextLabel>("%Action")
             .set_text(tr(key));
     }
 }
