@@ -29,6 +29,7 @@ position = Vector2(-192, 64)
 [node name="House" parent="." index="4" instance=ExtResource("4_vwc65")]
 beacon_room_name = "cv-houses"
 beacon_target = "Entrance"
+prompt_translation_key = "ENTER"
 position = Vector2(-32, 896)
 scale = Vector2(0.5, 0.5)
 

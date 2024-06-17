@@ -9,9 +9,9 @@ use godot::prelude::*;
 use crate::prelude::*;
 
 #[derive(GodotClass)]
-#[class(init, base=Node2D)]
+#[class(init, base=Node)]
 pub struct InteractionManager {
-    base: Base<Node2D>,
+    base: Base<Node>,
 
     #[init(default = onready_node(&base, "Prompt"))]
     prompt: OnReady<Gd<Control>>,
@@ -59,7 +59,7 @@ impl InteractionManager {
 }
 
 #[godot_api]
-impl INode2D for InteractionManager {
+impl INode for InteractionManager {
     fn process(&mut self, _delta: f64) {
         self.sort_zones_by_distance();
 
@@ -70,6 +70,7 @@ impl INode2D for InteractionManager {
         };
 
         // move the prompt to the zone
+        // self.prompt.set_text();
         self.prompt.show();
         self.prompt.set_global_position(zone.get_global_position());
     }
