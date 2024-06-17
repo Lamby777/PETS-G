@@ -3,7 +3,7 @@
 //! Shows the input prompt and handles the action if pressed.
 //!
 
-use godot::engine::{Control, InputEvent};
+use godot::engine::{Control, InputEvent, RichTextLabel};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -56,6 +56,14 @@ impl InteractionManager {
     pub fn closest_zone(&mut self) -> Option<Gd<InteractionZone>> {
         self.zones.get(0).cloned()
     }
+
+    fn set_prompt_text(&mut self, action: GString) {
+        let key = format!("IZ_INTERACT_{}", action);
+
+        self.prompt
+            .get_node_as::<RichTextLabel>("Action")
+            .set_text(tr(key));
+    }
 }
 
 #[godot_api]
@@ -70,7 +78,8 @@ impl INode for InteractionManager {
         };
 
         // move the prompt to the zone
-        // self.prompt.set_text();
+        let prompt_tr_key = zone.bind().prompt_translation_key.clone();
+        self.set_prompt_text(prompt_tr_key);
         self.prompt.show();
         self.prompt.set_global_position(zone.get_global_position());
     }

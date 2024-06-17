@@ -35,7 +35,7 @@ pub struct InteractionZone {
 
     #[export]
     #[init(default = "INTERACT".into())]
-    prompt_translation_key: GString,
+    pub prompt_translation_key: GString,
 }
 
 #[godot_api]
