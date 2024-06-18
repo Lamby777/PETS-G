@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://kgl5788x405y"]
+[gd_scene load_steps=19 format=3 uid="uid://kgl5788x405y"]
 
 [ext_resource type="Shader" path="res://themes/opacity.gdshader" id="1_3pmac"]
 [ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="2_0m4jp"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://bobf56v1g63p4" path="res://assets/music/battle/alright.ogg" id="4_l6m5j"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="5_hcsfj"]
 [ext_resource type="Texture2D" uid="uid://cx24dyfnh30ag" path="res://assets/textures/portraits/ETHAN.png" id="6_abown"]
+[ext_resource type="PackedScene" uid="uid://ywn8h01im5gx" path="res://scenes/enemy_sprite.tscn" id="6_dgpl5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w1wwc"]
 shader = ExtResource("2_0m4jp")
@@ -175,9 +176,17 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
-[node name="BattleIcon" type="BattleIcon" parent="."]
+[node name="Battle" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="BattleIcon"]
+[node name="EnemySprite" parent="Battle" instance=ExtResource("6_dgpl5")]
+unique_name_in_owner = true
+position = Vector2(960, 192)
+scale = Vector2(6, 6)
+
+[node name="BattleIcon" type="BattleIcon" parent="Battle"]
+unique_name_in_owner = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Battle/BattleIcon"]
 scale = Vector2(8, 8)
 texture = ExtResource("3_k3xai")
 hframes = 5
@@ -453,3 +462,4 @@ material = SubResource("ShaderMaterial_lgbmi")
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
