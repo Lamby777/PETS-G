@@ -5,8 +5,8 @@
 
 use godot::engine::object::ConnectFlags;
 use godot::engine::{
-    AnimatedSprite2D, AnimationPlayer, Control, InputEvent, Texture2D,
-    TextureRect, Timer,
+    AnimatedSprite2D, AnimationPlayer, Control, InputEvent, ProgressBar,
+    Texture2D, TextureRect, Timer,
 };
 use godot::prelude::*;
 
@@ -89,6 +89,12 @@ pub struct BattleEngine {
 
     #[init(default = onready_node(&base, "%BattleIcon"))]
     icon: OnReady<Gd<BattleIcon>>,
+
+    #[init(default = onready_node(&base, "%HPBar"))]
+    hp_bar: OnReady<Gd<ProgressBar>>,
+
+    #[init(default = onready_node(&base, "%ManaBar"))]
+    mana_bar: OnReady<Gd<ProgressBar>>,
 }
 
 #[godot_api]

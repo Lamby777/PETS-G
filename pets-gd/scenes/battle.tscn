@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://kgl5788x405y"]
+[gd_scene load_steps=20 format=3 uid="uid://kgl5788x405y"]
 
 [ext_resource type="Shader" path="res://themes/opacity.gdshader" id="1_3pmac"]
 [ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="2_0m4jp"]
@@ -9,6 +9,7 @@
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="5_hcsfj"]
 [ext_resource type="Texture2D" uid="uid://cx24dyfnh30ag" path="res://assets/textures/portraits/ETHAN.png" id="6_abown"]
 [ext_resource type="PackedScene" uid="uid://ywn8h01im5gx" path="res://scenes/enemy_sprite.tscn" id="6_dgpl5"]
+[ext_resource type="PackedScene" uid="uid://h2igfmr6q28y" path="res://scenes/hp_bar.tscn" id="9_ofq8e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w1wwc"]
 shader = ExtResource("2_0m4jp")
@@ -334,122 +335,35 @@ theme_override_constants/margin_bottom = 80
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="HPBar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/Margins/InfoBars"]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-value = 80.0
-show_percentage = false
-
-[node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HPBar"]
-layout_mode = 0
-offset_left = 40.0
-offset_right = 496.0
-offset_bottom = 66.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
-text = "HP"
-fit_content = true
-autowrap_mode = 0
-
-[node name="Slash" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HPBar"]
-layout_mode = 0
-offset_left = 672.0
-offset_right = 752.0
-offset_bottom = 66.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
-text = " /"
-autowrap_mode = 0
-
-[node name="Max" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HPBar"]
-layout_mode = 0
-offset_left = 704.0
-offset_right = 936.0
-offset_bottom = 66.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
-bbcode_enabled = true
-text = "[right]2000"
-fit_content = true
-autowrap_mode = 0
-
-[node name="Value" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HPBar"]
-layout_mode = 0
-offset_left = 392.0
-offset_right = 616.0
-offset_bottom = 66.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
-bbcode_enabled = true
-text = "[right]1999"
-fit_content = true
-autowrap_mode = 0
-
-[node name="ManaBar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/Margins/InfoBars"]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-theme_type_variation = &"TealBar"
-value = 80.0
-show_percentage = false
-
-[node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
-layout_mode = 0
-offset_left = 40.0
-offset_right = 496.0
-offset_bottom = 66.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
-text = "Mana"
-fit_content = true
-autowrap_mode = 0
-
-[node name="Slash" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
-layout_mode = 0
-offset_left = 672.0
-offset_right = 752.0
-offset_bottom = 66.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
-text = " /"
-autowrap_mode = 0
-
-[node name="Max" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
-layout_mode = 0
-offset_left = 704.0
-offset_right = 936.0
-offset_bottom = 66.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
-bbcode_enabled = true
-text = "[right]192"
-fit_content = true
-autowrap_mode = 0
-
-[node name="Value" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
-layout_mode = 0
-offset_left = 392.0
-offset_right = 616.0
-offset_bottom = 66.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
-bbcode_enabled = true
-text = "[right]168"
-fit_content = true
-autowrap_mode = 0
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/DualMenu"]
 root_node = NodePath("../../..")
 libraries = {
 "": SubResource("AnimationLibrary_730bq")
 }
+
+[node name="BoxContainer" type="BoxContainer" parent="Menu"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 960.0
+offset_right = 1728.0
+offset_bottom = 1024.0
+
+[node name="HPBar" parent="Menu/BoxContainer" instance=ExtResource("9_ofq8e")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ManaBar" parent="Menu/BoxContainer" instance=ExtResource("9_ofq8e")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"TealBar"
+
+[node name="ProgressBar" parent="Menu/BoxContainer/ManaBar" index="0"]
+theme_type_variation = &"TealBar"
+
+[node name="Label" parent="Menu/BoxContainer/ManaBar/Labels" index="0"]
+text = "[center]Mana"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -463,3 +377,5 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
+
+[editable path="Menu/BoxContainer/ManaBar"]
