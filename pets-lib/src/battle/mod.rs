@@ -5,7 +5,8 @@
 
 use godot::engine::object::ConnectFlags;
 use godot::engine::{
-    AnimationPlayer, Control, InputEvent, Texture2D, TextureRect, Timer,
+    AnimatedSprite2D, AnimationPlayer, Control, InputEvent, Texture2D,
+    TextureRect, Timer,
 };
 use godot::prelude::*;
 
@@ -83,7 +84,10 @@ pub struct BattleEngine {
     #[init(default = onready_node(&base, "AnimationPlayer"))]
     animator: OnReady<Gd<AnimationPlayer>>,
 
-    #[init(default = onready_node(&base, "BattleIcon"))]
+    #[init(default = onready_node(&base, "%EnemySprite"))]
+    enemy_sprite: OnReady<Gd<AnimatedSprite2D>>,
+
+    #[init(default = onready_node(&base, "%BattleIcon"))]
     icon: OnReady<Gd<BattleIcon>>,
 }
 
