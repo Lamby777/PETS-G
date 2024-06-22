@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://dk214wpitbhju" path="res://scenes/walking_enemy.tscn" id="2_2qq46"]
 [ext_resource type="PackedScene" uid="uid://xena0e3suwve" path="res://scenes/water_zone.tscn" id="3_bqhqn"]
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="4_vwc65"]
-[ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/builds/bush_long.tscn" id="5_txn6p"]
-[ext_resource type="PackedScene" uid="uid://drxvvfvnc7awr" path="res://scenes/builds/rodrick_sign.tscn" id="6_eminc"]
+[ext_resource type="PackedScene" uid="uid://dqu0s81c32bnq" path="res://scenes/builds/bush_long.tscn" id="5_txn6p"]
+[ext_resource type="PackedScene" uid="uid://bsaithlic8uhk" path="res://scenes/builds/rodrick_sign.tscn" id="6_eminc"]
 
 [node name="Room" instance=ExtResource("1_ls6vf")]
 

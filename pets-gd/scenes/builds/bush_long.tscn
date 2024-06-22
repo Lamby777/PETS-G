@@ -1,21 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://q3osyj42bsr4"]
+[gd_scene load_steps=3 format=3 uid="uid://dqu0s81c32bnq"]
 
 [ext_resource type="Texture2D" uid="uid://c50r4vfhgssms" path="res://assets/textures/builds/nature/bush_long.png" id="1_4j2qv"]
+[ext_resource type="PackedScene" uid="uid://h1du5kblkv2o" path="res://scenes/builds/Base Build.tscn" id="1_a0vuj"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ueqcd"]
-radius = 4.0
-height = 21.3333
+[node name="BushLong" instance=ExtResource("1_a0vuj")]
 
-[node name="BushLong" type="StaticBody2D"]
-position = Vector2(0, -16)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(4, 4)
+[node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("1_4j2qv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 16)
-rotation = 1.57079
-scale = Vector2(4, 4)
-shape = SubResource("CapsuleShape2D_ueqcd")
-metadata/_edit_group_ = true
