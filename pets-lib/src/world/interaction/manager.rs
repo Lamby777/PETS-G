@@ -6,6 +6,7 @@
 use godot::engine::{Control, InputEvent, RichTextLabel};
 use godot::prelude::*;
 
+use crate::consts::dialogue::INTERACT_PROMPT_HEIGHT_OFFSET;
 use crate::prelude::*;
 
 #[derive(GodotClass)]
@@ -70,6 +71,7 @@ impl InteractionManager {
 
         let pos = if custom_path.is_empty() {
             zone.get_global_position()
+                + Vector2::new(0.0, -INTERACT_PROMPT_HEIGHT_OFFSET)
         } else {
             zone.get_node_as::<Node2D>(custom_path)
                 .get_global_position()
