@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgycy4h18leus"]
+
+[ext_resource type="PackedScene" uid="uid://h1du5kblkv2o" path="res://scenes/builds/Base Build.tscn" id="1_nvl1g"]
+[ext_resource type="Texture2D" uid="uid://gdq3rghyjtpc" path="res://assets/textures/builds/nature/tree_con_1.png" id="2_hdi14"]
+
+[node name="TreeCon1" instance=ExtResource("1_nvl1g")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -56)
+scale = Vector2(6, 6)
+texture = ExtResource("2_hdi14")

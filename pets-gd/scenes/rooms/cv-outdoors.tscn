@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7x12nyqelw1f"]
+[gd_scene load_steps=9 format=3 uid="uid://c7x12nyqelw1f"]
 
 [ext_resource type="PackedScene" uid="uid://pefjtfxt6buk" path="res://scenes/rooms/_Base.tscn" id="1_ls6vf"]
 [ext_resource type="PackedScene" uid="uid://dk214wpitbhju" path="res://scenes/walking_enemy.tscn" id="2_2qq46"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="4_vwc65"]
 [ext_resource type="PackedScene" uid="uid://dqu0s81c32bnq" path="res://scenes/builds/bush_long.tscn" id="5_txn6p"]
 [ext_resource type="PackedScene" uid="uid://bsaithlic8uhk" path="res://scenes/builds/rodrick_sign.tscn" id="6_eminc"]
+[ext_resource type="PackedScene" uid="uid://cid68y5fqwsy8" path="res://scenes/builds/tree_dec1.tscn" id="7_b7alc"]
+[ext_resource type="PackedScene" uid="uid://bgycy4h18leus" path="res://scenes/builds/tree_con1.tscn" id="8_obhwm"]
 
 [node name="Room" instance=ExtResource("1_ls6vf")]
 
@@ -24,10 +26,6 @@ scale = Vector2(3, -2)
 
 [node name="DebugItem" parent="." index="3" instance=ExtResource("4_vwc65")]
 function_name = "debug_skill"
-prompt_location = NodePath("Node2D")
-position = Vector2(-192, 64)
-
-[node name="Node2D" type="Node2D" parent="DebugItem" index="1"]
 position = Vector2(-192, 64)
 
 [node name="House" parent="." index="4" instance=ExtResource("4_vwc65")]
@@ -171,3 +169,9 @@ collision_mask = 9
 
 [node name="InteractionZone" parent="RodrickSign" index="2" instance=ExtResource("4_vwc65")]
 interaction_id = "Rodrick Sign #1"
+
+[node name="TreeDec1" parent="." index="8" instance=ExtResource("7_b7alc")]
+position = Vector2(-368, 112)
+
+[node name="TreeCon1" parent="." index="9" instance=ExtResource("8_obhwm")]
+position = Vector2(-472, 112)
