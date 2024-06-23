@@ -6,6 +6,6 @@
 [node name="TreeDec1" instance=ExtResource("1_s6tdf")]
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(0, -56)
-scale = Vector2(6, 6)
+position = Vector2(0, -80)
+scale = Vector2(8, 8)
 texture = ExtResource("2_3573e")

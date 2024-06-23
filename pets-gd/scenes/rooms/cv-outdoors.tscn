@@ -171,7 +171,7 @@ collision_mask = 9
 interaction_id = "Rodrick Sign #1"
 
 [node name="TreeDec1" parent="." index="8" instance=ExtResource("7_b7alc")]
-position = Vector2(-368, 112)
+position = Vector2(-424, 112)
 
 [node name="TreeCon1" parent="." index="9" instance=ExtResource("8_obhwm")]
-position = Vector2(-472, 112)
+position = Vector2(-544, 112)
