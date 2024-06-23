@@ -1,13 +1,16 @@
 extends Quest
 
-@onready var zone1 = $"../../YSort/Room/TeleporterDemo/TPRightOut"
+@onready var zone1 = $"../../YSort/Room/HouseEntrance"
 @onready var dbox = DialogBox.singleton()
 
 func on_zone1_enter(_body):
-    print("Teleport done!")
-    dbox.start_ix("Intro #2")
-
     zone1.disconnect("body_entered", on_zone1_enter)
+    
+    # TODO make a signal for when a transition is over
+    await get_tree().create_timer(2.0).timeout
+
+    dbox.start_ix("Intro #2")
+    
     # connect some other zone's `body_entered` signal
 
 func _ready():
