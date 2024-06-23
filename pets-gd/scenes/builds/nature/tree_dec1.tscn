@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cid68y5fqwsy8"]
+
+[ext_resource type="PackedScene" uid="uid://h1du5kblkv2o" path="res://scenes/builds/Base Build.tscn" id="1_8q6ns"]
+[ext_resource type="Texture2D" uid="uid://bvjy8y2n0bdfn" path="res://assets/textures/builds/nature/tree_dec_1.png" id="2_2f5l7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gs064"]
+radius = 24.0
+height = 64.0
+
+[node name="TreeDec1" instance=ExtResource("1_8q6ns")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -80)
+texture = ExtResource("2_2f5l7")
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 8)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_gs064")

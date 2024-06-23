@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7x12nyqelw1f"]
+[gd_scene load_steps=10 format=3 uid="uid://c7x12nyqelw1f"]
 
 [ext_resource type="PackedScene" uid="uid://pefjtfxt6buk" path="res://scenes/rooms/_Base.tscn" id="1_ls6vf"]
 [ext_resource type="PackedScene" uid="uid://dk214wpitbhju" path="res://scenes/walking_enemy.tscn" id="2_2qq46"]
 [ext_resource type="PackedScene" uid="uid://xena0e3suwve" path="res://scenes/water_zone.tscn" id="3_bqhqn"]
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="4_vwc65"]
-[ext_resource type="PackedScene" uid="uid://dqu0s81c32bnq" path="res://scenes/builds/bush_long.tscn" id="5_txn6p"]
+[ext_resource type="PackedScene" uid="uid://dqu0s81c32bnq" path="res://scenes/builds/nature/bush_long.tscn" id="5_txn6p"]
 [ext_resource type="PackedScene" uid="uid://bsaithlic8uhk" path="res://scenes/builds/rodrick_sign.tscn" id="6_eminc"]
-[ext_resource type="PackedScene" uid="uid://cid68y5fqwsy8" path="res://scenes/builds/tree_dec1.tscn" id="7_b7alc"]
-[ext_resource type="PackedScene" uid="uid://bgycy4h18leus" path="res://scenes/builds/tree_con1.tscn" id="8_obhwm"]
+[ext_resource type="PackedScene" uid="uid://cid68y5fqwsy8" path="res://scenes/builds/nature/tree_dec1.tscn" id="7_b7alc"]
+[ext_resource type="PackedScene" uid="uid://bgycy4h18leus" path="res://scenes/builds/nature/tree_con1.tscn" id="8_obhwm"]
+[ext_resource type="PackedScene" uid="uid://dmark6m5rmra3" path="res://scenes/builds/houses/cv-house1.tscn" id="9_pvh7r"]
 
 [node name="Room" instance=ExtResource("1_ls6vf")]
 
@@ -24,18 +25,14 @@ position = Vector2(1120, 336)
 position = Vector2(416, 1056)
 scale = Vector2(3, -2)
 
-[node name="DebugItem" parent="." index="3" instance=ExtResource("4_vwc65")]
-function_name = "debug_skill"
-position = Vector2(-192, 64)
-
-[node name="HouseEntrance" parent="." index="4" instance=ExtResource("4_vwc65")]
+[node name="HouseEntrance" parent="." index="3" instance=ExtResource("4_vwc65")]
 beacon_room_name = "cv-houses"
 beacon_target = "Entrance"
 prompt_translation_key = "ENTER"
-position = Vector2(-32, 896)
+position = Vector2(368, -280)
 scale = Vector2(0.5, 0.5)
 
-[node name="TeleporterDemo" type="Node2D" parent="." index="5"]
+[node name="TeleporterDemo" type="Node2D" parent="." index="4"]
 position = Vector2(-1216, 864)
 
 [node name="TPRightIn" parent="TeleporterDemo" index="0" instance=ExtResource("4_vwc65")]
@@ -51,7 +48,7 @@ position = Vector2(344, 0)
 scale = Vector2(0.5, 0.5)
 
 [node name="RightBush" parent="TeleporterDemo" index="2" instance=ExtResource("5_txn6p")]
-position = Vector2(360, 0)
+position = Vector2(408, -80)
 collision_mask = 9
 
 [node name="TPLeftOut" parent="TeleporterDemo" index="3" instance=ExtResource("4_vwc65")]
@@ -64,11 +61,7 @@ beacon_target = "TeleporterDemo/TPLeftOut"
 position = Vector2(-216, 0)
 scale = Vector2(0.5, 0.5)
 
-[node name="LeftBush" parent="TeleporterDemo" index="5" instance=ExtResource("5_txn6p")]
-position = Vector2(-360, 0)
-collision_mask = 9
-
-[node name="DecoBushes" type="Node2D" parent="." index="6"]
+[node name="DecoBushes" type="Node2D" parent="." index="5"]
 y_sort_enabled = true
 
 [node name="BushTriangle" type="Node2D" parent="DecoBushes" index="0"]
@@ -163,17 +156,18 @@ collision_mask = 9
 position = Vector2(900, 1300)
 collision_mask = 9
 
-[node name="RodrickSign" parent="." index="7" instance=ExtResource("6_eminc")]
+[node name="RodrickSign" parent="." index="6" instance=ExtResource("6_eminc")]
 position = Vector2(192, 64)
 collision_mask = 9
 
 [node name="InteractionZone" parent="RodrickSign" index="2" instance=ExtResource("4_vwc65")]
 interaction_id = "Rodrick Sign #1"
 
-[node name="TreeCon1_0" parent="." index="8" instance=ExtResource("8_obhwm")]
+[node name="TreeCon1_0" parent="." index="7" instance=ExtResource("8_obhwm")]
 position = Vector2(160, 304)
 
-[node name="TreeBarrier" type="Node2D" parent="." index="9"]
+[node name="TreeBarrier" type="Node2D" parent="." index="8"]
+y_sort_enabled = true
 
 [node name="TreeDec1_0" parent="TreeBarrier" index="0" instance=ExtResource("7_b7alc")]
 position = Vector2(-688, 104)
@@ -186,3 +180,6 @@ position = Vector2(-464, 104)
 
 [node name="TreeDec1_3" parent="TreeBarrier" index="3" instance=ExtResource("7_b7alc")]
 position = Vector2(-352, 104)
+
+[node name="Build" parent="." index="9" instance=ExtResource("9_pvh7r")]
+position = Vector2(464, -368)

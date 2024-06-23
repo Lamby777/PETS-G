@@ -1,9 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsaithlic8uhk"]
+[gd_scene load_steps=4 format=3 uid="uid://bsaithlic8uhk"]
 
 [ext_resource type="PackedScene" uid="uid://h1du5kblkv2o" path="res://scenes/builds/Base Build.tscn" id="1_kaawg"]
 [ext_resource type="Texture2D" uid="uid://dd4tfjxmis0g4" path="res://assets/textures/builds/signs/sign_rodrick.png" id="1_vp6q5"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_he3wi"]
+radius = 24.0
+height = 208.0
+
 [node name="RodrickSign" instance=ExtResource("1_kaawg")]
 
 [node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -24)
 texture = ExtResource("1_vp6q5")
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 16)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_he3wi")

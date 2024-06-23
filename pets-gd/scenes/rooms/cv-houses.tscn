@@ -15,3 +15,8 @@ beacon_target = "HouseEntrance"
 prompt_translation_key = "EXIT"
 position = Vector2(-416, 32)
 scale = Vector2(0.5, 0.5)
+
+[node name="DebugSkill" parent="." index="2" instance=ExtResource("2_flkym")]
+function_name = "debug_skill"
+position = Vector2(-128, -96)
+scale = Vector2(0.5, 0.5)
