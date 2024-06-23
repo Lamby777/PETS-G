@@ -79,13 +79,18 @@ pub struct DialogBox {
 
 impl Singleton for DialogBox {
     fn singleton() -> Gd<Self> {
-        let path = format!("{}/{}", UI_LAYER_NAME, DBOX_NODE_NAME);
-        World::singleton().get_node_as::<DialogBox>(path)
+        Self::singleton()
     }
 }
 
 #[godot_api]
 impl DialogBox {
+    #[func]
+    fn singleton() -> Gd<Self> {
+        let path = format!("{}/{}", UI_LAYER_NAME, DBOX_NODE_NAME);
+        World::singleton().get_node_as::<DialogBox>(path)
+    }
+
     #[func]
     pub fn do_draw(&mut self) {
         let ending = self.current_ix_ending().cloned();
