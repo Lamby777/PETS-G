@@ -21,14 +21,13 @@ pub struct InteractionManager {
     zones: Vec<Gd<InteractionZone>>,
 }
 
-impl Singleton for InteractionManager {
-    fn singleton() -> Gd<Self> {
-        World::singleton().get_node_as("%InteractionManager")
-    }
-}
-
 #[godot_api]
 impl InteractionManager {
+    #[func]
+    pub fn singleton() -> Gd<Self> {
+        World::singleton().get_node_as("%InteractionManager")
+    }
+
     #[func]
     pub fn register_zone(&mut self, obj: Gd<InteractionZone>) {
         self.zones.push(obj);
