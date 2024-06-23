@@ -11,7 +11,6 @@
 
 #![feature(variant_count)]
 #![feature(let_chains)]
-#![feature(lazy_cell)]
 #![feature(try_blocks)]
 #![feature(generic_arg_infer)]
 #![feature(int_roundings)]
