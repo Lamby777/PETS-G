@@ -39,6 +39,9 @@ pub struct PlayerCB {
 
 #[godot_api]
 impl PlayerCB {
+    #[signal]
+    fn teleported(&self);
+
     #[func]
     pub fn singleton() -> Gd<Self> {
         World::singleton().get_node_as("%PlayerCB")
