@@ -4,11 +4,8 @@
 
 use crate::prelude::*;
 
-pub fn is_party_leader(pchar: &PChar) -> bool {
-    let party = PlayerCB::singleton().bind().party_pchars();
-    let leader = party.first().unwrap();
-
-    leader == pchar
+pub fn party_leader() -> PChar {
+    *PlayerCB::singleton().bind().party_pchars().first().unwrap()
 }
 
 const PLACEHOLDERS: &[(&'static str, fn() -> String)] = &[
@@ -17,16 +14,16 @@ const PLACEHOLDERS: &[(&'static str, fn() -> String)] = &[
     // NOTE <https://github.com/Lamby777/PETS-G/issues/23>
     ("[ETHAN]", || "Ethan".to_string()),
     ("[MOM]", || {
-        match is_party_leader(&PChar::ETHAN) {
-            true => "Mom",
-            false => "Paula",
+        match party_leader() {
+            PChar::ETHAN => "Mom",
+            _ => "Paula",
         }
         .to_string()
     }),
     ("[DAD]", || {
-        match is_party_leader(&PChar::ETHAN) {
-            true => "Dad",
-            false => "Clay",
+        match party_leader() {
+            PChar::ETHAN => "Dad",
+            _ => "Clay",
         }
         .to_string()
     }),
