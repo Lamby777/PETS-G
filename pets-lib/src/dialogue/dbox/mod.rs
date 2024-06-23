@@ -16,7 +16,6 @@ use crate::prelude::*;
 mod dchoice;
 mod placeholders;
 use dchoice::DChoice;
-use placeholders::process_placeholders;
 
 #[derive(Clone)]
 pub struct MetaPair<T> {
@@ -179,7 +178,11 @@ impl DialogBox {
         use Speaker::*;
 
         tr(match &self.speaker.temporary {
-            Named(v) => replace_str_all(v, &self.replaces),
+            Named(v) => {
+                let name = replace_str_all(v, &self.replaces);
+                placeholders::process_placeholders(&name).into()
+            }
+
             Narrator => "DG_SPK_NARRATOR".to_owned(),
             Unknown => "DG_SPK_UNKNOWN".to_owned(),
         })
@@ -198,7 +201,7 @@ impl DialogBox {
         let content = replace_str_all(&content, &self.replaces);
         let content = tr(content).to_string();
 
-        process_placeholders(&content).into()
+        placeholders::process_placeholders(&content).into()
     }
 
     fn anim_player(&self) -> Gd<AnimationPlayer> {

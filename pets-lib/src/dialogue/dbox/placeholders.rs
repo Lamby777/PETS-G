@@ -7,8 +7,9 @@ const PLACEHOLDERS: &[(&'static str, fn() -> String)] = &[
     ("[LEVEL]", || 123.to_string()),
     // NOTE <https://github.com/Lamby777/PETS-G/issues/23>
     ("[ETHAN]", || "Ethan".to_string()),
-    ("[MOM]", || "Paula".to_string()),
-    ("[DAD]", || "Clay".to_string()),
+    // TODO show "Mom" and "Dad" if the party leader is Ethan, else show their names
+    ("[MOM]", || "Paula (Mom)".to_string()),
+    ("[DAD]", || "Clay (Dad)".to_string()),
 ];
 
 pub fn process_placeholders(text: &str) -> String {
