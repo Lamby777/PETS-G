@@ -10,9 +10,7 @@ use godot::prelude::*;
 use super::stat_translation as to_battle;
 use crate::prelude::*;
 
-type DirectionalInputNames = [(StringName, Vector2); 4];
-
-const BATTLE_DIRECTIONS: LazyCell<DirectionalInputNames> =
+const BATTLE_DIRECTIONS: LazyCell<[(StringName, Vector2); 4]> =
     LazyCell::new(|| {
         [
             ("battle_move_up".into(), Vector2::UP),

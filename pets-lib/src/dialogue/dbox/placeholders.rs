@@ -1,12 +1,8 @@
 //!
 //! This module is for processing placeholders in dialogue strings.
-//! (duh)
 //!
 
-// use super::*;
-
-type DPlaceholder = (&'static str, fn() -> String);
-const PLACEHOLDERS: &[DPlaceholder] = &[
+const PLACEHOLDERS: &[(&'static str, fn() -> String)] = &[
     ("[PLAYER]", || "Cherry".to_string()),
     ("[LEVEL]", || 123.to_string()),
     // NOTE <https://github.com/Lamby777/PETS-G/issues/23>
