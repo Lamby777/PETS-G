@@ -142,9 +142,12 @@ impl InteractionZone {
                 let black = Gd::<ColorRect>::from_instance_id(black_id);
                 fade_black(&black, false, TP_BEACON_BLACK_OUT);
 
-                set_timeout(TP_BEACON_BLACK_OUT, || {
+                set_timeout(TP_BEACON_BLACK_OUT, move || {
                     // finally, reset the debounce when the black is gone
                     pcb().bind_mut().tpbeacon_debounce = false;
+
+                    // fire the signal that the teleport is over
+                    pcb().emit_signal("teleported".into(), &[]);
                 });
             });
         });

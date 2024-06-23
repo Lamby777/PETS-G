@@ -7,7 +7,7 @@ func on_zone1_enter(_body):
     zone1.disconnect("body_entered", on_zone1_enter)
     
     # TODO make a signal for when a transition is over
-    await get_tree().create_timer(2.0).timeout
+    await PlayerCB.singleton().teleported
 
     dbox.start_ix("Intro #2")
     
