@@ -77,16 +77,10 @@ pub struct DialogBox {
     text_visibility_timer: OnReady<Gd<Timer>>,
 }
 
-impl Singleton for DialogBox {
-    fn singleton() -> Gd<Self> {
-        Self::singleton()
-    }
-}
-
 #[godot_api]
 impl DialogBox {
     #[func]
-    fn singleton() -> Gd<Self> {
+    pub fn singleton() -> Gd<Self> {
         let path = format!("{}/{}", UI_LAYER_NAME, DBOX_NODE_NAME);
         World::singleton().get_node_as::<DialogBox>(path)
     }
