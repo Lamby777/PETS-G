@@ -160,6 +160,7 @@ transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_j
 graph_offset = Vector2(-79, 13)
 
 [node name="MIRA" instance=ExtResource("1_d7sgd")]
+pchar = "MIRA"
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_ld7rf")
