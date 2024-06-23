@@ -114,12 +114,10 @@ impl PlayerCB {
         if clear_past {
             self.past_positions.clear();
             self.past_rotations.clear();
-        } else {
-            self.past_positions.push(pos);
-
-            let rot = rot.unwrap_or(self.last_rot());
-            self.past_rotations.push(rot);
         }
+
+        self.past_positions.push(pos);
+        self.past_rotations.push(rot.unwrap_or(self.last_rot()));
 
         self.move_chars(false);
         self.base_mut().set_global_position(pos);
