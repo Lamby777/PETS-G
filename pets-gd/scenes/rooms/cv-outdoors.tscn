@@ -28,7 +28,7 @@ scale = Vector2(3, -2)
 function_name = "debug_skill"
 position = Vector2(-192, 64)
 
-[node name="House" parent="." index="4" instance=ExtResource("4_vwc65")]
+[node name="HouseEntrance" parent="." index="4" instance=ExtResource("4_vwc65")]
 beacon_room_name = "cv-houses"
 beacon_target = "Entrance"
 prompt_translation_key = "ENTER"
@@ -170,8 +170,19 @@ collision_mask = 9
 [node name="InteractionZone" parent="RodrickSign" index="2" instance=ExtResource("4_vwc65")]
 interaction_id = "Rodrick Sign #1"
 
-[node name="TreeDec1" parent="." index="8" instance=ExtResource("7_b7alc")]
-position = Vector2(-424, 112)
+[node name="TreeCon1_0" parent="." index="8" instance=ExtResource("8_obhwm")]
+position = Vector2(160, 304)
 
-[node name="TreeCon1" parent="." index="9" instance=ExtResource("8_obhwm")]
-position = Vector2(-544, 112)
+[node name="TreeBarrier" type="Node2D" parent="." index="9"]
+
+[node name="TreeDec1_0" parent="TreeBarrier" index="0" instance=ExtResource("7_b7alc")]
+position = Vector2(-688, 104)
+
+[node name="TreeDec1_1" parent="TreeBarrier" index="1" instance=ExtResource("7_b7alc")]
+position = Vector2(-576, 104)
+
+[node name="TreeDec1_2" parent="TreeBarrier" index="2" instance=ExtResource("7_b7alc")]
+position = Vector2(-464, 104)
+
+[node name="TreeDec1_3" parent="TreeBarrier" index="3" instance=ExtResource("7_b7alc")]
+position = Vector2(-352, 104)
