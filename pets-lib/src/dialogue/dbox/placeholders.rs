@@ -8,7 +8,6 @@ pub fn is_party_leader(pchar: &PChar) -> bool {
     let party = PlayerCB::singleton().bind().party_pchars();
     let leader = party.first().unwrap();
 
-    dbg!(leader, pchar);
     leader == pchar
 }
 

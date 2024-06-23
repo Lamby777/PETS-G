@@ -159,6 +159,7 @@ transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_j
 graph_offset = Vector2(-79, 13)
 
 [node name="ETHAN" instance=ExtResource("1_4disj")]
+pchar = "ETHAN"
 
 [node name="Sprite2D" parent="." index="0"]
 offset = Vector2(0, 1)
