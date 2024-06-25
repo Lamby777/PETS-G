@@ -133,8 +133,10 @@ DG_RODRICK1_COMEBACK,Come back when you're smart.
 ,
 DG_INTRO1_COMEUNPACK,"Hey, [ETHAN], we're unpacking your stuff! Come help!"
 ,
-DG_INTRO2_OVERHERE,Over here! This is your new room! What do you think?
-DG_INTRO2_GREAT,It's great!
-DG_INTRO2_ALRIGHT,It's alright...
-DG_INTRO2_GREAT_MOM,"Well, I'm glad you like it! I hope you'll be comfortable here."
-DG_INTRO2_ALRIGHT_MOM,"I know it's not much, but I hope you'll be comfortable here."
+DG_INTRO2_OVERHERE,Over here! This is your new room!
+
+DG_INTRO3_WDYT,What do you think?
+DG_INTRO3_GREAT,It's great!
+DG_INTRO3_ALRIGHT,It's alright...
+DG_INTRO3_GREAT_MOM,"Well, I'm glad you like it! I hope you'll be comfortable here."
+DG_INTRO3_ALRIGHT_MOM,"I know it's not much, but I hope you'll be comfortable here."
