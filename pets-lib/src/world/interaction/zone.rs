@@ -39,8 +39,11 @@ pub struct InteractionZone {
 
 #[godot_api]
 impl InteractionZone {
+    #[signal]
+    fn interacted(&self);
+
     #[func]
-    pub fn interact(&self) {
+    pub fn interact(&mut self) {
         let ix_id = self.interaction_id.to_string();
         if !ix_id.is_empty() {
             start_ix(ix_id);
@@ -54,10 +57,7 @@ impl InteractionZone {
         }
 
         // TODO fire signal here --------------------------------------
-        // TODO fire signal here --------------------------------------
-        // TODO fire signal here --------------------------------------
-        // TODO fire signal here --------------------------------------
-        // TODO fire signal here --------------------------------------
+        self.base_mut().emit_signal("interacted".into(), &[]);
 
         let target = &self.beacon_target;
         if !target.is_empty() {

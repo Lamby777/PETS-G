@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://hflql51x7i61"]
+[gd_scene load_steps=6 format=3 uid="uid://hflql51x7i61"]
 
 [ext_resource type="PackedScene" uid="uid://pefjtfxt6buk" path="res://scenes/rooms/_Base.tscn" id="1_t4iqd"]
 [ext_resource type="Script" path="res://scenes/rooms/room.gd" id="2_dkgsg"]
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="2_flkym"]
 [ext_resource type="PackedScene" uid="uid://bcpw80pdxqulb" path="res://scenes/builds/furniture/bed.tscn" id="4_3efre"]
+
+[sub_resource type="GDScript" id="GDScript_wc6uo"]
+script/source = "extends InteractionZone
+
+func _on_interacted():
+    ScriptExecutor.debug_skill()
+"
 
 [node name="Room" instance=ExtResource("1_t4iqd")]
 script = ExtResource("2_dkgsg")
@@ -33,10 +40,12 @@ position = Vector2(416, 392)
 scale = Vector2(0.5, 0.5)
 
 [node name="DebugSkill" parent="." index="4" instance=ExtResource("2_flkym")]
-function_name = "debug_skill"
-position = Vector2(-128, -96)
+position = Vector2(-128, 32)
 scale = Vector2(0.5, 0.5)
+script = SubResource("GDScript_wc6uo")
 
 [node name="EthanBed" parent="." index="5" instance=ExtResource("4_3efre")]
 unique_name_in_owner = true
 position = Vector2(664, 416)
+
+[connection signal="interacted" from="DebugSkill" to="DebugSkill" method="_on_interacted"]

@@ -13,6 +13,7 @@ pub use describe::Describe;
 pub use extensions::*;
 pub use node_stuff::*;
 
+use crate::functions::ScriptExecutor;
 use crate::prelude::*;
 
 use godot::engine::{Engine, Expression, SceneTreeTimer};
@@ -38,7 +39,14 @@ pub fn eval(script: &str) -> GReturn {
     let mut expr = Expression::new_gd();
     expr.parse(script.into());
 
-    let res = expr.execute_ex().base_instance(pcb().upcast()).done();
+    // nice try, buddy. i'm NOT calling it that.
+    let executor = ScriptExecutor::singleton();
+
+    // let res = expr.execute_ex().base_instance(executor.upcast()).done();
+    let res = expr.call("execute".into(), &[
+        varray![].to_variant(),
+        executor.to_variant(),
+    ]);
 
     Ok(res)
 }
