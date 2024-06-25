@@ -40,11 +40,40 @@ NAME [MOM]
 
 DG_INTRO3_GREAT_MOM
 
+@ Intro #4
 ---
 % Intro #3 >> Alright
 NAME [MOM]
 
 DG_INTRO3_ALRIGHT_MOM
+
+@ Intro #4
+---
+% Intro #4
+NAME [MOM]
+
+DG_INTRO4_ITSYOURS
+
+> DG_INTRO4_BEDCOLOR_RED
+$ set_ethan_bed_color red
+
+> DG_INTRO4_BEDCOLOR_ORANGE
+$ set_ethan_bed_color orange
+
+> DG_INTRO4_BEDCOLOR_YELLOW
+$ set_ethan_bed_color yellow
+
+> DG_INTRO4_BEDCOLOR_GREEN
+$ set_ethan_bed_color green
+
+> DG_INTRO4_BEDCOLOR_BLUE
+$ set_ethan_bed_color blue
+
+> DG_INTRO4_BEDCOLOR_PURPLE
+$ set_ethan_bed_color purple
+
+> DG_INTRO4_BEDCOLOR_PINK
+$ set_ethan_bed_color pink
 
 ---
 
