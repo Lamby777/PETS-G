@@ -108,8 +108,8 @@ impl INode for InteractionManager {
                 }
             }
 
-            if let Some(zone) = self.closest_zone() {
-                zone.bind().interact();
+            if let Some(mut zone) = self.closest_zone() {
+                zone.bind_mut().interact();
             }
         }
     }

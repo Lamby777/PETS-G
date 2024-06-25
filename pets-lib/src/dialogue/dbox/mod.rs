@@ -240,7 +240,9 @@ impl DialogBox {
             }
 
             GDScript(script) => {
+                let guard = self.base_mut();
                 eval(script).unwrap();
+                drop(guard);
             }
         }
     }
