@@ -1,13 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7x12nyqelw1f"]
+[gd_scene load_steps=11 format=3 uid="uid://c7x12nyqelw1f"]
 
 [ext_resource type="PackedScene" uid="uid://pefjtfxt6buk" path="res://scenes/rooms/_Base.tscn" id="1_ls6vf"]
 [ext_resource type="PackedScene" uid="uid://dk214wpitbhju" path="res://scenes/walking_enemy.tscn" id="2_2qq46"]
+[ext_resource type="Script" path="res://scenes/rooms/room.gd" id="2_t8063"]
 [ext_resource type="PackedScene" uid="uid://xena0e3suwve" path="res://scenes/water_zone.tscn" id="3_bqhqn"]
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="4_vwc65"]
-[ext_resource type="PackedScene" uid="uid://q3osyj42bsr4" path="res://scenes/builds/bush_long.tscn" id="5_txn6p"]
-[ext_resource type="PackedScene" uid="uid://drxvvfvnc7awr" path="res://scenes/builds/rodrick_sign.tscn" id="6_eminc"]
+[ext_resource type="PackedScene" uid="uid://dqu0s81c32bnq" path="res://scenes/builds/nature/bush_long.tscn" id="5_txn6p"]
+[ext_resource type="PackedScene" uid="uid://bsaithlic8uhk" path="res://scenes/builds/rodrick_sign.tscn" id="6_eminc"]
+[ext_resource type="PackedScene" uid="uid://cid68y5fqwsy8" path="res://scenes/builds/nature/tree_dec1.tscn" id="7_b7alc"]
+[ext_resource type="PackedScene" uid="uid://bgycy4h18leus" path="res://scenes/builds/nature/tree_con1.tscn" id="8_obhwm"]
+[ext_resource type="PackedScene" uid="uid://dmark6m5rmra3" path="res://scenes/builds/houses/cv-house1.tscn" id="9_pvh7r"]
 
 [node name="Room" instance=ExtResource("1_ls6vf")]
+script = ExtResource("2_t8063")
+room_id = "CV_Outdoors"
 
 [node name="TileMap" parent="." index="0"]
 layer_0/tile_data = PackedInt32Array(786417, 458755, 1, 720881, 131075, 0, 786416, 65539, 2, 720880, 65539, 0, 786415, 65539, 2, 720879, 65539, 0, 786414, 65539, 2, 720878, 65539, 0, 786413, 65539, 2, 720877, 65539, 0, 786412, 65539, 2, 720876, 65539, 0, 786411, 65539, 2, 720875, 65539, 0, 786410, 65539, 2, 720874, 65539, 0, 786409, 65539, 2, 720873, 65539, 0, 1048561, 458755, 2, 983025, 196611, 1, 917489, 196611, 1, 851953, 196611, 1, 1114097, 131075, 2, 1114096, 65539, 2, 1048560, 65539, 0, 1114095, 65539, 2, 1048559, 65539, 0, 1114094, 65539, 2, 1048558, 65539, 0, 1114093, 65539, 2, 1048557, 65539, 0, 1114092, 65539, 2, 1048556, 65539, 0, 1114091, 65539, 2, 1048555, 65539, 0, 1114090, 65539, 2, 1048554, 65539, 0, 1114089, 65539, 2, 1048553, 65539, 0, 1114088, 3, 2, 1048552, 262147, 2, 983016, 196611, 1, 917480, 196611, 1, 851944, 196611, 1, 786408, 262147, 1, 720872, 3, 0)
@@ -22,22 +28,15 @@ position = Vector2(1120, 336)
 position = Vector2(416, 1056)
 scale = Vector2(3, -2)
 
-[node name="DebugItem" parent="." index="3" instance=ExtResource("4_vwc65")]
-function_name = "debug_skill"
-prompt_location = NodePath("Node2D")
-position = Vector2(-192, 64)
-
-[node name="Node2D" type="Node2D" parent="DebugItem" index="1"]
-position = Vector2(-192, 64)
-
-[node name="House" parent="." index="4" instance=ExtResource("4_vwc65")]
+[node name="EthanHouseEntrance" parent="." index="3" instance=ExtResource("4_vwc65")]
 beacon_room_name = "cv-houses"
-beacon_target = "Entrance"
+beacon_target = "EthanHouseExit"
 prompt_translation_key = "ENTER"
-position = Vector2(-32, 896)
+position = Vector2(368, -280)
 scale = Vector2(0.5, 0.5)
 
-[node name="TeleporterDemo" type="Node2D" parent="." index="5"]
+[node name="TeleporterDemo" type="Node2D" parent="." index="4"]
+y_sort_enabled = true
 position = Vector2(-1216, 864)
 
 [node name="TPRightIn" parent="TeleporterDemo" index="0" instance=ExtResource("4_vwc65")]
@@ -53,7 +52,7 @@ position = Vector2(344, 0)
 scale = Vector2(0.5, 0.5)
 
 [node name="RightBush" parent="TeleporterDemo" index="2" instance=ExtResource("5_txn6p")]
-position = Vector2(360, 0)
+position = Vector2(408, -80)
 collision_mask = 9
 
 [node name="TPLeftOut" parent="TeleporterDemo" index="3" instance=ExtResource("4_vwc65")]
@@ -66,11 +65,7 @@ beacon_target = "TeleporterDemo/TPLeftOut"
 position = Vector2(-216, 0)
 scale = Vector2(0.5, 0.5)
 
-[node name="LeftBush" parent="TeleporterDemo" index="5" instance=ExtResource("5_txn6p")]
-position = Vector2(-360, 0)
-collision_mask = 9
-
-[node name="DecoBushes" type="Node2D" parent="." index="6"]
+[node name="DecoBushes" type="Node2D" parent="." index="5"]
 y_sort_enabled = true
 
 [node name="BushTriangle" type="Node2D" parent="DecoBushes" index="0"]
@@ -165,9 +160,30 @@ collision_mask = 9
 position = Vector2(900, 1300)
 collision_mask = 9
 
-[node name="RodrickSign" parent="." index="7" instance=ExtResource("6_eminc")]
+[node name="RodrickSign" parent="." index="6" instance=ExtResource("6_eminc")]
 position = Vector2(192, 64)
 collision_mask = 9
 
 [node name="InteractionZone" parent="RodrickSign" index="2" instance=ExtResource("4_vwc65")]
 interaction_id = "Rodrick Sign #1"
+
+[node name="TreeCon1_0" parent="." index="7" instance=ExtResource("8_obhwm")]
+position = Vector2(160, 304)
+
+[node name="TreeBarrier" type="Node2D" parent="." index="8"]
+y_sort_enabled = true
+
+[node name="TreeDec1_0" parent="TreeBarrier" index="0" instance=ExtResource("7_b7alc")]
+position = Vector2(-688, 104)
+
+[node name="TreeDec1_1" parent="TreeBarrier" index="1" instance=ExtResource("7_b7alc")]
+position = Vector2(-576, 104)
+
+[node name="TreeDec1_2" parent="TreeBarrier" index="2" instance=ExtResource("7_b7alc")]
+position = Vector2(-464, 104)
+
+[node name="TreeDec1_3" parent="TreeBarrier" index="3" instance=ExtResource("7_b7alc")]
+position = Vector2(-352, 104)
+
+[node name="Build" parent="." index="9" instance=ExtResource("9_pvh7r")]
+position = Vector2(464, -368)

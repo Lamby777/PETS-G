@@ -1,5 +1,3 @@
-use crate::battle::skills::BattlerPtr;
-
 use super::*;
 
 /// Trait for stuff that both party members and enemies
@@ -86,5 +84,5 @@ pub trait Battler {
 
 pub struct Battlers {
     pub good_guys: Vec<Box<dyn Battler>>,
-    pub _bad_guys: Vec<BattlerPtr>,
+    pub _bad_guys: Vec<Rc<RefCell<dyn Battler>>>,
 }

@@ -106,10 +106,10 @@ impl SkillFamily for AttackSkill {
 
     fn cast(
         &self,
-        _caster: BattlerPtr,
-        targets: Vec<BattlerPtr>,
-        _allies: Vec<BattlerPtr>,
-        _enemies: Vec<BattlerPtr>,
+        _caster: Rc<RefCell<dyn Battler>>,
+        targets: Vec<Rc<RefCell<dyn Battler>>>,
+        _allies: Vec<Rc<RefCell<dyn Battler>>>,
+        _enemies: Vec<Rc<RefCell<dyn Battler>>>,
     ) {
         if targets.is_empty() {
             panic!("attack skill should have a target");

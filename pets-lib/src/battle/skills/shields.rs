@@ -114,10 +114,10 @@ impl SkillFamily for ShieldSkill {
 
     fn cast(
         &self,
-        _caster: BattlerPtr,
-        _targets: Vec<BattlerPtr>,
-        _allies: Vec<BattlerPtr>,
-        _enemies: Vec<BattlerPtr>,
+        _caster: Rc<RefCell<dyn Battler>>,
+        _targets: Vec<Rc<RefCell<dyn Battler>>>,
+        _allies: Vec<Rc<RefCell<dyn Battler>>>,
+        _enemies: Vec<Rc<RefCell<dyn Battler>>>,
     ) {
         todo!()
     }

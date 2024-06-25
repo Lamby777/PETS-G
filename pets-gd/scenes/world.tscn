@@ -134,6 +134,7 @@ material = SubResource("ShaderMaterial_uyk0u")
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="Inventory" parent="UILayer" instance=ExtResource("3_jwkdy")]
 unique_name_in_owner = true

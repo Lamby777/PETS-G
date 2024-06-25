@@ -23,14 +23,13 @@ pub struct InventoryNode {
     row: OnReady<Gd<HBoxContainer>>,
 }
 
-impl Singleton for InventoryNode {
-    fn singleton() -> Gd<Self> {
-        World::singleton().get_node_as("%Inventory")
-    }
-}
-
 #[godot_api]
 impl InventoryNode {
+    #[func]
+    pub fn singleton() -> Gd<Self> {
+        World::singleton().get_node_as("%Inventory")
+    }
+
     fn inventory() -> Rc<RefCell<Vec<Item>>> {
         si().bind().save.inventory.clone()
     }

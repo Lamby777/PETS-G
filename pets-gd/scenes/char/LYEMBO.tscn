@@ -160,6 +160,7 @@ transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_j
 graph_offset = Vector2(-79, 13)
 
 [node name="LYEMBO" instance=ExtResource("1_y7x8p")]
+pchar = "LYEMBO"
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_wy23g")

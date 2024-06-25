@@ -47,15 +47,12 @@ impl PCharNode {
 
     fn anim_mode_str(&self, moving: bool) -> &'static str {
         let overlapping_areas = self.area.get_overlapping_areas();
-        let overlaps = overlapping_areas
+        let overlaps_water = overlapping_areas
             .iter_shared()
             .any(|area| area.is_in_group("water".into()));
 
-        if overlaps {
-            return "Wade";
-        }
-
         match moving {
+            _ if overlaps_water => "Wade",
             true => "Run",
             false => "Idle",
         }

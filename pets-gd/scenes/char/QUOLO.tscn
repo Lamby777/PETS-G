@@ -160,6 +160,7 @@ transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_j
 graph_offset = Vector2(-79, 13)
 
 [node name="QUOLO" instance=ExtResource("1_md4nv")]
+pchar = "QUOLO"
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_pgg4h")

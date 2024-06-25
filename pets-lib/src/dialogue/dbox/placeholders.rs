@@ -1,18 +1,32 @@
 //!
 //! This module is for processing placeholders in dialogue strings.
-//! (duh)
 //!
 
-// use super::*;
+use crate::prelude::*;
 
-type DPlaceholder = (&'static str, fn() -> String);
-const PLACEHOLDERS: &[DPlaceholder] = &[
+pub fn party_leader() -> PChar {
+    *PlayerCB::singleton().bind().party_pchars().first().unwrap()
+}
+
+const PLACEHOLDERS: &[(&'static str, fn() -> String)] = &[
     ("[PLAYER]", || "Cherry".to_string()),
     ("[LEVEL]", || 123.to_string()),
     // NOTE <https://github.com/Lamby777/PETS-G/issues/23>
     ("[ETHAN]", || "Ethan".to_string()),
-    ("[MOM]", || "Paula".to_string()),
-    ("[DAD]", || "Clay".to_string()),
+    ("[MOM]", || {
+        match party_leader() {
+            PChar::ETHAN => "Mom",
+            _ => "Paula",
+        }
+        .to_string()
+    }),
+    ("[DAD]", || {
+        match party_leader() {
+            PChar::ETHAN => "Dad",
+            _ => "Clay",
+        }
+        .to_string()
+    }),
 ];
 
 pub fn process_placeholders(text: &str) -> String {

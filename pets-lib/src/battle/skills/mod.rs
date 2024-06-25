@@ -22,8 +22,6 @@ pub(crate) use other::{PSIFluxSkill, PSIRewireSkill};
 pub(crate) use recovery::RecoverySkill;
 pub(crate) use shields::ShieldSkill;
 
-pub(crate) type BattlerPtr = Rc<RefCell<dyn Battler>>;
-
 #[typetag::serde(tag = "type")]
 pub trait SkillFamily {
     fn name(&self) -> String;
@@ -32,10 +30,10 @@ pub trait SkillFamily {
 
     fn cast(
         &self,
-        _caster: BattlerPtr,
-        _targets: Vec<BattlerPtr>,
-        _allies: Vec<BattlerPtr>,
-        _enemies: Vec<BattlerPtr>,
+        _caster: Rc<RefCell<dyn Battler>>,
+        _targets: Vec<Rc<RefCell<dyn Battler>>>,
+        _allies: Vec<Rc<RefCell<dyn Battler>>>,
+        _enemies: Vec<Rc<RefCell<dyn Battler>>>,
     );
 }
 

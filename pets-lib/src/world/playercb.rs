@@ -37,14 +37,16 @@ pub struct PlayerCB {
     pub water_speed_mod: real,
 }
 
-impl Singleton for PlayerCB {
-    fn singleton() -> Gd<Self> {
-        World::singleton().get_node_as("%PlayerCB")
-    }
-}
-
 #[godot_api]
 impl PlayerCB {
+    #[signal]
+    fn teleported(&self, target: Gd<Node2D>);
+
+    #[func]
+    pub fn singleton() -> Gd<Self> {
+        World::singleton().get_node_as("%PlayerCB")
+    }
+
     pub fn party_pchars(&self) -> Vec<PChar> {
         self.party.iter().map(|v| v.bind().pchar).collect()
     }
@@ -112,12 +114,10 @@ impl PlayerCB {
         if clear_past {
             self.past_positions.clear();
             self.past_rotations.clear();
-        } else {
-            self.past_positions.push(pos);
-
-            let rot = rot.unwrap_or(self.last_rot());
-            self.past_rotations.push(rot);
         }
+
+        self.past_positions.push(pos);
+        self.past_rotations.push(rot.unwrap_or(self.last_rot()));
 
         self.move_chars(false);
         self.base_mut().set_global_position(pos);
