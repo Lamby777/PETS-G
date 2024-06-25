@@ -204,6 +204,7 @@ impl ICharacterBody2D for PlayerCB {
         self.party = load_pchar_scenes_under!(
             self;
             PChar::ETHAN,
+            PChar::NEOXYLIN,
             PChar::SIVA,
             PChar::TERRA,
             PChar::MIRA,

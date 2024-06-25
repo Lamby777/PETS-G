@@ -40,7 +40,7 @@ pub enum PChar {
     FUZZY,
     LYEMBO,
     BOBBY,
-    NYX,
+    NEOXYLIN,
     QUOLO,
 
     // Silly billies
