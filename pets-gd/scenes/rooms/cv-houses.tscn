@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://hflql51x7i61"]
+[gd_scene load_steps=4 format=3 uid="uid://hflql51x7i61"]
 
 [ext_resource type="PackedScene" uid="uid://pefjtfxt6buk" path="res://scenes/rooms/_Base.tscn" id="1_t4iqd"]
+[ext_resource type="Script" path="res://scenes/rooms/room.gd" id="2_dkgsg"]
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="2_flkym"]
 
 [node name="Room" instance=ExtResource("1_t4iqd")]
+script = ExtResource("2_dkgsg")
+room_id = "CV_Houses"
 
 [node name="TileMap" parent="." index="0"]
 layer_2/tile_data = PackedInt32Array(6, 65538, 1, 5, 65538, 1, 4, 65538, 1, 3, 65538, 1, 2, 65538, 1, 1, 65538, 1, 0, 65538, 1, 65535, 65538, 1, 65534, 65538, 1, 65533, 65538, 1, 65532, 65538, 1, 65531, 65538, 1, 65530, 65538, 1, 65529, 65538, 1, 131066, 65538, 2, 131065, 65538, 2, 131064, 2, 2, 65528, 2, 1, -8, 2, 0, -7, 65538, 0, -6, 65538, 0, 131067, 65538, 2, -5, 65538, 0, 131068, 65538, 2, -4, 65538, 0, 131069, 65538, 2, -3, 65538, 0, 131070, 65538, 2, -2, 65538, 0, 131071, 65538, 2, -1, 65538, 0, 65536, 65538, 2, -65536, 65538, 0, 65537, 65538, 2, -65535, 65538, 0, 65538, 65538, 2, -65534, 65538, 0, 65539, 65538, 2, -65533, 65538, 0, 65540, 65538, 2, -65532, 65538, 0, 65541, 65538, 2, -65531, 65538, 0, 65542, 65538, 2, -65530, 65538, 0, 7, 131074, 1, 65543, 131074, 2, -65529, 131074, 0)

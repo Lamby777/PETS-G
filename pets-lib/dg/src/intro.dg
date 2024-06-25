@@ -22,23 +22,29 @@ NAME [MOM]
 
 DG_INTRO2_OVERHERE
 
-> DG_INTRO2_GREAT
-@ Intro #2 >> Great
-
-> DG_INTRO2_ALRIGHT
-@ Intro #2 >> Alright
-
 ---
-% Intro #2 >> Great
+% Intro #3
 NAME [MOM]
 
-DG_INTRO2_GREAT_MOM
+DG_INTRO3_WDYT
+
+> DG_INTRO3_GREAT
+@ Intro #3 >> Great
+
+> DG_INTRO3_ALRIGHT
+@ Intro #3 >> Alright
 
 ---
-% Intro #2 >> Alright
+% Intro #3 >> Great
 NAME [MOM]
 
-DG_INTRO2_ALRIGHT_MOM
+DG_INTRO3_GREAT_MOM
+
+---
+% Intro #3 >> Alright
+NAME [MOM]
+
+DG_INTRO3_ALRIGHT_MOM
 
 ---
 

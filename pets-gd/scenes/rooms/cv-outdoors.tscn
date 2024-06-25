@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7x12nyqelw1f"]
+[gd_scene load_steps=11 format=3 uid="uid://c7x12nyqelw1f"]
 
 [ext_resource type="PackedScene" uid="uid://pefjtfxt6buk" path="res://scenes/rooms/_Base.tscn" id="1_ls6vf"]
 [ext_resource type="PackedScene" uid="uid://dk214wpitbhju" path="res://scenes/walking_enemy.tscn" id="2_2qq46"]
+[ext_resource type="Script" path="res://scenes/rooms/room.gd" id="2_t8063"]
 [ext_resource type="PackedScene" uid="uid://xena0e3suwve" path="res://scenes/water_zone.tscn" id="3_bqhqn"]
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="4_vwc65"]
 [ext_resource type="PackedScene" uid="uid://dqu0s81c32bnq" path="res://scenes/builds/nature/bush_long.tscn" id="5_txn6p"]
@@ -11,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://dmark6m5rmra3" path="res://scenes/builds/houses/cv-house1.tscn" id="9_pvh7r"]
 
 [node name="Room" instance=ExtResource("1_ls6vf")]
+script = ExtResource("2_t8063")
+room_id = "CV_Outdoors"
 
 [node name="TileMap" parent="." index="0"]
 layer_0/tile_data = PackedInt32Array(786417, 458755, 1, 720881, 131075, 0, 786416, 65539, 2, 720880, 65539, 0, 786415, 65539, 2, 720879, 65539, 0, 786414, 65539, 2, 720878, 65539, 0, 786413, 65539, 2, 720877, 65539, 0, 786412, 65539, 2, 720876, 65539, 0, 786411, 65539, 2, 720875, 65539, 0, 786410, 65539, 2, 720874, 65539, 0, 786409, 65539, 2, 720873, 65539, 0, 1048561, 458755, 2, 983025, 196611, 1, 917489, 196611, 1, 851953, 196611, 1, 1114097, 131075, 2, 1114096, 65539, 2, 1048560, 65539, 0, 1114095, 65539, 2, 1048559, 65539, 0, 1114094, 65539, 2, 1048558, 65539, 0, 1114093, 65539, 2, 1048557, 65539, 0, 1114092, 65539, 2, 1048556, 65539, 0, 1114091, 65539, 2, 1048555, 65539, 0, 1114090, 65539, 2, 1048554, 65539, 0, 1114089, 65539, 2, 1048553, 65539, 0, 1114088, 3, 2, 1048552, 262147, 2, 983016, 196611, 1, 917480, 196611, 1, 851944, 196611, 1, 786408, 262147, 1, 720872, 3, 0)
