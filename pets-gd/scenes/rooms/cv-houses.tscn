@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://hflql51x7i61"]
+[gd_scene load_steps=5 format=3 uid="uid://hflql51x7i61"]
 
 [ext_resource type="PackedScene" uid="uid://pefjtfxt6buk" path="res://scenes/rooms/_Base.tscn" id="1_t4iqd"]
 [ext_resource type="Script" path="res://scenes/rooms/room.gd" id="2_dkgsg"]
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="2_flkym"]
+[ext_resource type="PackedScene" uid="uid://bcpw80pdxqulb" path="res://scenes/builds/furniture/bed.tscn" id="4_3efre"]
 
 [node name="Room" instance=ExtResource("1_t4iqd")]
 script = ExtResource("2_dkgsg")
@@ -35,3 +36,7 @@ scale = Vector2(0.5, 0.5)
 function_name = "debug_skill"
 position = Vector2(-128, -96)
 scale = Vector2(0.5, 0.5)
+
+[node name="EthanBed" parent="." index="5" instance=ExtResource("4_3efre")]
+unique_name_in_owner = true
+position = Vector2(664, 416)

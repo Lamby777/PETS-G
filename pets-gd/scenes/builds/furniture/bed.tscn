@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcpw80pdxqulb"]
+
+[ext_resource type="PackedScene" uid="uid://h1du5kblkv2o" path="res://scenes/builds/Base Build.tscn" id="1_67kvs"]
+[ext_resource type="Texture2D" uid="uid://vdgqcuyrho4h" path="res://assets/textures/builds/furniture/beds/bed_red.png" id="2_kmo56"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pc405"]
+size = Vector2(200, 64)
+
+[node name="Build" instance=ExtResource("1_67kvs")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -24)
+texture = ExtResource("2_kmo56")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_pc405")

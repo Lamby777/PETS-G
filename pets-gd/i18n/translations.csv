@@ -149,3 +149,6 @@ DG_INTRO4_BEDCOLOR_BLUE,"[color=#2500FF]X[/color]"
 DG_INTRO4_BEDCOLOR_PURPLE,"[color=#7F0087]X[/color]"
 DG_INTRO4_BEDCOLOR_PINK,"[color=#E889C4]X[/color]"
 ,
+DG_INTRO4_LOOKSBETTER,"Wow, it looks even better already!"
+DG_INTRO4_ILLBEDOWNSTAIRS,"Alright, I'll be downstairs if you need me."
+DG_INTRO4_BRINGFUZZY,"Go bring out Fuzzy from the car, okay?"
