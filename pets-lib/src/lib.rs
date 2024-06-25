@@ -44,7 +44,6 @@ mod prelude {
 
     pub use crate::battle::{Affinities, AffinityPower, BattleEngine};
     pub use crate::dialogue::{ix_map, DialogBox};
-    pub use crate::functions::{call_global, callv_global};
     pub use crate::world::{
         InteractionManager, InteractionZone, PlayerCB, World, WorldMenu,
     };

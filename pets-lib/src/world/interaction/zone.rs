@@ -18,10 +18,6 @@ pub struct InteractionZone {
     interaction_id: GString,
 
     #[export]
-    /// The function (from the global functions table) that gets called
-    function_name: GString,
-
-    #[export]
     /// The scene the beacon belongs to
     beacon_room_name: GString,
 
@@ -57,13 +53,11 @@ impl InteractionZone {
             return;
         }
 
-        let fn_id = self.function_name.to_string();
-        if !fn_id.is_empty() {
-            call_global(&fn_id).unwrap();
-
-            // Functions and beacons can coexist.
-            // Don't `return` here.
-        }
+        // TODO fire signal here --------------------------------------
+        // TODO fire signal here --------------------------------------
+        // TODO fire signal here --------------------------------------
+        // TODO fire signal here --------------------------------------
+        // TODO fire signal here --------------------------------------
 
         let target = &self.beacon_target;
         if !target.is_empty() {
