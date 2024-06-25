@@ -4,6 +4,7 @@ use crate::battle::skills::{
     AttackSkill, Element, ShieldSkill, SkillFamily as _,
 };
 use crate::prelude::*;
+use godot::engine::{StaticBody2D, Texture2D};
 use godot::prelude::*;
 
 fn end_interaction() {
@@ -47,10 +48,27 @@ const FUNCTIONS: LazyCell<FnTable> = LazyCell::new(|| {
         debug_battle,
         debug_item,
         debug_skill,
+        set_ethan_bed_color,
     });
 
     table
 });
+
+fn set_ethan_bed_color(args: GArgs) -> GReturn {
+    let color = args[0].to::<String>();
+    let texture = load::<Texture2D>(format!(
+        "res://assets/textures/builds/furniture/beds/bed_{color}.png"
+    ));
+
+    si().bind_mut().save.bed_color = color;
+
+    let mut bed =
+        World::room().get_node_as::<StaticBody2D>("%EthanBed/Sprite2D");
+
+    bed.callv("set_texture".into(), varray![texture]);
+
+    Ok(Variant::nil())
+}
 
 fn debug_skill(_args: GArgs) -> GReturn {
     end_interaction();

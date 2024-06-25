@@ -19,9 +19,12 @@ fn save_path(slot: u8) -> String {
 #[derive(Serialize, Deserialize)]
 pub struct SaveFile {
     pub chars: CharMap,
+
     pub inventory: Rc<RefCell<Vec<Item>>>,
     pub scrapbook: Scrapbook,
     pub quests: HashMap<String, QuestPhase>,
+
+    pub bed_color: String,
 }
 
 #[allow(unused)]
@@ -34,6 +37,7 @@ impl SaveFile {
             inventory: Rc::new(RefCell::new(vec![])),
             scrapbook: Scrapbook::empty(),
             quests: HashMap::new(),
+            bed_color: "red".to_string(),
         }
     }
 

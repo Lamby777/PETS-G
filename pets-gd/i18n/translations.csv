@@ -134,9 +134,18 @@ DG_RODRICK1_COMEBACK,Come back when you're smart.
 DG_INTRO1_COMEUNPACK,"Hey, [ETHAN], we're unpacking your stuff! Come help!"
 ,
 DG_INTRO2_OVERHERE,Over here! This is your new room!
-
+,
 DG_INTRO3_WDYT,What do you think?
 DG_INTRO3_GREAT,It's great!
 DG_INTRO3_ALRIGHT,It's alright...
 DG_INTRO3_GREAT_MOM,"Well, I'm glad you like it! I hope you'll be comfortable here."
 DG_INTRO3_ALRIGHT_MOM,"I know it's not much, but I hope you'll be comfortable here."
+DG_INTRO4_ITSYOURS,"Well, it's all yours. Do you have a specific blanket color in mind?"
+DG_INTRO4_BEDCOLOR_RED,"[color=#BD0000]X[/color]"
+DG_INTRO4_BEDCOLOR_ORANGE,"[color=#FF7200]X[/color]"
+DG_INTRO4_BEDCOLOR_YELLOW,"[color=#FFE300]X[/color]"
+DG_INTRO4_BEDCOLOR_GREEN,"[color=#00AE06]X[/color]"
+DG_INTRO4_BEDCOLOR_BLUE,"[color=#2500FF]X[/color]"
+DG_INTRO4_BEDCOLOR_PURPLE,"[color=#7F0087]X[/color]"
+DG_INTRO4_BEDCOLOR_PINK,"[color=#E889C4]X[/color]"
+,
