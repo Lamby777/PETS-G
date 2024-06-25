@@ -4,7 +4,7 @@ use crate::battle::skills::{
     AttackSkill, Element, ShieldSkill, SkillFamily as _,
 };
 use crate::prelude::*;
-use godot::engine::{StaticBody2D, Texture2D};
+use godot::engine::{Sprite2D, Texture2D};
 use godot::prelude::*;
 
 fn end_interaction() {
@@ -62,10 +62,11 @@ fn set_ethan_bed_color(args: GArgs) -> GReturn {
 
     si().bind_mut().save.bed_color = color;
 
-    let mut bed =
-        World::room().get_node_as::<StaticBody2D>("%EthanBed/Sprite2D");
-
+    let mut bed = World::room().get_node_as::<Sprite2D>("%EthanBed/Sprite2D");
     bed.callv("set_texture".into(), varray![texture]);
+
+    end_interaction();
+    start_ix("Intro #4 >> Bed Color Picked");
 
     Ok(Variant::nil())
 }
