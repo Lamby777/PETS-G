@@ -248,6 +248,10 @@ impl DialogBox {
                 let _ = callv_global(fn_id, args).unwrap();
                 drop(guard);
             }
+
+            GDScript(script) => {
+                eval(script).unwrap();
+            }
         }
     }
 
