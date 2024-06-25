@@ -1,5 +1,3 @@
-use std::cell::LazyCell;
-
 use crate::battle::skills::{
     AttackSkill, Element, ShieldSkill, SkillFamily as _,
 };
@@ -22,95 +20,90 @@ pub struct ScriptExecutor {
     base: Base<Node>,
 }
 
-fn set_ethan_bed_color(args: GArgs) -> GReturn {
-    let color = args[0].to::<String>();
-    let texture = load::<Texture2D>(format!(
-        "res://assets/textures/builds/furniture/beds/bed_{color}.png"
-    ));
+#[godot_api]
+impl ScriptExecutor {
+    #[func]
+    fn set_ethan_bed_color(color: String) {
+        let texture = load::<Texture2D>(format!(
+            "res://assets/textures/builds/furniture/beds/bed_{color}.png"
+        ));
 
-    si().bind_mut().save.bed_color = color;
+        si().bind_mut().save.bed_color = color;
 
-    let mut bed = World::room().get_node_as::<Sprite2D>("%EthanBed/Sprite2D");
-    bed.callv("set_texture".into(), varray![texture]);
+        let mut bed =
+            World::room().get_node_as::<Sprite2D>("%EthanBed/Sprite2D");
+        bed.callv("set_texture".into(), varray![texture]);
 
-    end_interaction();
-    start_ix("Intro #4 >> Bed Color Picked");
-
-    Ok(Variant::nil())
-}
-
-fn debug_skill(_args: GArgs) -> GReturn {
-    end_interaction();
-
-    let skill1 = AttackSkill {
-        tr_key: "SKILL_ATTACK_FIRE_DMG_NAME".to_owned(),
-        element: Element::Fire,
-        power: Some(1),
-        plural: true,
-        status_effect: None,
-    };
-
-    let aff = {
-        let mut map = HashMap::new();
-        map.insert(Element::Fire, AffinityPower::Weak);
-        map.insert(Element::Fuzz, AffinityPower::Strong);
-        map.insert(Element::Wind, AffinityPower::Nullify);
-        map.insert(Element::Spirit, AffinityPower::Heal);
-        map.insert(Element::Ice, AffinityPower::Reflect);
-        Affinities::new(map)
-    };
-
-    let skill2 = ShieldSkill {
-        affinity: aff,
-        hits: 1,
-        multiplier: 0.2,
-        reflect: false,
-        plural: false,
-    };
-
-    start_ix_replace("Debug Menu >> Skill", &[
-        ("{SKILL_NAME1}".to_owned(), skill1.name()),
-        ("{SKILL_DESC1}".to_owned(), skill1.description()),
-        ("{SKILL_NAME2}".to_owned(), skill2.name()),
-        ("{SKILL_DESC2}".to_owned(), skill2.description()),
-    ]);
-
-    Ok(Variant::nil())
-}
-
-fn debug_battle(_args: GArgs) -> GReturn {
-    end_interaction();
-
-    World::start_battle(&EnemyID::A_NONNY_MOUSE);
-    Ok(Variant::nil())
-}
-
-fn debug_item(args: GArgs) -> GReturn {
-    let item_id = args[0].to::<String>();
-
-    let quantity = args
-        .get(1)
-        .map(|v| v.try_to::<String>().ok())
-        .flatten()
-        .map(|v| v.parse().ok())
-        .flatten()
-        .unwrap_or(1);
-
-    // why tf do i have to do this?
-    let item = ITEM_REGISTRY
-        .get()
-        .unwrap()
-        .iter()
-        .find(|i| i.id == item_id);
-
-    let item = ribbons::unwrap_fmt!(item, "no item with id {}", item_id);
-
-    for _ in 0..quantity {
-        give_item(item.clone());
+        end_interaction();
+        start_ix("Intro #4 >> Bed Color Picked");
     }
 
-    end_interaction();
-    start_ix("Debug Menu >> After Item");
+    #[func]
+    fn debug_skill() {
+        end_interaction();
 
-    Ok(Variant::nil())
+        let skill1 = AttackSkill {
+            tr_key: "SKILL_ATTACK_FIRE_DMG_NAME".to_owned(),
+            element: Element::Fire,
+            power: Some(1),
+            plural: true,
+            status_effect: None,
+        };
+
+        let aff = {
+            let mut map = HashMap::new();
+            map.insert(Element::Fire, AffinityPower::Weak);
+            map.insert(Element::Fuzz, AffinityPower::Strong);
+            map.insert(Element::Wind, AffinityPower::Nullify);
+            map.insert(Element::Spirit, AffinityPower::Heal);
+            map.insert(Element::Ice, AffinityPower::Reflect);
+            Affinities::new(map)
+        };
+
+        let skill2 = ShieldSkill {
+            affinity: aff,
+            hits: 1,
+            multiplier: 0.2,
+            reflect: false,
+            plural: false,
+        };
+
+        start_ix_replace("Debug Menu >> Skill", &[
+            ("{SKILL_NAME1}".to_owned(), skill1.name()),
+            ("{SKILL_DESC1}".to_owned(), skill1.description()),
+            ("{SKILL_NAME2}".to_owned(), skill2.name()),
+            ("{SKILL_DESC2}".to_owned(), skill2.description()),
+        ]);
+    }
+
+    #[func]
+    fn debug_battle() {
+        end_interaction();
+
+        World::start_battle(&EnemyID::A_NONNY_MOUSE);
+    }
+
+    #[func]
+    fn debug_item(item_id: String, quantity: String) {
+        let quantity = quantity.parse().ok().unwrap_or_else(|| {
+            godot_warn!("quantity not provided, defaulting to 1");
+            1
+        });
+
+        // why tf do i have to do this?
+        let item = ITEM_REGISTRY
+            .get()
+            .unwrap()
+            .iter()
+            .find(|i| i.id == item_id);
+
+        let item = ribbons::unwrap_fmt!(item, "no item with id {}", item_id);
+
+        for _ in 0..quantity {
+            give_item(item.clone());
+        }
+
+        end_interaction();
+        start_ix("Debug Menu >> After Item");
+    }
 }

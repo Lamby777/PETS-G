@@ -7,13 +7,12 @@ use godot::engine::tween::TransitionType;
 
 const WAVE_BBCODE: &str = "[wave amp=100 freq=-6]";
 
+#[allow(unused)]
 pub mod type_aliases {
     use godot::prelude::*;
-    use std::collections::HashMap;
 
     pub type IntegralStat = i16;
     pub type FloatStat = f32;
-    pub type FnTable = HashMap<String, Callable>;
     pub type GArgs<'a, 'b> = &'a [&'b Variant];
     pub type GReturn = Result<Variant, ()>;
 }
