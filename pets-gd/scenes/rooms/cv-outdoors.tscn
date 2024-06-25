@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7x12nyqelw1f"]
+[gd_scene load_steps=13 format=3 uid="uid://c7x12nyqelw1f"]
 
 [ext_resource type="PackedScene" uid="uid://pefjtfxt6buk" path="res://scenes/rooms/_Base.tscn" id="1_ls6vf"]
 [ext_resource type="PackedScene" uid="uid://dk214wpitbhju" path="res://scenes/walking_enemy.tscn" id="2_2qq46"]
@@ -11,6 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://bgycy4h18leus" path="res://scenes/builds/nature/tree_con1.tscn" id="8_obhwm"]
 [ext_resource type="PackedScene" uid="uid://dmark6m5rmra3" path="res://scenes/builds/houses/cv-house1.tscn" id="9_pvh7r"]
 [ext_resource type="PackedScene" uid="uid://desphmjvj0i4t" path="res://scenes/builds/furniture/crates/crate_wood_trio.tscn" id="11_8dx4e"]
+
+[sub_resource type="GDScript" id="GDScript_p08up"]
+script/source = "extends InteractionZone
+
+func _on_interacted():
+    ScriptExecutor.debug_skill()
+"
 
 [node name="Room" instance=ExtResource("1_ls6vf")]
 script = ExtResource("2_t8063")
@@ -192,3 +199,11 @@ position = Vector2(520, -888)
 
 [node name="WoodenCrateTrio" parent="." index="10" instance=ExtResource("11_8dx4e")]
 position = Vector2(64, -544)
+
+[node name="DebugSkill" parent="WoodenCrateTrio" index="2" instance=ExtResource("4_vwc65")]
+prompt_translation_key = "DEBUG"
+position = Vector2(0, 32)
+scale = Vector2(1.02, 0.5)
+script = SubResource("GDScript_p08up")
+
+[connection signal="interacted" from="WoodenCrateTrio/DebugSkill" to="WoodenCrateTrio/DebugSkill" method="_on_interacted"]

@@ -8,6 +8,7 @@ IZ_INTERACT_TALK,Talk
 IZ_INTERACT_OPEN,Open
 IZ_INTERACT_READ,Read
 IZ_INTERACT_TAKE,Take
+IZ_INTERACT_DEBUG,Debug
 ,
 ITEM_NAME_trusty_rusty_pistol,Trusty Rusty Pistol
 ITEM_DESC_trusty_rusty_pistol,Pretty unsafe! Deals poor damage.
