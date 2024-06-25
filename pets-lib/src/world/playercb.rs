@@ -40,7 +40,7 @@ pub struct PlayerCB {
 #[godot_api]
 impl PlayerCB {
     #[signal]
-    fn teleported(&self);
+    fn teleported(&self, target: Gd<Node2D>);
 
     #[func]
     pub fn singleton() -> Gd<Self> {

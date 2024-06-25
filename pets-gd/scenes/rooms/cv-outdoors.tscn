@@ -28,14 +28,15 @@ position = Vector2(1120, 336)
 position = Vector2(416, 1056)
 scale = Vector2(3, -2)
 
-[node name="HouseEntrance" parent="." index="3" instance=ExtResource("4_vwc65")]
+[node name="EthanHouseEntrance" parent="." index="3" instance=ExtResource("4_vwc65")]
 beacon_room_name = "cv-houses"
-beacon_target = "Entrance"
+beacon_target = "EthanHouseExit"
 prompt_translation_key = "ENTER"
 position = Vector2(368, -280)
 scale = Vector2(0.5, 0.5)
 
 [node name="TeleporterDemo" type="Node2D" parent="." index="4"]
+y_sort_enabled = true
 position = Vector2(-1216, 864)
 
 [node name="TPRightIn" parent="TeleporterDemo" index="0" instance=ExtResource("4_vwc65")]

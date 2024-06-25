@@ -10,9 +10,10 @@ height = 176.0
 [node name="BushLong" instance=ExtResource("1_0dd1m")]
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(0, -32)
+position = Vector2(0, -8)
 texture = ExtResource("2_hv6fc")
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 16)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_v4g8c")
