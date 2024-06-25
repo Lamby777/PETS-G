@@ -11,7 +11,7 @@ NAME Agent Cascade
 What's up? Hard at work debugging?
 
 > Battle
-$ debug_battle
+$ debug_battle()
 
 > Item
 @ Debug Menu >> Item
@@ -28,7 +28,7 @@ NAME Agent Cascade
 Alright then. How about these?
 
 > Skill Desc
-$ debug_skill
+$ debug_skill()
 
 > Pauses
 @ Debug Menu >> Pauses
@@ -42,10 +42,10 @@ NAME Agent Cascade
 What do you need?
 
 > Rusty
-$ debug_item trusty_rusty_pistol
+$ debug_item("trusty_rusty_pistol")
 
 > 5 Rusties
-$ debug_item trusty_rusty_pistol 5
+$ debug_item("trusty_rusty_pistol", 5)
 
 ---
 % Debug Menu >> After Item
