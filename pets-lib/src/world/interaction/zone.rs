@@ -137,6 +137,8 @@ impl InteractionZone {
             let switching_rooms = scene_id.is_some();
             pcb().bind_mut().teleport(target_pos, None, switching_rooms);
 
+            let target_node_id = target_node.instance_id();
+
             set_timeout(TP_BEACON_BLACK_HOLD, move || {
                 // when it's time to fade the black away, do it.
                 let black = Gd::<ColorRect>::from_instance_id(black_id);
@@ -146,8 +148,13 @@ impl InteractionZone {
                     // finally, reset the debounce when the black is gone
                     pcb().bind_mut().tpbeacon_debounce = false;
 
+                    let target_node =
+                        Gd::<Node2D>::from_instance_id(target_node_id);
+
                     // fire the signal that the teleport is over
-                    pcb().emit_signal("teleported".into(), &[]);
+                    pcb().emit_signal("teleported".into(), &[
+                        target_node.to_variant()
+                    ]);
                 });
             });
         });
