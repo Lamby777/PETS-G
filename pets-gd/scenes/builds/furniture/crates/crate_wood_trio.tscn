@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://desphmjvj0i4t"]
+
+[ext_resource type="PackedScene" uid="uid://h1du5kblkv2o" path="res://scenes/builds/Base Build.tscn" id="1_fej5d"]
+[ext_resource type="Texture2D" uid="uid://ctqhfe5yw2lvr" path="res://assets/textures/builds/furniture/box_wood_trio.png" id="2_gb2w5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjyk5"]
+size = Vector2(144, 32)
+
+[node name="WoodenCrateTrio" instance=ExtResource("1_fej5d")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -24)
+texture = ExtResource("2_gb2w5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_kjyk5")
