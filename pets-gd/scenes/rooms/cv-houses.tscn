@@ -14,7 +14,7 @@ layer_3/tile_data = PackedInt32Array(131076, 65537, 1, 65540, 65537, 1, 4, 65537
 
 [node name="EthanHouseExit" parent="." index="1" instance=ExtResource("2_flkym")]
 beacon_room_name = "cv-outdoors"
-beacon_target = "HouseEntrance"
+beacon_target = "EthanHouseEntrance"
 prompt_translation_key = "EXIT"
 position = Vector2(-416, 32)
 scale = Vector2(0.5, 0.5)
