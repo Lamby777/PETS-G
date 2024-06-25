@@ -15,7 +15,7 @@ pub use node_stuff::*;
 
 use crate::prelude::*;
 
-use godot::engine::{Engine, SceneTreeTimer};
+use godot::engine::{Engine, Expression, SceneTreeTimer};
 use godot::prelude::*;
 
 // this is a macro so we can easily expand it and delete the definition
@@ -30,6 +30,17 @@ macro_rules! normalized {
             Vector2::normalized($vector)
         }
     }};
+}
+
+/// Evaluate a GDScript string.
+/// They are all evaluated from the context of the PlayerCB.
+pub fn eval(script: &str) -> GReturn {
+    let mut expr = Expression::new_gd();
+    expr.parse(script.into());
+
+    let res = expr.execute_ex().base_instance(pcb().upcast()).done();
+
+    Ok(res)
 }
 
 pub fn replace_str_all(text: &str, replaces: &[(String, String)]) -> String {
