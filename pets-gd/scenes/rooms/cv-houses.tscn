@@ -28,18 +28,24 @@ prompt_translation_key = "ENTER"
 position = Vector2(416, 32)
 scale = Vector2(0.5, 0.5)
 
-[node name="EthanBedroomExit" parent="." index="3" instance=ExtResource("2_flkym")]
+[node name="EthanBedroomEntrance2" parent="." index="3" instance=ExtResource("2_flkym")]
+interaction_id = "Check Crates"
+prompt_translation_key = "CHECK"
+position = Vector2(-104, -56)
+scale = Vector2(1.26, 0.5)
+
+[node name="EthanBedroomExit" parent="." index="4" instance=ExtResource("2_flkym")]
 beacon_target = "EthanBedroomEntrance"
 prompt_translation_key = "EXIT"
 position = Vector2(416, 392)
 scale = Vector2(0.5, 0.5)
 
-[node name="EthanBed" parent="." index="4" instance=ExtResource("4_3efre")]
+[node name="EthanBed" parent="." index="5" instance=ExtResource("4_3efre")]
 unique_name_in_owner = true
 position = Vector2(664, 416)
 
-[node name="WoodenCrate" parent="." index="5" instance=ExtResource("5_dgprv")]
+[node name="WoodenCrate" parent="." index="6" instance=ExtResource("5_dgprv")]
 position = Vector2(-176, -88)
 
-[node name="WoodenCrateTrio" parent="." index="6" instance=ExtResource("6_4wjmx")]
+[node name="WoodenCrateTrio" parent="." index="7" instance=ExtResource("6_4wjmx")]
 position = Vector2(-56, -88)

@@ -3,6 +3,7 @@
 Import rodrick.dg
 Import intro.dg
 Import debug-menu.dg
+Import check.dg
 
 ###
 ---
