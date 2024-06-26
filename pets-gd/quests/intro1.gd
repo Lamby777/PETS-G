@@ -1,14 +1,11 @@
 extends Quest
 
-@onready var dbox = DialogBox.singleton()
-@onready var pcb = PlayerCB.singleton()
-
 func room_id():
     return $"../../YSort/Room".room_id
 
 func _ready():
-    dbox.start_ix("Intro #1")
-    pcb.teleported.connect(on_teleported)
+    dbox().start_ix("Intro #1")
+    pcb().teleported.connect(on_teleported)
 
 func on_teleported(target):
     # It needs to know which room you're teleporting inside, because
@@ -21,13 +18,13 @@ func on_teleported(target):
 func on_house_tp(target):
     if phase == 0:
         self.phase = 1
-        dbox.start_ix("Intro #2")
+        dbox().start_ix("Intro #2")
 
     if target.name == "EthanBedroomExit" and phase == 1:
         self.phase = 2
-        dbox.start_ix("Intro #3")
+        dbox().start_ix("Intro #3")
 
 func on_outdoors_tp(target):
     if target.name == "EthanHouseEntrance" and phase == 2:
         self.phase = 3
-        dbox.start_ix("Intro #5")
+        dbox().start_ix("Intro #5")

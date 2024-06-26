@@ -26,6 +26,19 @@ pub struct ScriptExecutor {
 
 #[godot_api]
 impl ScriptExecutor {
+    // Convenience stuff to prevent long lines in embedded dialogue scripts
+    #[func]
+    fn dbox(&self) -> Gd<DialogBox> {
+        DialogBox::singleton()
+    }
+
+    #[func]
+    fn pcb(&self) -> Gd<PlayerCB> {
+        pcb()
+    }
+
+    // -----------------------------------------------------------------
+
     #[func]
     fn set_ethan_bed_color(color: String) {
         let texture = load::<Texture2D>(format!(
