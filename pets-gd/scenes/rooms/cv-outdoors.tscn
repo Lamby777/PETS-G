@@ -195,25 +195,31 @@ position = Vector2(-464, 104)
 [node name="TreeDec1_3" parent="TreeBarrier" index="3" instance=ExtResource("7_b7alc")]
 position = Vector2(-352, 104)
 
-[node name="EthanHouse" parent="." index="9" instance=ExtResource("9_pvh7r")]
+[node name="EthanHouse" type="Node2D" parent="." index="9"]
+y_sort_enabled = true
+
+[node name="TreeCon1_0" parent="EthanHouse" index="0" instance=ExtResource("8_obhwm")]
+position = Vector2(-32, -808)
+
+[node name="House" parent="EthanHouse" index="1" instance=ExtResource("9_pvh7r")]
 position = Vector2(520, -888)
 
-[node name="WoodenCrateTrio" parent="." index="10" instance=ExtResource("11_8dx4e")]
+[node name="WoodenCrateTrio" parent="EthanHouse" index="2" instance=ExtResource("11_8dx4e")]
 position = Vector2(64, -544)
 
-[node name="DebugSkill" parent="WoodenCrateTrio" index="2" instance=ExtResource("4_vwc65")]
+[node name="DebugSkill" parent="EthanHouse/WoodenCrateTrio" index="2" instance=ExtResource("4_vwc65")]
 prompt_translation_key = "DEBUG"
 position = Vector2(0, 32)
 scale = Vector2(1.02, 0.5)
 script = SubResource("GDScript_p08up")
 
-[node name="TrashCan" parent="." index="11" instance=ExtResource("12_skh3g")]
+[node name="TrashCan" parent="EthanHouse" index="3" instance=ExtResource("12_skh3g")]
 position = Vector2(632, -744)
 
-[node name="InteractionZone" parent="TrashCan" index="2" instance=ExtResource("4_vwc65")]
+[node name="InteractionZone" parent="EthanHouse/TrashCan" index="2" instance=ExtResource("4_vwc65")]
 interaction_id = "Check Trash"
 prompt_translation_key = "CHECK"
 position = Vector2(0, 8)
 scale = Vector2(1.02, 0.5)
 
-[connection signal="interacted" from="WoodenCrateTrio/DebugSkill" to="WoodenCrateTrio/DebugSkill" method="_on_interacted"]
+[connection signal="interacted" from="EthanHouse/WoodenCrateTrio/DebugSkill" to="EthanHouse/WoodenCrateTrio/DebugSkill" method="_on_interacted"]
