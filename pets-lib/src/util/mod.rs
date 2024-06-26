@@ -16,7 +16,7 @@ pub use node_stuff::*;
 use crate::functions::ScriptExecutor;
 use crate::prelude::*;
 
-use godot::engine::{Engine, Expression, SceneTreeTimer};
+use godot::engine::{Engine, GDScript, SceneTreeTimer};
 use godot::prelude::*;
 
 // this is a macro so we can easily expand it and delete the definition
@@ -35,22 +35,26 @@ macro_rules! normalized {
 
 /// Evaluate a GDScript string.
 /// They are all evaluated from the context of the PlayerCB.
-pub fn eval(script: &str) -> GReturn {
-    println!("Evaluating script: ---\n{}\n---\n", &script);
+///
+/// - [what the fuck](https://github.com/godotengine/godot/issues/8003)
+pub fn eval(source: &str) -> GReturn {
+    println!("Evaluating script: ---\n{}\n---\n", &source);
+    let mut script = GDScript::new_gd();
 
-    let mut expr = Expression::new_gd();
-    expr.parse(script.into());
+    let mut script_content = "extends ScriptExecutor\nfunc _eval():".to_owned();
+    for line in source.split("\n") {
+        script_content += &format!("\n\t{}", line);
+    }
+    script_content += "\n\tqueue_free()";
 
-    // nice try, buddy. i'm NOT calling it that.
-    let executor = ScriptExecutor::singleton();
+    script.set_source_code(script_content.into());
+    script.reload();
 
-    // let res = expr.execute_ex().base_instance(executor.upcast()).done();
-    let res = expr.call("execute".into(), &[
-        varray![].to_variant(),
-        executor.to_variant(),
-    ]);
+    let mut executor = ScriptExecutor::new_alloc();
+    executor.set_script(script.to_variant());
+    executor.call("_eval".into(), &[]);
 
-    Ok(res)
+    Ok(Variant::nil())
 }
 
 pub fn replace_str_all(text: &str, replaces: &[(String, String)]) -> String {

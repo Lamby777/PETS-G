@@ -15,7 +15,6 @@
 #![feature(generic_arg_infer)]
 #![feature(int_roundings)]
 
-use functions::ScriptExecutor;
 use godot::prelude::*;
 
 use prelude::*;
@@ -84,7 +83,6 @@ unsafe impl ExtensionLibrary for PetsLib {
         libdx::foreach_static!(
             [
                 StatsInterface,
-                ScriptExecutor,
             ] => GodotAutoload, register
         );
     }
@@ -97,7 +95,6 @@ unsafe impl ExtensionLibrary for PetsLib {
         libdx::foreach_static!(
             [
                 StatsInterface,
-                ScriptExecutor,
             ] => GodotAutoload, unregister
         );
     }

@@ -20,6 +20,7 @@ NAME _
 Test
 
 $$$
+print("2")
 pcb().move_to_relative(0.0, -200.0)
 print("3")
 await pcb().motion_done
