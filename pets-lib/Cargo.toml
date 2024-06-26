@@ -25,5 +25,5 @@ strum = { version = "0.26.1", features = ["derive"] }
 typetag = "0.2.15"
 
 [build-dependencies]
-dialogical = "0.13.0"
+dialogical = "0.13.1"
 
