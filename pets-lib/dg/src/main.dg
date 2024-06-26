@@ -1,7 +1,7 @@
 ###
 
 Import rodrick.dg
-Import intro.dg
+Import intro1.dg
 Import debug-menu.dg
 Import check.dg
 

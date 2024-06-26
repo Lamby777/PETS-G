@@ -15,15 +15,29 @@ const PLACEHOLDERS: &[(&'static str, fn() -> String)] = &[
     ("[ETHAN]", || "Ethan".to_string()),
     ("[MOM]", || {
         match party_leader() {
-            PChar::ETHAN => tr("DG_SPK_MOM"),
-            _ => "Paula".into(),
+            PChar::ETHAN => "DG_SPK_MOM",
+            _ => "DG_SPK_PAULA",
         }
         .to_string()
     }),
     ("[DAD]", || {
         match party_leader() {
-            PChar::ETHAN => tr("DG_SPK_DAD"),
-            _ => "CLAY".into(),
+            PChar::ETHAN => "DG_SPK_DAD",
+            _ => "DG_SPK_CLAY",
+        }
+        .to_string()
+    }),
+    ("[MR_TULIVAE]", || {
+        match party_leader() {
+            PChar::SIVA => "DG_SPK_DAD",
+            _ => "DG_SPK_MR_TULIVAE",
+        }
+        .to_string()
+    }),
+    ("[MRS_TULIVAE]", || {
+        match party_leader() {
+            PChar::SIVA => "DG_SPK_MOM",
+            _ => "DG_SPK_MRS_TULIVAE",
         }
         .to_string()
     }),
