@@ -36,6 +36,8 @@ macro_rules! normalized {
 /// Evaluate a GDScript string.
 /// They are all evaluated from the context of the PlayerCB.
 pub fn eval(script: &str) -> GReturn {
+    println!("Evaluating script: ---\n{}\n---\n", &script);
+
     let mut expr = Expression::new_gd();
     expr.parse(script.into());
 

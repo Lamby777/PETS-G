@@ -58,15 +58,17 @@ impl PlayerCB {
     }
 
     #[signal]
-    fn cutscene_motion_done(&self);
+    fn motion_done(&self);
 
     #[func]
-    pub fn cutscene_move_to_absolute(&mut self, target: Vector2) {
-        self.cutscene_motion = Some(target);
+    pub fn move_to_absolute(&mut self, x: real, y: real) {
+        let end = Vector2::new(x, y);
+        self.cutscene_motion = Some(end);
     }
 
     #[func]
-    pub fn cutscene_move_to_relative(&mut self, end: Vector2) {
+    pub fn move_to_relative(&mut self, x: real, y: real) {
+        let end = Vector2::new(x, y);
         let start = self.base().get_global_position();
         let total = start + end;
         self.cutscene_motion = Some(total);
@@ -276,8 +278,7 @@ impl ICharacterBody2D for PlayerCB {
 
             if (target - own_pos).length() < CUTSCENE_MOTION_CLOSE_ENOUGH {
                 self.cutscene_motion = None;
-                self.base_mut()
-                    .emit_signal("cutscene_motion_done".into(), &[]);
+                self.base_mut().emit_signal("motion_done".into(), &[]);
                 self.base_mut().set_global_position(target);
             }
 
