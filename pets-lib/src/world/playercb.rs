@@ -11,11 +11,6 @@ use super::inv_node::InventoryNode;
 use super::pchar_node::PCharNode;
 use super::BATTLE_PARTY_SIZE;
 
-enum CutsceneMotion {
-    Relative { start: Vector2, end: Vector2 },
-    Absolute(Vector2),
-}
-
 /// This scene contains the "player" aka the invisible
 /// entity that is moved around with WASD. It also contains
 /// party members as scenes, and this script does stuff like
@@ -40,7 +35,7 @@ pub struct PlayerCB {
 
     /// if the player is currently being controlled by a script,
     /// this is the location the player is being moved to
-    pub cutscene_motion: Option<CutsceneMotion>,
+    pub cutscene_motion: Option<Vector2>,
 
     #[init(default = 1.0)]
     pub water_speed_mod: real,
@@ -61,13 +56,14 @@ impl PlayerCB {
 
     #[func]
     pub fn cutscene_move_to_absolute(&mut self, target: Vector2) {
-        self.cutscene_motion = Some(CutsceneMotion::Absolute(target));
+        self.cutscene_motion = Some(target);
     }
 
     #[func]
     pub fn cutscene_move_to_relative(&mut self, end: Vector2) {
         let start = self.base().get_global_position();
-        self.cutscene_motion = Some(CutsceneMotion::Relative { start, end });
+        let total = start + end;
+        self.cutscene_motion = Some(total);
     }
 
     pub fn party_pchars(&self) -> Vec<PChar> {
