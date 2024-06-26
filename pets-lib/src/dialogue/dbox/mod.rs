@@ -177,15 +177,15 @@ impl DialogBox {
 
         use Speaker::*;
 
-        tr(match &self.speaker.temporary {
+        match &self.speaker.temporary {
             Named(v) => {
                 let name = replace_str_all(v, &self.replaces);
-                placeholders::process_placeholders(&name).into()
+                tr(placeholders::process_placeholders(&name))
             }
 
-            Narrator => "DG_SPK_NARRATOR".to_owned(),
-            Unknown => "DG_SPK_UNKNOWN".to_owned(),
-        })
+            Narrator => "".into(),
+            Unknown => tr("DG_SPK_UNKNOWN"),
+        }
     }
 
     fn translated_message(&self) -> GString {

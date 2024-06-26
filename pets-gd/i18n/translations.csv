@@ -121,7 +121,6 @@ SKILL_SHIELD_HITS_MANY,It could easily stand quite a few hits.
 SKILL_SHIELD_HITS_WHILE,It'd take enemies a while to break through this one.
 SKILL_SHIELD_COMBINE_PARTS,{part1} {hits_str}
 ,
-DG_SPK_NARRATOR,""
 DG_SPK_UNKNOWN,???
 DG_SPK_RODRICK,"Rodrick Sign Co."
 DG_SPK_MOM,Mom
