@@ -11,6 +11,11 @@ use super::inv_node::InventoryNode;
 use super::pchar_node::PCharNode;
 use super::BATTLE_PARTY_SIZE;
 
+enum CutsceneMotion {
+    Relative { start: Vector2, end: Vector2 },
+    Absolute(Vector2),
+}
+
 /// This scene contains the "player" aka the invisible
 /// entity that is moved around with WASD. It also contains
 /// party members as scenes, and this script does stuff like
@@ -33,6 +38,10 @@ pub struct PlayerCB {
     pub tpbeacon_debounce: bool,
     pub in_water: bool,
 
+    /// if the player is currently being controlled by a script,
+    /// this is the location the player is being moved to
+    pub cutscene_motion: Option<CutsceneMotion>,
+
     #[init(default = 1.0)]
     pub water_speed_mod: real,
 }
@@ -45,6 +54,20 @@ impl PlayerCB {
     #[func]
     pub fn singleton() -> Gd<Self> {
         World::singleton().get_node_as("%PlayerCB")
+    }
+
+    #[signal]
+    fn cutscene_motion_done(&self);
+
+    #[func]
+    pub fn cutscene_move_to_absolute(&mut self, target: Vector2) {
+        self.cutscene_motion = Some(CutsceneMotion::Absolute(target));
+    }
+
+    #[func]
+    pub fn cutscene_move_to_relative(&mut self, end: Vector2) {
+        let start = self.base().get_global_position();
+        self.cutscene_motion = Some(CutsceneMotion::Relative { start, end });
     }
 
     pub fn party_pchars(&self) -> Vec<PChar> {
@@ -126,15 +149,12 @@ impl PlayerCB {
     /// Do all the movement calculations that need to run every tick.
     ///
     /// Returns whether the player is moving or not.
-    fn calc_movements(&mut self, delta: f64) -> bool {
-        let input = Input::singleton();
-        let input_vector = normalized!(input.get_vector(
-            "left".into(),
-            "right".into(),
-            "up".into(),
-            "down".into(),
-        ));
-        let sprinting = input.is_action_pressed("sprint".into());
+    fn calc_movements(
+        &mut self,
+        input_vector: Vector2,
+        sprinting: bool,
+        delta: f64,
+    ) -> bool {
         let moving = input_vector != Vector2::ZERO;
 
         let target_pos = if moving {
@@ -219,7 +239,16 @@ impl ICharacterBody2D for PlayerCB {
         let mut moving = false;
 
         if self.can_move() {
-            moving = self.calc_movements(delta);
+            let input = Input::singleton();
+            let input_vector = normalized!(input.get_vector(
+                "left".into(),
+                "right".into(),
+                "up".into(),
+                "down".into(),
+            ));
+            let sprinting = input.is_action_pressed("sprint".into());
+
+            moving = self.calc_movements(input_vector, sprinting, delta);
         }
 
         self.move_chars(moving);
