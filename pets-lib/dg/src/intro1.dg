@@ -10,8 +10,25 @@ VOX Default
 Link NAME [DAD]
 VOX Default
 
+Link NAME _
+VOX Default
+
 ###
 ---
+NAME _
+
+Test
+
+$$$
+pcb().move_to_relative(0.0, -200.0)
+print("3")
+await pcb().motion_done
+print("4")
+start_ix("Intro #1 >> Walked")
+print("5")
+$$$
+---
+% Intro #1 >> Walked
 NAME [MOM]
 
 DG_INTRO1_COMEUNPACK
@@ -95,7 +112,15 @@ NAME [DAD]
 
 DG_INTRO5_OVERHERE
 
+$$$
+pcb().move_to_relative(-200.0, 0.0)
+await pcb().motion_done
+start_ix("Intro #5 >> Walked")
+$$$
+
 ---
+% Intro #5 >> Walked
+NAME [DAD]
 
 DG_INTRO5_MR_T
 
