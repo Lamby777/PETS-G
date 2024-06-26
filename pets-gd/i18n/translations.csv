@@ -1,6 +1,7 @@
 key,en_US
 ,
 IZ_INTERACT_INTERACT,Interact
+IZ_INTERACT_CHECK,Check
 IZ_INTERACT_PRESS,Press
 IZ_INTERACT_ENTER,Enter
 IZ_INTERACT_EXIT,Exit
@@ -120,9 +121,11 @@ SKILL_SHIELD_HITS_MANY,It could easily stand quite a few hits.
 SKILL_SHIELD_HITS_WHILE,It'd take enemies a while to break through this one.
 SKILL_SHIELD_COMBINE_PARTS,{part1} {hits_str}
 ,
-DG_SPK_NARRATOR,
+DG_SPK_NARRATOR,""
 DG_SPK_UNKNOWN,???
 DG_SPK_RODRICK,"Rodrick Sign Co."
+DG_SPK_MOM,Mom
+DG_SPK_DAD,Dad
 ,
 DG_RODRICK1_SOYOURE,"So... you're reading a sign, eh? Well..."
 DG_RODRICK1_AREYOUSMART,Are you smart?
@@ -153,3 +156,6 @@ DG_INTRO4_BEDCOLOR_PINK,"[color=#E889C4]X[/color]"
 DG_INTRO4_LOOKSBETTER,"Wow, it looks even better already!"
 DG_INTRO4_ILLBEDOWNSTAIRS,"Alright, I'll be downstairs if you need me."
 DG_INTRO4_BRINGFUZZY,"Go bring out Fuzzy from the car, okay?"
+,
+DG_CHECK_CRATE,"It's just a crate. Doesn't look like anything good is inside."
+DG_CHECK_CRATES,"It's just a bunch of crates. Doesn't look like they have anything useful."
