@@ -42,7 +42,7 @@ NAME Agent Cascade
 What do you need?
 
 > Rusty
-$ debug_item("trusty_rusty_pistol")
+$ debug_item("trusty_rusty_pistol", 1)
 
 > 5 Rusties
 $ debug_item("trusty_rusty_pistol", 5)

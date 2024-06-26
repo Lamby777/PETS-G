@@ -10,4 +10,16 @@ NAME _
 DG_CHECK_CRATES
 
 ---
+% Check Crate
+NAME _
+
+DG_CHECK_CRATE
+
+---
+% Check Trash
+NAME _
+
+DG_CHECK_TRASH
+
+---
 

@@ -88,12 +88,7 @@ impl ScriptExecutor {
     }
 
     #[func]
-    fn debug_item(item_id: String, quantity: String) {
-        let quantity = quantity.parse().ok().unwrap_or_else(|| {
-            godot_warn!("quantity not provided, defaulting to 1");
-            1
-        });
-
+    fn debug_item(item_id: String, quantity: u32) {
         // why tf do i have to do this?
         let item = ITEM_REGISTRY
             .get()

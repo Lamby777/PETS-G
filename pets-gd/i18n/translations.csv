@@ -156,3 +156,4 @@ DG_INTRO5_HE_SEEMS_NICE,He seems pretty nice. Maybe you should go say hi later.
 ,
 DG_CHECK_CRATE,"It's just a crate. Doesn't look like anything good is inside."
 DG_CHECK_CRATES,"It's just a bunch of crates. Doesn't look like they have anything useful."
+DG_CHECK_TRASH,"Nothing useful there. Are you that desperate?"
