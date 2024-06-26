@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://f6tdcsdb0s1e"]
+
+[ext_resource type="PackedScene" uid="uid://h1du5kblkv2o" path="res://scenes/builds/Base Build.tscn" id="1_dsohi"]
+[ext_resource type="Texture2D" uid="uid://cecjjicps1ugm" path="res://assets/textures/builds/residential/trash_can.png" id="2_ri6d2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f4yxf"]
+radius = 24.0
+height = 64.0
+
+[node name="TrashCan" instance=ExtResource("1_dsohi")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(32, -24)
+texture = ExtResource("2_ri6d2")
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 8)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_f4yxf")

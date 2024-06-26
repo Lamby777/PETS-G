@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c7x12nyqelw1f"]
+[gd_scene load_steps=14 format=3 uid="uid://c7x12nyqelw1f"]
 
 [ext_resource type="PackedScene" uid="uid://pefjtfxt6buk" path="res://scenes/rooms/_Base.tscn" id="1_ls6vf"]
 [ext_resource type="PackedScene" uid="uid://dk214wpitbhju" path="res://scenes/walking_enemy.tscn" id="2_2qq46"]
@@ -6,11 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://xena0e3suwve" path="res://scenes/water_zone.tscn" id="3_bqhqn"]
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="4_vwc65"]
 [ext_resource type="PackedScene" uid="uid://dqu0s81c32bnq" path="res://scenes/builds/nature/bush_long.tscn" id="5_txn6p"]
-[ext_resource type="PackedScene" uid="uid://bsaithlic8uhk" path="res://scenes/builds/rodrick_sign.tscn" id="6_eminc"]
+[ext_resource type="PackedScene" uid="uid://bsaithlic8uhk" path="res://scenes/builds/residential/rodrick_sign.tscn" id="6_eminc"]
 [ext_resource type="PackedScene" uid="uid://cid68y5fqwsy8" path="res://scenes/builds/nature/tree_dec1.tscn" id="7_b7alc"]
 [ext_resource type="PackedScene" uid="uid://bgycy4h18leus" path="res://scenes/builds/nature/tree_con1.tscn" id="8_obhwm"]
 [ext_resource type="PackedScene" uid="uid://dmark6m5rmra3" path="res://scenes/builds/houses/cv-house1.tscn" id="9_pvh7r"]
 [ext_resource type="PackedScene" uid="uid://desphmjvj0i4t" path="res://scenes/builds/furniture/crates/crate_wood_trio.tscn" id="11_8dx4e"]
+[ext_resource type="PackedScene" uid="uid://f6tdcsdb0s1e" path="res://scenes/builds/residential/trash_can.tscn" id="12_skh3g"]
 
 [sub_resource type="GDScript" id="GDScript_p08up"]
 script/source = "extends InteractionZone
@@ -205,5 +206,14 @@ prompt_translation_key = "DEBUG"
 position = Vector2(0, 32)
 scale = Vector2(1.02, 0.5)
 script = SubResource("GDScript_p08up")
+
+[node name="TrashCan" parent="." index="11" instance=ExtResource("12_skh3g")]
+position = Vector2(632, -744)
+
+[node name="InteractionZone" parent="TrashCan" index="2" instance=ExtResource("4_vwc65")]
+interaction_id = "Check Trash"
+prompt_translation_key = "CHECK"
+position = Vector2(0, 8)
+scale = Vector2(1.02, 0.5)
 
 [connection signal="interacted" from="WoodenCrateTrio/DebugSkill" to="WoodenCrateTrio/DebugSkill" method="_on_interacted"]
