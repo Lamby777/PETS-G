@@ -125,6 +125,7 @@ DG_SPK_UNKNOWN,???
 DG_SPK_RODRICK,"Rodrick Sign Co."
 DG_SPK_MOM,Mom
 DG_SPK_DAD,Dad
+DG_SPK_MR_TULIVAE,Mr. Tulivae
 ,
 DG_RODRICK1_SOYOURE,"So... you're reading a sign, eh? Well..."
 DG_RODRICK1_AREYOUSMART,Are you smart?
@@ -144,17 +145,14 @@ DG_INTRO3_ALRIGHT,It's alright...
 DG_INTRO3_GREAT_MOM,"Well, I'm glad you like it! I hope you'll be comfortable here."
 DG_INTRO3_ALRIGHT_MOM,"I know it's not much, but I hope you'll be comfortable here."
 DG_INTRO4_ITSYOURS,"Well, it's all yours. Do you have a specific blanket color in mind?"
-DG_INTRO4_BEDCOLOR_RED,"[color=#BD0000]X[/color]"
-DG_INTRO4_BEDCOLOR_ORANGE,"[color=#FF7200]X[/color]"
-DG_INTRO4_BEDCOLOR_YELLOW,"[color=#FFE300]X[/color]"
-DG_INTRO4_BEDCOLOR_GREEN,"[color=#00AE06]X[/color]"
-DG_INTRO4_BEDCOLOR_BLUE,"[color=#2500FF]X[/color]"
-DG_INTRO4_BEDCOLOR_PURPLE,"[color=#7F0087]X[/color]"
-DG_INTRO4_BEDCOLOR_PINK,"[color=#E889C4]X[/color]"
-,
 DG_INTRO4_LOOKSBETTER,"Wow, it looks even better already!"
 DG_INTRO4_ILLBEDOWNSTAIRS,"Alright, I'll be downstairs if you need me."
 DG_INTRO4_BRINGFUZZY,"Go bring out Fuzzy from the car, okay?"
+,
+DG_INTRO5_OVERHERE,"Here he is! Hey, [ETHAN], come meet the neighbors!"
+DG_INTRO5_MR_T,"This is Mr. Tulivae. He lives next door."
+DG_INTRO5_HITHERE,"Hi there, [ETHAN]. Pleasure meeting you."
+DG_INTRO5_HE_SEEMS_NICE,He seems pretty nice. Maybe you should go say hi later.
 ,
 DG_CHECK_CRATE,"It's just a crate. Doesn't look like anything good is inside."
 DG_CHECK_CRATES,"It's just a bunch of crates. Doesn't look like they have anything useful."

@@ -54,25 +54,25 @@ NAME [MOM]
 
 DG_INTRO4_ITSYOURS
 
-> DG_INTRO4_BEDCOLOR_RED
+> [color=#BD0000]X[/color]
 $ set_ethan_bed_color("red")
 
-> DG_INTRO4_BEDCOLOR_ORANGE
+> [color=#FF7200]X[/color]
 $ set_ethan_bed_color("orange")
 
-> DG_INTRO4_BEDCOLOR_YELLOW
+> [color=#FFE300]X[/color]
 $ set_ethan_bed_color("yellow")
 
-> DG_INTRO4_BEDCOLOR_GREEN
+> [color=#00AE06]X[/color]
 $ set_ethan_bed_color("green")
 
-> DG_INTRO4_BEDCOLOR_BLUE
+> [color=#2500FF]X[/color]
 $ set_ethan_bed_color("blue")
 
-> DG_INTRO4_BEDCOLOR_PURPLE
+> [color=#7F0087]X[/color]
 $ set_ethan_bed_color("purple")
 
-> DG_INTRO4_BEDCOLOR_PINK
+> [color=#E889C4]X[/color]
 $ set_ethan_bed_color("pink")
 
 ---
@@ -90,4 +90,21 @@ DG_INTRO4_ILLBEDOWNSTAIRS
 DG_INTRO4_BRINGFUZZY
 
 ---
+% Intro #5
+NAME [DAD]
 
+DG_INTRO5_OVERHERE
+
+---
+
+DG_INTRO5_MR_T
+
+---
+PageOnly NAME [MR_TULIVAE]
+
+DG_INTRO5_HITHERE
+
+---
+PageOnly NAME _
+
+DG_INTRO5_HE_SEEMS_NICE

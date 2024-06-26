@@ -15,12 +15,19 @@ func on_teleported(target):
     # the rooms have different teleporters that may or may not exist
     if room_id() == "CV_Houses":
         on_house_tp(target)
+    if room_id() == "CV_Outdoors":
+        on_outdoors_tp(target)
 
 func on_house_tp(target):
-    if phase < 2:
-        self.phase = 2
+    if phase == 0:
+        self.phase = 1
         dbox.start_ix("Intro #2")
 
-    if target.name == "EthanBedroomExit" and phase < 3:
-        self.phase = 3
+    if target.name == "EthanBedroomExit" and phase == 1:
+        self.phase = 2
         dbox.start_ix("Intro #3")
+
+func on_outdoors_tp(target):
+    if target.name == "EthanHouseEntrance" and phase == 2:
+        self.phase = 3
+        dbox.start_ix("Intro #5")
