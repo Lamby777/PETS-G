@@ -1,3 +1,5 @@
+use std::cmp::Ordering;
+
 use godot::engine::{
     CharacterBody2D, ColorRect, ICharacterBody2D, ShaderMaterial,
 };
@@ -10,6 +12,10 @@ use crate::prelude::*;
 use super::inv_node::InventoryNode;
 use super::pchar_node::PCharNode;
 use super::BATTLE_PARTY_SIZE;
+
+/// The player will stop being controlled once it reaches this
+/// distance from the cutscene target.
+const CUTSCENE_MOTION_CLOSE_ENOUGH: f32 = 10.0;
 
 /// This scene contains the "player" aka the invisible
 /// entity that is moved around with WASD. It also contains
@@ -245,6 +251,38 @@ impl ICharacterBody2D for PlayerCB {
             let sprinting = input.is_action_pressed("sprint".into());
 
             moving = self.calc_movements(input_vector, sprinting, delta);
+        } else if let Some(target) = self.cutscene_motion {
+            // TODO separate function
+            let own_pos = self.base().get_global_position();
+            let cmp_x = target.x.partial_cmp(&own_pos.x).unwrap();
+            let cmp_y = target.y.partial_cmp(&own_pos.y).unwrap();
+
+            use Ordering::*;
+            let iv_x = match cmp_x {
+                Less => Vector2::LEFT,
+                Greater => Vector2::RIGHT,
+                Equal => Vector2::ZERO,
+            };
+
+            let iv_y = match cmp_y {
+                Less => Vector2::UP,
+                Greater => Vector2::DOWN,
+                Equal => Vector2::ZERO,
+            };
+
+            let input_vector = iv_x + iv_y;
+            let sprinting = false; // TODO
+            moving = self.calc_movements(input_vector, sprinting, delta);
+
+            if (target - own_pos).length() < CUTSCENE_MOTION_CLOSE_ENOUGH {
+                self.cutscene_motion = None;
+                self.base_mut()
+                    .emit_signal("cutscene_motion_done".into(), &[]);
+                self.base_mut().set_global_position(target);
+            }
+
+            self.move_chars(moving);
+            return;
         }
 
         self.move_chars(moving);

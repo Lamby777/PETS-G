@@ -1,5 +1,5 @@
+use crate::prelude::*;
 use godot::prelude::*;
-// use crate::prelude::*;
 
 pub type QuestPhase = i32;
 
@@ -19,6 +19,16 @@ pub struct Quest {
 
 #[godot_api]
 impl Quest {
+    #[func]
+    fn dbox(&self) -> Gd<DialogBox> {
+        DialogBox::singleton()
+    }
+
+    #[func]
+    fn pcb(&self) -> Gd<PlayerCB> {
+        pcb()
+    }
+
     #[func]
     pub fn final_phase(&self) -> QuestPhase {
         self.final_phase
