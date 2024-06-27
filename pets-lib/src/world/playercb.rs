@@ -107,7 +107,8 @@ impl PlayerCB {
         let cant_move = dbox_is_active
             || InventoryNode::singleton().bind().is_open()
             || self.is_in_battle()
-            || self.tpbeacon_debounce;
+            || self.tpbeacon_debounce
+            || self.cutscene_motion.is_some();
 
         !cant_move
     }

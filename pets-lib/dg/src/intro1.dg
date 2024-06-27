@@ -14,22 +14,6 @@ Link NAME _
 VOX Default
 
 ###
----
-NAME _
-
-Test
-
-$$$
-print("1")
-pcb().move_to_relative(0.0, -200.0)
-print("2")
-await pcb().motion_done
-print("3")
-start_ix("Intro #1 >> Walked")
-print("4")
-$$$
----
-% Intro #1 >> Walked
 NAME [MOM]
 
 DG_INTRO1_COMEUNPACK
