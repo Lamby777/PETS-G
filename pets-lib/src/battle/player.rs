@@ -7,7 +7,7 @@ use std::cell::LazyCell;
 use godot::engine::Sprite2D;
 use godot::prelude::*;
 
-use super::stat_translation as to_battle;
+use super::stat_translation;
 use crate::prelude::*;
 
 const BATTLE_DIRECTIONS: LazyCell<[(StringName, Vector2); 4]> =
@@ -95,7 +95,7 @@ impl BattleIcon {
 impl INode2D for BattleIcon {
     fn ready(&mut self) {
         let ch_speed = si().bind().natural_speed_of(PChar::ETHAN);
-        self.speed = to_battle::speed(ch_speed);
+        self.speed = stat_translation::speed(ch_speed);
     }
 
     fn process(&mut self, delta: f64) {
