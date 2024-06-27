@@ -398,9 +398,16 @@ impl DialogBox {
     }
 
     fn set_ix(&mut self, ix: Interaction, replaces: Vec<(String, String)>) {
+        if ix.pages.len() == 0 {
+            panic!(
+                "Interaction has no pages! You probably made a dg sheet mistake."
+            );
+        }
+
         self.current_ix = Some(ix);
         self.current_page_number = 0;
         self.replaces = replaces;
+
         self.do_draw();
     }
 
