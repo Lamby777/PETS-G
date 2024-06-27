@@ -96,8 +96,19 @@ impl DialogBox {
         }
 
         self.goto_current_page();
-        self.spk_txt().set_text(self.translated_speaker());
-        self.msg_txt().set_text(self.translated_message());
+
+        let spk = self
+            .active
+            .then(|| self.translated_speaker())
+            .unwrap_or("".into());
+
+        let msg = self
+            .active
+            .then(|| self.translated_message())
+            .unwrap_or("".into());
+
+        self.spk_txt().set_text(spk);
+        self.msg_txt().set_text(msg);
 
         self.msg_txt().set_visible_characters(0);
         self.text_visibility_timer.start();
@@ -212,6 +223,7 @@ impl DialogBox {
     pub fn open_or_close(&mut self, open: bool) {
         self.active = open;
         self.anim_player().play_animation_forwards("open", open);
+        self.do_draw();
     }
 
     #[func]
@@ -240,6 +252,10 @@ impl DialogBox {
             }
 
             GDScript(script) => {
+                self.active = false;
+                self.tween_choices_wave(false);
+                self.close();
+
                 let guard = self.base_mut();
                 eval(script).unwrap();
                 drop(guard);
