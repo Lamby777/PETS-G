@@ -34,11 +34,10 @@ macro_rules! normalized {
 }
 
 /// Evaluate a GDScript string.
-/// They are all evaluated from the context of the PlayerCB.
+/// They are all evaluated from a `ScriptExecutor` object.
 ///
 /// - [what the fuck](https://github.com/godotengine/godot/issues/8003)
 pub fn eval(source: &str) -> GReturn {
-    println!("Evaluating script: ---\n{}\n---\n", &source);
     let mut script = GDScript::new_gd();
 
     let mut script_content = "extends ScriptExecutor\nfunc _eval():".to_owned();
