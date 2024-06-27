@@ -167,6 +167,21 @@ impl DialogBox {
         label.set_visible_characters(len);
     }
 
+    fn try_push_history(&mut self) {
+        let Some(mut history) =
+            current_scene().try_get_node_as::<Control>("%DialogueHistory")
+        else {
+            return;
+        };
+
+        let msg = format!(
+            "{}: {}",
+            self.translated_speaker(),
+            self.translated_message()
+        );
+        history.call("push".into(), &[msg.to_variant()]);
+    }
+
     /// sets the speaker and message labels to the given page
     pub fn goto_current_page(&mut self) {
         let pageno = self.current_page_number;
@@ -179,6 +194,8 @@ impl DialogBox {
 
             self.update_meta(&page.metadata);
         }
+
+        self.try_push_history();
     }
 
     fn translated_speaker(&self) -> GString {

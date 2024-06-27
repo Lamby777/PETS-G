@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://p2uymvf88jt7"]
+[gd_scene load_steps=18 format=3 uid="uid://p2uymvf88jt7"]
 
 [ext_resource type="PackedScene" uid="uid://kgl5788x405y" path="res://scenes/battle.tscn" id="1_37bcu"]
 [ext_resource type="PackedScene" uid="uid://c8hhg8v5ls70u" path="res://scenes/world_menu.tscn" id="2_6orff"]
@@ -9,6 +9,7 @@
 [ext_resource type="Shader" path="res://themes/encounter.gdshader" id="3_a3d4r"]
 [ext_resource type="PackedScene" uid="uid://clpj4pxq1ulin" path="res://scenes/inventory.tscn" id="3_jwkdy"]
 [ext_resource type="Script" path="res://scenes/BattleIntroRect.gd" id="4_jple0"]
+[ext_resource type="PackedScene" uid="uid://1wsf8astxdny" path="res://scenes/dialogue_history.tscn" id="8_4gdre"]
 [ext_resource type="PackedScene" uid="uid://c7x12nyqelw1f" path="res://scenes/rooms/cv-outdoors.tscn" id="10_kug7e"]
 [ext_resource type="Script" path="res://quests/intro1.gd" id="13_w40m0"]
 
@@ -135,6 +136,9 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
+
+[node name="DialogueHistory" parent="UILayer" instance=ExtResource("8_4gdre")]
+unique_name_in_owner = true
 
 [node name="Inventory" parent="UILayer" instance=ExtResource("3_jwkdy")]
 unique_name_in_owner = true
