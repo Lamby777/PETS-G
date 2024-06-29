@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://kgl5788x405y"]
+[gd_scene load_steps=20 format=3 uid="uid://kgl5788x405y"]
 
 [ext_resource type="Shader" path="res://themes/opacity.gdshader" id="1_3pmac"]
 [ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="2_0m4jp"]
@@ -9,6 +9,7 @@
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="5_hcsfj"]
 [ext_resource type="Texture2D" uid="uid://cx24dyfnh30ag" path="res://assets/textures/portraits/ETHAN.png" id="6_abown"]
 [ext_resource type="PackedScene" uid="uid://ywn8h01im5gx" path="res://scenes/enemy_sprite.tscn" id="6_dgpl5"]
+[ext_resource type="Script" path="res://scenes/hpbar.gd" id="9_r25ik"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w1wwc"]
 shader = ExtResource("2_0m4jp")
@@ -347,8 +348,12 @@ theme_override_constants/separation = 32
 [node name="HPBar" type="ProgressBar" parent="Menu/InfoBars"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
-value = 80.0
+max_value = 200.0
+value = 192.0
 show_percentage = false
+script = ExtResource("9_r25ik")
+bar_label_text = "HP"
+bar_value = 192
 
 [node name="Label" type="RichTextLabel" parent="Menu/InfoBars/HPBar"]
 layout_mode = 0
@@ -371,7 +376,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_font_sizes/normal_font_size = 56
 bbcode_enabled = true
-text = "[right]1999"
+text = "[right]192"
 fit_content = true
 autowrap_mode = 0
 
@@ -379,8 +384,12 @@ autowrap_mode = 0
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_type_variation = &"TealBar"
-value = 80.0
+max_value = 200.0
+value = 168.0
 show_percentage = false
+script = ExtResource("9_r25ik")
+bar_label_text = "Mana"
+bar_value = 168
 
 [node name="Label" type="RichTextLabel" parent="Menu/InfoBars/ManaBar"]
 layout_mode = 0
