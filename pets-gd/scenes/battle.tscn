@@ -330,17 +330,27 @@ theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 80
 
-[node name="InfoBars" type="VBoxContainer" parent="Menu/DualMenu/RightPanel/Margins"]
-layout_mode = 2
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/DualMenu"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_730bq")
+}
+
+[node name="InfoBars" type="VBoxContainer" parent="Menu"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 880.0
+offset_right = 1664.0
+offset_bottom = 1048.0
 theme_override_constants/separation = 32
 
-[node name="HPBar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/Margins/InfoBars"]
+[node name="HPBar" type="ProgressBar" parent="Menu/InfoBars"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 value = 80.0
 show_percentage = false
 
-[node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HPBar"]
+[node name="Label" type="RichTextLabel" parent="Menu/InfoBars/HPBar"]
 layout_mode = 0
 offset_left = 40.0
 offset_right = 496.0
@@ -352,34 +362,10 @@ text = "HP"
 fit_content = true
 autowrap_mode = 0
 
-[node name="Slash" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HPBar"]
+[node name="Value" type="RichTextLabel" parent="Menu/InfoBars/HPBar"]
 layout_mode = 0
-offset_left = 672.0
-offset_right = 752.0
-offset_bottom = 66.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
-text = " /"
-autowrap_mode = 0
-
-[node name="Max" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HPBar"]
-layout_mode = 0
-offset_left = 704.0
-offset_right = 936.0
-offset_bottom = 66.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
-bbcode_enabled = true
-text = "[right]2000"
-fit_content = true
-autowrap_mode = 0
-
-[node name="Value" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/HPBar"]
-layout_mode = 0
-offset_left = 392.0
-offset_right = 616.0
+offset_left = 1152.0
+offset_right = 1376.0
 offset_bottom = 66.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
@@ -389,14 +375,14 @@ text = "[right]1999"
 fit_content = true
 autowrap_mode = 0
 
-[node name="ManaBar" type="ProgressBar" parent="Menu/DualMenu/RightPanel/Margins/InfoBars"]
+[node name="ManaBar" type="ProgressBar" parent="Menu/InfoBars"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_type_variation = &"TealBar"
 value = 80.0
 show_percentage = false
 
-[node name="Label" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
+[node name="Label" type="RichTextLabel" parent="Menu/InfoBars/ManaBar"]
 layout_mode = 0
 offset_left = 40.0
 offset_right = 496.0
@@ -408,34 +394,10 @@ text = "Mana"
 fit_content = true
 autowrap_mode = 0
 
-[node name="Slash" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
+[node name="Value" type="RichTextLabel" parent="Menu/InfoBars/ManaBar"]
 layout_mode = 0
-offset_left = 672.0
-offset_right = 752.0
-offset_bottom = 66.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
-text = " /"
-autowrap_mode = 0
-
-[node name="Max" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
-layout_mode = 0
-offset_left = 704.0
-offset_right = 936.0
-offset_bottom = 66.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
-bbcode_enabled = true
-text = "[right]192"
-fit_content = true
-autowrap_mode = 0
-
-[node name="Value" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/InfoBars/ManaBar"]
-layout_mode = 0
-offset_left = 392.0
-offset_right = 616.0
+offset_left = 1152.0
+offset_right = 1376.0
 offset_bottom = 66.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
@@ -444,12 +406,6 @@ bbcode_enabled = true
 text = "[right]168"
 fit_content = true
 autowrap_mode = 0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/DualMenu"]
-root_node = NodePath("../../..")
-libraries = {
-"": SubResource("AnimationLibrary_730bq")
-}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
