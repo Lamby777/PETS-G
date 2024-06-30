@@ -1,4 +1,4 @@
-extends BattleStrategy
+extends Tactics
 
 var ctr = 0
 

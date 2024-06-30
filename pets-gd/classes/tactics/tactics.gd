@@ -1,4 +1,4 @@
-class_name BattleStrategy
+class_name Tactics
 extends Node
 
 @onready var timer = Timer.new()
