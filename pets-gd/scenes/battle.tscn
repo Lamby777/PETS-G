@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://kgl5788x405y"]
+[gd_scene load_steps=21 format=3 uid="uid://kgl5788x405y"]
 
 [ext_resource type="Shader" path="res://themes/opacity.gdshader" id="1_3pmac"]
+[ext_resource type="Script" path="res://classes/battle/battle_strategy.gd" id="1_ggj2p"]
 [ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="2_0m4jp"]
 [ext_resource type="Shader" path="res://themes/vdrugs/common.gdshader" id="2_5b7lm"]
 [ext_resource type="Texture2D" uid="uid://he44mug8lejt" path="res://assets/textures/misc/BattleIcons.png" id="3_k3xai"]
@@ -147,6 +148,7 @@ shader = ExtResource("1_3pmac")
 shader_parameter/opacity = 0.0
 
 [node name="BattleEngine" type="BattleEngine"]
+script = ExtResource("1_ggj2p")
 
 [node name="BattleMusic" type="BattleMusic" parent="."]
 stream = ExtResource("4_l6m5j")
@@ -169,6 +171,7 @@ layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 stretch_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="Solid" type="ColorRect" parent="VideoDrugs"]
 material = SubResource("ShaderMaterial_88ovb")
@@ -176,6 +179,7 @@ layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="Battle" type="Node2D" parent="."]
 
