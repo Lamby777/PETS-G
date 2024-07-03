@@ -1,5 +1,6 @@
 extends Tactics
 
+@export var bullet: PackedScene
 var ctr = 0
 
 func _start():

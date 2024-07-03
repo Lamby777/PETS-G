@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1u47pdgijmp3"]
+
+[ext_resource type="Script" path="res://scenes/bullets/fwd-only.gd" id="1_8li6o"]
+
+[node name="Bullet" type="Node2D"]
+script = ExtResource("1_8li6o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 512
+collision_mask = 256

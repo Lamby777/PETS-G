@@ -5,8 +5,8 @@
 
 use godot::engine::object::ConnectFlags;
 use godot::engine::{
-    AnimatedSprite2D, AnimationPlayer, Control, GDScript, InputEvent, Script,
-    Texture2D, TextureRect, Timer,
+    AnimatedSprite2D, AnimationPlayer, Control, InputEvent, Texture2D,
+    TextureRect, Timer,
 };
 use godot::prelude::*;
 
@@ -200,14 +200,10 @@ impl BattleEngine {
         // start attacking
         let enemy_data = pcb().bind().battling[0].clone();
         let enemy_id = enemy_data.borrow().id();
-        let script = load::<Script>(format!(
-            "res://classes/tactics/enemies/{}.gd",
-            enemy_id
-        ));
 
-        let mut atk_mgr = self.base_mut().get_node_as::<Node>("AttackManager");
-        atk_mgr.set_script(script.to_variant());
-        atk_mgr.call("_start".into(), &[]);
+        self.base()
+            .get_node_as::<Node>(format!("Tactics/{}", enemy_id))
+            .set_process(true);
     }
 }
 
