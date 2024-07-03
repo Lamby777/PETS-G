@@ -12,3 +12,6 @@ func _start():
     timer.name = "MainTimer"
     timer.timeout.connect(_attack)
     add_child(timer)
+
+func _ready():
+    _start()

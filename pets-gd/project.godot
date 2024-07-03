@@ -164,6 +164,8 @@ locale/fallback="en_US"
 2d_physics/layer_3="ix_zones"
 2d_physics/layer_4="enemies"
 2d_physics/layer_5="water"
+2d_physics/layer_9="battle_icon"
+2d_physics/layer_10="battle_bullets"
 
 [rendering]
 

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd2ecg5hgyxv2"]
+
+[ext_resource type="PackedScene" uid="uid://c1u47pdgijmp3" path="res://scenes/bullet.tscn" id="1_fj4su"]
+[ext_resource type="Texture2D" uid="uid://cpt38axrnw4i5" path="res://assets/textures/bb-attacks/usb-stick.png" id="2_t4tlk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_li03f"]
+radius = 8.0
+
+[node name="Bullet" instance=ExtResource("1_fj4su")]
+damage_ratio = null
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_t4tlk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" index="0"]
+shape = SubResource("CircleShape2D_li03f")
