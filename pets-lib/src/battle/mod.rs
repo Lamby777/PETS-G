@@ -3,6 +3,7 @@
 //! the GDExtension side that runs during battles.
 //!
 
+use godot::engine::node::ProcessMode;
 use godot::engine::object::ConnectFlags;
 use godot::engine::{
     AnimatedSprite2D, AnimationPlayer, Control, InputEvent, Texture2D,
@@ -203,7 +204,7 @@ impl BattleEngine {
 
         self.base()
             .get_node_as::<Node>(format!("Tactics/{}", enemy_id))
-            .set_process(true);
+            .set_process_mode(ProcessMode::ALWAYS);
     }
 }
 

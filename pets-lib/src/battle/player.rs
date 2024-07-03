@@ -4,7 +4,7 @@
 
 use std::cell::LazyCell;
 
-use godot::engine::Sprite2D;
+use godot::engine::{CharacterBody2D, ICharacterBody2D, Sprite2D};
 use godot::prelude::*;
 
 use super::stat_translation;
@@ -21,9 +21,9 @@ const BATTLE_DIRECTIONS: LazyCell<[(StringName, Vector2); 4]> =
     });
 
 #[derive(GodotClass)]
-#[class(init, base=Node2D)]
+#[class(init, base=CharacterBody2D)]
 pub struct BattleIcon {
-    base: Base<Node2D>,
+    base: Base<CharacterBody2D>,
 
     /// Maximum speed of player icon
     #[init(default = 400.0)]
@@ -92,7 +92,7 @@ impl BattleIcon {
 }
 
 #[godot_api]
-impl INode2D for BattleIcon {
+impl ICharacterBody2D for BattleIcon {
     fn ready(&mut self) {
         let ch_speed = si().bind().natural_speed_of(PChar::ETHAN);
         self.speed = stat_translation::speed(ch_speed);
