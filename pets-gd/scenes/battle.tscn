@@ -148,6 +148,8 @@ shader_parameter/opacity = 0.0
 
 [node name="BattleEngine" type="BattleEngine"]
 
+[node name="AttackManager" type="Node" parent="."]
+
 [node name="BattleMusic" type="BattleMusic" parent="."]
 stream = ExtResource("4_l6m5j")
 

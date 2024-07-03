@@ -5,8 +5,8 @@
 
 use godot::engine::object::ConnectFlags;
 use godot::engine::{
-    AnimatedSprite2D, AnimationPlayer, Control, InputEvent, Texture2D,
-    TextureRect, Timer,
+    AnimatedSprite2D, AnimationPlayer, Control, GDScript, InputEvent, Script,
+    Texture2D, TextureRect, Timer,
 };
 use godot::prelude::*;
 
@@ -42,8 +42,6 @@ enum MenuSection {
     Skill,
 }
 
-const INTRO_COUNTDOWN_SEC: f64 = 3.0;
-
 #[derive(Default, PartialEq)]
 enum BattleState {
     /// Few seconds countdown before the music starts
@@ -54,9 +52,8 @@ enum BattleState {
     Attack {
         /// Running away from battle?
         ///
-        /// While running away, you won't be able
-        /// to fight back, but once the countdown
-        /// is over, you'll escape the fight.
+        /// While running away, you won't be able to fight back, but once
+        /// the countdown is over, you'll escape the fight.
         running: bool,
     },
 
@@ -199,6 +196,18 @@ impl BattleEngine {
         // change state from intro to attack
         self.state = BattleState::Attack { running: false };
         self.music.bind_mut().play_battle_music();
+
+        // start attacking
+        let enemy_data = pcb().bind().battling[0].clone();
+        let enemy_id = enemy_data.borrow().id();
+        let script = load::<Script>(format!(
+            "res://classes/tactics/enemies/{}.gd",
+            enemy_id
+        ));
+
+        let mut atk_mgr = self.base_mut().get_node_as::<Node>("AttackManager");
+        atk_mgr.set_script(script.to_variant());
+        atk_mgr.call("_start".into(), &[]);
     }
 }
 

@@ -1,11 +1,14 @@
 class_name Tactics
 extends Node
 
-@onready var timer = Timer.new()
+var timer: Timer
 
 func _attack():
     pass
 
-func _ready():
+func _start():
+    print("Base start")
+    timer = Timer.new()
+    timer.name = "MainTimer"
     timer.timeout.connect(_attack)
-    timer.start()
+    add_child(timer)

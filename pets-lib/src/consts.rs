@@ -25,6 +25,8 @@ pub mod battle {
     pub const BATTLE_PARTY_SIZE: usize = 4;
 
     pub const INTRO_FADE_PREDELAY: f64 = 0.5;
+    pub const INTRO_COUNTDOWN_SEC: f64 = 3.0;
+
     pub const EFFECT_CHANCE_LIKELY: f64 = 0.8;
     pub const EFFECT_CHANCE_RARE: f64 = 0.1;
 }
