@@ -158,7 +158,7 @@ process_mode = 4
 
 [node name="A_NONNY_MOUSE" type="Node" parent="Tactics"]
 script = ExtResource("1_vrl6q")
-bullet = ExtResource("2_n0w8q")
+bullet_scene = ExtResource("2_n0w8q")
 
 [node name="BattleMusic" type="BattleMusic" parent="."]
 stream = ExtResource("4_l6m5j")

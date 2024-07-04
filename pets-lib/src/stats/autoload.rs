@@ -2,6 +2,7 @@
 //! Singleton for accessing player stats in GDScript.
 //!
 
+use godot::global::randomize;
 use godot::prelude::*;
 
 use super::charmap::default_charmap;
@@ -106,6 +107,9 @@ impl IObject for StatsInterface {
         let save = SaveFile::fresh();
 
         load_item_registry();
+
+        // randomize seed for godot
+        randomize();
 
         Self {
             base,

@@ -6,7 +6,7 @@
 script = ExtResource("1_8li6o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(4, 4)
+scale = Vector2(8, 8)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 512

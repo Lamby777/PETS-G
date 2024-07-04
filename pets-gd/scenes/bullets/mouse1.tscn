@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cpt38axrnw4i5" path="res://assets/textures/bb-attacks/usb-stick.png" id="2_t4tlk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7m356"]
-radius = 16.0
-height = 64.0
+radius = 24.0
+height = 96.0
 
 [node name="Bullet" instance=ExtResource("1_fj4su")]
 
