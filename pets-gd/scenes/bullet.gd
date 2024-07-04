@@ -9,7 +9,8 @@ extends Node2D
 @export var icon: BattleIcon
 
 func on_hit(_body):
-    pass
+    print("hit")
+    icon.on_hit(self)
 
 func _ready():
-    area.body_entered.connect(on_hit)
+    area.connect("body_entered", on_hit)
