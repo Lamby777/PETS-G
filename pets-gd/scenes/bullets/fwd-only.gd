@@ -4,6 +4,7 @@ extends Bullet
 @export var speed = 400.0
 
 func _ready():
+    super()
     look_at(icon.position)
 
 func _process(delta):

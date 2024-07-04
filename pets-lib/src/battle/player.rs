@@ -89,6 +89,14 @@ impl BattleIcon {
         let position = self.base().get_global_position() + change;
         self.base_mut().set_global_position(position);
     }
+
+    #[func]
+    fn on_hit(&mut self, bullet: Gd<Node2D>) {
+        let _ratio = bullet.get("damage_ratio".into());
+        let damage = 10; // TODO
+
+        godot_print!("Player took {} damage!", damage);
+    }
 }
 
 #[godot_api]
