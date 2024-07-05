@@ -6,10 +6,10 @@ use super::*;
 pub trait Battler {
     fn id(&self) -> String;
 
-    fn hp(&self) -> &IntegralStat;
+    fn hp(&self) -> IntegralStat;
     fn hp_mut(&mut self) -> &mut IntegralStat;
 
-    fn mana(&self) -> Option<&IntegralStat>;
+    fn mana(&self) -> Option<IntegralStat>;
     fn mana_mut(&mut self) -> Option<&mut IntegralStat>;
 
     fn status_effects(&self) -> &HashSet<StatusEffect>;

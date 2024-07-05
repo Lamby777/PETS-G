@@ -66,8 +66,8 @@ impl Battler for CharData {
         self.id.to_string()
     }
 
-    fn hp(&self) -> &IntegralStat {
-        &self.battle_stats.hp
+    fn hp(&self) -> IntegralStat {
+        self.battle_stats.hp
     }
 
     fn hp_mut(&mut self) -> &mut IntegralStat {
@@ -94,8 +94,8 @@ impl Battler for CharData {
         &self.battle_stats.buffs
     }
 
-    fn mana(&self) -> Option<&IntegralStat> {
-        self.battle_stats.mana.as_ref()
+    fn mana(&self) -> Option<IntegralStat> {
+        self.battle_stats.mana
     }
 
     fn mana_mut(&mut self) -> Option<&mut IntegralStat> {
