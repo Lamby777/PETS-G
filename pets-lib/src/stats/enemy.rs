@@ -20,6 +20,7 @@ pub struct EnemyData {
 
 impl EnemyData {
     pub fn from_id(id: EnemyID) -> Self {
+        // TODO load from file
         Self {
             id: id.to_string(),
             inherent_stats: InherentStats::default(),
