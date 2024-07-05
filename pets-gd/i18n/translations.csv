@@ -125,7 +125,10 @@ DG_SPK_UNKNOWN,???
 DG_SPK_RODRICK,"Rodrick Sign Co."
 DG_SPK_MOM,Mom
 DG_SPK_DAD,Dad
+DG_SPK_CLAY,Clay
+DG_SPK_JUNIPER,Juniper
 DG_SPK_MR_TULIVAE,Mr. Tulivae
+DG_SPK_MRS_TULIVAE,Mrs. Tulivae
 ,
 DG_RODRICK1_SOYOURE,"So... you're reading a sign, eh? Well..."
 DG_RODRICK1_AREYOUSMART,Are you smart?
