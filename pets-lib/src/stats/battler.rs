@@ -16,7 +16,7 @@ pub trait Battler {
     fn status_effects_mut(&mut self) -> &mut HashSet<StatusEffect>;
 
     /// This should only return a reference to the inherent stats
-    fn inherent_stats(&self) -> &InherentStats;
+    fn inherent_stats(&self) -> InherentStats;
     fn equipment(&self) -> &[Item];
 
     /// This should return a reference to the list of currently active (de)buffs
