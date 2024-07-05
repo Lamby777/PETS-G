@@ -23,7 +23,6 @@ pub use enemy::EnemyData;
 pub use pchars::{EnemyID, PChar};
 pub use quests::QuestPhase;
 pub use savefiles::SaveFile;
-pub use statcalc::{CharStatCalcs, StatCalcFn, StatCalcList};
 
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 pub struct BattleStats {

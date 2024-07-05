@@ -15,9 +15,6 @@ pub struct StatsInterface {
 
     /// Hash map of info on all the different characters in the game.
     pub save: SaveFile,
-
-    /// Hash map of function pointers for calculating stats
-    statcalcs: CharStatCalcs,
 }
 
 #[godot_api]
@@ -44,14 +41,6 @@ impl StatsInterface {
     #[func]
     pub fn set_quest_phase(&mut self, quest_id: GString, phase: QuestPhase) {
         self.save.quests.insert(quest_id.to_string(), phase);
-    }
-
-    /// Get the list of stat calculation functions for a given character
-    pub fn get_statcalc(&self, ch: &PChar) -> Rc<StatCalcList> {
-        self.statcalcs
-            .get(ch)
-            .expect("key should be a valid PChar name")
-            .clone()
     }
 }
 
