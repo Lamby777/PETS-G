@@ -52,8 +52,8 @@ impl Battler for EnemyData {
         &mut self.status_effects
     }
 
-    fn inherent_stats(&self) -> &InherentStats {
-        &self.inherent_stats
+    fn inherent_stats(&self) -> InherentStats {
+        self.inherent_stats.clone()
     }
 
     fn equipment(&self) -> &[Item] {

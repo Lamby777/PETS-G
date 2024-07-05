@@ -47,7 +47,18 @@ pub fn default_charmap() -> CharMap {
 
         ETHAN {
             display_name = "Ethan".to_owned(),
+
+            inherent_stats.max_hp = 20,
             inherent_stats.max_mana = Some(10),
+            inherent_stats.max_energy = 1,
+
+            inherent_stats.attack = 1,
+            inherent_stats.defense = 2,
+            inherent_stats.speed = 4,
+            inherent_stats.stability = 5,
+            inherent_stats.delta = 5,
+            inherent_stats.epsilon = 1,
+            inherent_stats.lambda = Some(1),
         },
 
         SIVA {
