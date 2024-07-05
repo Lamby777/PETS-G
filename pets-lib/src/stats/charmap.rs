@@ -49,8 +49,7 @@ pub fn default_charmap() -> CharMap {
             display_name = "Ethan".to_owned(),
 
             inherent_stats_base.max_hp = -10,
-            inherent_stats_base.max_mana = Some(10),
-
+            inherent_stats_base.max_mana = Some(5),
             inherent_stats_base.attack = 1,
             inherent_stats_base.defense = 2,
             inherent_stats_base.speed = 4,
@@ -60,13 +59,29 @@ pub fn default_charmap() -> CharMap {
             inherent_stats_base.lambda = Some(1),
         },
 
-        SIVA {
-            display_name = "Siva".to_owned(),
-            inherent_stats_base.max_mana = Some(10),
-        },
-
         TERRA {
             display_name = "Terra".to_owned(),
+            level = 5,
+
+            inherent_stats_base.max_hp = 35,
+            inherent_stats_base.attack = 5,
+            inherent_stats_base.defense = 4,
+            inherent_stats_base.speed = 1,
+            inherent_stats_base.stability = 3,
+            inherent_stats_base.delta = 2,
+            inherent_stats_base.epsilon = 1,
+        },
+
+        SIVA {
+            display_name = "Siva".to_owned(),
+
+            inherent_stats_base.max_mana = Some(10),
+            inherent_stats_base.attack = 3,
+            inherent_stats_base.defense = 1,
+            inherent_stats_base.speed = 2,
+            inherent_stats_base.stability = 5,
+            inherent_stats_base.delta = 3,
+            inherent_stats_base.epsilon = 1,
         },
     }
 
