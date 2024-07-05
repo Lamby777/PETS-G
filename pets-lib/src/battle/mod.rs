@@ -92,7 +92,8 @@ pub struct BattleEngine {
 #[godot_api]
 impl BattleEngine {
     pub fn take_damage(&mut self, damage: i32) {
-        self.current_battler_mut()
+        let _died = self
+            .current_battler_mut()
             .take_damage(damage.try_into().unwrap());
 
         self.update_health_and_mana_bars();
