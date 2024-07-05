@@ -19,7 +19,7 @@ const PLACEHOLDERS: &[(&'static str, fn() -> String)] = &[
     ("[MOM]", || {
         match party_leader() {
             PChar::ETHAN => "DG_SPK_MOM",
-            _ => "DG_SPK_PAULA",
+            _ => "DG_SPK_JUNIPER",
         }
         .to_string()
     }),

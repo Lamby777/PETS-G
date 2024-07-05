@@ -50,7 +50,7 @@ pub enum PChar {
     JERIAN,
 
     // Families
-    PAULA,
+    JUNIPER,
     CLAY,
     MR_TULIVAE,
     MS_TULIVAE,
