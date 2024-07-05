@@ -112,7 +112,12 @@ impl BattleIcon {
 #[godot_api]
 impl ICharacterBody2D for BattleIcon {
     fn ready(&mut self) {
-        let ch_speed = si().bind().natural_speed_of(PChar::ETHAN);
+        let ch_speed = si()
+            .bind()
+            .get_character(&PChar::ETHAN)
+            .practical_stats()
+            .speed;
+
         self.speed = stat_translation::speed(ch_speed);
     }
 
