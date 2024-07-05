@@ -41,10 +41,17 @@ pub struct BattleIcon {
     /// NOT normalized, but still limited by speed.
     #[init(default = Vector2::ZERO)]
     velocity: Vector2,
+
+    #[export]
+    engine: Option<Gd<BattleEngine>>,
 }
 
 #[godot_api]
 impl BattleIcon {
+    fn engine(&self) -> Gd<BattleEngine> {
+        self.engine.clone().expect("BattleIcon::engine is None")
+    }
+
     fn pchar_to_frame(pchar: PChar) -> i32 {
         match pchar {
             PChar::ETHAN => 0,
@@ -91,11 +98,14 @@ impl BattleIcon {
     }
 
     #[func]
-    fn on_hit(&mut self, bullet: Gd<Node2D>) {
-        let _ratio = bullet.get("damage_ratio".into());
-        let damage = 10; // TODO
+    fn on_hit(&mut self, mut bullet: Gd<Node2D>) {
+        let dmg_ratio = bullet.get("damage_ratio".into()).to::<f64>();
+        let base_dmg = 10;
+        let damage = (base_dmg as f64 * dmg_ratio).ceil();
 
-        godot_print!("Player took {} damage!", damage);
+        self.engine().bind_mut().take_damage(damage as i32);
+
+        bullet.queue_free();
     }
 }
 

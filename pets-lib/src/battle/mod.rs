@@ -6,8 +6,8 @@
 use godot::engine::node::ProcessMode;
 use godot::engine::object::ConnectFlags;
 use godot::engine::{
-    AnimatedSprite2D, AnimationPlayer, Control, InputEvent, Texture2D,
-    TextureRect, Timer,
+    AnimatedSprite2D, AnimationPlayer, Control, InputEvent, ProgressBar,
+    Texture2D, TextureRect, Timer,
 };
 use godot::prelude::*;
 
@@ -91,6 +91,31 @@ pub struct BattleEngine {
 
 #[godot_api]
 impl BattleEngine {
+    pub fn take_damage(&mut self, damage: i32) {
+        self.current_battler_mut()
+            .take_damage(damage.try_into().unwrap());
+
+        self.update_health_and_mana_bars();
+    }
+
+    fn update_health_and_mana_bars(&mut self) {
+        let battler = self.current_battler();
+        let _hp = battler.hp();
+        let _mana = battler.mana();
+
+        let _hp_bar = self.base().get_node_as::<ProgressBar>("%InfoBars/HPBar");
+        let _mana_bar =
+            self.base().get_node_as::<ProgressBar>("%InfoBars/ManaBar");
+    }
+
+    fn current_battler(&self) -> &Box<dyn Battler> {
+        &self.battlers.good_guys[self.current_party_member]
+    }
+
+    fn current_battler_mut(&mut self) -> &mut Box<dyn Battler> {
+        &mut self.battlers.good_guys[self.current_party_member]
+    }
+
     /// slowly fade out the black rectangle over the battle scene
     #[func]
     pub fn animate_in(&mut self) {
