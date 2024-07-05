@@ -102,9 +102,10 @@ impl BattleEngine {
     fn update_health_and_mana_bars(&mut self) {
         let battler = self.current_battler();
         let hp = battler.hp();
-        let max_hp = battler.max_hp();
         let mana = battler.mana();
-        let max_mana = battler.max_mana();
+        let inherent = battler.inherent_stats();
+        let max_hp = inherent.max_hp;
+        let max_mana = inherent.max_mana;
 
         let mut hp_bar =
             self.base().get_node_as::<ProgressBar>("%InfoBars/HPBar");
