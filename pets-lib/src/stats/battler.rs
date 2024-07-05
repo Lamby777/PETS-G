@@ -57,6 +57,11 @@ pub trait Battler {
         self.inherent_stats().max_hp
     }
 
+    // TODO delete these getter methods and just use `.inherent_stats()`
+    fn max_mana(&self) -> Option<IntegralStat> {
+        self.inherent_stats().max_mana
+    }
+
     /// Subtract damage count from the character's HP, stopping at 0.
     /// Returns true if the character has died because of this damage.
     fn take_damage(&mut self, damage: IntegralStat) -> bool {
