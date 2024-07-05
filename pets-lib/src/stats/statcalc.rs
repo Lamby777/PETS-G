@@ -6,6 +6,21 @@
 // the variable `lvl` in our code.
 use crate::prelude::*;
 
+pub fn level_to_stats(lvl: IntegralStat) -> InherentStats {
+    InherentStats {
+        max_hp: max_hp(lvl),
+        max_energy: max_energy(lvl),
+        attack: attack(lvl),
+        defense: defense(lvl),
+        speed: speed(lvl),
+        stability: stability(lvl),
+        delta: delta(lvl),
+        epsilon: epsilon(lvl),
+        lambda: lambda(lvl),
+        max_mana: max_mana(lvl),
+    }
+}
+
 /// floor(    ( (log(x) + x^3) / 16 )   + x )
 pub fn xp_requirement(lvl: IntegralStat) -> IntegralStat {
     // NOTE x is the level which reaching this amount of xp
