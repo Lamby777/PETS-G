@@ -102,7 +102,9 @@ impl BattleEngine {
     fn update_health_and_mana_bars(&mut self) {
         let battler = self.current_battler();
         let hp = battler.hp();
+        let max_hp = battler.max_hp();
         let mana = battler.mana();
+        let max_mana = battler.max_mana();
 
         let mut hp_bar =
             self.base().get_node_as::<ProgressBar>("%InfoBars/HPBar");
@@ -111,6 +113,9 @@ impl BattleEngine {
 
         hp_bar.set("bar_value".into(), hp.to_variant());
         mana_bar.set("bar_value".into(), mana.unwrap_or(0).to_variant());
+
+        hp_bar.set_max(max_hp.into());
+        mana_bar.set_max(max_mana.unwrap_or(1).into());
     }
 
     fn current_battler(&self) -> &Box<dyn Battler> {
@@ -243,6 +248,7 @@ impl INode2D for BattleEngine {
     fn ready(&mut self) {
         self.choices.bind_mut().disable();
         self.battlers.init(pcb().bind().new_battlers());
+        self.update_health_and_mana_bars();
 
         {
             // intro countdown timer setup
