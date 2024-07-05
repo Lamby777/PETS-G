@@ -5,14 +5,17 @@
 use crate::prelude::*;
 
 pub fn party_leader() -> PChar {
-    *PlayerCB::singleton().bind().party_pchars().first().unwrap()
+    *pcb().bind().party_pchars().first().unwrap()
+}
+
+pub fn pchar_display_name(pchar: &PChar) -> String {
+    si().bind().get_character(pchar).display_name
 }
 
 const PLACEHOLDERS: &[(&'static str, fn() -> String)] = &[
     ("[PLAYER]", || "Cherry".to_string()),
     ("[LEVEL]", || 123.to_string()),
-    // NOTE <https://github.com/Lamby777/PETS-G/issues/23>
-    ("[ETHAN]", || "Ethan".to_string()),
+    ("[ETHAN]", || pchar_display_name(&PChar::ETHAN)),
     ("[MOM]", || {
         match party_leader() {
             PChar::ETHAN => "DG_SPK_MOM",
