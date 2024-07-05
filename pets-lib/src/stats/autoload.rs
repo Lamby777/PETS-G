@@ -44,45 +44,6 @@ impl StatsInterface {
     }
 }
 
-/// name the function `x_of`, where `x` is the stat name
-/// for example, `si.natural_speed_of(PChar::ETHAN)`
-macro_rules! impl_stat_getters_on_si {
-    ($($stat:ident),* $(,)?) => {
-        #[allow(unused)]
-        impl StatsInterface {$(
-            concat_idents::concat_idents!(fn_name = natural_, $stat, _of {
-                /// Get the stat of a given character at a level,
-                /// not including equips or consumables
-                pub fn fn_name(&self, pchar: PChar) -> IntegralStat {
-                    // get character level
-                    let ch = self.get_character(&pchar);
-                    let lvl = ch.level;
-
-                    // get calculation fn for character
-                    let calcs = self.get_statcalc(&pchar);
-
-                    // calculate the stat
-                    (calcs.speed)(lvl)
-                }
-            });
-        )*}
-    };
-}
-
-// generate getters for character stats
-impl_stat_getters_on_si! {
-    max_hp,
-    max_energy,
-    attack,
-    defense,
-    speed,
-    stability,
-    delta,
-    epsilon,
-    lambda,
-    max_mana,
-}
-
 impl GodotAutoload for StatsInterface {
     const AUTOLOAD_NAME: &'static str = "Stats";
 }
@@ -100,10 +61,6 @@ impl IObject for StatsInterface {
         // randomize seed for godot
         randomize();
 
-        Self {
-            base,
-            save,
-            statcalcs,
-        }
+        Self { base, save }
     }
 }
