@@ -5,7 +5,6 @@
 use godot::global::randomize;
 use godot::prelude::*;
 
-use super::charmap::default_charmap;
 use crate::prelude::*;
 
 #[derive(GodotClass)]
@@ -53,7 +52,6 @@ impl IObject for StatsInterface {
     fn init(base: Base<Object>) -> Self {
         // start an empty save file, but load other if the player
         // picks a save file instead of "new"
-        let (_, statcalcs) = default_charmap();
         let save = SaveFile::fresh();
 
         load_item_registry();

@@ -13,6 +13,8 @@ mod pchars;
 mod quests;
 mod savefiles;
 pub mod scrapbook;
+
+#[allow(unused)]
 mod statcalc;
 
 // re-export some crap from ^^^

@@ -30,7 +30,7 @@ pub struct SaveFile {
 #[allow(unused)]
 impl SaveFile {
     pub fn fresh() -> Self {
-        let (chars, _) = default_charmap();
+        let chars = default_charmap();
 
         Self {
             chars,
