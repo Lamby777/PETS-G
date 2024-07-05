@@ -57,21 +57,21 @@ pub trait Battler {
         self.inherent_stats().max_hp
     }
 
-    /// Subtract damage count from the character's HP
-    ///
-    /// Saturated at 0.
-    fn take_damage(&mut self, damage: IntegralStat) {
-        let hp = *self.hp_mut();
-        *self.hp_mut() = 0.max(hp - damage);
+    /// Subtract damage count from the character's HP, stopping at 0.
+    /// Returns true if the character has died because of this damage.
+    fn take_damage(&mut self, damage: IntegralStat) -> bool {
+        let new_hp = 0.max(self.hp() - damage);
+        *self.hp_mut() = new_hp;
+
+        new_hp == 0
     }
 
     /// Add back HP to the character
     ///
     /// Saturated at the character's max HP
     fn heal(&mut self, amount: IntegralStat) {
-        let hp = *self.hp_mut();
         let max_hp = self.max_hp();
-        *self.hp_mut() = max_hp.min(hp + amount);
+        *self.hp_mut() = max_hp.min(self.hp() + amount);
     }
 
     fn apply_status_effect(&mut self, effect: StatusEffect) {
