@@ -40,30 +40,29 @@ macro_rules! ch_unique_registry {
 /// CharMap at the start of the game
 /// Most characters have unique base stats
 pub fn default_charmap() -> CharMap {
-    let mut res_map = uniform_charmap();
+    let mut map = uniform_charmap();
 
     ch_unique_registry! {
-        res_map,
+        map,
 
         ETHAN {
             display_name = "Ethan".to_owned(),
 
-            inherent_stats.max_hp = 20,
-            inherent_stats.max_mana = Some(10),
-            inherent_stats.max_energy = 1,
+            inherent_stats_base.max_hp = -10,
+            inherent_stats_base.max_mana = Some(10),
 
-            inherent_stats.attack = 1,
-            inherent_stats.defense = 2,
-            inherent_stats.speed = 4,
-            inherent_stats.stability = 5,
-            inherent_stats.delta = 5,
-            inherent_stats.epsilon = 1,
-            inherent_stats.lambda = Some(1),
+            inherent_stats_base.attack = 1,
+            inherent_stats_base.defense = 2,
+            inherent_stats_base.speed = 4,
+            inherent_stats_base.stability = 5,
+            inherent_stats_base.delta = 5,
+            inherent_stats_base.epsilon = 1,
+            inherent_stats_base.lambda = Some(1),
         },
 
         SIVA {
             display_name = "Siva".to_owned(),
-            inherent_stats.max_mana = Some(10),
+            inherent_stats_base.max_mana = Some(10),
         },
 
         TERRA {
@@ -71,5 +70,11 @@ pub fn default_charmap() -> CharMap {
         },
     }
 
-    res_map
+    // set everyone's hp to their max
+    for (_, chardata) in map.iter_mut() {
+        let mut pchar = chardata.borrow_mut();
+        pchar.battle_stats.hp = pchar.inherent_stats().max_hp;
+    }
+
+    map
 }

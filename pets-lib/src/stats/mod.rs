@@ -26,6 +26,8 @@ pub use pchars::{EnemyID, PChar};
 pub use quests::QuestPhase;
 pub use savefiles::SaveFile;
 
+/// Stats that aren't inherent and change via battles or
+/// occasionally other things. "Current" stuff like HP, Mana, etc.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct BattleStats {
     pub hp: IntegralStat,
@@ -53,13 +55,12 @@ pub struct CharData {
     /// Name of the character, as picked by the user
     /// ⚠️⚠️⚠️ See <https://github.com/Lamby777/PETS-G/issues/23>
     pub display_name: String,
-
     pub level: IntegralStat,
-    pub inherent_stats: InherentStats,
+
+    /// The offsets for inherent stats. The final inherent stats
+    /// are calculated with `CharData::inherent_stats`.
     pub inherent_stats_base: InherentStats,
     pub battle_stats: BattleStats,
-
-    /// Status effects the character has
     pub status_effects: HashSet<StatusEffect>,
 
     /// Equipment this character is wearing/using
@@ -67,10 +68,6 @@ pub struct CharData {
     /// # Important
     ///
     /// Equipping an item REMOVES it from the inventory!
-    ///
-    /// Not only does that make it easier to code, but it
-    /// also prevents feeling that your inventory space is
-    /// being "wasted" by equipment.
     pub equipment: Vec<Item>,
 }
 
@@ -96,7 +93,7 @@ impl Battler for CharData {
     }
 
     fn inherent_stats(&self) -> InherentStats {
-        self.inherent_stats.clone() + self.inherent_stats_base.clone()
+        statcalc::level_to_stats(self.level) + self.inherent_stats_base.clone()
     }
 
     fn equipment(&self) -> &[Item] {
@@ -266,7 +263,6 @@ impl Default for CharData {
 
             // i seriously can't `..Default::default()` because
             // that would be infinite recursion... WTF?
-            inherent_stats: Default::default(),
             inherent_stats_base: Default::default(),
             battle_stats: Default::default(),
             status_effects: Default::default(),
