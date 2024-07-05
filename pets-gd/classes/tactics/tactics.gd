@@ -7,7 +7,6 @@ func _attack():
     pass
 
 func _start():
-    print("Base start")
     timer = Timer.new()
     timer.name = "MainTimer"
     timer.timeout.connect(_attack)
