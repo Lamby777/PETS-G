@@ -358,6 +358,7 @@ libraries = {
 }
 
 [node name="InfoBars" type="VBoxContainer" parent="Menu"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 256.0
 offset_top = 880.0
