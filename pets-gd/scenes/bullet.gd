@@ -9,7 +9,6 @@ extends Node2D
 @export var icon: BattleIcon
 
 func on_hit(_body):
-    print("hit")
     icon.on_hit(self)
 
 func _ready():

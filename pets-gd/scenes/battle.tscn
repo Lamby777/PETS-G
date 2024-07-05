@@ -199,7 +199,8 @@ unique_name_in_owner = true
 position = Vector2(960, 192)
 scale = Vector2(6, 6)
 
-[node name="BattleIcon" type="BattleIcon" parent="Board"]
+[node name="BattleIcon" type="BattleIcon" parent="Board" node_paths=PackedStringArray("engine")]
+engine = NodePath("../..")
 unique_name_in_owner = true
 collision_layer = 256
 collision_mask = 0
