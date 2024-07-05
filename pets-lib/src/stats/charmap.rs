@@ -42,18 +42,17 @@ macro_rules! ch_unique_registry {
 pub fn default_charmap() -> CharMap {
     let mut res_map = uniform_charmap();
 
-    // max_hp, max_energy, attack, defense, speed,
-    // stability, delta, epsilon, lambda, max_mana,
-
     ch_unique_registry! {
         res_map,
 
         ETHAN {
             display_name = "Ethan".to_owned(),
+            inherent_stats.max_mana = Some(10),
         },
 
         SIVA {
             display_name = "Siva".to_owned(),
+            inherent_stats.max_mana = Some(10),
         },
 
         TERRA {

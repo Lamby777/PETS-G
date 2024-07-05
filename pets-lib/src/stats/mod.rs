@@ -26,12 +26,23 @@ pub use pchars::{EnemyID, PChar};
 pub use quests::QuestPhase;
 pub use savefiles::SaveFile;
 
-#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct BattleStats {
     pub hp: IntegralStat,
     pub mana: Option<IntegralStat>,
     pub energy: IntegralStat,
     pub buffs: Vec<InherentStats>,
+}
+
+impl Default for BattleStats {
+    fn default() -> Self {
+        BattleStats {
+            hp: 30,
+            mana: None,
+            energy: 1,
+            buffs: vec![],
+        }
+    }
 }
 
 /// All the information the game needs to know about a character
@@ -114,7 +125,6 @@ impl Battler for CharData {
 #[derive(
     Clone,
     Debug,
-    Default,
     Eq,
     Hash,
     PartialEq,
@@ -140,6 +150,23 @@ pub struct InherentStats {
     // Spoiler alert: Ethan is not the only one who needs lambda... :>
     pub lambda: Option<IntegralStat>,
     pub max_mana: Option<IntegralStat>,
+}
+
+impl Default for InherentStats {
+    fn default() -> Self {
+        InherentStats {
+            max_hp: 30,
+            max_energy: 1,
+            attack: 1,
+            defense: 1,
+            speed: 1,
+            stability: 1,
+            delta: 1,
+            epsilon: 1,
+            lambda: None,
+            max_mana: None,
+        }
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
