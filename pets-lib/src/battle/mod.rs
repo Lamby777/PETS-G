@@ -100,12 +100,16 @@ impl BattleEngine {
 
     fn update_health_and_mana_bars(&mut self) {
         let battler = self.current_battler();
-        let _hp = battler.hp();
-        let _mana = battler.mana();
+        let hp = battler.hp();
+        let mana = battler.mana();
 
-        let _hp_bar = self.base().get_node_as::<ProgressBar>("%InfoBars/HPBar");
-        let _mana_bar =
+        let mut hp_bar =
+            self.base().get_node_as::<ProgressBar>("%InfoBars/HPBar");
+        let mut mana_bar =
             self.base().get_node_as::<ProgressBar>("%InfoBars/ManaBar");
+
+        hp_bar.set("bar_value".into(), hp.to_variant());
+        mana_bar.set("bar_value".into(), mana.unwrap_or(0).to_variant());
     }
 
     fn current_battler(&self) -> &Box<dyn Battler> {
