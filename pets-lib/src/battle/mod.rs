@@ -35,7 +35,6 @@ enum AttackFlopReason {
     PoorTiming,
 }
 
-#[allow(unused)]
 #[derive(PartialEq)]
 enum MenuSection {
     Main,
