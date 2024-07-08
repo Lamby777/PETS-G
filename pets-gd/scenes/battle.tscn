@@ -63,6 +63,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [24]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Menu/InfoBars:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(256, 880)]
+}
 
 [sub_resource type="Animation" id="Animation_0hj2l"]
 resource_name = "dualmenu_open"
@@ -102,6 +114,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [24]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Menu/InfoBars:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(256, 880), Vector2(256, 1120)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_730bq"]
@@ -220,6 +244,86 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("5_hcsfj")
+
+[node name="InfoBars" type="VBoxContainer" parent="Menu"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 256.0
+offset_top = 880.0
+offset_right = 1664.0
+offset_bottom = 1048.0
+theme_override_constants/separation = 32
+
+[node name="HPBar" type="ProgressBar" parent="Menu/InfoBars"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+max_value = 200.0
+value = 192.0
+show_percentage = false
+script = ExtResource("9_r25ik")
+bar_label_text = "HP"
+bar_value = 192.0
+
+[node name="Label" type="RichTextLabel" parent="Menu/InfoBars/HPBar"]
+layout_mode = 0
+offset_left = 40.0
+offset_right = 496.0
+offset_bottom = 66.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 56
+text = "HP"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Value" type="RichTextLabel" parent="Menu/InfoBars/HPBar"]
+layout_mode = 0
+offset_left = 1152.0
+offset_right = 1376.0
+offset_bottom = 66.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 56
+bbcode_enabled = true
+text = "[right]192"
+fit_content = true
+autowrap_mode = 0
+
+[node name="ManaBar" type="ProgressBar" parent="Menu/InfoBars"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_type_variation = &"TealBar"
+max_value = 200.0
+value = 168.0
+show_percentage = false
+script = ExtResource("9_r25ik")
+bar_label_text = "Mana"
+bar_value = 168.0
+
+[node name="Label" type="RichTextLabel" parent="Menu/InfoBars/ManaBar"]
+layout_mode = 0
+offset_left = 40.0
+offset_right = 496.0
+offset_bottom = 66.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 56
+text = "Mana"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Value" type="RichTextLabel" parent="Menu/InfoBars/ManaBar"]
+layout_mode = 0
+offset_left = 1152.0
+offset_right = 1376.0
+offset_bottom = 66.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 56
+bbcode_enabled = true
+text = "[right]168"
+fit_content = true
+autowrap_mode = 0
 
 [node name="DualMenu" type="Control" parent="Menu"]
 layout_mode = 1
@@ -440,86 +544,6 @@ root_node = NodePath("../../..")
 libraries = {
 "": SubResource("AnimationLibrary_730bq")
 }
-
-[node name="InfoBars" type="VBoxContainer" parent="Menu"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 256.0
-offset_top = 880.0
-offset_right = 1664.0
-offset_bottom = 1048.0
-theme_override_constants/separation = 32
-
-[node name="HPBar" type="ProgressBar" parent="Menu/InfoBars"]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-max_value = 200.0
-value = 192.0
-show_percentage = false
-script = ExtResource("9_r25ik")
-bar_label_text = "HP"
-bar_value = 192.0
-
-[node name="Label" type="RichTextLabel" parent="Menu/InfoBars/HPBar"]
-layout_mode = 0
-offset_left = 40.0
-offset_right = 496.0
-offset_bottom = 66.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
-text = "HP"
-fit_content = true
-autowrap_mode = 0
-
-[node name="Value" type="RichTextLabel" parent="Menu/InfoBars/HPBar"]
-layout_mode = 0
-offset_left = 1152.0
-offset_right = 1376.0
-offset_bottom = 66.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
-bbcode_enabled = true
-text = "[right]192"
-fit_content = true
-autowrap_mode = 0
-
-[node name="ManaBar" type="ProgressBar" parent="Menu/InfoBars"]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-theme_type_variation = &"TealBar"
-max_value = 200.0
-value = 168.0
-show_percentage = false
-script = ExtResource("9_r25ik")
-bar_label_text = "Mana"
-bar_value = 168.0
-
-[node name="Label" type="RichTextLabel" parent="Menu/InfoBars/ManaBar"]
-layout_mode = 0
-offset_left = 40.0
-offset_right = 496.0
-offset_bottom = 66.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
-text = "Mana"
-fit_content = true
-autowrap_mode = 0
-
-[node name="Value" type="RichTextLabel" parent="Menu/InfoBars/ManaBar"]
-layout_mode = 0
-offset_left = 1152.0
-offset_right = 1376.0
-offset_bottom = 66.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
-bbcode_enabled = true
-text = "[right]168"
-fit_content = true
-autowrap_mode = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
