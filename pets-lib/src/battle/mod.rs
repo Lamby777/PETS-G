@@ -87,36 +87,53 @@ pub struct BattleEngine {
 
     #[init(default = onready_node(&base, "%BattleIcon"))]
     icon: OnReady<Gd<BattleIcon>>,
+
+    /// Something like the "rolling HP bar" feature from EarthBound
+    /// or Sans's KR from Undertale. Basically just a number that your
+    /// HP bar is going towards. The real HP value will be set ahead
+    /// of time, but the bar will slowly move towards it, and you
+    /// won't die until both your HP and the bar show zero.
+    karma_target: Option<IntegralStat>,
+
+    #[init(default = OnReady::manual())]
+    karma_timer: OnReady<Gd<Timer>>,
 }
 
 #[godot_api]
 impl BattleEngine {
     pub fn take_damage(&mut self, damage: i32) {
-        let _died = self
+        let new_hp = self
             .current_battler_mut()
             .take_damage(damage.try_into().unwrap());
 
-        self.update_health_and_mana_bars();
+        self.update_mana_bar();
+        self.karma_target = Some(new_hp);
     }
 
-    fn update_health_and_mana_bars(&mut self) {
+    fn update_mana_bar(&mut self) {
         let battler = self.current_battler();
-        let hp = battler.hp();
         let mana = battler.mana();
-        let inherent = battler.inherent_stats();
-        let max_hp = inherent.max_hp;
-        let max_mana = inherent.max_mana;
 
-        let mut hp_bar =
-            self.base().get_node_as::<ProgressBar>("%InfoBars/HPBar");
         let mut mana_bar =
             self.base().get_node_as::<ProgressBar>("%InfoBars/ManaBar");
-
-        hp_bar.set("bar_value".into(), hp.to_variant());
         mana_bar.set("bar_value".into(), mana.unwrap_or(0).to_variant());
 
-        hp_bar.set_max(max_hp.into());
+        let max_mana = battler.inherent_stats().max_mana;
         mana_bar.set_max(max_mana.unwrap_or(1).into());
+    }
+
+    #[func]
+    fn on_karma(&mut self) {
+        let battler = self.current_battler();
+        let hp = battler.hp();
+
+        // update hp bar
+        let mut hp_bar =
+            self.base().get_node_as::<ProgressBar>("%InfoBars/HPBar");
+        hp_bar.set("bar_value".into(), hp.to_variant());
+
+        let max_hp = battler.inherent_stats().max_hp;
+        hp_bar.set_max(max_hp.into());
     }
 
     fn current_battler(&self) -> &Box<dyn Battler> {
@@ -249,7 +266,20 @@ impl INode2D for BattleEngine {
     fn ready(&mut self) {
         self.choices.bind_mut().disable();
         self.battlers.init(pcb().bind().new_battlers());
-        self.update_health_and_mana_bars();
+        self.update_mana_bar();
+
+        {
+            let mut timer = Timer::new_alloc();
+            self.base_mut().add_child(timer.clone().upcast());
+            timer.set_wait_time(KARMA_INTERVAL);
+            timer.set_one_shot(false);
+            timer.start();
+
+            let callable = self.base().callable("on_karma");
+            timer.connect("timeout".into(), callable);
+
+            self.karma_timer.init(timer.upcast());
+        }
 
         {
             // intro countdown timer setup

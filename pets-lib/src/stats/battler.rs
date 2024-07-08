@@ -15,7 +15,7 @@ pub trait Battler {
     fn status_effects(&self) -> &HashSet<StatusEffect>;
     fn status_effects_mut(&mut self) -> &mut HashSet<StatusEffect>;
 
-    /// This should only return a reference to the inherent stats
+    /// This returns a copy of the inherent stats
     fn inherent_stats(&self) -> InherentStats;
     fn equipment(&self) -> &[Item];
 
@@ -54,12 +54,12 @@ pub trait Battler {
     }
 
     /// Subtract damage count from the character's HP, stopping at 0.
-    /// Returns true if the character has died because of this damage.
-    fn take_damage(&mut self, damage: IntegralStat) -> bool {
+    /// Returns the new HP.
+    fn take_damage(&mut self, damage: IntegralStat) -> IntegralStat {
         let new_hp = 0.max(self.hp() - damage);
         *self.hp_mut() = new_hp;
 
-        new_hp == 0
+        new_hp
     }
 
     /// Add back HP to the character

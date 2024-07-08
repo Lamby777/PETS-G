@@ -2,6 +2,7 @@
 //! All the "important" constants for configuring
 //! how the game works. Tinker all you want. Go nuts. :)
 //!
+
 use godot::builtin::real;
 use godot::engine::tween::TransitionType;
 
@@ -29,6 +30,8 @@ pub mod battle {
 
     pub const EFFECT_CHANCE_LIKELY: f64 = 0.8;
     pub const EFFECT_CHANCE_RARE: f64 = 0.1;
+
+    pub const KARMA_INTERVAL: f64 = 0.1;
 }
 
 pub mod playercb {
