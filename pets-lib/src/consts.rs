@@ -31,7 +31,8 @@ pub mod battle {
     pub const EFFECT_CHANCE_LIKELY: f64 = 0.8;
     pub const EFFECT_CHANCE_RARE: f64 = 0.1;
 
-    pub const KARMA_INTERVAL: f64 = 0.1;
+    pub const KARMA_INTERVAL: f64 = 0.02;
+    pub const KARMA_STEP: f64 = 0.1; // `some whole number * this = 1` must be true
 }
 
 pub mod playercb {
