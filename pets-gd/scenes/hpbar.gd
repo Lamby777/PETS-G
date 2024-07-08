@@ -12,7 +12,7 @@ extends ProgressBar
         if bar_label:
             bar_label.text = val
 
-@export var bar_value: int:
+@export var bar_value: float:
     get:
         return value
     set(val):

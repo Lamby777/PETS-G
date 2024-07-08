@@ -93,8 +93,6 @@ pub struct BattleEngine {
     /// HP bar is going towards. The real HP value will be set ahead
     /// of time, but the bar will slowly move towards it, and you
     /// won't die until both your HP and the bar show zero.
-    karma_target: Option<IntegralStat>,
-
     #[init(default = OnReady::manual())]
     karma_timer: OnReady<Gd<Timer>>,
 }
@@ -102,12 +100,11 @@ pub struct BattleEngine {
 #[godot_api]
 impl BattleEngine {
     pub fn take_damage(&mut self, damage: i32) {
-        let new_hp = self
+        let _new_hp = self
             .current_battler_mut()
             .take_damage(damage.try_into().unwrap());
 
         self.update_mana_bar();
-        self.karma_target = Some(new_hp);
     }
 
     fn update_mana_bar(&mut self) {
@@ -125,12 +122,20 @@ impl BattleEngine {
     #[func]
     fn on_karma(&mut self) {
         let battler = self.current_battler();
-        let hp = battler.hp();
-
-        // update hp bar
+        let hp = battler.hp() as f64;
         let mut hp_bar =
             self.base().get_node_as::<ProgressBar>("%InfoBars/HPBar");
-        hp_bar.set("bar_value".into(), hp.to_variant());
+        let hp_bar_value = hp_bar.get("bar_value".into()).to::<f64>();
+
+        // go up instantly, but go down over time
+        let new_hp_bar_value = if hp >= hp_bar_value {
+            hp
+        } else {
+            hp_bar_value - KARMA_STEP
+        };
+
+        // update hp bar
+        hp_bar.set("bar_value".into(), new_hp_bar_value.to_variant());
 
         let max_hp = battler.inherent_stats().max_hp;
         hp_bar.set_max(max_hp.into());
