@@ -2,7 +2,7 @@
 //! This file is for saving/loading the game.
 //!
 
-use io::{Read, Write};
+use io::Write;
 
 use godot::engine::file_access::ModeFlags;
 use godot::prelude::*;
@@ -27,7 +27,6 @@ pub struct SaveFile {
     pub bed_color: String,
 }
 
-#[allow(unused)]
 impl SaveFile {
     pub fn fresh() -> Self {
         let chars = default_charmap();
@@ -45,27 +44,23 @@ impl SaveFile {
         let new_save = Self::fresh();
         new_save.write_to(save_slot);
 
-        // SKIP THIS SHIT FOR DEBUG PURPOSES
         return Ok(new_save);
+        // SKIP THIS SHIT FOR DEBUG PURPOSES
 
-        // ----------------------------------------
-        // ----------------------------------------
-        // ----------------------------------------
-
-        let path = save_path(save_slot);
-        let Ok(mut file) = GFile::open(path, ModeFlags::READ) else {
-            let new_save = Self::fresh();
-            new_save.write_to(save_slot);
-            return Ok(new_save);
-        };
-
-        let mut content = vec![];
-        file.read_to_end(&mut content);
-        let content = String::from_utf8(content).unwrap();
-
-        // TODO load save file
-        // todo!()
-        Ok(serde_json::from_str(&content).unwrap())
+        // let path = save_path(save_slot);
+        // let Ok(mut file) = GFile::open(path, ModeFlags::READ) else {
+        //     let new_save = Self::fresh();
+        //     new_save.write_to(save_slot);
+        //     return Ok(new_save);
+        // };
+        //
+        // let mut content = vec![];
+        // file.read_to_end(&mut content);
+        // let content = String::from_utf8(content).unwrap();
+        //
+        // // TODO load save file
+        // // todo!()
+        // Ok(serde_json::from_str(&content).unwrap())
     }
 
     pub fn write_to(&self, save_slot: u8) {
