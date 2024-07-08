@@ -341,7 +341,7 @@ anchor_bottom = 0.5
 offset_left = 1024.0
 offset_top = -604.0
 offset_right = 1600.0
-offset_bottom = 612.0
+offset_bottom = 656.0
 grow_horizontal = 0
 grow_vertical = 2
 
@@ -351,6 +351,90 @@ theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/DualMenu/RightPanel/Margins"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="Menu/DualMenu/RightPanel/Margins/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Menu/DualMenu/RightPanel/Margins/VBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(0, 700)
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/DualMenu/RightPanel/Margins/VBoxContainer/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ChoiceAgent" type="ChoiceAgent" parent="Menu/DualMenu/RightPanel/Margins/VBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
+tween_property = ""
+tween_focused_value = 0.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/VBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "Caustics A"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/VBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "Gust B"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/VBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "Hail C"
+
+[node name="RichTextLabel10" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/VBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "Vex D"
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/VBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "Brainjack A"
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/VBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "PK Whip C"
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/VBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "PK Whip D"
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/VBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "PK Fuzz A"
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/VBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "PK Fuzz B"
+
+[node name="RichTextLabel9" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/VBoxContainer/PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "PSI Flux"
+
+[node name="SkillDescription" type="PanelContainer" parent="Menu/DualMenu/RightPanel/Margins/VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/DualMenu/RightPanel/Margins/VBoxContainer/SkillDescription"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "Description of the currently selected skill goes here."
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/DualMenu"]
 root_node = NodePath("../../..")
@@ -375,7 +459,7 @@ value = 192.0
 show_percentage = false
 script = ExtResource("9_r25ik")
 bar_label_text = "HP"
-bar_value = 192
+bar_value = 192.0
 
 [node name="Label" type="RichTextLabel" parent="Menu/InfoBars/HPBar"]
 layout_mode = 0
@@ -411,7 +495,7 @@ value = 168.0
 show_percentage = false
 script = ExtResource("9_r25ik")
 bar_label_text = "Mana"
-bar_value = 168
+bar_value = 168.0
 
 [node name="Label" type="RichTextLabel" parent="Menu/InfoBars/ManaBar"]
 layout_mode = 0

@@ -71,7 +71,7 @@ impl ChoiceAgent {
         };
 
         // color stuff
-        let t1 = if let Some(label) = txtlabel {
+        if let Some(label) = txtlabel {
             let target_col = {
                 let col = match is_picked {
                     true => "font_selected_color",
@@ -81,7 +81,7 @@ impl ChoiceAgent {
                 default_theme().get_color(col.into(), "RichTextLabel".into())
             };
 
-            let t1 = tween(
+            tween(
                 label.clone(),
                 "theme_override_colors/default_color",
                 None,
@@ -89,27 +89,22 @@ impl ChoiceAgent {
                 CHOICE_TWEEN_TIME,
                 CHOICE_TWEEN_TRANS,
             )
-            .map(|_| ());
+            .unwrap();
 
             bbcode_toggle(label, CHOICE_WAVE_BBCODE, is_picked);
-            t1
-        } else {
-            Ok(())
-        };
+        }
 
-        // tween the custom param
-        let t2 = tween(
-            target.clone(),
-            self.tween_property.clone(),
-            None,
-            target_val,
-            CHOICE_TWEEN_TIME,
-            CHOICE_TWEEN_TRANS,
-        );
-
-        // if either errored...
-        if t1.and(t2).is_err() {
-            godot_warn!("failed to tween choice!");
+        if !self.tween_property.is_empty() {
+            // tween the custom param
+            tween(
+                target.clone(),
+                self.tween_property.clone(),
+                None,
+                target_val,
+                CHOICE_TWEEN_TIME,
+                CHOICE_TWEEN_TRANS,
+            )
+            .unwrap();
         }
     }
 
