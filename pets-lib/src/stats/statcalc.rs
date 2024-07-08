@@ -22,7 +22,7 @@ pub fn level_to_stats(lvl: IntegralStat) -> InherentStats {
 }
 
 /// floor(    ( (log(x) + x^3) / 16 )   + x )
-pub fn xp_requirement(lvl: IntegralStat) -> IntegralStat {
+pub fn _xp_requirement(lvl: IntegralStat) -> IntegralStat {
     // NOTE x is the level which reaching this amount of xp
     // will get you to, and NOT the level you're currently at
     let p1 = (lvl as FloatStat).log10() + (lvl.pow(3) as FloatStat);
