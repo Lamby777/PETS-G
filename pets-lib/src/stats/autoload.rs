@@ -5,6 +5,7 @@
 use godot::global::randomize;
 use godot::prelude::*;
 
+use crate::battle::skills::load_skill_registry;
 use crate::prelude::*;
 
 #[derive(GodotClass)]
@@ -55,6 +56,7 @@ impl IObject for StatsInterface {
         let save = SaveFile::fresh();
 
         load_item_registry();
+        load_skill_registry();
 
         // randomize seed for godot
         randomize();

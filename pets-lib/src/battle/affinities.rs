@@ -1,7 +1,7 @@
 use super::skills::Element;
 use crate::prelude::*;
 
-#[derive(Clone, Copy, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub enum AffinityPower {
     /// The receiver is weak to this type of damage
     Weak,
@@ -34,7 +34,7 @@ impl AffinityPower {
     }
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Affinities(HashMap<Element, AffinityPower>);
 
 impl Default for Affinities {

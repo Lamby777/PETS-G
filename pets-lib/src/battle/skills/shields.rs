@@ -2,7 +2,7 @@ use godot::builtin::GString;
 
 use super::*;
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct ShieldSkill {
     /// Element of the shield
     pub affinity: Affinities,

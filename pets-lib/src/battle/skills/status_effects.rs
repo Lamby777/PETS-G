@@ -7,7 +7,7 @@
 use super::*;
 
 /// status effect from a skill, and its chances
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct EffectAndChance {
     pub effect: StatusEffect,
     pub chance: EffectChance,
@@ -26,7 +26,7 @@ impl Describe for EffectAndChance {
     }
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum EffectChance {
     Guaranteed,
     Common,

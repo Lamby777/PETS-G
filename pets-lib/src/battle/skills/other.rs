@@ -1,7 +1,7 @@
 use super::*;
 use std::time::Duration;
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct PSIFluxSkill(pub Duration);
 
 #[typetag::serde]

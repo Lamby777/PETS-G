@@ -7,6 +7,8 @@ use godot::prelude::*;
 use godot::tools::tr;
 use strum::{EnumIter, IntoEnumIterator as _};
 
+mod registry;
+pub(crate) use registry::load_skill_registry;
 mod status_effects;
 use status_effects::*;
 
@@ -23,7 +25,7 @@ pub(crate) use recovery::RecoverySkill;
 pub(crate) use shields::ShieldSkill;
 
 #[typetag::serde(tag = "type")]
-pub trait Skill {
+pub trait Skill: Debug + Sync + Send {
     fn name(&self) -> String;
     fn base_cost(&self) -> u32;
     fn description(&self) -> String;

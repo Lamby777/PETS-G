@@ -1,12 +1,12 @@
 use super::*;
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct RecoverySkill {
     pub name: String,
     pub recovery: RecoveryType,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum RecoveryType {
     HPPercent { percent: f64 },
     HPAmount { amount: u8 },

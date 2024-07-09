@@ -51,7 +51,7 @@ pub fn read_item_registry(path: &str) -> Option<Vec<Item>> {
     let mut content = vec![];
     file.read_to_end(&mut content).ok()?;
     if content.len() > 100_000_000 {
-        godot_warn!("{} mod_items.txt is too large! (over 100MB, wtf?)", path);
+        godot_warn!("{} mod items file too large! (over 100MB, wtf?)", path);
         godot_warn!("None of your modded items will be loaded!");
         return None;
     }
