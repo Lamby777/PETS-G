@@ -2,9 +2,10 @@ extends VBoxContainer
 
 @export var choice_agent: ChoiceAgent
 @export var battle_engine: BattleEngine
+@export var choicelabel_scene: PackedScene
 
 func on_skill_picked(control):
-    battle_engine.cast_skill("Caustics A")
+    battle_engine.cast_skill(control.skill_id)
     
 func on_skill_hover(control):
     pass
