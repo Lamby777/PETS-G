@@ -10,6 +10,7 @@ use godot::engine::{
     Texture2D, TextureRect, Timer, VBoxContainer,
 };
 use godot::prelude::*;
+use skills::Skill;
 
 use crate::consts::battle::*;
 use crate::prelude::*;
@@ -239,6 +240,11 @@ impl BattleEngine {
         portrait.set_texture(texture);
     }
 
+    #[func]
+    pub fn run_skill(&mut self, skill: Box<dyn Skill>) {
+        //
+    }
+
     fn open_skills_menu(&mut self) {
         self.menu_section = Some(MenuSection::Skill);
 
@@ -254,12 +260,13 @@ impl BattleEngine {
             .iter_shared()
             .for_each(|mut v| v.queue_free());
 
-        let scene = self
+        let mut scene = self
             .skills_menu_scene
             .clone()
             .expect("no skills menu scene exported")
             .instantiate_as::<VBoxContainer>();
 
+        scene.set("battle_engine".into(), self.base().to_variant());
         rpanel.add_child(scene.upcast());
 
         // animate slide the new menu up

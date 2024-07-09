@@ -73,7 +73,7 @@ impl ShieldSkill {
 }
 
 #[typetag::serde]
-impl SkillFamily for ShieldSkill {
+impl Skill for ShieldSkill {
     fn name(&self) -> String {
         let name = self.shield_type_str();
         let width = self.shield_width_str();

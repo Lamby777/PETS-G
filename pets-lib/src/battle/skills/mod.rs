@@ -23,7 +23,7 @@ pub(crate) use recovery::RecoverySkill;
 pub(crate) use shields::ShieldSkill;
 
 #[typetag::serde(tag = "type")]
-pub trait SkillFamily {
+pub trait Skill {
     fn name(&self) -> String;
     fn base_cost(&self) -> u32;
     fn description(&self) -> String;

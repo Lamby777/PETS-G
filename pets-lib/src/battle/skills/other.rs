@@ -5,7 +5,7 @@ use std::time::Duration;
 pub struct PSIFluxSkill(pub Duration);
 
 #[typetag::serde]
-impl SkillFamily for PSIFluxSkill {
+impl Skill for PSIFluxSkill {
     fn name(&self) -> String {
         tr!("SKILL_PSI_FLUX_NAME").to_string()
     }

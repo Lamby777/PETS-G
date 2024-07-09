@@ -14,7 +14,7 @@ pub enum RecoveryType {
 }
 
 #[typetag::serde]
-impl SkillFamily for RecoverySkill {
+impl Skill for RecoverySkill {
     fn name(&self) -> String {
         self.name.clone()
     }

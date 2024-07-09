@@ -8,7 +8,7 @@ pub struct BuffSkill {
 }
 
 #[typetag::serde]
-impl SkillFamily for BuffSkill {
+impl Skill for BuffSkill {
     fn name(&self) -> String {
         self.name.clone()
     }
