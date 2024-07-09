@@ -54,7 +54,7 @@ impl AttackSkill {
 }
 
 #[typetag::serde]
-impl SkillFamily for AttackSkill {
+impl Skill for AttackSkill {
     fn name(&self) -> String {
         let family = tr!("{}", self.tr_key.clone());
         let power = self.power.map(|p| tr(&format!("SKILL_ATTACK_TIER_{}", p)));
