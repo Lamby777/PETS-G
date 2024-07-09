@@ -10,7 +10,7 @@ use godot::engine::{
     Texture2D, TextureRect, Timer, VBoxContainer,
 };
 use godot::prelude::*;
-use skills::Skill;
+use skills::SKILL_REGISTRY;
 
 use crate::consts::battle::*;
 use crate::prelude::*;
@@ -106,14 +106,19 @@ pub struct BattleEngine {
 #[godot_api]
 impl BattleEngine {
     pub fn take_damage(&mut self, damage: i32) {
-        self.current_battler_mut()
-            .take_damage(damage.try_into().unwrap());
+        {
+            let battler = self.current_battler();
+            let mut battler = battler.borrow_mut();
+            battler.take_damage(damage.try_into().unwrap());
+        }
 
         self.update_mana_bar();
     }
 
     fn update_mana_bar(&mut self) {
         let battler = self.current_battler();
+        let battler = battler.borrow();
+
         let mana = battler.mana();
 
         let mut mana_bar =
@@ -127,6 +132,8 @@ impl BattleEngine {
     #[func]
     fn on_karma(&mut self) {
         let battler = self.current_battler();
+        let battler = battler.borrow();
+
         let hp = battler.hp() as f64;
         let mut hp_bar =
             self.base().get_node_as::<ProgressBar>("%InfoBars/HPBar");
@@ -160,12 +167,8 @@ impl BattleEngine {
         godot_print!("You died!");
     }
 
-    fn current_battler(&self) -> &Box<dyn Battler> {
-        &self.battlers.good_guys[self.current_party_member]
-    }
-
-    fn current_battler_mut(&mut self) -> &mut Box<dyn Battler> {
-        &mut self.battlers.good_guys[self.current_party_member]
+    fn current_battler(&self) -> Rc<RefCell<dyn Battler>> {
+        self.battlers.good_guys[self.current_party_member].clone()
     }
 
     /// slowly fade out the black rectangle over the battle scene
@@ -224,7 +227,7 @@ impl BattleEngine {
 
     pub fn swap_party_member(&mut self, new_index: usize) {
         self.current_party_member = new_index;
-        let pchar = self.battlers.good_guys[new_index].id();
+        let pchar = self.battlers.good_guys[new_index].borrow().id();
         let pchar = PChar::from_godot(pchar.into());
         godot_print!("Swapped to party member `{}`", pchar);
 
@@ -241,8 +244,17 @@ impl BattleEngine {
     }
 
     #[func]
-    pub fn cast_skill(&mut self, skill_id: GString) {
+    pub fn cast_skill(&mut self, skill_id: String) {
         println!("Casting skill: {}", skill_id);
+        let skill = SKILL_REGISTRY.get().unwrap().get(&skill_id).unwrap();
+
+        // skill.cast(caster, targets, allies, enemies)
+        skill.cast(
+            self.current_battler().clone(),
+            vec![],
+            self.battlers.good_guys.clone(),
+            self.battlers._bad_guys.clone(),
+        );
     }
 
     fn open_skills_menu(&mut self) {

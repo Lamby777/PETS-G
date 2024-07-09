@@ -199,11 +199,11 @@ impl PlayerCB {
         self.past_rotations.get(0).cloned().unwrap_or(Vector2::ZERO)
     }
 
-    pub fn good_guys_battlers(&self) -> Vec<Box<dyn Battler>> {
+    pub fn good_guys_battlers(&self) -> Vec<Rc<RefCell<dyn Battler>>> {
         self.party_chardata()
             .into_iter()
             .take(BATTLE_PARTY_SIZE)
-            .map(|v| Box::new(v) as Box<dyn Battler>)
+            .map(|v| Rc::new(RefCell::new(v)) as Rc<RefCell<dyn Battler>>)
             .collect()
     }
 
