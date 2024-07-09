@@ -1,5 +1,5 @@
-[
-    {
+{
+    "Caustics A": {
         "type": "AttackSkill",
         "tr_key": "SKILL_ATTACK_FIRE_DMG_NAME",
         "element": "Fire",
@@ -7,4 +7,4 @@
         "plural": false,
         "status_effect": null
     }
-]
+}
