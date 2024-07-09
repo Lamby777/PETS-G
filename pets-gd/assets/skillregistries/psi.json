@@ -1,0 +1,10 @@
+[
+    {
+        "type": "AttackSkill",
+        "tr_key": "SKILL_ATTACK_FIRE_DMG_NAME",
+        "element": "Fire",
+        "power": 1,
+        "plural": false,
+        "status_effect": null
+    }
+]
