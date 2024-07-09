@@ -4,7 +4,7 @@ extends VBoxContainer
 @export var battle_engine: BattleEngine
 
 func on_skill_picked(control):
-    pass
+    battle_engine.cast_skill("Caustics A")
     
 func on_skill_hover(control):
     pass
