@@ -70,23 +70,6 @@ impl IObject for StatsInterface {
 /// put stuff like serialization testing in here temporarily to mess around
 /// it'll run when the game starts
 fn print_debug_crap() {
-    // use crate::battle::skills::*;
-    // let skill = Box::new(AttackSkill {
-    //     tr_key: "SKILL_ATTACK_FIRE_DMG_NAME".to_owned(),
-    //     element: Element::Fire,
-    //     power: Some(1),
-    //     plural: false,
-    //     status_effect: None,
-    // }) as Box<dyn Skill>;
-    //
-    // let ser = serde_json::to_string(&skill).unwrap();
-
-    let ser = SKILL_REGISTRY
-        .get()
-        .unwrap()
-        .iter()
-        .find(|i| i.id == "Caustics A")
-        .unwrap();
-
+    let ser = SKILL_REGISTRY.get().unwrap().get("Caustics A").unwrap();
     godot_print!("{:?}", ser);
 }

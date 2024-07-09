@@ -8,7 +8,8 @@ use godot::engine::file_access::ModeFlags;
 use godot::engine::DirAccess;
 use godot::prelude::*;
 
-pub static SKILL_REGISTRY: OnceLock<Vec<Box<dyn Skill>>> = OnceLock::new();
+pub static SKILL_REGISTRY: OnceLock<HashMap<String, Box<dyn Skill>>> =
+    OnceLock::new();
 
 /// Find all the modded skills from modded registries.
 ///
@@ -18,7 +19,7 @@ pub static SKILL_REGISTRY: OnceLock<Vec<Box<dyn Skill>>> = OnceLock::new();
 ///  mods anyway, so it shouldn't be a big deal. I just typically
 ///  put a warning label on any function that leaks memory, so here
 ///  it is. You've been warned.
-pub fn find_modded_skills() -> Vec<Box<dyn Skill>> {
+pub fn find_modded_skills() -> HashMap<String, Box<dyn Skill>> {
     // make the folder in case it doesn't exist yet
     DirAccess::open("user://".into())
         .unwrap()
@@ -28,7 +29,7 @@ pub fn find_modded_skills() -> Vec<Box<dyn Skill>> {
         godot_warn!(
             "Could not open `mod-skills`, no modded skills were loaded."
         );
-        return vec![];
+        return HashMap::new();
     };
 
     dir.get_files()
@@ -39,7 +40,9 @@ pub fn find_modded_skills() -> Vec<Box<dyn Skill>> {
         .collect()
 }
 
-pub fn read_skill_registry(path: &str) -> Option<Vec<Box<dyn Skill>>> {
+pub fn read_skill_registry(
+    path: &str,
+) -> Option<HashMap<String, Box<dyn Skill>>> {
     let mut file = GFile::open(path, ModeFlags::READ).ok()?;
 
     let mut content = vec![];
@@ -51,7 +54,7 @@ pub fn read_skill_registry(path: &str) -> Option<Vec<Box<dyn Skill>>> {
     }
 
     let content = String::from_utf8(content).ok()?;
-    let res: Vec<Box<dyn Skill>> = ribbons::unwrap_fmt!(
+    let res: HashMap<String, Box<dyn Skill>> = ribbons::unwrap_fmt!(
         serde_json::from_str(&content),
         "skills file {} has wrong JSON contents",
         path
@@ -82,7 +85,7 @@ pub fn load_skill_registry() {
             skills
         })
         .flatten()
-        .collect::<Vec<_>>();
+        .collect::<HashMap<_, _>>();
 
     // scan for modded skill paths
     skills.extend(find_modded_skills());

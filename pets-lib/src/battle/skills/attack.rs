@@ -12,6 +12,7 @@ pub struct AttackSkill {
 }
 
 impl AttackSkill {
+    #[deprecated]
     pub fn new(tr_key: &str, element: Element, power: Option<u8>) -> Self {
         Self {
             tr_key: tr_key.to_owned(),
