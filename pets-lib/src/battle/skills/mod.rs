@@ -18,7 +18,7 @@ mod shields;
 
 pub(crate) use attack::AttackSkill;
 pub(crate) use buffs::BuffSkill;
-pub(crate) use other::{PSIFluxSkill, PSIRewireSkill};
+pub(crate) use other::PSIFluxSkill;
 pub(crate) use recovery::RecoverySkill;
 pub(crate) use shields::ShieldSkill;
 
