@@ -165,7 +165,7 @@ pchar = "SIVA"
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_yvaiy")
 hframes = 9
-vframes = 6
+vframes = 7
 
 [node name="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeStateMachine_4htcc")
