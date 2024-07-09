@@ -1,7 +1,14 @@
-[gd_scene format=3 uid="uid://b2m4ghg2jf166"]
+[gd_scene load_steps=3 format=3 uid="uid://b2m4ghg2jf166"]
 
-[node name="SkillsMenu" type="VBoxContainer"]
+[ext_resource type="Script" path="res://scenes/skills-menu.gd" id="1_3qen2"]
+[ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_lehk0"]
+
+[node name="SkillsMenu" type="VBoxContainer" node_paths=PackedStringArray("choice_agent")]
+custom_minimum_size = Vector2(400, 0)
 size_flags_vertical = 3
+theme = ExtResource("1_lehk0")
+script = ExtResource("1_3qen2")
+choice_agent = NodePath("PanelContainer/ScrollContainer/VBoxContainer/ChoiceAgent")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(0, 100)
