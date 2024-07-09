@@ -48,8 +48,10 @@ SKILL_PSI_FLUX_NAME,PSI Flux
 SKILL_PSI_FLUX_DESC,Warps time in your favor for {seconds} seconds.
 SKILL_PSI_REWIRE_NAME,PSI Rewire
 SKILL_PSI_REWIRE_DESC,Gamble away {percent} of your mana for the rare chance of a profit.
+SKILL_RECOVERY_HP_AMOUNT_NAME,Recover
 SKILL_RECOVERY_HP_AMOUNT_DESC,Heals {amount} of the target's HP.
-SKILL_RECOVERY_HP_PERCENT_DESC,Heals {percent}% of the target's HP.
+SKILL_RECOVERY_HP_PERCENT_NAME,Renew
+SKILL_RECOVERY_STATUS_NAME,Healing
 SKILL_RECOVERY_STATUS_DESC,Heals status effects up to {rating}★.
 ,
 SKILL_ATTACK_FIRE_DMG_NAME,Caustics
