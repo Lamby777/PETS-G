@@ -241,8 +241,8 @@ impl BattleEngine {
     }
 
     #[func]
-    pub fn run_skill(&mut self, skill: Box<dyn Skill>) {
-        //
+    pub fn cast_skill(&mut self, skill_id: GString) {
+        println!("Casting skill: {}", skill_id);
     }
 
     fn open_skills_menu(&mut self) {
