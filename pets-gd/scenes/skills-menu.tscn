@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://b2m4ghg2jf166"]
+
+[node name="SkillsMenu" type="VBoxContainer"]
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(0, 700)
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ChoiceAgent" type="ChoiceAgent" parent="PanelContainer/ScrollContainer/VBoxContainer"]
+tween_property = ""
+tween_focused_value = 0.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "Caustics A"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "Gust B"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "Hail C"
+
+[node name="RichTextLabel10" type="RichTextLabel" parent="PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "Vex D"
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "Brainjack A"
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "PK Whip C"
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "PK Whip D"
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "PK Fuzz A"
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "PK Fuzz B"
+
+[node name="RichTextLabel9" type="RichTextLabel" parent="PanelContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "PSI Flux"
+
+[node name="SkillDescription" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SkillDescription"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "Description of the currently selected skill goes here."

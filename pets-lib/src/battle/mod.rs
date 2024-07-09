@@ -7,7 +7,7 @@ use godot::engine::node::ProcessMode;
 use godot::engine::object::ConnectFlags;
 use godot::engine::{
     AnimatedSprite2D, AnimationPlayer, Control, InputEvent, ProgressBar,
-    Texture2D, TextureRect, Timer,
+    Texture2D, TextureRect, Timer, VBoxContainer,
 };
 use godot::prelude::*;
 
@@ -67,6 +67,12 @@ pub struct BattleEngine {
     base: Base<Node2D>,
 
     state: BattleState,
+
+    #[export]
+    skills_menu_scene: Option<Gd<PackedScene>>,
+
+    #[export]
+    right_panel_destination: Option<Gd<Control>>,
 
     #[init(default = OnReady::manual())]
     battlers: OnReady<Battlers>,
@@ -233,11 +239,44 @@ impl BattleEngine {
         portrait.set_texture(texture);
     }
 
+    fn open_skills_menu(&mut self) {
+        self.state = BattleState::Menu(MenuSection::Skill);
+
+        // clear right panel children
+        // TODO animate them out first
+        let mut rpanel = self
+            .right_panel_destination
+            .clone()
+            .expect("no right panel node exported");
+
+        rpanel
+            .get_children()
+            .iter_shared()
+            .for_each(|mut v| v.queue_free());
+
+        let scene = self
+            .skills_menu_scene
+            .clone()
+            .expect("no skills menu scene exported")
+            .instantiate_as::<VBoxContainer>();
+
+        rpanel.add_child(scene.upcast());
+
+        // animate slide the new menu up
+        rpanel
+            .get_node_as::<AnimationPlayer>("../AnimationPlayer")
+            .play_ex()
+            .name("margin_slide_up".into())
+            .done();
+    }
+
     #[func]
     pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
         match choice.get_name().to_string().as_str() {
-            "Skills" => todo!(),
+            "Skills" => self.open_skills_menu(),
+
             "Items" => todo!(),
+
             "Swap" => {
                 let mut next = self.current_party_member + 1;
                 if next >= BATTLE_PARTY_SIZE {
