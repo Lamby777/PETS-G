@@ -56,9 +56,8 @@ enum BattleState {
         /// the countdown is over, you'll escape the fight.
         running: bool,
     },
-
-    /// Has the menu open
-    Menu(MenuSection),
+    // /// Has the menu open
+    // Menu(MenuSection),
 }
 
 #[derive(GodotClass)]
@@ -67,6 +66,7 @@ pub struct BattleEngine {
     base: Base<Node2D>,
 
     state: BattleState,
+    menu_section: Option<MenuSection>,
 
     #[export]
     skills_menu_scene: Option<Gd<PackedScene>>,
@@ -178,7 +178,7 @@ impl BattleEngine {
         self.dualmenu_animator()
             .play_animation_forwards("dualmenu_open", true);
 
-        self.state = BattleState::Menu(MenuSection::Main);
+        self.menu_section = Some(MenuSection::Main);
 
         // enable the choice list
         let mut choices = self.choices.bind_mut();
@@ -190,7 +190,7 @@ impl BattleEngine {
         self.dualmenu_animator()
             .play_animation_forwards("dualmenu_open", false);
 
-        self.state = BattleState::Attack { running: false };
+        self.menu_section = None;
 
         // disable the choice list
         self.choices.bind_mut().disable();
@@ -200,11 +200,11 @@ impl BattleEngine {
         use BattleState::*;
 
         match self.state {
+            // close menu if open
+            _ if self.menu_section.is_some() => self.close_dualmenu(),
+
             // no menu while running away or in intro
             Intro | Attack { running: true } => return,
-
-            // close menu if open
-            Menu(_) => self.close_dualmenu(),
 
             // open menu if closed
             // (exhaustive match in case we add more states later)
@@ -240,7 +240,7 @@ impl BattleEngine {
     }
 
     fn open_skills_menu(&mut self) {
-        self.state = BattleState::Menu(MenuSection::Skill);
+        self.menu_section = Some(MenuSection::Skill);
 
         // clear right panel children
         // TODO animate them out first
