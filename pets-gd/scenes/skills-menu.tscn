@@ -21,6 +21,7 @@ size_flags_vertical = 3
 [node name="ChoiceAgent" type="ChoiceAgent" parent="PanelContainer/ScrollContainer/VBoxContainer"]
 tween_property = ""
 tween_focused_value = 0.0
+disabled = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 70)
