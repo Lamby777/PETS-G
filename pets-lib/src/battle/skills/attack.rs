@@ -103,7 +103,7 @@ impl Skill for AttackSkill {
         }
     }
 
-    fn base_cost(&self) -> u32 {
+    fn base_cost(&self) -> IntegralStat {
         1
     }
 

@@ -27,7 +27,7 @@ pub(crate) use shields::ShieldSkill;
 #[typetag::serde(tag = "type")]
 pub trait Skill: Debug + Sync + Send {
     fn name(&self) -> String;
-    fn base_cost(&self) -> u32;
+    fn base_cost(&self) -> IntegralStat;
     fn description(&self) -> String;
 
     /// Code that runs when the skill is casted
