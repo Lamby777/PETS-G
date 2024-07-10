@@ -4,13 +4,14 @@
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_lehk0"]
 [ext_resource type="PackedScene" uid="uid://ddnxr6fe5mj5q" path="res://scenes/skills_menu_choice.tscn" id="3_fa5t7"]
 
-[node name="SkillsMenu" type="VBoxContainer" node_paths=PackedStringArray("choice_agent")]
+[node name="SkillsMenu" type="VBoxContainer" node_paths=PackedStringArray("choice_agent", "description_label")]
 custom_minimum_size = Vector2(400, 0)
 size_flags_vertical = 3
 theme = ExtResource("1_lehk0")
 script = ExtResource("1_3qen2")
 choice_agent = NodePath("PanelContainer/ScrollContainer/VBoxContainer/ChoiceAgent")
 choicelabel_scene = ExtResource("3_fa5t7")
+description_label = NodePath("SkillDescription/RichTextLabel")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(0, 100)
