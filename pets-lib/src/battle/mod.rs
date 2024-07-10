@@ -270,6 +270,16 @@ impl BattleEngine {
         );
     }
 
+    #[func]
+    pub fn describe_skill(&self, skill_id: String) -> String {
+        let skill = ribbons::unwrap_fmt!(
+            SKILL_REGISTRY.get().unwrap().get(&skill_id),
+            "skill not found: {skill_id}",
+        );
+
+        skill.description()
+    }
+
     fn open_skills_menu(&mut self) {
         self.menu_section = Some(MenuSection::Skill);
 
