@@ -1,3 +1,5 @@
+use std::borrow::BorrowMut;
+
 use super::*;
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -107,15 +109,35 @@ impl Skill for AttackSkill {
 
     fn cast(
         &self,
-        _caster: Rc<RefCell<dyn Battler>>,
-        targets: Vec<Rc<RefCell<dyn Battler>>>,
+        caster: Rc<RefCell<dyn Battler>>,
+        target: Rc<RefCell<dyn Battler>>,
         _allies: Vec<Rc<RefCell<dyn Battler>>>,
         _enemies: Vec<Rc<RefCell<dyn Battler>>>,
     ) {
-        if targets.is_empty() {
-            panic!("attack skill should have a target");
+        let caster = RefCell::borrow(&caster);
+        let mut target = RefCell::borrow_mut(&target);
+
+        let attack = caster.practical_stats().attack;
+
+        if let Some(power) = self.power {
+            let damage = attack * power as IntegralStat;
+            godot_print!(
+                "Dealing {} damage, from {} attack * {} power",
+                damage,
+                attack,
+                power
+            );
+            target.take_damage(damage);
         }
 
-        todo!();
+        if let Some(effect) = &self.status_effect {
+            if !effect.chance.roll() {
+                godot_print!("Status effect rolled false.");
+                return;
+            }
+
+            godot_print!("Applying status effect: {:?}", effect.effect);
+            target.apply_status_effect(effect.effect);
+        }
     }
 }

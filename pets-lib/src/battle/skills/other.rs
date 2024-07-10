@@ -22,7 +22,7 @@ impl Skill for PSIFluxSkill {
     fn cast(
         &self,
         _caster: Rc<RefCell<dyn Battler>>,
-        _targets: Vec<Rc<RefCell<dyn Battler>>>,
+        _target: Rc<RefCell<dyn Battler>>,
         _allies: Vec<Rc<RefCell<dyn Battler>>>,
         _enemies: Vec<Rc<RefCell<dyn Battler>>>,
     ) {

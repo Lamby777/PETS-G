@@ -46,10 +46,8 @@ impl EffectChance {
         })
         .into()
     }
-}
 
-impl EffectChance {
-    pub fn _roll(&self) -> bool {
+    pub fn roll(&self) -> bool {
         use EffectChance::*;
 
         let chance = match self {
