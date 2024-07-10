@@ -245,15 +245,14 @@ impl BattleEngine {
 
     #[func]
     pub fn cast_skill(&mut self, skill_id: String) {
-        println!("Casting skill: {}", skill_id);
+        godot_print!("Casting skill: {}", skill_id);
         let skill = SKILL_REGISTRY.get().unwrap().get(&skill_id).unwrap();
 
-        // skill.cast(caster, targets, allies, enemies)
         skill.cast(
             self.current_battler().clone(),
-            vec![],
+            self.battlers.bad_guys[0].clone(),
             self.battlers.good_guys.clone(),
-            self.battlers._bad_guys.clone(),
+            self.battlers.bad_guys.clone(),
         );
     }
 

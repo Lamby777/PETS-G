@@ -218,7 +218,7 @@ impl PlayerCB {
     pub fn new_battlers(&self) -> Battlers {
         Battlers {
             good_guys: self.good_guys_battlers(),
-            _bad_guys: self.bad_guys_battlers(),
+            bad_guys: self.bad_guys_battlers(),
         }
     }
 }

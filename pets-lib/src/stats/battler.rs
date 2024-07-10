@@ -85,5 +85,5 @@ pub trait Battler {
 
 pub struct Battlers {
     pub good_guys: Vec<Rc<RefCell<dyn Battler>>>,
-    pub _bad_guys: Vec<Rc<RefCell<dyn Battler>>>,
+    pub bad_guys: Vec<Rc<RefCell<dyn Battler>>>,
 }

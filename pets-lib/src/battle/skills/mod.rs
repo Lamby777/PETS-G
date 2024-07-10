@@ -30,10 +30,18 @@ pub trait Skill: Debug + Sync + Send {
     fn base_cost(&self) -> u32;
     fn description(&self) -> String;
 
+    /// Code that runs when the skill is casted
+    ///
+    /// # Arguments
+    /// `caster`  - The battler that is casting the skill
+    /// `target`  - The battler that is the target of the skill.
+    ///            Ignored for plural skills.
+    /// `allies`  - The caster's allies
+    /// `enemies` - The caster's enemies
     fn cast(
         &self,
         _caster: Rc<RefCell<dyn Battler>>,
-        _targets: Vec<Rc<RefCell<dyn Battler>>>,
+        _target: Rc<RefCell<dyn Battler>>,
         _allies: Vec<Rc<RefCell<dyn Battler>>>,
         _enemies: Vec<Rc<RefCell<dyn Battler>>>,
     );
