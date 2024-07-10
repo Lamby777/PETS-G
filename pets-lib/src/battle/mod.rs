@@ -246,7 +246,10 @@ impl BattleEngine {
     #[func]
     pub fn cast_skill(&mut self, skill_id: String) {
         godot_print!("Casting skill: {}", skill_id);
-        let skill = SKILL_REGISTRY.get().unwrap().get(&skill_id).unwrap();
+        let skill = ribbons::unwrap_fmt!(
+            SKILL_REGISTRY.get().unwrap().get(&skill_id),
+            "skill not found: {skill_id}",
+        );
 
         skill.cast(
             self.current_battler().clone(),
@@ -261,28 +264,31 @@ impl BattleEngine {
 
         // clear right panel children
         // TODO animate them out first
-        let mut rpanel = self
+        let mut cont = self
             .right_panel_destination
             .clone()
             .expect("no right panel node exported");
 
-        rpanel
-            .get_children()
+        cont.get_children()
             .iter_shared()
             .for_each(|mut v| v.queue_free());
 
-        let mut scene = self
+        let mut panel = self
             .skills_menu_scene
             .clone()
             .expect("no skills menu scene exported")
             .instantiate_as::<VBoxContainer>();
 
-        scene.set("battle_engine".into(), self.base().to_variant());
-        rpanel.add_child(scene.upcast());
+        panel.set("battle_engine".into(), self.base().to_variant());
+        cont.add_child(panel.clone().upcast());
+
+        let mut agent =
+            panel.get("choice_agent".into()).to::<Gd<ChoiceAgent>>();
+        agent.bind_mut().enable();
+        self.choices.bind_mut().disable();
 
         // animate slide the new menu up
-        rpanel
-            .get_node_as::<AnimationPlayer>("../AnimationPlayer")
+        cont.get_node_as::<AnimationPlayer>("../AnimationPlayer")
             .play_ex()
             .name("margin_slide_up".into())
             .done();
