@@ -15,7 +15,7 @@ impl Skill for PSIFluxSkill {
         tr_replace!("SKILL_PSI_FLUX_DESC"; time)
     }
 
-    fn base_cost(&self) -> u32 {
+    fn base_cost(&self) -> IntegralStat {
         todo!()
     }
 
