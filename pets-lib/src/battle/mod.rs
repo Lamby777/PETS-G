@@ -85,6 +85,9 @@ pub struct BattleEngine {
     #[init(default = onready_node(&base, "%BattleChoices/ChoiceAgent"))]
     choices: OnReady<Gd<ChoiceAgent>>,
 
+    /// The choice agent for the right panel
+    other_choices: Option<Gd<ChoiceAgent>>,
+
     #[init(default = onready_node(&base, "AnimationPlayer"))]
     animator: OnReady<Gd<AnimationPlayer>>,
 
@@ -198,6 +201,14 @@ impl BattleEngine {
 
         // disable the choice list
         self.choices.bind_mut().disable();
+        // self.other_choices.as_mut().map(|v| v.bind_mut().disable());
+
+        self.right_panel_destination
+            .clone()
+            .expect("no right panel node exported")
+            .get_children()
+            .iter_shared()
+            .for_each(|mut v| v.queue_free());
     }
 
     fn toggle_dualmenu(&mut self) {
@@ -282,9 +293,10 @@ impl BattleEngine {
         panel.set("battle_engine".into(), self.base().to_variant());
         cont.add_child(panel.clone().upcast());
 
-        let mut agent =
-            panel.get("choice_agent".into()).to::<Gd<ChoiceAgent>>();
+        let mut agent: Gd<ChoiceAgent> = panel.get("choice_agent".into()).to();
         agent.bind_mut().enable();
+
+        self.other_choices = Some(agent);
         self.choices.bind_mut().disable();
 
         // animate slide the new menu up
