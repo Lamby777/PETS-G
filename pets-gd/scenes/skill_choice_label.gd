@@ -1,7 +1,7 @@
 class_name SkillChoiceLabel
 extends RichTextLabel
 
-@export var SKILL_ID: String
+@export var skill_id: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

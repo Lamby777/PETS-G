@@ -4,5 +4,6 @@
 
 [node name="RichTextLabel" type="RichTextLabel"]
 custom_minimum_size = Vector2(0, 70)
-text = "Caustics A"
+theme_override_colors/default_color = Color(0.803922, 0.87451, 0.266667, 1)
+bbcode_enabled = true
 script = ExtResource("1_5bmgk")

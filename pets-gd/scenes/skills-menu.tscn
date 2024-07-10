@@ -34,7 +34,15 @@ disabled = true
 
 [node name="RichTextLabel" parent="PanelContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_fa5t7")]
 layout_mode = 2
-SKILL_ID = "Caustics A"
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+text = "Caustics A"
+skill_id = "Caustics A"
+
+[node name="RichTextLabel2" parent="PanelContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_fa5t7")]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+text = "Caustics B"
+skill_id = "Caustics B"
 
 [node name="SkillDescription" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(0, 300)
