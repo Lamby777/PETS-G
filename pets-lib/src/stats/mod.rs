@@ -210,6 +210,34 @@ pub enum StatusEffect {
     Disarmed,
 }
 
+impl StatusEffect {
+    pub fn rating(&self) -> u8 {
+        use StatusEffect::*;
+        match self {
+            Paralyzed => 1,
+            Crying => 1,
+            Sleeping => 1,
+
+            LightHeaded => 2,
+            Bleeding => 2,
+            Poison => 2,
+
+            Blinded => 3,
+            Burning => 3,
+            Frostbite => 3,
+
+            ShortBreath => 4,
+            Dizzy => 4,
+            Tired => 4,
+
+            PoisonR => 5,
+
+            // cannot be healed
+            Disarmed => 6,
+        }
+    }
+}
+
 impl Display for StatusEffect {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         use StatusEffect::*;

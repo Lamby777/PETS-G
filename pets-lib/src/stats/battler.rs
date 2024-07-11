@@ -53,6 +53,36 @@ pub trait Battler {
         armored + buffs.sum()
     }
 
+    fn max_hp(&self) -> IntegralStat {
+        self.practical_stats().max_hp
+    }
+
+    fn max_mana(&self) -> Option<IntegralStat> {
+        self.practical_stats().max_mana
+    }
+
+    fn recover_hp(&mut self, amount: IntegralStat) {
+        let max_hp = self.max_hp();
+        let new_hp = max_hp.min(self.hp() + amount);
+        *self.hp_mut() = new_hp;
+    }
+
+    fn recover_mana(&mut self, amount: IntegralStat) {
+        let max_mana = self.max_mana();
+        if let Some(max_mana) = max_mana {
+            let new_mana = max_mana.min(self.mana().unwrap_or(0) + amount);
+            *self.mana_mut().unwrap() = new_mana;
+        }
+    }
+
+    fn recover_status(&mut self, rating: u8) {
+        for effect in self.status_effects().clone() {
+            if effect.rating() == rating {
+                self.remove_status_effect(effect);
+            }
+        }
+    }
+
     /// Subtract damage count from the character's HP, stopping at 0.
     /// Returns the new HP.
     fn take_damage(&mut self, damage: IntegralStat) -> IntegralStat {

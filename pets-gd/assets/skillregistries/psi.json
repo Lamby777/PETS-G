@@ -23,7 +23,7 @@
         "plural": false,
         "status_effect": null
     },
-    "Recovery A": {
+    "Recover A": {
         "type": "RecoverySkill",
         "power": 1,
         "recovery": {

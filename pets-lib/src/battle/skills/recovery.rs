@@ -1,3 +1,5 @@
+use std::borrow::BorrowMut;
+
 use super::*;
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -52,11 +54,30 @@ impl Skill for RecoverySkill {
 
     fn cast(
         &self,
-        _caster: Rc<RefCell<dyn Battler>>,
+        caster: Rc<RefCell<dyn Battler>>,
         _target: Rc<RefCell<dyn Battler>>,
-        _allies: Vec<Rc<RefCell<dyn Battler>>>,
+        allies: Vec<Rc<RefCell<dyn Battler>>>,
         _enemies: Vec<Rc<RefCell<dyn Battler>>>,
     ) {
-        todo!()
+        // let targets = if self.plural { _allies } else { vec![_target] };
+        let targets = if self.plural { allies } else { vec![caster] };
+
+        for target in targets {
+            match self.recovery {
+                RecoveryType::HPAmount { amount } => {
+                    RefCell::borrow_mut(&target).recover_hp(amount.into());
+                }
+
+                RecoveryType::HPPercent { percent } => {
+                    let max_hp = target.borrow().max_hp();
+                    let amount = (max_hp as f64 * percent).round() as u8;
+                    RefCell::borrow_mut(&target).recover_hp(amount.into());
+                }
+
+                RecoveryType::Status { rating } => {
+                    RefCell::borrow_mut(&target).recover_status(rating);
+                }
+            }
+        }
     }
 }
