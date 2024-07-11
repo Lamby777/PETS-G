@@ -27,9 +27,6 @@ NAME Agent Cascade
 
 Alright then. How about these?
 
-> Skill Desc
-$ debug_skill()
-
 > Pauses
 @ Debug Menu >> Pauses
 
