@@ -2,8 +2,9 @@ use super::*;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct RecoverySkill {
-    pub name: String,
+    pub power: u8,
     pub recovery: RecoveryType,
+    pub plural: bool,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -16,7 +17,15 @@ pub enum RecoveryType {
 #[typetag::serde]
 impl Skill for RecoverySkill {
     fn name(&self) -> String {
-        self.name.clone()
+        let family = match self.recovery {
+            RecoveryType::HPAmount { .. } => "SKILL_RECOVERY_HP_AMOUNT",
+            RecoveryType::HPPercent { .. } => "SKILL_RECOVERY_HP_PERCENT",
+            RecoveryType::Status { .. } => "SKILL_RECOVERY_STATUS",
+        };
+
+        let power = power_to_letter_pl(self.power, self.plural);
+
+        tr_replace!("SKILL_RECOVERY_COMBINED"; family, power)
     }
 
     fn description(&self) -> String {

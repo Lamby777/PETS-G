@@ -60,7 +60,7 @@ impl AttackSkill {
 impl Skill for AttackSkill {
     fn name(&self) -> String {
         let family = tr!("{}", self.tr_key.clone());
-        let power = self.power.map(|p| tr(&format!("SKILL_ATTACK_TIER_{}", p)));
+        let power = self.power.map(|p| power_to_letter_pl(p, self.plural));
 
         match power {
             Some(power) => tr_replace! {

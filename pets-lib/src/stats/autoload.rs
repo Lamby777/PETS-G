@@ -5,7 +5,7 @@
 use godot::global::randomize;
 use godot::prelude::*;
 
-use crate::battle::skills::{load_skill_registry, SKILL_REGISTRY};
+use crate::battle::skills::load_skill_registry;
 use crate::prelude::*;
 
 #[derive(GodotClass)]
@@ -70,6 +70,15 @@ impl IObject for StatsInterface {
 /// put stuff like serialization testing in here temporarily to mess around
 /// it'll run when the game starts
 fn print_debug_crap() {
-    let ser = SKILL_REGISTRY.get().unwrap().get("Caustics A").unwrap();
-    godot_print!("{:?}", ser);
+    // use crate::battle::skills::*;
+    //
+    // let ser = SKILL_REGISTRY.get().unwrap().get("Caustics A").unwrap();
+    // let skill = RecoverySkill {
+    //     power: 2,
+    //     recovery: RecoveryType::HPAmount { amount: 10 },
+    //     plural: false,
+    // };
+    //
+    // let ser = serde_json::to_string(&skill);
+    // godot_print!("{:?}", ser);
 }
