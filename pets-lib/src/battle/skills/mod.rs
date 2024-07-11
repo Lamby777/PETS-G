@@ -21,8 +21,21 @@ mod shields;
 pub(crate) use attack::AttackSkill;
 pub(crate) use buffs::BuffSkill;
 pub(crate) use other::PSIFluxSkill;
-pub(crate) use recovery::RecoverySkill;
+pub(crate) use recovery::{RecoverySkill, RecoveryType};
 pub(crate) use shields::ShieldSkill;
+
+fn power_to_letter(power: u8) -> GString {
+    tr(&format!("SKILL_TIER_{}", power))
+}
+
+fn power_to_letter_pl(power: u8, plural: bool) -> GString {
+    let power = power_to_letter(power);
+
+    match plural {
+        true => tr_replace!("SKILL_POWER_PLURAL"; power).into(),
+        false => power,
+    }
+}
 
 #[typetag::serde(tag = "type")]
 pub trait Skill: Debug + Sync + Send {
