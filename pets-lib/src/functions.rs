@@ -70,44 +70,6 @@ impl ScriptExecutor {
     }
 
     #[func]
-    fn debug_skill() {
-        end_ix();
-
-        let skill1 = AttackSkill {
-            tr_key: "SKILL_ATTACK_FIRE_DMG_NAME".to_owned(),
-            element: Element::Fire,
-            power: Some(1),
-            plural: true,
-            status_effect: None,
-        };
-
-        let aff = {
-            let mut map = HashMap::new();
-            map.insert(Element::Fire, AffinityPower::Weak);
-            map.insert(Element::Fuzz, AffinityPower::Strong);
-            map.insert(Element::Wind, AffinityPower::Nullify);
-            map.insert(Element::Spirit, AffinityPower::Heal);
-            map.insert(Element::Ice, AffinityPower::Reflect);
-            Affinities::new(map)
-        };
-
-        let skill2 = ShieldSkill {
-            affinity: aff,
-            hits: 1,
-            multiplier: 0.2,
-            reflect: false,
-            plural: false,
-        };
-
-        start_ix_replace("Debug Menu >> Skill", &[
-            ("{SKILL_NAME1}".to_owned(), skill1.name()),
-            ("{SKILL_DESC1}".to_owned(), skill1.description()),
-            ("{SKILL_NAME2}".to_owned(), skill2.name()),
-            ("{SKILL_DESC2}".to_owned(), skill2.description()),
-        ]);
-    }
-
-    #[func]
     fn debug_battle() {
         end_ix();
 
