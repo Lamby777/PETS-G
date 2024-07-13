@@ -1,9 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://kgl5788x405y"]
+[gd_scene load_steps=26 format=3 uid="uid://kgl5788x405y"]
 
 [ext_resource type="Shader" path="res://themes/opacity.gdshader" id="1_3pmac"]
 [ext_resource type="Script" path="res://classes/tactics/enemies/A_NONNY_MOUSE.gd" id="1_vrl6q"]
 [ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="2_0m4jp"]
-[ext_resource type="Shader" path="res://themes/vdrugs/common.gdshader" id="2_5b7lm"]
 [ext_resource type="PackedScene" uid="uid://dd2ecg5hgyxv2" path="res://scenes/bullets/mouse1.tscn" id="2_n0w8q"]
 [ext_resource type="Texture2D" uid="uid://he44mug8lejt" path="res://assets/textures/misc/BattleIcons.png" id="3_k3xai"]
 [ext_resource type="AudioStream" uid="uid://ck0eoifj1plwe" path="res://assets/sounds/click1.wav" id="4_icqrr"]
@@ -21,7 +20,10 @@ shader_parameter/speed = 2.0
 shader_parameter/angle = 47.788
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88ovb"]
-shader = ExtResource("2_5b7lm")
+shader = ExtResource("2_0m4jp")
+shader_parameter/strength = 0.716
+shader_parameter/speed = 1.7
+shader_parameter/angle = 39.46
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pf8ic"]
 radius = 40.0
