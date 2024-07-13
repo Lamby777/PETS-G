@@ -4,48 +4,44 @@
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_lehk0"]
 [ext_resource type="PackedScene" uid="uid://ddnxr6fe5mj5q" path="res://scenes/skills_menu_choice.tscn" id="3_fa5t7"]
 
-[node name="SkillsMenu" type="VBoxContainer" node_paths=PackedStringArray("choice_agent", "description_label")]
-custom_minimum_size = Vector2(400, 0)
-size_flags_vertical = 3
+[node name="PanelContainer" type="PanelContainer" node_paths=PackedStringArray("choice_agent", "description_label")]
+custom_minimum_size = Vector2(0, 700)
+offset_right = 400.0
+offset_bottom = 500.0
 theme = ExtResource("1_lehk0")
 script = ExtResource("1_3qen2")
-choice_agent = NodePath("PanelContainer/ScrollContainer/VBoxContainer/ChoiceAgent")
+choice_agent = NodePath("ScrollContainer/VBoxContainer/ChoiceAgent")
 choicelabel_scene = ExtResource("3_fa5t7")
 description_label = NodePath("SkillDescription/RichTextLabel")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer"]
-custom_minimum_size = Vector2(0, 700)
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
 follow_focus = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ChoiceAgent" type="ChoiceAgent" parent="PanelContainer/ScrollContainer/VBoxContainer"]
+[node name="ChoiceAgent" type="ChoiceAgent" parent="ScrollContainer/VBoxContainer"]
 tween_property = ""
 tween_focused_value = 0.0
 disabled = true
 
-[node name="RichTextLabel" parent="PanelContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_fa5t7")]
+[node name="RichTextLabel" parent="ScrollContainer/VBoxContainer" instance=ExtResource("3_fa5t7")]
 layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 text = "Caustics A"
 skill_id = "Caustics A"
 
-[node name="RichTextLabel2" parent="PanelContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_fa5t7")]
+[node name="RichTextLabel2" parent="ScrollContainer/VBoxContainer" instance=ExtResource("3_fa5t7")]
 layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 text = "Caustics B"
 skill_id = "Caustics B"
 
-[node name="RichTextLabel3" parent="PanelContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_fa5t7")]
+[node name="RichTextLabel3" parent="ScrollContainer/VBoxContainer" instance=ExtResource("3_fa5t7")]
 layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 text = "Recover A"
