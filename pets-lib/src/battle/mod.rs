@@ -6,8 +6,8 @@
 use godot::engine::node::ProcessMode;
 use godot::engine::object::ConnectFlags;
 use godot::engine::{
-    AnimatedSprite2D, AnimationPlayer, Control, InputEvent, ProgressBar,
-    Texture2D, TextureRect, Timer, VBoxContainer,
+    AnimatedSprite2D, AnimationPlayer, Control, InputEvent, PanelContainer,
+    ProgressBar, Texture2D, TextureRect, Timer,
 };
 use godot::prelude::*;
 use skills::SKILL_REGISTRY;
@@ -298,7 +298,7 @@ impl BattleEngine {
             .skills_menu_scene
             .clone()
             .expect("no skills menu scene exported")
-            .instantiate_as::<VBoxContainer>();
+            .instantiate_as::<PanelContainer>();
 
         panel.set("battle_engine".into(), self.base().to_variant());
         cont.add_child(panel.clone().upcast());

@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends PanelContainer
 
 @export var choice_agent: ChoiceAgent
 @export var battle_engine: BattleEngine
