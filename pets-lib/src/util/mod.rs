@@ -95,7 +95,7 @@ pub fn start_ix(name: impl Into<String>) {
     DialogBox::singleton().bind_mut().start_ix(name.into());
 }
 
-pub fn start_ix_replace<S>(name: impl Into<String>, replace: &[(S, S)])
+pub fn _start_ix_replace<S>(name: impl Into<String>, replace: &[(S, S)])
 where
     S: Into<String> + Clone,
 {
