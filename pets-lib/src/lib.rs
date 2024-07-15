@@ -60,6 +60,7 @@ mod prelude {
     pub use indoc::indoc;
     pub use rand::Rng;
     pub use ribbons::unwrap_fmt;
+    pub use serde::de::DeserializeOwned;
     pub use serde::{Deserialize, Serialize};
 
     pub use std::cell::RefCell;
