@@ -37,6 +37,8 @@ pub fn find_modded<T>(registry_name: &str) -> Registry<T>
 where
     T: DeserializeOwned + Serialize,
 {
+    godot_print!("Reading modded {} registries.", registry_name);
+
     // make the folder in case it doesn't exist yet
     DirAccess::open("user://".into())
         .unwrap()
@@ -56,21 +58,26 @@ where
         return HashMap::new();
     };
 
-    dir.get_files()
+    let res = dir
+        .get_files()
         .to_vec()
         .into_iter()
         .filter_map(|v| read_registry::<T>(&v.to_string()))
         .flatten()
-        .collect()
+        .collect();
+
+    godot_print!("Finished reading modded {} registries.\n\n", registry_name);
+    res
 }
 
 pub fn find_vanilla<T>(folder_name: &str) -> Registry<T>
 where
     T: DeserializeOwned + Serialize,
 {
+    godot_print!("Reading vanilla `{}`.", folder_name);
     let folder_path = format!("res://assets/{}", folder_name);
 
-    DirAccess::open(folder_path.clone().into())
+    let res = DirAccess::open(folder_path.clone().into())
         .unwrap()
         .get_files()
         .to_vec()
@@ -86,5 +93,8 @@ where
             content
         })
         .flatten()
-        .collect::<HashMap<_, _>>()
+        .collect::<HashMap<_, _>>();
+
+    godot_print!("Successfully read vanilla `{}`!\n\n", folder_name);
+    res
 }
