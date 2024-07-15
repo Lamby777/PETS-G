@@ -45,15 +45,19 @@ where
     T: DeserializeOwned + Serialize,
 {
     // make the folder in case it doesn't exist yet
-    DirAccess::open("user://mods/".into())
+    DirAccess::open("user://".into())
+        .unwrap()
+        .make_dir("modded".into());
+
+    DirAccess::open("user://modded".into())
         .unwrap()
         .make_dir(registry_name.into());
 
     let Some(mut dir) =
-        DirAccess::open(format!("user://mods/{}/", registry_name).into())
+        DirAccess::open(format!("user://modded/{}", registry_name).into())
     else {
         godot_warn!(
-            "Could not open `/mods/{0}`, no modded {0} were loaded.",
+            "Could not open `/modded/{0}`, no modded {0} were loaded.",
             registry_name
         );
         return HashMap::new();
@@ -73,7 +77,7 @@ where
 {
     let folder_path = format!("res://assets/{}", folder_name);
 
-    DirAccess::open(folder_name.into())
+    DirAccess::open(folder_path.clone().into())
         .unwrap()
         .get_files()
         .to_vec()
