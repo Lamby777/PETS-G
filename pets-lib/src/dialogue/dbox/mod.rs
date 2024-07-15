@@ -432,7 +432,7 @@ impl DialogBox {
 
     fn free_choice_labels(&mut self) {
         let mut cont = self.choice_container();
-        let children = subchildren_of_type::<DChoice, _>(cont.clone());
+        let children = children_of_type::<DChoice, _>(cont.clone());
 
         for mut node in children {
             node.set_name("deleted".into());

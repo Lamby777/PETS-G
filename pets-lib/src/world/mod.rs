@@ -5,6 +5,7 @@
 use crate::consts::battle::*;
 use crate::prelude::*;
 
+use enemy_node::WalkingEnemy;
 use godot::engine::utilities::randf_range;
 use godot::engine::{AnimationPlayer, AudioServer, AudioStream, CanvasLayer};
 use godot::prelude::*;
@@ -168,10 +169,8 @@ impl World {
         Self::mute_audio_bus(true);
 
         // it's a performance thing
-        // pcb().set_process(false);
-        // {
-        //     subchildren_of_type::<WalkingEnemy, _>(self.to_gd());
-        // }
+        pcb().set_process(false);
+        children_of_type::<WalkingEnemy, _>(self.to_gd());
     }
 
     // ---------------------------------------- MusicZone stuff
@@ -242,7 +241,7 @@ impl World {
     #[func]
     fn reconnect_musiczones(&mut self) {
         let room = Self::room();
-        let mzones = subchildren_of_type::<MusicZone, _>(room);
+        let mzones = children_of_type::<MusicZone, _>(room);
 
         for mut zone in mzones {
             disconnect_signal(&mut zone, "body_entered");
@@ -262,7 +261,7 @@ impl World {
     #[func]
     fn reconnect_waterzones(&mut self) {
         let room = Self::room();
-        let wzones = subchildren_of_type::<WaterZone, _>(room);
+        let wzones = children_of_type::<WaterZone, _>(room);
 
         for mut zone in wzones {
             disconnect_signal(&mut zone, "body_entered");
