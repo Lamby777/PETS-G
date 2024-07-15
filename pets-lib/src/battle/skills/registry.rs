@@ -16,7 +16,7 @@ pub static SKILL_REGISTRY: OnceLock<HashMap<String, Box<dyn Skill>>> =
 /// modded skill registries and combining the list of skills.
 pub fn load_skill_registry() {
     // scan the vanilla skills folder
-    let mut skills = find_vanilla("res://assets/skillregistries");
+    let mut skills = find_vanilla("skillregistries");
 
     // scan for modded skill paths
     skills.extend(find_modded("skills"));
