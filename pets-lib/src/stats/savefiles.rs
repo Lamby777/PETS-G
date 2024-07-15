@@ -20,7 +20,8 @@ fn save_path(slot: u8) -> String {
 pub struct SaveFile {
     pub chars: CharMap,
 
-    pub inventory: Rc<RefCell<Vec<Item>>>,
+    /// Mapping: item ID -> quantity
+    pub inventory: Rc<RefCell<HashMap<String, u32>>>,
     pub scrapbook: Scrapbook,
     pub quests: HashMap<String, QuestPhase>,
 
@@ -33,7 +34,7 @@ impl SaveFile {
 
         Self {
             chars,
-            inventory: Rc::new(RefCell::new(vec![])),
+            inventory: Rc::new(RefCell::new(HashMap::new())),
             scrapbook: Scrapbook::empty(),
             quests: HashMap::new(),
             bed_color: "red".to_string(),

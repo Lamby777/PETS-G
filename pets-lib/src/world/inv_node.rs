@@ -30,7 +30,7 @@ impl InventoryNode {
         World::singleton().get_node_as("%Inventory")
     }
 
-    fn inventory() -> Rc<RefCell<Vec<Item>>> {
+    fn inventory() -> Rc<RefCell<HashMap<String, Item>>> {
         si().bind().save.inventory.clone()
     }
 

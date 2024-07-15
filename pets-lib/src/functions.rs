@@ -6,9 +6,14 @@ fn end_ix() {
     DialogBox::singleton().bind_mut().end_interaction();
 }
 
-fn give_item(item: Item) {
+fn give_item(id: String) {
     let inv = si().bind_mut().save.inventory.clone();
-    inv.borrow_mut().push(item);
+    inv.borrow_mut()
+        .get_mut(&id)
+        .map(|v| *v += 1)
+        .unwrap_or_else(|| {
+            inv.borrow_mut().insert(id, 1);
+        });
 }
 
 #[derive(GodotClass)]
