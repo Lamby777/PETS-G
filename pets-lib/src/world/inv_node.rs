@@ -30,10 +30,6 @@ impl InventoryNode {
         World::singleton().get_node_as("%Inventory")
     }
 
-    fn inventory() -> Rc<RefCell<HashMap<String, Item>>> {
-        si().bind().save.inventory.clone()
-    }
-
     pub fn is_open(&self) -> bool {
         self.is_open
     }
@@ -57,17 +53,18 @@ impl InventoryNode {
         let mut desc_txt =
             cont.get_node_as::<RichTextLabel>("ItemDesc/RichTextLabel");
 
-        let inv = Self::inventory();
+        let inv = StatsInterface::inventory();
         let inv = inv.borrow();
 
-        let Some(item) = inv.get(self.current_index) else {
+        let Some((item_id, _item_count)) = inv.get_at_index(self.current_index)
+        else {
             name_txt.set_text("".into());
             desc_txt.set_text("".into());
             return;
         };
 
-        let name = tr!("ITEM_NAME_{a}", a = item.id);
-        let desc = tr!("ITEM_DESC_{a}", a = item.id);
+        let name = tr!("ITEM_NAME_{a}", a = item_id);
+        let desc = tr!("ITEM_DESC_{a}", a = item_id);
         name_txt.set_text(format!("[center]{}[/center]", name).into());
         desc_txt.set_text(format!("[center]{}[/center]", desc).into());
     }
@@ -75,7 +72,7 @@ impl InventoryNode {
     #[func]
     fn update_item_icons(&mut self) {
         let child_count = self.row.get_child_count();
-        let inv = Self::inventory();
+        let inv = StatsInterface::inventory();
         let inv = inv.borrow();
 
         for i in 1..=child_count {
@@ -88,10 +85,10 @@ impl InventoryNode {
                 continue;
             }
 
-            let item = inv.get(index as usize);
+            let item = inv.get_at_index(index as usize);
 
             let texture =
-                item.map_or(Variant::nil(), |item| item.id.to_variant());
+                item.map_or(Variant::nil(), |(id, _)| id.to_variant());
             icon_cont.call("set_texture".into(), &[texture]);
         }
     }
@@ -108,7 +105,8 @@ impl InventoryNode {
             false => -1,
         };
 
-        let inventory_length = Self::inventory().borrow().len() as i32;
+        let inventory_length =
+            StatsInterface::inventory().borrow().len() as i32;
         let new_index = self.current_index as i32 + offset;
 
         if new_index < 0 || new_index >= inventory_length {

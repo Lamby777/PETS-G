@@ -19,6 +19,10 @@ pub struct StatsInterface {
 
 #[godot_api]
 impl StatsInterface {
+    pub fn inventory() -> Rc<RefCell<Inventory>> {
+        si().bind().save.inventory.clone()
+    }
+
     pub fn load_save_state(&mut self, save: SaveFile) {
         self.save = save;
     }

@@ -6,16 +6,6 @@ fn end_ix() {
     DialogBox::singleton().bind_mut().end_interaction();
 }
 
-fn give_item(id: String) {
-    let inv = si().bind_mut().save.inventory.clone();
-    inv.borrow_mut()
-        .get_mut(&id)
-        .map(|v| *v += 1)
-        .unwrap_or_else(|| {
-            inv.borrow_mut().insert(id, 1);
-        });
-}
-
 #[derive(GodotClass)]
 #[class(init, base=Node)]
 pub struct ScriptExecutor {
@@ -78,14 +68,9 @@ impl ScriptExecutor {
 
     #[func]
     fn debug_item(item_id: String, quantity: u32) {
-        // why tf do i have to do this?
-        let item = ITEM_REGISTRY.get().unwrap().get(&item_id);
-
-        let item = ribbons::unwrap_fmt!(item, "no item with id {}", item_id);
-
-        for _ in 0..quantity {
-            give_item(item.clone());
-        }
+        StatsInterface::inventory()
+            .borrow_mut()
+            .give_item(item_id, quantity);
 
         end_ix();
         start_ix("Debug Menu >> After Item");

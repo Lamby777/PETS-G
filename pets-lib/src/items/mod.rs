@@ -14,7 +14,7 @@ use godot::prelude::*;
 
 mod inv;
 
-pub use inv::ItemList;
+pub use inv::{Inventory, ItemList};
 
 pub static ITEM_REGISTRY: OnceLock<HashMap<String, Item>> = OnceLock::new();
 
