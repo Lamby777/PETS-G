@@ -21,7 +21,7 @@ pub struct SaveFile {
     pub chars: CharMap,
 
     /// Mapping: item ID -> quantity
-    pub inventory: Rc<RefCell<HashMap<String, u32>>>,
+    pub inventory: Rc<RefCell<Inventory>>,
     pub scrapbook: Scrapbook,
     pub quests: HashMap<String, QuestPhase>,
 
@@ -34,7 +34,7 @@ impl SaveFile {
 
         Self {
             chars,
-            inventory: Rc::new(RefCell::new(HashMap::new())),
+            inventory: Rc::new(RefCell::new(Inventory::new())),
             scrapbook: Scrapbook::empty(),
             quests: HashMap::new(),
             bed_color: "red".to_string(),
