@@ -74,11 +74,7 @@ impl ScriptExecutor {
     #[func]
     fn debug_item(item_id: String, quantity: u32) {
         // why tf do i have to do this?
-        let item = ITEM_REGISTRY
-            .get()
-            .unwrap()
-            .iter()
-            .find(|i| i.id == item_id);
+        let item = ITEM_REGISTRY.get().unwrap().get(&item_id);
 
         let item = ribbons::unwrap_fmt!(item, "no item with id {}", item_id);
 

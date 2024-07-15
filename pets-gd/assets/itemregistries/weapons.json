@@ -1,6 +1,5 @@
-[
-    {
-        "id": "trusty_rusty_pistol",
+{
+    "trusty_rusty_pistol": {
         "attributes": [
             "Cheap",
             "Ranged",
@@ -24,4 +23,4 @@
             }
         }
     }
-]
+}

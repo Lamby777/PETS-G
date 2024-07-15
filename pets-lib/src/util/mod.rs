@@ -7,6 +7,7 @@ mod describe;
 mod extensions;
 pub mod limiq;
 mod node_stuff;
+pub mod registry;
 pub mod singleton;
 
 pub use describe::Describe;
