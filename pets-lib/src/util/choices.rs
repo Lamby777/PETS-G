@@ -108,12 +108,6 @@ impl ChoiceAgent {
         }
     }
 
-    // pub fn tween_all(&self, is_picked: bool) {
-    //     for choice in self.choice_labels() {
-    //         self._tween_choice(is_picked, choice);
-    //     }
-    // }
-
     pub fn parent(&self) -> Gd<Node> {
         self.base()
             .get_parent()

@@ -85,12 +85,8 @@ macro_rules! connect {
     };
 }
 
-/// Find n where the nth child of type `Filter` is named `name`.
 /// Recursively get all children of a node that are of a certain type.
-/// Returns a vector. Use `subchildren_of_type_array` for a godot array.
-///
-/// bugfix later: it won't find children of nodes that are the correct type
-pub fn subchildren_of_type<T, Par>(parent: Gd<Par>) -> Vec<Gd<T>>
+pub fn children_of_type<T, Par>(parent: Gd<Par>) -> Vec<Gd<T>>
 where
     Par: Inherits<Node>,
     T: Inherits<Node>,
@@ -99,29 +95,16 @@ where
     let parent = parent.upcast_ref();
 
     for node in parent.get_children().iter_shared() {
-        let Ok(node) = node.clone().try_cast::<T>() else {
-            let children = subchildren_of_type::<T, _>(node);
-            res.extend(children);
-            continue;
-        };
+        // if matches, push to res
+        if let Ok(node) = node.clone().try_cast::<T>() {
+            res.push(node);
+        }
 
-        res.push(node);
+        // push children that match as well
+        res.extend(children_of_type::<T, _>(node));
     }
 
     res
-}
-
-pub fn _index_of_child_with_name<Filter, N>(
-    node: Gd<N>,
-    name: GString,
-) -> Option<usize>
-where
-    Filter: Inherits<Node>,
-    N: Inherits<Node>,
-{
-    subchildren_of_type::<Filter, _>(node.upcast())
-        .iter()
-        .position(|n| n.upcast_ref().get_name() == name.clone().into())
 }
 
 pub fn connect_deferred<T>(node: &mut Gd<T>, signal: &str, callable: Callable)

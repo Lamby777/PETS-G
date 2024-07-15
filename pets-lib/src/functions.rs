@@ -11,10 +11,6 @@ fn give_item(item: Item) {
     inv.borrow_mut().push(item);
 }
 
-// impl GodotAutoload for ScriptExecutor {
-//     const AUTOLOAD_NAME: &'static str = "ScriptExecutor";
-// }
-
 #[derive(GodotClass)]
 #[class(init, base=Node)]
 pub struct ScriptExecutor {
