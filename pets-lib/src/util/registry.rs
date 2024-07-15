@@ -67,17 +67,19 @@ where
         .collect()
 }
 
-pub fn find_vanilla<T>(registry_folder: &str) -> Registry<T>
+pub fn find_vanilla<T>(folder_name: &str) -> Registry<T>
 where
     T: DeserializeOwned + Serialize,
 {
-    DirAccess::open(registry_folder.into())
+    let folder_path = format!("res://assets/{}", folder_name);
+
+    DirAccess::open(folder_name.into())
         .unwrap()
         .get_files()
         .to_vec()
         .into_iter()
         .map(|fname| {
-            let path = format!("res://assets/{}/{}", registry_folder, fname);
+            let path = format!("{}/{}", folder_path, fname);
             godot_print!("Reading vanilla registry: {}", path);
             let content = read_registry(&path).expect(
                 "Error loading vanilla registry. THIS IS A BUG, please report!",
