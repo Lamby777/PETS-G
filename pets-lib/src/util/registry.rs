@@ -33,13 +33,6 @@ where
 }
 
 /// Find all the modded skills from modded registries.
-///
-/// # Memory
-///
-///  This function leaks memory. It only runs once, and it's for
-///  mods anyway, so it shouldn't be a big deal. I just typically
-///  put a warning label on any function that leaks memory, so here
-///  it is. You've been warned.
 pub fn find_modded<T>(registry_name: &str) -> Registry<T>
 where
     T: DeserializeOwned + Serialize,
