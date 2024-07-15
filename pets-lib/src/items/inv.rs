@@ -28,6 +28,10 @@ impl Inventory {
         }
     }
 
+    pub fn get() -> Rc<RefCell<Self>> {
+        si().bind().save.inventory.clone()
+    }
+
     pub fn give_item(&mut self, id: String, quantity: u32) {
         let count = self.items.entry(id).or_insert(0);
         *count += quantity;
