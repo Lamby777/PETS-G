@@ -16,7 +16,7 @@ mod inv;
 
 pub use inv::ItemList;
 
-pub static ITEM_REGISTRY: OnceLock<Vec<Item>> = OnceLock::new();
+pub static ITEM_REGISTRY: OnceLock<HashMap<String, Item>> = OnceLock::new();
 
 /// Find all the modded items from modded registries.
 ///
@@ -26,7 +26,7 @@ pub static ITEM_REGISTRY: OnceLock<Vec<Item>> = OnceLock::new();
 ///  mods anyway, so it shouldn't be a big deal. I just typically
 ///  put a warning label on any function that leaks memory, so here
 ///  it is. You've been warned.
-pub fn find_modded_items() -> Vec<Item> {
+pub fn find_modded_items() -> HashMap<String, Item> {
     // make the folder in case it doesn't exist yet
     DirAccess::open("user://".into())
         .unwrap()
@@ -34,7 +34,7 @@ pub fn find_modded_items() -> Vec<Item> {
 
     let Some(mut dir) = DirAccess::open("user://mod-items/".into()) else {
         godot_warn!("Could not open `mod-items`, no modded items were loaded.");
-        return vec![];
+        return HashMap::new();
     };
 
     dir.get_files()
@@ -45,7 +45,7 @@ pub fn find_modded_items() -> Vec<Item> {
         .collect()
 }
 
-pub fn read_item_registry(path: &str) -> Option<Vec<Item>> {
+pub fn read_item_registry(path: &str) -> Option<HashMap<String, Item>> {
     let mut file = GFile::open(path, ModeFlags::READ).ok()?;
 
     let mut content = vec![];
@@ -86,7 +86,7 @@ pub fn load_item_registry() {
             items
         })
         .flatten()
-        .collect::<Vec<_>>();
+        .collect::<HashMap<_, _>>();
 
     // scan for modded item paths
     items.extend(find_modded_items());
@@ -100,8 +100,6 @@ pub fn load_item_registry() {
 /// A single item definition, stored in a vector for lookup.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Item {
-    pub id: String,
-
     /// Things that describe what the item does or is
     ///
     /// This may be used for weaknesses/resistances, sorting purposes,
