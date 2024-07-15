@@ -19,13 +19,6 @@ pub use inv::{Inventory, ItemList};
 pub static ITEM_REGISTRY: OnceLock<HashMap<String, Item>> = OnceLock::new();
 
 /// Find all the modded items from modded registries.
-///
-/// # Memory
-///
-///  This function leaks memory. It only runs once, and it's for
-///  mods anyway, so it shouldn't be a big deal. I just typically
-///  put a warning label on any function that leaks memory, so here
-///  it is. You've been warned.
 pub fn find_modded_items() -> HashMap<String, Item> {
     // make the folder in case it doesn't exist yet
     DirAccess::open("user://".into())
