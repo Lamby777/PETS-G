@@ -15,29 +15,11 @@ pub static SKILL_REGISTRY: OnceLock<HashMap<String, Box<dyn Skill>>> =
 /// Initializes `SKILL_REGISTRY` by scanning for vanilla and
 /// modded skill registries and combining the list of skills.
 pub fn load_skill_registry() {
-    let mut dir =
-        DirAccess::open("res://assets/skillregistries".into()).unwrap();
-
     // scan the vanilla skills folder
-    let mut skills = dir
-        .get_files()
-        .to_vec()
-        .into_iter()
-        .map(|fname| {
-            godot_print!("Reading vanilla skill registry: {}", fname);
-            let path = format!("res://assets/skillregistries/{}", fname);
-            let skills = read_registry(&path).expect(
-                "Error loading vanilla skills. THIS IS A BUG, please report!",
-            );
-
-            godot_print!("Vanilla registry {} read!", fname);
-            skills
-        })
-        .flatten()
-        .collect::<HashMap<_, _>>();
+    let mut skills = find_vanilla("res://assets/skillregistries");
 
     // scan for modded skill paths
-    skills.extend(find_modded());
+    skills.extend(find_modded("skills"));
 
     godot_print!("Finished reading skill registries.\n\n");
 

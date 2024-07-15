@@ -40,18 +40,21 @@ where
 ///  mods anyway, so it shouldn't be a big deal. I just typically
 ///  put a warning label on any function that leaks memory, so here
 ///  it is. You've been warned.
-pub fn find_modded<T>() -> Registry<T>
+pub fn find_modded<T>(registry_name: &str) -> Registry<T>
 where
     T: DeserializeOwned + Serialize,
 {
     // make the folder in case it doesn't exist yet
-    DirAccess::open("user://".into())
+    DirAccess::open("user://mods/".into())
         .unwrap()
-        .make_dir("mod-skills".into());
+        .make_dir(registry_name.into());
 
-    let Some(mut dir) = DirAccess::open("user://mod-skills/".into()) else {
+    let Some(mut dir) =
+        DirAccess::open(format!("user://mods/{}/", registry_name).into())
+    else {
         godot_warn!(
-            "Could not open `mod-skills`, no modded skills were loaded."
+            "Could not open `/mods/{0}`, no modded {0} were loaded.",
+            registry_name
         );
         return HashMap::new();
     };
@@ -62,4 +65,27 @@ where
         .filter_map(|v| read_registry::<T>(&v.to_string()))
         .flatten()
         .collect()
+}
+
+pub fn find_vanilla<T>(registry_folder: &str) -> Registry<T>
+where
+    T: DeserializeOwned + Serialize,
+{
+    DirAccess::open(registry_folder.into())
+        .unwrap()
+        .get_files()
+        .to_vec()
+        .into_iter()
+        .map(|fname| {
+            let path = format!("res://assets/{}/{}", registry_folder, fname);
+            godot_print!("Reading vanilla registry: {}", path);
+            let content = read_registry(&path).expect(
+                "Error loading vanilla registry. THIS IS A BUG, please report!",
+            );
+
+            godot_print!("Vanilla registry {} read!", path);
+            content
+        })
+        .flatten()
+        .collect::<HashMap<_, _>>()
 }
