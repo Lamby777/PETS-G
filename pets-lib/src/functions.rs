@@ -68,9 +68,7 @@ impl ScriptExecutor {
 
     #[func]
     fn debug_item(item_id: String, quantity: u32) {
-        StatsInterface::inventory()
-            .borrow_mut()
-            .give_item(item_id, quantity);
+        Inventory::get().borrow_mut().give_item(item_id, quantity);
 
         end_ix();
         start_ix("Debug Menu >> After Item");
