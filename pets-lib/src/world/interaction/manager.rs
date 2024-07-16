@@ -10,9 +10,9 @@ use crate::consts::dialogue::INTERACT_PROMPT_HEIGHT_OFFSET;
 use crate::prelude::*;
 
 #[derive(GodotClass)]
-#[class(init, base=Node)]
+#[class(init, base=Node2D)]
 pub struct InteractionManager {
-    base: Base<Node>,
+    base: Base<Node2D>,
 
     #[init(default = onready_node(&base, "Prompt"))]
     prompt: OnReady<Gd<Control>>,
@@ -81,7 +81,12 @@ impl InteractionManager {
 }
 
 #[godot_api]
-impl INode for InteractionManager {
+impl INode2D for InteractionManager {
+    fn ready(&mut self) {
+        self.prompt.hide();
+        self.base_mut().show();
+    }
+
     fn process(&mut self, _delta: f64) {
         self.sort_zones_by_distance();
 
