@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8hhg8v5ls70u"]
+[gd_scene load_steps=6 format=3 uid="uid://c8hhg8v5ls70u"]
 
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_pvxl0"]
+[ext_resource type="FontFile" uid="uid://bjo6y15l70nnu" path="res://assets/fonts/aAccountantSignature.otf" id="2_iwgvb"]
 
 [sub_resource type="Animation" id="Animation_3wgbn"]
 length = 0.001
@@ -96,4 +97,22 @@ theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "Quit"
+fit_content = true
+
+[node name="DatePanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -16.0
+offset_top = -272.0
+offset_right = 336.0
+offset_bottom = -120.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DatePanel"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 328.0
+offset_bottom = 128.0
+theme_override_fonts/normal_font = ExtResource("2_iwgvb")
+theme_override_font_sizes/normal_font_size = 90
+text = "09/01/2037"
 fit_content = true
