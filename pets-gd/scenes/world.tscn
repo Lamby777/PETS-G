@@ -102,10 +102,6 @@ libraries = {
 "": SubResource("AnimationLibrary_fv7du")
 }
 
-[node name="InteractionManager" parent="." instance=ExtResource("2_uh12s")]
-unique_name_in_owner = true
-visible = false
-
 [node name="BattleLayer" type="CanvasLayer" parent="."]
 
 [node name="YSort" type="Node2D" parent="."]
@@ -126,7 +122,20 @@ script = ExtResource("4_jple0")
 
 [node name="Room" parent="YSort" instance=ExtResource("10_kug7e")]
 
+[node name="InteractionManager" parent="." instance=ExtResource("2_uh12s")]
+unique_name_in_owner = true
+
 [node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="Inventory" parent="UILayer" instance=ExtResource("3_jwkdy")]
+unique_name_in_owner = true
+visible = false
+
+[node name="DialogBox" parent="UILayer" instance=ExtResource("2_lgtmm")]
+offset_left = -704.0
+offset_right = 704.0
+
+[node name="WorldMenu" parent="UILayer" instance=ExtResource("2_6orff")]
 
 [node name="BeaconFade" type="ColorRect" parent="UILayer"]
 unique_name_in_owner = true
@@ -136,14 +145,6 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
-
-[node name="Inventory" parent="UILayer" instance=ExtResource("3_jwkdy")]
-unique_name_in_owner = true
-visible = false
-
-[node name="DialogBox" parent="UILayer" instance=ExtResource("2_lgtmm")]
-
-[node name="WorldMenu" parent="UILayer" instance=ExtResource("2_6orff")]
 
 [node name="Quests" type="Node" parent="."]
 process_mode = 4

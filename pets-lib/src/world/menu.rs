@@ -25,7 +25,12 @@ pub struct WorldMenu {
 #[godot_api]
 impl WorldMenu {
     fn set_date_txt(&self, date: NaiveDate) {
-        let txt = date.to_string().replace("-", "/");
+        let txt = format!(
+            "{} {}, {}",
+            month_string_3letter(date.month()),
+            date.day(),
+            date.year()
+        );
 
         self.base()
             .get_node_as::<RichTextLabel>("%DatePanel/RichTextLabel")
@@ -37,6 +42,8 @@ impl WorldMenu {
     }
 
     fn open_or_close(&mut self, open: bool) {
+        self.set_date_txt(si().bind().save.date);
+
         self.opened = open;
 
         self.anim_player().play_animation_forwards("open", open);

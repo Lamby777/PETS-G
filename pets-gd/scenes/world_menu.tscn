@@ -115,5 +115,5 @@ offset_right = 328.0
 offset_bottom = 128.0
 theme_override_fonts/normal_font = ExtResource("2_iwgvb")
 theme_override_font_sizes/normal_font_size = 90
-text = "09/01/2037"
+text = "Date"
 fit_content = true
