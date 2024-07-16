@@ -100,6 +100,7 @@ text = "Quit"
 fit_content = true
 
 [node name="DatePanel" type="Panel" parent="."]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = -16.0
 offset_top = -272.0
