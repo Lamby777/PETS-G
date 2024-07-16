@@ -104,6 +104,7 @@ libraries = {
 
 [node name="InteractionManager" parent="." instance=ExtResource("2_uh12s")]
 unique_name_in_owner = true
+visible = false
 
 [node name="BattleLayer" type="CanvasLayer" parent="."]
 
