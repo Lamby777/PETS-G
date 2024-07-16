@@ -8,6 +8,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 anyhow = "1.0.80"
+chrono = { version = "0.4.38", features = ["serde"] }
 concat-idents = "1.1.5"
 derive_more = "0.99.17"
 derived-deref = "2.1.0"

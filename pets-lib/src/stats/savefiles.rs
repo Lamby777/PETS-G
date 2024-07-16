@@ -22,9 +22,11 @@ pub struct SaveFile {
 
     /// Mapping: item ID -> quantity
     pub inventory: Rc<RefCell<Inventory>>,
+
     pub scrapbook: Scrapbook,
     pub quests: HashMap<String, QuestPhase>,
 
+    pub date: NaiveDate,
     pub bed_color: String,
 }
 
@@ -37,6 +39,7 @@ impl SaveFile {
             inventory: Rc::new(RefCell::new(Inventory::new())),
             scrapbook: Scrapbook::empty(),
             quests: HashMap::new(),
+            date: NaiveDate::from_ymd_opt(2037, 09, 01).unwrap(),
             bed_color: "red".to_string(),
         }
     }
