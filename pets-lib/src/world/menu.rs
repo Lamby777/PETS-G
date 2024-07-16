@@ -3,7 +3,9 @@
 //! inventory, eat food, etc.
 //!
 
-use godot::engine::{AnimationPlayer, Control, IPanel, InputEvent, Panel};
+use godot::engine::{
+    AnimationPlayer, Control, IPanel, InputEvent, Panel, RichTextLabel,
+};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -22,6 +24,14 @@ pub struct WorldMenu {
 
 #[godot_api]
 impl WorldMenu {
+    fn set_date_txt(&self, date: NaiveDate) {
+        let txt = date.to_string().replace("-", "/");
+
+        self.base()
+            .get_node_as::<RichTextLabel>("%DatePanel/RichTextLabel")
+            .set_text(txt.into());
+    }
+
     fn anim_player(&self) -> Gd<AnimationPlayer> {
         self.base().get_node_as("AnimationPlayer")
     }
