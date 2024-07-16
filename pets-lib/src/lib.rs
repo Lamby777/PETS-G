@@ -56,6 +56,8 @@ mod prelude {
 
     // is this bad practice? no clue and idc honestly
     // it's convenient with no real caveat, therefore...
+    pub use anyhow::{anyhow, Result};
+    pub use chrono::NaiveDate;
     pub use derived_deref::{Deref, DerefMut};
     pub use indoc::indoc;
     pub use rand::Rng;
