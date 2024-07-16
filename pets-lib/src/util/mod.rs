@@ -20,6 +20,24 @@ use crate::prelude::*;
 use godot::engine::{Engine, GDScript, SceneTreeTimer};
 use godot::prelude::*;
 
+pub fn month_string_3letter(month: u32) -> &'static str {
+    match month {
+        1 => "Jan",
+        2 => "Feb",
+        3 => "Mar",
+        4 => "Apr",
+        5 => "May",
+        6 => "Jun",
+        7 => "Jul",
+        8 => "Aug",
+        9 => "Sep",
+        10 => "Oct",
+        11 => "Nov",
+        12 => "Dec",
+        _ => panic!("Invalid month"),
+    }
+}
+
 // this is a macro so we can easily expand it and delete the definition
 // when `gdext` adds new methods for allowing zero vectors
 pub use crate::normalized;
