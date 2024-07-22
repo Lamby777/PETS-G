@@ -4,10 +4,10 @@
 Link NAME [ETHAN]
 VOX Default
 
-Link NAME [MOM]
+Link NAME [JUNIPER]
 VOX Default
 
-Link NAME [DAD]
+Link NAME [CLAY]
 VOX Default
 
 Link NAME _
@@ -15,19 +15,19 @@ VOX Default
 
 ###
 ---
-NAME [MOM]
+NAME [JUNIPER]
 
 DG_INTRO1_COMEUNPACK
 
 ---
 % Intro #2
-NAME [MOM]
+NAME [JUNIPER]
 
 DG_INTRO2_OVERHERE
 
 ---
 % Intro #3
-NAME [MOM]
+NAME [JUNIPER]
 
 DG_INTRO3_WDYT
 
@@ -39,21 +39,21 @@ DG_INTRO3_WDYT
 
 ---
 % Intro #3 >> Great
-NAME [MOM]
+NAME [JUNIPER]
 
 DG_INTRO3_GREAT_MOM
 
 @ Intro #4
 ---
 % Intro #3 >> Alright
-NAME [MOM]
+NAME [JUNIPER]
 
 DG_INTRO3_ALRIGHT_MOM
 
 @ Intro #4
 ---
 % Intro #4
-NAME [MOM]
+NAME [JUNIPER]
 
 DG_INTRO4_ITSYOURS
 
@@ -80,7 +80,7 @@ $ set_ethan_bed_color("pink")
 
 ---
 % Intro #4 >> Bed Color Picked
-NAME [MOM]
+NAME [JUNIPER]
 
 DG_INTRO4_LOOKSBETTER
 
@@ -94,7 +94,7 @@ DG_INTRO4_BRINGFUZZY
 
 ---
 % Intro #5
-NAME [DAD]
+NAME [CLAY]
 
 DG_INTRO5_OVERHERE
 
@@ -106,7 +106,7 @@ $$$
 
 ---
 % Intro #5 >> Walked
-NAME [DAD]
+NAME [CLAY]
 
 DG_INTRO5_MR_T
 
