@@ -70,6 +70,6 @@ impl IObject for StatsInterface {
 /// put stuff like serialization testing in here temporarily to mess around
 /// it'll run when the game starts
 fn print_debug_crap() {
-    // let ser = serde_json::to_string(&skill);
-    // godot_print!("{:?}", ser);
+    let ser = serde_json::to_string(&skill);
+    godot_print!("{:?}", ser);
 }
