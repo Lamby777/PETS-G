@@ -39,39 +39,38 @@ pub enum PChar {
     DEVON,
     FUZZY,
     LYEMBO,
-    BOBBY,
-    NEOXYLIN,
+    // BOBBY,
+    // NEOXYLIN,
     QUOLO,
 
     // Silly billies
-    RUMBLE,
-    ESTHER,
-    RANA,
-    JERIAN,
+    // RUMBLE,
+    // ESTHER,
+    // RANA,
+    // JERIAN,
 
     // Families
     JUNIPER,
     CLAY,
     MR_TULIVAE,
     MS_TULIVAE,
-    JOLAINNE,
+    // JOLAINNE,
 
     // Winthrus, his crew, and associates
-    WINTHRUS,
-    JUNO,
-    HASSAN,
-    COLT,
+    // WINTHRUS,
+    // JUNO,
+    // COLT,
 
     // Important Goober people
-    MYLO,  // HQ
-    CALYX, // Ren
-    RAINE, // GLUE arc
-    TAINE, // GLUE arc
+    // MYLO,  // HQ
+    // CALYX, // Ren
+    // RAINE, // GLUE arc
+    // TAINE, // GLUE arc
 
     // Shopkeepers
-    CHERRY,      // Cherry's Cherries
-    RICHARD,     // Big Richard's Big Ripoffs
-    CHAIRPERSON, // Chair Chairperson of the Gaming Chair Committee
+    // CHERRY,      // Cherry's Cherries
+    // RICHARD,     // Big Richard's Big Ripoffs
+    // CHAIRPERSON, // Chair Chairperson of the Gaming Chair Committee
 }
 
 impl Display for PChar {
