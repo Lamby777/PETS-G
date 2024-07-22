@@ -11,6 +11,7 @@ pub fn uniform_charmap() -> CharMap {
             chname,
             RefCell::new(CharData {
                 id: chname,
+                inherent_stats_base: InherentStats::zero(),
                 ..Default::default()
             }),
         );

@@ -91,7 +91,8 @@ impl Battler for CharData {
     }
 
     fn inherent_stats(&self) -> InherentStats {
-        statcalc::level_to_stats(self.level) + self.inherent_stats_base.clone()
+        dbg!(statcalc::level_to_stats(self.level))
+            + self.inherent_stats_base.clone()
     }
 
     fn equipment(&self) -> &[Item] {
@@ -159,6 +160,23 @@ impl Default for InherentStats {
             stability: 1,
             delta: 1,
             epsilon: 1,
+            lambda: None,
+            max_mana: None,
+        }
+    }
+}
+
+impl InherentStats {
+    pub fn zero() -> Self {
+        InherentStats {
+            max_hp: 0,
+            max_energy: 0,
+            attack: 0,
+            defense: 0,
+            speed: 0,
+            stability: 0,
+            delta: 0,
+            epsilon: 0,
             lambda: None,
             max_mana: None,
         }

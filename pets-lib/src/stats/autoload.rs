@@ -72,5 +72,5 @@ impl IObject for StatsInterface {
 fn print_debug_crap() {
     let ser = crate::stats::charmap::default_charmap();
     let ser = toml::to_string(&ser).unwrap();
-    godot_print!("{:?}", ser);
+    godot_print!("{}", ser);
 }
