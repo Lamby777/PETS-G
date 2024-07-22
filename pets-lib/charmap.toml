@@ -1,25 +1,3 @@
-[DYLAN]
-id = "DYLAN"
-display_name = "Chicken Nugget"
-level = 1
-status_effects = []
-equipment = []
-
-[DYLAN.inherent_stats_base]
-max_hp = 30
-max_energy = 1
-attack = 1
-defense = 1
-speed = 1
-stability = 1
-delta = 1
-epsilon = 1
-
-[DYLAN.battle_stats]
-hp = 30
-energy = 1
-buffs = []
-
 [QUOLO]
 id = "QUOLO"
 display_name = "Chicken Nugget"
@@ -28,16 +6,126 @@ status_effects = []
 equipment = []
 
 [QUOLO.inherent_stats_base]
-max_hp = 30
-max_energy = 1
-attack = 1
-defense = 1
-speed = 1
-stability = 1
-delta = 1
-epsilon = 1
+max_hp = 0
+max_energy = 0
+attack = 0
+defense = 0
+speed = 0
+stability = 0
+delta = 0
+epsilon = 0
 
 [QUOLO.battle_stats]
+hp = 30
+energy = 1
+buffs = []
+
+[DEVON]
+id = "DEVON"
+display_name = "Chicken Nugget"
+level = 1
+status_effects = []
+equipment = []
+
+[DEVON.inherent_stats_base]
+max_hp = 0
+max_energy = 0
+attack = 0
+defense = 0
+speed = 0
+stability = 0
+delta = 0
+epsilon = 0
+
+[DEVON.battle_stats]
+hp = 30
+energy = 1
+buffs = []
+
+[JUNIPER]
+id = "JUNIPER"
+display_name = "Chicken Nugget"
+level = 1
+status_effects = []
+equipment = []
+
+[JUNIPER.inherent_stats_base]
+max_hp = 0
+max_energy = 0
+attack = 0
+defense = 0
+speed = 0
+stability = 0
+delta = 0
+epsilon = 0
+
+[JUNIPER.battle_stats]
+hp = 30
+energy = 1
+buffs = []
+
+[MR_TULIVAE]
+id = "MR_TULIVAE"
+display_name = "Chicken Nugget"
+level = 1
+status_effects = []
+equipment = []
+
+[MR_TULIVAE.inherent_stats_base]
+max_hp = 0
+max_energy = 0
+attack = 0
+defense = 0
+speed = 0
+stability = 0
+delta = 0
+epsilon = 0
+
+[MR_TULIVAE.battle_stats]
+hp = 30
+energy = 1
+buffs = []
+
+[FUZZY]
+id = "FUZZY"
+display_name = "Chicken Nugget"
+level = 1
+status_effects = []
+equipment = []
+
+[FUZZY.inherent_stats_base]
+max_hp = 0
+max_energy = 0
+attack = 0
+defense = 0
+speed = 0
+stability = 0
+delta = 0
+epsilon = 0
+
+[FUZZY.battle_stats]
+hp = 30
+energy = 1
+buffs = []
+
+[MS_TULIVAE]
+id = "MS_TULIVAE"
+display_name = "Chicken Nugget"
+level = 1
+status_effects = []
+equipment = []
+
+[MS_TULIVAE.inherent_stats_base]
+max_hp = 0
+max_energy = 0
+attack = 0
+defense = 0
+speed = 0
+stability = 0
+delta = 0
+epsilon = 0
+
+[MS_TULIVAE.battle_stats]
 hp = 30
 energy = 1
 buffs = []
@@ -50,39 +138,16 @@ status_effects = []
 equipment = []
 
 [LEO.inherent_stats_base]
-max_hp = 30
-max_energy = 1
-attack = 1
-defense = 1
-speed = 1
-stability = 1
-delta = 1
-epsilon = 1
+max_hp = 0
+max_energy = 0
+attack = 0
+defense = 0
+speed = 0
+stability = 0
+delta = 0
+epsilon = 0
 
 [LEO.battle_stats]
-hp = 30
-energy = 1
-buffs = []
-
-[SIVA]
-id = "SIVA"
-display_name = "Siva"
-level = 1
-status_effects = []
-equipment = []
-
-[SIVA.inherent_stats_base]
-max_hp = 30
-max_energy = 1
-attack = 3
-defense = 1
-speed = 2
-stability = 5
-delta = 3
-epsilon = 1
-max_mana = 10
-
-[SIVA.battle_stats]
 hp = 30
 energy = 1
 buffs = []
@@ -95,60 +160,16 @@ status_effects = []
 equipment = []
 
 [LYEMBO.inherent_stats_base]
-max_hp = 30
-max_energy = 1
-attack = 1
-defense = 1
-speed = 1
-stability = 1
-delta = 1
-epsilon = 1
+max_hp = 0
+max_energy = 0
+attack = 0
+defense = 0
+speed = 0
+stability = 0
+delta = 0
+epsilon = 0
 
 [LYEMBO.battle_stats]
-hp = 30
-energy = 1
-buffs = []
-
-[MIRA]
-id = "MIRA"
-display_name = "Chicken Nugget"
-level = 1
-status_effects = []
-equipment = []
-
-[MIRA.inherent_stats_base]
-max_hp = 30
-max_energy = 1
-attack = 1
-defense = 1
-speed = 1
-stability = 1
-delta = 1
-epsilon = 1
-
-[MIRA.battle_stats]
-hp = 30
-energy = 1
-buffs = []
-
-[PORKY]
-id = "PORKY"
-display_name = "Chicken Nugget"
-level = 1
-status_effects = []
-equipment = []
-
-[PORKY.inherent_stats_base]
-max_hp = 30
-max_energy = 1
-attack = 1
-defense = 1
-speed = 1
-stability = 1
-delta = 1
-epsilon = 1
-
-[PORKY.battle_stats]
 hp = 30
 energy = 1
 buffs = []
@@ -162,7 +183,7 @@ equipment = []
 
 [TERRA.inherent_stats_base]
 max_hp = 35
-max_energy = 1
+max_energy = 0
 attack = 5
 defense = 4
 speed = 1
@@ -171,94 +192,95 @@ delta = 2
 epsilon = 1
 
 [TERRA.battle_stats]
-hp = 60
+hp = 83
 energy = 1
 buffs = []
 
-[JUNIPER]
-id = "JUNIPER"
+[DYLAN]
+id = "DYLAN"
 display_name = "Chicken Nugget"
 level = 1
 status_effects = []
 equipment = []
 
-[JUNIPER.inherent_stats_base]
-max_hp = 30
-max_energy = 1
-attack = 1
-defense = 1
-speed = 1
-stability = 1
-delta = 1
-epsilon = 1
+[DYLAN.inherent_stats_base]
+max_hp = 0
+max_energy = 0
+attack = 0
+defense = 0
+speed = 0
+stability = 0
+delta = 0
+epsilon = 0
 
-[JUNIPER.battle_stats]
+[DYLAN.battle_stats]
 hp = 30
 energy = 1
 buffs = []
 
-[FUZZY]
-id = "FUZZY"
+[MIRA]
+id = "MIRA"
 display_name = "Chicken Nugget"
 level = 1
 status_effects = []
 equipment = []
 
-[FUZZY.inherent_stats_base]
-max_hp = 30
-max_energy = 1
-attack = 1
-defense = 1
-speed = 1
-stability = 1
-delta = 1
-epsilon = 1
+[MIRA.inherent_stats_base]
+max_hp = 0
+max_energy = 0
+attack = 0
+defense = 0
+speed = 0
+stability = 0
+delta = 0
+epsilon = 0
 
-[FUZZY.battle_stats]
+[MIRA.battle_stats]
 hp = 30
 energy = 1
 buffs = []
 
-[MR_TULIVAE]
-id = "MR_TULIVAE"
-display_name = "Chicken Nugget"
+[SIVA]
+id = "SIVA"
+display_name = "Siva"
 level = 1
 status_effects = []
 equipment = []
 
-[MR_TULIVAE.inherent_stats_base]
-max_hp = 30
-max_energy = 1
-attack = 1
+[SIVA.inherent_stats_base]
+max_hp = 0
+max_energy = 0
+attack = 3
 defense = 1
-speed = 1
-stability = 1
-delta = 1
+speed = 2
+stability = 5
+delta = 3
 epsilon = 1
+max_mana = 10
 
-[MR_TULIVAE.battle_stats]
+[SIVA.battle_stats]
 hp = 30
 energy = 1
 buffs = []
 
-[MS_TULIVAE]
-id = "MS_TULIVAE"
+[PORKY]
+id = "PORKY"
 display_name = "Chicken Nugget"
 level = 1
 status_effects = []
 equipment = []
 
-[MS_TULIVAE.inherent_stats_base]
-max_hp = 30
-max_energy = 1
-attack = 1
-defense = 1
-speed = 1
-stability = 1
-delta = 1
-epsilon = 1
+[PORKY.inherent_stats_base]
+max_hp = 0
+max_energy = 0
+attack = 0
+defense = 0
+speed = 0
+stability = 0
+delta = 0
+epsilon = 0
 
-[MS_TULIVAE.battle_stats]
+[PORKY.battle_stats]
 hp = 30
 energy = 1
 buffs = []
@@ -272,7 +294,7 @@ equipment = []
 
 [ETHAN.inherent_stats_base]
 max_hp = -10
-max_energy = 1
+max_energy = 0
 attack = 1
 defense = 2
 speed = 4
@@ -283,7 +305,7 @@ lambda = 1
 max_mana = 5
 
 [ETHAN.battle_stats]
-hp = -10
+hp = 20
 energy = 1
 buffs = []
 
@@ -295,38 +317,16 @@ status_effects = []
 equipment = []
 
 [CLAY.inherent_stats_base]
-max_hp = 30
-max_energy = 1
-attack = 1
-defense = 1
-speed = 1
-stability = 1
-delta = 1
-epsilon = 1
+max_hp = 0
+max_energy = 0
+attack = 0
+defense = 0
+speed = 0
+stability = 0
+delta = 0
+epsilon = 0
 
 [CLAY.battle_stats]
-hp = 30
-energy = 1
-buffs = []
-
-[DEVON]
-id = "DEVON"
-display_name = "Chicken Nugget"
-level = 1
-status_effects = []
-equipment = []
-
-[DEVON.inherent_stats_base]
-max_hp = 30
-max_energy = 1
-attack = 1
-defense = 1
-speed = 1
-stability = 1
-delta = 1
-epsilon = 1
-
-[DEVON.battle_stats]
 hp = 30
 energy = 1
 buffs = []

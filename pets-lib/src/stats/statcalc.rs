@@ -34,12 +34,12 @@ pub fn _xp_requirement(lvl: IntegralStat) -> IntegralStat {
     quotient + lvl
 }
 
-/// floor(5 * log_1.4_(x)) + 0.5x
+/// floor(5 * log_1.4_(x+1)) + 0.5x + 20
 pub fn max_hp(lvl: IntegralStat) -> IntegralStat {
-    let p1 = (5.0 * (lvl as FloatStat).log(1.4)) as IntegralStat;
+    let p1 = (5.0 * ((lvl + 1) as FloatStat).log(1.4)) as IntegralStat;
     let p2 = lvl / 2;
 
-    p1 + p2
+    p1 + p2 + 20
 }
 
 /// 10 + (floor(x/10) * 10)
