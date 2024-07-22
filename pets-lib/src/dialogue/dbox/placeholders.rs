@@ -16,6 +16,8 @@ const PLACEHOLDERS: &[(&'static str, fn() -> String)] = &[
     ("[PLAYER]", || "Cherry".to_string()),
     ("[LEVEL]", || 123.to_string()),
     ("[ETHAN]", || pchar_display_name(&PChar::ETHAN)),
+    ("[LYEMBO]", || pchar_display_name(&PChar::LYEMBO)),
+    ("[QUOLO]", || pchar_display_name(&PChar::QUOLO)),
     ("[MOM]", || {
         match party_leader() {
             PChar::ETHAN => "DG_SPK_MOM",
