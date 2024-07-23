@@ -78,7 +78,7 @@ impl PlayerCB {
         self.party.iter().map(|v| v.bind().pchar).collect()
     }
 
-    pub fn party_chardata(&self) -> Vec<CharData> {
+    pub fn party_chardata(&self) -> Vec<Rc<RefCell<CharData>>> {
         self.party_pchars()
             .into_iter()
             .map(|id| si().bind().get_character(&id))
@@ -203,7 +203,7 @@ impl PlayerCB {
         self.party_chardata()
             .into_iter()
             .take(BATTLE_PARTY_SIZE)
-            .map(|v| Rc::new(RefCell::new(v)) as Rc<RefCell<dyn Battler>>)
+            .map(|v| v as Rc<RefCell<dyn Battler>>)
             .collect()
     }
 

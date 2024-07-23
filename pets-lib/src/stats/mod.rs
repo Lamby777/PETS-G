@@ -91,8 +91,7 @@ impl Battler for CharData {
     }
 
     fn inherent_stats(&self) -> InherentStats {
-        dbg!(statcalc::level_to_stats(self.level))
-            + self.inherent_stats_base.clone()
+        statcalc::level_to_stats(self.level) + self.inherent_stats_base.clone()
     }
 
     fn equipment(&self) -> &[Item] {

@@ -24,13 +24,8 @@ impl StatsInterface {
     }
 
     // #[func]
-    pub fn get_character(&self, ch: &PChar) -> CharData {
-        self.save
-            .chars
-            .get(ch)
-            .expect("key should be a valid PChar name")
-            .clone()
-            .take()
+    pub fn get_character(&self, ch: &PChar) -> Rc<RefCell<CharData>> {
+        self.save.chars.character(ch)
     }
 
     #[func]
@@ -71,6 +66,6 @@ impl IObject for StatsInterface {
 /// it'll run when the game starts
 fn print_debug_crap() {
     let ser = crate::stats::charmap::default_charmap();
-    let ser = toml::to_string(&ser).unwrap();
+    let ser = serde_json::to_string(&ser).unwrap();
     godot_print!("{}", ser);
 }
