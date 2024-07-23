@@ -116,6 +116,7 @@ impl ICharacterBody2D for BattleIcon {
         let ch_speed = si()
             .bind()
             .get_character(&PChar::ETHAN)
+            .borrow()
             .practical_stats()
             .speed;
 

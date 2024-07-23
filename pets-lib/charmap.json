@@ -1,0 +1,377 @@
+[
+    {
+        "id": "PORKY",
+        "display_name": "Chicken Nugget",
+        "level": 1,
+        "inherent_stats_base": {
+            "max_hp": 0,
+            "max_energy": 0,
+            "attack": 0,
+            "defense": 0,
+            "speed": 0,
+            "stability": 0,
+            "delta": 0,
+            "epsilon": 0,
+            "lambda": null,
+            "max_mana": null
+        },
+        "battle_stats": {
+            "hp": 30,
+            "mana": null,
+            "energy": 1,
+            "buffs": []
+        },
+        "status_effects": [],
+        "equipment": []
+    },
+    {
+        "id": "ETHAN",
+        "display_name": "Chicken Nugget",
+        "level": 1,
+        "inherent_stats_base": {
+            "max_hp": 0,
+            "max_energy": 0,
+            "attack": 0,
+            "defense": 0,
+            "speed": 0,
+            "stability": 0,
+            "delta": 0,
+            "epsilon": 0,
+            "lambda": null,
+            "max_mana": null
+        },
+        "battle_stats": {
+            "hp": 30,
+            "mana": null,
+            "energy": 1,
+            "buffs": []
+        },
+        "status_effects": [],
+        "equipment": []
+    },
+    {
+        "id": "TERRA",
+        "display_name": "Chicken Nugget",
+        "level": 1,
+        "inherent_stats_base": {
+            "max_hp": 0,
+            "max_energy": 0,
+            "attack": 0,
+            "defense": 0,
+            "speed": 0,
+            "stability": 0,
+            "delta": 0,
+            "epsilon": 0,
+            "lambda": null,
+            "max_mana": null
+        },
+        "battle_stats": {
+            "hp": 30,
+            "mana": null,
+            "energy": 1,
+            "buffs": []
+        },
+        "status_effects": [],
+        "equipment": []
+    },
+    {
+        "id": "SIVA",
+        "display_name": "Chicken Nugget",
+        "level": 1,
+        "inherent_stats_base": {
+            "max_hp": 0,
+            "max_energy": 0,
+            "attack": 0,
+            "defense": 0,
+            "speed": 0,
+            "stability": 0,
+            "delta": 0,
+            "epsilon": 0,
+            "lambda": null,
+            "max_mana": null
+        },
+        "battle_stats": {
+            "hp": 30,
+            "mana": null,
+            "energy": 1,
+            "buffs": []
+        },
+        "status_effects": [],
+        "equipment": []
+    },
+    {
+        "id": "DYLAN",
+        "display_name": "Chicken Nugget",
+        "level": 1,
+        "inherent_stats_base": {
+            "max_hp": 0,
+            "max_energy": 0,
+            "attack": 0,
+            "defense": 0,
+            "speed": 0,
+            "stability": 0,
+            "delta": 0,
+            "epsilon": 0,
+            "lambda": null,
+            "max_mana": null
+        },
+        "battle_stats": {
+            "hp": 30,
+            "mana": null,
+            "energy": 1,
+            "buffs": []
+        },
+        "status_effects": [],
+        "equipment": []
+    },
+    {
+        "id": "MIRA",
+        "display_name": "Chicken Nugget",
+        "level": 1,
+        "inherent_stats_base": {
+            "max_hp": 0,
+            "max_energy": 0,
+            "attack": 0,
+            "defense": 0,
+            "speed": 0,
+            "stability": 0,
+            "delta": 0,
+            "epsilon": 0,
+            "lambda": null,
+            "max_mana": null
+        },
+        "battle_stats": {
+            "hp": 30,
+            "mana": null,
+            "energy": 1,
+            "buffs": []
+        },
+        "status_effects": [],
+        "equipment": []
+    },
+    {
+        "id": "LEO",
+        "display_name": "Chicken Nugget",
+        "level": 1,
+        "inherent_stats_base": {
+            "max_hp": 0,
+            "max_energy": 0,
+            "attack": 0,
+            "defense": 0,
+            "speed": 0,
+            "stability": 0,
+            "delta": 0,
+            "epsilon": 0,
+            "lambda": null,
+            "max_mana": null
+        },
+        "battle_stats": {
+            "hp": 30,
+            "mana": null,
+            "energy": 1,
+            "buffs": []
+        },
+        "status_effects": [],
+        "equipment": []
+    },
+    {
+        "id": "DEVON",
+        "display_name": "Chicken Nugget",
+        "level": 1,
+        "inherent_stats_base": {
+            "max_hp": 0,
+            "max_energy": 0,
+            "attack": 0,
+            "defense": 0,
+            "speed": 0,
+            "stability": 0,
+            "delta": 0,
+            "epsilon": 0,
+            "lambda": null,
+            "max_mana": null
+        },
+        "battle_stats": {
+            "hp": 30,
+            "mana": null,
+            "energy": 1,
+            "buffs": []
+        },
+        "status_effects": [],
+        "equipment": []
+    },
+    {
+        "id": "FUZZY",
+        "display_name": "Chicken Nugget",
+        "level": 1,
+        "inherent_stats_base": {
+            "max_hp": 0,
+            "max_energy": 0,
+            "attack": 0,
+            "defense": 0,
+            "speed": 0,
+            "stability": 0,
+            "delta": 0,
+            "epsilon": 0,
+            "lambda": null,
+            "max_mana": null
+        },
+        "battle_stats": {
+            "hp": 30,
+            "mana": null,
+            "energy": 1,
+            "buffs": []
+        },
+        "status_effects": [],
+        "equipment": []
+    },
+    {
+        "id": "LYEMBO",
+        "display_name": "Chicken Nugget",
+        "level": 1,
+        "inherent_stats_base": {
+            "max_hp": 0,
+            "max_energy": 0,
+            "attack": 0,
+            "defense": 0,
+            "speed": 0,
+            "stability": 0,
+            "delta": 0,
+            "epsilon": 0,
+            "lambda": null,
+            "max_mana": null
+        },
+        "battle_stats": {
+            "hp": 30,
+            "mana": null,
+            "energy": 1,
+            "buffs": []
+        },
+        "status_effects": [],
+        "equipment": []
+    },
+    {
+        "id": "QUOLO",
+        "display_name": "Chicken Nugget",
+        "level": 1,
+        "inherent_stats_base": {
+            "max_hp": 0,
+            "max_energy": 0,
+            "attack": 0,
+            "defense": 0,
+            "speed": 0,
+            "stability": 0,
+            "delta": 0,
+            "epsilon": 0,
+            "lambda": null,
+            "max_mana": null
+        },
+        "battle_stats": {
+            "hp": 30,
+            "mana": null,
+            "energy": 1,
+            "buffs": []
+        },
+        "status_effects": [],
+        "equipment": []
+    },
+    {
+        "id": "JUNIPER",
+        "display_name": "Chicken Nugget",
+        "level": 1,
+        "inherent_stats_base": {
+            "max_hp": 0,
+            "max_energy": 0,
+            "attack": 0,
+            "defense": 0,
+            "speed": 0,
+            "stability": 0,
+            "delta": 0,
+            "epsilon": 0,
+            "lambda": null,
+            "max_mana": null
+        },
+        "battle_stats": {
+            "hp": 30,
+            "mana": null,
+            "energy": 1,
+            "buffs": []
+        },
+        "status_effects": [],
+        "equipment": []
+    },
+    {
+        "id": "CLAY",
+        "display_name": "Chicken Nugget",
+        "level": 1,
+        "inherent_stats_base": {
+            "max_hp": 0,
+            "max_energy": 0,
+            "attack": 0,
+            "defense": 0,
+            "speed": 0,
+            "stability": 0,
+            "delta": 0,
+            "epsilon": 0,
+            "lambda": null,
+            "max_mana": null
+        },
+        "battle_stats": {
+            "hp": 30,
+            "mana": null,
+            "energy": 1,
+            "buffs": []
+        },
+        "status_effects": [],
+        "equipment": []
+    },
+    {
+        "id": "MR_TULIVAE",
+        "display_name": "Chicken Nugget",
+        "level": 1,
+        "inherent_stats_base": {
+            "max_hp": 0,
+            "max_energy": 0,
+            "attack": 0,
+            "defense": 0,
+            "speed": 0,
+            "stability": 0,
+            "delta": 0,
+            "epsilon": 0,
+            "lambda": null,
+            "max_mana": null
+        },
+        "battle_stats": {
+            "hp": 30,
+            "mana": null,
+            "energy": 1,
+            "buffs": []
+        },
+        "status_effects": [],
+        "equipment": []
+    },
+    {
+        "id": "MS_TULIVAE",
+        "display_name": "Chicken Nugget",
+        "level": 1,
+        "inherent_stats_base": {
+            "max_hp": 0,
+            "max_energy": 0,
+            "attack": 0,
+            "defense": 0,
+            "speed": 0,
+            "stability": 0,
+            "delta": 0,
+            "epsilon": 0,
+            "lambda": null,
+            "max_mana": null
+        },
+        "battle_stats": {
+            "hp": 30,
+            "mana": null,
+            "energy": 1,
+            "buffs": []
+        },
+        "status_effects": [],
+        "equipment": []
+    }
+]

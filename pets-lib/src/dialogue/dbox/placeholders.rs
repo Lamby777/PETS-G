@@ -9,7 +9,11 @@ pub fn party_leader() -> PChar {
 }
 
 pub fn pchar_display_name(pchar: &PChar) -> String {
-    si().bind().get_character(pchar).display_name
+    si().bind()
+        .get_character(pchar)
+        .borrow()
+        .display_name
+        .clone()
 }
 
 const PLACEHOLDERS: &[(&'static str, fn() -> String)] = &[
