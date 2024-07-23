@@ -1,7 +1,6 @@
 use godot::engine::file_access::ModeFlags;
 use godot::prelude::*;
 use io::Read as _;
-use strum::IntoEnumIterator as _;
 
 use crate::prelude::*;
 
@@ -22,18 +21,6 @@ impl CharMap {
             .expect("Character not found")
             .clone()
     }
-}
-
-/// CharMap with all characters having the same exact stats
-pub fn _uniform_charmap() -> CharMap {
-    PChar::iter().fold(CharMap::new(), |mut map, chname| {
-        map.push(Rc::new(RefCell::new(CharData {
-            id: chname,
-            inherent_stats_base: InherentStats::zero(),
-            ..Default::default()
-        })));
-        map
-    })
 }
 
 /// CharMap at the start of the game
