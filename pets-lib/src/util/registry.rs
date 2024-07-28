@@ -17,7 +17,7 @@ where
     let mut content = vec![];
     file.read_to_end(&mut content).ok()?;
     if content.len() > 100_000_000 {
-        godot_warn!("{} mod skills file too large! (over 100MB, wtf?)", path);
+        godot_warn!("{} mod file too large! (over 100MB, wtf?)", path);
         godot_warn!("None of your modded skills will be loaded!");
         return None;
     }

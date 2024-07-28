@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c7x12nyqelw1f"]
+[gd_scene load_steps=15 format=3 uid="uid://c7x12nyqelw1f"]
 
 [ext_resource type="PackedScene" uid="uid://pefjtfxt6buk" path="res://scenes/rooms/_Base.tscn" id="1_ls6vf"]
 [ext_resource type="PackedScene" uid="uid://dk214wpitbhju" path="res://scenes/walking_enemy.tscn" id="2_2qq46"]
@@ -13,9 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://desphmjvj0i4t" path="res://scenes/builds/furniture/crates/crate_wood_trio.tscn" id="11_8dx4e"]
 [ext_resource type="PackedScene" uid="uid://f6tdcsdb0s1e" path="res://scenes/builds/residential/trash_can.tscn" id="12_skh3g"]
 [ext_resource type="PackedScene" uid="uid://b1j4gxaaylwjl" path="res://scenes/char/LYEMBO.tscn" id="13_2on2m"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fft65"]
-size = Vector2(256, 224)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dljt4"]
 radius = 24.0
@@ -220,13 +217,9 @@ scale = Vector2(1.02, 0.5)
 [node name="LYEMBO" parent="." index="10" instance=ExtResource("13_2on2m")]
 position = Vector2(-128, -320)
 
-[node name="InteractionZone" type="InteractionZone" parent="LYEMBO" index="4"]
+[node name="InteractionZone" parent="LYEMBO" index="4" instance=ExtResource("4_vwc65")]
 interaction_id = "L'yembo Intro"
 prompt_translation_key = "TALK"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LYEMBO/InteractionZone" index="0"]
-position = Vector2(0, 16)
-shape = SubResource("RectangleShape2D_fft65")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="LYEMBO" index="5"]
 
