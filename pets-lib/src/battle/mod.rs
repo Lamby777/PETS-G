@@ -407,8 +407,4 @@ impl INode2D for BattleEngine {
             self.toggle_dualmenu();
         }
     }
-
-    fn process(&mut self, _delta: f64) {
-        //
-    }
 }
