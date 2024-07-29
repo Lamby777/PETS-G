@@ -67,7 +67,6 @@ mod prelude {
 
     pub use std::cell::RefCell;
     pub use std::collections::{HashMap, HashSet};
-    pub use std::convert::Infallible;
     pub use std::fmt::{self, Debug, Display};
     pub use std::path::{Path, PathBuf};
     pub use std::rc::Rc;

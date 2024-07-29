@@ -54,7 +54,7 @@ pub fn llm_generate() {
     let model = load_llm();
 
     let mut session = model.start_session(Default::default());
-    let res = session.infer::<Infallible>(
+    let res = session.infer::<!>(
         &model,
         &mut rand::thread_rng(),
         &llm::InferenceRequest {
