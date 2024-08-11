@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ben252ibtpchc"]
+[gd_scene load_steps=13 format=3 uid="uid://ben252ibtpchc"]
 
 [ext_resource type="AudioStream" uid="uid://bu1akc5wvo0wo" path="res://assets/music/menu/titlebreeze.ogg" id="1_06t4m"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="3_gc66u"]
@@ -41,12 +41,6 @@ _data = {
 "RESET": SubResource("Animation_uejll"),
 "open": SubResource("Animation_4x3vx")
 }
-
-[sub_resource type="GDScript" id="GDScript_0mk7k"]
-script/source = "extends ChoiceAgent
-
-func _ready():
-    enable()"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tovj7"]
 shader = ExtResource("4_gkpis")
@@ -576,8 +570,6 @@ offset_right = 104.0
 offset_bottom = 360.0
 
 [node name="ChoiceAgent" type="ChoiceAgent" parent="MoveRight/MenuChoices"]
-disabled = true
-script = SubResource("GDScript_0mk7k")
 
 [node name="Play" type="RichTextLabel" parent="MoveRight/MenuChoices"]
 clip_contents = false
@@ -588,6 +580,7 @@ focus_neighbor_top = NodePath("../Quit")
 focus_neighbor_bottom = NodePath("../Options")
 focus_next = NodePath("../Options")
 focus_previous = NodePath("../Quit")
+focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
@@ -603,6 +596,7 @@ focus_neighbor_top = NodePath("../Play")
 focus_neighbor_bottom = NodePath("../Credits")
 focus_next = NodePath("../Credits")
 focus_previous = NodePath("../Play")
+focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
@@ -618,6 +612,7 @@ focus_neighbor_top = NodePath("../Options")
 focus_neighbor_bottom = NodePath("../Quit")
 focus_next = NodePath("../Quit")
 focus_previous = NodePath("../Options")
+focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
@@ -633,6 +628,7 @@ focus_neighbor_top = NodePath("../Credits")
 focus_neighbor_bottom = NodePath("../Play")
 focus_next = NodePath("../Play")
 focus_previous = NodePath("../Credits")
+focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true

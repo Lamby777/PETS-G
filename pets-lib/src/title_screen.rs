@@ -150,8 +150,6 @@ impl INode2D for TitleScreen {
         let callable = self.base().callable("on_save_file_picked");
         self.save_choices
             .connect("selection_confirmed".into(), callable);
-
-        self.choices.bind_mut().enable();
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
