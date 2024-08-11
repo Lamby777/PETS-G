@@ -50,7 +50,8 @@ pub struct ChoiceAgent {
 impl ChoiceAgent {
     fn _tween_choice(&self, is_picked: bool, node: Gd<Control>) {
         if !node.is_inside_tree() {
-            panic!("node to tween is not inside tree");
+            godot_print!("node to tween is not inside tree, returning");
+            return;
         }
 
         let target =
