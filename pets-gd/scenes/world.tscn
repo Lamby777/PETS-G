@@ -131,16 +131,6 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 visible = false
 
-[node name="DialogBox" parent="UILayer" instance=ExtResource("2_lgtmm")]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-editor_description = ""
-script = null
-
 [node name="WorldMenu" parent="UILayer" instance=ExtResource("2_6orff")]
 
 [node name="BeaconFade" type="ColorRect" parent="UILayer"]

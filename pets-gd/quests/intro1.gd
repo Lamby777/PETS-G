@@ -7,7 +7,8 @@ func _ready():
     pcb().move_to_relative(0.0, -200.0)
     await pcb().motion_done
 
-    dbox().start_ix("Intro #1")
+    Dialogic.start("intro1")
+
     pcb().teleported.connect(on_teleported)
 
 func on_teleported(target):
@@ -21,13 +22,13 @@ func on_teleported(target):
 func on_house_tp(target):
     if phase == 0:
         self.phase = 1
-        dbox().start_ix("Intro #2")
-
+        Dialogic.start("intro2")
+    
     if target.name == "EthanBedroomExit" and phase == 1:
         self.phase = 2
-        dbox().start_ix("Intro #3")
+        Dialogic.start("intro3")
 
 func on_outdoors_tp(target):
     if target.name == "EthanHouseEntrance" and phase == 2:
         self.phase = 3
-        dbox().start_ix("Intro #5")
+        Dialogic.start("intro5")

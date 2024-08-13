@@ -29,7 +29,7 @@ directories/dch_directory={
 "Juniper": "res://dialogic/char/Juniper.dch"
 }
 directories/dtl_directory={
-"timelines/intro1": "res://dialogic/timelines/intro1.dtl"
+"intro1": "res://dialogic/timelines/intro1.dtl"
 }
 layout/style_list=["res://dialogic/style.tres"]
 layout/default_style="res://dialogic/style.tres"
