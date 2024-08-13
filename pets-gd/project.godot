@@ -51,6 +51,12 @@ save/autosave_delay=60.0
 save/encryption_on_exports_only=true
 text/autopauses={}
 glossary/default_case_sensitive=true
+translation/enabled=true
+translation/original_locale="en"
+translation/file_mode=1
+translation/translation_folder="res://dialogic/l10n"
+translation/save_mode=0
+translation/add_separator=false
 
 [display]
 

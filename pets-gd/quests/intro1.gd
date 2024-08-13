@@ -8,7 +8,6 @@ func _ready():
     await pcb().motion_done
 
     Dialogic.start("intro1")
-
     pcb().teleported.connect(on_teleported)
 
 func on_teleported(target):
