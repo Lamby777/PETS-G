@@ -67,7 +67,6 @@ pub mod dialogue {
     pub const WHITESPACE_DELAY: f64 = 0.03;
 
     pub const UI_LAYER_NAME: &str = "UILayer";
-    pub const DBOX_NODE_NAME: &str = "DialogBox";
 
     /// distance the dialog box is from the bottom of the screen
     /// to avoid the glow effect from showing while it's not active

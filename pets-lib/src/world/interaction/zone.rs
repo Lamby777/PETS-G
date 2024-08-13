@@ -46,7 +46,8 @@ impl InteractionZone {
     pub fn interact(&mut self) {
         let ix_id = self.interaction_id.to_string();
         if !ix_id.is_empty() {
-            start_ix(ix_id);
+            todo!("iz starts interaction");
+            // start_ix(ix_id);
 
             // Interactions take priority, you can't have
             // functions or beacons at the same time as an interaction.

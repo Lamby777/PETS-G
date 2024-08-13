@@ -20,11 +20,6 @@ pub struct Quest {
 #[godot_api]
 impl Quest {
     #[func]
-    fn dbox(&self) -> Gd<DialogBox> {
-        DialogBox::singleton()
-    }
-
-    #[func]
     fn pcb(&self) -> Gd<PlayerCB> {
         pcb()
     }

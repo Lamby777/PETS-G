@@ -83,7 +83,7 @@ impl WorldMenu {
         match choice.get_name().to_string().as_str() {
             "Inventory" => self.open_inventory(),
             "DebugQuit" => godot_tree().quit(),
-            "DebugMenu" => start_ix("Debug Menu"),
+            "DebugMenu" => todo!("debug menu"),
 
             _ => unreachable!(),
         }

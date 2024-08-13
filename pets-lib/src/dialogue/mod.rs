@@ -3,7 +3,6 @@
 //!
 
 mod dbox;
-pub use dbox::DialogBox;
 
 use crate::prelude::*;
 use dialogical::InteractionMap;

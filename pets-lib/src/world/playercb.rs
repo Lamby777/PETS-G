@@ -102,7 +102,7 @@ impl PlayerCB {
     /// * Menus
     pub fn can_move(&self) -> bool {
         // PRAISE SHORT-CIRCUIT EVALUATION!!
-        let dbox_is_active = DialogBox::singleton().bind().is_active();
+        let dbox_is_active = todo!("dbox is active check");
 
         let cant_move = dbox_is_active
             || InventoryNode::singleton().bind().is_open()
