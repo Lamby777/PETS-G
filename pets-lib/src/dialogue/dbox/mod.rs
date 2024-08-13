@@ -251,14 +251,10 @@ impl DialogBox {
                 self.set_ix(new_ix.clone(), vec![]);
             }
 
-            GDScript(script) => {
-                self.active = false;
-                self.tween_choices_wave(false);
-                self.close();
-
-                let guard = self.base_mut();
-                eval(script).unwrap();
-                drop(guard);
+            GDScript(_) => {
+                unimplemented!(
+                    "gdscript blocks are not supported on this branch"
+                )
             }
         }
     }
