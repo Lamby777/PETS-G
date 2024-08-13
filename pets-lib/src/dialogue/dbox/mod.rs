@@ -78,6 +78,12 @@ pub struct DialogBox {
 
 #[godot_api]
 impl DialogBox {
+    #[signal]
+    fn ix_ended(&self);
+
+    #[signal]
+    fn ix_choice_picked(&self, node: Gd<Control>, choice_index: u64);
+
     #[func]
     pub fn singleton() -> Gd<Self> {
         let path = format!("{}/{}", UI_LAYER_NAME, DBOX_NODE_NAME);
@@ -255,6 +261,8 @@ impl DialogBox {
 
     /// close the dialog and tween choices away
     pub fn end_interaction(&mut self) {
+        self.base_mut().emit_signal("ix_ended".into(), &[]);
+
         self.current_page_number = 0;
         self.current_ix = None;
         self.tween_choices_wave(false);
@@ -293,6 +301,11 @@ impl DialogBox {
         let DialogueEnding::Choices(choices) = ending else {
             unreachable!()
         };
+
+        self.base_mut().emit_signal("ix_choice_picked".into(), &[
+            choice.to_variant(),
+            (picked_i as u64).to_variant(),
+        ]);
 
         match &choices[picked_i].label {
             // no label means end the interaction
