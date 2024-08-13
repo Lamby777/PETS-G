@@ -58,25 +58,18 @@ NAME [JUNIPER]
 DG_INTRO4_ITSYOURS
 
 > [color=#BD0000]X[/color]
-$ set_ethan_bed_color("red")
 
 > [color=#FF7200]X[/color]
-$ set_ethan_bed_color("orange")
 
 > [color=#FFE300]X[/color]
-$ set_ethan_bed_color("yellow")
 
 > [color=#00AE06]X[/color]
-$ set_ethan_bed_color("green")
 
 > [color=#2500FF]X[/color]
-$ set_ethan_bed_color("blue")
 
 > [color=#7F0087]X[/color]
-$ set_ethan_bed_color("purple")
 
 > [color=#E889C4]X[/color]
-$ set_ethan_bed_color("pink")
 
 ---
 % Intro #4 >> Bed Color Picked
@@ -97,12 +90,6 @@ DG_INTRO4_BRINGFUZZY
 NAME [CLAY]
 
 DG_INTRO5_OVERHERE
-
-$$$
-pcb().move_to_relative(-200.0, 0.0)
-await pcb().motion_done
-start_ix("Intro #5 >> Walked")
-$$$
 
 ---
 % Intro #5 >> Walked

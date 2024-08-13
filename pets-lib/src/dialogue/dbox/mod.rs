@@ -250,12 +250,6 @@ impl DialogBox {
 
                 self.set_ix(new_ix.clone(), vec![]);
             }
-
-            GDScript(_) => {
-                unimplemented!(
-                    "gdscript blocks are not supported on this branch"
-                )
-            }
         }
     }
 
