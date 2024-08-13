@@ -23,7 +23,6 @@ mod consts;
 mod util;
 
 mod battle;
-mod dialogue;
 mod functions;
 mod items;
 mod stats;

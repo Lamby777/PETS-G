@@ -57,27 +57,6 @@ pub mod dialogue {
 
     /// Height above an interaction zone to display the prompt by default
     pub const INTERACT_PROMPT_HEIGHT_OFFSET: real = 240.0;
-
-    pub const DEFAULT_VOX: &str = "_";
-
-    pub const TEXT_VISIBILITY_DELAY: f64 = 0.015;
-    pub const PAUSE_CHAR: char = '​';
-    pub const PAUSE_CHAR_DELAY: f64 = 0.1;
-    pub const PUNCT_DELAY: f64 = 0.1;
-    pub const WHITESPACE_DELAY: f64 = 0.03;
-
-    pub const UI_LAYER_NAME: &str = "UILayer";
-
-    /// distance the dialog box is from the bottom of the screen
-    /// to avoid the glow effect from showing while it's not active
-    pub const _DBOX_Y_BELOW_VIEWPORT: f32 = 20.0;
-
-    pub const DBOX_CHOICE_TWEEN_TIME: f64 = choice_lists::CHOICE_TWEEN_TIME;
-    pub const DBOX_CHOICE_TWEEN_TRANS: TransitionType = TransitionType::QUAD;
-    pub const DBOX_CHOICE_HEIGHT: f32 = 70.0;
-    pub const DBOX_CHOICE_WAVE_TIME: f64 = 0.1;
-
-    pub const _DBOX_SELECTION_BBCODE: &str = WAVE_BBCODE;
 }
 
 pub mod choice_lists {

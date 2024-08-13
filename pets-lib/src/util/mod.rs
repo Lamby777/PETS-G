@@ -14,8 +14,6 @@ pub use describe::Describe;
 pub use extensions::*;
 pub use node_stuff::*;
 
-use crate::prelude::*;
-
 use godot::engine::{Engine, SceneTreeTimer};
 use godot::prelude::*;
 
@@ -49,12 +47,6 @@ macro_rules! normalized {
             Vector2::normalized($vector)
         }
     }};
-}
-
-pub fn replace_str_all(text: &str, replaces: &[(String, String)]) -> String {
-    replaces
-        .into_iter()
-        .fold(text.to_owned(), |text, (from, to)| text.replace(from, to))
 }
 
 pub fn tr(text: impl Into<StringName>) -> GString {
