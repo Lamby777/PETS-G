@@ -39,7 +39,7 @@ enum AttackFlopReason {
 #[derive(PartialEq)]
 enum MenuSection {
     Main,
-    Item,
+    _Item,
     Skill,
 }
 
