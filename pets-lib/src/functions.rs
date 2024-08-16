@@ -2,10 +2,6 @@ use crate::prelude::*;
 use godot::engine::{Sprite2D, Texture2D};
 use godot::prelude::*;
 
-fn end_ix() {
-    DialogBox::singleton().bind_mut().end_interaction();
-}
-
 #[derive(GodotClass)]
 #[class(init, base=Node)]
 pub struct ScriptExecutor {
@@ -32,7 +28,7 @@ impl ScriptExecutor {
 
     #[func]
     fn end_ix() {
-        end_ix();
+        DialogBox::singleton().bind_mut().end_interaction();
     }
 
     #[func]
@@ -55,13 +51,13 @@ impl ScriptExecutor {
             World::room().get_node_as::<Sprite2D>("%EthanBed/Sprite2D");
         bed.callv("set_texture".into(), varray![texture]);
 
-        end_ix();
+        Self::end_ix();
         start_ix("Intro #4 >> Bed Color Picked");
     }
 
     #[func]
     fn debug_battle() {
-        end_ix();
+        Self::end_ix();
 
         World::start_battle(&EnemyID::A_NONNY_MOUSE);
     }
@@ -70,7 +66,7 @@ impl ScriptExecutor {
     fn debug_item(item_id: String, quantity: u32) {
         Inventory::get().borrow_mut().give_item(item_id, quantity);
 
-        end_ix();
+        Self::end_ix();
         start_ix("Debug Menu >> After Item");
     }
 }
