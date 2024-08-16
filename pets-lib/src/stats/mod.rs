@@ -144,6 +144,7 @@ pub struct InherentStats {
 
     // Exclusive to certain characters
     // Spoiler alert: Ethan is not the only one who needs lambda... :>
+    // EDIT: I forgot what the above line is referring to LMFAO
     pub lambda: Option<IntegralStat>,
     pub max_mana: Option<IntegralStat>,
 }
