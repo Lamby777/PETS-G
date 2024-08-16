@@ -14,7 +14,7 @@ pub use describe::Describe;
 pub use extensions::*;
 pub use node_stuff::*;
 
-use crate::functions::ScriptExecutor;
+use crate::functions::DialogueScript;
 use crate::prelude::*;
 
 use godot::engine::{Engine, GDScript, SceneTreeTimer};
@@ -53,9 +53,10 @@ macro_rules! normalized {
 }
 
 /// Evaluate a GDScript string.
-/// They are all evaluated from a `ScriptExecutor` object.
+/// They are all evaluated from a `DialogueScript` object.
 ///
 /// - [what the fuck](https://github.com/godotengine/godot/issues/8003)
+#[deprecated]
 pub fn eval(source: &str) -> GReturn {
     let mut script = GDScript::new_gd();
 
@@ -68,7 +69,7 @@ pub fn eval(source: &str) -> GReturn {
     script.set_source_code(script_content.into());
     script.reload();
 
-    let mut executor = ScriptExecutor::new_alloc();
+    let mut executor = DialogueScript::new_alloc();
     executor.set_script(script.to_variant());
     executor.call("_eval".into(), &[]);
 

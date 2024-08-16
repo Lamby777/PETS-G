@@ -4,12 +4,16 @@ use godot::prelude::*;
 
 #[derive(GodotClass)]
 #[class(init, base=Node)]
-pub struct ScriptExecutor {
+pub struct DialogueScript {
     base: Base<Node>,
 }
 
 #[godot_api]
-impl ScriptExecutor {
+impl DialogueScript {
+    /// This is the entry point for all dialogue scripts.
+    #[func]
+    fn _start() {}
+
     // Convenience stuff to prevent long lines in embedded dialogue scripts
     #[func]
     fn dbox(&self) -> Gd<DialogBox> {
