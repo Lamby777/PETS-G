@@ -46,14 +46,15 @@ impl InteractionZone {
     pub fn interact(&mut self) {
         let ix_id = self.interaction_id.to_string();
         if !ix_id.is_empty() {
-            start_ix(ix_id);
+            todo!("call _start on an interaction gdscript");
+            // start_ix(ix_id);
 
             // Interactions take priority, you can't have
             // functions or beacons at the same time as an interaction.
             // If you want to run code before an interaction, you can
             // use a function that later starts the interaction using
             // a call to `start_ix()`
-            return;
+            // return;
         }
 
         // TODO fire signal here --------------------------------------
