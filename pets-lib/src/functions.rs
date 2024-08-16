@@ -26,19 +26,8 @@ impl DialogueScript {
     }
 
     #[func]
-    fn start_ix(&self, name: String) {
-        start_ix(name);
-    }
-
-    #[func]
-    fn end_ix() {
-        DialogBox::singleton().bind_mut().end_interaction();
-    }
-
-    #[func]
-    fn swap_ix(&self, name: String) {
-        Self::end_ix();
-        self.start_ix(name);
+    fn end() {
+        DialogBox::singleton().bind_mut().end();
     }
 
     // -----------------------------------------------------------------
@@ -54,23 +43,17 @@ impl DialogueScript {
         let mut bed =
             World::room().get_node_as::<Sprite2D>("%EthanBed/Sprite2D");
         bed.callv("set_texture".into(), varray![texture]);
-
-        Self::end_ix();
-        start_ix("Intro #4 >> Bed Color Picked");
+        // start_ix("Intro #4 >> Bed Color Picked");
     }
 
     #[func]
     fn debug_battle() {
-        Self::end_ix();
-
         World::start_battle(&EnemyID::A_NONNY_MOUSE);
     }
 
     #[func]
     fn debug_item(item_id: String, quantity: u32) {
         Inventory::get().borrow_mut().give_item(item_id, quantity);
-
-        Self::end_ix();
-        start_ix("Debug Menu >> After Item");
+        // start_ix("Debug Menu >> After Item");
     }
 }

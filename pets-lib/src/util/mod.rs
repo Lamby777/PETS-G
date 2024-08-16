@@ -111,24 +111,6 @@ macro_rules! tr_replace {
     }};
 }
 
-pub fn start_ix(name: impl Into<String>) {
-    DialogBox::singleton().bind_mut().start_ix(name.into());
-}
-
-pub fn _start_ix_replace<S>(name: impl Into<String>, replace: &[(S, S)])
-where
-    S: Into<String> + Clone,
-{
-    let replace = replace
-        .iter()
-        .map(|(a, b)| (a.clone().into(), b.clone().into()))
-        .collect::<Vec<_>>();
-
-    DialogBox::singleton()
-        .bind_mut()
-        .start_ix_replace(name.into(), replace.to_vec());
-}
-
 /// Like setTimeout in JS, using godot timers.
 /// Uses SECONDS, not ms.
 pub fn set_timeout<F>(time_sec: f64, mut func: F) -> Gd<SceneTreeTimer>

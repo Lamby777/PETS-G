@@ -17,60 +17,24 @@ mod dchoice;
 mod placeholders;
 use dchoice::DChoice;
 
-#[derive(Clone)]
-pub struct MetaPair<T> {
-    pub temporary: T,
-    pub permanent: T,
-}
-
-impl<T> MetaPair<T> {
-    pub fn from_cloned(v: T) -> Self
-    where
-        T: Clone,
-    {
-        Self {
-            temporary: v.clone(),
-            permanent: v,
-        }
-    }
-
-    /// matches over a `Metaline` to update a field depending on
-    /// whether it's pageonly, permanent, or nochange
-    pub fn set_from<'a>(&mut self, meta: &'a Metaline<T>)
-    where
-        T: Clone,
-    {
-        use Metaline::*;
-        self.temporary = match meta {
-            PageOnly(ref v) => v,
-            Permanent(ref v) => {
-                self.permanent = v.clone();
-                v
-            }
-            NoChange => &self.permanent,
-        }
-        .clone();
-    }
-}
-
 #[derive(GodotClass)]
 #[class(init, base=PanelContainer)]
 pub struct DialogBox {
     base: Base<PanelContainer>,
 
     // state for the current interaction
-    current_ix: Option<Interaction>,
-    current_page_number: usize,
     active: bool,
     replaces: Vec<(String, String)>,
 
     #[init(default = onready_node(&base, "VBox/Choices/ChoiceAgent"))]
     choice_agent: OnReady<Gd<ChoiceAgent>>,
 
-    #[init(default = MetaPair::from_cloned(Speaker::Narrator))]
-    speaker: MetaPair<Speaker>,
-    #[init(default = MetaPair::from_cloned(DEFAULT_VOX.to_owned()))]
-    vox: MetaPair<String>,
+    page_content: String,
+
+    #[init(default = Speaker::Narrator)]
+    speaker: Speaker,
+    #[init(default = DEFAULT_VOX.to_owned())]
+    vox: String,
 
     #[init(default = OnReady::manual())]
     text_visibility_timer: OnReady<Gd<Timer>>,
@@ -86,16 +50,12 @@ impl DialogBox {
 
     #[func]
     pub fn do_draw(&mut self) {
-        let ending = self.current_ix_ending().cloned();
-        if self.is_on_or_past_last_page()
-            && let Some(DialogueEnding::Choices(choices)) = ending
-        {
-            self.recreate_choice_labels(&choices);
-            self.tween_choices_wave(true);
-            self.choice_agent.bind_mut().enable();
+        // TODO if there are choices to show, show them
+        if false {
+            // self.recreate_choice_labels(&choices);
+            // self.tween_choices_wave(true);
+            // self.choice_agent.bind_mut().enable();
         }
-
-        self.goto_current_page();
 
         let spk = self
             .active
@@ -112,27 +72,6 @@ impl DialogBox {
 
         self.msg_txt().set_visible_characters(0);
         self.text_visibility_timer.start();
-    }
-
-    #[func]
-    pub fn start_ix(&mut self, ix_id: String) {
-        self.start_ix_replace(ix_id, vec![]);
-    }
-
-    pub fn start_ix_replace(
-        &mut self,
-        ix_id: String,
-        replace: Vec<(String, String)>,
-    ) {
-        let ix = ix_map().get(&ix_id);
-        let ix = unwrap_fmt!(
-            ix,
-            "Could not find interaction \"{}\" in the interaction map",
-            ix_id,
-        );
-
-        self.set_ix(ix.clone(), replace);
-        self.open();
     }
 
     /// See <https://github.com/Lamby777/PETS-G/issues/50>
@@ -167,28 +106,12 @@ impl DialogBox {
         label.set_visible_characters(len);
     }
 
-    /// sets the speaker and message labels to the given page
-    pub fn goto_current_page(&mut self) {
-        let pageno = self.current_page_number;
-        let ix = self.current_ix.as_ref();
-
-        if let Some(ix) = ix {
-            let ix = ix.clone();
-            let page = ix.pages.get(pageno);
-            let page = unwrap_fmt!(page, "Page #{} out of range!", pageno);
-
-            self.update_meta(&page.metadata);
-        }
-    }
-
+    /// The current speaker's name, processed.
+    /// First processes placeholders, then translation keys.
     fn translated_speaker(&self) -> GString {
-        if self.current_ix.is_none() {
-            return "".into();
-        }
-
         use Speaker::*;
 
-        match &self.speaker.temporary {
+        match &self.speaker {
             Named(v) => {
                 let name = replace_str_all(v, &self.replaces);
                 tr(placeholders::process_placeholders(&name))
@@ -200,15 +123,7 @@ impl DialogBox {
     }
 
     fn translated_message(&self) -> GString {
-        let pageno = self.current_page_number;
-        let Some(ix) = self.current_ix.as_ref() else {
-            return "".into();
-        };
-
-        let page = ix.pages.get(pageno);
-        let page = unwrap_fmt!(page, "Page #{} out of range!", pageno);
-
-        let content = page.content.clone();
+        let content = self.page_content.clone();
         let content = replace_str_all(&content, &self.replaces);
         let content = tr(content).to_string();
 
@@ -236,83 +151,31 @@ impl DialogBox {
         self.open_or_close(false);
     }
 
-    pub fn run_label(&mut self, label: &Label) {
-        use Label::*;
-
-        match label {
-            Goto(ix_id) => {
-                let new_ix = ix_map().get(ix_id);
-                let new_ix = unwrap_fmt!(
-                    new_ix,
-                    "GOTO: Could not find interaction with ID: {}",
-                    ix_id,
-                );
-
-                self.set_ix(new_ix.clone(), vec![]);
-            }
-
-            GDScript(script) => {
-                self.active = false;
-                self.tween_choices_wave(false);
-                self.close();
-
-                let guard = self.base_mut();
-                eval(script).unwrap();
-                drop(guard);
-            }
-        }
-    }
-
     /// close the dialog and tween choices away
-    pub fn end_interaction(&mut self) {
-        self.current_page_number = 0;
-        self.current_ix = None;
+    pub fn end(&mut self) {
         self.tween_choices_wave(false);
         self.close();
     }
 
-    pub fn run_ix_ending(&mut self) {
-        use DialogueEnding::*;
-
-        let ending = self.current_ix_ending().unwrap().clone();
-        match ending {
-            Choices(_) => (), // it's handled in `on_choice_picked`
-            Label(label) => self.run_label(&label),
-            End => self.end_interaction(),
-        }
-    }
-
     fn on_accept(&mut self) {
-        // go to next page
-        if self.is_on_or_past_last_page() {
-            self.run_ix_ending();
-        } else {
-            self.current_page_number += 1;
-        }
-
-        self.do_draw();
+        // TODO
     }
 
     #[func]
-    pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
-        // NOTE convention is that the agent is BEFORE the labels
-        let picked_i = (choice.get_index() - 1) as usize;
-
-        // we know the ending has to be `Choices` and not a label or end
-        let ending = self.current_ix_ending().unwrap().clone();
-        let DialogueEnding::Choices(choices) = ending else {
-            unreachable!()
-        };
-
-        match &choices[picked_i].label {
-            // no label means end the interaction
-            None => self.end_interaction(),
-
-            Some(label) => {
-                self.tween_choices_wave(false);
-                self.run_label(label);
-            }
-        }
+    pub fn on_choice_picked(&mut self, _choice: Gd<Control>) {
+        // // NOTE convention is that the agent is BEFORE the labels
+        // let picked_i = (choice.get_index() - 1) as usize;
+        // let choices = todo!();
+        //
+        // match &choices[picked_i].label {
+        //     // no label means end the interaction
+        //     None => self.end_interaction(),
+        //
+        //     Some(label) => {
+        //         self.tween_choices_wave(false);
+        //         // self.run_label(label);
+        //     }
+        // }
     }
 }
 
@@ -395,39 +258,6 @@ impl DialogBox {
     /// OR on-screen and not tweening off-screen
     pub fn is_active(&self) -> bool {
         self.active
-    }
-
-    fn set_ix(&mut self, ix: Interaction, replaces: Vec<(String, String)>) {
-        if ix.pages.len() == 0 {
-            panic!(
-                "Interaction has no pages! You probably made a dg sheet mistake."
-            );
-        }
-
-        self.current_ix = Some(ix);
-        self.current_page_number = 0;
-        self.replaces = replaces;
-
-        self.do_draw();
-    }
-
-    pub fn is_on_or_past_last_page(&self) -> bool {
-        let Some(ix) = self.current_ix.as_ref() else {
-            return false;
-        };
-
-        self.current_page_number >= ix.pages.len() - 1
-    }
-
-    pub fn current_ix_ending(&self) -> Option<&DialogueEnding> {
-        let ix = self.current_ix.as_ref();
-        ix.map(|ix| &ix.ending)
-    }
-
-    /// Updates the speaker and vox based on the given page metadata
-    pub fn update_meta(&mut self, meta: &PageMeta) {
-        self.speaker.set_from(&meta.speaker);
-        self.vox.set_from(&meta.vox);
     }
 
     fn free_choice_labels(&mut self) {
