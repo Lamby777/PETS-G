@@ -78,7 +78,6 @@ y_sort_enabled = true
 
 [node name="BushTriangle" type="Node2D" parent="DecoBushes" index="0"]
 y_sort_enabled = true
-position = Vector2(-32, 0)
 
 [node name="BushMid" parent="DecoBushes/BushTriangle" index="0" instance=ExtResource("5_txn6p")]
 position = Vector2(0, 900)
