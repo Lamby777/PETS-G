@@ -41,13 +41,6 @@ impl DialogBox {
     #[signal]
     fn accept(&self, _choice: Gd<Control>);
 
-    /// Set the message and write it to the label in one function
-    #[func]
-    fn say(&mut self, msg: String) {
-        self.set_message(msg);
-        self.do_draw();
-    }
-
     #[func]
     fn set_message(&mut self, msg: String) {
         self.message = msg;

@@ -4,14 +4,13 @@ func room_id():
     return $"../../YSort/Room".room_id
 
 func _ready():
-    # pcb().move_to_relative(0.0, -200.0)
-    # await pcb().motion_done
-    #
-    # dbox().open()
-    # dbox().set_speaker("[JUNIPER]")
-    # dbox().say("DG_INTRO1_COMEUNPACK")
-    # await dbox().accept
-    # dbox().close()
+    pcb().move_to_relative(0.0, -200.0)
+    await pcb().motion_done
+    
+    dbox().open()
+    dbox().set_speaker("[JUNIPER]")
+    await dbox().say(["DG_INTRO1_COMEUNPACK"])
+    dbox().close()
 
     pcb().teleported.connect(on_teleported)
 
@@ -28,8 +27,7 @@ func on_house_tp(target):
         self.phase = 1
         dbox().open()
         dbox().set_speaker("[JUNIPER]")
-        dbox().say("DG_INTRO1_OVERHERE")
-        await dbox().accept
+        await dbox().say(["DG_INTRO1_OVERHERE"])
         dbox().close()
 
     if target.name == "EthanBedroomExit" and phase == 1:
