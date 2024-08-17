@@ -1,4 +1,4 @@
-use godot::engine::{
+use godot::classes::{
     AnimatedSprite2D, Area2D, CharacterBody2D, ICharacterBody2D,
 };
 use godot::prelude::*;

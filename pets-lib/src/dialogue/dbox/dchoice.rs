@@ -6,8 +6,8 @@
 //! 🦀 **blazingly fast** 🦀
 //!
 
-use godot::engine::notify::ContainerNotification;
-use godot::engine::{IMarginContainer, MarginContainer, RichTextLabel};
+use godot::classes::notify::ContainerNotification;
+use godot::classes::{IMarginContainer, MarginContainer, RichTextLabel};
 use godot::prelude::*;
 
 use crate::consts::dialogue::*;

@@ -3,8 +3,7 @@
 //!
 
 use dialogical::prelude::*;
-use godot::engine::global::Side;
-use godot::engine::{
+use godot::classes::{
     AnimationPlayer, Control, HBoxContainer, IPanelContainer, InputEvent,
     PanelContainer, RichTextLabel, Timer,
 };

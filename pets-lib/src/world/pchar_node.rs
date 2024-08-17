@@ -1,4 +1,4 @@
-use godot::engine::{
+use godot::classes::{
     AnimationNodeStateMachinePlayback, AnimationPlayer, AnimationTree, Area2D,
     Sprite2D,
 };

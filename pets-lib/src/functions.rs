@@ -1,5 +1,5 @@
 use crate::prelude::*;
-use godot::engine::{Sprite2D, Texture2D};
+use godot::classes::{Sprite2D, Texture2D};
 use godot::prelude::*;
 
 #[derive(GodotClass)]

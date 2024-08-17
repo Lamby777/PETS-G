@@ -3,7 +3,7 @@
 //! inventory, eat food, etc.
 //!
 
-use godot::engine::{
+use godot::classes::{
     AnimationPlayer, Control, IPanel, InputEvent, Panel, RichTextLabel,
 };
 use godot::prelude::*;

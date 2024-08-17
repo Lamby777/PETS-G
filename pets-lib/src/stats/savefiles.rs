@@ -4,7 +4,7 @@
 
 use io::Write;
 
-use godot::engine::file_access::ModeFlags;
+use godot::classes::file_access::ModeFlags;
 use godot::prelude::*;
 
 use super::charmap::default_charmap;

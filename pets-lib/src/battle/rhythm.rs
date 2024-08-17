@@ -2,7 +2,7 @@
 //! Data structures related to rhythm in battle
 //!
 
-use godot::engine::{InputEvent, Timer};
+use godot::classes::{InputEvent, Timer};
 use godot::prelude::*;
 
 use super::midi::{BattleTrack, MidiReceiver};

@@ -3,7 +3,7 @@
 //! an interaction when within range
 //!
 
-use godot::engine::{Area2D, ColorRect, IArea2D};
+use godot::classes::{Area2D, ColorRect, IArea2D};
 use godot::prelude::*;
 
 use crate::consts::playercb::*;

@@ -4,7 +4,7 @@
 //!
 
 use godot::builtin::real;
-use godot::engine::tween::TransitionType;
+use godot::classes::tween::TransitionType;
 
 const WAVE_BBCODE: &str = "[wave amp=100 freq=-6]";
 

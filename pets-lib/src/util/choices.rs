@@ -6,8 +6,8 @@
 use crate::consts::choice_lists::*;
 use crate::prelude::*;
 
-use godot::engine::control::FocusMode;
-use godot::engine::{Control, InputEvent, RichTextLabel};
+use godot::classes::control::FocusMode;
+use godot::classes::{Control, InputEvent, RichTextLabel};
 use godot::prelude::*;
 
 /// This class should be placed under any control that has
