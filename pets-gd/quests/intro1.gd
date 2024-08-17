@@ -26,7 +26,11 @@ func on_teleported(target):
 func on_house_tp(target):
     if phase == 0:
         self.phase = 1
-        #dbox().start_ix("Intro #2")
+        dbox().open()
+        dbox().set_speaker("[JUNIPER]")
+        dbox().say("DG_INTRO1_OVERHERE")
+        await dbox().accept
+        dbox().close()
 
     if target.name == "EthanBedroomExit" and phase == 1:
         self.phase = 2
