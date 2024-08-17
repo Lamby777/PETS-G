@@ -7,7 +7,10 @@ func _ready():
     pcb().move_to_relative(0.0, -200.0)
     await pcb().motion_done
 
-    dbox().start_ix("Intro #1")
+    dbox().set_speaker("Deez")
+    dbox().set_message("Nuggets")
+    dbox().do_draw()
+    dbox().open()
     pcb().teleported.connect(on_teleported)
 
 func on_teleported(target):

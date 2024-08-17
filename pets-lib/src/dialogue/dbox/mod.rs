@@ -27,10 +27,11 @@ pub struct DialogBox {
     #[init(node = "VBox/Choices/ChoiceAgent")]
     choice_agent: OnReady<Gd<ChoiceAgent>>,
 
-    page_content: String,
-
     #[init(val = Speaker::Narrator)]
     speaker: Speaker,
+
+    message: String,
+
     #[init(val = DEFAULT_VOX.to_owned())]
     _vox: String, // TODO
 
@@ -40,6 +41,31 @@ pub struct DialogBox {
 
 #[godot_api]
 impl DialogBox {
+    #[func]
+    fn set_message(&mut self, msg: String) {
+        self.message = msg;
+    }
+
+    #[func]
+    fn set_speaker(&mut self, spk: String) {
+        self.speaker = Speaker::Named(spk);
+    }
+
+    // Godot doesn't have fancy-pants enums like Rust, so
+    // these 2 methods are for the "special" speakers
+
+    #[func]
+    fn set_speaker_narrator(&mut self) {
+        self.speaker = Speaker::Narrator;
+    }
+
+    #[func]
+    fn set_speaker_unknown(&mut self) {
+        self.speaker = Speaker::Unknown;
+    }
+
+    // --------------------------------------------------------------
+
     #[func]
     pub fn singleton() -> Gd<Self> {
         let path = format!("{}/{}", UI_LAYER_NAME, DBOX_NODE_NAME);
@@ -117,7 +143,7 @@ impl DialogBox {
     }
 
     fn translated_message(&self) -> GString {
-        let content = self.page_content.clone();
+        let content = self.message.clone();
         let content = tr(content).to_string();
 
         placeholders::process_placeholders(&content).into()
