@@ -142,22 +142,22 @@ DG_RODRICK1_COMEBACK,Come back when you're smart.
 ,
 DG_INTRO1_COMEUNPACK,"Hey, [ETHAN], we're unpacking your stuff! Come help!"
 ,
-DG_INTRO2_OVERHERE,Over here! This is your new room!
+DG_INTRO1_OVERHERE,Over here! This is your new room!
 ,
-DG_INTRO3_WDYT,What do you think?
-DG_INTRO3_GREAT,It's great!
-DG_INTRO3_ALRIGHT,It's alright...
-DG_INTRO3_GREAT_MOM,"Well, I'm glad you like it! I hope you'll be comfortable here."
-DG_INTRO3_ALRIGHT_MOM,"I know it's not much, but I hope you'll be comfortable here."
-DG_INTRO4_ITSYOURS,"Well, it's all yours. Do you have a specific blanket color in mind?"
-DG_INTRO4_LOOKSBETTER,"Wow, it looks even better already!"
-DG_INTRO4_ILLBEDOWNSTAIRS,"Alright, I'll be downstairs if you need me."
-DG_INTRO4_BRINGFUZZY,"Go bring out Fuzzy from the car, okay?"
+DG_INTRO1_WDYT,What do you think?
+DG_INTRO1_GREAT,It's great!
+DG_INTRO1_ALRIGHT,It's alright...
+DG_INTRO1_GREAT_MOM,"Well, I'm glad you like it! I hope you'll be comfortable here."
+DG_INTRO1_ALRIGHT_MOM,"I know it's not much, but I hope you'll be comfortable here."
+DG_INTRO1_ITSYOURS,"Well, it's all yours. Do you have a specific blanket color in mind?"
+DG_INTRO1_LOOKSBETTER,"Wow, it looks even better already!"
+DG_INTRO1_ILLBEDOWNSTAIRS,"Alright, I'll be downstairs if you need me."
+DG_INTRO1_BRINGFUZZY,"Go bring out Fuzzy from the car, okay?"
 ,
-DG_INTRO5_OVERHERE,"Here he is! Hey, [ETHAN], come meet the neighbors!"
-DG_INTRO5_MR_T,"This is Mr. Tulivae. He lives next door."
-DG_INTRO5_HITHERE,"Hi there, [ETHAN]. Pleasure meeting you."
-DG_INTRO5_HE_SEEMS_NICE,He seems pretty nice. Maybe you should go say hi later.
+DG_INTRO1_MEET_NEIGHBORS,"Here he is! Hey, [ETHAN], come meet the neighbors!"
+DG_INTRO1_MR_T,"This is Mr. Tulivae. He lives next door."
+DG_INTRO1_HITHERE,"Hi there, [ETHAN]. Pleasure meeting you."
+DG_INTRO1_HE_SEEMS_NICE,He seems pretty nice. Maybe you should go say hi later.
 ,
 DG_CHECK_CRATE,"It's just a crate. Doesn't look like anything good is inside."
 DG_CHECK_CRATES,"It's just a bunch of crates. Doesn't look like they have anything useful."

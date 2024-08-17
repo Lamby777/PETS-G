@@ -1,61 +1,33 @@
-% Intro #1
-###
-
-Link NAME [ETHAN]
-VOX Default
-
-Link NAME [JUNIPER]
-VOX Default
-
-Link NAME [CLAY]
-VOX Default
-
-Link NAME _
-VOX Default
-
-###
----
-NAME [JUNIPER]
-
-DG_INTRO1_COMEUNPACK
-
----
-% Intro #2
-NAME [JUNIPER]
-
-DG_INTRO2_OVERHERE
-
----
 % Intro #3
 NAME [JUNIPER]
 
-DG_INTRO3_WDYT
+DG_INTRO1_WDYT
 
-> DG_INTRO3_GREAT
+> DG_INTRO1_GREAT
 @ Intro #3 >> Great
 
-> DG_INTRO3_ALRIGHT
+> DG_INTRO1_ALRIGHT
 @ Intro #3 >> Alright
 
 ---
 % Intro #3 >> Great
 NAME [JUNIPER]
 
-DG_INTRO3_GREAT_MOM
+DG_INTRO1_GREAT_MOM
 
 @ Intro #4
 ---
 % Intro #3 >> Alright
 NAME [JUNIPER]
 
-DG_INTRO3_ALRIGHT_MOM
+DG_INTRO1_ALRIGHT_MOM
 
 @ Intro #4
 ---
 % Intro #4
 NAME [JUNIPER]
 
-DG_INTRO4_ITSYOURS
+DG_INTRO1_ITSYOURS
 
 > [color=#BD0000]X[/color]
 $ set_ethan_bed_color("red")
@@ -82,21 +54,21 @@ $ set_ethan_bed_color("pink")
 % Intro #4 >> Bed Color Picked
 NAME [JUNIPER]
 
-DG_INTRO4_LOOKSBETTER
+DG_INTRO1_LOOKSBETTER
 
 ---
 
-DG_INTRO4_ILLBEDOWNSTAIRS
+DG_INTRO1_ILLBEDOWNSTAIRS
 
 ---
 
-DG_INTRO4_BRINGFUZZY
+DG_INTRO1_BRINGFUZZY
 
 ---
 % Intro #5
 NAME [CLAY]
 
-DG_INTRO5_OVERHERE
+DG_INTRO1_MEET_NEIGHBORS
 
 $$$
 pcb().move_to_relative(-200.0, 0.0)
@@ -108,17 +80,17 @@ $$$
 % Intro #5 >> Walked
 NAME [CLAY]
 
-DG_INTRO5_MR_T
+DG_INTRO1_MR_T
 
 ---
 PageOnly NAME [MR_TULIVAE]
 
-DG_INTRO5_HITHERE
+DG_INTRO1_HITHERE
 
 ---
 PageOnly NAME _
 
-DG_INTRO5_HE_SEEMS_NICE
+DG_INTRO1_HE_SEEMS_NICE
 
 ---
 % L'yembo Intro
