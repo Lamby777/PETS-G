@@ -7,11 +7,8 @@ func _ready():
     pcb().move_to_relative(0.0, -200.0)
     await pcb().motion_done
     
-    dbox().open()
-    dbox().set_speaker("[JUNIPER]")
-    await dbox().say(["DG_INTRO1_COMEUNPACK"])
-    dbox().close()
-
+    await dbox().say_as("[JUNIPER]", ["DG_INTRO1_COMEUNPACK"])
+    
     pcb().teleported.connect(on_teleported)
 
 func on_teleported(target):
@@ -25,10 +22,7 @@ func on_teleported(target):
 func on_house_tp(target):
     if phase == 0:
         self.phase = 1
-        dbox().open()
-        dbox().set_speaker("[JUNIPER]")
-        await dbox().say(["DG_INTRO1_OVERHERE"])
-        dbox().close()
+        await dbox().say_as("[JUNIPER]", ["DG_INTRO1_OVERHERE"])
 
     if target.name == "EthanBedroomExit" and phase == 1:
         self.phase = 2

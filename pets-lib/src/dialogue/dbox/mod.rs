@@ -29,6 +29,9 @@ pub struct DialogBox {
     speaker: String,
     message: String,
 
+    #[var]
+    choices: VariantArray,
+
     #[init(val = DEFAULT_VOX.to_owned())]
     _vox: String, // TODO
 
@@ -62,10 +65,13 @@ impl DialogBox {
     #[func]
     pub fn do_draw(&mut self) {
         // TODO if there are choices to show, show them
-        if false {
-            // self.recreate_choice_labels(&choices);
-            // self.tween_choices_wave(true);
-            // self.choice_agent.bind_mut().enable();
+        if self.choices.len() > 0 {
+            godot_print!("Showing choices");
+            self.recreate_choice_labels();
+            self.tween_choices_wave(true);
+            self.choice_agent.bind_mut().enable();
+        } else {
+            godot_print!("Not showing choices");
         }
 
         let spk = self
@@ -274,26 +280,27 @@ impl DialogBox {
     }
 
     /// delete old labels and create new default ones
-    // pub fn recreate_choice_labels(&mut self, choices: &[DialogueChoice]) {
-    //     self.free_choice_labels();
-    //
-    //     let mut cont = self.choice_container();
-    //
-    //     for (i, choice) in choices.iter().enumerate() {
-    //         let mut dchoice = DChoice::new_container(i, &choice.text);
-    //
-    //         self.choice_agent
-    //             .bind_mut()
-    //             .bind_callables_for(&mut dchoice);
-    //
-    //         cont.add_child(dchoice.clone());
-    //
-    //         // put label below the window
-    //         dchoice.bind().put_label_under();
-    //     }
-    //
-    //     self.set_choice_label_focus_directions();
-    // }
+    pub fn recreate_choice_labels(&mut self) {
+        self.free_choice_labels();
+
+        let mut cont = self.choice_container();
+
+        for (i, choice) in self.choices.iter_shared().enumerate() {
+            godot_print!("Creating choice label: {}", choice);
+            let mut dchoice = DChoice::new_container(i, &choice.to_string());
+
+            self.choice_agent
+                .bind_mut()
+                .bind_callables_for(&mut dchoice);
+
+            cont.add_child(dchoice.clone());
+
+            // put label below the window
+            dchoice.bind().put_label_under();
+        }
+
+        self.set_choice_label_focus_directions();
+    }
 
     /// makes it so that all the choice labels refer to each
     /// other in their focus neighbor properties
