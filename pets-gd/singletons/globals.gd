@@ -1,6 +1,6 @@
 class_name Globals
 extends Node
-    
+
 #func _input(_event):
     #if Input.is_key_pressed(KEY_0):
         #get_tree().change_scene_to_file("res://scenes/world.tscn")
@@ -26,4 +26,3 @@ func discord_rich_presence():
 
     # Always refresh after changing the values!
     discord_sdk.refresh()
-
