@@ -133,20 +133,6 @@ pub fn si() -> Gd<StatsInterface> {
 /// Wrapper around Gd<T> so I can implement external traits on godot stuff
 pub struct GdW<T: GodotClass>(pub Gd<T>);
 
-/// helper function to load nodes into `OnReady` fields
-/// adapted from bromeon's answer on the gdext discord
-pub fn onready_node<O, T>(
-    this: &Base<O>,
-    path: impl Into<NodePath> + 'static,
-) -> OnReady<Gd<T>>
-where
-    T: Inherits<Node>,
-    O: Inherits<Node>,
-{
-    let self_obj = this.to_gd();
-    OnReady::new(move || self_obj.upcast().get_node_as(path))
-}
-
 /// takes a bbcode string and prepends or removes it from the label text
 pub fn bbcode_toggle(mut node: Gd<RichTextLabel>, bbcode: &str, active: bool) {
     let old_text = node.get_text().to_string();
