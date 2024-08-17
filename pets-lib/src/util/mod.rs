@@ -14,10 +14,7 @@ pub use describe::Describe;
 pub use extensions::*;
 pub use node_stuff::*;
 
-use crate::functions::DialogueScript;
-use crate::prelude::*;
-
-use godot::classes::{Engine, GDScript, SceneTreeTimer};
+use godot::classes::{Engine, SceneTreeTimer};
 use godot::prelude::*;
 
 pub fn month_string_3letter(month: u32) -> &'static str {
@@ -50,30 +47,6 @@ macro_rules! normalized {
             Vector2::normalized($vector)
         }
     }};
-}
-
-/// Evaluate a GDScript string.
-/// They are all evaluated from a `DialogueScript` object.
-///
-/// - [what the fuck](https://github.com/godotengine/godot/issues/8003)
-#[deprecated]
-pub fn eval(source: &str) -> GReturn {
-    let mut script = GDScript::new_gd();
-
-    let mut script_content = "extends ScriptExecutor\nfunc _eval():".to_owned();
-    for line in source.split("\n") {
-        script_content += &format!("\n\t{}", line);
-    }
-    script_content += "\n\tqueue_free()";
-
-    script.set_source_code(script_content.into());
-    script.reload();
-
-    let mut executor = DialogueScript::new_alloc();
-    executor.set_script(script.to_variant());
-    executor.call("_eval".into(), &[]);
-
-    Ok(Variant::nil())
 }
 
 pub fn replace_str_all(text: &str, replaces: &[(String, String)]) -> String {
