@@ -3,10 +3,11 @@
 //! an interaction when within range
 //!
 
-use godot::classes::{Area2D, ColorRect, IArea2D};
+use godot::classes::{Area2D, ColorRect, GDScript, IArea2D};
 use godot::prelude::*;
 
 use crate::consts::playercb::*;
+use crate::functions::DialogueScript;
 use crate::prelude::*;
 
 #[derive(GodotClass)]
@@ -15,7 +16,7 @@ pub struct InteractionZone {
     base: Base<Area2D>,
 
     #[export]
-    interaction_id: GString,
+    interaction_script: Option<Gd<GDScript>>,
 
     #[export]
     /// The scene the beacon belongs to
@@ -44,20 +45,16 @@ impl InteractionZone {
 
     #[func]
     pub fn interact(&mut self) {
-        let ix_id = self.interaction_id.to_string();
-        if !ix_id.is_empty() {
-            todo!("call _start on an interaction gdscript");
-            // start_ix(ix_id);
+        if let Some(script) = &self.interaction_script {
+            let mut executor = DialogueScript::new_alloc();
+            executor.set_script(script.to_variant());
+            executor.call("_start".into(), &[]);
 
-            // Interactions take priority, you can't have
-            // functions or beacons at the same time as an interaction.
-            // If you want to run code before an interaction, you can
-            // use a function that later starts the interaction using
-            // a call to `start_ix()`
-            // return;
+            // Scripts take priority over beacons. You can make the player teleport
+            // inside your script if you still want them to teleport, though.
+            return;
         }
 
-        // TODO fire signal here --------------------------------------
         self.base_mut().emit_signal("interacted".into(), &[]);
 
         let target = &self.beacon_target;
