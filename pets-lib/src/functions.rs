@@ -11,8 +11,8 @@ pub struct DialogueScript {
 #[godot_api]
 impl DialogueScript {
     /// This is the entry point for all dialogue scripts.
-    #[func]
-    fn _start() {}
+    #[func(virtual)]
+    fn _start(&mut self) {}
 
     // Convenience stuff to prevent long lines in embedded dialogue scripts
     #[func]

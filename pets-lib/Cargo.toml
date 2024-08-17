@@ -13,7 +13,8 @@ concat-idents = "1.1.5"
 derive_more = "0.99.17"
 derived-deref = "2.1.0"
 dialogical = "=0.13.1"
-godot = { version = "0.1.1", features = ["experimental-threads", "experimental-godot-api"] }
+# godot = { version = "0.1.3", features = ["api-4-3", "experimental-threads", "experimental-godot-api"] }
+godot = { git = "https://github.com/godot-rust/gdext", version = "0.1.3", features = ["api-4-3", "experimental-threads", "experimental-godot-api"] }
 indoc = "2.0.4"
 libdx = "2.1.1"
 nodi = "1.0.0"
