@@ -49,12 +49,6 @@ macro_rules! normalized {
     }};
 }
 
-pub fn replace_str_all(text: &str, replaces: &[(String, String)]) -> String {
-    replaces
-        .into_iter()
-        .fold(text.to_owned(), |text, (from, to)| text.replace(from, to))
-}
-
 pub fn tr(text: impl Into<StringName>) -> GString {
     Engine::singleton().tr(text.into())
 }

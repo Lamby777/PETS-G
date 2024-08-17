@@ -5,9 +5,7 @@ func room_id():
 
 func _ready():
     pcb().move_to_relative(0.0, -200.0)
-    print("moving")
     await pcb().motion_done
-    print("done")
 
     dbox().start_ix("Intro #1")
     pcb().teleported.connect(on_teleported)
