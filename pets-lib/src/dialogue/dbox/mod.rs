@@ -23,7 +23,6 @@ pub struct DialogBox {
 
     // state for the current interaction
     active: bool,
-    replaces: Vec<(String, String)>,
 
     #[init(node = "VBox/Choices/ChoiceAgent")]
     choice_agent: OnReady<Gd<ChoiceAgent>>,
@@ -111,11 +110,7 @@ impl DialogBox {
         use Speaker::*;
 
         match &self.speaker {
-            Named(v) => {
-                let name = replace_str_all(v, &self.replaces);
-                tr(placeholders::process_placeholders(&name))
-            }
-
+            Named(name) => tr(placeholders::process_placeholders(&name)),
             Narrator => "".into(),
             Unknown => tr("DG_SPK_UNKNOWN"),
         }
@@ -123,7 +118,6 @@ impl DialogBox {
 
     fn translated_message(&self) -> GString {
         let content = self.page_content.clone();
-        let content = replace_str_all(&content, &self.replaces);
         let content = tr(content).to_string();
 
         placeholders::process_placeholders(&content).into()
