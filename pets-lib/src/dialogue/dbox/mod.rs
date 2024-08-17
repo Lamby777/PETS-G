@@ -200,7 +200,7 @@ impl IPanelContainer for DialogBox {
             self.base().callable("text_visibility_tick"),
         );
         timer.set_one_shot(true);
-        self.base_mut().add_child(timer.clone().upcast());
+        self.base_mut().add_child(&timer);
         self.text_visibility_timer.init(timer);
     }
 
@@ -267,7 +267,7 @@ impl DialogBox {
             node.set_name("deleted".into());
             node.queue_free();
             ChoiceAgent::unbind_callables_for(&mut node);
-            cont.remove_child(node.upcast());
+            cont.remove_child(node);
         }
     }
 
@@ -284,7 +284,7 @@ impl DialogBox {
                 .bind_mut()
                 .bind_callables_for(&mut dchoice);
 
-            cont.add_child(dchoice.clone().upcast());
+            cont.add_child(dchoice.clone());
 
             // put label below the window
             dchoice.bind().put_label_under();

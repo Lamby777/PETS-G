@@ -78,7 +78,7 @@ macro_rules! load_pchar_scene_under {
         let path = format!("res://scenes/char/{}.tscn", $name);
         let packed = load::<PackedScene>(path);
         let inst = packed.instantiate_as::<PCharNode>();
-        $parent.base_mut().add_child(inst.clone().upcast());
+        $parent.base_mut().add_child(&inst);
         inst
     }};
 }
