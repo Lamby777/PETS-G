@@ -22,19 +22,19 @@ pub struct ChoiceAgent {
     focused: Option<Gd<Control>>,
 
     #[export]
-    #[init(default = "position:x".into())]
+    #[init(val = "position:x".into())]
     tween_property: GString,
 
     #[export]
-    #[init(default = 0.0)]
+    #[init(val = 0.0)]
     tween_normal_value: real,
 
     #[export]
-    #[init(default = 64.0)]
+    #[init(val = 64.0)]
     tween_focused_value: real,
 
     #[export]
-    #[init(default = CHOICE_WAVE_BBCODE.into())]
+    #[init(val = CHOICE_WAVE_BBCODE.into())]
     bbcode: GString,
 
     #[export]
@@ -42,7 +42,7 @@ pub struct ChoiceAgent {
     disabled: bool,
 
     #[export]
-    #[init(default = ".".into())]
+    #[init(val = ".".into())]
     tween_target_relative: GString,
 }
 

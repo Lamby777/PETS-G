@@ -26,20 +26,20 @@ pub struct BattleIcon {
     base: Base<CharacterBody2D>,
 
     /// Maximum speed of player icon
-    #[init(default = 400.0)]
+    #[init(val = 400.0)]
     speed: FloatStat,
 
     /// Acceleration amount per tick held
-    #[init(default = 80.0)]
+    #[init(val = 80.0)]
     acceleration: FloatStat,
 
     /// Coefficient of deceleration
-    #[init(default = 0.96)]
+    #[init(val = 0.96)]
     friction: FloatStat,
 
     /// Current velocity of player icon
     /// NOT normalized, but still limited by speed.
-    #[init(default = Vector2::ZERO)]
+    #[init(val = Vector2::ZERO)]
     velocity: Vector2,
 
     #[export]

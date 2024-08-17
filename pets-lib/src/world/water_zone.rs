@@ -9,6 +9,6 @@ pub struct WaterZone {
     base: Base<Area2D>,
 
     #[export]
-    #[init(default = DEFAULT_WATER_SPEED_MOD)]
+    #[init(val = DEFAULT_WATER_SPEED_MOD)]
     pub speed_modulation: real,
 }

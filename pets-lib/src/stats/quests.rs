@@ -9,11 +9,11 @@ pub struct Quest {
     base: Base<Node>,
 
     #[export]
-    #[init(default = 0)]
+    #[init(val = 0)]
     pub phase: QuestPhase,
 
     #[export]
-    #[init(default = 1)]
+    #[init(val = 1)]
     final_phase: QuestPhase,
 }
 

@@ -102,7 +102,7 @@ pub struct BattleEngine {
     /// HP bar is going towards. The real HP value will be set ahead
     /// of time, but the bar will slowly move towards it, and you
     /// won't die until both your HP and the bar show zero.
-    #[init(default = OnReady::manual())]
+    #[init(val = OnReady::manual())]
     karma_timer: OnReady<Gd<Timer>>,
 }
 

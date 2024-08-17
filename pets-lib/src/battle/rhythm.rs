@@ -65,11 +65,11 @@ pub struct BattleMusic {
     base: Base<AudioStreamPlayer>,
     rhythm: RhythmState,
 
-    #[init(default = OnReady::manual())]
+    #[init(val = OnReady::manual())]
     track: OnReady<BattleTrack>,
 
     /// timer that is in charge of turning `player_clicked` to false
-    #[init(default = OnReady::manual())]
+    #[init(val = OnReady::manual())]
     post_click_timer: OnReady<Gd<Timer>>,
 
     /// timer that gets fired a little bit after the note off event

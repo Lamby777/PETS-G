@@ -31,12 +31,12 @@ pub struct DialogBox {
 
     page_content: String,
 
-    #[init(default = Speaker::Narrator)]
+    #[init(val = Speaker::Narrator)]
     speaker: Speaker,
-    #[init(default = DEFAULT_VOX.to_owned())]
+    #[init(val = DEFAULT_VOX.to_owned())]
     vox: String,
 
-    #[init(default = OnReady::manual())]
+    #[init(val = OnReady::manual())]
     text_visibility_timer: OnReady<Gd<Timer>>,
 }
 
