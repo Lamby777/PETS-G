@@ -4,14 +4,14 @@ func room_id():
     return $"../../YSort/Room".room_id
 
 func _ready():
-    pcb().move_to_relative(0.0, -200.0)
-    await pcb().motion_done
-
-    dbox().open()
-    dbox().set_speaker("[JUNIPER]")
-    dbox().say("DG_INTRO1_COMEUNPACK")
-    await dbox().accept
-    dbox().close()
+    # pcb().move_to_relative(0.0, -200.0)
+    # await pcb().motion_done
+    #
+    # dbox().open()
+    # dbox().set_speaker("[JUNIPER]")
+    # dbox().say("DG_INTRO1_COMEUNPACK")
+    # await dbox().accept
+    # dbox().close()
 
     pcb().teleported.connect(on_teleported)
 
