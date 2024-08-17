@@ -2,7 +2,6 @@
 //! Dialog box class for menus and dialogue text
 //!
 
-use dialogical::prelude::*;
 use godot::classes::{
     AnimationPlayer, Control, HBoxContainer, IPanelContainer, InputEvent,
     PanelContainer, RichTextLabel, Timer,
@@ -27,9 +26,7 @@ pub struct DialogBox {
     #[init(node = "VBox/Choices/ChoiceAgent")]
     choice_agent: OnReady<Gd<ChoiceAgent>>,
 
-    #[init(val = Speaker::Narrator)]
-    speaker: Speaker,
-
+    speaker: String,
     message: String,
 
     #[init(val = DEFAULT_VOX.to_owned())]
@@ -58,20 +55,7 @@ impl DialogBox {
 
     #[func]
     fn set_speaker(&mut self, spk: String) {
-        self.speaker = Speaker::Named(spk);
-    }
-
-    // Godot doesn't have fancy-pants enums like Rust, so
-    // these 2 methods are for the "special" speakers
-
-    #[func]
-    fn set_speaker_narrator(&mut self) {
-        self.speaker = Speaker::Narrator;
-    }
-
-    #[func]
-    fn set_speaker_unknown(&mut self) {
-        self.speaker = Speaker::Unknown;
+        self.speaker = spk;
     }
 
     // --------------------------------------------------------------
@@ -143,13 +127,8 @@ impl DialogBox {
     /// The current speaker's name, processed.
     /// First processes placeholders, then translation keys.
     fn translated_speaker(&self) -> GString {
-        use Speaker::*;
-
-        match &self.speaker {
-            Named(name) => tr(placeholders::process_placeholders(&name)),
-            Narrator => "".into(),
-            Unknown => tr("DG_SPK_UNKNOWN"),
-        }
+        // Unknown => tr("DG_SPK_UNKNOWN"),
+        tr(placeholders::process_placeholders(&self.speaker))
     }
 
     fn translated_message(&self) -> GString {
@@ -302,26 +281,26 @@ impl DialogBox {
     }
 
     /// delete old labels and create new default ones
-    pub fn recreate_choice_labels(&mut self, choices: &[DialogueChoice]) {
-        self.free_choice_labels();
-
-        let mut cont = self.choice_container();
-
-        for (i, choice) in choices.iter().enumerate() {
-            let mut dchoice = DChoice::new_container(i, &choice.text);
-
-            self.choice_agent
-                .bind_mut()
-                .bind_callables_for(&mut dchoice);
-
-            cont.add_child(dchoice.clone());
-
-            // put label below the window
-            dchoice.bind().put_label_under();
-        }
-
-        self.set_choice_label_focus_directions();
-    }
+    // pub fn recreate_choice_labels(&mut self, choices: &[DialogueChoice]) {
+    //     self.free_choice_labels();
+    //
+    //     let mut cont = self.choice_container();
+    //
+    //     for (i, choice) in choices.iter().enumerate() {
+    //         let mut dchoice = DChoice::new_container(i, &choice.text);
+    //
+    //         self.choice_agent
+    //             .bind_mut()
+    //             .bind_callables_for(&mut dchoice);
+    //
+    //         cont.add_child(dchoice.clone());
+    //
+    //         // put label below the window
+    //         dchoice.bind().put_label_under();
+    //     }
+    //
+    //     self.set_choice_label_focus_directions();
+    // }
 
     /// makes it so that all the choice labels refer to each
     /// other in their focus neighbor properties
