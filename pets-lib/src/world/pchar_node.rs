@@ -12,7 +12,7 @@ pub struct PCharNode {
     base: Base<Node2D>,
 
     #[export]
-    #[init(default = PChar::DEVON)]
+    #[init(val = PChar::DEVON)]
     pub pchar: PChar,
 
     #[init(default = onready_node(&base, "Sprite2D"))]
@@ -27,7 +27,7 @@ pub struct PCharNode {
     #[init(default = onready_node(&base, "Area2D"))]
     area: OnReady<Gd<Area2D>>,
 
-    #[init(default = OnReady::manual())]
+    #[init(val = OnReady::manual())]
     anim_state: OnReady<Gd<AnimationNodeStateMachinePlayback>>,
 }
 

@@ -27,10 +27,10 @@ pub struct PlayerCB {
     base: Base<CharacterBody2D>,
     party: Vec<Gd<PCharNode>>,
 
-    #[init(default = LimiQ::new(2000))]
+    #[init(val = LimiQ::new(2000))]
     past_positions: LimiQ<Vector2>,
 
-    #[init(default = LimiQ::new(2000))]
+    #[init(val = LimiQ::new(2000))]
     past_rotations: LimiQ<Vector2>,
 
     /// The enemies that are currently in battle with you
@@ -43,7 +43,7 @@ pub struct PlayerCB {
     /// this is the location the player is being moved to
     pub cutscene_motion: Option<Vector2>,
 
-    #[init(default = 1.0)]
+    #[init(val = 1.0)]
     pub water_speed_mod: real,
 }
 

@@ -30,7 +30,7 @@ pub struct InteractionZone {
     auto_interact: bool,
 
     #[export]
-    #[init(default = "INTERACT".into())]
+    #[init(val = "INTERACT".into())]
     prompt_translation_key: GString,
 
     #[export]
