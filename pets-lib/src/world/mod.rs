@@ -106,7 +106,7 @@ impl World {
             child.queue_free();
         }
 
-        old_room.replace_by(new_room.clone().upcast());
+        old_room.replace_by(&new_room);
 
         let mut world = self.base_mut();
         world.call_deferred("reconnect_musiczones".into(), &[]);
@@ -163,7 +163,7 @@ impl World {
         // load the scene
         let mut scene = self.instantiate_battle_scene();
 
-        layer.add_child(scene.clone().upcast());
+        layer.add_child(&scene);
         scene.bind_mut().animate_in();
 
         Self::mute_audio_bus(true);

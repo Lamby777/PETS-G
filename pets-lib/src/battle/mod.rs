@@ -301,7 +301,7 @@ impl BattleEngine {
             .instantiate_as::<PanelContainer>();
 
         panel.set("battle_engine".into(), self.base().to_variant());
-        cont.add_child(panel.clone().upcast());
+        cont.add_child(panel.clone());
 
         let mut agent: Gd<ChoiceAgent> = panel.get("choice_agent".into()).to();
         agent.bind_mut().enable();
@@ -372,7 +372,7 @@ impl INode2D for BattleEngine {
 
         {
             let mut timer = Timer::new_alloc();
-            self.base_mut().add_child(timer.clone().upcast());
+            self.base_mut().add_child(&timer);
             timer.set_wait_time(KARMA_INTERVAL);
             timer.set_one_shot(false);
             timer.start();
@@ -386,7 +386,7 @@ impl INode2D for BattleEngine {
         {
             // intro countdown timer setup
             let mut timer = Timer::new_alloc();
-            self.base_mut().add_child(timer.clone().upcast());
+            self.base_mut().add_child(&timer);
             timer.set_wait_time(INTRO_COUNTDOWN_SEC);
             timer.start();
             let callable = self.base().callable("intro_over");

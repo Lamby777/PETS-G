@@ -179,7 +179,7 @@ impl IAudioStreamPlayer for BattleMusic {
         // early click timer setup
         let mut timer = Timer::new_alloc();
         timer.set_one_shot(true);
-        self.base_mut().add_child(timer.clone().upcast());
+        self.base_mut().add_child(&timer);
         self.post_click_timer.init(timer);
 
         connect! {
