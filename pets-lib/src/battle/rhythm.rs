@@ -73,11 +73,11 @@ pub struct BattleMusic {
     post_click_timer: OnReady<Gd<Timer>>,
 
     /// timer that gets fired a little bit after the note off event
-    #[init(default = onready_node(&base, "RhythmTimer"))]
+    #[init(node = "RhythmTimer")]
     note_off_timer: OnReady<Gd<Timer>>,
 
     /// Metronome-like thingy
-    #[init(default = onready_node(&base, "ClickSFX"))]
+    #[init(node = "ClickSFX")]
     clicksfx: OnReady<Gd<AudioStreamPlayer>>,
 }
 

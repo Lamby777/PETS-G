@@ -16,10 +16,10 @@ pub struct InventoryNode {
     current_index: usize,
     is_open: bool,
 
-    #[init(default = onready_node(&base, "AnimationPlayer"))]
+    #[init(node = "AnimationPlayer")]
     anim: OnReady<Gd<AnimationPlayer>>,
 
-    #[init(default = onready_node(&base, "%ItemsRow"))]
+    #[init(node = "%ItemsRow")]
     row: OnReady<Gd<HBoxContainer>>,
 }
 

@@ -75,23 +75,23 @@ pub struct BattleEngine {
     #[export]
     right_panel_destination: Option<Gd<Control>>,
 
-    #[init(default = OnReady::manual())]
+    #[init(val = OnReady::manual())]
     battlers: OnReady<Battlers>,
     current_party_member: usize,
 
-    #[init(default = onready_node(&base, "BattleMusic"))]
+    #[init(node = "BattleMusic")]
     music: OnReady<Gd<BattleMusic>>,
 
-    #[init(default = onready_node(&base, "%BattleChoices/ChoiceAgent"))]
+    #[init(node = "%BattleChoices/ChoiceAgent")]
     choices: OnReady<Gd<ChoiceAgent>>,
 
     /// The choice agent for the right panel
     other_choices: Option<Gd<ChoiceAgent>>,
 
-    #[init(default = onready_node(&base, "AnimationPlayer"))]
+    #[init(node = "AnimationPlayer")]
     animator: OnReady<Gd<AnimationPlayer>>,
 
-    #[init(default = onready_node(&base, "%EnemySprite"))]
+    #[init(node = "%EnemySprite")]
     enemy_sprite: OnReady<Gd<AnimatedSprite2D>>,
 
     #[init(default = onready_node(&base, "%BattleIcon"))]

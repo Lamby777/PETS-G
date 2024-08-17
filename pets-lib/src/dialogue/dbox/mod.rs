@@ -26,7 +26,7 @@ pub struct DialogBox {
     active: bool,
     replaces: Vec<(String, String)>,
 
-    #[init(default = onready_node(&base, "VBox/Choices/ChoiceAgent"))]
+    #[init(node = "VBox/Choices/ChoiceAgent")]
     choice_agent: OnReady<Gd<ChoiceAgent>>,
 
     page_content: String,

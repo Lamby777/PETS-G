@@ -18,7 +18,7 @@ pub struct WorldMenu {
     base: Base<Panel>,
     opened: bool,
 
-    #[init(default = onready_node(&base, "Choices/ChoiceAgent"))]
+    #[init(node = "Choices/ChoiceAgent")]
     choices: OnReady<Gd<ChoiceAgent>>,
 }
 

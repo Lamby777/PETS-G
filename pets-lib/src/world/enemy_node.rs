@@ -27,10 +27,10 @@ pub struct WalkingEnemy {
     #[export]
     max_speed: real,
 
-    #[init(default = onready_node(&base, "AnimatedSprite2D"))]
+    #[init(node = "AnimatedSprite2D")]
     sprite: OnReady<Gd<AnimatedSprite2D>>,
 
-    #[init(default = onready_node(&base, "ContactRange"))]
+    #[init(node = "ContactRange")]
     range: OnReady<Gd<Area2D>>,
 
     // returns early from `anim_move` if the same options are passed
