@@ -3,7 +3,7 @@ extends DialogueScript
 func _start() -> void:
     dbox().open()
     dbox().set_speaker("[RODRICK]")
-    await say([
+    await dbox().say([
         "DG_RODRICK1_SOYOURE",
         "DG_RODRICK1_AREYOUSMART"
     ])

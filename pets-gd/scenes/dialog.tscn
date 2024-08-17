@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://wkelk3y4bkcj"]
+[gd_scene load_steps=6 format=3 uid="uid://wkelk3y4bkcj"]
 
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_jbfs2"]
+[ext_resource type="Script" path="res://scenes/dbox.gd" id="2_jmx8e"]
 
 [sub_resource type="Animation" id="Animation_3wgbn"]
 length = 0.001
@@ -44,13 +45,14 @@ clip_contents = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 256.0
+offset_left = -704.0
 offset_top = 1200.0
-offset_right = 1664.0
+offset_right = 704.0
 offset_bottom = 1646.0
 grow_horizontal = 2
 pivot_offset = Vector2(704, 220)
 theme = ExtResource("1_jbfs2")
+script = ExtResource("2_jmx8e")
 
 [node name="VBox" type="VBoxContainer" parent="."]
 clip_contents = true
