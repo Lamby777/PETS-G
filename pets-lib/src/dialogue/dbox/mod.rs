@@ -41,6 +41,16 @@ pub struct DialogBox {
 
 #[godot_api]
 impl DialogBox {
+    #[signal]
+    fn accept(&self, _choice: Gd<Control>);
+
+    /// Set the message and write it to the label in one function
+    #[func]
+    fn say(&mut self, msg: String) {
+        self.set_message(msg);
+        self.do_draw();
+    }
+
     #[func]
     fn set_message(&mut self, msg: String) {
         self.message = msg;
@@ -177,7 +187,7 @@ impl DialogBox {
     }
 
     fn on_accept(&mut self) {
-        // TODO
+        self.base_mut().emit_signal("accept".into(), &[]);
     }
 
     #[func]
