@@ -7,7 +7,7 @@ use godot::classes::{Area2D, ColorRect, GDScript, IArea2D};
 use godot::prelude::*;
 
 use crate::consts::playercb::*;
-use crate::functions::DialogueScript;
+use crate::functions::DialogueScriptBase;
 use crate::prelude::*;
 
 #[derive(GodotClass)]
@@ -46,7 +46,7 @@ impl InteractionZone {
     #[func]
     pub fn interact(&mut self) {
         if let Some(script) = &self.interaction_script {
-            let mut executor = DialogueScript::new_alloc();
+            let mut executor = DialogueScriptBase::new_alloc();
             executor.set_script(script.to_variant());
             executor.call("_start".into(), &[]);
 

@@ -4,12 +4,12 @@ use godot::prelude::*;
 
 #[derive(GodotClass)]
 #[class(init, base=Node)]
-pub struct DialogueScript {
+pub struct DialogueScriptBase {
     base: Base<Node>,
 }
 
 #[godot_api]
-impl DialogueScript {
+impl DialogueScriptBase {
     /// This is the entry point for all dialogue scripts.
     #[allow(non_snake_case)]
     #[func(virtual)]
