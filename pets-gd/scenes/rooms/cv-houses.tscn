@@ -29,7 +29,6 @@ position = Vector2(416, 32)
 scale = Vector2(0.5, 0.5)
 
 [node name="EthanBedroomEntrance2" parent="." index="3" instance=ExtResource("2_flkym")]
-interaction_id = "Check Crates"
 prompt_translation_key = "CHECK"
 position = Vector2(-104, -56)
 scale = Vector2(1.26, 0.5)
