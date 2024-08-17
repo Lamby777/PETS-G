@@ -1,9 +1,9 @@
 use crate::prelude::*;
 
 use derived_deref::{Deref, DerefMut};
-use godot::engine::object::ConnectFlags;
-use godot::engine::tween::TransitionType;
-use godot::engine::{
+use godot::classes::object::ConnectFlags;
+use godot::classes::tween::TransitionType;
+use godot::classes::{
     ColorRect, Engine, RichTextLabel, ShaderMaterial, Theme, Tween,
 };
 use godot::prelude::*;

@@ -3,9 +3,9 @@
 //! the GDExtension side that runs during battles.
 //!
 
-use godot::engine::node::ProcessMode;
-use godot::engine::object::ConnectFlags;
-use godot::engine::{
+use godot::classes::node::ProcessMode;
+use godot::classes::object::ConnectFlags;
+use godot::classes::{
     AnimatedSprite2D, AnimationPlayer, Control, InputEvent, PanelContainer,
     ProgressBar, Texture2D, TextureRect, Timer,
 };
@@ -94,7 +94,7 @@ pub struct BattleEngine {
     #[init(node = "%EnemySprite")]
     enemy_sprite: OnReady<Gd<AnimatedSprite2D>>,
 
-    #[init(default = onready_node(&base, "%BattleIcon"))]
+    #[init(node = "%BattleIcon")]
     icon: OnReady<Gd<BattleIcon>>,
 
     /// Something like the "rolling HP bar" feature from EarthBound

@@ -1,4 +1,4 @@
-use godot::engine::AnimationPlayer;
+use godot::classes::AnimationPlayer;
 use godot::prelude::*;
 
 pub trait Vector2Ext {

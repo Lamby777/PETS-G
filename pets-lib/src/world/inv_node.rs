@@ -1,6 +1,6 @@
 use crate::prelude::*;
-use godot::engine::object::ConnectFlags;
-use godot::engine::{
+use godot::classes::object::ConnectFlags;
+use godot::classes::{
     AnimationPlayer, BoxContainer, Control, HBoxContainer, IControl,
     InputEvent, MarginContainer, RichTextLabel,
 };

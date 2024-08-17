@@ -1,5 +1,5 @@
 // use crate::prelude::*;
-use godot::engine::{Area2D, AudioStream};
+use godot::classes::{Area2D, AudioStream};
 use godot::prelude::*;
 
 #[derive(GodotClass)]

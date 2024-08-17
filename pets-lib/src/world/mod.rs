@@ -6,8 +6,8 @@ use crate::consts::battle::*;
 use crate::prelude::*;
 
 use enemy_node::WalkingEnemy;
-use godot::engine::utilities::randf_range;
-use godot::engine::{AnimationPlayer, AudioServer, AudioStream, CanvasLayer};
+use godot::classes::{AnimationPlayer, AudioServer, AudioStream, CanvasLayer};
+use godot::global::randf_range;
 use godot::prelude::*;
 
 mod enemy_node;

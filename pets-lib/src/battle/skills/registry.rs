@@ -5,8 +5,8 @@ use crate::util::registry::*;
 use std::io::Read as _;
 use std::sync::OnceLock;
 
-use godot::engine::file_access::ModeFlags;
-use godot::engine::DirAccess;
+use godot::classes::file_access::ModeFlags;
+use godot::classes::DirAccess;
 use godot::prelude::*;
 
 pub static SKILL_REGISTRY: OnceLock<HashMap<String, Box<dyn Skill>>> =

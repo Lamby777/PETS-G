@@ -1,4 +1,4 @@
-use godot::engine::Area2D;
+use godot::classes::Area2D;
 use godot::prelude::*;
 
 const DEFAULT_WATER_SPEED_MOD: real = 0.4;

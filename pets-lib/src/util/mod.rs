@@ -17,7 +17,7 @@ pub use node_stuff::*;
 use crate::functions::DialogueScript;
 use crate::prelude::*;
 
-use godot::engine::{Engine, GDScript, SceneTreeTimer};
+use godot::classes::{Engine, GDScript, SceneTreeTimer};
 use godot::prelude::*;
 
 pub fn month_string_3letter(month: u32) -> &'static str {

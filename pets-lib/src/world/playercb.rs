@@ -1,6 +1,6 @@
 use std::cmp::Ordering;
 
-use godot::engine::{
+use godot::classes::{
     CharacterBody2D, ColorRect, ICharacterBody2D, ShaderMaterial,
 };
 use godot::prelude::*;

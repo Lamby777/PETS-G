@@ -1,8 +1,8 @@
 use crate::prelude::*;
 use std::collections::HashMap;
 
-use godot::engine::file_access::ModeFlags;
-use godot::engine::DirAccess;
+use godot::classes::file_access::ModeFlags;
+use godot::classes::DirAccess;
 use godot::prelude::*;
 use io::Read as _;
 

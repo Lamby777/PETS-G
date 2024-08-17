@@ -3,7 +3,7 @@
 //! Shows the input prompt and handles the action if pressed.
 //!
 
-use godot::engine::{Control, InputEvent, RichTextLabel};
+use godot::classes::{Control, InputEvent, RichTextLabel};
 use godot::prelude::*;
 
 use crate::consts::dialogue::INTERACT_PROMPT_HEIGHT_OFFSET;

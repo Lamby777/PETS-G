@@ -12,9 +12,9 @@ use accurate_timer::AccurateTimer;
 use ribbons::unwrap_fmt;
 use std::io::Read;
 
-use godot::engine::file_access::ModeFlags;
-use godot::engine::GFile;
+use godot::classes::file_access::ModeFlags;
 use godot::prelude::*;
+use godot::tools::GFile;
 
 use midly::Smf;
 use nodi::timers::Ticker;
