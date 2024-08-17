@@ -11,6 +11,7 @@ pub struct DialogueScript {
 #[godot_api]
 impl DialogueScript {
     /// This is the entry point for all dialogue scripts.
+    #[allow(non_snake_case)]
     #[func(virtual)]
     fn _start(&mut self) {}
 

@@ -33,7 +33,7 @@ pub struct DialogBox {
     #[init(val = Speaker::Narrator)]
     speaker: Speaker,
     #[init(val = DEFAULT_VOX.to_owned())]
-    vox: String,
+    _vox: String, // TODO
 
     #[init(val = OnReady::manual())]
     text_visibility_timer: OnReady<Gd<Timer>>,
