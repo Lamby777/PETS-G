@@ -15,16 +15,16 @@ pub struct PCharNode {
     #[init(val = PChar::DEVON)]
     pub pchar: PChar,
 
-    #[init(default = onready_node(&base, "Sprite2D"))]
+    #[init(node = "Sprite2D")]
     sprite: OnReady<Gd<Sprite2D>>,
 
-    #[init(default = onready_node(&base, "AnimationPlayer"))]
+    #[init(node = "AnimationPlayer")]
     anim_player: OnReady<Gd<AnimationPlayer>>,
 
-    #[init(default = onready_node(&base, "AnimationTree"))]
+    #[init(node = "AnimationTree")]
     anim_tree: OnReady<Gd<AnimationTree>>,
 
-    #[init(default = onready_node(&base, "Area2D"))]
+    #[init(node = "Area2D")]
     area: OnReady<Gd<Area2D>>,
 
     #[init(val = OnReady::manual())]

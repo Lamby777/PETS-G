@@ -23,15 +23,15 @@ const BLACK_FADE_TIME: f64 = 1.0;
 struct TitleScreen {
     base: Base<Node2D>,
 
-    #[init(default = onready_node(&base, "%MenuChoices/ChoiceAgent"))]
+    #[init(node = "%MenuChoices/ChoiceAgent")]
     choices: OnReady<Gd<ChoiceAgent>>,
 
     credits_up: bool,
 
-    #[init(default = onready_node(&base, "%SaveFilesContainer"))]
+    #[init(node = "%SaveFilesContainer")]
     save_button_cont: OnReady<Gd<Control>>,
 
-    #[init(default = onready_node(&base, "%SaveFilesContainer/ChoiceAgent"))]
+    #[init(node = "%SaveFilesContainer/ChoiceAgent")]
     save_choices: OnReady<Gd<ChoiceAgent>>,
 }
 

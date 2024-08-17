@@ -14,7 +14,7 @@ use crate::prelude::*;
 pub struct InteractionManager {
     base: Base<Node2D>,
 
-    #[init(default = onready_node(&base, "Prompt"))]
+    #[init(node = "Prompt")]
     prompt: OnReady<Gd<Control>>,
 
     /// All interaction zones the player is inside

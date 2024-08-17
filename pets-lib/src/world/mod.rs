@@ -63,13 +63,13 @@ fn cue_battle_intro_fx() {
 pub struct World {
     base: Base<Node2D>,
 
-    #[init(default = onready_node(&base, "ZoneAudio/Active"))]
+    #[init(node = "ZoneAudio/Active")]
     active_audio: OnReady<Gd<AudioStreamPlayer>>,
 
-    #[init(default = onready_node(&base, "ZoneAudio/FadeOut"))]
+    #[init(node = "ZoneAudio/FadeOut")]
     fading_audio: OnReady<Gd<AudioStreamPlayer>>,
 
-    #[init(default = onready_node(&base, "ZoneAudio/AnimationPlayer"))]
+    #[init(node = "ZoneAudio/AnimationPlayer")]
     fade_animator: OnReady<Gd<AnimationPlayer>>,
 
     current_mz: Option<Gd<MusicZone>>,
