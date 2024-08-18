@@ -23,7 +23,7 @@ pub struct DialogBox {
     // state for the current interaction
     active: bool,
 
-    #[init(node = "VBox/Choices/ChoiceAgent")]
+    #[init(node = "%ChoiceAgent")]
     choice_agent: OnReady<Gd<ChoiceAgent>>,
 
     speaker: String,
@@ -196,7 +196,7 @@ impl DialogBox {
 
     /// Get the container for choice labels
     fn choice_container(&self) -> Gd<HBoxContainer> {
-        self.base().get_node_as("VBox/Choices")
+        self.base().get_node_as("%Choices")
     }
 
     /// If the dialog box is currently active
