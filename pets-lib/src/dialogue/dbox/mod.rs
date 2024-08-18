@@ -29,8 +29,9 @@ pub struct DialogBox {
     speaker: String,
     message: String,
 
+    /// Choices to be shown at the next `do_draw` call
     #[var]
-    choices: VariantArray,
+    queued_choices: VariantArray,
 
     #[init(val = DEFAULT_VOX.to_owned())]
     _vox: String, // TODO
@@ -42,10 +43,7 @@ pub struct DialogBox {
 #[godot_api]
 impl DialogBox {
     #[signal]
-    fn accept(&self);
-
-    #[signal]
-    fn choice_picked(&self, choice_index: u64);
+    fn accept(&self, picked_i: i32);
 
     #[func]
     fn set_message(&mut self, msg: String) {
@@ -68,7 +66,7 @@ impl DialogBox {
     #[func]
     pub fn do_draw(&mut self) {
         // TODO if there are choices to show, show them
-        if self.choices.len() > 0 {
+        if self.queued_choices.len() > 0 {
             self.recreate_choice_labels();
             self.tween_choices_wave(true);
             self.choice_agent.bind_mut().enable();
@@ -165,7 +163,8 @@ impl DialogBox {
     }
 
     fn on_confirm_next_page(&mut self) {
-        self.base_mut().emit_signal("accept".into(), &[]);
+        self.base_mut()
+            .emit_signal("accept".into(), &[(-1).to_variant()]);
     }
 
     #[func]
@@ -175,7 +174,7 @@ impl DialogBox {
         self.tween_choices_wave(false);
 
         self.base_mut()
-            .emit_signal("choice_picked".into(), &[picked_i.to_variant()]);
+            .emit_signal("accept".into(), &[picked_i.to_variant()]);
     }
 
     fn _awaiting_choice(&self) -> bool {
@@ -223,7 +222,7 @@ impl DialogBox {
 
         let mut cont = self.choice_container();
 
-        for (i, choice) in self.choices.iter_shared().enumerate() {
+        for (i, choice) in self.queued_choices.iter_shared().enumerate() {
             godot_print!("Creating choice label: {}", choice);
             let mut dchoice = DChoice::new_container(i, &choice.to_string());
 
