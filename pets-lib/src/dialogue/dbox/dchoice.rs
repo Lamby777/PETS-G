@@ -7,7 +7,7 @@
 //!
 
 use godot::classes::notify::ContainerNotification;
-use godot::classes::{IMarginContainer, MarginContainer, RichTextLabel};
+use godot::classes::{IMarginContainer, MarginContainer, RichTextLabel, Tween};
 use godot::prelude::*;
 
 use crate::consts::dialogue::*;
@@ -31,7 +31,7 @@ impl DChoice {
     }
 
     /// tween the contained text label in/out of the window
-    pub fn tween_label(&self, up: bool) {
+    pub fn tween_label(&self, up: bool) -> Gd<Tween> {
         let tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
 
         tween(
@@ -42,7 +42,7 @@ impl DChoice {
             DBOX_CHOICE_TWEEN_TIME,
             DBOX_CHOICE_TWEEN_TRANS,
         )
-        .unwrap();
+        .unwrap()
     }
 
     pub fn put_label_under(&self) {

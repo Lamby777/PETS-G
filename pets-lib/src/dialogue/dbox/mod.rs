@@ -42,7 +42,10 @@ pub struct DialogBox {
 #[godot_api]
 impl DialogBox {
     #[signal]
-    fn accept(&self, _choice: Gd<Control>);
+    fn accept(&self);
+
+    #[signal]
+    fn choice_picked(&self, choice_index: u64);
 
     #[func]
     fn set_message(&mut self, msg: String) {
@@ -66,12 +69,9 @@ impl DialogBox {
     pub fn do_draw(&mut self) {
         // TODO if there are choices to show, show them
         if self.choices.len() > 0 {
-            godot_print!("Showing choices");
             self.recreate_choice_labels();
             self.tween_choices_wave(true);
             self.choice_agent.bind_mut().enable();
-        } else {
-            godot_print!("Not showing choices");
         }
 
         let spk = self
@@ -164,83 +164,21 @@ impl DialogBox {
         self.close();
     }
 
-    fn on_accept(&mut self) {
+    fn on_confirm_next_page(&mut self) {
         self.base_mut().emit_signal("accept".into(), &[]);
     }
 
     #[func]
-    pub fn on_choice_picked(&mut self, _choice: Gd<Control>) {
-        // // NOTE convention is that the agent is BEFORE the labels
-        // let picked_i = (choice.get_index() - 1) as usize;
-        // let choices = todo!();
-        //
-        // match &choices[picked_i].label {
-        //     // no label means end the interaction
-        //     None => self.end_interaction(),
-        //
-        //     Some(label) => {
-        //         self.tween_choices_wave(false);
-        //         // self.run_label(label);
-        //     }
-        // }
-    }
-}
+    pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
+        // NOTE convention is that the agent is BEFORE the labels
+        let picked_i = (choice.get_index() - 1) as u64;
+        self.tween_choices_wave(false);
 
-#[godot_api]
-impl IPanelContainer for DialogBox {
-    fn ready(&mut self) {
-        let mut connect = |name: &str, method: &str| {
-            let callable = self.base().callable(method);
-            // self.choice_agent.connect(name.into(), callable);
-            connect_deferred(&mut self.choice_agent, name.into(), callable);
-        };
-
-        connect("selection_confirmed", "on_choice_picked");
-        connect("selection_focused", "on_choice_focused");
-        connect("selection_unfocused", "on_choice_unfocused");
-
-        self.choice_agent.bind_mut().disable();
-
-        let mut timer = Timer::new_alloc();
-        timer.set_wait_time(TEXT_VISIBILITY_DELAY);
-        timer.connect(
-            "timeout".into(),
-            self.base().callable("text_visibility_tick"),
-        );
-        timer.set_one_shot(true);
-        self.base_mut().add_child(&timer);
-        self.text_visibility_timer.init(timer);
+        self.base_mut()
+            .emit_signal("choice_picked".into(), &[picked_i.to_variant()]);
     }
 
-    fn input(&mut self, event: Gd<InputEvent>) {
-        let confirming = event.is_action_pressed("ui_accept".into());
-
-        if !self.active {
-            return;
-        }
-
-        if confirming && !self.is_done_showing_text() {
-            self.skip_text_visibility();
-            return;
-        }
-
-        if self.awaiting_choice() {
-            // TODO NOTE this used to handle stuff but like...
-            // i'm not sure if the early return is still necessary
-            return;
-        }
-
-        if confirming {
-            mark_input_handled(&self.base());
-            self.on_accept();
-        }
-    }
-}
-
-/// shorter methods that are sorta self-explanatory
-/// moving 'em here to avoid clutter up above
-impl DialogBox {
-    fn awaiting_choice(&self) -> bool {
+    fn _awaiting_choice(&self) -> bool {
         !self.choice_agent.bind().get_disabled()
     }
 
@@ -348,17 +286,67 @@ impl DialogBox {
             // thread safety stuff, so just pass in the instance id
             let label_id = cont.instance_id();
 
-            let choice_slide_up = move || {
+            // set timer
+            set_timeout(DBOX_CHOICE_WAVE_TIME * i as f64, move || {
                 // get the label again using the instance id
                 let label = Gd::<DChoice>::try_from_instance_id(label_id);
 
                 if let Ok(label) = label {
-                    label.bind().tween_label(up);
-                };
-            };
+                    let mut tw = label.bind().tween_label(up);
 
-            // set timer
-            set_timeout(DBOX_CHOICE_WAVE_TIME * i as f64, choice_slide_up);
+                    // if tweening down, delete it after the tween
+                    if !up {
+                        tw.connect(
+                            "finished".into(),
+                            label.callable("queue_free"),
+                        );
+                    }
+                };
+            });
+        }
+    }
+}
+
+#[godot_api]
+impl IPanelContainer for DialogBox {
+    fn ready(&mut self) {
+        let mut connect = |name: &str, method: &str| {
+            let callable = self.base().callable(method);
+            // self.choice_agent.connect(name.into(), callable);
+            connect_deferred(&mut self.choice_agent, name.into(), callable);
+        };
+
+        connect("selection_confirmed", "on_choice_picked");
+        connect("selection_focused", "on_choice_focused");
+        connect("selection_unfocused", "on_choice_unfocused");
+
+        self.choice_agent.bind_mut().disable();
+
+        let mut timer = Timer::new_alloc();
+        timer.set_wait_time(TEXT_VISIBILITY_DELAY);
+        timer.connect(
+            "timeout".into(),
+            self.base().callable("text_visibility_tick"),
+        );
+        timer.set_one_shot(true);
+        self.base_mut().add_child(&timer);
+        self.text_visibility_timer.init(timer);
+    }
+
+    fn input(&mut self, event: Gd<InputEvent>) {
+        if !self.active {
+            return;
+        }
+
+        let confirming = event.is_action_pressed("ui_accept".into());
+        if confirming && !self.is_done_showing_text() {
+            self.skip_text_visibility();
+            return;
+        }
+
+        if confirming {
+            mark_input_handled(&self.base());
+            self.on_confirm_next_page();
         }
     }
 }

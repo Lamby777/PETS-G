@@ -14,7 +14,7 @@ func say_as_with_choices(speaker, msgs, dchoices, do_open = true, do_close = tru
         
         set_message(msg)
         if msg_i == msgs.size() - 1:
-            self.choices = dchoices 
+            self.choices = dchoices
         do_draw()
         await accept
         

@@ -1,7 +1,7 @@
 extends DialogueScript
 
 func _start() -> void:
-    await dbox().say_as_with_choices("[RODRICK]", [
+    var picked = await dbox().say_as_with_choices("[RODRICK]", [
         "DG_RODRICK1_SOYOURE",
         "DG_RODRICK1_AREYOUSMART",
     ], [
@@ -9,7 +9,5 @@ func _start() -> void:
         "DG_RODRICK1_DEFNOT",
     ])
     
-    # DG_RODRICK1_DIDNT
-    # DG_RODRICK1_DEFDIDNT
-    #
-    # DG_RODRICK1_COMEBACK
+    var msg = "DG_RODRICK1_DIDNT" if picked == 0 else "DG_RODRICK1_DEFDIDNT"
+    await dbox().say_as("[RODRICK]", [msg, "DG_RODRICK1_COMEBACK"])
