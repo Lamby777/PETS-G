@@ -6,11 +6,10 @@ use godot::classes::{
 use godot::prelude::*;
 
 use crate::consts::playercb::*;
-use crate::load_pchar_scenes_under;
 use crate::prelude::*;
 
 use super::inv_node::InventoryNode;
-use super::pchar_node::PCharNode;
+use super::pchar_node::{load_pchar_scenes_under, PCharNode};
 use super::BATTLE_PARTY_SIZE;
 
 /// The player will stop being controlled once it reaches this
@@ -25,6 +24,8 @@ const CUTSCENE_MOTION_CLOSE_ENOUGH: f32 = 10.0;
 #[class(init, base=CharacterBody2D)]
 pub struct PlayerCB {
     base: Base<CharacterBody2D>,
+
+    /// Each party member's scene node
     party: Vec<Gd<PCharNode>>,
 
     #[init(val = LimiQ::new(2000))]
@@ -226,13 +227,12 @@ impl PlayerCB {
 #[godot_api]
 impl ICharacterBody2D for PlayerCB {
     fn ready(&mut self) {
-        self.party = load_pchar_scenes_under!(
-            self;
+        self.party = load_pchar_scenes_under(&mut self.to_gd().upcast(), &[
             PChar::ETHAN,
             PChar::SIVA,
             PChar::TERRA,
             PChar::MIRA,
-        );
+        ]);
     }
 
     fn physics_process(&mut self, delta: f64) {
