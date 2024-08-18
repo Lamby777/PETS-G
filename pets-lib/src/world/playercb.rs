@@ -224,16 +224,17 @@ impl PlayerCB {
     }
 
     #[func]
-    fn load_pchar_scene_gd(&mut self, name: GString) -> Gd<PCharNode> {
+    fn push_pchar_gd(&mut self, name: GString) -> Gd<PCharNode> {
         // because godot can't understand `impl Trait`
-        self.load_pchar_scene(name.to_string())
+        self.push_pchar(name.to_string())
     }
 
-    pub fn load_pchar_scene(&mut self, name: impl ToString) -> Gd<PCharNode> {
+    pub fn push_pchar(&mut self, name: impl ToString) -> Gd<PCharNode> {
         let path = format!("res://scenes/char/{}.tscn", name.to_string());
         let packed = load::<PackedScene>(path);
         let inst = packed.instantiate_as::<PCharNode>();
         self.base_mut().add_child(&inst);
+        self.party.push(inst.clone());
         inst
     }
 }
@@ -242,10 +243,10 @@ impl PlayerCB {
 impl ICharacterBody2D for PlayerCB {
     fn ready(&mut self) {
         self.party = vec![
-            self.load_pchar_scene(PChar::ETHAN),
-            // self.load_pchar_scene(PChar::SIVA),
-            // self.load_pchar_scene(PChar::TERRA),
-            // self.load_pchar_scene(PChar::MIRA),
+            self.push_pchar(PChar::ETHAN),
+            // self.push_pchar(PChar::SIVA),
+            // self.push_pchar(PChar::TERRA),
+            // self.push_pchar(PChar::MIRA),
         ];
     }
 
