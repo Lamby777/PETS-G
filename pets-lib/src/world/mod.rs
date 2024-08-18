@@ -172,7 +172,7 @@ impl World {
 
         // it's a performance thing
         pcb().set_process(false);
-        children_of_type::<WalkingEnemy, _>(self.to_gd());
+        children_of_type::<WalkingEnemy, _>(&self.to_gd());
     }
 
     // ---------------------------------------- MusicZone stuff
@@ -243,7 +243,7 @@ impl World {
     #[func]
     fn reconnect_musiczones(&mut self) {
         let room = Self::room();
-        let mzones = children_of_type::<MusicZone, _>(room);
+        let mzones = children_of_type::<MusicZone, _>(&room);
 
         for mut zone in mzones {
             disconnect_signal(&mut zone, "body_entered");
@@ -263,7 +263,7 @@ impl World {
     #[func]
     fn reconnect_waterzones(&mut self) {
         let room = Self::room();
-        let wzones = children_of_type::<WaterZone, _>(room);
+        let wzones = children_of_type::<WaterZone, _>(&room);
 
         for mut zone in wzones {
             disconnect_signal(&mut zone, "body_entered");

@@ -38,6 +38,15 @@ pub struct DialogBox {
 
     #[init(val = OnReady::manual())]
     text_visibility_timer: OnReady<Gd<Timer>>,
+
+    #[init(node = "AnimationPlayer")]
+    anim_player: OnReady<Gd<AnimationPlayer>>,
+    #[init(node = "VBox/SpeakerName")]
+    spk_txt: OnReady<Gd<RichTextLabel>>,
+    #[init(node = "VBox/Content")]
+    msg_txt: OnReady<Gd<RichTextLabel>>,
+    #[init(node = "%Choices")]
+    choice_container: OnReady<Gd<HBoxContainer>>,
 }
 
 #[godot_api]
@@ -85,17 +94,17 @@ impl DialogBox {
             .then(|| self.translated_message())
             .unwrap_or("".into());
 
-        self.spk_txt().set_text(spk);
-        self.msg_txt().set_text(msg);
+        self.spk_txt.set_text(spk);
+        self.msg_txt.set_text(msg);
 
-        self.msg_txt().set_visible_characters(0);
+        self.msg_txt.set_visible_characters(0);
         self.text_visibility_timer.start();
     }
 
     /// See <https://github.com/Lamby777/PETS-G/issues/50>
     #[func]
     pub fn text_visibility_tick(&mut self) {
-        let mut label = self.msg_txt();
+        let label = &mut self.msg_txt;
         let visible = label.get_visible_characters();
         label.set_visible_characters(visible + 1);
 
@@ -114,12 +123,12 @@ impl DialogBox {
     }
 
     pub fn is_done_showing_text(&self) -> bool {
-        let label = self.msg_txt();
+        let label = &self.msg_txt;
         label.get_visible_characters() >= label.get_text().len() as i32
     }
 
     pub fn skip_text_visibility(&mut self) {
-        let mut label = self.msg_txt();
+        let label = &mut self.msg_txt;
         let len = label.get_text().len() as i32;
         label.set_visible_characters(len);
     }
@@ -138,14 +147,10 @@ impl DialogBox {
         placeholders::process_placeholders(&content).into()
     }
 
-    fn anim_player(&self) -> Gd<AnimationPlayer> {
-        self.base().get_node_as("AnimationPlayer")
-    }
-
     #[func]
     pub fn open_or_close(&mut self, open: bool) {
         self.active = open;
-        self.anim_player().play_animation_forwards("open", open);
+        self.anim_player.play_animation_forwards("open", open);
         self.do_draw();
     }
 
@@ -184,21 +189,6 @@ impl DialogBox {
         !self.choice_agent.bind().get_disabled()
     }
 
-    /// Get the speaker name label
-    fn spk_txt(&self) -> Gd<RichTextLabel> {
-        self.base().get_node_as("VBox/SpeakerName")
-    }
-
-    /// Get the message text label
-    fn msg_txt(&self) -> Gd<RichTextLabel> {
-        self.base().get_node_as("VBox/Content")
-    }
-
-    /// Get the container for choice labels
-    fn choice_container(&self) -> Gd<HBoxContainer> {
-        self.base().get_node_as("%Choices")
-    }
-
     /// If the dialog box is currently active
     ///
     /// Active means either tweening on-screen,
@@ -208,8 +198,8 @@ impl DialogBox {
     }
 
     fn free_choice_labels(&mut self) {
-        let mut cont = self.choice_container();
-        let children = children_of_type::<DChoice, _>(cont.clone());
+        let cont = &mut self.choice_container;
+        let children = children_of_type::<DChoice, _>(&cont.clone());
 
         for mut node in children {
             node.set_name("deleted".into());
@@ -223,7 +213,7 @@ impl DialogBox {
     pub fn recreate_choice_labels(&mut self) {
         self.free_choice_labels();
 
-        let mut cont = self.choice_container();
+        let cont = &mut self.choice_container;
 
         for (i, choice) in self.queued_choices.iter_shared().enumerate() {
             godot_print!("Creating choice label: {}", choice);
@@ -236,7 +226,7 @@ impl DialogBox {
             cont.add_child(dchoice.clone());
 
             // put label below the window
-            dchoice.bind().put_label_under();
+            dchoice.bind_mut().put_label_under();
         }
 
         self.set_choice_label_focus_directions();
@@ -267,7 +257,7 @@ impl DialogBox {
     }
 
     pub fn choice_nodes(&self) -> Vec<Gd<DChoice>> {
-        self.choice_container()
+        self.choice_container
             .get_children()
             .iter_shared()
             .filter_map(|n| n.try_cast::<DChoice>().ok())
@@ -276,12 +266,12 @@ impl DialogBox {
 
     pub fn tween_choices_wave(&mut self, up: bool) {
         self.choice_agent.bind_mut().set_disabled(!up);
-        let choices = self.choice_nodes();
+        let mut choices = self.choice_nodes();
 
-        for (i, cont) in choices.iter().enumerate() {
+        for (i, cont) in choices.iter_mut().enumerate() {
             // if moving up, start below the window
             if up {
-                cont.bind().put_label_under();
+                cont.bind_mut().put_label_under();
             }
 
             // we can't move the label into the closure because of
@@ -293,8 +283,8 @@ impl DialogBox {
                 // get the label again using the instance id
                 let label = Gd::<DChoice>::try_from_instance_id(label_id);
 
-                if let Ok(label) = label {
-                    let mut tw = label.bind().tween_label(up);
+                if let Ok(mut label) = label {
+                    let mut tw = label.bind_mut().tween_label(up);
 
                     // if tweening down, delete it after the tween
                     if !up {

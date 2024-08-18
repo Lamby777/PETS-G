@@ -21,6 +21,9 @@ pub struct InventoryNode {
 
     #[init(node = "%ItemsRow")]
     row: OnReady<Gd<HBoxContainer>>,
+
+    #[init(node = "%InventoryText")]
+    text_container: OnReady<Gd<BoxContainer>>,
 }
 
 #[godot_api]
@@ -34,10 +37,6 @@ impl InventoryNode {
         self.is_open
     }
 
-    fn text_container(&self) -> Gd<BoxContainer> {
-        self.base().get_node_as("%InventoryText")
-    }
-
     fn item_icon(&self, index: usize) -> Gd<MarginContainer> {
         if index > self.row.get_child_count() as usize {
             panic!("Index out of bounds: {}", index);
@@ -47,7 +46,7 @@ impl InventoryNode {
     }
 
     fn update_text_labels(&mut self) {
-        let cont = self.text_container();
+        let cont = &self.text_container;
         let mut name_txt =
             cont.get_node_as::<RichTextLabel>("ItemName/RichTextLabel");
         let mut desc_txt =

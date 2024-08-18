@@ -23,6 +23,9 @@ pub struct WorldMenu {
     #[init(node = "Choices/ChoiceAgent")]
     choices: OnReady<Gd<ChoiceAgent>>,
 
+    #[init(node = "AnimationPlayer")]
+    anim_player: OnReady<Gd<AnimationPlayer>>,
+
     #[export]
     debug_menu_script: Option<Gd<GDScript>>,
 }
@@ -42,16 +45,12 @@ impl WorldMenu {
             .set_text(txt.into());
     }
 
-    fn anim_player(&self) -> Gd<AnimationPlayer> {
-        self.base().get_node_as("AnimationPlayer")
-    }
-
     fn open_or_close(&mut self, open: bool) {
         self.set_date_txt(si().bind().save.date);
 
         self.opened = open;
 
-        self.anim_player().play_animation_forwards("open", open);
+        self.anim_player.play_animation_forwards("open", open);
 
         // set focus mode
         let mut choices = self.choices.bind_mut();

@@ -33,20 +33,18 @@ struct TitleScreen {
 
     #[init(node = "%SaveFilesContainer/ChoiceAgent")]
     save_choices: OnReady<Gd<ChoiceAgent>>,
+
+    #[init(node = "%BlackFade")]
+    black: OnReady<Gd<ColorRect>>,
+
+    #[init(node = "%CreditsPanel")]
+    credits_panel: OnReady<Gd<PanelContainer>>,
 }
 
 #[godot_api]
 impl TitleScreen {
-    fn credits_panel(&self) -> Gd<PanelContainer> {
-        self.base().get_node_as("%CreditsPanel")
-    }
-
-    fn black(&self) -> Gd<ColorRect> {
-        self.base().get_node_as("%BlackFade")
-    }
-
     fn anim_out(&self) {
-        fade_black(&self.black(), true, BLACK_FADE_TIME);
+        fade_black(&self.black, true, BLACK_FADE_TIME);
 
         let mut anim = self
             .base()
@@ -96,7 +94,7 @@ impl TitleScreen {
             }
 
             "Credits" => {
-                let panel = self.credits_panel();
+                let panel = &mut self.credits_panel;
                 self.credits_up = !self.credits_up;
 
                 let y = match self.credits_up {

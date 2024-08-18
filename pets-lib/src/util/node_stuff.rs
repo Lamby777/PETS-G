@@ -86,7 +86,7 @@ macro_rules! connect {
 }
 
 /// Recursively get all children of a node that are of a certain type.
-pub fn children_of_type<T, Par>(parent: Gd<Par>) -> Vec<Gd<T>>
+pub fn children_of_type<T, Par>(parent: &Gd<Par>) -> Vec<Gd<T>>
 where
     Par: Inherits<Node>,
     T: Inherits<Node>,
@@ -101,7 +101,7 @@ where
         }
 
         // push children that match as well
-        res.extend(children_of_type::<T, _>(node));
+        res.extend(children_of_type::<T, _>(&node));
     }
 
     res
@@ -187,7 +187,7 @@ where
 /// shorthand to do some tweeneroonies :3
 /// `time` is in seconds
 pub fn tween<NP, V, N>(
-    mut node: Gd<N>,
+    node: &mut Gd<N>,
     property: NP,
     start_value: Option<V>,
     end_value: V,
@@ -204,7 +204,7 @@ where
 
         let mut property = tween
             .tween_property(
-                node.upcast::<Object>(),
+                node.clone().upcast::<Object>(),
                 property.into(),
                 end_value.to_variant(),
                 time,
