@@ -75,7 +75,7 @@ impl Battler for CharData {
     }
 
     fn hp(&self) -> IntegralStat {
-        self.battle_stats.hp
+        self.battle_stats.hp.min(self.practical_stats().max_hp)
     }
 
     fn hp_mut(&mut self) -> &mut IntegralStat {

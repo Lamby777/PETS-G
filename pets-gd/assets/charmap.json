@@ -41,7 +41,7 @@
             "max_mana": 5
         },
         "battle_stats": {
-            "hp": 30,
+            "hp": 20,
             "mana": null,
             "energy": 1,
             "buffs": []
