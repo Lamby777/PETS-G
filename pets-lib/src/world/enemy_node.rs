@@ -115,7 +115,7 @@ impl WalkingEnemy {
         self.touched_player = true;
 
         godot_print!("Player touched enemy: {}", self.enemy_id);
-        World::start_battle(&self.enemy_id);
+        World::start_battle(self.enemy_id.to_godot());
     }
 }
 
