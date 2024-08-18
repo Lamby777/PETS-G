@@ -217,7 +217,7 @@ position = Vector2(0, 8)
 scale = Vector2(1.02, 0.5)
 
 [node name="LYEMBO" parent="." index="10" instance=ExtResource("13_2on2m")]
-position = Vector2(-128, -320)
+position = Vector2(-264, -536)
 
 [node name="InteractionZone" parent="LYEMBO" index="4" instance=ExtResource("4_vwc65")]
 interaction_script = ExtResource("15_ndq3e")

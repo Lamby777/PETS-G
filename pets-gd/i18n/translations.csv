@@ -125,6 +125,7 @@ SKILL_SHIELD_COMBINE_PARTS,{part1} {hits_str}
 ,
 DG_SPK_UNKNOWN,???
 DG_SPK_RODRICK,"Rodrick Sign Co."
+DG_SPK_CASCADE,Agent Cascade
 DG_SPK_MOM,Mom
 DG_SPK_DAD,Dad
 DG_SPK_JUNIPER,Juniper

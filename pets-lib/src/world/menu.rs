@@ -4,10 +4,12 @@
 //!
 
 use godot::classes::{
-    AnimationPlayer, Control, IPanel, InputEvent, Panel, RichTextLabel,
+    AnimationPlayer, Control, GDScript, IPanel, InputEvent, Panel,
+    RichTextLabel,
 };
 use godot::prelude::*;
 
+use crate::functions::DialogueScriptBase;
 use crate::prelude::*;
 
 use super::inv_node::InventoryNode;
@@ -20,6 +22,9 @@ pub struct WorldMenu {
 
     #[init(node = "Choices/ChoiceAgent")]
     choices: OnReady<Gd<ChoiceAgent>>,
+
+    #[export]
+    debug_menu_script: Option<Gd<GDScript>>,
 }
 
 #[godot_api]
@@ -83,8 +88,15 @@ impl WorldMenu {
         match choice.get_name().to_string().as_str() {
             "Inventory" => self.open_inventory(),
             "DebugQuit" => godot_tree().quit(),
-            // "DebugMenu" => start_ix("Debug Menu"),
-            "DebugMenu" => todo!("agent cascade's debug menu"),
+            "DebugMenu" => {
+                DialogueScriptBase::new(
+                    self.debug_menu_script
+                        .as_ref()
+                        .expect("no debug script exported")
+                        .clone(),
+                )
+                .call("_start".into(), &[]);
+            }
 
             _ => unreachable!(),
         }

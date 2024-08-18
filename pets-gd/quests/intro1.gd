@@ -68,4 +68,3 @@ func on_outdoors_tp(target):
         await dbox().say_as("[CLAY]", [ "DG_INTRO1_MR_T" ]);
         await dbox().say_as("[MR_TULIVAE]", [ "DG_INTRO1_HITHERE" ]);
         await dbox().say_as("[NARRATOR]", [ "DG_INTRO1_HE_SEEMS_NICE" ]);
-
