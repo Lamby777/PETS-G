@@ -4,13 +4,13 @@ func _start() -> void:
     var choice
     choice = await dbox().say_as_with_choices(
         "[CASCADE]", [
-            "Hey...?",
+            "Hey, what's up?",
         ], [
             "Battle",
             "Item",
             "Party",
-            "Page 2",
-            "Nah",
+            "Pauses",
+            "Bye",
         ]
     )
 
@@ -66,22 +66,17 @@ func _start() -> void:
             ])
                
 
-        3: # Page 2
-            choice = await dbox().say_as_with_choices(
-                "[CASCADE]", [
-                    "Okay, how about these?",
-                ], [
-                    "Pauses",
-                    "Nah",
-            ])
-
-            match choice:
-                0:
-                    await dbox().say_as("Isaac", [
+        3: # Pauses
+            await dbox().say_as("Isaac", [
 """Flint...​​​​​​​​​​
 Where did you last see Hinawa?"""
-                    ])
-                    await dbox().say_as("[CASCADE]", [
+            ])
+            await dbox().say_as("[CASCADE]", [
 """This next part will print v​e​r​r​r​r​r​y
 s​​​l​​​o​​​o​​​o​​​o​​​o​​​w​​​l​​​y."""
-                    ])
+            ])
+
+        4: # Bye
+            await dbox().say_as("[CASCADE]", [
+                "See ya!"
+            ])
