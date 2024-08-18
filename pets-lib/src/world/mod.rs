@@ -126,8 +126,10 @@ impl World {
         srv.set_bus_mute(unmuted, false);
     }
 
-    pub fn start_battle(eid: &EnemyID) {
-        let enemy_data = EnemyData::from_id(*eid);
+    #[func]
+    pub fn start_battle(eid: GString) {
+        let eid = EnemyID::from_godot(eid);
+        let enemy_data = EnemyData::from_id(eid);
         pcb()
             .bind_mut()
             .battling
