@@ -171,16 +171,19 @@ position = Vector2(900, 1300)
 collision_mask = 9
 
 [node name="RodrickSign" parent="." index="6" instance=ExtResource("6_eminc")]
-position = Vector2(192, 64)
+position = Vector2(-240, -240)
 collision_mask = 9
 
 [node name="InteractionZone" parent="RodrickSign" index="2" instance=ExtResource("4_vwc65")]
 interaction_script = ExtResource("8_28v1w")
 
 [node name="TreeCon1_0" parent="." index="7" instance=ExtResource("8_obhwm")]
-position = Vector2(160, 304)
+position = Vector2(168, 400)
 
-[node name="TreeBarrier" type="Node2D" parent="." index="8"]
+[node name="TreeCon1_1" parent="." index="8" instance=ExtResource("8_obhwm")]
+position = Vector2(336, 352)
+
+[node name="TreeBarrier" type="Node2D" parent="." index="9"]
 y_sort_enabled = true
 
 [node name="TreeDec1_0" parent="TreeBarrier" index="0" instance=ExtResource("7_b7alc")]
@@ -195,7 +198,7 @@ position = Vector2(-464, 104)
 [node name="TreeDec1_3" parent="TreeBarrier" index="3" instance=ExtResource("7_b7alc")]
 position = Vector2(-352, 104)
 
-[node name="EthanHouse" type="Node2D" parent="." index="9"]
+[node name="EthanHouse" type="Node2D" parent="." index="10"]
 y_sort_enabled = true
 
 [node name="TreeCon1_0" parent="EthanHouse" index="0" instance=ExtResource("8_obhwm")]
@@ -216,7 +219,7 @@ prompt_translation_key = "CHECK"
 position = Vector2(0, 8)
 scale = Vector2(1.02, 0.5)
 
-[node name="LYEMBO" parent="." index="10" instance=ExtResource("13_2on2m")]
+[node name="LYEMBO" parent="." index="11" instance=ExtResource("13_2on2m")]
 position = Vector2(-264, -536)
 
 [node name="InteractionZone" parent="LYEMBO" index="4" instance=ExtResource("4_vwc65")]
