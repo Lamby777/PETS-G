@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c7x12nyqelw1f"]
+[gd_scene load_steps=18 format=3 uid="uid://c7x12nyqelw1f"]
 
 [ext_resource type="PackedScene" uid="uid://pefjtfxt6buk" path="res://scenes/rooms/_Base.tscn" id="1_ls6vf"]
 [ext_resource type="PackedScene" uid="uid://dk214wpitbhju" path="res://scenes/walking_enemy.tscn" id="2_2qq46"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://desphmjvj0i4t" path="res://scenes/builds/furniture/crates/crate_wood_trio.tscn" id="11_8dx4e"]
 [ext_resource type="PackedScene" uid="uid://f6tdcsdb0s1e" path="res://scenes/builds/residential/trash_can.tscn" id="12_skh3g"]
 [ext_resource type="PackedScene" uid="uid://b1j4gxaaylwjl" path="res://scenes/char/LYEMBO.tscn" id="13_2on2m"]
+[ext_resource type="Script" path="res://dialogue/empty_trash.gd" id="14_h4mky"]
 [ext_resource type="Script" path="res://dialogue/lyembo1.gd" id="15_ndq3e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dljt4"]
@@ -210,6 +211,7 @@ position = Vector2(64, -544)
 position = Vector2(632, -744)
 
 [node name="InteractionZone" parent="EthanHouse/TrashCan" index="2" instance=ExtResource("4_vwc65")]
+interaction_script = ExtResource("14_h4mky")
 prompt_translation_key = "CHECK"
 position = Vector2(0, 8)
 scale = Vector2(1.02, 0.5)
