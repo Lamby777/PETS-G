@@ -243,9 +243,9 @@ impl ICharacterBody2D for PlayerCB {
     fn ready(&mut self) {
         self.party = vec![
             self.load_pchar_scene(PChar::ETHAN),
-            self.load_pchar_scene(PChar::SIVA),
-            self.load_pchar_scene(PChar::TERRA),
-            self.load_pchar_scene(PChar::MIRA),
+            // self.load_pchar_scene(PChar::SIVA),
+            // self.load_pchar_scene(PChar::TERRA),
+            // self.load_pchar_scene(PChar::MIRA),
         ];
     }
 
