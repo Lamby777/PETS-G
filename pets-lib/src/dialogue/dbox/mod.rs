@@ -70,6 +70,9 @@ impl DialogBox {
             self.recreate_choice_labels();
             self.tween_choices_wave(true);
             self.choice_agent.bind_mut().enable();
+            self.queued_choices.clear();
+        } else {
+            self.free_choice_labels();
         }
 
         let spk = self
