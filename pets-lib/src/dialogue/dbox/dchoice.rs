@@ -17,25 +17,25 @@ use crate::prelude::*;
 #[class(init, base=MarginContainer)]
 pub struct DChoice {
     base: Base<MarginContainer>,
+
+    #[init(node = "RichTextLabel")]
+    txt_label: OnReady<Gd<RichTextLabel>>,
 }
 
 #[godot_api]
 impl DChoice {
     #[func]
     pub fn set_text_tr(&mut self, text: GString) {
-        self.txt_label().set_text(tr(text));
-    }
-
-    pub fn txt_label(&self) -> Gd<RichTextLabel> {
-        self.base().get_node_as("RichTextLabel")
+        self.txt_label.set_text(tr(text));
     }
 
     /// tween the contained text label in/out of the window
-    pub fn tween_label(&self, up: bool) -> Gd<Tween> {
+    pub fn tween_label(&mut self, up: bool) -> Gd<Tween> {
+        let label = &mut self.txt_label;
         let tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
 
         tween(
-            self.txt_label(),
+            label,
             "position:y",
             None,
             tw_end,
@@ -45,8 +45,8 @@ impl DChoice {
         .unwrap()
     }
 
-    pub fn put_label_under(&self) {
-        self.txt_label()
+    pub fn put_label_under(&mut self) {
+        self.txt_label
             .set_position(Vector2::new(0.0, DBOX_CHOICE_HEIGHT));
     }
 
@@ -69,7 +69,7 @@ impl IMarginContainer for DChoice {
             return;
         }
 
-        let label = self.txt_label();
+        let label = &self.txt_label;
         let label_size = Vector2 {
             x: label.get_size().x,
             // y: label.get_size().y + 20.0,

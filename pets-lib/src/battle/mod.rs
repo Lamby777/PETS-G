@@ -104,6 +104,12 @@ pub struct BattleEngine {
     /// won't die until both your HP and the bar show zero.
     #[init(val = OnReady::manual())]
     karma_timer: OnReady<Gd<Timer>>,
+
+    #[init(node = "Menu/DualMenu")]
+    dualmenu: OnReady<Gd<Control>>,
+
+    #[init(node = "Menu/DualMenu/AnimationPlayer")]
+    dualmenu_animator: OnReady<Gd<AnimationPlayer>>,
 }
 
 #[godot_api]
@@ -182,7 +188,7 @@ impl BattleEngine {
     }
 
     fn open_dualmenu(&mut self) {
-        self.dualmenu_animator()
+        self.dualmenu_animator
             .play_animation_forwards("dualmenu_open", true);
 
         self.menu_section = Some(MenuSection::Main);
@@ -194,7 +200,7 @@ impl BattleEngine {
     }
 
     fn close_dualmenu(&mut self) {
-        self.dualmenu_animator()
+        self.dualmenu_animator
             .play_animation_forwards("dualmenu_open", false);
 
         self.menu_section = None;
@@ -225,15 +231,6 @@ impl BattleEngine {
             // (exhaustive match in case we add more states later)
             Attack { running: false } => self.open_dualmenu(),
         }
-    }
-
-    pub fn dualmenu(&self) -> Gd<Control> {
-        self.base().get_node_as::<Control>("Menu/DualMenu")
-    }
-
-    pub fn dualmenu_animator(&self) -> Gd<AnimationPlayer> {
-        self.dualmenu()
-            .get_node_as::<AnimationPlayer>("AnimationPlayer")
     }
 
     pub fn swap_party_member(&mut self, new_index: usize) {

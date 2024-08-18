@@ -82,7 +82,7 @@ impl ChoiceAgent {
             };
 
             tween(
-                label.clone(),
+                &mut label.clone(),
                 "theme_override_colors/default_color",
                 None,
                 target_col,
@@ -97,7 +97,7 @@ impl ChoiceAgent {
         if !self.tween_property.is_empty() {
             // tween the custom param
             tween(
-                target.clone(),
+                &mut target.clone(),
                 self.tween_property.clone(),
                 None,
                 target_val,
