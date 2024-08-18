@@ -59,27 +59,6 @@ impl PCharNode {
     }
 }
 
-pub fn load_pchar_scenes_under(
-    parent: &mut Gd<Node>,
-    names: &[impl ToString],
-) -> Vec<Gd<PCharNode>> {
-    names
-        .into_iter()
-        .map(|name| load_pchar_scene_under(parent, name.to_string()))
-        .collect()
-}
-
-pub fn load_pchar_scene_under(
-    parent: &mut Gd<Node>,
-    name: impl Into<String>,
-) -> Gd<PCharNode> {
-    let path = format!("res://scenes/char/{}.tscn", name.into());
-    let packed = load::<PackedScene>(path);
-    let inst = packed.instantiate_as::<PCharNode>();
-    parent.add_child(&inst);
-    inst
-}
-
 #[godot_api]
 impl INode2D for PCharNode {
     fn ready(&mut self) {
