@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://p2uymvf88jt7"]
+[gd_scene load_steps=18 format=3 uid="uid://p2uymvf88jt7"]
 
 [ext_resource type="PackedScene" uid="uid://kgl5788x405y" path="res://scenes/battle.tscn" id="1_37bcu"]
 [ext_resource type="PackedScene" uid="uid://c8hhg8v5ls70u" path="res://scenes/world_menu.tscn" id="2_6orff"]
@@ -9,6 +9,7 @@
 [ext_resource type="Shader" path="res://themes/encounter.gdshader" id="3_a3d4r"]
 [ext_resource type="PackedScene" uid="uid://clpj4pxq1ulin" path="res://scenes/inventory.tscn" id="3_jwkdy"]
 [ext_resource type="Script" path="res://scenes/BattleIntroRect.gd" id="4_jple0"]
+[ext_resource type="Script" path="res://dialogue/debug.gd" id="10_egidj"]
 [ext_resource type="PackedScene" uid="uid://c7x12nyqelw1f" path="res://scenes/rooms/cv-outdoors.tscn" id="10_kug7e"]
 [ext_resource type="Script" path="res://quests/intro1.gd" id="13_w40m0"]
 
@@ -134,6 +135,7 @@ visible = false
 [node name="DialogBox" parent="UILayer" instance=ExtResource("2_lgtmm")]
 
 [node name="WorldMenu" parent="UILayer" instance=ExtResource("2_6orff")]
+debug_menu_script = ExtResource("10_egidj")
 
 [node name="BeaconFade" type="ColorRect" parent="UILayer"]
 unique_name_in_owner = true

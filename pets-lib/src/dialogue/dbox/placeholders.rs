@@ -23,6 +23,7 @@ const PLACEHOLDERS: &[(&'static str, fn() -> String)] = &[
     ("[NARRATOR]", || "".to_owned()),
     ("[???]", || "DG_SPK_UNKNOWN".to_owned()),
     // character names
+    ("[CASCADE]", || "DG_SPK_CASCADE".to_owned()),
     ("[RODRICK]", || "DG_SPK_RODRICK".to_owned()),
     ("[ETHAN]", || pchar_display_name(&PChar::ETHAN)),
     ("[LYEMBO]", || pchar_display_name(&PChar::LYEMBO)),
