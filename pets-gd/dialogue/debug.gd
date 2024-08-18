@@ -58,7 +58,7 @@ func _start() -> void:
             )
 
             var chosen_char = choices[choice]
-            PlayerCB.singleton().push_pchar_gd(chosen_char)
+            pcb().push_pchar_gd(chosen_char)
 
             await dbox().say_as("[CASCADE]", [
                 "Welcome to the team" + 
