@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://hflql51x7i61"]
+[gd_scene load_steps=8 format=3 uid="uid://hflql51x7i61"]
 
 [ext_resource type="PackedScene" uid="uid://pefjtfxt6buk" path="res://scenes/rooms/_Base.tscn" id="1_t4iqd"]
 [ext_resource type="Script" path="res://scenes/rooms/room.gd" id="2_dkgsg"]
 [ext_resource type="PackedScene" uid="uid://2i16xk27wro6" path="res://scenes/interaction_zone.tscn" id="2_flkym"]
 [ext_resource type="PackedScene" uid="uid://bcpw80pdxqulb" path="res://scenes/builds/furniture/bed.tscn" id="4_3efre"]
+[ext_resource type="Script" path="res://dialogue/crates.gd" id="4_cj4nk"]
 [ext_resource type="PackedScene" uid="uid://dkxcjrnsor4et" path="res://scenes/builds/furniture/crates/crate_wood.tscn" id="5_dgprv"]
 [ext_resource type="PackedScene" uid="uid://desphmjvj0i4t" path="res://scenes/builds/furniture/crates/crate_wood_trio.tscn" id="6_4wjmx"]
 
@@ -29,6 +30,7 @@ position = Vector2(416, 32)
 scale = Vector2(0.5, 0.5)
 
 [node name="EthanBedroomEntrance2" parent="." index="3" instance=ExtResource("2_flkym")]
+interaction_script = ExtResource("4_cj4nk")
 prompt_translation_key = "CHECK"
 position = Vector2(-104, -56)
 scale = Vector2(1.26, 0.5)
