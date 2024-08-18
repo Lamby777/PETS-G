@@ -180,7 +180,7 @@ impl DialogBox {
             .emit_signal("accept".into(), &[picked_i.to_variant()]);
     }
 
-    fn _awaiting_choice(&self) -> bool {
+    fn awaiting_choice(&self) -> bool {
         !self.choice_agent.bind().get_disabled()
     }
 
@@ -346,7 +346,7 @@ impl IPanelContainer for DialogBox {
             return;
         }
 
-        if confirming {
+        if confirming && !self.awaiting_choice() {
             mark_input_handled(&self.base());
             self.on_confirm_next_page();
         }
