@@ -61,4 +61,11 @@ func on_house_tp(target):
 func on_outdoors_tp(target):
     if target.name == "EthanHouseEntrance" and phase == 2:
         self.phase = 3
-        #dbox().start_ix("Intro #5")
+        await dbox().say_as("[CLAY]", [ "DG_INTRO1_MEET_NEIGHBORS" ]);
+        var pcb = PlayerCB.singleton()
+        pcb.move_to_relative(-200.0, 0.0)
+        await pcb.motion_done
+        await dbox().say_as("[CLAY]", [ "DG_INTRO1_MR_T" ]);
+        await dbox().say_as("[MR_TULIVAE]", [ "DG_INTRO1_HITHERE" ]);
+        await dbox().say_as("[NARRATOR]", [ "DG_INTRO1_HE_SEEMS_NICE" ]);
+

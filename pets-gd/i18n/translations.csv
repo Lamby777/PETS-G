@@ -127,8 +127,8 @@ DG_SPK_UNKNOWN,???
 DG_SPK_RODRICK,"Rodrick Sign Co."
 DG_SPK_MOM,Mom
 DG_SPK_DAD,Dad
-DG_SPK_CLAY,Clay
 DG_SPK_JUNIPER,Juniper
+DG_SPK_CLAY,Clay
 DG_SPK_MR_TULIVAE,Mr. Tulivae
 DG_SPK_MRS_TULIVAE,Mrs. Tulivae
 ,
@@ -153,7 +153,6 @@ DG_INTRO1_ITSYOURS,"Well, it's all yours. Do you have a specific blanket color i
 DG_INTRO1_LOOKSBETTER,"Wow, it looks even better already!"
 DG_INTRO1_ILLBEDOWNSTAIRS,"Alright, I'll be downstairs if you need me."
 DG_INTRO1_BRINGFUZZY,"Go bring out Fuzzy from the car, okay?"
-,
 DG_INTRO1_MEET_NEIGHBORS,"Here he is! Hey, [ETHAN], come meet the neighbors!"
 DG_INTRO1_MR_T,"This is Mr. Tulivae. He lives next door."
 DG_INTRO1_HITHERE,"Hi there, [ETHAN]. Pleasure meeting you."
