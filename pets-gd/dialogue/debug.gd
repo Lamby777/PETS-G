@@ -1,8 +1,6 @@
 extends DialogueScript
 
 func _start() -> void:
-    print("Opening debug menu!")
-    
     var choice
     choice = await dbox().say_as_with_choices(
         "[CASCADE]", [
@@ -46,6 +44,10 @@ func _start() -> void:
                 "SIVA",
                 "TERRA",
                 "MIRA",
+                "LYEMBO",
+                "QUOLO",
+                "LEO",
+                "DYLAN"
             ]
 
             choice = await dbox().say_as_with_choices(
