@@ -1,5 +1,5 @@
 use crate::prelude::*;
-use godot::classes::{Sprite2D, Texture2D};
+use godot::classes::{GDScript, Sprite2D, Texture2D};
 use godot::prelude::*;
 
 #[derive(GodotClass)]
@@ -10,10 +10,17 @@ pub struct DialogueScriptBase {
 
 #[godot_api]
 impl DialogueScriptBase {
+    #[func]
+    pub fn new(script: Gd<GDScript>) -> Gd<Self> {
+        let mut executor = DialogueScriptBase::new_alloc();
+        executor.set_script(script.to_variant());
+        executor
+    }
+
     /// This is the entry point for all dialogue scripts.
     #[allow(non_snake_case)]
     #[func(virtual)]
-    fn _start(&mut self) {}
+    pub fn _start(&mut self) {}
 
     // Convenience stuff to prevent long lines in embedded dialogue scripts
     #[func]
@@ -44,7 +51,6 @@ impl DialogueScriptBase {
         let mut bed =
             World::room().get_node_as::<Sprite2D>("%EthanBed/Sprite2D");
         bed.callv("set_texture".into(), varray![texture]);
-        // start_ix("Intro #4 >> Bed Color Picked");
     }
 
     #[func]

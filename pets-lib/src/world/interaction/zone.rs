@@ -46,8 +46,7 @@ impl InteractionZone {
     #[func]
     pub fn interact(&mut self) {
         if let Some(script) = &self.interaction_script {
-            let mut executor = DialogueScriptBase::new_alloc();
-            executor.set_script(script.to_variant());
+            let mut executor = DialogueScriptBase::new(script.clone());
             executor.call("_start".into(), &[]);
 
             // Scripts take priority over beacons. You can make the player teleport

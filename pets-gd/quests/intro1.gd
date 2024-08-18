@@ -33,7 +33,30 @@ func on_house_tp(target):
             choicelist.duplicate(),
         )
 
-        await dbox().say_as("[JUNIPER]", [ choicelist[picked] + "_MOM" ])
+        var picked_bedcolor_i = await dbox().say_as_with_choices(
+            "[JUNIPER]",
+            [choicelist[picked] + "_MOM", "DG_INTRO1_ITSYOURS"],
+            [
+                "[color=#BD0000]X[/color]",
+                "[color=#FF7200]X[/color]",
+                "[color=#FFE300]X[/color]",
+                "[color=#00AE06]X[/color]",
+                "[color=#2500FF]X[/color]",
+                "[color=#7F0087]X[/color]",
+                "[color=#E889C4]X[/color]",
+            ]
+        )
+
+        var bedcolors = ["red", "orange", "yellow", "green", "blue", "purple", "pink"]
+        var picked_bedcolor = bedcolors[picked_bedcolor_i]
+
+        DialogueScriptBase.set_ethan_bed_color(picked_bedcolor)
+
+        await dbox().say_as("[JUNIPER]", [
+            "DG_INTRO1_LOOKSBETTER",
+            "DG_INTRO1_ILLBEDOWNSTAIRS",
+            "DG_INTRO1_BRINGFUZZY",
+        ])
 
 func on_outdoors_tp(target):
     if target.name == "EthanHouseEntrance" and phase == 2:
