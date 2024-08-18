@@ -26,7 +26,14 @@ func on_house_tp(target):
 
     if target.name == "EthanBedroomExit" and phase == 1:
         self.phase = 2
-        #dbox().start_ix("Intro #3")
+        var choicelist = ["DG_INTRO1_GREAT", "DG_INTRO1_ALRIGHT"] 
+        var picked = await dbox().say_as_with_choices(
+            "[JUNIPER]",
+            ["DG_INTRO1_WDYT"],
+            choicelist.duplicate(),
+        )
+
+        await dbox().say_as("[JUNIPER]", [ choicelist[picked] + "_MOM" ])
 
 func on_outdoors_tp(target):
     if target.name == "EthanHouseEntrance" and phase == 2:
