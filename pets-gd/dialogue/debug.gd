@@ -10,15 +10,17 @@ func _start() -> void:
         ], [
             "Battle",
             "Item",
+            "Party",
             "Page 2",
             "Nah",
         ]
     )
 
     match choice:
-        0:
+        0: # Battle
             World.singleton().start_battle("A_NONNY_MOUSE")
-        1:
+
+        1: # Item
             choice = await dbox().say_as_with_choices(
                 "[CASCADE]", [
                     "What do you need?",
@@ -37,7 +39,31 @@ func _start() -> void:
             await dbox().say_as("[CASCADE]", [
                 "Here you go!"
             ])
-        2:
+        
+        2: # Party
+            var choices = [
+                "ETHAN",
+                "SIVA",
+                "TERRA",
+                "MIRA",
+            ]
+
+            choice = await dbox().say_as_with_choices(
+                "[CASCADE]", [
+                    "Who do you want to add?",
+                ], 
+                choices.duplicate()
+            )
+
+            var chosen_char = choices[choice]
+            PlayerCB.singleton().load_pchar_scene_gd(chosen_char)
+
+            await dbox().say_as("[CASCADE]", [
+                "Welcome to the team!"
+            ])
+               
+
+        3: # Page 2
             choice = await dbox().say_as_with_choices(
                 "[CASCADE]", [
                     "Okay, how about these?",

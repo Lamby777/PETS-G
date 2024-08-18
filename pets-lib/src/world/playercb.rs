@@ -223,6 +223,12 @@ impl PlayerCB {
         }
     }
 
+    #[func]
+    fn load_pchar_scene_gd(&mut self, name: GString) -> Gd<PCharNode> {
+        // because godot can't understand `impl Trait`
+        self.load_pchar_scene(name.to_string())
+    }
+
     pub fn load_pchar_scene(&mut self, name: impl ToString) -> Gd<PCharNode> {
         let path = format!("res://scenes/char/{}.tscn", name.to_string());
         let packed = load::<PackedScene>(path);
