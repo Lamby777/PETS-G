@@ -9,17 +9,20 @@ func say_as_with_choices(speaker, msgs, dchoices, do_open = true, do_close = tru
     if speaker:
         set_speaker(speaker)
 
+    var index
     for msg_i in msgs.size():
         var msg = msgs[msg_i]
         
         set_message(msg)
         if msg_i == msgs.size() - 1:
-            self.choices = dchoices
+            self.queued_choices = dchoices
         do_draw()
-        await accept
+        index = await accept
         
     if do_close:
         close()
+    
+    return index
        
 func say_as(speaker, msgs, do_open = true, do_close = true):
     await say_as_with_choices(speaker, msgs, [], do_open, do_close)
