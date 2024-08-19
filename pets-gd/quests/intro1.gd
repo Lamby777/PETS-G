@@ -22,7 +22,7 @@ func on_teleported(target):
 func on_house_tp(target):
     if phase == 0:
         self.phase = 1
-        await dbox().say_as("[JUNIPER]", ["DG_INTRO1_OVERHERE"])
+        await dbox().say_as("[JUNIPER]", ["DG_INTRO1_OVER_HERE"])
 
     if target.name == "EthanBedroomExit" and phase == 1:
         self.phase = 2
@@ -52,9 +52,9 @@ func on_house_tp(target):
         StatsInterface.set_ethan_bed_color(picked_bedcolor)
 
         await dbox().say_as("[JUNIPER]", [
-            "DG_INTRO1_LOOKSBETTER",
-            "DG_INTRO1_ILLBEDOWNSTAIRS",
-            "DG_INTRO1_BRINGFUZZY",
+            "DG_INTRO1_LOOKS_BETTER",
+            "DG_INTRO1_ILL_BE_DOWNSTAIRS",
+            "DG_INTRO1_BRING_FUZZY",
         ])
 
 func on_outdoors_tp(target):
@@ -64,5 +64,5 @@ func on_outdoors_tp(target):
         pcb().move_to_relative(-200.0, 0.0)
         await pcb().motion_done
         await dbox().say_as("[CLAY]", [ "DG_INTRO1_MR_T" ]);
-        await dbox().say_as("[MR_TULIVAE]", [ "DG_INTRO1_HITHERE" ]);
+        await dbox().say_as("[MR_TULIVAE]", [ "DG_INTRO1_HI_THERE" ]);
         await dbox().say_as("[NARRATOR]", [ "DG_INTRO1_HE_SEEMS_NICE" ]);
