@@ -12,7 +12,7 @@ pub struct PCharNode {
     base: Base<Node2D>,
 
     #[export]
-    #[init(val = PChar::DEVON)]
+    #[init(val = PChar::Devon)]
     pub pchar: PChar,
 
     #[init(node = "Sprite2D")]
