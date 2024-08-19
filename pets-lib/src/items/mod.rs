@@ -9,7 +9,7 @@ use crate::util::registry::*;
 use std::sync::OnceLock;
 
 mod inv;
-pub use inv::{Inventory, ItemList};
+pub use inv::{Equipment, Inventory};
 
 pub static ITEM_REGISTRY: OnceLock<HashMap<String, Item>> = OnceLock::new();
 
@@ -78,8 +78,12 @@ pub enum AmmoCat {
 }
 
 impl Item {
-    pub fn is_equipment(&self) -> bool {
-        matches!(self.category, ItemCat::Equipment { .. })
+    pub fn from_registry(id: &str) -> &Item {
+        unwrap_fmt!(
+            ITEM_REGISTRY.get().unwrap().get(id),
+            "Item ID not found: {}",
+            id
+        )
     }
 }
 

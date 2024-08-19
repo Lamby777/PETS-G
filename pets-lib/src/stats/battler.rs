@@ -7,7 +7,9 @@ pub struct Battler {
     pub buffs_list: Vec<InherentStats>,
 
     pub inherent_stats: InherentStats,
-    pub equipment: Vec<Item>,
+
+    /// The IDs of all equipped items
+    pub equipment: Equipment,
 }
 
 impl Default for Battler {
@@ -18,7 +20,7 @@ impl Default for Battler {
             buffs_list: Vec::new(),
 
             inherent_stats: InherentStats::default(),
-            equipment: Vec::new(),
+            equipment: Equipment::default(),
         }
     }
 }
@@ -45,14 +47,7 @@ impl Battler {
     /// This should take armor, weapons, etc. into account for players.
     /// It should NOT consider in-battle buffs/debuffs.
     fn armored_stats(&self) -> InherentStats {
-        let inherent = self.inherent_stats.clone();
-
-        // get all offsets from each item that has one
-        let equips = &self.equipment;
-        let offsets = equips.offsets();
-
-        // ... and sum them up
-        inherent + offsets.cloned().sum()
+        self.inherent_stats.clone() + self.equipment.offsets()
     }
 
     /// The final "in practice" stats of the character.

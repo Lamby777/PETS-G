@@ -24,7 +24,16 @@
                 "lambda": null,
                 "max_mana": null
             },
-            "equipment": []
+            "equipment": {
+                "head": null,
+                "body": null,
+                "weapon": null,
+                "accessories": [
+                    null,
+                    null,
+                    null
+                ]
+            }
         }
     },
     {
@@ -52,7 +61,16 @@
                 "lambda": null,
                 "max_mana": null
             },
-            "equipment": []
+            "equipment": {
+                "head": null,
+                "body": null,
+                "weapon": null,
+                "accessories": [
+                    null,
+                    null,
+                    null
+                ]
+            }
         }
     },
     {
@@ -80,7 +98,16 @@
                 "lambda": null,
                 "max_mana": null
             },
-            "equipment": []
+            "equipment": {
+                "head": null,
+                "body": null,
+                "weapon": "cool_stick",
+                "accessories": [
+                    null,
+                    null,
+                    null
+                ]
+            }
         }
     },
     {
@@ -108,7 +135,16 @@
                 "lambda": null,
                 "max_mana": null
             },
-            "equipment": []
+            "equipment": {
+                "head": null,
+                "body": null,
+                "weapon": null,
+                "accessories": [
+                    null,
+                    null,
+                    null
+                ]
+            }
         }
     },
     {
@@ -136,7 +172,16 @@
                 "lambda": null,
                 "max_mana": null
             },
-            "equipment": []
+            "equipment": {
+                "head": null,
+                "body": null,
+                "weapon": null,
+                "accessories": [
+                    null,
+                    null,
+                    null
+                ]
+            }
         }
     },
     {
@@ -164,7 +209,16 @@
                 "lambda": null,
                 "max_mana": null
             },
-            "equipment": []
+            "equipment": {
+                "head": null,
+                "body": null,
+                "weapon": null,
+                "accessories": [
+                    null,
+                    null,
+                    null
+                ]
+            }
         }
     },
     {
@@ -192,7 +246,16 @@
                 "lambda": null,
                 "max_mana": null
             },
-            "equipment": []
+            "equipment": {
+                "head": null,
+                "body": null,
+                "weapon": null,
+                "accessories": [
+                    null,
+                    null,
+                    null
+                ]
+            }
         }
     },
     {
@@ -220,7 +283,16 @@
                 "lambda": null,
                 "max_mana": null
             },
-            "equipment": []
+            "equipment": {
+                "head": null,
+                "body": null,
+                "weapon": null,
+                "accessories": [
+                    null,
+                    null,
+                    null
+                ]
+            }
         }
     },
     {
@@ -248,7 +320,16 @@
                 "lambda": null,
                 "max_mana": null
             },
-            "equipment": []
+            "equipment": {
+                "head": null,
+                "body": null,
+                "weapon": null,
+                "accessories": [
+                    null,
+                    null,
+                    null
+                ]
+            }
         }
     },
     {
@@ -276,7 +357,16 @@
                 "lambda": null,
                 "max_mana": null
             },
-            "equipment": []
+            "equipment": {
+                "head": null,
+                "body": null,
+                "weapon": null,
+                "accessories": [
+                    null,
+                    null,
+                    null
+                ]
+            }
         }
     },
     {
@@ -304,7 +394,16 @@
                 "lambda": null,
                 "max_mana": null
             },
-            "equipment": []
+            "equipment": {
+                "head": null,
+                "body": null,
+                "weapon": null,
+                "accessories": [
+                    null,
+                    null,
+                    null
+                ]
+            }
         }
     },
     {
@@ -332,7 +431,16 @@
                 "lambda": null,
                 "max_mana": null
             },
-            "equipment": []
+            "equipment": {
+                "head": null,
+                "body": null,
+                "weapon": null,
+                "accessories": [
+                    null,
+                    null,
+                    null
+                ]
+            }
         }
     },
     {
@@ -360,7 +468,16 @@
                 "lambda": null,
                 "max_mana": null
             },
-            "equipment": []
+            "equipment": {
+                "head": null,
+                "body": null,
+                "weapon": null,
+                "accessories": [
+                    null,
+                    null,
+                    null
+                ]
+            }
         }
     },
     {
@@ -388,7 +505,16 @@
                 "lambda": null,
                 "max_mana": null
             },
-            "equipment": []
+            "equipment": {
+                "head": null,
+                "body": null,
+                "weapon": null,
+                "accessories": [
+                    null,
+                    null,
+                    null
+                ]
+            }
         }
     },
     {
@@ -416,7 +542,16 @@
                 "lambda": null,
                 "max_mana": null
             },
-            "equipment": []
+            "equipment": {
+                "head": null,
+                "body": null,
+                "weapon": null,
+                "accessories": [
+                    null,
+                    null,
+                    null
+                ]
+            }
         }
     }
 ]

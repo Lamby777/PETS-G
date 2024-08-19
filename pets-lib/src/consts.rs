@@ -25,6 +25,9 @@ pub mod battle {
     /// are the ones that you get to use in battle.
     pub const BATTLE_PARTY_SIZE: usize = 4;
 
+    /// Number of accessory slots per character
+    pub const ACCESSORY_SLOTS: usize = 3;
+
     pub const INTRO_FADE_PREDELAY: f64 = 0.5;
     pub const INTRO_COUNTDOWN_SEC: f64 = 3.0;
 
