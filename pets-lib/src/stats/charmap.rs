@@ -10,10 +10,6 @@ const CHARMAP_PATH: &str = "res://assets/charmap.json";
 pub struct CharMap(pub Vec<Rc<RefCell<CharData>>>);
 
 impl CharMap {
-    pub fn new() -> Self {
-        CharMap(Vec::new())
-    }
-
     pub fn character(&self, ch: &PChar) -> Rc<RefCell<CharData>> {
         self.0
             .iter()

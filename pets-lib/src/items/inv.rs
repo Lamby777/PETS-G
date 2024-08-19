@@ -41,7 +41,7 @@ impl Inventory {
         self.items.len()
     }
 
-    pub fn get_item_count(&self, id: &str) -> u32 {
+    pub fn _get_item_count(&self, id: &str) -> u32 {
         self.items.get(id).cloned().unwrap_or(0)
     }
 
