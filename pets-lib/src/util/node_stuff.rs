@@ -130,7 +130,7 @@ pub fn si() -> Gd<StatsInterface> {
 }
 
 #[derive(Deref, DerefMut)]
-/// Wrapper around Gd<T> so I can implement external traits on godot stuff
+/// Wrapper around `Gd<T>` so I can implement external traits on godot stuff
 pub struct GdW<T: GodotClass>(pub Gd<T>);
 
 /// takes a bbcode string and prepends or removes it from the label text
