@@ -30,9 +30,9 @@ func _start() -> void:
 
             match choice["index"]:
                 0:
-                    DialogueScriptBase.debug_item("trusty_rusty_pistol", 1)
+                    DialogueScript.debug_item("trusty_rusty_pistol", 1)
                 1:
-                    DialogueScriptBase.debug_item("trusty_rusty_pistol", 5)
+                    DialogueScript.debug_item("trusty_rusty_pistol", 5)
 
             await dbox().say_as("[CASCADE]", [
                 "Here you go!"

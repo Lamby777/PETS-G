@@ -10,7 +10,7 @@ use godot::classes::{
 use godot::prelude::*;
 
 use crate::common::*;
-use crate::dialogue::DialogueScriptBase;
+use crate::dialogue::DialogueScript;
 
 use super::inv_node::InventoryNode;
 
@@ -88,7 +88,7 @@ impl WorldMenu {
             "Inventory" => self.open_inventory(),
             "DebugQuit" => godot_tree().quit(),
             "DebugMenu" => {
-                DialogueScriptBase::new(
+                DialogueScript::new(
                     self.debug_menu_script
                         .as_ref()
                         .expect("no debug script exported")

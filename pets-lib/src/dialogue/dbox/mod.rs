@@ -151,6 +151,10 @@ impl DialogBox {
     pub fn open_or_close(&mut self, open: bool) {
         self.active = open;
         self.anim_player.play_animation_forwards("open", open);
+        if !open {
+            self.tween_choices_wave(false);
+        }
+
         self.do_draw();
     }
 
@@ -162,12 +166,6 @@ impl DialogBox {
     #[func]
     pub fn close(&mut self) {
         self.open_or_close(false);
-    }
-
-    /// close the dialog and tween choices away
-    pub fn end(&mut self) {
-        self.tween_choices_wave(false);
-        self.close();
     }
 
     fn on_confirm_next_page(&mut self) {
