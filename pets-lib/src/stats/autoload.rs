@@ -2,6 +2,7 @@
 //! Singleton for accessing player stats in GDScript.
 //!
 
+use godot::classes::{Sprite2D, Texture2D};
 use godot::global::randomize;
 use godot::prelude::*;
 
@@ -36,6 +37,19 @@ impl StatsInterface {
     #[func]
     pub fn set_quest_phase(&mut self, quest_id: GString, phase: QuestPhase) {
         self.save.quests.insert(quest_id.to_string(), phase);
+    }
+
+    #[func]
+    fn set_ethan_bed_color(color: String) {
+        let texture = load::<Texture2D>(format!(
+            "res://assets/textures/builds/furniture/beds/bed_{color}.png"
+        ));
+
+        si().bind_mut().save.bed_color = color;
+
+        let mut bed =
+            World::room().get_node_as::<Sprite2D>("%EthanBed/Sprite2D");
+        bed.callv("set_texture".into(), varray![texture]);
     }
 }
 
