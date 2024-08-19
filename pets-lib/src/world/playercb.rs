@@ -55,7 +55,8 @@ pub struct PlayerCB {
     pub is_npc: bool,
 
     /// Each party member's scene node
-    party: Vec<Gd<PCharNode>>,
+    #[var]
+    party: Array<Gd<PCharNode>>,
 
     #[init(val = LimiQ::new(2000))]
     past_positions: LimiQ<Vector2>,
@@ -105,7 +106,7 @@ impl PlayerCB {
     }
 
     pub fn party_pchars(&self) -> Vec<PChar> {
-        self.party.iter().map(|v| v.bind().pchar).collect()
+        self.party.iter_shared().map(|v| v.bind().pchar).collect()
     }
 
     pub fn party_chardata(&self) -> Vec<Rc<RefCell<CharData>>> {
@@ -153,7 +154,7 @@ impl PlayerCB {
             return;
         }
 
-        for (i, ch) in self.party.iter_mut().enumerate() {
+        for (i, mut ch) in self.party.iter_shared().enumerate() {
             // index of past data limqs
             let nth = i * PERSONAL_SPACE;
             ch.set_global_position(*self.past_positions.get_or_last(nth));
@@ -270,20 +271,6 @@ impl PlayerCB {
 
 #[godot_api]
 impl ICharacterBody2D for PlayerCB {
-    fn ready(&mut self) {
-        if self.is_npc {
-            return;
-        }
-
-        // TODO remove this and make it so Ethan gets added as part of intro1.gd
-        self.party = vec![
-            self.push_pchar(PChar::Ethan),
-            self.push_pchar(PChar::Siva),
-            self.push_pchar(PChar::Terra),
-            self.push_pchar(PChar::Mira),
-        ];
-    }
-
     fn physics_process(&mut self, delta: f64) {
         let mut moving = false;
 

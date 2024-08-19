@@ -4,6 +4,9 @@ func room_id():
     return $"../../YSort/Room".room_id
 
 func _ready():
+    for pchar in ["Ethan", "Siva", "Terra", "Mira"]:
+        pcb().push_pchar_gd(pchar)
+
     pcb().move_to_relative(0.0, -200.0)
     await pcb().motion_done
     
