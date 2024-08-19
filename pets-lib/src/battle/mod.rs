@@ -23,7 +23,7 @@ mod rhythm;
 pub mod skills;
 mod stat_translation;
 
-pub use affinities::{Affinities, AffinityPower};
+pub use affinities::Affinities;
 use player::BattleIcon;
 use rhythm::BattleMusic;
 

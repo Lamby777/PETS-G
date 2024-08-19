@@ -23,7 +23,6 @@ use music_zone::MusicZone;
 use water_zone::WaterZone;
 
 pub use interaction::{InteractionManager, InteractionZone};
-pub use menu::WorldMenu;
 pub use playercb::PlayerCB;
 
 // just for testing

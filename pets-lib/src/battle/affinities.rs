@@ -44,7 +44,7 @@ impl Default for Affinities {
 }
 
 impl Affinities {
-    pub fn new(affinities: HashMap<Element, AffinityPower>) -> Self {
+    pub fn _new(affinities: HashMap<Element, AffinityPower>) -> Self {
         Self(affinities)
     }
 
