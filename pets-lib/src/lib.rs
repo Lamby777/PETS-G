@@ -29,9 +29,7 @@ mod items;
 mod stats;
 mod title_screen;
 mod world;
-
-#[cfg(any())]
-mod llm;
+// mod llm;
 
 #[allow(unused)]
 mod prelude {
