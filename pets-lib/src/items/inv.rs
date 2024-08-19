@@ -1,17 +1,33 @@
 use super::*;
+use crate::consts::battle::ACCESSORY_SLOTS;
 
-pub trait ItemList {
-    /// Every item that can be equipped
-    fn offsets(&self) -> impl Iterator<Item = &InherentStats>;
+#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+pub struct Equipment {
+    head: Option<String>,
+    body: Option<String>,
+    weapon: Option<String>,
+    accessories: [Option<String>; ACCESSORY_SLOTS],
 }
 
-impl ItemList for Vec<Item> {
-    fn offsets(&self) -> impl Iterator<Item = &InherentStats> {
-        use ItemCat::*;
+impl Equipment {
+    pub fn iter(&self) -> impl Iterator<Item = &str> {
+        self.head
+            .iter()
+            .chain(self.body.iter())
+            .chain(self.weapon.iter())
+            .chain(self.accessories.iter().filter_map(|s| s.as_ref()))
+            .map(|s| s.as_str())
+    }
 
-        self.iter().filter_map(|i| match &i.category {
-            Equipment { offsets, .. } => Some(offsets),
-            _ => None,
+    pub fn offsets(&self) -> InherentStats {
+        self.iter().fold(InherentStats::default(), |acc, item| {
+            let ItemCat::Equipment { ref offsets, .. } =
+                Item::from_registry(item).category
+            else {
+                panic!("item {} not equippable", item)
+            };
+
+            acc + offsets.clone()
         })
     }
 }
