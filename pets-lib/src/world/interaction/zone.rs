@@ -8,7 +8,7 @@ use godot::prelude::*;
 
 use crate::common::*;
 use crate::consts::playercb::*;
-use crate::functions::DialogueScriptBase;
+use crate::dialogue::DialogueScriptBase;
 
 #[derive(GodotClass)]
 #[class(init, base=Area2D)]

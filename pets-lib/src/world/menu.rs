@@ -10,7 +10,7 @@ use godot::classes::{
 use godot::prelude::*;
 
 use crate::common::*;
-use crate::functions::DialogueScriptBase;
+use crate::dialogue::DialogueScriptBase;
 
 use super::inv_node::InventoryNode;
 
