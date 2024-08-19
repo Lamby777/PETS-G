@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dmark6m5rmra3" path="res://scenes/builds/houses/cv-house1.tscn" id="9_pvh7r"]
 [ext_resource type="PackedScene" uid="uid://desphmjvj0i4t" path="res://scenes/builds/furniture/crates/crate_wood_trio.tscn" id="11_8dx4e"]
 [ext_resource type="PackedScene" uid="uid://f6tdcsdb0s1e" path="res://scenes/builds/residential/trash_can.tscn" id="12_skh3g"]
-[ext_resource type="PackedScene" uid="uid://b1j4gxaaylwjl" path="res://scenes/char/LYEMBO.tscn" id="13_2on2m"]
+[ext_resource type="PackedScene" uid="uid://b1j4gxaaylwjl" path="res://scenes/char/Lyembo.tscn" id="13_2on2m"]
 [ext_resource type="Script" path="res://dialogue/empty_trash.gd" id="14_h4mky"]
 [ext_resource type="Script" path="res://dialogue/lyembo1.gd" id="15_ndq3e"]
 
@@ -219,16 +219,16 @@ prompt_translation_key = "CHECK"
 position = Vector2(0, 8)
 scale = Vector2(1.02, 0.5)
 
-[node name="LYEMBO" parent="." index="11" instance=ExtResource("13_2on2m")]
+[node name="Lyembo" parent="." index="11" instance=ExtResource("13_2on2m")]
 position = Vector2(-264, -536)
 
-[node name="InteractionZone" parent="LYEMBO" index="4" instance=ExtResource("4_vwc65")]
+[node name="InteractionZone" parent="Lyembo" index="4" instance=ExtResource("4_vwc65")]
 interaction_script = ExtResource("15_ndq3e")
 prompt_translation_key = "TALK"
 
-[node name="StaticBody2D" type="StaticBody2D" parent="LYEMBO" index="5"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Lyembo" index="5"]
 
-[node name="CollisionPolygon2D" type="CollisionShape2D" parent="LYEMBO/StaticBody2D" index="0"]
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Lyembo/StaticBody2D" index="0"]
 position = Vector2(0, 32)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_dljt4")

@@ -43,14 +43,14 @@ func _start() -> void:
                 "[CASCADE]", [
                     "Who do you want to add?",
                 ], [
-                    "ETHAN",
-                    "SIVA",
-                    "TERRA",
-                    "MIRA",
-                    "LYEMBO",
-                    "QUOLO",
-                    "LEO",
-                    "DYLAN"
+                    "Ethan",
+                    "Siva",
+                    "Terra",
+                    "Mira",
+                    "Lyembo",
+                    "Quolo",
+                    "Leo",
+                    "Dylan"
                 ]
             )
 
