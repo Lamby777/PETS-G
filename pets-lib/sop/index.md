@@ -6,4 +6,5 @@ also new contributors who are confused on where to start.
 
 ## Table of Contents
 
+- [Workflow](workflow.md)
 - [Enemies](enemies.md)
