@@ -54,10 +54,10 @@ impl Skill for RecoverySkill {
 
     fn cast(
         &self,
-        caster: Rc<RefCell<dyn Battler>>,
-        _target: Rc<RefCell<dyn Battler>>,
-        allies: Vec<Rc<RefCell<dyn Battler>>>,
-        _enemies: Vec<Rc<RefCell<dyn Battler>>>,
+        caster: Rc<RefCell<Battler>>,
+        _target: Rc<RefCell<Battler>>,
+        allies: Vec<Rc<RefCell<Battler>>>,
+        _enemies: Vec<Rc<RefCell<Battler>>>,
     ) {
         // let targets = if self.plural { _allies } else { vec![_target] };
         let targets = if self.plural { allies } else { vec![caster] };
@@ -65,13 +65,13 @@ impl Skill for RecoverySkill {
         for target in targets {
             match self.recovery {
                 RecoveryType::HPAmount { amount } => {
-                    RefCell::borrow_mut(&target).recover_hp(amount.into());
+                    RefCell::borrow_mut(&target).heal(amount.into());
                 }
 
                 RecoveryType::HPPercent { percent } => {
-                    let max_hp = target.borrow().max_hp();
+                    let max_hp = target.borrow().practical_stats().max_hp;
                     let amount = (max_hp as f64 * percent).round() as u8;
-                    RefCell::borrow_mut(&target).recover_hp(amount.into());
+                    RefCell::borrow_mut(&target).heal(amount.into());
                 }
 
                 RecoveryType::Status { rating } => {

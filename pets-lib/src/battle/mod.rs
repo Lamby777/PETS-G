@@ -128,13 +128,13 @@ impl BattleEngine {
         let battler = self.current_battler();
         let battler = battler.borrow();
 
-        let mana = battler.mana();
+        let mana = battler.battle_stats.mana;
 
         let mut mana_bar =
             self.base().get_node_as::<ProgressBar>("%InfoBars/ManaBar");
         mana_bar.set("bar_value".into(), mana.unwrap_or(0).to_variant());
 
-        let max_mana = battler.inherent_stats().max_mana;
+        let max_mana = battler.inherent_stats.max_mana;
         mana_bar.set_max(max_mana.unwrap_or(1).into());
     }
 
@@ -143,7 +143,7 @@ impl BattleEngine {
         let battler = self.current_battler();
         let battler = battler.borrow();
 
-        let hp = battler.hp() as f64;
+        let hp = battler.battle_stats.hp as f64;
         let mut hp_bar =
             self.base().get_node_as::<ProgressBar>("%InfoBars/HPBar");
 
@@ -158,7 +158,7 @@ impl BattleEngine {
         // update hp bar
         hp_bar.set("bar_value".into(), hp_bar_value.to_variant());
 
-        let max_hp = battler.inherent_stats().max_hp;
+        let max_hp = battler.inherent_stats.max_hp;
         hp_bar.set_max(max_hp.into());
 
         // if both the hp bar and the actual hp are zero, die
@@ -176,7 +176,7 @@ impl BattleEngine {
         godot_print!("You died!");
     }
 
-    fn current_battler(&self) -> Rc<RefCell<dyn Battler>> {
+    fn current_battler(&self) -> Rc<RefCell<Battler>> {
         self.battlers.good_guys[self.current_party_member].clone()
     }
 
@@ -238,7 +238,8 @@ impl BattleEngine {
 
     pub fn swap_party_member(&mut self, new_index: usize) {
         self.current_party_member = new_index;
-        let pchar = self.battlers.good_guys[new_index].borrow().id();
+        let pchar: String = todo!();
+        // let pchar = &self.battlers.good_guys[new_index].borrow().id;
         let pchar = PChar::from_godot(pchar.into());
         godot_print!("Swapped to party member `{}`", pchar);
 
@@ -355,7 +356,7 @@ impl BattleEngine {
 
         // start attacking
         let enemy_data = pcb().bind().battling[0].clone();
-        let enemy_id = enemy_data.borrow().id();
+        let enemy_id = &enemy_data.borrow().id;
 
         self.base()
             .get_node_as::<Node>(format!("Tactics/{}", enemy_id))
