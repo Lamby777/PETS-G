@@ -7,7 +7,7 @@ use godot::classes::node::ProcessMode;
 use godot::classes::object::ConnectFlags;
 use godot::classes::{
     AnimatedSprite2D, AnimationPlayer, Control, InputEvent, PanelContainer,
-    ProgressBar, Texture2D, TextureRect, Timer,
+    ProgressBar, RichTextLabel, Texture2D, TextureRect, Timer,
 };
 use godot::prelude::*;
 use skills::SKILL_REGISTRY;
@@ -26,15 +26,6 @@ mod stat_translation;
 pub use affinities::Affinities;
 use player::BattleIcon;
 use rhythm::BattleMusic;
-
-#[derive(Debug)]
-enum AttackFlopReason {
-    /// The beat was not clicked
-    Skipped,
-
-    /// The player clicked outside of a beat window
-    PoorTiming,
-}
 
 #[derive(PartialEq)]
 enum MenuSection {
@@ -96,6 +87,9 @@ pub struct BattleEngine {
 
     #[init(node = "%BattleIcon")]
     icon: OnReady<Gd<BattleIcon>>,
+
+    #[init(node = "%ClickStatus")]
+    click_status_txt: OnReady<Gd<RichTextLabel>>,
 
     /// Something like the "rolling HP bar" feature from EarthBound
     /// or Sans's KR from Undertale. Basically just a number that your
@@ -349,6 +343,23 @@ impl BattleEngine {
     // ------------------------------------------------------------
 
     #[func]
+    fn on_note_hit(&mut self) {
+        self.click_status_txt.set_text("Hit!".into());
+    }
+
+    #[func]
+    fn on_note_flop(&mut self) {
+        self.click_status_txt.set_text("Flop!".into());
+    }
+
+    #[func]
+    fn on_note_miss(&mut self) {
+        self.click_status_txt.set_text("Miss!".into())
+    }
+
+    // ------------------------------------------------------------
+
+    #[func]
     pub fn intro_over(&mut self) {
         // change state from intro to attack
         self.state = BattleState::Attack { running: false };
@@ -401,6 +412,15 @@ impl INode2D for BattleEngine {
         connect! {
             self.choices, "selection_confirmed" =>
             self.base(), "on_choice_picked";
+
+            self.music, "note_hit" =>
+            self.base(), "on_note_hit";
+
+            self.music, "note_flop" =>
+            self.base(), "on_note_flop";
+
+            self.music, "note_miss" =>
+            self.base(), "on_note_miss";
         }
     }
 
