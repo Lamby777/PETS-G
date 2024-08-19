@@ -216,7 +216,6 @@ impl DialogBox {
         let cont = &mut self.choice_container;
 
         for (i, choice) in self.queued_choices.iter_shared().enumerate() {
-            godot_print!("Creating choice label: {}", choice);
             let mut dchoice = DChoice::new_container(i, &choice.to_string());
 
             self.choice_agent

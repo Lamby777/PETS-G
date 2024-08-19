@@ -14,11 +14,11 @@ func _start() -> void:
         ]
     )
 
-    match choice:
-        0: # Battle
-            World.singleton().start_battle("A_NONNY_MOUSE")
+    match choice["value"]:
+        "Battle": 
+            World.start_battle("A_NONNY_MOUSE")
 
-        1: # Item
+        "Item":
             choice = await dbox().say_as_with_choices(
                 "[CASCADE]", [
                     "What do you need?",
@@ -28,7 +28,7 @@ func _start() -> void:
                 ]
             )
 
-            match choice:
+            match choice["index"]:
                 0:
                     DialogueScriptBase.debug_item("trusty_rusty_pistol", 1)
                 1:
@@ -38,35 +38,31 @@ func _start() -> void:
                 "Here you go!"
             ])
         
-        2: # Party
-            var choices = [
-                "ETHAN",
-                "SIVA",
-                "TERRA",
-                "MIRA",
-                "LYEMBO",
-                "QUOLO",
-                "LEO",
-                "DYLAN"
-            ]
-
-            choice = await dbox().say_as_with_choices(
+        "Party":
+            var picked = await dbox().say_as_with_choices(
                 "[CASCADE]", [
                     "Who do you want to add?",
-                ], 
-                choices.duplicate()
+                ], [
+                    "ETHAN",
+                    "SIVA",
+                    "TERRA",
+                    "MIRA",
+                    "LYEMBO",
+                    "QUOLO",
+                    "LEO",
+                    "DYLAN"
+                ]
             )
 
-            var chosen_char = choices[choice]
-            pcb().push_pchar_gd(chosen_char)
+            pcb().push_pchar_gd(picked["value"])
 
             await dbox().say_as("[CASCADE]", [
                 "Welcome to the team" + 
-                (", ... me!" if chosen_char == "MIRA" else "!")
+                (", ... me!" if picked["value"] == "MIRA" else "!")
             ])
                
 
-        3: # Pauses
+        "Pauses":
             await dbox().say_as("Isaac", [
 """Flint...​​​​​​​​​​
 Where did you last see Hinawa?"""
@@ -76,7 +72,7 @@ Where did you last see Hinawa?"""
 s​​​l​​​o​​​o​​​o​​​o​​​o​​​w​​​l​​​y."""
             ])
 
-        4: # Bye
+        "Bye":
             await dbox().say_as("[CASCADE]", [
                 "See ya!"
             ])
