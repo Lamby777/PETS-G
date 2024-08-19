@@ -77,10 +77,11 @@ pub struct World {
     battle_scene: Option<Gd<PackedScene>>,
 }
 
-// Due to a gdext limitation, you can only have 1 `#[godot_api]` custom `impl` block.
-// There's gonna be a LOT of methods ahead, so look for these comment markers that
+// Due to a gdext limitation, you can only have 1 `#[godot_api]` custom `impl` block
+// per class.
+//
+// There are gonna be a LOT of methods ahead, so look for these comment markers that
 // split the code into sections.
-
 #[godot_api]
 impl World {
     /// Get the world node, or panic if not currently in the world scene.
