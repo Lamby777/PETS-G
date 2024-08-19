@@ -39,8 +39,14 @@ pub struct Item {
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum ItemCat {
     Equipment {
+        /// The category of equipment this item belongs to (weapon, armor, accessory)
         category: EquipmentCat,
+
+        /// Stat offsets that the item applies when equipped
         offsets: InherentStats,
+
+        /// Only characters with this weapon style can equip this
+        equippable_by: Option<DefaultWeaponStyle>,
     },
     AmmoBox {
         category: AmmoCat,
@@ -84,11 +90,6 @@ pub enum ItemAttribute {
     Cheap,
 
     Melee,
-    Blade,
-
     Ranged,
-    Firearm,
-
     Explosive,
-    Grenade,
 }
