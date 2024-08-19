@@ -8,7 +8,7 @@ use godot::prelude::*;
 
 use crate::common::*;
 use crate::consts::playercb::*;
-use crate::dialogue::DialogueScriptBase;
+use crate::dialogue::DialogueScript;
 
 #[derive(GodotClass)]
 #[class(init, base=Area2D)]
@@ -46,7 +46,7 @@ impl InteractionZone {
     #[func]
     pub fn interact(&mut self) {
         if let Some(script) = &self.interaction_script {
-            let mut executor = DialogueScriptBase::new(script.clone());
+            let mut executor = DialogueScript::new(script.clone());
             executor.call("_start".into(), &[]);
 
             // Scripts take priority over beacons. You can make the player teleport
