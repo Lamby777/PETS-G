@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://kgl5788x405y"]
 
 [ext_resource type="Shader" path="res://themes/opacity.gdshader" id="1_3pmac"]
-[ext_resource type="Script" path="res://classes/tactics/enemies/A_NONNY_MOUSE.gd" id="1_vrl6q"]
+[ext_resource type="Script" path="res://classes/tactics/enemies/ANonnyMouse.gd" id="1_vrl6q"]
 [ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="2_0m4jp"]
 [ext_resource type="PackedScene" uid="uid://dd2ecg5hgyxv2" path="res://scenes/bullets/mouse1.tscn" id="2_n0w8q"]
 [ext_resource type="Texture2D" uid="uid://he44mug8lejt" path="res://assets/textures/misc/BattleIcons.png" id="3_k3xai"]
@@ -222,7 +222,7 @@ right_panel_destination = NodePath("Menu/DualMenu/RightPanel/Margins")
 [node name="Tactics" type="Node" parent="."]
 process_mode = 4
 
-[node name="A_NONNY_MOUSE" type="Node" parent="Tactics"]
+[node name="ANonnyMouse" type="Node" parent="Tactics"]
 script = ExtResource("1_vrl6q")
 bullet_scene = ExtResource("2_n0w8q")
 

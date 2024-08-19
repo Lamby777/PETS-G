@@ -15,7 +15,7 @@ y_sort_enabled = true
 collision_layer = 8
 
 [node name="AnimatedSprite2D" parent="." instance=ExtResource("1_4ne20")]
-animation = &"A_NONNY_MOUSE-Run"
+animation = &"ANonnyMouse-Run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.38419e-06, 20)

@@ -18,7 +18,7 @@ pub struct WalkingEnemy {
     base: Base<CharacterBody2D>,
 
     #[export]
-    #[init(val = EnemyID::A_NONNY_MOUSE)]
+    #[init(val = EnemyID::ANonnyMouse)]
     enemy_id: EnemyID,
 
     #[export]
