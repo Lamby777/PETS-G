@@ -1,4 +1,30 @@
 {
+    "cool_stick": {
+        "attributes": [
+            "Cheap",
+            "Melee"
+        ],
+        "category": {
+            "Equipment": {
+                "category": "Weapon",
+                "offsets": {
+                    "max_hp": 0,
+                    "max_energy": 0,
+                    "attack": 1,
+                    "defense": 0,
+                    "speed": 2,
+                    "stability": 3,
+                    "delta": 0,
+                    "epsilon": 0,
+                    "lambda": 0,
+                    "max_mana": 0
+                },
+                "equippable_by": [
+                    "Ethan"
+                ]
+            }
+        }
+    },
     "trusty_rusty_pistol": {
         "attributes": [
             "Cheap",
