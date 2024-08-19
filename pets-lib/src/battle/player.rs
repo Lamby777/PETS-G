@@ -100,8 +100,12 @@ impl BattleIcon {
     #[func]
     fn on_hit(&mut self, mut bullet: Gd<Node2D>) {
         let dmg_ratio = bullet.get("damage_ratio".into()).to::<f64>();
-        let base_dmg =
-            pcb().bind().battling[0].borrow().inherent_stats().attack;
+        let base_dmg = pcb().bind().battling[0]
+            .borrow()
+            .battler
+            .borrow()
+            .practical_stats()
+            .attack;
         let damage = (base_dmg as f64 * dmg_ratio).ceil();
 
         self.engine().bind_mut().take_damage(damage as i32);
@@ -116,6 +120,8 @@ impl ICharacterBody2D for BattleIcon {
         let ch_speed = si()
             .bind()
             .get_character(&PChar::Ethan)
+            .borrow()
+            .battler
             .borrow()
             .practical_stats()
             .speed;

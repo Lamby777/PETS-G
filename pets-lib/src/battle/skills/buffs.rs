@@ -23,10 +23,10 @@ impl Skill for BuffSkill {
 
     fn cast(
         &self,
-        _caster: Rc<RefCell<dyn Battler>>,
-        _target: Rc<RefCell<dyn Battler>>,
-        _allies: Vec<Rc<RefCell<dyn Battler>>>,
-        _enemies: Vec<Rc<RefCell<dyn Battler>>>,
+        _caster: Rc<RefCell<Battler>>,
+        _target: Rc<RefCell<Battler>>,
+        _allies: Vec<Rc<RefCell<Battler>>>,
+        _enemies: Vec<Rc<RefCell<Battler>>>,
     ) {
         todo!()
     }

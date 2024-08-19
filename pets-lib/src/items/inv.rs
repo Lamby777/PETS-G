@@ -5,7 +5,7 @@ pub trait ItemList {
     fn offsets(&self) -> impl Iterator<Item = &InherentStats>;
 }
 
-impl ItemList for &[Item] {
+impl ItemList for Vec<Item> {
     fn offsets(&self) -> impl Iterator<Item = &InherentStats> {
         use ItemCat::*;
 

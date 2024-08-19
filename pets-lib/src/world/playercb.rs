@@ -230,19 +230,18 @@ impl PlayerCB {
         self.past_rotations.get(0).cloned().unwrap_or(Vector2::ZERO)
     }
 
-    pub fn good_guys_battlers(&self) -> Vec<Rc<RefCell<dyn Battler>>> {
+    pub fn good_guys_battlers(&self) -> Vec<Rc<RefCell<Battler>>> {
         self.party_chardata()
             .into_iter()
             .take(BATTLE_PARTY_SIZE)
-            .map(|v| v as Rc<RefCell<dyn Battler>>)
+            .map(|cd| cd.borrow().battler.clone())
             .collect()
     }
 
-    pub fn bad_guys_battlers(&self) -> Vec<Rc<RefCell<dyn Battler>>> {
+    pub fn bad_guys_battlers(&self) -> Vec<Rc<RefCell<Battler>>> {
         self.battling
             .iter()
-            .cloned()
-            .map(|v| v as Rc<RefCell<dyn Battler>>)
+            .map(|v| v.borrow().battler.clone())
             .collect()
     }
 
