@@ -56,6 +56,5 @@ impl DialogueScriptBase {
     #[func]
     fn debug_item(item_id: String, quantity: u32) {
         Inventory::get().borrow_mut().give_item(item_id, quantity);
-        // start_ix("Debug Menu >> After Item");
     }
 }
