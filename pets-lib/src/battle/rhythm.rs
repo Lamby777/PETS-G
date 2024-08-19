@@ -1,12 +1,16 @@
 //!
 //! Data structures related to rhythm in battle
 //!
+//! For the purposes of battle rhythm...
+//! - "Hit" means you clicked at the right time
+//! - "Flop" means you click at the wrong time
+//! - "Miss" means you didn't click at all
+//!
 
 use godot::classes::{InputEvent, Timer};
 use godot::prelude::*;
 
 use super::midi::{BattleTrack, MidiReceiver};
-use super::AttackFlopReason;
 use crate::common::*;
 
 /// How long before/after a beat to still consider clicks valid
@@ -83,17 +87,32 @@ pub struct BattleMusic {
 
 #[godot_api]
 impl BattleMusic {
+    #[signal]
+    fn note_hit(&self);
+
+    #[signal]
+    fn note_flop(&self);
+
+    #[signal]
+    fn note_miss(&self);
+
     /// Called when the player successfully hits a note
     fn on_attack_hit(&mut self) {
         self.rhythm.reset();
+        self.base_mut().emit_signal("note_hit".into(), &[]);
     }
 
-    fn on_attack_flop(&mut self, reason: AttackFlopReason) {
-        // we'll use it later for telling the user why
-        // the attack failed, but for now it's just a debug print
-        // godot_print!("Flop reason: {:?}", reason);
-        let _ = reason;
+    fn on_attack_flop(&mut self) {
+        self.on_attack_flop_or_miss();
+        self.base_mut().emit_signal("note_flop".into(), &[]);
+    }
 
+    fn on_attack_miss(&mut self) {
+        self.on_attack_flop_or_miss();
+        self.base_mut().emit_signal("note_miss".into(), &[]);
+    }
+
+    fn on_attack_flop_or_miss(&mut self) {
         self.rhythm.player_clicked = false;
     }
 
@@ -120,7 +139,7 @@ impl BattleMusic {
     pub fn close_beat(&mut self) {
         // If there was an unclicked note, it's a flop
         if self.rhythm.note.take().is_some() {
-            self.on_attack_flop(AttackFlopReason::Skipped);
+            self.on_attack_miss();
         }
     }
 
@@ -129,7 +148,7 @@ impl BattleMusic {
         // If the player clicked early and there was no note
         // shortly after it, it's a flop
         if self.rhythm.player_clicked {
-            self.on_attack_flop(AttackFlopReason::PoorTiming);
+            self.on_attack_flop();
         }
 
         self.rhythm.player_clicked = false;
