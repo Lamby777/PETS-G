@@ -14,8 +14,8 @@ use super::midi::{BattleTrack, MidiReceiver};
 use crate::common::*;
 
 /// How long before/after a beat to still consider clicks valid
-const LENIENCY_PRE: f64 = 0.08;
-const LENIENCY_POST: f64 = 0.02;
+const LENIENCY_PRE: f64 = 0.1;
+const LENIENCY_POST: f64 = 0.04;
 
 #[derive(Clone, Copy, Debug)]
 /// The game's MIDI files have a special code for what each
@@ -79,10 +79,6 @@ pub struct BattleMusic {
     /// timer that gets fired a little bit after the note off event
     #[init(node = "RhythmTimer")]
     note_off_timer: OnReady<Gd<Timer>>,
-
-    /// Metronome-like thingy
-    #[init(node = "ClickSFX")]
-    clicksfx: OnReady<Gd<AudioStreamPlayer>>,
 }
 
 #[godot_api]
@@ -124,12 +120,6 @@ impl BattleMusic {
             self.on_attack_hit();
         }
 
-        // let mut stream = AudioStream::new_gd();
-        // stream.set_path("res://assets/sounds/click1.wav".into());
-        // self.clicksfx.set_stream(stream);
-
-        self.clicksfx.play();
-
         let timer = &mut self.note_off_timer;
         timer.set_wait_time(LENIENCY_POST);
         timer.start();
@@ -157,6 +147,9 @@ impl BattleMusic {
     #[func]
     pub fn on_player_clicked(&mut self) {
         if self.rhythm.player_clicked {
+            // prevent the cheat strategy of spamming clicks to always get hits
+            // by only allowing one click per note
+            self.on_attack_flop();
             return;
         };
 
