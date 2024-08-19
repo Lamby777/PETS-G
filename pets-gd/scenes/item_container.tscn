@@ -8,28 +8,22 @@ script/source = "extends MarginContainer
 @onready var icon = $PanelContainer/Node2D/TextureRect
 
 func set_texture(texture):
-	if texture == null:
-		icon.hide()
-		return
-	
-	icon.show()
-	
-	var path = \"res://assets/textures/items/\" + texture + \".png\"
-	icon.texture = load(path)
+    if texture == null:
+        icon.hide()
+        return
+    
+    icon.show()
+    
+    var path = \"res://assets/textures/items/\" + texture + \".png\"
+    icon.texture = load(path)
 "
 
 [sub_resource type="GDScript" id="GDScript_yffjx"]
 script/source = "extends Node2D
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	global_rotation = 0
+func _process(_delta):
+    global_rotation = 0
 "
 
 [node name="ItemContainer" type="MarginContainer"]

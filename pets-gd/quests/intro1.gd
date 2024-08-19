@@ -26,16 +26,15 @@ func on_house_tp(target):
 
     if target.name == "EthanBedroomExit" and phase == 1:
         self.phase = 2
-        var choicelist = ["DG_INTRO1_GREAT", "DG_INTRO1_ALRIGHT"] 
-        var picked = await dbox().say_as_with_choices(
+        var picked_thoughts = await dbox().say_as_with_choices(
             "[JUNIPER]",
             ["DG_INTRO1_WDYT"],
-            choicelist.duplicate(),
+            ["DG_INTRO1_GREAT", "DG_INTRO1_ALRIGHT"],
         )
 
-        var picked_bedcolor_i = await dbox().say_as_with_choices(
+        var picked_bedcolor_x = await dbox().say_as_with_choices(
             "[JUNIPER]",
-            [choicelist[picked] + "_MOM", "DG_INTRO1_ITSYOURS"],
+            [picked_thoughts["value"] + "_MOM", "DG_INTRO1_ITSYOURS"],
             [
                 "[color=#BD0000]X[/color]",
                 "[color=#FF7200]X[/color]",
@@ -48,7 +47,7 @@ func on_house_tp(target):
         )
 
         var bedcolors = ["red", "orange", "yellow", "green", "blue", "purple", "pink"]
-        var picked_bedcolor = bedcolors[picked_bedcolor_i]
+        var picked_bedcolor = bedcolors[picked_bedcolor_x["index"]]
 
         DialogueScriptBase.set_ethan_bed_color(picked_bedcolor)
 
@@ -62,9 +61,8 @@ func on_outdoors_tp(target):
     if target.name == "EthanHouseEntrance" and phase == 2:
         self.phase = 3
         await dbox().say_as("[CLAY]", [ "DG_INTRO1_MEET_NEIGHBORS" ]);
-        var pcb = PlayerCB.singleton()
-        pcb.move_to_relative(-200.0, 0.0)
-        await pcb.motion_done
+        pcb().move_to_relative(-200.0, 0.0)
+        await pcb().motion_done
         await dbox().say_as("[CLAY]", [ "DG_INTRO1_MR_T" ]);
         await dbox().say_as("[MR_TULIVAE]", [ "DG_INTRO1_HITHERE" ]);
         await dbox().say_as("[NARRATOR]", [ "DG_INTRO1_HE_SEEMS_NICE" ]);

@@ -56,7 +56,9 @@ impl DChoice {
         let mut dchoice = scene.instantiate_as::<Self>();
 
         dchoice.set_name(format!("Choice{}", i).into());
-        dchoice.bind_mut().set_text_tr(text.into());
+
+        dchoice.call_deferred("set_text_tr".into(), &[text.to_variant()]);
+        // dchoice.bind_mut().set_text_tr(text.into());
 
         dchoice
     }
