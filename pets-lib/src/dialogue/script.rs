@@ -33,11 +33,6 @@ impl DialogueScriptBase {
         pcb()
     }
 
-    #[func]
-    fn end() {
-        DialogBox::singleton().bind_mut().end();
-    }
-
     // -----------------------------------------------------------------
     // ONLY DEBUG CRAP SHOULD BE PLACED BELOW!
     // Putting non-debug functions here should be treated as a code smell.
