@@ -133,6 +133,10 @@ DG_SPK_CLAY,Clay
 DG_SPK_MR_TULIVAE,Mr. Tulivae
 DG_SPK_MRS_TULIVAE,Mrs. Tulivae
 ,
+DG_CHECK_CRATE,"It's just a crate. Doesn't look like anything good is inside."
+DG_CHECK_CRATES,"It's just a bunch of crates. Doesn't look like they have anything useful."
+DG_CHECK_TRASH,"Nothing useful there. Are you that desperate?"
+,
 DG_RODRICK1_SOYOURE,"So... you're reading a sign, eh? Well..."
 DG_RODRICK1_AREYOUSMART,Are you smart?
 DG_RODRICK1_NOPE,Nope.
@@ -142,23 +146,17 @@ DG_RODRICK1_DEFDIDNT,"Yeah, I definitely didn't think so."
 DG_RODRICK1_COMEBACK,Come back when you're smart.
 ,
 DG_INTRO1_COMEUNPACK,"Hey, [ETHAN], we're unpacking your stuff! Come help!"
-,
-DG_INTRO1_OVERHERE,Over here! This is your new room!
-,
+DG_INTRO1_OVER_HERE,Over here! This is your new room!
 DG_INTRO1_WDYT,What do you think?
 DG_INTRO1_GREAT,It's great!
 DG_INTRO1_ALRIGHT,It's alright...
 DG_INTRO1_GREAT_MOM,"Well, I'm glad you like it! I hope you'll be comfortable here."
 DG_INTRO1_ALRIGHT_MOM,"I know it's not much, but I hope you'll be comfortable here."
-DG_INTRO1_ITSYOURS,"Well, it's all yours. Do you have a specific blanket color in mind?"
-DG_INTRO1_LOOKSBETTER,"Wow, it looks even better already!"
-DG_INTRO1_ILLBEDOWNSTAIRS,"Alright, I'll be downstairs if you need me."
-DG_INTRO1_BRINGFUZZY,"Go bring out Fuzzy from the car, okay?"
+DG_INTRO1_ITS_YOURS,"Well, it's all yours. Do you have a specific blanket color in mind?"
+DG_INTRO1_LOOKS_BETTER,"Wow, it looks even better already!"
+DG_INTRO1_ILL_BE_DOWNSTAIRS,"Alright, I'll be downstairs if you need me."
+DG_INTRO1_BRING_FUZZY,"Go bring out Fuzzy from the car, okay?"
 DG_INTRO1_MEET_NEIGHBORS,"Here he is! Hey, [ETHAN], come meet the neighbors!"
 DG_INTRO1_MR_T,"This is Mr. Tulivae. He lives next door."
-DG_INTRO1_HITHERE,"Hi there, [ETHAN]. Pleasure meeting you."
+DG_INTRO1_HI_THERE,"Hi there, [ETHAN]. Pleasure meeting you."
 DG_INTRO1_HE_SEEMS_NICE,He seems pretty nice. Maybe you should go say hi later.
-,
-DG_CHECK_CRATE,"It's just a crate. Doesn't look like anything good is inside."
-DG_CHECK_CRATES,"It's just a bunch of crates. Doesn't look like they have anything useful."
-DG_CHECK_TRASH,"Nothing useful there. Are you that desperate?"
