@@ -3,7 +3,7 @@
 //! For inventory-related types, check out `inv.rs`
 //!
 
-use crate::prelude::*;
+use crate::common::*;
 use crate::util::registry::*;
 
 use std::sync::OnceLock;

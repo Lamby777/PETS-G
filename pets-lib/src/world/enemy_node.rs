@@ -3,7 +3,7 @@ use godot::classes::{
 };
 use godot::prelude::*;
 
-use crate::prelude::*;
+use crate::common::*;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 struct AnimOptions {

@@ -13,7 +13,7 @@ use godot::classes::{
 use godot::obj::WithBaseField;
 use godot::prelude::*;
 
-use crate::prelude::*;
+use crate::common::*;
 
 const CREDITS_TWEEN_TIME: f64 = 0.5;
 const BLACK_FADE_TIME: f64 = 1.0;

@@ -12,8 +12,8 @@ use godot::classes::{
 use godot::prelude::*;
 use skills::SKILL_REGISTRY;
 
+use crate::common::*;
 use crate::consts::battle::*;
-use crate::prelude::*;
 
 mod affinities;
 mod midi;
@@ -254,7 +254,7 @@ impl BattleEngine {
     #[func]
     pub fn cast_skill(&mut self, skill_id: String) {
         godot_print!("Casting skill: {}", skill_id);
-        let skill = ribbons::unwrap_fmt!(
+        let skill = unwrap_fmt!(
             SKILL_REGISTRY.get().unwrap().get(&skill_id),
             "skill not found: {skill_id}",
         );
@@ -269,7 +269,7 @@ impl BattleEngine {
 
     #[func]
     pub fn describe_skill(&self, skill_id: String) -> String {
-        let skill = ribbons::unwrap_fmt!(
+        let skill = unwrap_fmt!(
             SKILL_REGISTRY.get().unwrap().get(&skill_id),
             "skill not found: {skill_id}",
         );

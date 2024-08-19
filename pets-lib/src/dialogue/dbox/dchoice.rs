@@ -10,8 +10,8 @@ use godot::classes::notify::ContainerNotification;
 use godot::classes::{IMarginContainer, MarginContainer, RichTextLabel, Tween};
 use godot::prelude::*;
 
+use crate::common::*;
 use crate::consts::dialogue::*;
-use crate::prelude::*;
 
 #[derive(GodotClass)]
 #[class(init, base=MarginContainer)]

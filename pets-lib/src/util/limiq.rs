@@ -2,7 +2,7 @@
 //! Limited Queue stuff
 //!
 
-use crate::prelude::*;
+use crate::common::*;
 use std::collections::VecDeque;
 
 /// "Limited Queue"

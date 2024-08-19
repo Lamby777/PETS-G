@@ -6,9 +6,9 @@
 use godot::classes::{Area2D, ColorRect, GDScript, IArea2D};
 use godot::prelude::*;
 
+use crate::common::*;
 use crate::consts::playercb::*;
 use crate::functions::DialogueScriptBase;
-use crate::prelude::*;
 
 #[derive(GodotClass)]
 #[class(init, base=Area2D)]

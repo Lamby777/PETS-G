@@ -2,7 +2,7 @@
 //! This module is for character/enemy stat type definitions
 //!
 
-use crate::prelude::*;
+use crate::common::*;
 
 // stat-related submodules
 mod autoload;

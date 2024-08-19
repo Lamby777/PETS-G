@@ -2,7 +2,7 @@ use godot::classes::file_access::ModeFlags;
 use godot::prelude::*;
 use io::Read as _;
 
-use crate::prelude::*;
+use crate::common::*;
 
 const CHARMAP_PATH: &str = "res://assets/charmap.json";
 

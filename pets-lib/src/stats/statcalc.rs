@@ -4,7 +4,7 @@
 // For all these functions, the doc comment is the
 // mathematical function. The variable `x` represents
 // the variable `lvl` in our code.
-use crate::prelude::*;
+use crate::common::*;
 
 pub fn level_to_stats(lvl: IntegralStat) -> InherentStats {
     InherentStats {
