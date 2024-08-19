@@ -109,6 +109,7 @@ libraries = {
 y_sort_enabled = true
 
 [node name="PlayerCB" parent="YSort" groups=["playercb"] instance=ExtResource("2_r6tgb")]
+is_npc = false
 unique_name_in_owner = true
 
 [node name="BattleIntroRect" type="ColorRect" parent="YSort/PlayerCB"]

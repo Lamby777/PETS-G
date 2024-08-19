@@ -16,14 +16,43 @@ use super::BATTLE_PARTY_SIZE;
 /// distance from the cutscene target.
 const CUTSCENE_MOTION_CLOSE_ENOUGH: f32 = 10.0;
 
-/// This scene contains the "player" aka the invisible
-/// entity that is moved around with WASD. It also contains
-/// party members as scenes, and this script does stuff like
-/// running animations on those nodes too.
+struct Inputs {
+    pub input_vector: Vector2,
+    pub sprinting: bool,
+}
+
+impl Inputs {
+    pub fn from_player_input() -> Self {
+        let input = Input::singleton();
+        let input_vector = normalized!(input.get_vector(
+            "left".into(),
+            "right".into(),
+            "up".into(),
+            "down".into(),
+        ));
+
+        let sprinting = input.is_action_pressed("sprint".into());
+        Inputs {
+            input_vector,
+            sprinting,
+        }
+    }
+}
+
+/// This scene contains the "player" aka the invisible entity that is
+/// moved around with WASD. It also contains party members as scenes,
+/// and this script does stuff like running animations on those nodes too.
+///
+/// This class is not a singleton; many can exist at once. Only one should
+/// be controllable by the player. The rest are NPC-controlled.
 #[derive(GodotClass)]
 #[class(init, base=CharacterBody2D)]
 pub struct PlayerCB {
     base: Base<CharacterBody2D>,
+
+    #[export]
+    #[init(val = true)]
+    pub is_npc: bool,
 
     /// Each party member's scene node
     party: Vec<Gd<PCharNode>>,
@@ -155,12 +184,12 @@ impl PlayerCB {
     /// Do all the movement calculations that need to run every tick.
     ///
     /// Returns whether the player is moving or not.
-    fn calc_movements(
-        &mut self,
-        input_vector: Vector2,
-        sprinting: bool,
-        delta: f64,
-    ) -> bool {
+    fn calc_movements(&mut self, inputs: Inputs, delta: f64) -> bool {
+        let Inputs {
+            input_vector,
+            sprinting,
+        } = inputs;
+
         let moving = input_vector != Vector2::ZERO;
 
         let target_pos = if moving {
@@ -242,6 +271,11 @@ impl PlayerCB {
 #[godot_api]
 impl ICharacterBody2D for PlayerCB {
     fn ready(&mut self) {
+        if self.is_npc {
+            return;
+        }
+
+        // TODO remove this and make it so Ethan gets added as part of intro1.gd
         self.party = vec![
             self.push_pchar(PChar::Ethan),
             self.push_pchar(PChar::Siva),
@@ -253,17 +287,9 @@ impl ICharacterBody2D for PlayerCB {
     fn physics_process(&mut self, delta: f64) {
         let mut moving = false;
 
-        if self.can_move() {
-            let input = Input::singleton();
-            let input_vector = normalized!(input.get_vector(
-                "left".into(),
-                "right".into(),
-                "up".into(),
-                "down".into(),
-            ));
-            let sprinting = input.is_action_pressed("sprint".into());
-
-            moving = self.calc_movements(input_vector, sprinting, delta);
+        if self.can_move() && !self.is_npc {
+            let inputs = Inputs::from_player_input();
+            moving = self.calc_movements(inputs, delta);
         } else if let Some(target) = self.cutscene_motion {
             // TODO separate function
             let own_pos = self.base().get_global_position();
@@ -284,8 +310,13 @@ impl ICharacterBody2D for PlayerCB {
             };
 
             let input_vector = iv_x + iv_y;
-            let sprinting = false; // TODO
-            moving = self.calc_movements(input_vector, sprinting, delta);
+            moving = self.calc_movements(
+                Inputs {
+                    input_vector,
+                    sprinting: false, // TODO
+                },
+                delta,
+            );
 
             if (target - own_pos).length() < CUTSCENE_MOTION_CLOSE_ENOUGH {
                 self.cutscene_motion = None;
