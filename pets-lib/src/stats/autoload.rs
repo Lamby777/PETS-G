@@ -62,6 +62,7 @@ impl IObject for StatsInterface {
     fn init(base: Base<Object>) -> Self {
         // start an empty save file, but load other if the player
         // picks a save file instead of "new"
+        print_debug_crap();
         let save = SaveFile::fresh();
 
         load_item_registry();
@@ -69,8 +70,6 @@ impl IObject for StatsInterface {
 
         // randomize seed for godot
         randomize();
-
-        print_debug_crap();
 
         Self { base, save }
     }
@@ -80,6 +79,7 @@ impl IObject for StatsInterface {
 /// it'll run when the game starts
 fn print_debug_crap() {
     // let ser = crate::stats::charmap::default_charmap();
-    // let ser = serde_json::to_string(&ser).unwrap();
-    // godot_print!("{}", ser);
+    let ser = CharMap::_debugging_charmap();
+    let ser = serde_json::to_string(&ser).unwrap();
+    godot_print!("{}", ser);
 }
