@@ -3,8 +3,8 @@
 //! lists of stuff
 //!
 
+use crate::common::*;
 use crate::consts::choice_lists::*;
-use crate::prelude::*;
 
 use godot::classes::control::FocusMode;
 use godot::classes::{Control, InputEvent, RichTextLabel};

@@ -6,8 +6,8 @@
 use godot::classes::{Control, InputEvent, RichTextLabel};
 use godot::prelude::*;
 
+use crate::common::*;
 use crate::consts::dialogue::INTERACT_PROMPT_HEIGHT_OFFSET;
-use crate::prelude::*;
 
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]

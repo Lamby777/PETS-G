@@ -8,7 +8,7 @@ use godot::classes::{CharacterBody2D, ICharacterBody2D, Sprite2D};
 use godot::prelude::*;
 
 use super::stat_translation;
-use crate::prelude::*;
+use crate::common::*;
 
 const BATTLE_DIRECTIONS: LazyCell<[(StringName, Vector2); 4]> =
     LazyCell::new(|| {

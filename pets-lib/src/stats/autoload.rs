@@ -6,7 +6,7 @@ use godot::global::randomize;
 use godot::prelude::*;
 
 use crate::battle::skills::load_skill_registry;
-use crate::prelude::*;
+use crate::common::*;
 
 #[derive(GodotClass)]
 #[class(base=Object)]

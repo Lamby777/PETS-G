@@ -6,7 +6,7 @@
 //! the old code, and I'm already used to calling them that.
 //! tl;dr get used to it.
 
-use crate::prelude::*;
+use crate::common::*;
 
 use godot::prelude::*;
 use strum::EnumIter;

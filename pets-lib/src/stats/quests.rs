@@ -1,4 +1,4 @@
-use crate::prelude::*;
+use crate::common::*;
 use godot::prelude::*;
 
 pub type QuestPhase = i32;

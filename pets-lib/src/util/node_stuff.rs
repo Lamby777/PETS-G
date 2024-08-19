@@ -1,4 +1,4 @@
-use crate::prelude::*;
+use crate::common::*;
 
 use derived_deref::{Deref, DerefMut};
 use godot::classes::object::ConnectFlags;

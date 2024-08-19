@@ -1,4 +1,4 @@
-use crate::prelude::*;
+use crate::common::*;
 use std::collections::HashMap;
 
 use godot::classes::file_access::ModeFlags;
@@ -23,7 +23,7 @@ where
     }
 
     let content = String::from_utf8(content).ok()?;
-    let res: Registry<T> = ribbons::unwrap_fmt!(
+    let res: Registry<T> = unwrap_fmt!(
         serde_json::from_str(&content),
         "skills file {} has wrong JSON contents",
         path

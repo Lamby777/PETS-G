@@ -1,5 +1,5 @@
 use super::skills::Element;
-use crate::prelude::*;
+use crate::common::*;
 
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub enum AffinityPower {

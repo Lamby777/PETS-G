@@ -4,7 +4,7 @@
 //! to the battle engine.
 //!
 
-use crate::prelude::*;
+use crate::common::*;
 const SPEED_STAT_MULTIPLIER: FloatStat = 800.0;
 
 pub fn speed(speed: IntegralStat) -> FloatStat {

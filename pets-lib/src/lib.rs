@@ -17,7 +17,7 @@
 
 use godot::prelude::*;
 
-use prelude::*;
+use common::*;
 
 mod consts;
 mod util;
@@ -31,8 +31,7 @@ mod title_screen;
 mod world;
 // mod llm;
 
-#[allow(unused)]
-mod prelude {
+mod common {
     pub use crate::consts::type_aliases::*;
 
     pub use crate::items::*;
@@ -40,10 +39,10 @@ mod prelude {
     pub use crate::stats::*;
     pub use crate::util::*;
 
-    pub use crate::battle::{Affinities, AffinityPower, BattleEngine};
+    pub use crate::battle::{Affinities, BattleEngine};
     pub use crate::dialogue::DialogBox;
     pub use crate::world::{
-        InteractionManager, InteractionZone, PlayerCB, World, WorldMenu,
+        InteractionManager, InteractionZone, PlayerCB, World,
     };
 
     pub use crate::choices::ChoiceAgent;
@@ -54,19 +53,19 @@ mod prelude {
 
     // is this bad practice? no clue and idc honestly
     // it's convenient with no real caveat, therefore...
-    pub use anyhow::{anyhow, Result};
+    pub use anyhow::Result;
     pub use chrono::{Datelike, NaiveDate};
     pub use derived_deref::{Deref, DerefMut};
-    pub use indoc::indoc;
-    pub use rand::Rng;
+    // pub use indoc::indoc;
     pub use ribbons::unwrap_fmt;
+    // pub use rand::Rng;
     pub use serde::de::DeserializeOwned;
     pub use serde::{Deserialize, Serialize};
 
     pub use std::cell::RefCell;
     pub use std::collections::{HashMap, HashSet};
     pub use std::fmt::{self, Debug, Display};
-    pub use std::path::{Path, PathBuf};
+    // pub use std::path::{Path, PathBuf};
     pub use std::rc::Rc;
     pub use std::{io, thread};
 }

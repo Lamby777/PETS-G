@@ -5,8 +5,8 @@ use godot::classes::{
 };
 use godot::prelude::*;
 
+use crate::common::*;
 use crate::consts::playercb::*;
-use crate::prelude::*;
 
 use super::inv_node::InventoryNode;
 use super::pchar_node::PCharNode;

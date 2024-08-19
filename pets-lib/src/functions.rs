@@ -1,4 +1,4 @@
-use crate::prelude::*;
+use crate::common::*;
 use godot::classes::{GDScript, Sprite2D, Texture2D};
 use godot::prelude::*;
 

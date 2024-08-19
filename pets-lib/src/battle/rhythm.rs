@@ -7,7 +7,7 @@ use godot::prelude::*;
 
 use super::midi::{BattleTrack, MidiReceiver};
 use super::AttackFlopReason;
-use crate::prelude::*;
+use crate::common::*;
 
 /// How long before/after a beat to still consider clicks valid
 const LENIENCY_PRE: f64 = 0.08;
@@ -29,7 +29,7 @@ impl NoteType {
     /// Panics if the note is invalid, for ergonomics.
     /// Use `try_from_note` if you want to handle the error.
     pub fn from_note(note: u8) -> Self {
-        ribbons::unwrap_fmt!(
+        unwrap_fmt!(
             Self::try_from_note(note),
             "invalid midi note with code {}",
             note

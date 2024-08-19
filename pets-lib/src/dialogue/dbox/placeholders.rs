@@ -2,7 +2,7 @@
 //! This module is for processing placeholders in dialogue strings.
 //!
 
-use crate::prelude::*;
+use crate::common::*;
 
 pub fn party_leader() -> PChar {
     *pcb().bind().party_pchars().first().unwrap()

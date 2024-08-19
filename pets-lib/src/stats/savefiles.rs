@@ -9,7 +9,7 @@ use godot::prelude::*;
 
 use super::charmap::default_charmap;
 use super::scrapbook::Scrapbook;
-use crate::prelude::*;
+use crate::common::*;
 
 fn save_path(slot: u8) -> String {
     format!("user://save{}.json", slot)

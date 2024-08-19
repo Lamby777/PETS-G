@@ -4,7 +4,7 @@ use godot::classes::{
 };
 use godot::prelude::*;
 
-use crate::prelude::*;
+use crate::common::*;
 
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]

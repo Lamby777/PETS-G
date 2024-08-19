@@ -8,8 +8,8 @@ use godot::classes::{
 };
 use godot::prelude::*;
 
+use crate::common::*;
 use crate::consts::dialogue::*;
-use crate::prelude::*;
 
 mod dchoice;
 mod placeholders;
