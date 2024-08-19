@@ -88,6 +88,11 @@ pub struct BattleEngine {
     #[init(node = "%BattleIcon")]
     icon: OnReady<Gd<BattleIcon>>,
 
+    /// Metronome-like thingy
+    #[init(node = "ClickSFX")]
+    clicksfx: OnReady<Gd<AudioStreamPlayer>>,
+
+    /// Text saying if you hit, flop, or miss a note
     #[init(node = "%ClickStatus")]
     click_status_txt: OnReady<Gd<RichTextLabel>>,
 
@@ -345,6 +350,7 @@ impl BattleEngine {
     #[func]
     fn on_note_hit(&mut self) {
         self.click_status_txt.set_text("Hit!".into());
+        self.clicksfx.play();
     }
 
     #[func]

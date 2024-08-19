@@ -226,11 +226,11 @@ process_mode = 4
 script = ExtResource("1_vrl6q")
 bullet_scene = ExtResource("2_n0w8q")
 
+[node name="ClickSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_icqrr")
+
 [node name="BattleMusic" type="BattleMusic" parent="."]
 stream = ExtResource("4_l6m5j")
-
-[node name="ClickSFX" type="AudioStreamPlayer" parent="BattleMusic"]
-stream = ExtResource("4_icqrr")
 
 [node name="RhythmTimer" type="Timer" parent="BattleMusic"]
 one_shot = true
