@@ -208,7 +208,10 @@ impl BattleEngine {
         // disable the choice list
         self.choices.bind_mut().disable();
         // self.other_choices.as_mut().map(|v| v.bind_mut().disable());
+        self.clear_right_panel();
+    }
 
+    fn clear_right_panel(&mut self) {
         self.right_panel_destination
             .clone()
             .expect("no right panel node exported")
@@ -366,6 +369,7 @@ impl INode2D for BattleEngine {
         self.choices.bind_mut().disable();
         self.battlers.init(pcb().bind().new_battlers());
         self.update_mana_bar();
+        self.clear_right_panel();
 
         {
             let mut timer = Timer::new_alloc();

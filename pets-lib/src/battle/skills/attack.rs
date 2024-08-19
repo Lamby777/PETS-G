@@ -128,6 +128,8 @@ impl Skill for AttackSkill {
                 power
             );
             target.take_damage(damage);
+
+            godot_print!("Target HP after damage: {}", target.hp());
         }
 
         if let Some(effect) = &self.status_effect {
