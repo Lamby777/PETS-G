@@ -45,8 +45,8 @@ pub enum ItemCat {
         /// Stat offsets that the item applies when equipped
         offsets: InherentStats,
 
-        /// Only characters with this weapon style can equip this
-        equippable_by: Option<DefaultWeaponStyle>,
+        /// Only characters in this list can equip this
+        equippable_by: Vec<PChar>,
     },
     AmmoBox {
         category: AmmoCat,
