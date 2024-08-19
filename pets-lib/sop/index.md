@@ -8,3 +8,7 @@ also new contributors who are confused on where to start.
 
 - [Workflow](workflow.md)
 - [Enemies](enemies.md)
+
+## Plot
+
+Forgetting some details? Check out the [char/plot summary](plot.md)!
