@@ -301,7 +301,7 @@ where
 impl Default for CharData {
     fn default() -> Self {
         CharData {
-            id: PChar::DEVON,
+            id: PChar::Devon,
             display_name: "Chicken Nugget".to_owned(),
             level: 1,
 

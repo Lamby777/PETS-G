@@ -17,60 +17,59 @@ use strum::EnumIter;
 //   ////////                                          ////////
 // //////////////////////////////////////////////////////////
 
-#[allow(non_camel_case_types)]
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
 #[derive(Serialize, Deserialize, EnumIter)]
 #[derive(GodotConvert, Var, Export)]
 #[godot(via = GString)]
 pub enum PChar {
     // the "chosen ones"... :)
-    PORKY,
-    ETHAN,
-    TERRA,
-    SIVA,
+    Porky,
+    Ethan,
+    Terra,
+    Siva,
 
     // These guys will def be playable in the main storyline.
-    DYLAN,
-    MIRA,
-    LEO,
+    Dylan,
+    Mira,
+    Leo,
 
     // The rest probably won't be playable in the main game,
     // but need PChars regardless.
-    DEVON,
-    FUZZY,
-    LYEMBO,
-    // BOBBY,
-    // NEOXYLIN,
-    QUOLO,
+    Devon,
+    Fuzzy,
+    Lyembo,
+    // Bobby,
+    // Neoxylin,
+    Quolo,
 
     // Silly billies
-    // RUMBLE,
-    // ESTHER,
-    // RANA,
-    // JERIAN,
+    // Rumble,
+    // Esther,
+    // Rana,
+    // Jerian,
 
     // Families
-    JUNIPER,
-    CLAY,
-    MR_TULIVAE,
-    MS_TULIVAE,
-    // JOLAINNE,
+    Juniper,
+    Clay,
+    MrTulivae,
+    MsTulivae,
+    // Jolainne,
 
     // Winthrus, his crew, and associates
-    // WINTHRUS,
-    // JUNO,
-    // COLT,
+    // Winthrus,
+    // Juno,
+    // Colt,
 
     // Important Goober people
-    // MYLO,  // HQ
-    // CALYX, // Ren
-    // RAINE, // GLUE arc
-    // TAINE, // GLUE arc
+    // Mylo,  // HQ
+    // Calyx, // Ren
+    // Raine, // GLUE arc
+    // Taine, // GLUE arc
 
     // Shopkeepers
-    // CHERRY,      // Cherry's Cherries
-    // RICHARD,     // Big Richard's Big Ripoffs
-    // CHAIRPERSON, // Chair Chairperson of the Gaming Chair Committee
+    // Cherry,      // Cherry's Cherries
+    // Richard,     // Big Richard's Big Ripoffs
+    // Chairperson, // Chair Chairperson of the Gaming Chair Committee
 }
 
 impl Display for PChar {

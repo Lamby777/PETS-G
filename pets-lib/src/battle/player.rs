@@ -54,12 +54,12 @@ impl BattleIcon {
 
     fn pchar_to_frame(pchar: PChar) -> i32 {
         match pchar {
-            PChar::ETHAN => 0,
-            PChar::TERRA => 1,
-            PChar::SIVA => 2,
-            PChar::PORKY => 3,
+            PChar::Ethan => 0,
+            PChar::Terra => 1,
+            PChar::Siva => 2,
+            PChar::Porky => 3,
 
-            PChar::FUZZY => 8,
+            PChar::Fuzzy => 8,
 
             _ => {
                 godot_warn!("PChar {} doesn't have a battle icon (yet). Defaulting to Ethan's icon.", pchar);
@@ -115,7 +115,7 @@ impl ICharacterBody2D for BattleIcon {
     fn ready(&mut self) {
         let ch_speed = si()
             .bind()
-            .get_character(&PChar::ETHAN)
+            .get_character(&PChar::Ethan)
             .borrow()
             .practical_stats()
             .speed;

@@ -25,33 +25,33 @@ const PLACEHOLDERS: &[(&'static str, fn() -> String)] = &[
     // character names
     ("[CASCADE]", || "DG_SPK_CASCADE".to_owned()),
     ("[RODRICK]", || "DG_SPK_RODRICK".to_owned()),
-    ("[ETHAN]", || pchar_display_name(&PChar::ETHAN)),
-    ("[LYEMBO]", || pchar_display_name(&PChar::LYEMBO)),
-    ("[QUOLO]", || pchar_display_name(&PChar::QUOLO)),
+    ("[ETHAN]", || pchar_display_name(&PChar::Ethan)),
+    ("[LYEMBO]", || pchar_display_name(&PChar::Lyembo)),
+    ("[QUOLO]", || pchar_display_name(&PChar::Quolo)),
     ("[JUNIPER]", || {
         match party_leader() {
-            PChar::ETHAN => "DG_SPK_MOM",
+            PChar::Ethan => "DG_SPK_MOM",
             _ => "DG_SPK_JUNIPER",
         }
         .to_owned()
     }),
     ("[CLAY]", || {
         match party_leader() {
-            PChar::ETHAN => "DG_SPK_DAD",
+            PChar::Ethan => "DG_SPK_DAD",
             _ => "DG_SPK_CLAY",
         }
         .to_owned()
     }),
     ("[MR_TULIVAE]", || {
         match party_leader() {
-            PChar::SIVA => "DG_SPK_DAD",
+            PChar::Siva => "DG_SPK_DAD",
             _ => "DG_SPK_MR_TULIVAE",
         }
         .to_owned()
     }),
     ("[MRS_TULIVAE]", || {
         match party_leader() {
-            PChar::SIVA => "DG_SPK_MOM",
+            PChar::Siva => "DG_SPK_MOM",
             _ => "DG_SPK_MRS_TULIVAE",
         }
         .to_owned()
