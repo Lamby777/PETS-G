@@ -16,7 +16,7 @@ func _start() -> void:
 
     match choice["value"]:
         "Battle": 
-            World.start_battle("A_NONNY_MOUSE")
+            World.start_battle("ANonnyMouse")
 
         "Item":
             choice = await dbox().say_as_with_choices(
