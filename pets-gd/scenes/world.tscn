@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c0jehwow4ein4" path="res://scenes/interaction_manager.tscn" id="2_uh12s"]
 [ext_resource type="Shader" path="res://themes/encounter.gdshader" id="3_a3d4r"]
 [ext_resource type="PackedScene" uid="uid://clpj4pxq1ulin" path="res://scenes/inventory.tscn" id="3_jwkdy"]
-[ext_resource type="Script" path="res://scenes/BattleIntroRect.gd" id="4_jple0"]
+[ext_resource type="Script" path="res://classes/BattleIntroRect.gd" id="4_jple0"]
 [ext_resource type="Script" path="res://dialogue/debug.gd" id="10_egidj"]
 [ext_resource type="PackedScene" uid="uid://c7x12nyqelw1f" path="res://scenes/rooms/cv-outdoors.tscn" id="10_kug7e"]
 [ext_resource type="Script" path="res://quests/intro1.gd" id="13_w40m0"]

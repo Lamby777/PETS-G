@@ -10,7 +10,7 @@
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="5_hcsfj"]
 [ext_resource type="Texture2D" uid="uid://cx24dyfnh30ag" path="res://assets/textures/portraits/ETHAN.png" id="6_abown"]
 [ext_resource type="PackedScene" uid="uid://ywn8h01im5gx" path="res://scenes/enemy_sprite.tscn" id="6_dgpl5"]
-[ext_resource type="Script" path="res://scenes/hpbar.gd" id="9_r25ik"]
+[ext_resource type="Script" path="res://classes/hpbar.gd" id="9_r25ik"]
 [ext_resource type="PackedScene" uid="uid://b2m4ghg2jf166" path="res://scenes/skills-menu.tscn" id="12_546eg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w1wwc"]
