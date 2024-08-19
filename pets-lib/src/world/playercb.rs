@@ -244,9 +244,9 @@ impl ICharacterBody2D for PlayerCB {
     fn ready(&mut self) {
         self.party = vec![
             self.push_pchar(PChar::ETHAN),
-            // self.push_pchar(PChar::SIVA),
-            // self.push_pchar(PChar::TERRA),
-            // self.push_pchar(PChar::MIRA),
+            self.push_pchar(PChar::SIVA),
+            self.push_pchar(PChar::TERRA),
+            self.push_pchar(PChar::MIRA),
         ];
     }
 
