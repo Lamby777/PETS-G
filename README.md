@@ -16,12 +16,12 @@ control of your own hardware overly complicated... and is also open-source! <3
 
 ---
 
-On Godot version 4.2.2
+On Godot version 4.3
 
 Using [godot-rust/gdext](https://github.com/godot-rust/gdextension) for most of
 the stuff, because of the type system. Prefer GDScript for things that probably
 won't need to interact with Rust code, and are simpler to just write as GDScript
-scripts.
+scripts (for example, enemy attack patterns or NPC dialogue).
 
 ---
 
@@ -34,6 +34,10 @@ the world, right?
 ---
 
 ## (Recommended...?) Workflow
+
+IMPORTANT: Read the [SOPs](pets-lib/sop/index.md) for some instructions on common tasks.
+If you can't find what you're looking for there, open a ticket and I'll be happy
+to help you out and add an entry for future reference.
 
 You're probably gonna want to spend most of your time in the `pets-lib` folder.
 This is where the Rust side of the codebase is in. The `pets-gd` folder has the
