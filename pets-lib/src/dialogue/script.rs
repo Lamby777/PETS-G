@@ -1,5 +1,5 @@
 use crate::common::*;
-use godot::classes::{GDScript, Sprite2D, Texture2D};
+use godot::classes::GDScript;
 use godot::prelude::*;
 
 #[derive(GodotClass)]
@@ -39,19 +39,9 @@ impl DialogueScriptBase {
     }
 
     // -----------------------------------------------------------------
-
-    #[func]
-    fn set_ethan_bed_color(color: String) {
-        let texture = load::<Texture2D>(format!(
-            "res://assets/textures/builds/furniture/beds/bed_{color}.png"
-        ));
-
-        si().bind_mut().save.bed_color = color;
-
-        let mut bed =
-            World::room().get_node_as::<Sprite2D>("%EthanBed/Sprite2D");
-        bed.callv("set_texture".into(), varray![texture]);
-    }
+    // ONLY DEBUG CRAP SHOULD BE PLACED BELOW!
+    // Putting non-debug functions here should be treated as a code smell.
+    // -----------------------------------------------------------------
 
     #[func]
     fn debug_item(item_id: String, quantity: u32) {

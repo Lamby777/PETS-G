@@ -49,7 +49,7 @@ func on_house_tp(target):
         var bedcolors = ["red", "orange", "yellow", "green", "blue", "purple", "pink"]
         var picked_bedcolor = bedcolors[picked_bedcolor_x["index"]]
 
-        DialogueScriptBase.set_ethan_bed_color(picked_bedcolor)
+        StatsInterface.set_ethan_bed_color(picked_bedcolor)
 
         await dbox().say_as("[JUNIPER]", [
             "DG_INTRO1_LOOKSBETTER",
