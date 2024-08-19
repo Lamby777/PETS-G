@@ -2,8 +2,7 @@
     "trusty_rusty_pistol": {
         "attributes": [
             "Cheap",
-            "Ranged",
-            "Firearm"
+            "Ranged"
         ],
         "category": {
             "Equipment": {
@@ -19,7 +18,10 @@
                     "epsilon": 0,
                     "lambda": 0,
                     "max_mana": 0
-                }
+                },
+                "equippable_by": [
+                    "Terra"
+                ]
             }
         }
     }
