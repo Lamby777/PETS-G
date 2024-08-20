@@ -16,7 +16,8 @@ pub fn pchar_display_name(pchar: &PChar) -> String {
         .clone()
 }
 
-const PLACEHOLDERS: &[(&'static str, fn() -> String)] = &[
+type PlaceholderMapping = (&'static str, fn() -> String);
+const PLACEHOLDERS: &[PlaceholderMapping] = &[
     ("[PLAYER]", || "Cherry".to_owned()),
     ("[LEVEL]", || 123.to_string()),
     // "special" speakers

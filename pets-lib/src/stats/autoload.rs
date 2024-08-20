@@ -54,7 +54,7 @@ impl StatsInterface {
 }
 
 impl GodotAutoload for StatsInterface {
-    const AUTOLOAD_NAME: &'static str = "Stats";
+    const AUTOLOAD_NAME: &str = "Stats";
 }
 
 #[godot_api]

@@ -227,7 +227,7 @@ impl BattleEngine {
             _ if self.menu_section.is_some() => self.close_dualmenu(),
 
             // no menu while running away or in intro
-            Intro | Attack { running: true } => return,
+            Intro | Attack { running: true } => (),
 
             // open menu if closed
             // (exhaustive match in case we add more states later)
