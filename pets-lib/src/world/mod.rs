@@ -14,8 +14,8 @@ mod enemy_node;
 mod interaction;
 mod inv_node;
 mod menu; // mod menu?? are you hacking?!!! ban ban report >:3
+mod partycb;
 mod pchar_node;
-mod playercb;
 
 mod music_zone;
 mod water_zone;
@@ -23,7 +23,7 @@ use music_zone::MusicZone;
 use water_zone::WaterZone;
 
 pub use interaction::{InteractionManager, InteractionZone};
-pub use playercb::PlayerCB;
+pub use partycb::PartyCB;
 
 // just for testing
 // use a value provided by the mz later on...
@@ -47,8 +47,8 @@ fn generate_random_mod() -> Vector2 {
 
 fn cue_battle_intro_fx() {
     // start the cool shader rectangle thing
-    let mut rect = PlayerCB::fx_rect();
-    let mut mat = PlayerCB::fx_material();
+    let mut rect = PartyCB::fx_rect();
+    let mut mat = PartyCB::fx_material();
     rect.call("reset_shader_timer".into(), &[]);
 
     let rand_mod = generate_random_mod().to_variant();
@@ -136,7 +136,7 @@ impl World {
             .push(Rc::new(RefCell::new(enemy_data)));
         let world = World::singleton();
 
-        let mat = PlayerCB::fx_material();
+        let mat = PartyCB::fx_material();
         let fade_len = mat.get_shader_parameter("LENGTH".into()).to::<f64>();
 
         set_timeout(INTRO_FADE_PREDELAY, cue_battle_intro_fx);

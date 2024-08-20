@@ -6,7 +6,7 @@ use godot::classes::{
 use godot::prelude::*;
 
 use crate::common::*;
-use crate::consts::playercb::*;
+use crate::consts::partycb::*;
 
 use super::inv_node::InventoryNode;
 use super::pchar_node::PCharNode;
@@ -47,7 +47,7 @@ impl Inputs {
 /// be controllable by the player. The rest are NPC-controlled.
 #[derive(GodotClass)]
 #[class(init, base=CharacterBody2D)]
-pub struct PlayerCB {
+pub struct PartyCB {
     base: Base<CharacterBody2D>,
 
     #[export]
@@ -79,13 +79,13 @@ pub struct PlayerCB {
 }
 
 #[godot_api]
-impl PlayerCB {
+impl PartyCB {
     #[signal]
     fn teleported(&self, target: Gd<Node2D>);
 
     #[func]
     pub fn singleton() -> Gd<Self> {
-        World::singleton().get_node_as("%PlayerCB")
+        World::singleton().get_node_as("%PartyCB")
     }
 
     #[signal]
@@ -272,7 +272,7 @@ impl PlayerCB {
 }
 
 #[godot_api]
-impl ICharacterBody2D for PlayerCB {
+impl ICharacterBody2D for PartyCB {
     fn physics_process(&mut self, delta: f64) {
         let mut moving = false;
 

@@ -3,7 +3,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubtmb"]
 size = Vector2(24, 48)
 
-[node name="PlayerCB" type="PlayerCB"]
+[node name="PartyCB" type="PartyCB"]
 y_sort_enabled = true
 collision_layer = 2
 motion_mode = 1

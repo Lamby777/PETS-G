@@ -7,7 +7,7 @@ use godot::classes::{Area2D, ColorRect, GDScript, IArea2D};
 use godot::prelude::*;
 
 use crate::common::*;
-use crate::consts::playercb::*;
+use crate::consts::partycb::*;
 use crate::dialogue::DialogueScript;
 
 #[derive(GodotClass)]

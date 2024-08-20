@@ -25,7 +25,7 @@ impl Quest {
     }
 
     #[func]
-    fn pcb(&self) -> Gd<PlayerCB> {
+    fn pcb(&self) -> Gd<PartyCB> {
         pcb()
     }
 
