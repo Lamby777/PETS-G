@@ -74,8 +74,7 @@ impl DialogBox {
 
     #[func]
     pub fn do_draw(&mut self) {
-        // TODO if there are choices to show, show them
-        if self.queued_choices.len() > 0 {
+        if !self.queued_choices.is_empty() {
             self.recreate_choice_labels();
             self.tween_choices_wave(true);
             self.choice_agent.bind_mut().enable();
@@ -233,7 +232,7 @@ impl DialogBox {
     /// other in their focus neighbor properties
     pub fn set_choice_label_focus_directions(&self) {
         let nodes = self.choice_nodes();
-        let Some(mut previous) = nodes.last().map(Gd::clone) else {
+        let Some(mut previous) = nodes.last().cloned() else {
             // if no choices, there's nothing to set
             return;
         };
@@ -302,7 +301,7 @@ impl IPanelContainer for DialogBox {
         let mut connect = |name: &str, method: &str| {
             let callable = self.base().callable(method);
             // self.choice_agent.connect(name.into(), callable);
-            connect_deferred(&mut self.choice_agent, name.into(), callable);
+            connect_deferred(&mut self.choice_agent, name, callable);
         };
 
         connect("selection_confirmed", "on_choice_picked");

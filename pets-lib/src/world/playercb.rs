@@ -205,7 +205,7 @@ impl PlayerCB {
 
         let velocity = self.base().get_velocity();
         self.base_mut()
-            .set_velocity(velocity.move_toward(target_pos, deltatimes as f32));
+            .set_velocity(velocity.move_toward(target_pos, deltatimes));
 
         self.base_mut().move_and_slide();
 
@@ -227,7 +227,10 @@ impl PlayerCB {
     }
 
     fn last_rot(&self) -> Vector2 {
-        self.past_rotations.get(0).cloned().unwrap_or(Vector2::ZERO)
+        self.past_rotations
+            .front()
+            .cloned()
+            .unwrap_or(Vector2::ZERO)
     }
 
     pub fn good_guys_battlers(&self) -> Vec<Rc<RefCell<Battler>>> {

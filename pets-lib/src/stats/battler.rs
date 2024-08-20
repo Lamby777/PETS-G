@@ -1,6 +1,6 @@
 use super::*;
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Serialize, Deserialize)]
 pub struct Battler {
     pub battle_stats: BattleStats,
     pub status_effects: HashSet<StatusEffect>,
@@ -10,19 +10,6 @@ pub struct Battler {
 
     /// The IDs of all equipped items
     pub equipment: Equipment,
-}
-
-impl Default for Battler {
-    fn default() -> Self {
-        Self {
-            battle_stats: BattleStats::default(),
-            status_effects: HashSet::new(),
-            buffs_list: Vec::new(),
-
-            inherent_stats: InherentStats::default(),
-            equipment: Equipment::default(),
-        }
-    }
 }
 
 impl Battler {

@@ -64,7 +64,7 @@ pub mod dialogue {
     pub const DEFAULT_VOX: &str = "_";
 
     pub const TEXT_VISIBILITY_DELAY: f64 = 0.015;
-    pub const PAUSE_CHAR: char = '​';
+    pub const PAUSE_CHAR: char = '\u{200B}'; // ​
     pub const PAUSE_CHAR_DELAY: f64 = 0.1;
     pub const PUNCT_DELAY: f64 = 0.1;
     pub const WHITESPACE_DELAY: f64 = 0.03;

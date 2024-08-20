@@ -142,7 +142,7 @@ impl InventoryNode {
         let mut inv = inv.borrow_mut();
         let item = inv
             .get_at_index(index)
-            .map(|(id, count)| (id.clone(), count.clone()));
+            .map(|(id, count)| (id.clone(), *count));
 
         let Some((item_id, _)) = item else {
             return godot_warn!("No item to drop at index {}", index);
