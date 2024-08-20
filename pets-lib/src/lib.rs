@@ -14,6 +14,7 @@
 #![feature(try_blocks)]
 #![feature(generic_arg_infer)]
 #![feature(int_roundings)]
+// #![warn(clippy::missing_docs_in_private_items)]
 
 use godot::prelude::*;
 
@@ -30,6 +31,8 @@ mod title_screen;
 mod world;
 // mod llm;
 
+/// Module for all common stuff used throughout the codebase.
+/// You'll often see `use crate::common::*;` at the top of most files.
 mod common {
     pub use crate::consts::type_aliases::*;
 
@@ -50,8 +53,6 @@ mod common {
     // re-exports
     pub use nodi::midly;
 
-    // is this bad practice? no clue and idc honestly
-    // it's convenient with no real caveat, therefore...
     pub use anyhow::Result;
     pub use chrono::{Datelike, NaiveDate};
     pub use derived_deref::{Deref, DerefMut};
@@ -69,6 +70,7 @@ mod common {
     pub use std::{io, thread};
 }
 
+/// The GDExtension library struct
 struct PetsLib;
 
 #[gdextension]
