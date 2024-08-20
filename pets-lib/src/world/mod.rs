@@ -129,7 +129,7 @@ impl World {
     #[func]
     pub fn start_battle(eid: GString) {
         let eid = EnemyID::from_godot(eid);
-        let enemy_data = EnemyData::from_id(eid);
+        let enemy_data = EnemyData::new_from_eid(eid);
         pcb()
             .bind_mut()
             .battling
