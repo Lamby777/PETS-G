@@ -117,10 +117,10 @@ where
         .done();
 }
 
-/// Returns the singleton instance of `PlayerCB`.
+/// Returns the singleton instance of `PartyCB`.
 /// So common that I might as well abbreviate it. :P
-pub fn pcb() -> Gd<PlayerCB> {
-    PlayerCB::singleton()
+pub fn pcb() -> Gd<PartyCB> {
+    PartyCB::singleton()
 }
 
 /// Returns the singleton instance `StatsInterface`.

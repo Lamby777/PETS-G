@@ -38,7 +38,7 @@ pub mod battle {
     pub const KARMA_STEP: f64 = 0.1; // `some whole number * this = 1` must be true
 }
 
-pub mod playercb {
+pub mod partycb {
     use super::*;
 
     // Movement physics stuff

@@ -44,7 +44,7 @@ mod common {
     pub use crate::battle::{Affinities, BattleEngine};
     pub use crate::dialogue::DialogBox;
     pub use crate::world::{
-        InteractionManager, InteractionZone, PlayerCB, World,
+        InteractionManager, InteractionZone, PartyCB, World,
     };
 
     pub use crate::choices::ChoiceAgent;
