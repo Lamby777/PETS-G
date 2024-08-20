@@ -10,7 +10,6 @@ use godot::classes::tween::TransitionType;
 use godot::classes::{
     AnimationPlayer, ColorRect, Control, InputEvent, PanelContainer,
 };
-use godot::obj::WithBaseField;
 use godot::prelude::*;
 
 use crate::common::*;

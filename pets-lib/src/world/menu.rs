@@ -88,13 +88,15 @@ impl WorldMenu {
             "Inventory" => self.open_inventory(),
             "DebugQuit" => godot_tree().quit(),
             "DebugMenu" => {
-                DialogueScript::new(
+                let mut ds = DialogueScript::new(
                     self.debug_menu_script
                         .as_ref()
                         .expect("no debug script exported")
                         .clone(),
-                )
-                .call("_start".into(), &[]);
+                );
+
+                self.base_mut().add_child(&ds);
+                ds.call("_start".into(), &[]);
             }
 
             _ => unreachable!(),
