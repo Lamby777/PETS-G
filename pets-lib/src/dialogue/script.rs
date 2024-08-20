@@ -39,7 +39,7 @@ impl DialogueScript {
     // -----------------------------------------------------------------
 
     #[func]
-    fn debug_item(item_id: String, quantity: u32) {
+    fn debug_item(item_id: String, quantity: i32) {
         Inventory::get().borrow_mut().give_item(item_id, quantity);
     }
 }

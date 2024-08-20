@@ -48,9 +48,9 @@ impl Inventory {
         si().bind().save.inventory.clone()
     }
 
-    pub fn give_item(&mut self, id: String, quantity: u32) {
+    pub fn give_item(&mut self, id: String, quantity: i32) {
         let count = self.items.entry(id).or_insert(0);
-        *count += quantity;
+        *count = (*count as i32).saturating_add(quantity) as u32;
     }
 
     pub fn len(&self) -> usize {
