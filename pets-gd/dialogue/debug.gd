@@ -25,6 +25,8 @@ func _start() -> void:
                 ], [
                     "Rusty x1",
                     "Rusty x5",
+                    "Stick x1",
+                    "Stick x5",
                 ]
             )
 
@@ -33,6 +35,10 @@ func _start() -> void:
                     DialogueScript.debug_item("trusty_rusty_pistol", 1)
                 1:
                     DialogueScript.debug_item("trusty_rusty_pistol", 5)
+                2:
+                    DialogueScript.debug_item("cool_stick", 1)
+                3:
+                    DialogueScript.debug_item("cool_stick", 5)
 
             await dbox().say_as("[CASCADE]", [
                 "Here you go!"

@@ -149,6 +149,8 @@ impl InventoryNode {
         };
 
         inv.give_item(item_id.to_owned(), -1);
+        drop(inv);
+
         self.update_item_icons();
         self.update_text_labels();
     }
