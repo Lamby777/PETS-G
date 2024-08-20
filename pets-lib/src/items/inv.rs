@@ -32,6 +32,11 @@ impl Equipment {
     }
 }
 
+/// The player's inventory
+///
+/// # Invariants
+/// - All item counts are non-negative
+/// - Items with a count of 0 are not present in the map
 #[derive(Serialize, Deserialize)]
 pub struct Inventory {
     items: HashMap<String, u32>,
@@ -48,9 +53,15 @@ impl Inventory {
         si().bind().save.inventory.clone()
     }
 
-    pub fn give_item(&mut self, id: String, quantity: i32) {
-        let count = self.items.entry(id).or_insert(0);
+    pub fn give_item(&mut self, id: impl Into<String>, quantity: i32) {
+        let key = id.into();
+
+        let count = self.items.entry(key.clone()).or_insert(0);
         *count = (*count as i32).saturating_add(quantity) as u32;
+
+        if *count == 0 {
+            self.items.remove(&key);
+        }
     }
 
     pub fn len(&self) -> usize {
