@@ -32,7 +32,7 @@ impl Equipment {
     }
 }
 
-/// The player's inventory
+/// The player's inventory. Keys are item IDs, values are the count of that item.
 ///
 /// # Invariants
 /// - All item counts are non-negative

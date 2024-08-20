@@ -4,11 +4,11 @@ use super::*;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct ItemDrops {
-    pub item: Item,
+    pub item_id: String,
     pub odds: u8,
 }
 
-/// All the information the game needs to know about a character
+/// All the information the game needs to know about an enemy
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct EnemyData {
     pub id: String,
@@ -16,7 +16,7 @@ pub struct EnemyData {
 }
 
 impl EnemyData {
-    pub fn from_id(id: EnemyID) -> Self {
+    pub fn new_from_eid(id: EnemyID) -> Self {
         // TODO load from file
         Self {
             id: id.to_string(),
