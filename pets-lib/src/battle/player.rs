@@ -2,7 +2,7 @@
 //! Player icon that moves around n shit during battles
 //!
 
-use std::cell::LazyCell;
+use std::sync::LazyLock;
 
 use godot::classes::{CharacterBody2D, ICharacterBody2D, Sprite2D};
 use godot::prelude::*;
@@ -10,8 +10,8 @@ use godot::prelude::*;
 use super::stat_translation;
 use crate::common::*;
 
-const BATTLE_DIRECTIONS: LazyCell<[(StringName, Vector2); 4]> =
-    LazyCell::new(|| {
+static BATTLE_DIRECTIONS: LazyLock<[(StringName, Vector2); 4]> =
+    LazyLock::new(|| {
         [
             ("battle_move_up".into(), Vector2::UP),
             ("battle_move_down".into(), Vector2::DOWN),
