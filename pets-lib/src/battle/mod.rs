@@ -237,9 +237,7 @@ impl BattleEngine {
 
     pub fn swap_party_member(&mut self, new_index: usize) {
         self.current_party_member = new_index;
-        let pchar: String = todo!();
-        // let pchar = &self.battlers.good_guys[new_index].borrow().id;
-        let pchar = PChar::from_godot(pchar.into());
+        let pchar: PChar = pcb().bind_mut().party_pchars()[new_index];
         godot_print!("Swapped to party member `{}`", pchar);
 
         // set battle icon sprite
