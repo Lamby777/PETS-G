@@ -124,15 +124,15 @@ impl Skill for ShieldSkill {
 }
 
 pub fn describe_shield_adjective(aff: &Affinities) -> GString {
-    if is_physical_shield(&aff) {
+    if is_physical_shield(aff) {
         return tr("SKILL_SHIELD_PHYSICAL_ADJ");
     }
 
-    if is_magical_shield(&aff) {
+    if is_magical_shield(aff) {
         return tr("SKILL_SHIELD_MAGICAL_ADJ");
     }
 
-    if is_unique_shield(&aff) {
+    if is_unique_shield(aff) {
         return tr("SKILL_SHIELD_UNIQUE_ADJ");
     }
 
@@ -140,15 +140,15 @@ pub fn describe_shield_adjective(aff: &Affinities) -> GString {
 }
 
 pub fn describe_damage_blocked(aff: &Affinities) -> GString {
-    if is_physical_shield(&aff) {
+    if is_physical_shield(aff) {
         return tr("SKILL_SHIELD_PHYSICAL_DESC");
     }
 
-    if is_magical_shield(&aff) {
+    if is_magical_shield(aff) {
         return tr("SKILL_SHIELD_MAGICAL_DESC");
     }
 
-    if is_unique_shield(&aff) {
+    if is_unique_shield(aff) {
         return tr("SKILL_SHIELD_UNIQUE_DESC");
     }
 

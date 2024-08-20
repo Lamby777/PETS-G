@@ -82,7 +82,7 @@ where
         .get_files()
         .to_vec()
         .into_iter()
-        .map(|fname| {
+        .flat_map(|fname| {
             let path = format!("{}/{}", folder_path, fname);
             godot_print!("Reading vanilla registry: {}", path);
             let content = read_registry(&path).expect(
@@ -92,7 +92,6 @@ where
             godot_print!("Vanilla registry {} read!", path);
             content
         })
-        .flatten()
         .collect::<HashMap<_, _>>();
 
     godot_print!("Successfully read vanilla `{}`!\n\n", folder_name);
