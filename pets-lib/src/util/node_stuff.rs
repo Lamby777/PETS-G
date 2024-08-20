@@ -30,7 +30,7 @@ pub fn fade_black<N>(black: &Gd<N>, visible: bool, tween_time: f64)
 where
     N: GodotClass + Inherits<ColorRect>,
 {
-    fade_black_f64(&black, visible as u8 as f64, tween_time)
+    fade_black_f64(black, visible as u8 as f64, tween_time)
 }
 
 pub fn fade_black_f64<N>(black: &Gd<N>, visible: f64, tween_time: f64)

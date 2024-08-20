@@ -35,13 +35,9 @@ impl AffinityPower {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+#[derive(Default)]
 pub struct Affinities(HashMap<Element, AffinityPower>);
 
-impl Default for Affinities {
-    fn default() -> Self {
-        Self(HashMap::new())
-    }
-}
 
 impl Affinities {
     pub fn _new(affinities: HashMap<Element, AffinityPower>) -> Self {
