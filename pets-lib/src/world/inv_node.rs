@@ -81,14 +81,14 @@ impl InventoryNode {
                 self.current_index as i32 + i - (child_count / 2) - 1;
             if index < 0 || index >= inv.len() as i32 {
                 icon_cont.call("set_texture".into(), &[Variant::nil()]);
+                icon_cont.call("set_item_ct".into(), &[0.to_variant()]);
                 continue;
             }
 
-            let item = inv.get_at_index(index as usize);
+            let (item_id, item_ct) = inv.get_at_index(index as usize).unwrap();
 
-            let texture =
-                item.map_or(Variant::nil(), |(id, _)| id.to_variant());
-            icon_cont.call("set_texture".into(), &[texture]);
+            icon_cont.call("set_item_ct".into(), &[item_ct.to_variant()]);
+            icon_cont.call("set_texture".into(), &[item_id.to_variant()]);
         }
     }
 
@@ -136,6 +136,22 @@ impl InventoryNode {
 
         self.anim.play_animation_forwards("open_inv", open);
     }
+
+    pub fn drop_item(&mut self, index: usize) {
+        let inv = Inventory::get();
+        let mut inv = inv.borrow_mut();
+        let item = inv
+            .get_at_index(index)
+            .map(|(id, count)| (id.clone(), count.clone()));
+
+        let Some((item_id, _)) = item else {
+            return godot_warn!("No item to drop at index {}", index);
+        };
+
+        inv.give_item(item_id.to_owned(), -1);
+        self.update_item_icons();
+        self.update_text_labels();
+    }
 }
 
 #[godot_api]
@@ -153,20 +169,19 @@ impl IControl for InventoryNode {
 
         if is_pressed("menu") {
             self.open(false);
-
-            return mark_input_handled(&self.base());
+        } else if is_pressed("ui_up") || is_pressed("ui_down") {
+            // do nothing for now
+        } else if is_pressed("ui_left") || is_pressed("ui_right") {
+            self.cycle_items(is_pressed("ui_right"));
+        } else if is_pressed("ui_accept") {
+            // do something with the item
+        } else if is_pressed("delete") {
+            // delete the item
+            self.drop_item(self.current_index);
+        } else {
+            return;
         }
 
-        if is_pressed("ui_right") || is_pressed("ui_down") {
-            self.cycle_items(true);
-
-            return mark_input_handled(&self.base());
-        }
-
-        if is_pressed("ui_left") || is_pressed("ui_up") {
-            self.cycle_items(false);
-
-            return mark_input_handled(&self.base());
-        }
+        mark_input_handled(&self.base());
     }
 }

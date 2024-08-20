@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://btmwdhpxxjkn"]
+[gd_scene load_steps=5 format=3 uid="uid://btmwdhpxxjkn"]
 
 [ext_resource type="Texture2D" uid="uid://crxp0fa3kco2o" path="res://assets/textures/items/terra_precision_shotgun.png" id="1_r6rt7"]
+[ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="2_7r2nb"]
 
 [sub_resource type="GDScript" id="GDScript_c1aim"]
 script/source = "extends MarginContainer
 
-@onready var icon = $PanelContainer/Node2D/TextureRect
+@onready var icon = %TextureRect
+@onready var ct_label = %ItemCountLabel
 
 func set_texture(texture):
     if texture == null:
@@ -16,6 +18,9 @@ func set_texture(texture):
     
     var path = \"res://assets/textures/items/\" + texture + \".png\"
     icon.texture = load(path)
+
+func set_item_ct(ct):
+    ct_label.text = str(ct) if ct > 1 else \"\"
 "
 
 [sub_resource type="GDScript" id="GDScript_yffjx"]
@@ -42,6 +47,7 @@ size_flags_horizontal = 3
 script = SubResource("GDScript_yffjx")
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/Node2D"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 160)
 offset_left = -8.0
 offset_top = -8.0
@@ -49,3 +55,13 @@ offset_right = 152.0
 offset_bottom = 152.0
 texture = ExtResource("1_r6rt7")
 stretch_mode = 5
+
+[node name="ItemCountLabel" type="RichTextLabel" parent="PanelContainer/Node2D"]
+unique_name_in_owner = true
+offset_left = 88.0
+offset_top = 88.0
+offset_right = 200.0
+offset_bottom = 160.0
+theme = ExtResource("2_7r2nb")
+theme_override_constants/outline_size = 12
+text = "1"
