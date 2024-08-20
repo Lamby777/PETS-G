@@ -10,7 +10,7 @@ pub trait Singleton: Inherits<Object> + NewAlloc {
 /// Trait for autoloaded classes
 /// Makes it more convenient to get the singleton instance
 pub trait GodotAutoload: Singleton {
-    const AUTOLOAD_NAME: &'static str;
+    const AUTOLOAD_NAME: &str;
 
     /// Register the singleton with the engine
     fn register() {

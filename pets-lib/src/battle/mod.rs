@@ -7,7 +7,7 @@ use godot::classes::node::ProcessMode;
 use godot::classes::object::ConnectFlags;
 use godot::classes::{
     AnimatedSprite2D, AnimationPlayer, Control, InputEvent, PanelContainer,
-    ProgressBar, Texture2D, TextureRect, Timer,
+    ProgressBar, RichTextLabel, Texture2D, TextureRect, Timer,
 };
 use godot::prelude::*;
 use skills::SKILL_REGISTRY;
@@ -26,15 +26,6 @@ mod stat_translation;
 pub use affinities::Affinities;
 use player::BattleIcon;
 use rhythm::BattleMusic;
-
-#[derive(Debug)]
-enum AttackFlopReason {
-    /// The beat was not clicked
-    Skipped,
-
-    /// The player clicked outside of a beat window
-    PoorTiming,
-}
 
 #[derive(PartialEq)]
 enum MenuSection {
@@ -97,6 +88,14 @@ pub struct BattleEngine {
     #[init(node = "%BattleIcon")]
     icon: OnReady<Gd<BattleIcon>>,
 
+    /// Metronome-like thingy
+    #[init(node = "ClickSFX")]
+    clicksfx: OnReady<Gd<AudioStreamPlayer>>,
+
+    /// Text saying if you hit, flop, or miss a note
+    #[init(node = "%ClickStatus")]
+    click_status_txt: OnReady<Gd<RichTextLabel>>,
+
     /// Something like the "rolling HP bar" feature from EarthBound
     /// or Sans's KR from Undertale. Basically just a number that your
     /// HP bar is going towards. The real HP value will be set ahead
@@ -128,13 +127,13 @@ impl BattleEngine {
         let battler = self.current_battler();
         let battler = battler.borrow();
 
-        let mana = battler.mana();
+        let mana = battler.battle_stats.mana;
 
         let mut mana_bar =
             self.base().get_node_as::<ProgressBar>("%InfoBars/ManaBar");
         mana_bar.set("bar_value".into(), mana.unwrap_or(0).to_variant());
 
-        let max_mana = battler.inherent_stats().max_mana;
+        let max_mana = battler.inherent_stats.max_mana;
         mana_bar.set_max(max_mana.unwrap_or(1).into());
     }
 
@@ -143,7 +142,7 @@ impl BattleEngine {
         let battler = self.current_battler();
         let battler = battler.borrow();
 
-        let hp = battler.hp() as f64;
+        let hp = battler.battle_stats.hp as f64;
         let mut hp_bar =
             self.base().get_node_as::<ProgressBar>("%InfoBars/HPBar");
 
@@ -158,7 +157,7 @@ impl BattleEngine {
         // update hp bar
         hp_bar.set("bar_value".into(), hp_bar_value.to_variant());
 
-        let max_hp = battler.inherent_stats().max_hp;
+        let max_hp = battler.inherent_stats.max_hp;
         hp_bar.set_max(max_hp.into());
 
         // if both the hp bar and the actual hp are zero, die
@@ -176,7 +175,7 @@ impl BattleEngine {
         godot_print!("You died!");
     }
 
-    fn current_battler(&self) -> Rc<RefCell<dyn Battler>> {
+    fn current_battler(&self) -> Rc<RefCell<Battler>> {
         self.battlers.good_guys[self.current_party_member].clone()
     }
 
@@ -208,7 +207,10 @@ impl BattleEngine {
         // disable the choice list
         self.choices.bind_mut().disable();
         // self.other_choices.as_mut().map(|v| v.bind_mut().disable());
+        self.clear_right_panel();
+    }
 
+    fn clear_right_panel(&mut self) {
         self.right_panel_destination
             .clone()
             .expect("no right panel node exported")
@@ -225,7 +227,7 @@ impl BattleEngine {
             _ if self.menu_section.is_some() => self.close_dualmenu(),
 
             // no menu while running away or in intro
-            Intro | Attack { running: true } => return,
+            Intro | Attack { running: true } => (),
 
             // open menu if closed
             // (exhaustive match in case we add more states later)
@@ -235,8 +237,7 @@ impl BattleEngine {
 
     pub fn swap_party_member(&mut self, new_index: usize) {
         self.current_party_member = new_index;
-        let pchar = self.battlers.good_guys[new_index].borrow().id();
-        let pchar = PChar::from_godot(pchar.into());
+        let pchar: PChar = pcb().bind_mut().party_pchars()[new_index];
         godot_print!("Swapped to party member `{}`", pchar);
 
         // set battle icon sprite
@@ -345,6 +346,24 @@ impl BattleEngine {
     // ------------------------------------------------------------
 
     #[func]
+    fn on_note_hit(&mut self) {
+        self.click_status_txt.set_text("Hit!".into());
+        self.clicksfx.play();
+    }
+
+    #[func]
+    fn on_note_flop(&mut self) {
+        self.click_status_txt.set_text("Flop!".into());
+    }
+
+    #[func]
+    fn on_note_miss(&mut self) {
+        self.click_status_txt.set_text("Miss!".into())
+    }
+
+    // ------------------------------------------------------------
+
+    #[func]
     pub fn intro_over(&mut self) {
         // change state from intro to attack
         self.state = BattleState::Attack { running: false };
@@ -352,7 +371,7 @@ impl BattleEngine {
 
         // start attacking
         let enemy_data = pcb().bind().battling[0].clone();
-        let enemy_id = enemy_data.borrow().id();
+        let enemy_id = &enemy_data.borrow().id;
 
         self.base()
             .get_node_as::<Node>(format!("Tactics/{}", enemy_id))
@@ -366,6 +385,7 @@ impl INode2D for BattleEngine {
         self.choices.bind_mut().disable();
         self.battlers.init(pcb().bind().new_battlers());
         self.update_mana_bar();
+        self.clear_right_panel();
 
         {
             let mut timer = Timer::new_alloc();
@@ -396,6 +416,15 @@ impl INode2D for BattleEngine {
         connect! {
             self.choices, "selection_confirmed" =>
             self.base(), "on_choice_picked";
+
+            self.music, "note_hit" =>
+            self.base(), "on_note_hit";
+
+            self.music, "note_flop" =>
+            self.base(), "on_note_flop";
+
+            self.music, "note_miss" =>
+            self.base(), "on_note_miss";
         }
     }
 

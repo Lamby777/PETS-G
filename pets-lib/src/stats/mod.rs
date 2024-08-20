@@ -55,60 +55,7 @@ pub struct CharData {
     pub display_name: String,
     pub level: IntegralStat,
 
-    /// The offsets for inherent stats. The final inherent stats
-    /// are calculated with `CharData::inherent_stats`.
-    pub inherent_stats_base: InherentStats,
-    pub battle_stats: BattleStats,
-    pub status_effects: HashSet<StatusEffect>,
-
-    /// Equipment this character is wearing/using
-    ///
-    /// # Important
-    ///
-    /// Equipping an item REMOVES it from the inventory!
-    pub equipment: Vec<Item>,
-}
-
-impl Battler for CharData {
-    fn id(&self) -> String {
-        self.id.to_string()
-    }
-
-    fn hp(&self) -> IntegralStat {
-        self.battle_stats.hp.min(self.practical_stats().max_hp)
-    }
-
-    fn hp_mut(&mut self) -> &mut IntegralStat {
-        &mut self.battle_stats.hp
-    }
-
-    fn status_effects(&self) -> &HashSet<StatusEffect> {
-        &self.status_effects
-    }
-
-    fn status_effects_mut(&mut self) -> &mut HashSet<StatusEffect> {
-        &mut self.status_effects
-    }
-
-    fn inherent_stats(&self) -> InherentStats {
-        statcalc::level_to_stats(self.level) + self.inherent_stats_base.clone()
-    }
-
-    fn equipment(&self) -> &[Item] {
-        &self.equipment
-    }
-
-    fn buffs_list(&self) -> &[InherentStats] {
-        &self.battle_stats.buffs
-    }
-
-    fn mana(&self) -> Option<IntegralStat> {
-        self.battle_stats.mana
-    }
-
-    fn mana_mut(&mut self) -> Option<&mut IntegralStat> {
-        self.battle_stats.mana.as_mut()
-    }
+    pub battler: Rc<RefCell<Battler>>,
 }
 
 /// Stats that are inherent to a character or enemy type.
@@ -307,10 +254,7 @@ impl Default for CharData {
 
             // i seriously can't `..Default::default()` because
             // that would be infinite recursion... WTF?
-            inherent_stats_base: Default::default(),
-            battle_stats: Default::default(),
-            status_effects: Default::default(),
-            equipment: Default::default(),
+            battler: Default::default(),
         }
     }
 }

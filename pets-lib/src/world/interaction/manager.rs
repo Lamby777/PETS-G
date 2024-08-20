@@ -54,7 +54,7 @@ impl InteractionManager {
     ///
     /// Panics if there are no zones
     pub fn closest_zone(&mut self) -> Option<Gd<InteractionZone>> {
-        self.zones.get(0).cloned()
+        self.zones.first().cloned()
     }
 
     fn set_prompt_text(&mut self, action: GString) {

@@ -9,7 +9,7 @@ use crate::util::registry::*;
 use std::sync::OnceLock;
 
 mod inv;
-pub use inv::{Inventory, ItemList};
+pub use inv::{Equipment, Inventory};
 
 pub static ITEM_REGISTRY: OnceLock<HashMap<String, Item>> = OnceLock::new();
 
@@ -39,8 +39,14 @@ pub struct Item {
 #[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum ItemCat {
     Equipment {
+        /// The category of equipment this item belongs to (weapon, armor, accessory)
         category: EquipmentCat,
+
+        /// Stat offsets that the item applies when equipped
         offsets: InherentStats,
+
+        /// Only characters in this list can equip this
+        equippable_by: Vec<PChar>,
     },
     AmmoBox {
         category: AmmoCat,
@@ -72,8 +78,12 @@ pub enum AmmoCat {
 }
 
 impl Item {
-    pub fn is_equipment(&self) -> bool {
-        matches!(self.category, ItemCat::Equipment { .. })
+    pub fn from_registry(id: &str) -> &Item {
+        unwrap_fmt!(
+            ITEM_REGISTRY.get().unwrap().get(id),
+            "Item ID not found: {}",
+            id
+        )
     }
 }
 
@@ -84,11 +94,6 @@ pub enum ItemAttribute {
     Cheap,
 
     Melee,
-    Blade,
-
     Ranged,
-    Firearm,
-
     Explosive,
-    Grenade,
 }

@@ -30,7 +30,7 @@ pub fn fade_black<N>(black: &Gd<N>, visible: bool, tween_time: f64)
 where
     N: GodotClass + Inherits<ColorRect>,
 {
-    fade_black_f64(&black, visible as u8 as f64, tween_time)
+    fade_black_f64(black, visible as u8 as f64, tween_time)
 }
 
 pub fn fade_black_f64<N>(black: &Gd<N>, visible: f64, tween_time: f64)
@@ -130,7 +130,7 @@ pub fn si() -> Gd<StatsInterface> {
 }
 
 #[derive(Deref, DerefMut)]
-/// Wrapper around Gd<T> so I can implement external traits on godot stuff
+/// Wrapper around `Gd<T>` so I can implement external traits on godot stuff
 pub struct GdW<T: GodotClass>(pub Gd<T>);
 
 /// takes a bbcode string and prepends or removes it from the label text

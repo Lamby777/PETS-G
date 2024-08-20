@@ -47,7 +47,7 @@ impl AttackSkill {
             panic!("power should be `Some(1..=5)` or `None`");
         }
 
-        let adjective = tr(&format!("SKILL_ATTACK_POWER_{}", self.power?));
+        let adjective = tr(format!("SKILL_ATTACK_POWER_{}", self.power?));
 
         Some(tr_replace! {
             "SKILL_ATTACK_POWER_DESCRIBE";
@@ -109,10 +109,10 @@ impl Skill for AttackSkill {
 
     fn cast(
         &self,
-        caster: Rc<RefCell<dyn Battler>>,
-        target: Rc<RefCell<dyn Battler>>,
-        _allies: Vec<Rc<RefCell<dyn Battler>>>,
-        _enemies: Vec<Rc<RefCell<dyn Battler>>>,
+        caster: Rc<RefCell<Battler>>,
+        target: Rc<RefCell<Battler>>,
+        _allies: Vec<Rc<RefCell<Battler>>>,
+        _enemies: Vec<Rc<RefCell<Battler>>>,
     ) {
         let caster = RefCell::borrow(&caster);
         let mut target = RefCell::borrow_mut(&target);
@@ -128,6 +128,8 @@ impl Skill for AttackSkill {
                 power
             );
             target.take_damage(damage);
+
+            godot_print!("Target HP after damage: {}", target.battle_stats.hp);
         }
 
         if let Some(effect) = &self.status_effect {

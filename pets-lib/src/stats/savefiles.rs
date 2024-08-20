@@ -39,7 +39,7 @@ impl SaveFile {
             inventory: Rc::new(RefCell::new(Inventory::new())),
             scrapbook: Scrapbook::empty(),
             quests: HashMap::new(),
-            date: NaiveDate::from_ymd_opt(2037, 09, 01).unwrap(),
+            date: NaiveDate::from_ymd_opt(2037, 9, 1).unwrap(),
             bed_color: "red".to_string(),
         }
     }
@@ -48,7 +48,7 @@ impl SaveFile {
         let new_save = Self::fresh();
         new_save.write_to(save_slot);
 
-        return Ok(new_save);
+        Ok(new_save)
         // SKIP THIS SHIT FOR DEBUG PURPOSES
 
         // let path = save_path(save_slot);
