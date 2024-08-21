@@ -14,11 +14,31 @@ use super::BATTLE_PARTY_SIZE;
 
 /// The player will stop being controlled once it reaches this
 /// distance from the cutscene target.
-const CUTSCENE_MOTION_CLOSE_ENOUGH: f32 = 10.0;
+pub const CUTSCENE_MOTION_CLOSE_ENOUGH: f32 = 10.0;
 
-struct Inputs {
+pub struct Inputs {
     pub input_vector: Vector2,
     pub sprinting: bool,
+}
+
+impl Inputs {
+    /// Get the pair of -1, 0, or 1 required to get from one
+    /// point to another.
+    pub fn iv_from_to(from: Vector2, to: Vector2) -> Vector2 {
+        let diff = to - from;
+        let x = match diff.x.partial_cmp(&0.0).unwrap() {
+            Ordering::Less => -1.0,
+            Ordering::Equal => 0.0,
+            Ordering::Greater => 1.0,
+        };
+        let y = match diff.y.partial_cmp(&0.0).unwrap() {
+            Ordering::Less => -1.0,
+            Ordering::Equal => 0.0,
+            Ordering::Greater => 1.0,
+        };
+
+        Vector2::new(x, y)
+    }
 }
 
 impl Inputs {
@@ -281,25 +301,9 @@ impl ICharacterBody2D for PartyCB {
             let inputs = Inputs::from_player_input();
             moving = self.calc_movements(inputs, delta);
         } else if let Some(target) = self.cutscene_motion {
-            // TODO separate function
             let own_pos = self.base().get_global_position();
-            let cmp_x = target.x.partial_cmp(&own_pos.x).unwrap();
-            let cmp_y = target.y.partial_cmp(&own_pos.y).unwrap();
+            let input_vector = Inputs::iv_from_to(own_pos, target);
 
-            use Ordering::*;
-            let iv_x = match cmp_x {
-                Less => Vector2::LEFT,
-                Greater => Vector2::RIGHT,
-                Equal => Vector2::ZERO,
-            };
-
-            let iv_y = match cmp_y {
-                Less => Vector2::UP,
-                Greater => Vector2::DOWN,
-                Equal => Vector2::ZERO,
-            };
-
-            let input_vector = iv_x + iv_y;
             moving = self.calc_movements(
                 Inputs {
                     input_vector,

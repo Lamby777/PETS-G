@@ -29,6 +29,10 @@ pub struct PCharNode {
 
     #[init(val = OnReady::manual())]
     anim_state: OnReady<Gd<AnimationNodeStateMachinePlayback>>,
+
+    /// if the player is currently being controlled by a script,
+    /// this is the location the player is being moved to
+    pub cutscene_motion: Option<Vector2>,
 }
 
 #[godot_api]
@@ -46,16 +50,18 @@ impl PCharNode {
     }
 
     fn anim_mode_str(&self, moving: bool) -> &'static str {
-        let overlapping_areas = self.area.get_overlapping_areas();
-        let overlaps_water = overlapping_areas
-            .iter_shared()
-            .any(|area| area.is_in_group("water".into()));
-
         match moving {
-            _ if overlaps_water => "Wade",
+            _ if self.overlapping_water() => "Wade",
             true => "Run",
             false => "Idle",
         }
+    }
+
+    fn overlapping_water(&self) -> bool {
+        let overlapping_areas = self.area.get_overlapping_areas();
+        overlapping_areas
+            .iter_shared()
+            .any(|area| area.is_in_group("water".into()))
     }
 }
 
@@ -66,4 +72,8 @@ impl INode2D for PCharNode {
         let anim_state = self.anim_tree.get("parameters/playback".into()).to();
         self.anim_state.init(anim_state);
     }
+
+    // fn physics_process(&mut self, delta: f64) {
+    //     if let Some(target) = self.cutscene_motion {}
+    // }
 }
