@@ -5,6 +5,9 @@ use godot::classes::{
 use godot::prelude::*;
 
 use crate::common::*;
+use crate::consts::partycb::MAX_SPEED;
+
+use super::partycb::{Inputs, CUTSCENE_MOTION_CLOSE_ENOUGH};
 
 #[derive(GodotClass)]
 #[class(init, base=Node2D)]
@@ -30,13 +33,14 @@ pub struct PCharNode {
     #[init(val = OnReady::manual())]
     anim_state: OnReady<Gd<AnimationNodeStateMachinePlayback>>,
 
-    /// if the player is currently being controlled by a script,
-    /// this is the location the player is being moved to
     pub cutscene_motion: Option<Vector2>,
 }
 
 #[godot_api]
 impl PCharNode {
+    #[signal]
+    fn motion_done(&self);
+
     #[func]
     pub fn anim_move(&mut self, moving: bool, inputs: Vector2) {
         // change the animationtree state machine to the correct mode
@@ -63,6 +67,19 @@ impl PCharNode {
             .iter_shared()
             .any(|area| area.is_in_group("water".into()))
     }
+
+    #[func]
+    pub fn move_to_absolute(&mut self, x: real, y: real) {
+        self.cutscene_motion = Some(Vector2::new(x, y));
+    }
+
+    #[func]
+    pub fn move_to_relative(&mut self, x: real, y: real) {
+        let end = Vector2::new(x, y);
+        let start = self.base().get_global_position();
+        let total = start + end;
+        self.cutscene_motion = Some(total);
+    }
 }
 
 #[godot_api]
@@ -73,7 +90,22 @@ impl INode2D for PCharNode {
         self.anim_state.init(anim_state);
     }
 
-    // fn physics_process(&mut self, delta: f64) {
-    //     if let Some(target) = self.cutscene_motion {}
-    // }
+    fn physics_process(&mut self, delta: f64) {
+        if let Some(target) = self.cutscene_motion {
+            let own_pos = self.base().get_global_position();
+            let input_vector = Inputs::iv_from_to(own_pos, target);
+
+            self.base_mut().set_global_position(
+                own_pos + input_vector * MAX_SPEED * delta as real,
+            );
+
+            self.anim_move(true, input_vector);
+
+            if (target - own_pos).length() < CUTSCENE_MOTION_CLOSE_ENOUGH {
+                self.cutscene_motion = None;
+                self.base_mut().emit_signal("motion_done".into(), &[]);
+                self.base_mut().set_global_position(target);
+            }
+        }
+    }
 }
