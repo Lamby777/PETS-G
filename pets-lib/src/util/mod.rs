@@ -35,20 +35,6 @@ pub fn month_string_3letter(month: u32) -> &'static str {
     }
 }
 
-// this is a macro so we can easily expand it and delete the definition
-// when `gdext` adds new methods for allowing zero vectors
-pub use crate::normalized;
-#[macro_export]
-macro_rules! normalized {
-    ($vector:expr) => {{
-        if $vector == Vector2::ZERO {
-            Vector2::ZERO
-        } else {
-            Vector2::normalized($vector)
-        }
-    }};
-}
-
 pub fn tr(text: impl Into<StringName>) -> GString {
     Engine::singleton().tr(text.into())
 }

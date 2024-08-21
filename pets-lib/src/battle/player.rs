@@ -89,7 +89,7 @@ impl BattleIcon {
         self.velocity += self.acceleration * input_vector;
 
         if self.velocity.length() > self.speed {
-            self.velocity = normalized!(self.velocity) * self.speed;
+            self.velocity = (self.velocity).normalized_or_zero() * self.speed;
         }
 
         let change = self.velocity * real::from_f64(delta);

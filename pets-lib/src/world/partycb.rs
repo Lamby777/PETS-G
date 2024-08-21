@@ -24,12 +24,13 @@ struct Inputs {
 impl Inputs {
     pub fn from_player_input() -> Self {
         let input = Input::singleton();
-        let input_vector = normalized!(input.get_vector(
+        let input_vector = (input.get_vector(
             "left".into(),
             "right".into(),
             "up".into(),
             "down".into(),
-        ));
+        ))
+        .normalized_or_zero();
 
         let sprinting = input.is_action_pressed("sprint".into());
         Inputs {

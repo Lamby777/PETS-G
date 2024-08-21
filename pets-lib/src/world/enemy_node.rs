@@ -84,7 +84,7 @@ impl WalkingEnemy {
         let pcb_pos = pcb().get_position();
         let own_pos = base.get_position();
 
-        let target_pos = normalized!(pcb_pos - own_pos);
+        let target_pos = (pcb_pos - own_pos).normalized_or_zero();
         if own_pos.distance_to(pcb_pos) < 10.0 {
             return;
         }
