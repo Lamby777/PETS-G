@@ -43,17 +43,16 @@ impl Inputs {
 /// This scene contains the "player" aka the invisible entity that is
 /// moved around with WASD. It also contains party members as scenes,
 /// and this script does stuff like running animations on those nodes too.
-///
-/// This class is not a singleton; many can exist at once. Only one should
-/// be controllable by the player. The rest are NPC-controlled.
 #[derive(GodotClass)]
 #[class(init, base=CharacterBody2D)]
 pub struct PartyCB {
     base: Base<CharacterBody2D>,
 
+    /// Whether or this PCB will apply its movements to all party members' nodes
+    /// using `past_positions` and `past_rotations`.
     #[export]
     #[init(val = true)]
-    pub is_npc: bool,
+    pub controls_pchar_nodes: bool,
 
     /// Each party member's scene node
     #[var]
@@ -151,16 +150,17 @@ impl PartyCB {
 
     /// Set character positions based on past pos/rot
     pub fn move_chars(&mut self, moving: bool) {
-        if self.past_positions.len() == 0 {
+        // don't run if disabled or if no previous positions saved
+        if !self.controls_pchar_nodes || self.past_positions.len() == 0 {
             return;
         }
 
-        for (i, mut ch) in self.party.iter_shared().enumerate() {
-            // index of past data limqs
+        for (i, mut ch_node) in self.party.iter_shared().enumerate() {
+            // index of past data to get from the `LimiQ`s
             let nth = i * PERSONAL_SPACE;
-            ch.set_global_position(*self.past_positions.get_or_last(nth));
+            ch_node.set_global_position(*self.past_positions.get_or_last(nth));
 
-            let mut ch = ch.bind_mut();
+            let mut ch = ch_node.bind_mut();
             ch.anim_move(moving, *self.past_rotations.get_or_last(nth));
         }
     }
@@ -277,7 +277,7 @@ impl ICharacterBody2D for PartyCB {
     fn physics_process(&mut self, delta: f64) {
         let mut moving = false;
 
-        if self.can_move() && !self.is_npc {
+        if self.can_move() {
             let inputs = Inputs::from_player_input();
             moving = self.calc_movements(inputs, delta);
         } else if let Some(target) = self.cutscene_motion {
@@ -313,9 +313,6 @@ impl ICharacterBody2D for PartyCB {
                 self.base_mut().emit_signal("motion_done".into(), &[]);
                 self.base_mut().set_global_position(target);
             }
-
-            self.move_chars(moving);
-            return;
         }
 
         self.move_chars(moving);

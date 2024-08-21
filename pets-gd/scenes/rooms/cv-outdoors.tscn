@@ -219,18 +219,14 @@ prompt_translation_key = "CHECK"
 position = Vector2(0, 8)
 scale = Vector2(1.02, 0.5)
 
-[node name="PartyCB" type="PartyCB" parent="." index="11"]
-y_sort_enabled = true
-
-[node name="Lyembo" parent="PartyCB" index="0" instance=ExtResource("13_2on2m")]
+[node name="Lyembo" parent="." index="11" instance=ExtResource("13_2on2m")]
 position = Vector2(-264, -536)
 
-[node name="CollisionPolygon2D" type="CollisionShape2D" parent="PartyCB" index="1"]
-position = Vector2(-264, -504)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_dljt4")
-
-[node name="InteractionZone" parent="PartyCB" index="2" instance=ExtResource("4_vwc65")]
+[node name="InteractionZone" parent="Lyembo" index="4" instance=ExtResource("4_vwc65")]
 interaction_script = ExtResource("15_ndq3e")
 prompt_translation_key = "TALK"
-position = Vector2(-264, -536)
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Lyembo/InteractionZone" index="1"]
+position = Vector2(0, 32)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_dljt4")
