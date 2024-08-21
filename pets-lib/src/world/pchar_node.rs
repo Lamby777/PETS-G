@@ -92,6 +92,8 @@ impl INode2D for PCharNode {
 
     fn physics_process(&mut self, delta: f64) {
         if let Some(target) = self.cutscene_motion {
+            let mut moving;
+
             let own_pos = self.base().get_global_position();
             let input_vector = Inputs::iv_from_to(own_pos, target);
 
@@ -99,13 +101,16 @@ impl INode2D for PCharNode {
                 own_pos + input_vector * MAX_SPEED * delta as real,
             );
 
-            self.anim_move(true, input_vector);
+            moving = true;
 
             if (target - own_pos).length() < CUTSCENE_MOTION_CLOSE_ENOUGH {
                 self.cutscene_motion = None;
                 self.base_mut().emit_signal("motion_done".into(), &[]);
                 self.base_mut().set_global_position(target);
+                moving = false;
             }
+
+            self.anim_move(moving, input_vector);
         }
     }
 }
