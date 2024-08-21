@@ -77,31 +77,23 @@ impl WalkingEnemy {
         self.distance_to_player() < self.sight_range
     }
 
-    /// Returns the positions of the enemy and the player
-    fn self_pos_pcb_pos(&self) -> ((real, real), (real, real)) {
-        let pcb_pos = pcb().get_global_position();
-        let self_pos = self.base().get_global_position();
-        (self_pos.to_tuple(), pcb_pos.to_tuple())
-    }
-
     pub fn walk_towards_player(&mut self, _delta: f64) {
         let spd = self.max_speed;
-        {
-            let mut base = self.base_mut();
 
-            let pcb_pos = pcb().get_position();
-            let own_pos = base.get_position();
+        let mut base = self.base_mut();
+        let pcb_pos = pcb().get_position();
+        let own_pos = base.get_position();
 
-            let target_pos = normalized!(pcb_pos - own_pos);
-            if own_pos.distance_to(pcb_pos) < 10.0 {
-                return;
-            }
-
-            base.set_velocity(target_pos * spd);
-            base.move_and_slide();
-
-            base.look_at(pcb_pos);
+        let target_pos = normalized!(pcb_pos - own_pos);
+        if own_pos.distance_to(pcb_pos) < 10.0 {
+            return;
         }
+
+        base.set_velocity(target_pos * spd);
+        base.move_and_slide();
+
+        base.look_at(pcb_pos);
+        drop(base); // drop the bass! 🤘
 
         self.sprite.set_global_rotation(0.0);
     }
@@ -145,11 +137,12 @@ impl ICharacterBody2D for WalkingEnemy {
                 backwards: false,
             });
         } else {
-            let ((own_x, own_y), (pcb_x, pcb_y)) = self.self_pos_pcb_pos();
+            let pcb_xy = pcb().get_global_position();
+            let own_xy = self.base().get_global_position();
 
             // flipped if player is to the right of the enemy
-            let flipped = pcb_x > own_x;
-            let backwards = pcb_y < own_y;
+            let flipped = pcb_xy.x > own_xy.x;
+            let backwards = pcb_xy.y < own_xy.y;
 
             self.anim_move(AnimOptions {
                 moving: true,
