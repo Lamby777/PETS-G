@@ -71,8 +71,8 @@ pub struct PartyCB {
     /// Whether or this PCB will apply its movements to all party members' nodes
     /// using `past_positions` and `past_rotations`.
     #[export]
-    #[init(val = true)]
-    pub controls_pchar_nodes: bool,
+    #[init(val = false)]
+    pub in_cutscene: bool,
 
     /// Each party member's scene node
     #[var]
@@ -90,12 +90,10 @@ pub struct PartyCB {
     pub tpbeacon_debounce: bool,
     pub in_water: bool,
 
-    /// if the player is currently being controlled by a script,
-    /// this is the location the player is being moved to
-    pub cutscene_motion: Option<Vector2>,
-
     #[init(val = 1.0)]
     pub water_speed_mod: real,
+
+    pub cutscene_motion: Option<Vector2>,
 }
 
 #[godot_api]
@@ -103,13 +101,13 @@ impl PartyCB {
     #[signal]
     fn teleported(&self, target: Gd<Node2D>);
 
+    #[signal]
+    fn motion_done(&self);
+
     #[func]
     pub fn singleton() -> Gd<Self> {
         World::singleton().get_node_as("%PartyCB")
     }
-
-    #[signal]
-    fn motion_done(&self);
 
     #[func]
     pub fn move_to_absolute(&mut self, x: real, y: real) {
@@ -159,7 +157,8 @@ impl PartyCB {
             || InventoryNode::singleton().bind().is_open()
             || self.is_in_battle()
             || self.tpbeacon_debounce
-            || self.cutscene_motion.is_some();
+            || self.cutscene_motion.is_some()
+            || self.in_cutscene;
 
         !cant_move
     }
@@ -171,7 +170,7 @@ impl PartyCB {
     /// Set character positions based on past pos/rot
     pub fn move_chars(&mut self, moving: bool) {
         // don't run if disabled or if no previous positions saved
-        if !self.controls_pchar_nodes || self.past_positions.len() == 0 {
+        if self.in_cutscene || self.past_positions.len() == 0 {
             return;
         }
 
