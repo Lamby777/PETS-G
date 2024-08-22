@@ -81,20 +81,6 @@ a warning anyway.
 
 ---
 
-## GLUE Server Locations
-
-1. Goober Labs (Hidden room that Leo found)
-2. Corr Valley (Empress Neoxylin's Office)
-3. Melpine Town (Police Station)
-4. Constchar (Resultin Moshkelsaz's Office)
-5. Constchar Outskirts (Power Plant)
-6. Pirate Bay (Pirate Cabal Hideout)
-7.
-8.
-9.
-
----
-
 ## Plot Points
 
 ---
@@ -207,3 +193,44 @@ a warning anyway.
 - The papers seem very confusing and mention something about a "Final Equation". Leo takes a picture of the papers.
 - In the front of the room is a locker with a keypad. Leo easily cracks the code, and finds a server rack with a monitor showing 9 live connections to GLUE servers around the world. One must have physical access to 5 of the 9 servers to overthrow the GLUE AI training system. Leo writes down the server locations.
 - Leo takes the picture and the server locations back to the team, and they all agree that this is very suspicious.
+
+#### GLUE Server Locations
+
+Main Server: Melpine Heights - Goober Labs (Hidden room that Leo found)
+
+1. Corr Valley (Empress Neoxylin's Office)
+2. Melpine Town (Suspicious Building)
+3. Pirate Bay (Pirate Cabal Hideout)
+4. Constchar Outskirts (Power Plant)
+5. Constchar (Resultin Moshkelsaz's Office)
+6.
+7.
+8.
+9.
+
+---
+
+### Corr Valley GLUE Server
+
+- Not knowing what the servers are for, they decide to check out the most convenient one first: Neoxylin's office.
+- Neoxylin is happy to see them, and they ask if they can check out the server. She agrees, and they go to the server room.
+- There are lots of servers in the room being rented out as a way to make money for the city. The team finds the GLUE server, and Leo plugs in his laptop.
+- The server is suspiciously well-protected, but Leo uses a side-channel attack to learn what's going on.
+  - It seems to be a validator node that verifies the training data for the GLUE AI has been properly approved by admins first.
+- Leo finds a backdoor, but decides not to take over the server to avoid alerting Goober Labs.
+- They thank Neoxylin for letting them check out the server, and head back to the studio.
+- They decide to check out the other servers next, and Leo points out that one of the servers is somewhere right in Melpine.
+
+---
+
+### Melpine GLUE Server
+
+- The Naturals split up to all search their own suspected locations, but ultimately P/E/T/S find the suspicious building.
+  - It looks abandoned, and it's near the edge of town.
+- The Naturals all return empty-handed, so they resort to their last lead: the suspicious building.
+- They break in, and look through the house. It's eerie, as if it was abandoned a long time ago.
+- They find a "basement" door which leads into another huge maze. The door locks itself behind them as they go in.
+
+---
+
+// TODO the rest of the story
