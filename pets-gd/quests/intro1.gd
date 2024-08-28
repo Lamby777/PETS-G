@@ -68,8 +68,16 @@ func on_outdoors_tp(target):
     if target.name == "EthanHouseEntrance" and phase == 2:
         self.phase = 3
         await dbox().say_as("[CLAY]", [ "DG_INTRO1_MEET_NEIGHBORS" ]);
-        pcb().move_to_relative(-200.0, 0.0)
+
+        pcb().move_to_relative(-100.0, 100.0)
         await pcb().motion_done
+
+        # wait x seconds
+        await get_tree().create_timer(2).timeout 
+
+        pcb().move_to_relative(-100.0, 0.0)
+        await pcb().motion_done
+
         await dbox().say_as("[CLAY]", [ "DG_INTRO1_MR_T" ]);
         await dbox().say_as("[MR_TULIVAE]", [ "DG_INTRO1_HI_THERE" ]);
         await dbox().say_as("[NARRATOR]", [ "DG_INTRO1_HE_SEEMS_NICE" ]);

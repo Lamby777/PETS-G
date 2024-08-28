@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://p2uymvf88jt7"]
+[gd_scene load_steps=19 format=3 uid="uid://p2uymvf88jt7"]
 
 [ext_resource type="PackedScene" uid="uid://kgl5788x405y" path="res://scenes/battle.tscn" id="1_37bcu"]
 [ext_resource type="PackedScene" uid="uid://c8hhg8v5ls70u" path="res://scenes/world_menu.tscn" id="2_6orff"]
@@ -86,6 +86,12 @@ shader_parameter/rand_mod = Vector2(1, 1)
 shader = ExtResource("2_6uro0")
 shader_parameter/opacity = 0.0
 
+[sub_resource type="Curve2D" id="Curve2D_f5v2n"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 440, -848, 0, 0, 0, 0, 440, -760, 0, 0, 0, 0, 336, -656, 0, 0, 0, 0, 264, -728, 0, 0, 0, 0, 192, -656, 0, 0, 0, 0, 128, -720, 0, 0, 0, 0, 64, -656)
+}
+point_count = 7
+
 [node name="Overworld" type="World"]
 battle_scene = ExtResource("1_37bcu")
 
@@ -152,3 +158,6 @@ process_mode = 4
 [node name="Intro1" type="Quest" parent="Quests"]
 process_mode = 3
 script = ExtResource("13_w40m0")
+
+[node name="PorchWalk" type="Path2D" parent="Quests/Intro1"]
+curve = SubResource("Curve2D_f5v2n")
