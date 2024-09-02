@@ -168,7 +168,7 @@ impl PartyCB {
     }
 
     /// Set character positions based on past pos/rot
-    pub fn move_chars(&mut self, moving: bool) {
+    pub fn move_chars(&mut self) {
         // don't run if disabled or if no previous positions saved
         if self.in_cutscene || self.past_positions.len() == 0 {
             return;
@@ -180,7 +180,7 @@ impl PartyCB {
             ch_node.set_global_position(*self.past_positions.get_or_last(nth));
 
             let mut ch = ch_node.bind_mut();
-            ch.anim_move(moving, *self.past_rotations.get_or_last(nth));
+            ch.anim_move(*self.past_rotations.get_or_last(nth));
         }
     }
 
@@ -198,7 +198,7 @@ impl PartyCB {
         self.past_positions.push(pos);
         self.past_rotations.push(rot.unwrap_or(self.last_rot()));
 
-        self.move_chars(false);
+        self.move_chars();
         self.base_mut().set_global_position(pos);
     }
 
@@ -294,16 +294,16 @@ impl PartyCB {
 #[godot_api]
 impl ICharacterBody2D for PartyCB {
     fn physics_process(&mut self, delta: f64) {
-        let mut moving = false;
+        let mut _moving = false;
 
         if self.can_move() {
             let inputs = Inputs::from_player_input();
-            moving = self.calc_movements(inputs, delta);
+            _moving = self.calc_movements(inputs, delta);
         } else if let Some(target) = self.cutscene_motion {
             let own_pos = self.base().get_global_position();
             let input_vector = Inputs::iv_from_to(own_pos, target);
 
-            moving = self.calc_movements(
+            _moving = self.calc_movements(
                 Inputs {
                     input_vector,
                     sprinting: false, // TODO
@@ -318,6 +318,6 @@ impl ICharacterBody2D for PartyCB {
             }
         }
 
-        self.move_chars(moving);
+        self.move_chars();
     }
 }
