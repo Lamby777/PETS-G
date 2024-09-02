@@ -12,10 +12,6 @@ use super::inv_node::InventoryNode;
 use super::pchar_node::PCharNode;
 use super::BATTLE_PARTY_SIZE;
 
-/// The player will stop being controlled once it reaches this
-/// distance from the cutscene target.
-pub const CUTSCENE_MOTION_CLOSE_ENOUGH: f32 = 10.0;
-
 pub struct Inputs {
     pub input_vector: Vector2,
     pub sprinting: bool,
@@ -24,7 +20,7 @@ pub struct Inputs {
 impl Inputs {
     /// Get the pair of -1, 0, or 1 required to get from one
     /// point to another.
-    pub fn iv_from_to(from: Vector2, to: Vector2) -> Vector2 {
+    pub fn _iv_from_to(from: Vector2, to: Vector2) -> Vector2 {
         let diff = to - from;
         let x = match diff.x.partial_cmp(&0.0).unwrap() {
             Ordering::Less => -1.0,
@@ -92,8 +88,6 @@ pub struct PartyCB {
 
     #[init(val = 1.0)]
     pub water_speed_mod: real,
-
-    pub cutscene_motion: Option<Vector2>,
 }
 
 #[godot_api]
@@ -107,20 +101,6 @@ impl PartyCB {
     #[func]
     pub fn singleton() -> Gd<Self> {
         World::singleton().get_node_as("%PartyCB")
-    }
-
-    #[func]
-    pub fn move_to_absolute(&mut self, x: real, y: real) {
-        let end = Vector2::new(x, y);
-        self.cutscene_motion = Some(end);
-    }
-
-    #[func]
-    pub fn move_to_relative(&mut self, x: real, y: real) {
-        let end = Vector2::new(x, y);
-        let start = self.base().get_global_position();
-        let total = start + end;
-        self.cutscene_motion = Some(total);
     }
 
     pub fn party_pchars(&self) -> Vec<PChar> {
@@ -157,7 +137,6 @@ impl PartyCB {
             || InventoryNode::singleton().bind().is_open()
             || self.is_in_battle()
             || self.tpbeacon_debounce
-            || self.cutscene_motion.is_some()
             || self.in_cutscene;
 
         !cant_move
@@ -297,23 +276,6 @@ impl ICharacterBody2D for PartyCB {
         if self.can_move() {
             let inputs = Inputs::from_player_input();
             self.calc_movements(inputs, delta);
-        } else if let Some(target) = self.cutscene_motion {
-            let own_pos = self.base().get_global_position();
-            let input_vector = Inputs::iv_from_to(own_pos, target);
-
-            self.calc_movements(
-                Inputs {
-                    input_vector,
-                    sprinting: false, // TODO
-                },
-                delta,
-            );
-
-            if (target - own_pos).length() < CUTSCENE_MOTION_CLOSE_ENOUGH {
-                self.cutscene_motion = None;
-                self.base_mut().emit_signal("motion_done".into(), &[]);
-                self.base_mut().set_global_position(target);
-            }
         }
 
         self.move_chars();
