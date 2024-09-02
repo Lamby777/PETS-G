@@ -20,7 +20,7 @@ pub struct Inputs {
 impl Inputs {
     /// Get the pair of -1, 0, or 1 required to get from one
     /// point to another.
-    pub fn _iv_from_to(from: Vector2, to: Vector2) -> Vector2 {
+    pub fn iv_from_to(from: Vector2, to: Vector2) -> Vector2 {
         let diff = to - from;
         let x = match diff.x.partial_cmp(&0.0).unwrap() {
             Ordering::Less => -1.0,
@@ -76,9 +76,6 @@ pub struct PartyCB {
 
     #[init(val = LimiQ::new(2000))]
     past_positions: LimiQ<Vector2>,
-
-    #[init(val = LimiQ::new(2000))]
-    past_rotations: LimiQ<Vector2>,
 
     /// The enemies that are currently in battle with you
     pub battling: Vec<Rc<RefCell<EnemyData>>>,
@@ -159,23 +156,21 @@ impl PartyCB {
             ch_node.set_global_position(*self.past_positions.get_or_last(nth));
 
             let mut ch = ch_node.bind_mut();
-            ch.anim_move(*self.past_rotations.get_or_last(nth));
+            ch.anim_move();
         }
     }
 
     pub fn teleport(
         &mut self,
         pos: Vector2,
-        rot: Option<Vector2>,
+        _rot: Option<Vector2>, // TODO
         clear_past: bool,
     ) {
         if clear_past {
             self.past_positions.clear();
-            self.past_rotations.clear();
         }
 
         self.past_positions.push(pos);
-        self.past_rotations.push(rot.unwrap_or(self.last_rot()));
 
         self.move_chars();
         self.base_mut().set_global_position(pos);
@@ -213,23 +208,9 @@ impl PartyCB {
 
         if pos_updated {
             self.past_positions.push(self.base().get_global_position());
-
-            // don't push new input vector if slowing down
-            self.past_rotations.push(if moving {
-                input_vector
-            } else {
-                self.last_rot()
-            })
         }
 
         moving
-    }
-
-    fn last_rot(&self) -> Vector2 {
-        self.past_rotations
-            .front()
-            .cloned()
-            .unwrap_or(Vector2::ZERO)
     }
 
     pub fn good_guys_battlers(&self) -> Vec<Rc<RefCell<Battler>>> {

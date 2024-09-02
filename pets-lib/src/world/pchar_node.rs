@@ -1,10 +1,11 @@
+use godot::builtin::math::ApproxEq;
 use godot::classes::{
     AnimationNodeStateMachinePlayback, AnimationPlayer, AnimationTree, Area2D,
     Sprite2D,
 };
 use godot::prelude::*;
 
-// use super::partycb::Inputs;
+use super::partycb::Inputs;
 use crate::common::*;
 
 #[derive(GodotClass)]
@@ -40,9 +41,10 @@ impl PCharNode {
     fn motion_done(&self);
 
     #[func]
-    pub fn anim_move(&mut self, inputs: Vector2) {
+    pub fn anim_move(&mut self) {
         let cur_pos = self.base().get_global_position();
         let moving = self.last_position != cur_pos;
+        let inputs = Inputs::iv_from_to(self.last_position, cur_pos);
         self.last_position = cur_pos;
 
         // change the animationtree state machine to the correct mode
@@ -50,9 +52,17 @@ impl PCharNode {
         self.anim_state.travel(mode_str.into());
 
         // set the blend position
-        let blend_pos_field = format!("parameters/{mode_str}/blend_position");
-        self.anim_tree
-            .set(blend_pos_field.into(), Variant::from(inputs));
+        if !inputs.approx_eq(&Vector2::ZERO) {
+            self.set_blend_positions(inputs);
+        }
+    }
+
+    fn set_blend_positions(&mut self, inputs: Vector2) {
+        for mode in &["Idle", "Run", "Wade"] {
+            let blend_pos_field = format!("parameters/{mode}/blend_position");
+            self.anim_tree
+                .set(blend_pos_field.into(), Variant::from(inputs));
+        }
     }
 
     fn anim_mode_str(&self, moving: bool) -> &'static str {

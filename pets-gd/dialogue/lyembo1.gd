@@ -8,5 +8,5 @@ func _start() -> void:
     ])
 
     var lyembo = get_parent().get_parent()
-    lyembo.move_to_relative(-100.0, 0.0)
-    await lyembo.motion_done
+    #lyembo.move_to_relative(-100.0, 0.0)
+    #await lyembo.motion_done

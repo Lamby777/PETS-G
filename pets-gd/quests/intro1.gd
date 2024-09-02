@@ -11,8 +11,9 @@ func _ready():
     # pcb().party[0].move_to_relative(0.0, -200.0)
     # await pcb().party[0].motion_done
     # pcb().in_cutscene = false
-    pcb().move_to_relative(0.0, -200.0)
-    await pcb().motion_done
+
+    # pcb().move_to_relative(0.0, -200.0)
+    # await pcb().motion_done
     
     await dbox().say_as("[JUNIPER]", ["DG_INTRO1_COMEUNPACK"])
     
