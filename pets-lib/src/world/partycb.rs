@@ -294,16 +294,14 @@ impl PartyCB {
 #[godot_api]
 impl ICharacterBody2D for PartyCB {
     fn physics_process(&mut self, delta: f64) {
-        let mut _moving = false;
-
         if self.can_move() {
             let inputs = Inputs::from_player_input();
-            _moving = self.calc_movements(inputs, delta);
+            self.calc_movements(inputs, delta);
         } else if let Some(target) = self.cutscene_motion {
             let own_pos = self.base().get_global_position();
             let input_vector = Inputs::iv_from_to(own_pos, target);
 
-            _moving = self.calc_movements(
+            self.calc_movements(
                 Inputs {
                     input_vector,
                     sprinting: false, // TODO
