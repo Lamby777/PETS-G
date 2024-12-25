@@ -102,7 +102,7 @@ impl PartyCB {
     fn teleported(&self, target: Gd<Node2D>);
 
     #[signal]
-    fn motion_done(&self);
+    fn pcb_motion_done(&self);
 
     #[func]
     pub fn singleton() -> Gd<Self> {
@@ -313,7 +313,7 @@ impl ICharacterBody2D for PartyCB {
 
             if (target - own_pos).length() < CUTSCENE_MOTION_CLOSE_ENOUGH {
                 self.cutscene_motion = None;
-                self.base_mut().emit_signal("motion_done".into(), &[]);
+                self.base_mut().emit_signal("pcb_motion_done".into(), &[]);
                 self.base_mut().set_global_position(target);
             }
         }

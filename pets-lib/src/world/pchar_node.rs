@@ -39,7 +39,7 @@ pub struct PCharNode {
 #[godot_api]
 impl PCharNode {
     #[signal]
-    fn motion_done(&self);
+    fn pchar_motion_done(&self);
 
     #[func]
     pub fn anim_move(&mut self, moving: bool, inputs: Vector2) {
@@ -105,7 +105,7 @@ impl INode2D for PCharNode {
 
             if (target - own_pos).length() < CUTSCENE_MOTION_CLOSE_ENOUGH {
                 self.cutscene_motion = None;
-                self.base_mut().emit_signal("motion_done".into(), &[]);
+                self.base_mut().emit_signal("pchar_motion_done".into(), &[]);
                 self.base_mut().set_global_position(target);
                 moving = false;
             }

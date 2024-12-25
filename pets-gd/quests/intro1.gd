@@ -9,10 +9,10 @@ func _ready():
 
     # pcb().in_cutscene = true
     # pcb().party[0].move_to_relative(0.0, -200.0)
-    # await pcb().party[0].motion_done
+    # await pcb().party[0].pchar_motion_done
     # pcb().in_cutscene = false
     pcb().move_to_relative(0.0, -200.0)
-    await pcb().motion_done
+    await pcb().pcb_motion_done
     
     await dbox().say_as("[JUNIPER]", ["DG_INTRO1_COMEUNPACK"])
     
@@ -69,7 +69,7 @@ func on_outdoors_tp(target):
         self.phase = 3
         await dbox().say_as("[CLAY]", [ "DG_INTRO1_MEET_NEIGHBORS" ]);
         pcb().move_to_relative(-200.0, 0.0)
-        await pcb().motion_done
+        await pcb().pcb_motion_done
         await dbox().say_as("[CLAY]", [ "DG_INTRO1_MR_T" ]);
         await dbox().say_as("[MR_TULIVAE]", [ "DG_INTRO1_HI_THERE" ]);
         await dbox().say_as("[NARRATOR]", [ "DG_INTRO1_HE_SEEMS_NICE" ]);
