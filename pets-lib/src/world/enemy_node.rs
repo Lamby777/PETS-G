@@ -60,7 +60,7 @@ impl WalkingEnemy {
         let dir_str = ""; // if opts.backwards { "Back" } else { "" };
 
         let anim_name = format!("{}-{}{}", self.enemy_id, mode_str, dir_str);
-        self.sprite.set_animation(anim_name.into());
+        self.sprite.set_animation(&anim_name);
         self.sprite.play();
 
         if let Some(v) = opts.flipped {
@@ -115,7 +115,7 @@ impl WalkingEnemy {
 impl ICharacterBody2D for WalkingEnemy {
     fn ready(&mut self) {
         let callable = self.base().callable("on_player_touched");
-        self.range.connect("body_entered".into(), callable);
+        self.range.connect("body_entered", &callable);
 
         self.ready = true;
     }

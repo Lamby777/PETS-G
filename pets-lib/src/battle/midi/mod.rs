@@ -55,7 +55,7 @@ impl Connection for GdW<MidiReceiver> {
 impl MidiReceiver {
     pub fn on_note_event(&mut self, on: bool, note: u8) {
         let signal = if on { "note_on" } else { "note_off" };
-        self.base_mut().call_deferred("emit_signal".into(), &[
+        self.base_mut().call_deferred("emit_signal", &[
             signal.to_variant(),
             note.to_variant(),
         ]);

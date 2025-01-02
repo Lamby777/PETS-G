@@ -47,7 +47,7 @@ impl AttackSkill {
             panic!("power should be `Some(1..=5)` or `None`");
         }
 
-        let adjective = tr(format!("SKILL_ATTACK_POWER_{}", self.power?));
+        let adjective = tr(&format!("SKILL_ATTACK_POWER_{}", self.power?));
 
         Some(tr_replace! {
             "SKILL_ATTACK_POWER_DESCRIBE";

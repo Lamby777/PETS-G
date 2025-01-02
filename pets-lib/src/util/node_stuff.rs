@@ -6,22 +6,23 @@ use godot::classes::tween::TransitionType;
 use godot::classes::{
     ColorRect, Engine, RichTextLabel, ShaderMaterial, Theme, Tween,
 };
+use godot::meta::AsArg;
 use godot::prelude::*;
 
 pub fn disconnect_signal<N, SN>(node: &mut Gd<N>, signal: SN)
 where
     N: Inherits<Node>,
-    SN: Into<StringName> + Copy,
+    SN: AsArg<StringName> + Copy,
 {
     let node = node.upcast_mut::<Node>();
 
-    node.get_signal_connection_list(signal.into())
+    node.get_signal_connection_list(signal)
         .iter_shared()
         .for_each(|dict| {
             // let signal = dict.get("signal").unwrap();
             let callable = dict.get("callable").unwrap();
 
-            node.disconnect(signal.into(), callable.to());
+            node.disconnect(signal, &callable.to());
         })
 }
 
@@ -44,14 +45,14 @@ where
         .cast::<ShaderMaterial>();
     let material_id = material.instance_id();
 
-    let callable = Callable::from_fn("set_shader_value", move |args| {
+    let callable = Callable::from_local_fn("set_shader_value", move |args| {
         let mut material = Gd::<ShaderMaterial>::from_instance_id(material_id);
-        material.set_shader_parameter("opacity".into(), args[0].clone());
+        material.set_shader_parameter("opacity", &args[0]);
 
         Ok(Variant::nil())
     });
 
-    let start_value = material.get_shader_parameter("opacity".into());
+    let start_value = material.get_shader_parameter("opacity");
 
     tween_method(
         callable,
@@ -80,7 +81,7 @@ macro_rules! connect {
     ($($con_node:expr,$signal:expr=>$cal_node:expr,$cal_name:expr);* $(;)?) => {
         $({
             let callable = $cal_node.callable($cal_name);
-            $con_node.connect($signal.into(), callable);
+            $con_node.connect($signal, &callable);
         })*
     };
 }
@@ -112,7 +113,7 @@ where
     T: Inherits<Object>,
 {
     node.upcast_mut()
-        .connect_ex(signal.into(), callable)
+        .connect_ex(signal, &callable)
         .flags(ConnectFlags::DEFERRED.ord() as u32)
         .done();
 }
@@ -138,7 +139,7 @@ pub fn bbcode_toggle(mut node: Gd<RichTextLabel>, bbcode: &str, active: bool) {
     let old_text = node.get_text().to_string();
     let new_text = prefix_mod(&old_text, bbcode, active);
 
-    node.set_text(new_text.into());
+    node.set_text(&new_text);
 }
 
 /// adds `prefix` to the start of `target` if `active` is true...
@@ -171,9 +172,9 @@ where
 
         tween
             .tween_method(
-                callable,
-                start_value.to_variant(),
-                end_value.to_variant(),
+                &callable,
+                &start_value.to_variant(),
+                &end_value.to_variant(),
                 time,
             )?
             .set_trans(trans);
@@ -195,7 +196,7 @@ pub fn tween<NP, V, N>(
     trans: TransitionType,
 ) -> Result<Gd<Tween>, ()>
 where
-    NP: Into<NodePath>,
+    NP: AsArg<NodePath>,
     V: ToGodot,
     N: Inherits<Node> + Inherits<Object>,
 {
@@ -203,16 +204,11 @@ where
         let mut tween = node.upcast_mut::<Node>().create_tween()?;
 
         let mut property = tween
-            .tween_property(
-                node.clone().upcast::<Object>(),
-                property.into(),
-                end_value.to_variant(),
-                time,
-            )?
+            .tween_property(&*node, property, &end_value.to_variant(), time)?
             .set_trans(trans)?;
 
         if let Some(start_value) = start_value {
-            property.from(start_value.to_variant())?;
+            property.from(&start_value.to_variant())?;
         }
 
         tween
@@ -237,9 +233,11 @@ pub use crate::change_scene;
 #[macro_export]
 macro_rules! change_scene {
     ($scene:expr) => {
-        godot_tree().change_scene_to_file(
-            concat!("res://scenes/", $scene, ".tscn").into(),
-        )
+        godot_tree().change_scene_to_file(concat!(
+            "res://scenes/",
+            $scene,
+            ".tscn"
+        ))
     };
 }
 

@@ -80,8 +80,8 @@ impl BattleIcon {
 
         // check inputs
         let mut input_vector = Vector2::ZERO;
-        for (k, v) in BATTLE_DIRECTIONS.iter() {
-            if input.is_action_pressed(k.clone()) {
+        for (key, v) in BATTLE_DIRECTIONS.iter() {
+            if input.is_action_pressed(key) {
                 input_vector += *v;
             }
         }
@@ -99,7 +99,7 @@ impl BattleIcon {
 
     #[func]
     fn on_hit(&mut self, mut bullet: Gd<Node2D>) {
-        let dmg_ratio = bullet.get("damage_ratio".into()).to::<f64>();
+        let dmg_ratio = bullet.get("damage_ratio").to::<f64>();
         let base_dmg = pcb().bind().battling[0]
             .borrow()
             .battler

@@ -45,12 +45,11 @@ impl PCharNode {
     pub fn anim_move(&mut self, moving: bool, inputs: Vector2) {
         // change the animationtree state machine to the correct mode
         let mode_str = self.anim_mode_str(moving);
-        self.anim_state.travel(mode_str.into());
+        self.anim_state.travel(mode_str);
 
         // set the blend position
         let blend_pos_field = format!("parameters/{mode_str}/blend_position");
-        self.anim_tree
-            .set(blend_pos_field.into(), Variant::from(inputs));
+        self.anim_tree.set(&blend_pos_field, &inputs.to_variant());
     }
 
     fn anim_mode_str(&self, moving: bool) -> &'static str {
@@ -65,7 +64,7 @@ impl PCharNode {
         let overlapping_areas = self.area.get_overlapping_areas();
         overlapping_areas
             .iter_shared()
-            .any(|area| area.is_in_group("water".into()))
+            .any(|area| area.is_in_group("water"))
     }
 
     #[func]
@@ -86,7 +85,7 @@ impl PCharNode {
 impl INode2D for PCharNode {
     fn ready(&mut self) {
         self.anim_tree.set_active(true);
-        let anim_state = self.anim_tree.get("parameters/playback".into()).to();
+        let anim_state = self.anim_tree.get("parameters/playback").to();
         self.anim_state.init(anim_state);
     }
 
@@ -105,7 +104,7 @@ impl INode2D for PCharNode {
 
             if (target - own_pos).length() < CUTSCENE_MOTION_CLOSE_ENOUGH {
                 self.cutscene_motion = None;
-                self.base_mut().emit_signal("pchar_motion_done".into(), &[]);
+                self.base_mut().emit_signal("pchar_motion_done", &[]);
                 self.base_mut().set_global_position(target);
                 moving = false;
             }

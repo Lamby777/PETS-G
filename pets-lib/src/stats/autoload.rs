@@ -41,7 +41,7 @@ impl StatsInterface {
 
     #[func]
     fn set_ethan_bed_color(color: String) {
-        let texture = load::<Texture2D>(format!(
+        let texture = load::<Texture2D>(&format!(
             "res://assets/textures/builds/furniture/beds/bed_{color}.png"
         ));
 
@@ -49,7 +49,7 @@ impl StatsInterface {
 
         let mut bed =
             World::room().get_node_as::<Sprite2D>("%EthanBed/Sprite2D");
-        bed.callv("set_texture".into(), varray![texture]);
+        bed.callv("set_texture", &varray![texture]);
     }
 }
 

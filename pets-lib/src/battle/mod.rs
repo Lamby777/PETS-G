@@ -131,7 +131,7 @@ impl BattleEngine {
 
         let mut mana_bar =
             self.base().get_node_as::<ProgressBar>("%InfoBars/ManaBar");
-        mana_bar.set("bar_value".into(), mana.unwrap_or(0).to_variant());
+        mana_bar.set("bar_value", &mana.unwrap_or(0).to_variant());
 
         let max_mana = battler.inherent_stats.max_mana;
         mana_bar.set_max(max_mana.unwrap_or(1).into());
@@ -147,7 +147,7 @@ impl BattleEngine {
             self.base().get_node_as::<ProgressBar>("%InfoBars/HPBar");
 
         // go up instantly, but go down over time
-        let hp_bar_value = hp_bar.get("bar_value".into()).to::<f64>();
+        let hp_bar_value = hp_bar.get("bar_value").to::<f64>();
         let hp_bar_value = if hp >= hp_bar_value {
             hp
         } else {
@@ -155,7 +155,7 @@ impl BattleEngine {
         };
 
         // update hp bar
-        hp_bar.set("bar_value".into(), hp_bar_value.to_variant());
+        hp_bar.set("bar_value", &hp_bar_value.to_variant());
 
         let max_hp = battler.inherent_stats.max_hp;
         hp_bar.set_max(max_hp.into());
@@ -182,7 +182,7 @@ impl BattleEngine {
     /// slowly fade out the black rectangle over the battle scene
     #[func]
     pub fn animate_in(&mut self) {
-        self.animator.set_assigned_animation("fade_in".into());
+        self.animator.set_assigned_animation("fade_in");
         self.animator.play();
     }
 
@@ -248,8 +248,8 @@ impl BattleEngine {
             self.base().get_node_as::<TextureRect>("%PortraitTexture");
 
         let path = format!("res://assets/textures/portraits/{}.png", pchar);
-        let texture = load::<Texture2D>(path);
-        portrait.set_texture(texture);
+        let texture = load::<Texture2D>(&path);
+        portrait.set_texture(&texture);
     }
 
     #[func]
@@ -298,10 +298,10 @@ impl BattleEngine {
             .expect("no skills menu scene exported")
             .instantiate_as::<PanelContainer>();
 
-        panel.set("battle_engine".into(), self.base().to_variant());
-        cont.add_child(panel.clone());
+        panel.set("battle_engine", &self.base().to_variant());
+        cont.add_child(&panel);
 
-        let mut agent: Gd<ChoiceAgent> = panel.get("choice_agent".into()).to();
+        let mut agent: Gd<ChoiceAgent> = panel.get("choice_agent").to();
         agent.bind_mut().enable();
 
         self.other_choices = Some(agent);
@@ -310,7 +310,7 @@ impl BattleEngine {
         // animate slide the new menu up
         cont.get_node_as::<AnimationPlayer>("../AnimationPlayer")
             .play_ex()
-            .name("margin_slide_up".into())
+            .name("margin_slide_up")
             .done();
     }
 
@@ -347,18 +347,18 @@ impl BattleEngine {
 
     #[func]
     fn on_note_hit(&mut self) {
-        self.click_status_txt.set_text("Hit!".into());
+        self.click_status_txt.set_text("Hit!");
         self.clicksfx.play();
     }
 
     #[func]
     fn on_note_flop(&mut self) {
-        self.click_status_txt.set_text("Flop!".into());
+        self.click_status_txt.set_text("Flop!");
     }
 
     #[func]
     fn on_note_miss(&mut self) {
-        self.click_status_txt.set_text("Miss!".into())
+        self.click_status_txt.set_text("Miss!")
     }
 
     // ------------------------------------------------------------
@@ -374,7 +374,7 @@ impl BattleEngine {
         let enemy_id = &enemy_data.borrow().id;
 
         self.base()
-            .get_node_as::<Node>(format!("Tactics/{}", enemy_id))
+            .get_node_as::<Node>(&format!("Tactics/{}", enemy_id))
             .set_process_mode(ProcessMode::ALWAYS);
     }
 }
@@ -395,7 +395,7 @@ impl INode2D for BattleEngine {
             timer.start();
 
             let callable = self.base().callable("on_karma");
-            timer.connect("timeout".into(), callable);
+            timer.connect("timeout", &callable);
 
             self.karma_timer.init(timer.upcast());
         }
@@ -408,7 +408,7 @@ impl INode2D for BattleEngine {
             timer.start();
             let callable = self.base().callable("intro_over");
             timer
-                .connect_ex("timeout".into(), callable)
+                .connect_ex("timeout", &callable)
                 .flags(ConnectFlags::ONE_SHOT.ord() as u32)
                 .done();
         }
@@ -429,7 +429,7 @@ impl INode2D for BattleEngine {
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
-        if event.is_action_pressed("menu".into()) {
+        if event.is_action_pressed("menu") {
             self.toggle_dualmenu();
         }
     }
