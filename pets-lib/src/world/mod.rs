@@ -34,7 +34,7 @@ fn set_or_stop_audio(
     mut audio: Gd<AudioStreamPlayer>,
 ) {
     match src {
-        Some(src) => audio.set_stream(src),
+        Some(ref src) => audio.set_stream(src),
         None => audio.stop(),
     }
 }
@@ -49,10 +49,10 @@ fn cue_battle_intro_fx() {
     // start the cool shader rectangle thing
     let mut rect = PartyCB::fx_rect();
     let mut mat = PartyCB::fx_material();
-    rect.call("reset_shader_timer".into(), &[]);
+    rect.call("reset_shader_timer", &[]);
 
     let rand_mod = generate_random_mod().to_variant();
-    mat.set_shader_parameter("rand_mod".into(), rand_mod);
+    mat.set_shader_parameter("rand_mod", &rand_mod);
 
     rect.set_visible(true);
 }
@@ -102,15 +102,15 @@ impl World {
         let mut old_room = Self::room();
 
         for mut child in old_room.get_children().iter_shared() {
-            old_room.remove_child(child.clone());
+            old_room.remove_child(&child);
             child.queue_free();
         }
 
         old_room.replace_by(&new_room);
 
         let mut world = self.base_mut();
-        world.call_deferred("reconnect_musiczones".into(), &[]);
-        world.call_deferred("reconnect_waterzones".into(), &[]);
+        world.call_deferred("reconnect_musiczones", &[]);
+        world.call_deferred("reconnect_waterzones", &[]);
     }
 
     // ---------------------------------------- Battle stuff
@@ -137,13 +137,11 @@ impl World {
         let world = World::singleton();
 
         let mat = PartyCB::fx_material();
-        let fade_len = mat.get_shader_parameter("LENGTH".into()).to::<f64>();
+        let fade_len = mat.get_shader_parameter("LENGTH").to::<f64>();
 
         set_timeout(INTRO_FADE_PREDELAY, cue_battle_intro_fx);
 
-        let cue_scene = world
-            .callable("cue_battle_scene")
-            .bindv((&[eid.to_variant()]).into());
+        let cue_scene = world.callable("cue_battle_scene").bindv(&varray![eid]);
         set_timeout_callable(INTRO_FADE_PREDELAY + fade_len, cue_scene);
     }
 
@@ -158,7 +156,7 @@ impl World {
     fn cue_battle_scene(&mut self, _eid: GString) {
         // emit a signal for other nodes if they need to do something
         self.base_mut()
-            .emit_signal("battle_intro_done".into(), &[_eid.to_variant()]);
+            .emit_signal("battle_intro_done", &[_eid.to_variant()]);
 
         let mut layer = self.base().get_node_as::<CanvasLayer>(LAYER_NAME);
 
@@ -205,8 +203,7 @@ impl World {
         self.fade_animator.set_speed_scale(AUDIO_FADE_TIME);
         self.fade_animator.stop();
 
-        self.fade_animator
-            .set_assigned_animation("crossfade".into());
+        self.fade_animator.set_assigned_animation("crossfade");
         self.fade_animator.play();
 
         // play the stuff
@@ -250,13 +247,11 @@ impl World {
             disconnect_signal(&mut zone, "body_exited");
 
             let on_mz_exit = self.base().callable("on_mz_exit");
-            let on_mz_enter = self
-                .base()
-                .callable("on_mz_enter")
-                .bindv((&[zone.to_variant()]).into());
+            let on_mz_enter =
+                self.base().callable("on_mz_enter").bindv(&varray![zone]);
 
-            zone.connect("body_entered".into(), on_mz_enter);
-            zone.connect("body_exited".into(), on_mz_exit);
+            zone.connect("body_entered", &on_mz_enter);
+            zone.connect("body_exited", &on_mz_exit);
         }
     }
 
@@ -270,13 +265,11 @@ impl World {
             disconnect_signal(&mut zone, "body_exited");
 
             let on_water_exit = self.base().callable("on_water_exit");
-            let on_water_enter = self
-                .base()
-                .callable("on_water_enter")
-                .bindv((&[zone.to_variant()]).into());
+            let on_water_enter =
+                self.base().callable("on_water_enter").bindv(&varray![zone]);
 
-            zone.connect("body_entered".into(), on_water_enter);
-            zone.connect("body_exited".into(), on_water_exit);
+            zone.connect("body_entered", &on_water_enter);
+            zone.connect("body_exited", &on_water_exit);
         }
     }
 }

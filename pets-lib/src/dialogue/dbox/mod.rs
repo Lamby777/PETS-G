@@ -69,7 +69,7 @@ impl DialogBox {
     #[func]
     pub fn singleton() -> Gd<Self> {
         let path = format!("{}/{}", UI_LAYER_NAME, DBOX_NODE_NAME);
-        World::singleton().get_node_as::<DialogBox>(path)
+        World::singleton().get_node_as::<DialogBox>(&path)
     }
 
     #[func]
@@ -93,8 +93,8 @@ impl DialogBox {
             .then(|| self.translated_message())
             .unwrap_or("".into());
 
-        self.spk_txt.set_text(spk);
-        self.msg_txt.set_text(msg);
+        self.spk_txt.set_text(&spk);
+        self.msg_txt.set_text(&msg);
 
         self.msg_txt.set_visible_characters(0);
         self.text_visibility_timer.start();
@@ -136,12 +136,12 @@ impl DialogBox {
     /// First processes placeholders, then translation keys.
     fn translated_speaker(&self) -> GString {
         // Unknown => tr("DG_SPK_UNKNOWN"),
-        tr(placeholders::process_placeholders(&self.speaker))
+        tr(&placeholders::process_placeholders(&self.speaker))
     }
 
     fn translated_message(&self) -> GString {
         let content = self.message.clone();
-        let content = tr(content).to_string();
+        let content = tr(&content).to_string();
 
         placeholders::process_placeholders(&content).into()
     }
@@ -168,8 +168,7 @@ impl DialogBox {
     }
 
     fn on_confirm_next_page(&mut self) {
-        self.base_mut()
-            .emit_signal("accept".into(), &[(-1).to_variant()]);
+        self.base_mut().emit_signal("accept", &[(-1).to_variant()]);
     }
 
     #[func]
@@ -179,7 +178,7 @@ impl DialogBox {
         self.tween_choices_wave(false);
 
         self.base_mut()
-            .emit_signal("accept".into(), &[picked_i.to_variant()]);
+            .emit_signal("accept", &[picked_i.to_variant()]);
     }
 
     fn awaiting_choice(&self) -> bool {
@@ -199,10 +198,10 @@ impl DialogBox {
         let children = children_of_type::<DChoice, _>(&cont.clone());
 
         for mut node in children {
-            node.set_name("deleted".into());
+            node.set_name("deleted");
             node.queue_free();
             ChoiceAgent::unbind_callables_for(&mut node);
-            cont.remove_child(node);
+            cont.remove_child(&node);
         }
     }
 
@@ -219,7 +218,7 @@ impl DialogBox {
                 .bind_mut()
                 .bind_callables_for(&mut dchoice);
 
-            cont.add_child(dchoice.clone());
+            cont.add_child(&dchoice);
 
             // put label below the window
             dchoice.bind_mut().put_label_under();
@@ -243,10 +242,10 @@ impl DialogBox {
             let own_path = node.get_path();
             let prev_path = previous.get_path();
 
-            previous.set_focus_next(own_path.clone());
-            previous.set_focus_neighbor(Side::RIGHT, own_path);
-            node.set_focus_previous(prev_path.clone());
-            node.set_focus_neighbor(Side::LEFT, prev_path);
+            previous.set_focus_next(&own_path);
+            previous.set_focus_neighbor(Side::RIGHT, &own_path);
+            node.set_focus_previous(&prev_path);
+            node.set_focus_neighbor(Side::LEFT, &prev_path);
 
             previous = node;
         }
@@ -284,10 +283,7 @@ impl DialogBox {
 
                     // if tweening down, delete it after the tween
                     if !up {
-                        tw.connect(
-                            "finished".into(),
-                            label.callable("queue_free"),
-                        );
+                        tw.connect("finished", &label.callable("queue_free"));
                     }
                 };
             });
@@ -312,10 +308,7 @@ impl IPanelContainer for DialogBox {
 
         let mut timer = Timer::new_alloc();
         timer.set_wait_time(TEXT_VISIBILITY_DELAY);
-        timer.connect(
-            "timeout".into(),
-            self.base().callable("text_visibility_tick"),
-        );
+        timer.connect("timeout", &self.base().callable("text_visibility_tick"));
         timer.set_one_shot(true);
         self.base_mut().add_child(&timer);
         self.text_visibility_timer.init(timer);
@@ -326,7 +319,7 @@ impl IPanelContainer for DialogBox {
             return;
         }
 
-        let confirming = event.is_action_pressed("ui_accept".into());
+        let confirming = event.is_action_pressed("ui_accept");
         if confirming && !self.is_done_showing_text() {
             self.skip_text_visibility();
             return;

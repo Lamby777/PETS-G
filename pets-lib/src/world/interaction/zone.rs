@@ -48,14 +48,14 @@ impl InteractionZone {
         if let Some(script) = &self.interaction_script {
             let mut ds = DialogueScript::new(script.clone());
             self.base_mut().add_child(&ds);
-            ds.call("_start".into(), &[]);
+            ds.call("_start", &[]);
 
             // Scripts take priority over beacons. You can make the player teleport
             // inside your script if you still want them to teleport, though.
             return;
         }
 
-        self.base_mut().emit_signal("interacted".into(), &[]);
+        self.base_mut().emit_signal("interacted", &[]);
 
         let target = &self.beacon_target;
         if !target.is_empty() {
@@ -107,7 +107,7 @@ impl InteractionZone {
         let black_id = black.instance_id();
 
         let scene_id = target_scene.map(|s| {
-            load::<PackedScene>(format!("res://scenes/rooms/{}.tscn", s))
+            load::<PackedScene>(&format!("res://scenes/rooms/{}.tscn", s))
                 .instantiate()
                 .unwrap()
                 .instance_id()
@@ -120,8 +120,7 @@ impl InteractionZone {
                 World::singleton().bind_mut().change_room(new_room_scene);
             }
 
-            let target_node =
-                World::room().get_node_as::<Node2D>(target.clone());
+            let target_node = World::room().get_node_as::<Node2D>(&target);
             let target_pos = target_node.get_global_position();
 
             // after the screen is black, teleport the player
@@ -144,9 +143,8 @@ impl InteractionZone {
                         Gd::<Node2D>::from_instance_id(target_node_id);
 
                     // fire the signal that the teleport is over
-                    pcb().emit_signal("teleported".into(), &[
-                        target_node.to_variant()
-                    ]);
+                    pcb()
+                        .emit_signal("teleported", &[target_node.to_variant()]);
                 });
             });
         });
@@ -160,7 +158,7 @@ impl IArea2D for InteractionZone {
 
         let enter_fn = node.callable("on_entered");
         let exit_fn = node.callable("on_exited");
-        node.connect("body_entered".into(), enter_fn);
-        node.connect("body_exited".into(), exit_fn);
+        node.connect("body_entered", &enter_fn);
+        node.connect("body_exited", &exit_fn);
     }
 }

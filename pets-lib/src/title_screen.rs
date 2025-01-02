@@ -48,7 +48,7 @@ impl TitleScreen {
         let mut anim = self
             .base()
             .get_node_as::<AnimationPlayer>("MoveRight/AnimationPlayer");
-        anim.set_assigned_animation("main_menu_outro".into());
+        anim.set_assigned_animation("main_menu_outro");
         anim.play();
     }
 
@@ -145,14 +145,11 @@ impl INode2D for TitleScreen {
         connect_deferred(&mut self.choices, "selection_confirmed", callable);
 
         let callable = self.base().callable("on_save_file_picked");
-        self.save_choices
-            .connect("selection_confirmed".into(), callable);
+        self.save_choices.connect("selection_confirmed", &callable);
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
-        if event.is_action_pressed("ui_cancel".into())
-            && self.save_files_shown()
-        {
+        if event.is_action_pressed("ui_cancel") && self.save_files_shown() {
             self.show_save_files(false);
         }
     }

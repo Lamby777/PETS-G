@@ -54,8 +54,7 @@ impl ChoiceAgent {
             return;
         }
 
-        let target =
-            node.get_node_as::<Node>(self.tween_target_relative.clone());
+        let target = node.get_node_as::<Node>(self.tween_target_relative.arg());
 
         // either the node itself is a text label OR check if it
         // has a child to tween
@@ -78,7 +77,7 @@ impl ChoiceAgent {
                     false => "default_color",
                 };
 
-                default_theme().get_color(col.into(), "RichTextLabel".into())
+                default_theme().get_color(col, "RichTextLabel")
             };
 
             tween(
@@ -98,7 +97,7 @@ impl ChoiceAgent {
             // tween the custom param
             tween(
                 &mut target.clone(),
-                self.tween_property.clone(),
+                self.tween_property.arg(),
                 None,
                 target_val,
                 CHOICE_TWEEN_TIME,
@@ -120,8 +119,8 @@ impl ChoiceAgent {
             .iter_shared()
             .filter_map(|x| x.try_cast::<Control>().ok())
             .filter(|x| {
-                !(x.has_meta("ChoiceAgentIgnore".into())
-                    && x.get_meta("ChoiceAgentIgnore".into()).to::<bool>())
+                !(x.has_meta("ChoiceAgentIgnore")
+                    && x.get_meta("ChoiceAgentIgnore").to::<bool>())
             })
             .collect()
     }
@@ -129,9 +128,7 @@ impl ChoiceAgent {
     #[func]
     pub fn _tween_choice_on(&mut self, choice: Gd<Control>) {
         self.base_mut()
-            .emit_signal("selection_focused".into(), &[choice
-                .clone()
-                .to_variant()]);
+            .emit_signal("selection_focused", &[choice.clone().to_variant()]);
         self.focused = Some(choice.clone());
 
         self._tween_choice(true, choice);
@@ -140,9 +137,7 @@ impl ChoiceAgent {
     #[func]
     pub fn _tween_choice_off(&mut self, choice: Gd<Control>) {
         self.base_mut()
-            .emit_signal("selection_unfocused".into(), &[choice
-                .clone()
-                .to_variant()]);
+            .emit_signal("selection_unfocused", &[choice.clone().to_variant()]);
 
         if self.focused == Some(choice.clone()) {
             self.focused = None;
@@ -172,7 +167,7 @@ impl ChoiceAgent {
     pub fn focus_nth(&mut self, n: u32) {
         let mut choices = self.choice_labels();
         let guard = self.base_mut();
-        choices[n as usize].call_deferred("grab_focus".into(), &[]);
+        choices[n as usize].call_deferred("grab_focus", &[]);
         drop(guard);
     }
 
@@ -211,11 +206,11 @@ impl ChoiceAgent {
         let entered = self
             .base()
             .callable("_tween_choice_on")
-            .bindv(varray![choice.to_variant()]);
+            .bindv(&varray![choice]);
         let exited = self
             .base()
             .callable("_tween_choice_off")
-            .bindv(varray![choice.to_variant()]);
+            .bindv(&varray![choice]);
 
         connect_deferred(choice, "focus_entered", entered.clone());
         connect_deferred(choice, "focus_exited", exited.clone());
@@ -245,7 +240,7 @@ impl INode for ChoiceAgent {
             return;
         }
 
-        let is_pressed = |x: &str| event.is_action_pressed(x.into());
+        let is_pressed = |x: &str| event.is_action_pressed(x);
 
         if self.focused.is_none() {
             if !(is_pressed("ui_up")
@@ -271,9 +266,8 @@ impl INode for ChoiceAgent {
             let focused = self.focused.clone().unwrap();
             mark_input_handled(&self.base());
 
-            self.base_mut().emit_signal("selection_confirmed".into(), &[
-                focused.to_variant(),
-            ]);
+            self.base_mut()
+                .emit_signal("selection_confirmed", &[focused.to_variant()]);
         }
     }
 }

@@ -26,7 +26,7 @@ pub struct DChoice {
 impl DChoice {
     #[func]
     pub fn set_text_tr(&mut self, text: GString) {
-        self.txt_label.set_text(tr(text));
+        self.txt_label.set_text(&tr(text.arg()));
     }
 
     /// tween the contained text label in/out of the window
@@ -55,9 +55,9 @@ impl DChoice {
         let scene = load::<PackedScene>("res://scenes/dialogchoice.tscn");
         let mut dchoice = scene.instantiate_as::<Self>();
 
-        dchoice.set_name(format!("Choice{}", i).into());
+        dchoice.set_name(&format!("Choice{}", i));
 
-        dchoice.call_deferred("set_text_tr".into(), &[text.to_variant()]);
+        dchoice.call_deferred("set_text_tr", &[text.to_variant()]);
         // dchoice.bind_mut().set_text_tr(text.into());
 
         dchoice

@@ -95,17 +95,17 @@ impl BattleMusic {
     /// Called when the player successfully hits a note
     fn on_attack_hit(&mut self) {
         self.rhythm.reset();
-        self.base_mut().emit_signal("note_hit".into(), &[]);
+        self.base_mut().emit_signal("note_hit", &[]);
     }
 
     fn on_attack_flop(&mut self) {
         self.on_attack_flop_or_miss();
-        self.base_mut().emit_signal("note_flop".into(), &[]);
+        self.base_mut().emit_signal("note_flop", &[]);
     }
 
     fn on_attack_miss(&mut self) {
         self.on_attack_flop_or_miss();
-        self.base_mut().emit_signal("note_miss".into(), &[]);
+        self.base_mut().emit_signal("note_miss", &[]);
     }
 
     fn on_attack_flop_or_miss(&mut self) {
@@ -210,7 +210,7 @@ impl IAudioStreamPlayer for BattleMusic {
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
-        if event.is_action_pressed("ui_accept".into()) {
+        if event.is_action_pressed("ui_accept") {
             self.on_player_clicked();
         }
     }

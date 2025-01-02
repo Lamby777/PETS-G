@@ -62,7 +62,7 @@ impl InteractionManager {
 
         self.prompt
             .get_node_as::<RichTextLabel>("%Action")
-            .set_text(tr(key));
+            .set_text(&tr(&key));
     }
 
     fn move_prompt_to_zone(&mut self, zone: Gd<InteractionZone>) {
@@ -72,7 +72,7 @@ impl InteractionManager {
             zone.get_global_position()
                 + Vector2::new(0.0, -INTERACT_PROMPT_HEIGHT_OFFSET)
         } else {
-            zone.get_node_as::<Node2D>(custom_path)
+            zone.get_node_as::<Node2D>(&custom_path)
                 .get_global_position()
         };
 
@@ -104,7 +104,7 @@ impl INode2D for InteractionManager {
     }
 
     fn unhandled_input(&mut self, event: Gd<InputEvent>) {
-        if event.is_action_pressed("ui_accept".into()) {
+        if event.is_action_pressed("ui_accept") {
             {
                 if !pcb().bind().can_move() {
                     // can't interact with stuff if you're

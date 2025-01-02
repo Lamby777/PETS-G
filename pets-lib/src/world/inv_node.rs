@@ -42,7 +42,7 @@ impl InventoryNode {
             panic!("Index out of bounds: {}", index);
         }
 
-        self.row.get_node_as(format!("ItemContainer{}", index))
+        self.row.get_node_as(&format!("ItemContainer{}", index))
     }
 
     fn update_text_labels(&mut self) {
@@ -57,15 +57,15 @@ impl InventoryNode {
 
         let Some((item_id, _item_count)) = inv.get_at_index(self.current_index)
         else {
-            name_txt.set_text("".into());
-            desc_txt.set_text("".into());
+            name_txt.set_text("");
+            desc_txt.set_text("");
             return;
         };
 
         let name = tr!("ITEM_NAME_{a}", a = item_id);
         let desc = tr!("ITEM_DESC_{a}", a = item_id);
-        name_txt.set_text(format!("[center]{}[/center]", name).into());
-        desc_txt.set_text(format!("[center]{}[/center]", desc).into());
+        name_txt.set_text(&format!("[center]{}[/center]", name).to_godot());
+        desc_txt.set_text(&format!("[center]{}[/center]", desc).to_godot());
     }
 
     #[func]
@@ -80,15 +80,15 @@ impl InventoryNode {
             let index: i32 =
                 self.current_index as i32 + i - (child_count / 2) - 1;
             if index < 0 || index >= inv.len() as i32 {
-                icon_cont.call("set_texture".into(), &[Variant::nil()]);
-                icon_cont.call("set_item_ct".into(), &[0.to_variant()]);
+                icon_cont.call("set_texture", &[Variant::nil()]);
+                icon_cont.call("set_item_ct", &[0.to_variant()]);
                 continue;
             }
 
             let (item_id, item_ct) = inv.get_at_index(index as usize).unwrap();
 
-            icon_cont.call("set_item_ct".into(), &[item_ct.to_variant()]);
-            icon_cont.call("set_texture".into(), &[item_id.to_variant()]);
+            icon_cont.call("set_item_ct", &[item_ct.to_variant()]);
+            icon_cont.call("set_texture", &[item_id.to_variant()]);
         }
     }
 
@@ -114,8 +114,8 @@ impl InventoryNode {
         self.current_index = new_index as usize;
 
         let animation = match right {
-            true => "shift_right".into(),
-            false => "shift_left".into(),
+            true => "shift_right",
+            false => "shift_left",
         };
         self.anim.set_assigned_animation(animation);
         self.anim.play();
@@ -123,7 +123,7 @@ impl InventoryNode {
         // update icons once anim is over
         let callable = self.base().callable("on_cycle_done");
         self.anim
-            .connect_ex("animation_finished".into(), callable)
+            .connect_ex("animation_finished", &callable)
             .flags(ConnectFlags::ONE_SHOT.ord() as u32)
             .done();
     }
@@ -167,7 +167,7 @@ impl IControl for InventoryNode {
             return;
         }
 
-        let is_pressed = |name: &str| event.is_action_pressed(name.into());
+        let is_pressed = |name: &str| event.is_action_pressed(name);
 
         if is_pressed("menu") {
             self.open(false);

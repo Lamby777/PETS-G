@@ -69,7 +69,7 @@ impl SaveFile {
 
     pub fn write_to(&self, save_slot: u8) {
         let path = save_path(save_slot);
-        let mut file = GFile::open(path, ModeFlags::WRITE).unwrap();
+        let mut file = GFile::open(&path, ModeFlags::WRITE).unwrap();
 
         let content = serde_json::to_string(self).unwrap();
         write!(file, "{}", content).unwrap();

@@ -44,15 +44,10 @@ impl Inputs {
 impl Inputs {
     pub fn from_player_input() -> Self {
         let input = Input::singleton();
-        let input_vector = (input.get_vector(
-            "left".into(),
-            "right".into(),
-            "up".into(),
-            "down".into(),
-        ))
-        .normalized_or_zero();
+        let input_vector = (input.get_vector("left", "right", "up", "down"))
+            .normalized_or_zero();
 
-        let sprinting = input.is_action_pressed("sprint".into());
+        let sprinting = input.is_action_pressed("sprint");
         Inputs {
             input_vector,
             sprinting,
@@ -283,10 +278,10 @@ impl PartyCB {
 
     pub fn push_pchar(&mut self, name: impl ToString) -> Gd<PCharNode> {
         let path = format!("res://scenes/char/{}.tscn", name.to_string());
-        let packed = load::<PackedScene>(path);
+        let packed = load::<PackedScene>(&path);
         let inst = packed.instantiate_as::<PCharNode>();
         self.base_mut().add_child(&inst);
-        self.party.push(inst.clone());
+        self.party.push(&inst);
         inst
     }
 }
@@ -313,7 +308,7 @@ impl ICharacterBody2D for PartyCB {
 
             if (target - own_pos).length() < CUTSCENE_MOTION_CLOSE_ENOUGH {
                 self.cutscene_motion = None;
-                self.base_mut().emit_signal("pcb_motion_done".into(), &[]);
+                self.base_mut().emit_signal("pcb_motion_done", &[]);
                 self.base_mut().set_global_position(target);
             }
         }

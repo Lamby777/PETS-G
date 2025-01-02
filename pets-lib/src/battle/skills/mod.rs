@@ -25,7 +25,7 @@ pub(crate) use recovery::{RecoverySkill, RecoveryType};
 pub(crate) use shields::ShieldSkill;
 
 fn power_to_letter(power: u8) -> GString {
-    tr(format!("SKILL_TIER_{}", power))
+    tr(&format!("SKILL_TIER_{}", power))
 }
 
 fn power_to_letter_pl(power: u8, plural: bool) -> GString {
@@ -135,6 +135,6 @@ impl Element {
     /// User-facing string for formatting the element of a skill
     /// Handles the "edge cases" of grammar like "Fuzz" => "Fuzzy"
     pub fn adjective(&self) -> GString {
-        tr(format!("ELEMENT_ADJ_{:?}", self))
+        tr(&format!("ELEMENT_ADJ_{:?}", self))
     }
 }
