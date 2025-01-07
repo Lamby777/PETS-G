@@ -52,7 +52,7 @@ a warning anyway.
 - Quolo Torviní: 17 year old boy who is the biggest troublemaker in Corr Valley. He is very cynical and thinks everyone is out to get him, and he's also a bully in school. The only person he trusts is L'yembo because he was willing to be friends with him despite his bad reputation. Known for always wearing a black hoodie with the hood up.
 - The Justicians: A group of people who believe Ethan is a scumbag and want to protest against Corr Valley's immigration policy. They're especially furious that Ethan "took along" Siva with him, because the very next day, someone broke into her basement and lots of critical infrastructure almost went down if it weren't for Neoxylin's quick reaction. The main leaders are L'yembo and Quolo, because they want to "prove" themselves to the world and boost their ego by taking down the "biggest threat" to their society.
 - Cassander Distantó: ~30 year old detective in Melpine Town. Heavily corrupt, and willing to take bribes to change the outcome of a case. Melpine has very few laws restricting what counts as evidence, and ultimately, Cassander is the one who decides who goes to prison and who doesn't.
-- The Pirate Cabal: A secret organized group of pirates which are sworn enemies against Winthrus and his crew. They receive a lot of hate due to their malware-infested cracks and general lack of morals. They are known for their brutal tactics and are feared by many.
+- The Pirate Cabal: A secret organized group of pirates which are sworn enemies against Winthrus and his crew. They receive a lot of hate due to their malware-infested cracks and general lack of morals. They're always flat broke, so they're envious of people who do cracks for "fun" or anti-copyright ideology as opposed to doing it to rat people and make a quick buck. They are known for their brutal tactics and are feared by many.
 - Calyx: A robot that looks exactly like Siva. It is capable of using all of Siva's abilities. Developed by an extremely bored employee at Goober Labs, it is capable of learning and adapting to any situation.
 
 ---
@@ -122,7 +122,7 @@ a warning anyway.
 
 ### The Apple
 
-- Ethan sees a flock of sheep in the distance, and runs towards them. The sheep say to each other that there's this "Apple of True Happiness" in the nearby forest. The apple will magically alter reality to make you happier, as long as it detects legitimate discontentment. Later on, Mira says you'd need a perfect sense of smell to find it. Ethan wishes for this apple to take away all his troubles.
+- Ethan sees a flock of sheep in the distance, and runs towards them. The sheep say to each other that there's this "Apple of True Happiness" in the nearby forest. The apple will magically alter reality to make you happier, as long as it detects legitimate discontentment. Later on, Mira says you'd need a perfect sense of smell to find it, and that she would look for it for years if she truly believed it was real. Ethan wishes for this apple to take away all his troubles.
 - Frosty Lostlass comes back and says she's found a forest which smells really nice, and that she's off to take a walk in it.
 - Ethan wants to go to the apple, but Siva says her feeling is guiding her to the Great Melpine Basin. Terra says the feeling has gotten them in nothing but trouble, and leaves to go to the studio. Ethan trusts Siva's feeling, so together they go trekking to the basin.
 - At the end, they find Porky behind a rock, playfully rolling in the mud. He joins the team.
@@ -196,6 +196,8 @@ a warning anyway.
 
 #### GLUE Server Locations
 
+Parentheses parts are NOT known by the team yet. (Leo only saw the general area)
+
 Main Server: Melpine Heights - Goober Labs (Hidden room that Leo found)
 
 1. Corr Valley (Empress Neoxylin's Office)
@@ -203,8 +205,8 @@ Main Server: Melpine Heights - Goober Labs (Hidden room that Leo found)
 3. Pirate Bay (Pirate Cabal Hideout)
 4. Constchar Outskirts (Power Plant)
 5. Constchar (Resultin Moshkelsaz's Office)
-6.
-7.
+6. Further inside Forest #32767 (Akhritha's House in Elven Sanctuary)
+7. Dazzling Mines (Ning Sa's Office in Topaz Fields)
 8.
 9.
 
@@ -223,13 +225,36 @@ Main Server: Melpine Heights - Goober Labs (Hidden room that Leo found)
 
 ---
 
-### Melpine GLUE Server
+### Melpine GLUE Server Sabotage
 
-- The Naturals split up to all search their own suspected locations, but ultimately P/E/T/S find the suspicious building.
+- The Naturals agree to help and all split up to search their own suspected locations, but ultimately P/E/T/S find the suspicious building.
   - It looks abandoned, and it's near the edge of town.
 - The Naturals all return empty-handed, so they resort to their last lead: the suspicious building.
-- They break in, and look through the house. It's eerie, as if it was abandoned a long time ago.
-- They find a "basement" door which leads into another huge maze. The door locks itself behind them as they go in.
+- They break in, and look through the house. It's eerie, as if it was abandoned a long time ago, but Siva is certain that this is the place they were looking for.
+- They find a "basement" door which leads into another huge maze. The door locks itself behind them as they go in. Everyone except Leo and P/E/T/S are stuck outside.
+- At the center of the maze, they fall into a portal that takes them into a "flipped" weird version of the real world, reminiscent of the Rift dimension or a less neoncore trippy version of Moonside. They leave the suspicious house in the other dimension.
+- In the flipped reality's Melpine, they explore around town and come across a magician who gives them a bag of "Crux Flux," a magic white powder that is known for causing inverse hallucinations (bringing people back to reality) for a short period of time when sniffed. He tells them to use it wisely.
+- They eventually find the GLUE server in the studio, guarded by sentient recording equipment (minibosses). The server has recently been logged into.
+- Leo uses the backdoor he found in the Corr Valley server to take over the Melpine server. He writes a quick and dirty script to send truckloads of garbage data to the GLUE AI model, effectively making it useless. He also deletes all connected hot backups, so they can't just restore from those. The system shows there have been recent off-site backups, though.
+- The door starts budging, so Leo throws the bag of Crux Flux into the air, and everyone sniffs it. Mylo and Calyx burst through the door, but there's nobody to be seen.
+- They call it a day, and head back to the studio to zzz. Any future attempts to enter the locked room in the suspicious building are met with strange immediate fatigue.
+
+---
+
+### Pirate Cabal GLUE Server
+
+- Terra calls Winthrus and asks what the Pirate Cabal is and if he's a part of it. Winthrus says he's not a part of it, and doesn't know a thing about their whereabouts besides the fact that they're around Pirate Bay. He says to be very cautious, and also says messing with Goober might be a bad idea. He can fly them to Pirate Bay, but refuses to let Siva or Ethan on the airship because he doesn't want to put them in danger.
+- S complains to E about always being treated like a baby. They scheme a plot to get to Pirate Bay without T/Winthrus knowing.
+- Terra asks Leo and Mira to come along, since they're good with computers and Bobby/Dubs are busy.
+- They go to Pirate Bay via airship, while S casts a "fairy ferry" for her and E to ride on.
+- T/L/M arrive, find the Pirate Cabal hideout, but get mugged by the pirates. They're taken to the leader, a masked figure who goes by the name "Shadow King."
+- Shadow King is actually pretty kind, and says he's been expecting them. He says he knows they're after the GLUE server, and that he's willing to help them if they help him first. He knows Winthrus is outside, he's "not deaf" and heard the airship above the island. He wants Winthrus to walk in and transfer 20,000 Prokaryo to his wallet and apologize for making fun of his hat online.
+- Terra goes back out and finally convinces Winthrus to do so, saying he'll pay him back the Prokaryo immediately after. Once the Prokaryo is transfered, the Pirate Cabal goons lock the doors and grab them, holding them hostage until the Naturals back home pay an extra 980,000 Prokaryo.
+- E/S finally arrive on the island and Siva PK Whips the door open. They find the Pirate Cabal goons, and Ethan casts PK Fuzz in the room, causing everyone to act drunk (and reckless). T/L/M/W are tied to chairs, but Shadow King charges at E/S.
+- Upon winning the fight, Shadow King falls apart and makes loud metallic clangs as his parts hit the floor. The pirate goons are shocked, and one mentions that he was acting a little strange recently, too.
+- Once the talking is over, they hear a faint beeping coming from the fake Shadow King's body. Mira uses her scanner from earlier again and sees the device is a self-destruct bomb. They all flee the scene, taking the pirate goons with them, all agreeing not to fight each other for the time being.
+- The hideout blows up, and Leo reports that his phone shows one of the GLUE servers lost connection. They didn't have a chance to glean any information from it, but at least the validator node is gone, I guess.
+- Finally having some time to think, they point out how strange it was that they only met a robotic version of Shadow King yet it looked so real.
 
 ---
 
