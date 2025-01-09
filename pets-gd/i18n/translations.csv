@@ -1,162 +1,146 @@
-key,en_US
-,
-IZ_INTERACT_INTERACT,Interact
-IZ_INTERACT_CHECK,Check
-IZ_INTERACT_PRESS,Press
-IZ_INTERACT_ENTER,Enter
-IZ_INTERACT_EXIT,Exit
-IZ_INTERACT_TALK,Talk
-IZ_INTERACT_OPEN,Open
-IZ_INTERACT_READ,Read
-IZ_INTERACT_TAKE,Take
-IZ_INTERACT_DEBUG,Debug
-,
-ITEM_NAME_cool_stick,Stick
-ITEM_DESC_cool_stick,Some stick you found off the sidewalk. Looks cool.
-ITEM_NAME_trusty_rusty_pistol,Trusty Rusty Pistol
-ITEM_DESC_trusty_rusty_pistol,Pretty unsafe! Deals poor damage.
-ITEM_NAME_ts_slick7,TS Slick7
-ITEM_DESC_ts_slick7,Tactical Supreme’s latest model. Deals decent damage.
-ITEM_NAME_terra_precision_shotgun,Precision Shotgun
-ITEM_DESC_terra_precision_shotgun,A weapon for Terra. Massive damage at the cost of reload time.
-,
-ELEMENT_NAME_Blade,Blade
-ELEMENT_NAME_Kinetic,Kinetic
-ELEMENT_NAME_Fire,Fire
-ELEMENT_NAME_Ice,Ice
-ELEMENT_NAME_Electric,Electric
-ELEMENT_NAME_Wind,Wind
-ELEMENT_NAME_Earth,Earth
-ELEMENT_NAME_Psi,Psychic
-ELEMENT_NAME_Spirit,Spirit
-ELEMENT_NAME_Fuzz,Fuzz
-ELEMENT_NAME_Whip,Whip
-,
-ELEMENT_ADJ_Blade,Slash
-ELEMENT_ADJ_Kinetic,Kinetic
-ELEMENT_ADJ_Fire,Fire-based
-ELEMENT_ADJ_Ice,Ice-based
-ELEMENT_ADJ_Electric,Electric
-ELEMENT_ADJ_Wind,Wind-based
-ELEMENT_ADJ_Earth,Earth-based
-ELEMENT_ADJ_Psi,Psychic
-ELEMENT_ADJ_Spirit,Supernatural
-ELEMENT_ADJ_Fuzz,Fuzzy
-ELEMENT_ADJ_Whip,Whip
-,
-SKILL_PSI_FLUX_NAME,PSI Flux
-SKILL_PSI_FLUX_DESC,Warps time in your favor for {seconds} seconds.
-SKILL_RECOVERY_COMBINED,{family} {power}
-SKILL_RECOVERY_HP_AMOUNT_NAME,Recover
-SKILL_RECOVERY_HP_AMOUNT_DESC,Heals {amount} of the target's HP.
-SKILL_RECOVERY_HP_PERCENT_NAME,Renew
-SKILL_RECOVERY_STATUS_NAME,Healing
-SKILL_RECOVERY_STATUS_DESC,Heals status effects up to {rating}★.
-,
-SKILL_ATTACK_FIRE_DMG_NAME,Caustics
-SKILL_ATTACK_FIRE_FX_NAME,Flame
-SKILL_ATTACK_ICE_DMG_NAME,Hail
-SKILL_ATTACK_ICE_FX_NAME,Freeze
-SKILL_ATTACK_ELECTRIC_DMG_NAME,Zap
-SKILL_ATTACK_ELECTRIC_FX_NAME,Current
-SKILL_ATTACK_WIND_DMG_NAME,Gust
-SKILL_ATTACK_WIND_FX_NAME,Disarm
-SKILL_ATTACK_EARTH_DMG_NAME,Quake
-SKILL_ATTACK_EARTH_FX_NAME,Ground
-SKILL_ATTACK_PSI_DMG_NAME,Psi
-SKILL_ATTACK_PSI_FX_NAME,Brainjack
-SKILL_ATTACK_SPIRIT_DMG_NAME,Vex
-SKILL_ATTACK_SPIRIT_FX_NAME,Curse
-SKILL_ATTACK_FUZZ_NAME,PK Fuzz
-SKILL_ATTACK_WHIP_NAME,PK Whip
-,
-SKILL_TIER_1,A
-SKILL_TIER_2,B
-SKILL_TIER_3,C
-SKILL_TIER_4,D
-SKILL_TIER_5,E
-SKILL_POWER_PLURAL,@{power}
-,
-SKILL_ATTACK_NAME_COMBINED,{family} {power}
-SKILL_ATTACK_DESCRIBE_COMBINED,{dmg} {fx}
-SKILL_ATTACK_POWER_DESCRIBE,Deals {adjective} {element} damage.
-SKILL_ATTACK_POWER_1,faint
-SKILL_ATTACK_POWER_2,weak
-SKILL_ATTACK_POWER_3,medium
-SKILL_ATTACK_POWER_4,strong
-SKILL_ATTACK_POWER_5,massive
-,
-SKILL_ATTACK_PLURAL_DESC,{part1} Targets all enemies!
-,
-SKILL_ATTACK_FX_CHANCE_ALWAYS,Always inflicts {fx}.
-SKILL_ATTACK_FX_CHANCE_HIGH,High chance of inflicting {fx}.
-SKILL_ATTACK_FX_CHANCE_LOW,May inflict {fx}.
-,
-SKILL_SHIELD_NAME,{adjective} {width} {name}
-SKILL_SHIELD_DESC,Casts a {width} {potency} {name} that {reflect_action} {affinity} damage.
-,
-SKILL_SHIELD_PHYSICAL_ADJ,Physical
-SKILL_SHIELD_MAGICAL_ADJ,Magical
-SKILL_SHIELD_UNIQUE_ADJ,Forceful
-SKILL_SHIELD_SPECIALIZED_ADJ,Strange
-SKILL_SHIELD_PHYSICAL_DESC,physical
-SKILL_SHIELD_MAGICAL_DESC,magical
-SKILL_SHIELD_UNIQUE_DESC,magical and unique
-SKILL_SHIELD_SPECIALIZED_DESC,certain types of
-,
-SKILL_SHIELD_WIDTH_WIDE,Wide
-SKILL_SHIELD_WIDTH_NARROW,Narrow
-SKILL_SHIELD_POTENCY_IMPENETRABLE,Impenetrable
-SKILL_SHIELD_POTENCY_STURDY,Sturdy
-SKILL_SHIELD_POTENCY_FAIR,Fair
-SKILL_SHIELD_POTENCY_WEAK,Weak
-SKILL_SHIELD_POTENCY_NULLIFIED,Nullified
-SKILL_SHIELD_REFLECTIVITY_FALSE,blocks
-SKILL_SHIELD_REFLECTIVITY_TRUE,reflects
-SKILL_SHIELD_NAME_MIRROR,Mirror
-SKILL_SHIELD_NAME_SHIELD,Shield
-SKILL_SHIELD_HITS_NONE,It probably won't last...
-SKILL_SHIELD_HITS_ONE,It could stand one hit... probably.
-SKILL_SHIELD_HITS_COUPLE,It could likely stand a couple hits.
-SKILL_SHIELD_HITS_SEVERAL,It could stand several hits.
-SKILL_SHIELD_HITS_MANY,It could easily stand quite a few hits.
-SKILL_SHIELD_HITS_WHILE,It'd take enemies a while to break through this one.
-SKILL_SHIELD_COMBINE_PARTS,{part1} {hits_str}
-,
-DG_SPK_UNKNOWN,???
-DG_SPK_RODRICK,"Rodrick Sign Co."
-DG_SPK_CASCADE,Agent Cascade
-DG_SPK_MOM,Mom
-DG_SPK_DAD,Dad
-DG_SPK_JUNIPER,Juniper
-DG_SPK_CLAY,Clay
-DG_SPK_MR_TULIVAE,Mr. Tulivae
-DG_SPK_MRS_TULIVAE,Mrs. Tulivae
-,
-DG_CHECK_CRATE,"It's just a crate. Doesn't look like anything good is inside."
-DG_CHECK_CRATES,"It's just a bunch of crates. Doesn't look like they have anything useful."
-DG_CHECK_TRASH,"Nothing useful there. Are you that desperate?"
-,
-DG_RODRICK1_SOYOURE,"So... you're reading a sign, eh? Well..."
-DG_RODRICK1_AREYOUSMART,Are you smart?
-DG_RODRICK1_NOPE,Nope.
-DG_RODRICK1_DEFNOT,Definitely not.
-DG_RODRICK1_DIDNT,"Yeah, I didn't think so."
-DG_RODRICK1_DEFDIDNT,"Yeah, I definitely didn't think so."
-DG_RODRICK1_COMEBACK,Come back when you're smart.
-,
-DG_INTRO1_COMEUNPACK,"Hey, [ETHAN], we're unpacking your stuff! Come help!"
-DG_INTRO1_OVER_HERE,Over here! This is your new room!
-DG_INTRO1_WDYT,What do you think?
-DG_INTRO1_GREAT,It's great!
-DG_INTRO1_ALRIGHT,It's alright...
-DG_INTRO1_GREAT_MOM,"Well, I'm glad you like it! I hope you'll be comfortable here."
-DG_INTRO1_ALRIGHT_MOM,"I know it's not much, but I hope you'll be comfortable here."
-DG_INTRO1_ITS_YOURS,"Well, it's all yours. Do you have a specific blanket color in mind?"
-DG_INTRO1_LOOKS_BETTER,"Wow, it looks even better already!"
-DG_INTRO1_ILL_BE_DOWNSTAIRS,"Alright, I'll be downstairs if you need me."
-DG_INTRO1_BRING_FUZZY,"Go bring out Fuzzy from the car, okay?"
-DG_INTRO1_MEET_NEIGHBORS,"Here he is! Hey, [ETHAN], come meet the neighbors!"
-DG_INTRO1_MR_T,"This is Mr. Tulivae. He lives next door."
-DG_INTRO1_HI_THERE,"Hi there, [ETHAN]. Pleasure meeting you."
-DG_INTRO1_HE_SEEMS_NICE,He seems pretty nice. Maybe you should go say hi later.
+key,en_US,en_US_Pirate,en_US_Sarcastic
+IZ_INTERACT_INTERACT,Interact,Interact,Interact
+IZ_INTERACT_CHECK,Check,Peer,Critique
+IZ_INTERACT_PRESS,Press,Push,Press
+IZ_INTERACT_ENTER,Enter,Enter,Enter
+IZ_INTERACT_EXIT,Exit,Exit,Exit
+IZ_INTERACT_TALK,Talk,Chatter,Yap
+IZ_INTERACT_OPEN,Open,Open,Open
+IZ_INTERACT_READ,Read,Read,Read
+IZ_INTERACT_TAKE,Take,Plunder,Steal
+IZ_INTERACT_DEBUG,Debug,Remove barnacles,Defeature
+ITEM_NAME_cool_stick,Stick,Stick,Stick
+ITEM_DESC_cool_stick,Some stick you found off the sidewalk. Looks cool.,Some stick ye plundered off th' lands. Lookin' dandy.,"THIS is the best weapon you could find?"
+ITEM_NAME_trusty_rusty_pistol,Trusty Rusty Pistol,Miniature Musket (Rusty),Ol' Reliable Rusty
+ITEM_DESC_trusty_rusty_pistol,Pretty unsafe! Deals poor damage.,What kind o' pirate would be caught dead or alive with this?,You're better off throwing this at the enemy. Weirdo.
+ITEM_NAME_ts_slick7,TS Slick7,TS Slick7,TS Slick7
+ITEM_DESC_ts_slick7,Tactical Supreme’s latest model in the pistol category. Deals decent damage.,Yer fancy new-fangled gun from Tactical Supreme.,It's a gun. It shoots things. What more do you want?
+ITEM_NAME_terra_precision_shotgun,Precision Shotgun,Precision Blunderbuss,Precision Shotgun
+ITEM_DESC_terra_precision_shotgun,A weapon for Terra. Massive damage at the cost of reload time.,A weapon fer Terra. Massive blast o' hurtin' at th' expense o' reloadin' speed.,"A weapon for Terra. Red Ryder over here probably does enough damage to scare away a squirrel, I guess."
+ELEMENT_NAME_Blade,Blade,Cutlass,Blade
+ELEMENT_NAME_Kinetic,Kinetic,Cannonball,Kinetic
+ELEMENT_NAME_Fire,Fire,Flames,Fire
+ELEMENT_NAME_Ice,Ice,Iceberg,Ice
+ELEMENT_NAME_Electric,Electric,Lightnin',Zap
+ELEMENT_NAME_Wind,Wind,Gale,Wind
+ELEMENT_NAME_Earth,Earth,Earth,Rock
+ELEMENT_NAME_Psi,Psychic,Magic,Oddball
+ELEMENT_NAME_Spirit,Spirit,Flyin' Dutchman,Ghost
+ELEMENT_NAME_Fuzz,Fuzz,Rum,Fuzz
+ELEMENT_NAME_Whip,Whip,Keelhaul,Tickle
+ELEMENT_ADJ_Blade,Slash,Slash,Edgy
+ELEMENT_ADJ_Kinetic,Kinetic,Kinetic,Kinetic
+ELEMENT_ADJ_Fire,Fire-based,Flamin' hot,Fire-based
+ELEMENT_ADJ_Ice,Ice-based,Frigid,Ice-based
+ELEMENT_ADJ_Electric,Electric,Thundrous,Zappy
+ELEMENT_ADJ_Wind,Wind-based,Windy,Wind-based
+ELEMENT_ADJ_Earth,Earth-based,Earthen,Rocky
+ELEMENT_ADJ_Psi,Psychic,Mind-bendin',Hippie-dippie
+ELEMENT_ADJ_Spirit,Supernatural,Spectral,Spoopy
+ELEMENT_ADJ_Fuzz,Fuzzy,Drunken,Fuzzy
+ELEMENT_ADJ_Whip,Whip,Keelhaulin',Tickle-based
+SKILL_PSI_FLUX_NAME,PSI Flux,Time Machine,PSI Flux
+SKILL_PSI_FLUX_DESC,Warps time in your favor for {seconds} seconds.,Warps time in yer favor for {seconds} seconds.,Call time-out and ask the enemies to let you tie your shoe for {seconds} seconds.
+SKILL_RECOVERY_COMBINED,{family} {power},{family} {power},{family} {power}
+SKILL_RECOVERY_HP_AMOUNT_NAME,Recover,Recover,Recover
+SKILL_RECOVERY_HP_AMOUNT_DESC,Heals {amount} of the target's HP.,Heals {amount} o' th' target's life.,Heals {amount} of the target's HP.
+SKILL_RECOVERY_HP_PERCENT_NAME,Renew,Renew,Renew
+SKILL_RECOVERY_HP_PERCENT_DESC,Heals {percent} of the target's HP.,Heals {percent} o' th' target's life.,Heals {percent} of the target's HP.
+SKILL_RECOVERY_STATUS_NAME,Healing,Healing,Healing
+SKILL_RECOVERY_STATUS_DESC,Heals status effects up to {rating}★.,Heals status effects up to {rating}★.,Miracule cure that works on ALL YOUR PROBLEMS!* (*only up to {rating}★)
+SKILL_ATTACK_FIRE_DMG_NAME,Caustics,Scald,Caustics
+SKILL_ATTACK_FIRE_FX_NAME,Flame,Will-O-Wisp,Flame
+SKILL_ATTACK_ICE_DMG_NAME,Hail,Hail,Hail
+SKILL_ATTACK_ICE_FX_NAME,Freeze,Iceberg,Freeze
+SKILL_ATTACK_ELECTRIC_DMG_NAME,Zap,Zap,Zap
+SKILL_ATTACK_ELECTRIC_FX_NAME,Current,Lightnin',Current
+SKILL_ATTACK_WIND_DMG_NAME,Gust,Gale,Gust
+SKILL_ATTACK_WIND_FX_NAME,Disarm,Hurricane,Pickpocket
+SKILL_ATTACK_EARTH_DMG_NAME,Quake,Quake,Quake
+SKILL_ATTACK_EARTH_FX_NAME,Ground,Ground,Ground
+SKILL_ATTACK_PSI_DMG_NAME,Psi,Psi,Psi
+SKILL_ATTACK_PSI_FX_NAME,Brainjack,Brainjack,Brainjack
+SKILL_ATTACK_SPIRIT_DMG_NAME,Vex,Doom,Vex
+SKILL_ATTACK_SPIRIT_FX_NAME,Curse,Curse,Spook
+SKILL_ATTACK_FUZZ_NAME,PK Fuzz,PK Rum,PK Fuzz
+SKILL_ATTACK_WHIP_NAME,PK Whip,Keelhaul,PK Whip
+SKILL_TIER_1,A,A,A
+SKILL_TIER_2,B,B,B
+SKILL_TIER_3,C,C,C
+SKILL_TIER_4,D,D,D
+SKILL_TIER_5,E,E,E
+SKILL_POWER_PLURAL,@{power},@{power},@{power}
+SKILL_ATTACK_NAME_COMBINED,{family} {power},{family} {power},{family} {power}
+SKILL_ATTACK_DESCRIBE_COMBINED,{dmg} {fx},{dmg} {fx},{dmg} {fx}
+SKILL_ATTACK_POWER_DESCRIBE,Deals {adjective} {element} damage.,Deals {adjective} {element} damage.,Deals {adjective} {element} damage.
+SKILL_ATTACK_POWER_1,faint,faint,puny
+SKILL_ATTACK_POWER_2,weak,weak,faint
+SKILL_ATTACK_POWER_3,medium,medium,weak
+SKILL_ATTACK_POWER_4,strong,strong,mediocre
+SKILL_ATTACK_POWER_5,massive,massive,decent
+SKILL_ATTACK_PLURAL_DESC,{part1} Targets all enemies!,{part1} Pillages all yer foes!,{part1} And I guess it costs more to use...
+SKILL_ATTACK_FX_CHANCE_ALWAYS,Always inflicts {fx}.,Always inflicts {fx}.,Always inflicts {fx}.
+SKILL_ATTACK_FX_CHANCE_HIGH,High chance of inflicting {fx}.,High chance o' inflictin' {fx}.,May inflict {fx}.
+SKILL_ATTACK_FX_CHANCE_LOW,May inflict {fx}.,May inflict {fx}.,Probably won't ever actually inflict {fx}.
+SKILL_SHIELD_NAME,{adjective} {width} {name},{adjective} {width} {name},{adjective} {width} {name}
+SKILL_SHIELD_DESC,Casts a {width} {potency} {name} that {reflect_action} {affinity} damage.,Casts a {width} {potency} {name} that {reflect_action} {affinity} damage.,Casts a {width} {potency} {name} that {reflect_action} {affinity} damage.
+SKILL_SHIELD_PHYSICAL_ADJ,Physical,Material,Physical
+SKILL_SHIELD_MAGICAL_ADJ,Magical,Magician's,Magical
+SKILL_SHIELD_UNIQUE_ADJ,Forceful,Dandy,Forceful
+SKILL_SHIELD_SPECIALIZED_ADJ,Strange,Queer,Strange
+SKILL_SHIELD_PHYSICAL_DESC,physical,material,physical
+SKILL_SHIELD_MAGICAL_DESC,magical,magician's,magical
+SKILL_SHIELD_UNIQUE_DESC,magical and unique,magician and dandy,magical and unique
+SKILL_SHIELD_SPECIALIZED_DESC,certain types of,certain types o',certain types of
+SKILL_SHIELD_WIDTH_WIDE,Wide,Big Ol',Wide
+SKILL_SHIELD_WIDTH_NARROW,Narrow,Miniscule,Narrow
+SKILL_SHIELD_POTENCY_IMPENETRABLE,Impenetrable,Impenetrable,Impenetrable
+SKILL_SHIELD_POTENCY_STURDY,Sturdy,Sturdy,Mediocre
+SKILL_SHIELD_POTENCY_FAIR,Fair,Fair,Weak
+SKILL_SHIELD_POTENCY_WEAK,Weak,Weak,Puny
+SKILL_SHIELD_POTENCY_NULLIFIED,Nullified,Nullified,Useless
+SKILL_SHIELD_REFLECTIVITY_FALSE,blocks,blocks,blocks
+SKILL_SHIELD_REFLECTIVITY_TRUE,reflects,reflects,reflects
+SKILL_SHIELD_NAME_MIRROR,Mirror,Mirror,Mirror
+SKILL_SHIELD_NAME_SHIELD,Shield,Shield,Shield
+SKILL_SHIELD_HITS_NONE,It probably won't last...,It shant e'er last...,It probably won't last...
+SKILL_SHIELD_HITS_ONE,It could stand one hit... probably.,Ye could do with one hit... probably.,It could stand one hit... if you were lucky.
+SKILL_SHIELD_HITS_COUPLE,It could likely stand a couple hits.,Ye could do with a couple hits.,"It could stand a couple hits, I guess."
+SKILL_SHIELD_HITS_SEVERAL,It could stand several hits.,Ye could do with several hits.,It could stand several hits.
+SKILL_SHIELD_HITS_MANY,It could easily stand quite a few hits.,"Ye could do with quite a few hits, matey!","Yeah, this one might actually work."
+SKILL_SHIELD_HITS_WHILE,It'd take enemies a while to break through this one.,It'd take yer foes fer evah to plunder yer booty.,Those enemies won't stand a chance.
+SKILL_SHIELD_COMBINE_PARTS,{part1} {hits_str},{part1} {hits_str},{part1} {hits_str}
+DG_SPK_UNKNOWN,???,???,???
+DG_SPK_RODRICK,"Rodrick Sign Co.","Rodrick Sign Co.","Your Mom!!!!!!!! (real)"
+DG_SPK_CASCADE,Agent Cascade,Purple Gal,Cascade
+DG_SPK_MOM,Mom,Mom,Mom
+DG_SPK_DAD,Dad,Dad,Dad
+DG_SPK_JUNIPER,Juniper,Juniper,Juniper
+DG_SPK_CLAY,Clay,Clay,Clay
+DG_SPK_MR_TULIVAE,Mr. Tulivae,Cap'n Tulivae,Mr. Tulivae
+DG_SPK_MRS_TULIVAE,Mrs. Tulivae,Mrs. Tulivae,Mrs. Tulivae
+DG_CHECK_CRATE,It's just a crate. Doesn't look like anything good is inside.,"It be just a crate, matey. Nothin' to plunder here.",It's just a crate.
+DG_CHECK_CRATES,It's just a bunch of crates. Doesn't look like they have anything useful.,"'Tis just a bunch o' crates. Nothin' to plunder here, matey.",It's just a bunch of crates.
+DG_CHECK_TRASH,Nothing useful there. Are you that desperate?,Nothin' useful there. Are ye that desperate?,You found... a whole lotta trash! Nicely done!
+DG_RODRICK1_SOYOURE,"So... you're reading a sign, eh? Well...","So... ye be readin' a sign, eh? Well...","So... you're reading a sign, eh? Well..."
+DG_RODRICK1_AREYOUSMART,Are you smart?,Be ye wise?,Are you smart?
+DG_RODRICK1_NOPE,Nope.,Nay.,Nope.
+DG_RODRICK1_DEFNOT,Definitely not.,Definitely naht.,Definitely not.
+DG_RODRICK1_DIDNT,"Yeah, I didn't think so.","Aye, I didn't think so.","Yeah, I didn't think so."
+DG_RODRICK1_DEFDIDNT,"Yeah, I definitely didn't think so.","Aye, I definitely didn't think so.","Yeah, I definitely didn't think so."
+DG_RODRICK1_COMEBACK,Come back when you're smart.,Come back when ye be wiser.,Come back when you're smart.
+DG_INTRO1_COMEUNPACK,"Hey, [ETHAN], we're unpacking your stuff! Come help!","Ahoy, [ETHAN], we be unpackin' yer stuff! Come help!","Hey, [ETHAN], we're unpacking your stuff! Come help!"
+DG_INTRO1_OVER_HERE,Over here! This is your new room!,Over here! This be yer new room!,Over here! This is your new room!
+DG_INTRO1_WDYT,What do you think?,What be yer thoughts?,What do you think?
+DG_INTRO1_GREAT,It's great!,Rather grand!,"Wow, sooooo comfy..."
+DG_INTRO1_ALRIGHT,It's alright...,It be alright...,It's alright...
+DG_INTRO1_GREAT_MOM,"Well, I'm glad you like it! I hope you'll be comfortable here.","Well, I be glad ye like it! I hope ye be comfortable here.",...
+DG_INTRO1_ALRIGHT_MOM,"I know it's not much, but I hope you'll be comfortable here.","I know it's nah much, but ye do with what ye got, right?","I know it's not much, but I hope you'll be comfortable here."
+DG_INTRO1_ITS_YOURS,"Well, it's all yours. Do you have a specific blanket color in mind?","Well, it's all yours, captain. What color flag does yer ship fly?","Well, it's all yours. Do you have a specific blanket color in mind?"
+DG_INTRO1_LOOKS_BETTER,"Wow, it looks even better already!","Arrr, fine choice!","That's so basic. Whatever, I guess."
+DG_INTRO1_ILL_BE_DOWNSTAIRS,"Alright, I'll be downstairs if you need me.","Alright, yer mama be downstairs if ye need her.","I'll be downstairs if you need me."
+DG_INTRO1_BRING_FUZZY,"Go bring out Fuzzy from the car, okay?","Go fetch Fuzzy from the car, aye?","Go bring out Fuzzy from the car, okay?"
+DG_INTRO1_MEET_NEIGHBORS,"Here he is! Hey, [ETHAN], come meet the neighbors!","Here he be! Hey, [ETHAN], come meet th' neighbors!","Took him long enough. Hey, [ETHAN], come meet the neighbors!"
+DG_INTRO1_MR_T,"This is Mr. Tulivae. He lives next door.","This be Cap'n Tulivae. He lives next door.","This is Mr. Tulivae. He lives next door."
+DG_INTRO1_HI_THERE,"Hi there, [ETHAN]. Pleasure meeting you.","Ahoy, [ETHAN]. Pleasure meetin' ya.","Hi there, [ETHAN]. Pleasure meeting you."
+DG_INTRO1_HE_SEEMS_NICE,He seems pretty nice. Maybe you should go say hi later.,He seems pretty nice. Maybe ye should go say hi later.,He seems pretty nice. Must be up to something.
