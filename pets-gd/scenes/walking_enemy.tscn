@@ -6,7 +6,7 @@
 size = Vector2(39.9995, 80.0003)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yogbq"]
-radius = 128.25
+radius = 40.0
 
 [node name="WalkingEnemy" type="WalkingEnemy"]
 sight_range = 850.0
