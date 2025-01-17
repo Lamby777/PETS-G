@@ -157,6 +157,7 @@ delete={
 [internationalization]
 
 locale/translations=PackedStringArray("res://i18n/translations.en_US.translation")
+locale/test="en_US_PIRATE"
 locale/fallback="en_US"
 
 [layer_names]
