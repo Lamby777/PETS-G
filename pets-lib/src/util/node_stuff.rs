@@ -135,9 +135,18 @@ pub fn si() -> Gd<StatsInterface> {
 pub struct GdW<T: GodotClass>(pub Gd<T>);
 
 /// takes a bbcode string and prepends or removes it from the label text
-pub fn bbcode_toggle(mut node: Gd<RichTextLabel>, bbcode: &str, active: bool) {
-    let old_text = node.get_text().to_string();
-    let new_text = prefix_mod(&old_text, bbcode, active);
+pub fn bbcode_toggle(
+    mut node: Gd<RichTextLabel>,
+    bbcode: &str,
+    active: bool,
+    autotranslate: bool,
+) {
+    let mut old_text = node.get_text();
+    if autotranslate {
+        old_text = tr(old_text.arg());
+    }
+
+    let new_text = prefix_mod(old_text.to_string().as_str(), bbcode, active);
 
     node.set_text(&new_text);
 }

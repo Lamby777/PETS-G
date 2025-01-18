@@ -1,4 +1,8 @@
 keys,en_US,pr,tlh_US
+MAINMENU_OPTION_PLAY,Play,Set Sail,Play
+MAINMENU_OPTION_OPTIONS,Options,Fiddle 'round,Options
+MAINMENU_OPTION_CREDITS,Credits,Th' Crew,Credits
+MAINMENU_OPTION_QUIT,Quit,Avast!,Touch Grass
 IZ_INTERACT_INTERACT,Interact,Interact,Interact
 IZ_INTERACT_CHECK,Check,Peer,Critique
 IZ_INTERACT_PRESS,Press,Push,Press

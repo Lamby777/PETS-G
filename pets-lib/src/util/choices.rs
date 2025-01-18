@@ -90,7 +90,7 @@ impl ChoiceAgent {
             )
             .unwrap();
 
-            bbcode_toggle(label, CHOICE_WAVE_BBCODE, is_picked);
+            bbcode_toggle(label, CHOICE_WAVE_BBCODE, is_picked, true);
         }
 
         if !self.tween_property.is_empty() {
