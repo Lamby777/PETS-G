@@ -254,7 +254,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(1.92, 3.2),
 "transitions": PackedFloat32Array(0.307786, 1),
 "update": 0,
-"values": [Vector2(-400, 320), Vector2(64, 320)]
+"values": [Vector2(-700, 320), Vector2(64, 320)]
 }
 
 [sub_resource type="Animation" id="Animation_m5j65"]
@@ -354,7 +354,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(64, 320), Vector2(-2400, 320)]
+"values": [Vector2(64, 320), Vector2(-3000, 320)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -574,7 +574,7 @@ offset_bottom = 360.0
 [node name="Play" type="RichTextLabel" parent="MoveRight/MenuChoices"]
 clip_contents = false
 layout_mode = 0
-offset_right = 456.0
+offset_right = 720.0
 offset_bottom = 136.0
 focus_neighbor_top = NodePath("../Quit")
 focus_neighbor_bottom = NodePath("../Options")
@@ -582,15 +582,15 @@ focus_next = NodePath("../Options")
 focus_previous = NodePath("../Quit")
 focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 80
+theme_override_font_sizes/normal_font_size = 68
 bbcode_enabled = true
-text = "Play"
+text = "MAINMENU_OPTION_PLAY"
 
 [node name="Options" type="RichTextLabel" parent="MoveRight/MenuChoices"]
 clip_contents = false
 layout_mode = 0
 offset_top = 128.0
-offset_right = 456.0
+offset_right = 720.0
 offset_bottom = 264.0
 focus_neighbor_top = NodePath("../Play")
 focus_neighbor_bottom = NodePath("../Credits")
@@ -598,15 +598,15 @@ focus_next = NodePath("../Credits")
 focus_previous = NodePath("../Play")
 focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 80
+theme_override_font_sizes/normal_font_size = 68
 bbcode_enabled = true
-text = "Options"
+text = "MAINMENU_OPTION_OPTIONS"
 
 [node name="Credits" type="RichTextLabel" parent="MoveRight/MenuChoices"]
 clip_contents = false
 layout_mode = 0
 offset_top = 256.0
-offset_right = 456.0
+offset_right = 720.0
 offset_bottom = 392.0
 focus_neighbor_top = NodePath("../Options")
 focus_neighbor_bottom = NodePath("../Quit")
@@ -614,15 +614,15 @@ focus_next = NodePath("../Quit")
 focus_previous = NodePath("../Options")
 focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 80
+theme_override_font_sizes/normal_font_size = 68
 bbcode_enabled = true
-text = "Credits"
+text = "MAINMENU_OPTION_CREDITS"
 
 [node name="Quit" type="RichTextLabel" parent="MoveRight/MenuChoices"]
 clip_contents = false
 layout_mode = 0
 offset_top = 384.0
-offset_right = 456.0
+offset_right = 720.0
 offset_bottom = 520.0
 focus_neighbor_top = NodePath("../Credits")
 focus_neighbor_bottom = NodePath("../Play")
@@ -630,9 +630,9 @@ focus_next = NodePath("../Play")
 focus_previous = NodePath("../Credits")
 focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 80
+theme_override_font_sizes/normal_font_size = 68
 bbcode_enabled = true
-text = "Quit"
+text = "MAINMENU_OPTION_QUIT"
 
 [node name="BlackFade" type="ColorRect" parent="MoveRight"]
 unique_name_in_owner = true
