@@ -13,7 +13,7 @@ IZ_INTERACT_OPEN,Open,Open,Open
 IZ_INTERACT_READ,Read,Read,Read
 IZ_INTERACT_TAKE,Take,Plunder,Steal
 IZ_INTERACT_DEBUG,Debug,Remove barnacles,Defeature
-ITEM_NAME_cool_stick,Stick,Stick,Stick
+ITEM_NAME_cool_stick,Stick,Cane,Stick
 ITEM_DESC_cool_stick,Some stick you found off the sidewalk. Looks cool.,Some stick ye plundered off th' lands. Lookin' dandy.,"THIS is the best weapon you could find?"
 ITEM_NAME_trusty_rusty_pistol,Trusty Rusty Pistol,Miniature Musket (Rusty),Ol' Reliable Rusty
 ITEM_DESC_trusty_rusty_pistol,Pretty unsafe! Deals poor damage.,What kind o' pirate would be caught dead or alive with this?,You're better off throwing this at the enemy. Weirdo.
@@ -118,9 +118,9 @@ DG_SPK_UNKNOWN,???,???,???
 DG_SPK_RODRICK,"Rodrick Sign Co.","Rodrick Sign Co.","Your Mom!!!!!!!! (real)"
 DG_SPK_CASCADE,Agent Cascade,Purple Gal,Cascade
 DG_SPK_MOM,Mom,Mom,Mom
-DG_SPK_DAD,Dad,Dad,Dad
-DG_SPK_JUNIPER,Juniper,Juniper,Juniper
-DG_SPK_CLAY,Clay,Clay,Clay
+DG_SPK_DAD,Dad,Pops,Dad
+DG_SPK_JUNIPER,Juniper,Lady Juniper,Juniper
+DG_SPK_CLAY,Clay,Cap'n Clay,Clay
 DG_SPK_MR_TULIVAE,Mr. Tulivae,Cap'n Tulivae,Mr. Tulivae
 DG_SPK_MRS_TULIVAE,Mrs. Tulivae,Mrs. Tulivae,Mrs. Tulivae
 DG_CHECK_CRATE,It's just a crate. Doesn't look like anything good is inside.,"It be just a crate, matey. Nothin' to plunder here.",It's just a crate.
@@ -144,7 +144,7 @@ DG_INTRO1_ITS_YOURS,"Well, it's all yours. Do you have a specific blanket color 
 DG_INTRO1_LOOKS_BETTER,"Wow, it looks even better already!","Arrr, fine choice!","That's so basic. Whatever, I guess."
 DG_INTRO1_ILL_BE_DOWNSTAIRS,"Alright, I'll be downstairs if you need me.","Alright, yer mama be downstairs if ye need her.","I'll be downstairs if you need me."
 DG_INTRO1_BRING_FUZZY,"Go bring out Fuzzy from the car, okay?","Go fetch Fuzzy from the car, aye?","Go bring out Fuzzy from the car, okay?"
-DG_INTRO1_MEET_NEIGHBORS,"Here he is! Hey, [ETHAN], come meet the neighbors!","Here he be! Hey, [ETHAN], come meet th' neighbors!","Took him long enough. Hey, [ETHAN], come meet the neighbors!"
+DG_INTRO1_MEET_NEIGHBORS,"Here he is! Hey, [ETHAN], come meet the neighbors!","Thar she blows! Hey, [ETHAN], come meet th' neighbors!","Took him long enough. Hey, [ETHAN], come meet the neighbors!"
 DG_INTRO1_MR_T,"This is Mr. Tulivae. He lives next door.","This be Cap'n Tulivae. He lives next door.","This is Mr. Tulivae. He lives next door."
 DG_INTRO1_HI_THERE,"Hi there, [ETHAN]. Pleasure meeting you.","Ahoy, [ETHAN]. Pleasure meetin' ya.","Hi there, [ETHAN]. Pleasure meeting you."
 DG_INTRO1_HE_SEEMS_NICE,He seems pretty nice. Maybe you should go say hi later.,He seems pretty nice. Maybe ye should go say hi later.,He seems pretty nice. Must be up to something.
