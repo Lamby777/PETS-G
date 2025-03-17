@@ -165,7 +165,7 @@ impl PartyCB {
     /// Set character positions based on past pos/rot
     pub fn move_chars(&mut self, moving: bool) {
         // don't run if disabled or if no previous positions saved
-        if self.in_cutscene || self.past_positions.len() == 0 {
+        if self.in_cutscene || self.past_positions.is_empty() {
             return;
         }
 
@@ -224,7 +224,7 @@ impl PartyCB {
 
         self.base_mut().move_and_slide();
 
-        let pos_updated = (self.past_positions.len() == 0)
+        let pos_updated = (self.past_positions.is_empty())
             || (self.past_positions[0] != self.base().get_position());
 
         if pos_updated {

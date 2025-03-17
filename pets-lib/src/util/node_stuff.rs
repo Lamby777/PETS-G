@@ -47,7 +47,7 @@ where
 
     let callable = Callable::from_local_fn("set_shader_value", move |args| {
         let mut material = Gd::<ShaderMaterial>::from_instance_id(material_id);
-        material.set_shader_parameter("opacity", &args[0]);
+        material.set_shader_parameter("opacity", args[0]);
 
         Ok(Variant::nil())
     });
