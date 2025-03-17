@@ -83,15 +83,11 @@ impl DialogBox {
             self.free_choice_labels();
         }
 
-        let spk = self
-            .active
-            .then(|| self.translated_speaker())
-            .unwrap_or("".into());
-
-        let msg = self
-            .active
-            .then(|| self.translated_message())
-            .unwrap_or("".into());
+        let (spk, msg) = if self.active {
+            (self.translated_speaker(), self.translated_message())
+        } else {
+            ("".into(), "".into())
+        };
 
         self.spk_txt.set_text(&spk);
         self.msg_txt.set_text(&msg);
