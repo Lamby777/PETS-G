@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2m4ghg2jf166"]
 
-[ext_resource type="Script" path="res://classes/skills-menu.gd" id="1_3qen2"]
+[ext_resource type="Script" uid="uid://bajx2jlpjxjt4" path="res://classes/skills-menu.gd" id="1_3qen2"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_lehk0"]
 [ext_resource type="PackedScene" uid="uid://ddnxr6fe5mj5q" path="res://scenes/skills_menu_choice.tscn" id="3_fa5t7"]
 

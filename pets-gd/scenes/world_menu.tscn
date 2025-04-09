@@ -36,8 +36,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ujmhv"]
 _data = {
-"RESET": SubResource("Animation_3wgbn"),
-"open": SubResource("Animation_acqou")
+&"RESET": SubResource("Animation_3wgbn"),
+&"open": SubResource("Animation_acqou")
 }
 
 [node name="WorldMenu" type="WorldMenu"]

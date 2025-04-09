@@ -2,16 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://kgl5788x405y" path="res://scenes/battle.tscn" id="1_37bcu"]
 [ext_resource type="PackedScene" uid="uid://c8hhg8v5ls70u" path="res://scenes/world_menu.tscn" id="2_6orff"]
-[ext_resource type="Shader" path="res://themes/opacity.gdshader" id="2_6uro0"]
+[ext_resource type="Shader" uid="uid://cakivekftxu5d" path="res://themes/opacity.gdshader" id="2_6uro0"]
 [ext_resource type="PackedScene" uid="uid://wkelk3y4bkcj" path="res://scenes/dialog.tscn" id="2_lgtmm"]
 [ext_resource type="PackedScene" uid="uid://b0rlrppekv4vg" path="res://scenes/party_cb.tscn" id="2_r6tgb"]
 [ext_resource type="PackedScene" uid="uid://c0jehwow4ein4" path="res://scenes/interaction_manager.tscn" id="2_uh12s"]
-[ext_resource type="Shader" path="res://themes/encounter.gdshader" id="3_a3d4r"]
+[ext_resource type="Shader" uid="uid://drmd5yccef704" path="res://themes/encounter.gdshader" id="3_a3d4r"]
 [ext_resource type="PackedScene" uid="uid://clpj4pxq1ulin" path="res://scenes/inventory.tscn" id="3_jwkdy"]
-[ext_resource type="Script" path="res://classes/BattleIntroRect.gd" id="4_jple0"]
-[ext_resource type="Script" path="res://dialogue/debug.gd" id="10_egidj"]
+[ext_resource type="Script" uid="uid://2gb0eqa1s4si" path="res://classes/BattleIntroRect.gd" id="4_jple0"]
+[ext_resource type="Script" uid="uid://d2ndy8s1o0h2w" path="res://dialogue/debug.gd" id="10_egidj"]
 [ext_resource type="PackedScene" uid="uid://c7x12nyqelw1f" path="res://scenes/rooms/cv-outdoors.tscn" id="10_kug7e"]
-[ext_resource type="Script" path="res://quests/intro1.gd" id="13_w40m0"]
+[ext_resource type="Script" uid="uid://gcei2f7ax5f7" path="res://quests/intro1.gd" id="13_w40m0"]
 
 [sub_resource type="Animation" id="Animation_2m57u"]
 length = 0.001
@@ -69,8 +69,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fv7du"]
 _data = {
-"RESET": SubResource("Animation_2m57u"),
-"crossfade": SubResource("Animation_k4si3")
+&"RESET": SubResource("Animation_2m57u"),
+&"crossfade": SubResource("Animation_k4si3")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3xdh0"]
@@ -100,7 +100,7 @@ bus = &"ZoneMusic"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ZoneAudio"]
 libraries = {
-"": SubResource("AnimationLibrary_fv7du")
+&"": SubResource("AnimationLibrary_fv7du")
 }
 
 [node name="BattleLayer" type="CanvasLayer" parent="."]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://wkelk3y4bkcj"]
 
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_jbfs2"]
-[ext_resource type="Script" path="res://classes/dbox.gd" id="2_jmx8e"]
+[ext_resource type="Script" uid="uid://bm3e2r0bgc7u2" path="res://classes/dbox.gd" id="2_jmx8e"]
 
 [sub_resource type="Animation" id="Animation_3wgbn"]
 length = 0.001
@@ -36,8 +36,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ujmhv"]
 _data = {
-"RESET": SubResource("Animation_3wgbn"),
-"open": SubResource("Animation_acqou")
+&"RESET": SubResource("Animation_3wgbn"),
+&"open": SubResource("Animation_acqou")
 }
 
 [node name="DialogBox" type="DialogBox"]
