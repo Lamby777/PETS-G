@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ddnxr6fe5mj5q"]
 
-[ext_resource type="Script" path="res://classes/skill_choice_label.gd" id="1_5bmgk"]
+[ext_resource type="Script" uid="uid://41g8vgpbopgu" path="res://classes/skill_choice_label.gd" id="1_5bmgk"]
 
 [node name="RichTextLabel" type="RichTextLabel"]
 custom_minimum_size = Vector2(0, 70)

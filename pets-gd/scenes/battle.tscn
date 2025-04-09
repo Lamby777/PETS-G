@@ -1,8 +1,8 @@
 [gd_scene load_steps=26 format=3 uid="uid://kgl5788x405y"]
 
-[ext_resource type="Shader" path="res://themes/opacity.gdshader" id="1_3pmac"]
-[ext_resource type="Script" path="res://classes/tactics/enemies/ANonnyMouse.gd" id="1_vrl6q"]
-[ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="2_0m4jp"]
+[ext_resource type="Shader" uid="uid://cakivekftxu5d" path="res://themes/opacity.gdshader" id="1_3pmac"]
+[ext_resource type="Script" uid="uid://c3btsjsnjtghu" path="res://classes/tactics/enemies/ANonnyMouse.gd" id="1_vrl6q"]
+[ext_resource type="Shader" uid="uid://bkmn6vpcv6d25" path="res://themes/vdrugs/rainbow.gdshader" id="2_0m4jp"]
 [ext_resource type="PackedScene" uid="uid://dd2ecg5hgyxv2" path="res://scenes/bullets/mouse1.tscn" id="2_n0w8q"]
 [ext_resource type="Texture2D" uid="uid://he44mug8lejt" path="res://assets/textures/misc/BattleIcons.png" id="3_k3xai"]
 [ext_resource type="AudioStream" uid="uid://ck0eoifj1plwe" path="res://assets/sounds/click1.wav" id="4_icqrr"]
@@ -10,7 +10,7 @@
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="5_hcsfj"]
 [ext_resource type="Texture2D" uid="uid://cx24dyfnh30ag" path="res://assets/textures/portraits/Ethan.png" id="6_abown"]
 [ext_resource type="PackedScene" uid="uid://ywn8h01im5gx" path="res://scenes/enemy_sprite.tscn" id="6_dgpl5"]
-[ext_resource type="Script" path="res://classes/hpbar.gd" id="9_r25ik"]
+[ext_resource type="Script" uid="uid://dygfeopjs60l3" path="res://classes/hpbar.gd" id="9_r25ik"]
 [ext_resource type="PackedScene" uid="uid://b2m4ghg2jf166" path="res://scenes/skills-menu.tscn" id="12_546eg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w1wwc"]
@@ -85,8 +85,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_khfqk"]
 _data = {
-"RESET": SubResource("Animation_fe50h"),
-"margin_slide_up": SubResource("Animation_7bvmr")
+&"RESET": SubResource("Animation_fe50h"),
+&"margin_slide_up": SubResource("Animation_7bvmr")
 }
 
 [sub_resource type="Animation" id="Animation_lk11u"]
@@ -170,8 +170,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_730bq"]
 _data = {
-"RESET": SubResource("Animation_lk11u"),
-"dualmenu_open": SubResource("Animation_0hj2l")
+&"RESET": SubResource("Animation_lk11u"),
+&"dualmenu_open": SubResource("Animation_0hj2l")
 }
 
 [sub_resource type="Animation" id="Animation_fgiup"]
@@ -207,8 +207,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cwld1"]
 _data = {
-"RESET": SubResource("Animation_fgiup"),
-"fade_in": SubResource("Animation_16138")
+&"RESET": SubResource("Animation_fgiup"),
+&"fade_in": SubResource("Animation_16138")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lgbmi"]
@@ -510,18 +510,18 @@ layout_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/DualMenu/RightPanel"]
 libraries = {
-"": SubResource("AnimationLibrary_khfqk")
+&"": SubResource("AnimationLibrary_khfqk")
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/DualMenu"]
 root_node = NodePath("../../..")
 libraries = {
-"": SubResource("AnimationLibrary_730bq")
+&"": SubResource("AnimationLibrary_730bq")
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_cwld1")
+&"": SubResource("AnimationLibrary_cwld1")
 }
 
 [node name="IntroBlack" type="ColorRect" parent="."]

@@ -3,7 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://bu1akc5wvo0wo" path="res://assets/music/menu/titlebreeze.ogg" id="1_06t4m"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="3_gc66u"]
 [ext_resource type="AudioStream" uid="uid://4puxvjdkmpho" path="res://assets/sounds/petsgamestart.wav" id="4_1uee5"]
-[ext_resource type="Shader" path="res://themes/opacity.gdshader" id="4_gkpis"]
+[ext_resource type="Shader" uid="uid://cakivekftxu5d" path="res://themes/opacity.gdshader" id="4_gkpis"]
 
 [sub_resource type="Animation" id="Animation_uejll"]
 length = 0.001
@@ -38,8 +38,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i3drf"]
 _data = {
-"RESET": SubResource("Animation_uejll"),
-"open": SubResource("Animation_4x3vx")
+&"RESET": SubResource("Animation_uejll"),
+&"open": SubResource("Animation_4x3vx")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tovj7"]
@@ -371,9 +371,9 @@ tracks/8/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qpnwk"]
 _data = {
-"RESET": SubResource("Animation_khffc"),
-"main_menu_intro": SubResource("Animation_po2ip"),
-"main_menu_outro": SubResource("Animation_m5j65")
+&"RESET": SubResource("Animation_khffc"),
+&"main_menu_intro": SubResource("Animation_po2ip"),
+&"main_menu_outro": SubResource("Animation_m5j65")
 }
 
 [node name="TitleScreen" type="TitleScreen"]
@@ -541,7 +541,7 @@ text = "[center]3"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MoveRight/SaveFilesPanel"]
 libraries = {
-"": SubResource("AnimationLibrary_i3drf")
+&"": SubResource("AnimationLibrary_i3drf")
 }
 
 [node name="SlashPanel2" type="Panel" parent="MoveRight"]
@@ -654,6 +654,6 @@ metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MoveRight"]
 libraries = {
-"": SubResource("AnimationLibrary_qpnwk")
+&"": SubResource("AnimationLibrary_qpnwk")
 }
 autoplay = "main_menu_intro"

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://clpj4pxq1ulin"]
 
-[ext_resource type="Shader" path="res://themes/opacity.gdshader" id="1_ghbm4"]
+[ext_resource type="Shader" uid="uid://cakivekftxu5d" path="res://themes/opacity.gdshader" id="1_ghbm4"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_yb1iv"]
 [ext_resource type="PackedScene" uid="uid://btmwdhpxxjkn" path="res://scenes/item_container.tscn" id="3_8obkk"]
 
@@ -171,10 +171,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_28ffd"]
 _data = {
-"RESET": SubResource("Animation_ct2uj"),
-"open_inv": SubResource("Animation_bvf1n"),
-"shift_left": SubResource("Animation_52u0v"),
-"shift_right": SubResource("Animation_qnask")
+&"RESET": SubResource("Animation_ct2uj"),
+&"open_inv": SubResource("Animation_bvf1n"),
+&"shift_left": SubResource("Animation_52u0v"),
+&"shift_right": SubResource("Animation_qnask")
 }
 
 [node name="InventoryNode" type="InventoryNode"]
