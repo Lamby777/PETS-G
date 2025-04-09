@@ -1,14 +1,16 @@
 use std::cmp::Ordering;
 
-use godot::classes::{CharacterBody2D, ICharacterBody2D};
+use godot::classes::{
+    CharacterBody2D, ColorRect, ICharacterBody2D, Input, ShaderMaterial,
+};
 use godot::prelude::*;
 
 use crate::common::*;
-// use crate::consts::partycb::*;
+use crate::consts::partycb::*;
 
-// use super::inv_node::InventoryNode;
+use super::inv_node::InventoryNode;
 use super::pchar_node::PCharNode;
-// use super::BATTLE_PARTY_SIZE;
+use super::BATTLE_PARTY_SIZE;
 
 /// The player will stop being controlled once it reaches this
 /// distance from the cutscene target.

@@ -4,7 +4,7 @@
 
 use std::sync::LazyLock;
 
-use godot::classes::{CharacterBody2D, ICharacterBody2D, Sprite2D};
+use godot::classes::{CharacterBody2D, ICharacterBody2D, Input, Sprite2D};
 use godot::prelude::*;
 
 use super::stat_translation;
