@@ -6,8 +6,8 @@
 use godot::classes::node::ProcessMode;
 use godot::classes::object::ConnectFlags;
 use godot::classes::{
-    AnimatedSprite2D, AnimationPlayer, Control, InputEvent, PanelContainer,
-    ProgressBar, RichTextLabel, Texture2D, TextureRect, Timer,
+    AnimatedSprite2D, AnimationPlayer, AudioStreamPlayer, Control, InputEvent,
+    PanelContainer, ProgressBar, RichTextLabel, Texture2D, TextureRect, Timer,
 };
 use godot::prelude::*;
 use skills::SKILL_REGISTRY;

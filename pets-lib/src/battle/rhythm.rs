@@ -7,7 +7,7 @@
 //! - "Miss" means you didn't click at all
 //!
 
-use godot::classes::{InputEvent, Timer};
+use godot::classes::{IAudioStreamPlayer, InputEvent, Timer};
 use godot::prelude::*;
 
 use super::midi::{BattleTrack, MidiReceiver};
@@ -84,13 +84,13 @@ pub struct BattleMusic {
 #[godot_api]
 impl BattleMusic {
     #[signal]
-    fn note_hit(&self);
+    fn note_hit();
 
     #[signal]
-    fn note_flop(&self);
+    fn note_flop();
 
     #[signal]
-    fn note_miss(&self);
+    fn note_miss();
 
     /// Called when the player successfully hits a note
     fn on_attack_hit(&mut self) {

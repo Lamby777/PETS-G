@@ -39,7 +39,7 @@ pub struct PCharNode {
 #[godot_api]
 impl PCharNode {
     #[signal]
-    fn pchar_motion_done(&self);
+    fn pchar_motion_done();
 
     #[func]
     pub fn anim_move(&mut self, moving: bool, inputs: Vector2) {
