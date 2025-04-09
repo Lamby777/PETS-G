@@ -116,7 +116,7 @@ impl World {
     // ---------------------------------------- Battle stuff
 
     #[signal]
-    fn battle_intro_done(eid: GString) {}
+    fn battle_intro_done(eid: GString);
 
     fn mute_audio_bus(mute_world: bool) {
         let (muted, unmuted) = if mute_world { (1, 2) } else { (2, 1) };

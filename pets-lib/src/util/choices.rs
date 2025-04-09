@@ -188,13 +188,13 @@ impl ChoiceAgent {
     }
 
     #[signal]
-    fn selection_focused(choice: Gd<Control>) {}
+    fn selection_focused(choice: Gd<Control>);
 
     #[signal]
-    fn selection_unfocused(choice: Gd<Control>) {}
+    fn selection_unfocused(choice: Gd<Control>);
 
     #[signal]
-    fn selection_confirmed(choice: Gd<Control>) {}
+    fn selection_confirmed(choice: Gd<Control>);
 
     pub fn bind_callables_for<N>(&mut self, choice: &mut Gd<N>)
     where

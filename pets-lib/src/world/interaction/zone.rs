@@ -3,12 +3,12 @@
 //! an interaction when within range
 //!
 
-use godot::classes::{Area2D, ColorRect, GDScript, IArea2D};
+use godot::classes::{Area2D, GDScript, IArea2D};
 use godot::prelude::*;
 
-use crate::common::*;
-use crate::consts::partycb::*;
-use crate::dialogue::DialogueScript;
+// use crate::common::*;
+// use crate::consts::partycb::*;
+// use crate::dialogue::DialogueScript;
 
 #[derive(GodotClass)]
 #[class(init, base=Area2D)]
