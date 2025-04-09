@@ -65,10 +65,10 @@ impl MidiReceiver {
 #[godot_api]
 impl MidiReceiver {
     #[signal]
-    fn note_on(note: u8) {}
+    fn note_on(note: u8);
 
     #[signal]
-    fn note_off(note: u8) {}
+    fn note_off(note: u8);
 }
 
 #[godot_api]
