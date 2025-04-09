@@ -157,8 +157,6 @@ delete={
 [internationalization]
 
 locale/translations=PackedStringArray("res://i18n/translations.en_US.translation", "res://i18n/translations.pr.translation", "res://i18n/translations.tlh_US.translation")
-locale/test="pr"
-locale/fallback="en_US"
 
 [layer_names]
 
