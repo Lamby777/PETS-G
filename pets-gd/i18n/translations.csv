@@ -14,7 +14,7 @@ IZ_INTERACT_READ,Read,Read,Read
 IZ_INTERACT_TAKE,Take,Plunder,Steal
 IZ_INTERACT_DEBUG,Debug,Remove barnacles,Defeature
 ITEM_NAME_cool_stick,Stick,Cane,Stick
-ITEM_DESC_cool_stick,Some stick you found off the sidewalk. Looks cool.,Some stick ye plundered off th' lands. Lookin' dandy.,"THIS is the best weapon you could find?"
+ITEM_DESC_cool_stick,"Some stick you found off the sidewalk. Looks cool. ""Put ya stick away, Waltuh.""",Some stick ye plundered off th' lands. Lookin' dandy.,THIS is the best weapon you could find?
 ITEM_NAME_trusty_rusty_pistol,Trusty Rusty Pistol,Miniature Musket (Rusty),Ol' Reliable Rusty
 ITEM_DESC_trusty_rusty_pistol,Pretty unsafe! Deals poor damage.,What kind o' pirate would be caught dead or alive with this?,You're better off throwing this at the enemy. Weirdo.
 ITEM_NAME_ts_slick7,TS Slick7,TS Slick7,TS Slick7
@@ -114,6 +114,185 @@ SKILL_SHIELD_HITS_SEVERAL,It could stand several hits.,Ye could do with several 
 SKILL_SHIELD_HITS_MANY,It could easily stand quite a few hits.,"Ye could do with quite a few hits, matey!","Yeah, this one might actually work."
 SKILL_SHIELD_HITS_WHILE,It'd take enemies a while to break through this one.,It'd take yer foes fer evah to plunder yer booty.,Those enemies won't stand a chance.
 SKILL_SHIELD_COMBINE_PARTS,{part1} {hits_str},{part1} {hits_str},{part1} {hits_str}
+BATTLEHUD_VERSUS,vs.,vs.,vs.
+BATTLEHUD_ATTACK_GOODTIMING,Good Timing!,Good Timing!,Good Timing!
+BATTLEHUD_ATTACK_MISSEDBEAT,Missed beat...,Missed beat...,Missed beat...
+BATTLEHUD_ATTACK_BADTIMING,Bad timing.,Bad timing.,Bad timing.
+BATTLEHUD_ATTACK_ALREADYCLICKED,Already clicked!,Already clicked!,Already clicked!
+BATTLEHUD_MUSIC_ZIN,Zin,Zin,Zin
+BATTLEHUD_MUSIC_BOUNCE,Bounce,Bounce,Bounce
+BATTLEHUD_MUSIC_PKR,PKR,PKR,PKR
+BATTLEHUD_MUSIC_PKWTF,PKWTF,PKWTF,PKWTF
+BATTLEHUD_MUSIC_TROUBLESOMEMODIFICATIONS,Trb. Mods,Trb. Mods,Trb. Mods
+BATTLEHUD_MUSIC_SYLVERHABANERA,Sylver Habanera,Sylver Habanera,Sylver Habanera
+BATTLEHUD_MUSIC_SLICK,Slick,Slick,Slick
+BATTLEHUD_MUSIC_SORROWFUL,Sorrowful,Sorrowful,Sorrowful
+BATTLEHUD_MUSIC_SECRETIVE,Secretive,Secretive,Secretive
+BATTLEHUD_MUSIC_BOGUSBEAT,Bogus Beat,Bogus Beat,Bogus Beat
+BATTLEHUD_MUSIC_SUSPICIOUS,Suspicious,Suspicious,Suspicious
+BATTLEHUD_MUSIC_SPITEFUL,Spiteful,Spiteful,Spiteful
+BATTLEHUD_MUSIC_CHARMING,Charming,Charming,Charming
+BATTLEHUD_MUSIC_GOODINSIDE,Good Inside,Good Inside,Good Inside
+BATTLEHUD_MUSIC_UNDISPUTEDREVENGE,Undisp. Revenge,Undisp. Revenge,Undisp. Revenge
+BATTLEHUD_MUSIC_CUTEE,Cute E,Cute E,Cute E
+BATTLEHUD_MUSIC_REDUXBLISS,Redux<Bliss>,Redux<Bliss>,Redux<Bliss>
+BATTLEHUD_MUSIC_CLOAKEDEMPRESS,Cloaked Empress,Cloaked Empress,Cloaked Empress
+BATTLEHUD_MUSIC_SERIO,Serio,Serio,Serio
+BATTLEHUD_MUSIC_PRECISIO,Precisio,Precisio,Precisio
+BATTLEHUD_MUSIC_SERIOUSLYSERIO,Seriously Serio,Seriously Serio,Seriously Serio
+BATTLEHUD_MUSIC_CONFLICTINGBATTLETACTICS,Conf. Battle Tactics,Conf. Battle Tactics,Conf. Battle Tactics
+BATTLEHUD_MUSIC_DIESELDREAMS,Diesel Dreams,Diesel Dreams,Diesel Dreams
+BATTLEHUD_MUSIC_SHADOWKINGSREVENGE,S.K.'s Revenge,S.K.'s Revenge,S.K.'s Revenge
+BATTLEHUD_MUSIC_THESTUDIO,The Studio,The Studio,The Studio
+BATTLEHUD_MUSIC_SPOOKYBLUES,Spooky Blues,Spooky Blues,Spooky Blues
+ENEMY_K_GummyDummy,Gummy Dummy,Gummy Dummy,Gummy Dummy
+ENEMY_U_GummyDummy,Angered Gelatinous Creature,Feisty Jelly Bear,Walkin' Gummy Bear
+ENEMY_K_GelatinGangster,Gelatin Gangster,Gelatin Gangster,Gelatin Gangster
+ENEMY_U_GelatinGangster,Boss of the Gelatin Crime Syndicate,Swashbucklin' Jelly Bear,Gelatinous Godfather
+ENEMY_K_TWrecks,T. Wrecks,T. Wrecks,T. Wrecks
+ENEMY_U_TWrecks,Destructive Dinosaur of Doom,Cannonball Saurus,RAWR ECKS DEE!!!
+ENEMY_K_PuppyMache,Puppy Mâché,Puppy Mâché,Puppy Mâché
+ENEMY_U_PuppyMache,Papery Puppy,Papery Poochie,Papery Pooch
+ENEMY_K_PuppierMache,Puppier Mâché,Puppier Mâché,Puppier Mâché
+ENEMY_U_PuppierMache,Even Paperier Puppy,Even Paperier Poochie,Even Paperier Pooch
+ENEMY_K_BigDawgMache,Big Dawg Mâché,Big Dawg Mâché,Big Dawg Mâché
+ENEMY_U_BigDawgMache,Super-sticky Guard Dog,Hound o' th' Gluey Paper,Heckin' Guard Doggo
+ENEMY_K_Porkalo1,Porkalo,Porkalo,Porkalo
+ENEMY_U_Porkalo1,Prideful Walking Bacon Strip,Swiney Lil' Fella,OH... MY... PORK!!!!
+ENEMY_K_Porkalo2,Porkalicious,Porkalicious,Porkalicious
+ENEMY_U_Porkalo2,Prideful Walking Ham Sandwich,Swiney Snack,Piggeh piggeh piggeh
+ENEMY_K_PorkaloP,Pirate Porkalo,Pirate Porkalo,Pirate Porkalo
+ENEMY_U_PorkaloP,Cold-cut Captain of the Seas,Swiney Crewmate,Winthrus's Missing Lunch
+ENEMY_K_ANonnyMouse,A Nonny Mouse,A Nonny Mouse,A Nonny Mouse
+ENEMY_U_ANonnyMouse,Rebellious Rodent,Bilge Rat,1337 Hackerman's Rodent
+ENEMY_K_MrEman,Mr. Eman,Mr. Eman,Mr. Eman
+ENEMY_U_MrEman,Calm Sneakin' Suburbanite,Sneaky Landlubber,Dr. Christian Nalvian Emanstralodus II
+ENEMY_K_SirTinperson,Sir Tinperson,Sir Tinperson,Sir Tinperson
+ENEMY_U_SirTinperson,Clammy Knight,Sneaky Knight,Clammy Knight
+ENEMY_K_USurname,U. Surname,U. Surname,U. Surname
+ENEMY_U_USurname,History-Clearing Mind Hacker,Unforeseen Matey,1337 Hackerman
+ENEMY_K_ArbitraryMarooner,Arrr-bitrary Marooner,Arrr-bitrary Marooner,Arrr-bitrary Marooner
+ENEMY_U_ArbitraryMarooner,Sailer of the Seven Seas of the Internet,Swashbucklin' Swindler,Average Movie Torrenter
+ENEMY_K_IncognitoInsurgent,Incognito Insurgent,Incognito Insurgent,Incognito Insurgent
+ENEMY_U_IncognitoInsurgent,Question Marked Orchestrator of Terror,Anonymous Anarchist,Headless Weirdo
+ENEMY_K_UniDentified,Uni-Dentified,Uni-Dentified,Uni-Dentified
+ENEMY_U_UniDentified,One-horned Wonder,Pure Maiden's Masked Mare,PWETTY UNICORNS AND RAINBOWS :3 :3 :3
+ENEMY_K_CopperCrow,Copper Crow,Copper Crow,Copper Crow
+ENEMY_U_CopperCrow,Shiny Bird of the Daylight,Shiny Squawker o' th' Sun,Mookbird
+ENEMY_K_GoldenGoose,Golden Goose,Golden Goose,Golden Goose
+ENEMY_U_GoldenGoose,Gilded Mythical Bird of the Night,Treasure-borne Treasure-layin' Squawker o' th' Moonlight,Goosey Goose
+ENEMY_K_RubyRobin,Ruby Robin,Ruby Robin,Ruby Robin
+ENEMY_U_RubyRobin,Sharp Crystal-feathered Songbird,Pointy Red Squawker o' th' Sunrise,Robbie Robin
+ENEMY_K_CarbonCardinal,Carbon Cardinal,Carbon Cardinal,Carbon Cardinal
+ENEMY_U_CarbonCardinal,Pitch Black Firebird of the Dusk,Pitch Black Flamin' Squawker o' th' Dusk,Big Mad Birb
+ENEMY_K_PlatinumParrot,Platinum Parrot,Platinum Parrot,Platinum Parrot
+ENEMY_U_PlatinumParrot,Prismatic Parrot of the High Seas,Yarrrr Glistenin' Polly o' th' High Seas,Winthrus's Childhood Pet
+ENEMY_K_TanzaniteTesia,Tanzanite Tesia,Tanzanite Tesia,Tanzanite Tesia
+ENEMY_U_TanzaniteTesia,Telepathic Indigo Terror,Frightful Lil' Squawker o' Telepathy,PK Birb
+ENEMY_K_Pigeonado,Pigeonado,Pigeonado,Pigeonado
+ENEMY_U_Pigeonado,Urban Skyline Diamondbird,Tarred and Feathered Fury o' th' Skies,Slimefun Player
+ENEMY_K_SapphireSparrow,Sapphire Sparrow,Sapphire Sparrow,Sapphire Sparrow
+ENEMY_U_SapphireSparrow,Bluebird of the Mines,Lazhwardish Squawker o' th' Rockies,Strange-Looking Bat
+ENEMY_K_EmeraldEagle,Emerald Eagle,Emerald Eagle,Emerald Eagle
+ENEMY_U_EmeraldEagle,Green Guardian of the Elven Forest,Kraken o' th' Elves,Mr. Hawk T. Uwah
+ENEMY_K_DiamondDuck,Diamond Duck,Diamond Duck,Diamond Duck
+ENEMY_U_DiamondDuck,Precious Waterfowl,Shiny Ducky,Ducc
+ENEMY_K_IridescentIbis,Iridescent Ibis,Iridescent Ibis,Iridescent Ibis
+ENEMY_U_IridescentIbis,Bubbly Wading Wetland Bird,Glistenin' Ibis o' th' Swamp,Bubble Birb
+ENEMY_K_RadioactiveRaven,Radioactive Raven,Radioactive Raven,Radioactive Raven
+ENEMY_U_RadioactiveRaven,Harbinger of Blight,Blackbird o' th' Apocalypse,Lil' Poe
+ENEMY_K_CarbonKitten,Carbon Kitten,Carbon Kitten,Carbon Kitten
+ENEMY_U_CarbonKitten,Lil' Carbon Copycat,Lil' Carbon Copycat,Lil' Copycat
+ENEMY_K_CarbonCat,Carbon Cat,Carbon Cat,Carbon Cat
+ENEMY_U_CarbonCat,Carbon Copycat,Carbon Copycat,Copycat
+ENEMY_K_DrumBunny,Drum Bunny,Drum Bunny,Drum Bunny
+ENEMY_U_DrumBunny,Drummin' Rabbit,Drummin' Rabbit,Drummin' Rabbit
+ENEMY_K_2WattWilly,2-Watt Willy,2-Watt Willy,2-Watt Willy
+ENEMY_U_2WattWilly,Rogue Cheap Electronic Toy,Wicked Young-un's Toy,Rogue Toy
+ENEMY_K_LowAmpPhibian,Low Amp-phibian,Low Amp-phibian,Low Amp-phibian
+ENEMY_U_LowAmpPhibian,Zapper of the Swamp,Zapper o' th' Swamp,Swamp Zapper
+ENEMY_K_ShortCircuitZap,Short Circuit Zap,Short Circuit Zap,Short Circuit Zap
+ENEMY_U_ShortCircuitZap,Thunderbolt Spirit,Wisp o' th' Storms,Thunderbolt Spirit
+ENEMY_K_HighAmpPhibian,High Amp-phibian,High Amp-phibian,High Amp-phibian
+ENEMY_U_HighAmpPhibian,Electrocutioner of the Swamp,Electrocutioner o' th' Swamp,Swamp Electrocutioner
+ENEMY_K_Snoozer,Snoozer,Snoozer,Snoozer
+ENEMY_U_Snoozer,Restless Sleeper,Restless Napper,Unusual Pillow
+ENEMY_K_Shleep,Shleep,Shleep,Shleep
+ENEMY_U_Shleep,Uneasy Sheep of Slumber,Rough-actin' Woolface,Eepy Sheepy
+ENEMY_K_Dozer,Dozer,Dozer,Dozer
+ENEMY_U_Dozer,"""Heavy"" Sleeper","""Heavy"" Napper","""Heavy"" Sleeper"
+ENEMY_K_KickMeNote,Kick Me Note,Kick Me Note,Kick Me Note
+ENEMY_U_KickMeNote,Unoriginal Prank,Unoriginal Prank,Unoriginal Prank
+ENEMY_K_LostHat,Lost Hat,Lost Hat,Lost Hat
+ENEMY_U_LostHat,Mad Hat,Angered Ol' Tricorn,Mad Hat
+ENEMY_K_LostRibbon,Lost Ribbon,Lost Ribbon,Lost Ribbon
+ENEMY_U_LostRibbon,Old Gold Bow,Spinnin' Gal's Wonder,Mad Bow
+ENEMY_K_LostRocket,Lost Rocket,Lost Rocket,Lost Rocket
+ENEMY_U_LostRocket,Abandoned Explosives,Ol' Matey's Dynamite,Pipe Bomb!!!!
+ENEMY_K_FloatinFez,Floatin' Fez,Floatin' Fez,Floatin' Fez
+ENEMY_U_FloatinFez,Psychokinetic Hat,Floatin' Hat,Floatin' Hat
+ENEMY_K_ShoeSnake,Shoe Snake,Shoe Snake,Shoe Snake
+ENEMY_U_ShoeSnake,Lost Slitherin' Shoe,Serpent-like Sneaker,Snek
+ENEMY_K_PrincessRainboots,Princess Rainboots,Princess Rainboots,Princess Rainboots
+ENEMY_U_PrincessRainboots,Magical Pink Rainboots,Magical Pink Rainboots,Magical Pink Rainboots
+ENEMY_K_ThiefKicks,Thief Kicks,Thief Kicks,Thief Kicks
+ENEMY_U_ThiefKicks,Worn-out Shoes,Ol' Plunderer's Peglegs,Worn-out Shoes
+ENEMY_K_EnforcerBoots,Enforcer's Boots,Enforcer's Boots,Enforcer's Boots
+ENEMY_U_EnforcerBoots,Vengeful Combat Boots,Ol' Captain's Boots,Vengeful Combat Boots
+ENEMY_K_ScaldingCup,Scalding Cup of Java,Scalding Cup o' Java,Scalding Cup of Java
+ENEMY_U_ScaldingCup,Piping-Hot Drink,Pipin'-Hot Drink,Hot Drink of 3 Billion Devices
+ENEMY_K_DepressoEspresso,Depresso Espresso,Depresso Espresso,Depresso Espresso
+ENEMY_U_DepressoEspresso,Brew of Morning Despair,Unpleasant Brews o' Mornin' Blues,Displeasing Brew
+ENEMY_K_Chicksanthemum,Chicksanthemum,Chicksanthemum,Chicksanthemum
+ENEMY_U_Chicksanthemum,Feathered Flower,Cluckin' Flower,Feathered Flower
+ENEMY_K_Goatenrod,Goat'enrod,Goat'enrod,Goat'enrod
+ENEMY_U_Goatenrod,Lucifer's Gruff Goldenrod,Goldenrod o' th' Underworld,Gruff Goldenrod
+ENEMY_K_Pigtunia,Pigtunia,Pigtunia,Pigtunia
+ENEMY_U_Pigtunia,Particularly Piggy Plant,Swiney Pollen Pistol,Particularly Piggy Plant
+ENEMY_K_SheepstaDaisy,Sheepsta Daisy,Sheepsta Daisy,Sheepsta Daisy
+ENEMY_U_SheepstaDaisy,Explosive Floofy Flower,Kaboomin' Flower o' Fluffballs,Huggable Floofy Flower
+ENEMY_K_TrackinTroll,Trackin' Troll,Trackin' Troll,Trackin' Troll
+ENEMY_U_TrackinTroll,Stalker of the Internet,Stalkin' Troll,Corporate Cyberstalker
+ENEMY_K_SpywareWarrior,Spyware Warrior,Spyware Warrior,Spyware Warrior
+ENEMY_U_SpywareWarrior,Warmonger of Localhost,Mutineer o' th' Home Seas,Cookie Enjoyer
+ENEMY_K_TrajectoryTracer,Trajectory Tracer,Trajectory Tracer,Trajectory Tracer
+ENEMY_U_TrajectoryTracer,Cybernetic Sniper,Cybernetic Musketeer,Aimbot Cheater
+ENEMY_K_XLR8,XLR-8,XLR-8,XLR-8
+ENEMY_U_XLR8,XLR-8,XLR-8,XLR-8
+ENEMY_K_XLR16,XLR-16,XLR-16,XLR-16
+ENEMY_U_XLR16,XLR-16,XLR-16,XLR-16
+ENEMY_K_XLR32,XLR-32,XLR-32,XLR-32
+ENEMY_U_XLR32,XLR-32,XLR-32,XLR-32
+ENEMY_K_XLR64,XLR-64,XLR-64,XLR-64
+ENEMY_U_XLR64,XLR-64,XLR-64,XLR-64
+ENEMY_K_XLR128,XLR-128,XLR-128,XLR-128
+ENEMY_U_XLR128,XLR-128,XLR-128,XLR-128
+ENEMY_K_XLR256,XLR-256,XLR-256,XLR-256
+ENEMY_U_XLR256,XLR-256,XLR-256,XLR-256
+ENEMY_K_XLR512,XLR-512,XLR-512,XLR-512
+ENEMY_U_XLR512,XLR-512,XLR-512,XLR-512
+ENEMY_K_RocketRaccoon,The Rocket Raccoon,The Rocket Raccoon,The Rocket Raccoon
+ENEMY_U_RocketRaccoon,Launcher-Wielding Raccoon,Cannon-Wieldin' Raccoon,Spicy Boi
+ENEMY_K_SuspiciousFish,Suspicious Fish,Suspicious Fish,Suspicious Fish
+ENEMY_U_SuspiciousFish,Fish of the Vents,Fishy o' th' Ducts,Sussy Fish
+ENEMY_K_RedCloakedSpirit,Red Cloaked Spirit,Red Cloaked Spirit,Red Cloaked Spirit
+ENEMY_U_RedCloakedSpirit,Toilet Paper Spirit,Flyin' Dutchman o' th' Restroom,Skibidi Spirit
+ENEMY_K_DeusVolt,Deus Volt,Deus Volt,Deus Volt
+ENEMY_U_DeusVolt,Crusader of Storms,Crusader o' Storms,Deus Volt
+ENEMY_K_XLRAndo,XLR-Ando,XLR-Ando,XLR-Ando
+ENEMY_U_XLRAndo,XLR-Ando,XLR-Ando,XLR-Ando
+ENEMY_K_CameronMann,Cameron Mann,Cameron Mann,Cameron Mann
+ENEMY_U_CameronMann,Cameron Mann,Cameron Mann,Cameron Mann
+ENEMY_K_MichaelRophone,Michael Rophone,Michael Rophone,Michael Rophone
+ENEMY_U_MichaelRophone,Michael Rophone,Michael Rophone,Michael Rophone
+ENEMY_K_CommanderPeuter,Commander Peuter,Commander Peuter,Commander Peuter
+ENEMY_U_CommanderPeuter,Commander Peuter,Commander Peuter,Commander Peuter
+ENEMY_K_MonikaETorrh,Monika E. Torrh,Monika E. Torrh,Monika E. Torrh
+ENEMY_U_MonikaETorrh,Monika E. Torrh,Monika E. Torrh,Monika E. Torrh
+ENEMY_K_TheBoogieMan,The Boogie Man,The Boogie Man,The Boogie Man
+ENEMY_U_TheBoogieMan,Dancing Studio Ghost,Dancin' Studio Spirit,The Boogie Man
+ENEMY_K_RumbleSerpent,Rumble's Serpent,Rumble's Serpent,Rumble's Serpent
+ENEMY_U_RumbleSerpent,Rumble's Mechanical Monstrosity,Rumble's Steel Kraken,Rumble's Snek
 DG_SPK_UNKNOWN,???,???,???
 DG_SPK_RODRICK,"Rodrick Sign Co.","Rodrick Sign Co.","Your Mom!!!!!!!! (real)"
 DG_SPK_CASCADE,Agent Cascade,Purple Gal,Cascade
@@ -147,4 +326,4 @@ DG_INTRO1_BRING_FUZZY,"Go bring out Fuzzy from the car, okay?","Go fetch Fuzzy f
 DG_INTRO1_MEET_NEIGHBORS,"Here he is! Hey, [ETHAN], come meet the neighbors!","Thar she blows! Hey, [ETHAN], come meet th' neighbors!","Took him long enough. Hey, [ETHAN], come meet the neighbors!"
 DG_INTRO1_MR_T,"This is Mr. Tulivae. He lives next door.","This be Cap'n Tulivae. He lives next door.","This is Mr. Tulivae. He lives next door."
 DG_INTRO1_HI_THERE,"Hi there, [ETHAN]. Pleasure meeting you.","Ahoy, [ETHAN]. Pleasure meetin' ya.","Hi there, [ETHAN]. Pleasure meeting you."
-DG_INTRO1_HE_SEEMS_NICE,He seems pretty nice. Maybe you should go say hi later.,He seems pretty nice. Maybe ye should go say hi later.,He seems pretty nice. Must be up to something.
+DG_INTRO1_HE_SEEMS_NICE,He seems pretty nice. Maybe you should go say hi later.,He seems pretty nice. Maybe ye should go say hi later.,He seems pretty nice... but does he pay his taxes?
