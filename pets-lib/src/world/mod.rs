@@ -6,7 +6,9 @@ use crate::common::*;
 use crate::consts::battle::*;
 
 use enemy_node::WalkingEnemy;
-use godot::classes::{AnimationPlayer, AudioServer, AudioStream, CanvasLayer};
+use godot::classes::{
+    AnimationPlayer, AudioServer, AudioStream, AudioStreamPlayer, CanvasLayer,
+};
 use godot::global::randf_range;
 use godot::prelude::*;
 
@@ -22,7 +24,7 @@ mod water_zone;
 use music_zone::MusicZone;
 use water_zone::WaterZone;
 
-pub use interaction::{InteractionManager, InteractionZone};
+pub use interaction::InteractionZone;
 pub use partycb::PartyCB;
 
 // just for testing

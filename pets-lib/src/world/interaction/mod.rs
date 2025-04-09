@@ -5,5 +5,5 @@
 mod manager;
 mod zone;
 
-pub use manager::InteractionManager;
+// pub use manager::InteractionManager;
 pub use zone::InteractionZone;

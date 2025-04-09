@@ -3,7 +3,7 @@
 //!
 
 use godot::classes::{
-    AnimationPlayer, Control, HBoxContainer, IPanelContainer, InputEvent,
+    AnimationPlayer, HBoxContainer, IPanelContainer, InputEvent,
     PanelContainer, RichTextLabel, Timer,
 };
 use godot::prelude::*;
@@ -13,7 +13,6 @@ use crate::consts::dialogue::*;
 
 mod dchoice;
 mod placeholders;
-use dchoice::DChoice;
 
 #[derive(GodotClass)]
 #[class(init, base=PanelContainer)]

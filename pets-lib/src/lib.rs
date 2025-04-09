@@ -43,9 +43,7 @@ mod common {
 
     pub use crate::battle::{Affinities, BattleEngine};
     pub use crate::dialogue::DialogBox;
-    pub use crate::world::{
-        InteractionManager, InteractionZone, PartyCB, World,
-    };
+    pub use crate::world::{InteractionZone, PartyCB, World};
 
     pub use crate::choices::ChoiceAgent;
     pub use crate::singleton::{GodotAutoload, Singleton};
