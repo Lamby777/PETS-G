@@ -7,7 +7,9 @@
 //! - "Miss" means you didn't click at all
 //!
 
-use godot::classes::{IAudioStreamPlayer, InputEvent, Timer};
+use godot::classes::{
+    AudioStreamPlayer, IAudioStreamPlayer, InputEvent, Timer,
+};
 use godot::prelude::*;
 
 use super::midi::{BattleTrack, MidiReceiver};

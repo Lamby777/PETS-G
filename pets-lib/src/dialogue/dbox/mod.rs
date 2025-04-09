@@ -2,8 +2,9 @@
 //! Dialog box class for menus and dialogue text
 //!
 
+use dchoice::DChoice;
 use godot::classes::{
-    AnimationPlayer, HBoxContainer, IPanelContainer, InputEvent,
+    AnimationPlayer, Control, HBoxContainer, IPanelContainer, InputEvent,
     PanelContainer, RichTextLabel, Timer,
 };
 use godot::prelude::*;
@@ -51,7 +52,7 @@ pub struct DialogBox {
 #[godot_api]
 impl DialogBox {
     #[signal]
-    fn accept(&self, picked_i: i32);
+    fn accept(picked_i: i32);
 
     #[func]
     fn set_message(&mut self, msg: String) {
