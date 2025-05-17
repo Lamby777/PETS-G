@@ -51,7 +51,7 @@ SKILL_RECOVERY_HP_AMOUNT_DESC,Heals {amount} of the target's HP.,Heals {amount} 
 SKILL_RECOVERY_HP_PERCENT_NAME,Renew,Renew,Renew
 SKILL_RECOVERY_HP_PERCENT_DESC,Heals {percent} of the target's HP.,Heals {percent} o' th' target's life.,Heals {percent} of the target's HP.
 SKILL_RECOVERY_STATUS_NAME,Healing,Healing,Healing
-SKILL_RECOVERY_STATUS_DESC,Heals status effects up to {rating}★.,Heals status effects up to {rating}★.,Miracule cure that works on ALL YOUR PROBLEMS!* (*only up to {rating}★)
+SKILL_RECOVERY_STATUS_DESC,Heals status effects up to {rating}★.,Heals status effects up to {rating}★.,Miracle cure that works on ALL YOUR PROBLEMS!* (*only up to {rating}★)
 SKILL_ATTACK_FIRE_DMG_NAME,Caustics,Scald,Caustics
 SKILL_ATTACK_FIRE_FX_NAME,Flame,Will-O-Wisp,Flame
 SKILL_ATTACK_ICE_DMG_NAME,Hail,Hail,Hail
@@ -112,7 +112,7 @@ SKILL_SHIELD_HITS_ONE,It could stand one hit... probably.,Ye could do with one h
 SKILL_SHIELD_HITS_COUPLE,It could likely stand a couple hits.,Ye could do with a couple hits.,"It could stand a couple hits, I guess."
 SKILL_SHIELD_HITS_SEVERAL,It could stand several hits.,Ye could do with several hits.,It could stand several hits.
 SKILL_SHIELD_HITS_MANY,It could easily stand quite a few hits.,"Ye could do with quite a few hits, matey!","Yeah, this one might actually work."
-SKILL_SHIELD_HITS_WHILE,It'd take enemies a while to break through this one.,It'd take yer foes fer evah to plunder yer booty.,Those enemies won't stand a chance.
+SKILL_SHIELD_HITS_WHILE,It'd take enemies a while to break through this one.,It'd take yer foes fer evah to plunder yer booty.,These goons won't stand a chance.
 SKILL_SHIELD_COMBINE_PARTS,{part1} {hits_str},{part1} {hits_str},{part1} {hits_str}
 BATTLEHUD_VERSUS,vs.,vs.,vs.
 BATTLEHUD_ATTACK_GOODTIMING,Good Timing!,Good Timing!,Good Timing!
