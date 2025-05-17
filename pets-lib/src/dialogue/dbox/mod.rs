@@ -68,7 +68,7 @@ impl DialogBox {
 
     #[func]
     pub fn singleton() -> Gd<Self> {
-        let path = format!("{}/{}", UI_LAYER_NAME, DBOX_NODE_NAME);
+        let path = format!("{UI_LAYER_NAME}/{DBOX_NODE_NAME}");
         World::singleton().get_node_as::<DialogBox>(&path)
     }
 

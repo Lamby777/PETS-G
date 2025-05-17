@@ -247,7 +247,7 @@ impl BattleEngine {
         let mut portrait =
             self.base().get_node_as::<TextureRect>("%PortraitTexture");
 
-        let path = format!("res://assets/textures/portraits/{}.png", pchar);
+        let path = format!("res://assets/textures/portraits/{pchar}.png");
         let texture = load::<Texture2D>(&path);
         portrait.set_texture(&texture);
     }
@@ -374,7 +374,7 @@ impl BattleEngine {
         let enemy_id = &enemy_data.borrow().id;
 
         self.base()
-            .get_node_as::<Node>(&format!("Tactics/{}", enemy_id))
+            .get_node_as::<Node>(&format!("Tactics/{enemy_id}"))
             .set_process_mode(ProcessMode::ALWAYS);
     }
 }

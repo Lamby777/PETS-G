@@ -24,7 +24,7 @@ impl Equipment {
             let ItemCat::Equipment { ref offsets, .. } =
                 Item::from_registry(item).category
             else {
-                panic!("item {} not equippable", item)
+                panic!("item {item} not equippable")
             };
 
             acc + offsets.clone()

@@ -159,7 +159,7 @@ pub fn bbcode_toggle(
 /// if the prefix isn't already there. be careful with this function...
 pub fn prefix_mod(target: &str, prefix: &str, active: bool) -> String {
     if active {
-        format!("{}{}", prefix, target)
+        format!("{prefix}{target}")
     } else {
         let st: String = target.into();
         st[prefix.len()..].to_owned()

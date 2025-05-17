@@ -12,7 +12,7 @@ use super::scrapbook::Scrapbook;
 use crate::common::*;
 
 fn save_path(slot: u8) -> String {
-    format!("user://save{}.json", slot)
+    format!("user://save{slot}.json")
 }
 
 /// All the data saved to one of the save file slots
@@ -72,6 +72,6 @@ impl SaveFile {
         let mut file = GFile::open(&path, ModeFlags::WRITE).unwrap();
 
         let content = serde_json::to_string(self).unwrap();
-        write!(file, "{}", content).unwrap();
+        write!(file, "{content}").unwrap();
     }
 }
