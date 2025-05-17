@@ -109,7 +109,7 @@ impl InteractionZone {
         let black_id = black.instance_id();
 
         let scene_id = target_scene.map(|s| {
-            load::<PackedScene>(&format!("res://scenes/rooms/{}.tscn", s))
+            load::<PackedScene>(&format!("res://scenes/rooms/{s}.tscn"))
                 .instantiate()
                 .unwrap()
                 .instance_id()

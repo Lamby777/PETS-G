@@ -55,7 +55,7 @@ impl DChoice {
         let scene = load::<PackedScene>("res://scenes/dialogchoice.tscn");
         let mut dchoice = scene.instantiate_as::<Self>();
 
-        dchoice.set_name(&format!("Choice{}", i));
+        dchoice.set_name(&format!("Choice{i}"));
 
         dchoice.call_deferred("set_text_tr", &[text.to_variant()]);
         // dchoice.bind_mut().set_text_tr(text.into());

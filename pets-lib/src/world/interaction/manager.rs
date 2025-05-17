@@ -58,7 +58,7 @@ impl InteractionManager {
     }
 
     fn set_prompt_text(&mut self, action: GString) {
-        let key = format!("IZ_INTERACT_{}", action);
+        let key = format!("IZ_INTERACT_{action}");
 
         self.prompt
             .get_node_as::<RichTextLabel>("%Action")
