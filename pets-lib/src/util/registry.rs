@@ -47,7 +47,7 @@ where
         .make_dir(registry_name);
 
     let Some(mut dir) =
-        DirAccess::open(&format!("user://modded/{}", registry_name))
+        DirAccess::open(&format!("user://modded/{registry_name}"))
     else {
         godot_warn!(
             "Could not open `/modded/{0}`, no modded {0} were loaded.",
@@ -73,7 +73,7 @@ where
     T: DeserializeOwned + Serialize,
 {
     godot_print!("Reading vanilla `{}`.", folder_name);
-    let folder_path = format!("res://assets/{}", folder_name);
+    let folder_path = format!("res://assets/{folder_name}");
 
     let res = DirAccess::open(&folder_path)
         .unwrap()
@@ -81,7 +81,7 @@ where
         .to_vec()
         .into_iter()
         .flat_map(|fname| {
-            let path = format!("{}/{}", folder_path, fname);
+            let path = format!("{folder_path}/{fname}");
             godot_print!("Reading vanilla registry: {}", path);
             let content = read_registry(&path).expect(
                 "Error loading vanilla registry. THIS IS A BUG, please report!",

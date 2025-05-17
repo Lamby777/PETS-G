@@ -86,7 +86,7 @@ impl BattleTrack {
     /// # Memory Leak
     /// See [`BattleTrack::from_godot_path`] docs for more information.
     pub fn new_from_name(track_name: &str) -> BattleTrack {
-        let path = format!("res://assets/music/battle/{}.mid", track_name);
+        let path = format!("res://assets/music/battle/{track_name}.mid");
         let Smf { header, tracks } = Self::from_godot_path(&path);
 
         let midly::Timing::Metrical(ticks) = header.timing else {

@@ -215,7 +215,7 @@ impl Display for StatusEffect {
             _ => return Debug::fmt(&self, f),
         };
 
-        write!(f, "{}", s)
+        write!(f, "{s}")
     }
 }
 

@@ -74,7 +74,7 @@ pub enum PChar {
 
 impl Display for PChar {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{:?}", self)
+        write!(f, "{self:?}")
     }
 }
 
@@ -90,6 +90,6 @@ pub enum EnemyID {
 
 impl Display for EnemyID {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{:?}", self)
+        write!(f, "{self:?}")
     }
 }
