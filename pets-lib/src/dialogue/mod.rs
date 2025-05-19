@@ -5,4 +5,4 @@
 mod dbox;
 mod script;
 pub use dbox::DialogBox;
-pub use script::DialogueScriptBase;
+pub use script::DialogueScript;

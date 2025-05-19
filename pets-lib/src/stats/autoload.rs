@@ -41,7 +41,7 @@ impl StatsInterface {
 
     #[func]
     fn set_ethan_bed_color(color: String) {
-        let texture = load::<Texture2D>(format!(
+        let texture = load::<Texture2D>(&format!(
             "res://assets/textures/builds/furniture/beds/bed_{color}.png"
         ));
 
@@ -49,12 +49,12 @@ impl StatsInterface {
 
         let mut bed =
             World::room().get_node_as::<Sprite2D>("%EthanBed/Sprite2D");
-        bed.callv("set_texture".into(), varray![texture]);
+        bed.callv("set_texture", &varray![texture]);
     }
 }
 
 impl GodotAutoload for StatsInterface {
-    const AUTOLOAD_NAME: &'static str = "Stats";
+    const AUTOLOAD_NAME: &str = "Stats";
 }
 
 #[godot_api]
@@ -80,6 +80,7 @@ impl IObject for StatsInterface {
 /// it'll run when the game starts
 fn print_debug_crap() {
     // let ser = crate::stats::charmap::default_charmap();
+    // let ser = CharMap::_debugging_charmap();
     // let ser = serde_json::to_string(&ser).unwrap();
     // godot_print!("{}", ser);
 }

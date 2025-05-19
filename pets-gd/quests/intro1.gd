@@ -4,8 +4,15 @@ func room_id():
     return $"../../YSort/Room".room_id
 
 func _ready():
+    for pchar in ["Ethan", "Siva", "Terra", "Mira"]:
+        pcb().push_pchar_gd(pchar)
+
+    # pcb().in_cutscene = true
+    # pcb().party[0].move_to_relative(0.0, -200.0)
+    # await pcb().party[0].pchar_motion_done
+    # pcb().in_cutscene = false
     pcb().move_to_relative(0.0, -200.0)
-    await pcb().motion_done
+    await pcb().pcb_motion_done
     
     await dbox().say_as("[JUNIPER]", ["DG_INTRO1_COMEUNPACK"])
     
@@ -22,7 +29,7 @@ func on_teleported(target):
 func on_house_tp(target):
     if phase == 0:
         self.phase = 1
-        await dbox().say_as("[JUNIPER]", ["DG_INTRO1_OVERHERE"])
+        await dbox().say_as("[JUNIPER]", ["DG_INTRO1_OVER_HERE"])
 
     if target.name == "EthanBedroomExit" and phase == 1:
         self.phase = 2
@@ -34,7 +41,7 @@ func on_house_tp(target):
 
         var picked_bedcolor_x = await dbox().say_as_with_choices(
             "[JUNIPER]",
-            [picked_thoughts["value"] + "_MOM", "DG_INTRO1_ITSYOURS"],
+            [picked_thoughts["value"] + "_MOM", "DG_INTRO1_ITS_YOURS"],
             [
                 "[color=#BD0000]X[/color]",
                 "[color=#FF7200]X[/color]",
@@ -52,9 +59,9 @@ func on_house_tp(target):
         StatsInterface.set_ethan_bed_color(picked_bedcolor)
 
         await dbox().say_as("[JUNIPER]", [
-            "DG_INTRO1_LOOKSBETTER",
-            "DG_INTRO1_ILLBEDOWNSTAIRS",
-            "DG_INTRO1_BRINGFUZZY",
+            "DG_INTRO1_LOOKS_BETTER",
+            "DG_INTRO1_ILL_BE_DOWNSTAIRS",
+            "DG_INTRO1_BRING_FUZZY",
         ])
 
 func on_outdoors_tp(target):
@@ -62,7 +69,7 @@ func on_outdoors_tp(target):
         self.phase = 3
         await dbox().say_as("[CLAY]", [ "DG_INTRO1_MEET_NEIGHBORS" ]);
         pcb().move_to_relative(-200.0, 0.0)
-        await pcb().motion_done
+        await pcb().pcb_motion_done
         await dbox().say_as("[CLAY]", [ "DG_INTRO1_MR_T" ]);
-        await dbox().say_as("[MR_TULIVAE]", [ "DG_INTRO1_HITHERE" ]);
+        await dbox().say_as("[MR_TULIVAE]", [ "DG_INTRO1_HI_THERE" ]);
         await dbox().say_as("[NARRATOR]", [ "DG_INTRO1_HE_SEEMS_NICE" ]);

@@ -25,7 +25,7 @@ pub(crate) use recovery::{RecoverySkill, RecoveryType};
 pub(crate) use shields::ShieldSkill;
 
 fn power_to_letter(power: u8) -> GString {
-    tr(&format!("SKILL_TIER_{}", power))
+    tr(&format!("SKILL_TIER_{power}"))
 }
 
 fn power_to_letter_pl(power: u8, plural: bool) -> GString {
@@ -53,10 +53,10 @@ pub trait Skill: Debug + Sync + Send {
     /// `enemies` - The caster's enemies
     fn cast(
         &self,
-        _caster: Rc<RefCell<dyn Battler>>,
-        _target: Rc<RefCell<dyn Battler>>,
-        _allies: Vec<Rc<RefCell<dyn Battler>>>,
-        _enemies: Vec<Rc<RefCell<dyn Battler>>>,
+        _caster: Rc<RefCell<Battler>>,
+        _target: Rc<RefCell<Battler>>,
+        _allies: Vec<Rc<RefCell<Battler>>>,
+        _enemies: Vec<Rc<RefCell<Battler>>>,
     );
 }
 
@@ -135,6 +135,6 @@ impl Element {
     /// User-facing string for formatting the element of a skill
     /// Handles the "edge cases" of grammar like "Fuzz" => "Fuzzy"
     pub fn adjective(&self) -> GString {
-        tr(&format!("ELEMENT_ADJ_{:?}", self))
+        tr(&format!("ELEMENT_ADJ_{self:?}"))
     }
 }

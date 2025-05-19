@@ -1,21 +1,42 @@
 use super::*;
+use crate::consts::battle::ACCESSORY_SLOTS;
 
-pub trait ItemList {
-    /// Every item that can be equipped
-    fn offsets(&self) -> impl Iterator<Item = &InherentStats>;
+#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+pub struct Equipment {
+    head: Option<String>,
+    body: Option<String>,
+    weapon: Option<String>,
+    accessories: [Option<String>; ACCESSORY_SLOTS],
 }
 
-impl ItemList for &[Item] {
-    fn offsets(&self) -> impl Iterator<Item = &InherentStats> {
-        use ItemCat::*;
+impl Equipment {
+    pub fn iter(&self) -> impl Iterator<Item = &str> {
+        self.head
+            .iter()
+            .chain(self.body.iter())
+            .chain(self.weapon.iter())
+            .chain(self.accessories.iter().filter_map(|s| s.as_ref()))
+            .map(|s| s.as_str())
+    }
 
-        self.iter().filter_map(|i| match &i.category {
-            Equipment { offsets, .. } => Some(offsets),
-            _ => None,
+    pub fn offsets(&self) -> InherentStats {
+        self.iter().fold(InherentStats::default(), |acc, item| {
+            let ItemCat::Equipment { ref offsets, .. } =
+                Item::from_registry(item).category
+            else {
+                panic!("item {item} not equippable")
+            };
+
+            acc + offsets.clone()
         })
     }
 }
 
+/// The player's inventory. Keys are item IDs, values are the count of that item.
+///
+/// # Invariants
+/// - All item counts are non-negative
+/// - Items with a count of 0 are not present in the map
 #[derive(Serialize, Deserialize)]
 pub struct Inventory {
     items: HashMap<String, u32>,
@@ -32,9 +53,15 @@ impl Inventory {
         si().bind().save.inventory.clone()
     }
 
-    pub fn give_item(&mut self, id: String, quantity: u32) {
-        let count = self.items.entry(id).or_insert(0);
-        *count += quantity;
+    pub fn give_item(&mut self, id: impl Into<String>, quantity: i32) {
+        let key = id.into();
+
+        let count = self.items.entry(key.clone()).or_insert(0);
+        *count = (*count as i32).saturating_add(quantity) as u32;
+
+        if *count == 0 {
+            self.items.remove(&key);
+        }
     }
 
     pub fn len(&self) -> usize {

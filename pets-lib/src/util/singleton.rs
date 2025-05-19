@@ -10,18 +10,16 @@ pub trait Singleton: Inherits<Object> + NewAlloc {
 /// Trait for autoloaded classes
 /// Makes it more convenient to get the singleton instance
 pub trait GodotAutoload: Singleton {
-    const AUTOLOAD_NAME: &'static str;
+    const AUTOLOAD_NAME: &str;
 
     /// Register the singleton with the engine
     fn register() {
-        let gd = Self::new_alloc().upcast();
-        let name = Self::AUTOLOAD_NAME.into();
-        Engine::singleton().register_singleton(name, gd);
+        let new_self = Self::new_alloc();
+        Engine::singleton().register_singleton(Self::AUTOLOAD_NAME, &new_self);
     }
 
     fn unregister() {
-        let name = Self::AUTOLOAD_NAME.into();
-        Engine::singleton().unregister_singleton(name);
+        Engine::singleton().unregister_singleton(Self::AUTOLOAD_NAME);
     }
 }
 
@@ -29,7 +27,7 @@ impl<T: GodotAutoload> Singleton for T {
     /// Get a shared ref to use in other nodes
     fn singleton() -> Gd<Self> {
         Engine::singleton()
-            .get_singleton(Self::AUTOLOAD_NAME.into())
+            .get_singleton(Self::AUTOLOAD_NAME)
             .unwrap()
             .cast()
     }

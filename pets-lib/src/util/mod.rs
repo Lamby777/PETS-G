@@ -15,6 +15,7 @@ pub use extensions::*;
 pub use node_stuff::*;
 
 use godot::classes::{Engine, SceneTreeTimer};
+use godot::meta::AsArg;
 use godot::prelude::*;
 
 pub fn month_string_3letter(month: u32) -> &'static str {
@@ -35,22 +36,8 @@ pub fn month_string_3letter(month: u32) -> &'static str {
     }
 }
 
-// this is a macro so we can easily expand it and delete the definition
-// when `gdext` adds new methods for allowing zero vectors
-pub use crate::normalized;
-#[macro_export]
-macro_rules! normalized {
-    ($vector:expr) => {{
-        if $vector == Vector2::ZERO {
-            Vector2::ZERO
-        } else {
-            Vector2::normalized($vector)
-        }
-    }};
-}
-
-pub fn tr(text: impl Into<StringName>) -> GString {
-    Engine::singleton().tr(text.into())
+pub fn tr(text: impl AsArg<StringName>) -> GString {
+    Engine::singleton().tr(text)
 }
 
 pub use crate::tr_replace;
@@ -68,10 +55,11 @@ pub use crate::tr_replace;
 macro_rules! tr_replace {
     ($tr_key:expr; $($key:ident),* $(,)?) => {{
         let template = $crate::util::tr($tr_key).to_string();
+
         $(
-        let key = concat!("{", stringify!($key), "}");
-        let val = &$key.to_string();
-        let template = template.replace(key, val);
+            let key = concat!("{", stringify!($key), "}");
+            let val = &$key.to_string();
+            let template = template.replace(key, val);
         )*
 
         template
@@ -84,7 +72,7 @@ pub fn set_timeout<F>(time_sec: f64, mut func: F) -> Gd<SceneTreeTimer>
 where
     F: FnMut() + Sync + Send + 'static,
 {
-    let callable = Callable::from_fn("timeout", move |_| {
+    let callable = Callable::from_local_fn("timeout", move |_| {
         func();
         Ok(Variant::nil())
     });
@@ -98,7 +86,7 @@ pub fn set_timeout_callable(
     callable: Callable,
 ) -> Gd<SceneTreeTimer> {
     let mut timer = godot_tree().create_timer(time_sec).unwrap();
-    timer.connect("timeout".into(), callable);
+    timer.connect("timeout", &callable);
 
     timer
 }

@@ -1,164 +1,340 @@
-key,en_US
-,
-IZ_INTERACT_INTERACT,Interact
-IZ_INTERACT_CHECK,Check
-IZ_INTERACT_PRESS,Press
-IZ_INTERACT_ENTER,Enter
-IZ_INTERACT_EXIT,Exit
-IZ_INTERACT_TALK,Talk
-IZ_INTERACT_OPEN,Open
-IZ_INTERACT_READ,Read
-IZ_INTERACT_TAKE,Take
-IZ_INTERACT_DEBUG,Debug
-,
-ITEM_NAME_trusty_rusty_pistol,Trusty Rusty Pistol
-ITEM_DESC_trusty_rusty_pistol,Pretty unsafe! Deals poor damage.
-ITEM_NAME_ts_slick7,TS Slick7
-ITEM_DESC_ts_slick7,Tactical Supreme’s latest model. Deals decent damage.
-ITEM_NAME_stick,Stick
-ITEM_DESC_stick,Some stick you found off the sidewalk. Looks cool.
-ITEM_NAME_terra_precision_shotgun,Precision Shotgun
-ITEM_DESC_terra_precision_shotgun,A weapon for Terra. Massive damage at the cost of reload time.
-,
-ELEMENT_NAME_Blade,Blade
-ELEMENT_NAME_Kinetic,Kinetic
-ELEMENT_NAME_Fire,Fire
-ELEMENT_NAME_Ice,Ice
-ELEMENT_NAME_Electric,Electric
-ELEMENT_NAME_Wind,Wind
-ELEMENT_NAME_Earth,Earth
-ELEMENT_NAME_Psi,Psychic
-ELEMENT_NAME_Spirit,Spirit
-ELEMENT_NAME_Fuzz,Fuzz
-ELEMENT_NAME_Whip,Whip
-,
-ELEMENT_ADJ_Blade,Slash
-ELEMENT_ADJ_Kinetic,Kinetic
-ELEMENT_ADJ_Fire,Fire-based
-ELEMENT_ADJ_Ice,Ice-based
-ELEMENT_ADJ_Electric,Electric
-ELEMENT_ADJ_Wind,Wind-based
-ELEMENT_ADJ_Earth,Earth-based
-ELEMENT_ADJ_Psi,Psychic
-ELEMENT_ADJ_Spirit,Supernatural
-ELEMENT_ADJ_Fuzz,Fuzzy
-ELEMENT_ADJ_Whip,Whip
-,
-SKILL_PSI_FLUX_NAME,PSI Flux
-SKILL_PSI_FLUX_DESC,Warps time in your favor for {seconds} seconds.
-SKILL_RECOVERY_COMBINED,{family} {power}
-SKILL_RECOVERY_HP_AMOUNT_NAME,Recover
-SKILL_RECOVERY_HP_AMOUNT_DESC,Heals {amount} of the target's HP.
-SKILL_RECOVERY_HP_PERCENT_NAME,Renew
-SKILL_RECOVERY_STATUS_NAME,Healing
-SKILL_RECOVERY_STATUS_DESC,Heals status effects up to {rating}★.
-,
-SKILL_ATTACK_FIRE_DMG_NAME,Caustics
-SKILL_ATTACK_FIRE_FX_NAME,Flame
-SKILL_ATTACK_ICE_DMG_NAME,Hail
-SKILL_ATTACK_ICE_FX_NAME,Freeze
-SKILL_ATTACK_ELECTRIC_DMG_NAME,Zap
-SKILL_ATTACK_ELECTRIC_FX_NAME,Current
-SKILL_ATTACK_WIND_DMG_NAME,Gust
-SKILL_ATTACK_WIND_FX_NAME,Disarm
-SKILL_ATTACK_EARTH_DMG_NAME,Quake
-SKILL_ATTACK_EARTH_FX_NAME,Ground
-SKILL_ATTACK_PSI_DMG_NAME,Psi
-SKILL_ATTACK_PSI_FX_NAME,Brainjack
-SKILL_ATTACK_SPIRIT_DMG_NAME,Vex
-SKILL_ATTACK_SPIRIT_FX_NAME,Curse
-SKILL_ATTACK_FUZZ_NAME,PK Fuzz
-SKILL_ATTACK_WHIP_NAME,PK Whip
-,
-SKILL_TIER_1,A
-SKILL_TIER_2,B
-SKILL_TIER_3,C
-SKILL_TIER_4,D
-SKILL_TIER_5,E
-SKILL_POWER_PLURAL,@{power}
-,
-SKILL_ATTACK_NAME_COMBINED,{family} {power}
-SKILL_ATTACK_DESCRIBE_COMBINED,{dmg} {fx}
-SKILL_ATTACK_POWER_DESCRIBE,Deals {adjective} {element} damage.
-SKILL_ATTACK_POWER_1,faint
-SKILL_ATTACK_POWER_2,weak
-SKILL_ATTACK_POWER_3,medium
-SKILL_ATTACK_POWER_4,strong
-SKILL_ATTACK_POWER_5,massive
-,
-SKILL_ATTACK_PLURAL_DESC,{part1} Targets all enemies!
-,
-SKILL_ATTACK_FX_CHANCE_ALWAYS,Always inflicts {fx}.
-SKILL_ATTACK_FX_CHANCE_HIGH,High chance of inflicting {fx}.
-SKILL_ATTACK_FX_CHANCE_LOW,May inflict {fx}.
-,
-SKILL_SHIELD_NAME,{adjective} {width} {name}
-SKILL_SHIELD_DESC,Casts a {width} {potency} {name} that {reflect_action} {affinity} damage.
-,
-SKILL_SHIELD_PHYSICAL_ADJ,Physical
-SKILL_SHIELD_MAGICAL_ADJ,Magical
-SKILL_SHIELD_UNIQUE_ADJ,Forceful
-SKILL_SHIELD_SPECIALIZED_ADJ,Strange
-SKILL_SHIELD_PHYSICAL_DESC,physical
-SKILL_SHIELD_MAGICAL_DESC,magical
-SKILL_SHIELD_UNIQUE_DESC,magical and unique
-SKILL_SHIELD_SPECIALIZED_DESC,certain types of
-,
-SKILL_SHIELD_WIDTH_WIDE,Wide
-SKILL_SHIELD_WIDTH_NARROW,Narrow
-SKILL_SHIELD_POTENCY_IMPENETRABLE,Impenetrable
-SKILL_SHIELD_POTENCY_STURDY,Sturdy
-SKILL_SHIELD_POTENCY_FAIR,Fair
-SKILL_SHIELD_POTENCY_WEAK,Weak
-SKILL_SHIELD_POTENCY_NULLIFIED,Nullified
-SKILL_SHIELD_REFLECTIVITY_FALSE,blocks
-SKILL_SHIELD_REFLECTIVITY_TRUE,reflects
-SKILL_SHIELD_NAME_MIRROR,Mirror
-SKILL_SHIELD_NAME_SHIELD,Shield
-SKILL_SHIELD_HITS_NONE,It probably won't last...
-SKILL_SHIELD_HITS_ONE,It could stand one hit... probably.
-SKILL_SHIELD_HITS_COUPLE,It could likely stand a couple hits.
-SKILL_SHIELD_HITS_SEVERAL,It could stand several hits.
-SKILL_SHIELD_HITS_MANY,It could easily stand quite a few hits.
-SKILL_SHIELD_HITS_WHILE,It'd take enemies a while to break through this one.
-SKILL_SHIELD_COMBINE_PARTS,{part1} {hits_str}
-,
-DG_SPK_UNKNOWN,???
-DG_SPK_RODRICK,"Rodrick Sign Co."
-DG_SPK_CASCADE,Agent Cascade
-DG_SPK_MOM,Mom
-DG_SPK_DAD,Dad
-DG_SPK_JUNIPER,Juniper
-DG_SPK_CLAY,Clay
-DG_SPK_MR_TULIVAE,Mr. Tulivae
-DG_SPK_MRS_TULIVAE,Mrs. Tulivae
-,
-DG_RODRICK1_SOYOURE,"So... you're reading a sign, eh? Well..."
-DG_RODRICK1_AREYOUSMART,Are you smart?
-DG_RODRICK1_NOPE,Nope.
-DG_RODRICK1_DEFNOT,Definitely not.
-DG_RODRICK1_DIDNT,"Yeah, I didn't think so."
-DG_RODRICK1_DEFDIDNT,"Yeah, I definitely didn't think so."
-DG_RODRICK1_COMEBACK,Come back when you're smart.
-,
-DG_INTRO1_COMEUNPACK,"Hey, [ETHAN], we're unpacking your stuff! Come help!"
-,
-DG_INTRO1_OVERHERE,Over here! This is your new room!
-,
-DG_INTRO1_WDYT,What do you think?
-DG_INTRO1_GREAT,It's great!
-DG_INTRO1_ALRIGHT,It's alright...
-DG_INTRO1_GREAT_MOM,"Well, I'm glad you like it! I hope you'll be comfortable here."
-DG_INTRO1_ALRIGHT_MOM,"I know it's not much, but I hope you'll be comfortable here."
-DG_INTRO1_ITSYOURS,"Well, it's all yours. Do you have a specific blanket color in mind?"
-DG_INTRO1_LOOKSBETTER,"Wow, it looks even better already!"
-DG_INTRO1_ILLBEDOWNSTAIRS,"Alright, I'll be downstairs if you need me."
-DG_INTRO1_BRINGFUZZY,"Go bring out Fuzzy from the car, okay?"
-DG_INTRO1_MEET_NEIGHBORS,"Here he is! Hey, [ETHAN], come meet the neighbors!"
-DG_INTRO1_MR_T,"This is Mr. Tulivae. He lives next door."
-DG_INTRO1_HITHERE,"Hi there, [ETHAN]. Pleasure meeting you."
-DG_INTRO1_HE_SEEMS_NICE,He seems pretty nice. Maybe you should go say hi later.
-,
-DG_CHECK_CRATE,"It's just a crate. Doesn't look like anything good is inside."
-DG_CHECK_CRATES,"It's just a bunch of crates. Doesn't look like they have anything useful."
-DG_CHECK_TRASH,"Nothing useful there. Are you that desperate?"
+keys,en_US,pr,tlh_US
+MAINMENU_OPTION_PLAY,Play,Set Sail,Play
+MAINMENU_OPTION_OPTIONS,Options,Fiddle 'round,Options
+MAINMENU_OPTION_CREDITS,Credits,Th' Crew,Credits
+MAINMENU_OPTION_QUIT,Quit,Avast!,Touch Grass
+IZ_INTERACT_INTERACT,Interact,Interact,Interact
+IZ_INTERACT_CHECK,Check,Peer,Critique
+IZ_INTERACT_PRESS,Press,Push,Press
+IZ_INTERACT_ENTER,Enter,Enter,Enter
+IZ_INTERACT_EXIT,Exit,Exit,Exit
+IZ_INTERACT_TALK,Talk,Chatter,Yap
+IZ_INTERACT_OPEN,Open,Open,Open
+IZ_INTERACT_READ,Read,Read,Read
+IZ_INTERACT_TAKE,Take,Plunder,Steal
+IZ_INTERACT_DEBUG,Debug,Remove barnacles,Defeature
+ITEM_NAME_cool_stick,Stick,Cane,Stick
+ITEM_DESC_cool_stick,"Some stick you found off the sidewalk. Looks cool. ""Put ya stick away, Waltuh.""",Some stick ye plundered off th' lands. Lookin' dandy.,THIS is the best weapon you could find?
+ITEM_NAME_trusty_rusty_pistol,Trusty Rusty Pistol,Miniature Musket (Rusty),Ol' Reliable Rusty
+ITEM_DESC_trusty_rusty_pistol,Pretty unsafe! Deals poor damage.,What kind o' pirate would be caught dead or alive with this?,You're better off throwing this at the enemy. Weirdo.
+ITEM_NAME_ts_slick7,TS Slick7,TS Slick7,TS Slick7
+ITEM_DESC_ts_slick7,Tactical Supreme’s latest model in the pistol category. Deals decent damage.,Yer fancy new-fangled gun from Tactical Supreme.,It's a gun. It shoots things. What more do you want?
+ITEM_NAME_terra_precision_shotgun,Precision Shotgun,Precision Blunderbuss,Precision Shotgun
+ITEM_DESC_terra_precision_shotgun,A weapon for Terra. Massive damage at the cost of reload time.,A weapon fer Terra. Massive blast o' hurtin' at th' expense o' reloadin' speed.,"A weapon for Terra. Red Ryder over here probably does enough damage to scare away a squirrel, I guess."
+ELEMENT_NAME_Blade,Blade,Cutlass,Blade
+ELEMENT_NAME_Kinetic,Kinetic,Cannonball,Kinetic
+ELEMENT_NAME_Fire,Fire,Flames,Fire
+ELEMENT_NAME_Ice,Ice,Iceberg,Ice
+ELEMENT_NAME_Electric,Electric,Lightnin',Zap
+ELEMENT_NAME_Wind,Wind,Gale,Wind
+ELEMENT_NAME_Earth,Earth,Earth,Rock
+ELEMENT_NAME_Psi,Psychic,Magic,Oddball
+ELEMENT_NAME_Spirit,Spirit,Flyin' Dutchman,Ghost
+ELEMENT_NAME_Fuzz,Fuzz,Rum,Fuzz
+ELEMENT_NAME_Whip,Whip,Keelhaul,Tickle
+ELEMENT_ADJ_Blade,Slash,Slash,Edgy
+ELEMENT_ADJ_Kinetic,Kinetic,Kinetic,Kinetic
+ELEMENT_ADJ_Fire,Fire-based,Flamin' hot,Fire-based
+ELEMENT_ADJ_Ice,Ice-based,Frigid,Ice-based
+ELEMENT_ADJ_Electric,Electric,Thundrous,Zappy
+ELEMENT_ADJ_Wind,Wind-based,Windy,Wind-based
+ELEMENT_ADJ_Earth,Earth-based,Earthen,Rocky
+ELEMENT_ADJ_Psi,Psychic,Mind-bendin',Hippie-dippie
+ELEMENT_ADJ_Spirit,Supernatural,Spectral,Spoopy
+ELEMENT_ADJ_Fuzz,Fuzzy,Drunken,Fuzzy
+ELEMENT_ADJ_Whip,Whip,Keelhaulin',Tickle-based
+SKILL_PSI_FLUX_NAME,PSI Flux,Time Machine,PSI Flux
+SKILL_PSI_FLUX_DESC,Warps time in your favor for {seconds} seconds.,Warps time in yer favor for {seconds} seconds.,Call time-out and ask the enemies to let you tie your shoe for {seconds} seconds.
+SKILL_RECOVERY_COMBINED,{family} {power},{family} {power},{family} {power}
+SKILL_RECOVERY_HP_AMOUNT_NAME,Recover,Recover,Recover
+SKILL_RECOVERY_HP_AMOUNT_DESC,Heals {amount} of the target's HP.,Heals {amount} o' th' target's life.,Heals {amount} of the target's HP.
+SKILL_RECOVERY_HP_PERCENT_NAME,Renew,Renew,Renew
+SKILL_RECOVERY_HP_PERCENT_DESC,Heals {percent} of the target's HP.,Heals {percent} o' th' target's life.,Heals {percent} of the target's HP.
+SKILL_RECOVERY_STATUS_NAME,Healing,Healing,Healing
+SKILL_RECOVERY_STATUS_DESC,Heals status effects up to {rating}★.,Heals status effects up to {rating}★.,Miracle cure that works on ALL YOUR PROBLEMS!* (*only up to {rating}★)
+SKILL_ATTACK_FIRE_DMG_NAME,Caustics,Scald,Caustics
+SKILL_ATTACK_FIRE_FX_NAME,Flame,Will-O-Wisp,Flame
+SKILL_ATTACK_ICE_DMG_NAME,Hail,Hail,Hail
+SKILL_ATTACK_ICE_FX_NAME,Freeze,Iceberg,Freeze
+SKILL_ATTACK_ELECTRIC_DMG_NAME,Zap,Zap,Zap
+SKILL_ATTACK_ELECTRIC_FX_NAME,Current,Lightnin',Current
+SKILL_ATTACK_WIND_DMG_NAME,Gust,Gale,Gust
+SKILL_ATTACK_WIND_FX_NAME,Disarm,Hurricane,Pickpocket
+SKILL_ATTACK_EARTH_DMG_NAME,Quake,Quake,Quake
+SKILL_ATTACK_EARTH_FX_NAME,Ground,Ground,Ground
+SKILL_ATTACK_PSI_DMG_NAME,Psi,Psi,Psi
+SKILL_ATTACK_PSI_FX_NAME,Brainjack,Brainjack,Brainjack
+SKILL_ATTACK_SPIRIT_DMG_NAME,Vex,Doom,Vex
+SKILL_ATTACK_SPIRIT_FX_NAME,Curse,Curse,Spook
+SKILL_ATTACK_FUZZ_NAME,PK Fuzz,PK Rum,PK Fuzz
+SKILL_ATTACK_WHIP_NAME,PK Whip,Keelhaul,PK Whip
+SKILL_TIER_1,A,A,A
+SKILL_TIER_2,B,B,B
+SKILL_TIER_3,C,C,C
+SKILL_TIER_4,D,D,D
+SKILL_TIER_5,E,E,E
+SKILL_POWER_PLURAL,@{power},@{power},@{power}
+SKILL_ATTACK_NAME_COMBINED,{family} {power},{family} {power},{family} {power}
+SKILL_ATTACK_DESCRIBE_COMBINED,{dmg} {fx},{dmg} {fx},{dmg} {fx}
+SKILL_ATTACK_POWER_DESCRIBE,Deals {adjective} {element} damage.,Deals {adjective} {element} damage.,Deals {adjective} {element} damage.
+SKILL_ATTACK_POWER_1,faint,faint,puny
+SKILL_ATTACK_POWER_2,weak,weak,faint
+SKILL_ATTACK_POWER_3,medium,medium,weak
+SKILL_ATTACK_POWER_4,strong,strong,mediocre
+SKILL_ATTACK_POWER_5,massive,massive,decent
+SKILL_ATTACK_PLURAL_DESC,{part1} Targets all enemies!,{part1} Pillages all yer foes!,{part1} And I guess it costs more to use...
+SKILL_ATTACK_FX_CHANCE_ALWAYS,Always inflicts {fx}.,Always inflicts {fx}.,Always inflicts {fx}.
+SKILL_ATTACK_FX_CHANCE_HIGH,High chance of inflicting {fx}.,High chance o' inflictin' {fx}.,May inflict {fx}.
+SKILL_ATTACK_FX_CHANCE_LOW,May inflict {fx}.,May inflict {fx}.,Probably won't ever actually inflict {fx}.
+SKILL_SHIELD_NAME,{adjective} {width} {name},{adjective} {width} {name},{adjective} {width} {name}
+SKILL_SHIELD_DESC,Casts a {width} {potency} {name} that {reflect_action} {affinity} damage.,Casts a {width} {potency} {name} that {reflect_action} {affinity} damage.,Casts a {width} {potency} {name} that {reflect_action} {affinity} damage.
+SKILL_SHIELD_PHYSICAL_ADJ,Physical,Material,Physical
+SKILL_SHIELD_MAGICAL_ADJ,Magical,Magician's,Magical
+SKILL_SHIELD_UNIQUE_ADJ,Forceful,Dandy,Forceful
+SKILL_SHIELD_SPECIALIZED_ADJ,Strange,Queer,Strange
+SKILL_SHIELD_PHYSICAL_DESC,physical,material,physical
+SKILL_SHIELD_MAGICAL_DESC,magical,magician's,magical
+SKILL_SHIELD_UNIQUE_DESC,magical and unique,magician and dandy,magical and unique
+SKILL_SHIELD_SPECIALIZED_DESC,certain types of,certain types o',certain types of
+SKILL_SHIELD_WIDTH_WIDE,Wide,Big Ol',Wide
+SKILL_SHIELD_WIDTH_NARROW,Narrow,Miniscule,Narrow
+SKILL_SHIELD_POTENCY_IMPENETRABLE,Impenetrable,Impenetrable,Impenetrable
+SKILL_SHIELD_POTENCY_STURDY,Sturdy,Sturdy,Mediocre
+SKILL_SHIELD_POTENCY_FAIR,Fair,Fair,Weak
+SKILL_SHIELD_POTENCY_WEAK,Weak,Weak,Puny
+SKILL_SHIELD_POTENCY_NULLIFIED,Nullified,Nullified,Useless
+SKILL_SHIELD_REFLECTIVITY_FALSE,blocks,blocks,blocks
+SKILL_SHIELD_REFLECTIVITY_TRUE,reflects,reflects,reflects
+SKILL_SHIELD_NAME_MIRROR,Mirror,Mirror,Mirror
+SKILL_SHIELD_NAME_SHIELD,Shield,Shield,Shield
+SKILL_SHIELD_HITS_NONE,It probably won't last...,It shant e'er last...,It probably won't last...
+SKILL_SHIELD_HITS_ONE,It could stand one hit... probably.,Ye could do with one hit... probably.,It could stand one hit... if you were lucky.
+SKILL_SHIELD_HITS_COUPLE,It could likely stand a couple hits.,Ye could do with a couple hits.,"It could stand a couple hits, I guess."
+SKILL_SHIELD_HITS_SEVERAL,It could stand several hits.,Ye could do with several hits.,It could stand several hits.
+SKILL_SHIELD_HITS_MANY,It could easily stand quite a few hits.,"Ye could do with quite a few hits, matey!","Yeah, this one might actually work."
+SKILL_SHIELD_HITS_WHILE,It'd take enemies a while to break through this one.,It'd take yer foes fer evah to plunder yer booty.,These goons won't stand a chance.
+SKILL_SHIELD_COMBINE_PARTS,{part1} {hits_str},{part1} {hits_str},{part1} {hits_str}
+BATTLEHUD_VERSUS,vs.,vs.,vs.
+BATTLEHUD_ATTACK_GOODTIMING,Good Timing!,Good Timing!,Good Timing!
+BATTLEHUD_ATTACK_MISSEDBEAT,Missed beat...,Missed beat...,Missed beat...
+BATTLEHUD_ATTACK_BADTIMING,Bad timing.,Bad timing.,Bad timing.
+BATTLEHUD_ATTACK_ALREADYCLICKED,Already clicked!,Already clicked!,Already clicked!
+BATTLEHUD_MUSIC_ZIN,Zin,Zin,Zin
+BATTLEHUD_MUSIC_BOUNCE,Bounce,Bounce,Bounce
+BATTLEHUD_MUSIC_PKR,PKR,PKR,PKR
+BATTLEHUD_MUSIC_PKWTF,PKWTF,PKWTF,PKWTF
+BATTLEHUD_MUSIC_TROUBLESOMEMODIFICATIONS,Trb. Mods,Trb. Mods,Trb. Mods
+BATTLEHUD_MUSIC_SYLVERHABANERA,Sylver Habanera,Sylver Habanera,Sylver Habanera
+BATTLEHUD_MUSIC_SLICK,Slick,Slick,Slick
+BATTLEHUD_MUSIC_SORROWFUL,Sorrowful,Sorrowful,Sorrowful
+BATTLEHUD_MUSIC_SECRETIVE,Secretive,Secretive,Secretive
+BATTLEHUD_MUSIC_BOGUSBEAT,Bogus Beat,Bogus Beat,Bogus Beat
+BATTLEHUD_MUSIC_SUSPICIOUS,Suspicious,Suspicious,Suspicious
+BATTLEHUD_MUSIC_SPITEFUL,Spiteful,Spiteful,Spiteful
+BATTLEHUD_MUSIC_CHARMING,Charming,Charming,Charming
+BATTLEHUD_MUSIC_GOODINSIDE,Good Inside,Good Inside,Good Inside
+BATTLEHUD_MUSIC_UNDISPUTEDREVENGE,Undisp. Revenge,Undisp. Revenge,Undisp. Revenge
+BATTLEHUD_MUSIC_CUTEE,Cute E,Cute E,Cute E
+BATTLEHUD_MUSIC_REDUXBLISS,Redux<Bliss>,Redux<Bliss>,Redux<Bliss>
+BATTLEHUD_MUSIC_CLOAKEDEMPRESS,Cloaked Empress,Cloaked Empress,Cloaked Empress
+BATTLEHUD_MUSIC_SERIO,Serio,Serio,Serio
+BATTLEHUD_MUSIC_PRECISIO,Precisio,Precisio,Precisio
+BATTLEHUD_MUSIC_SERIOUSLYSERIO,Seriously Serio,Seriously Serio,Seriously Serio
+BATTLEHUD_MUSIC_CONFLICTINGBATTLETACTICS,Conf. Battle Tactics,Conf. Battle Tactics,Conf. Battle Tactics
+BATTLEHUD_MUSIC_DIESELDREAMS,Diesel Dreams,Diesel Dreams,Diesel Dreams
+BATTLEHUD_MUSIC_SHADOWKINGSREVENGE,S.K.'s Revenge,S.K.'s Revenge,S.K.'s Revenge
+BATTLEHUD_MUSIC_THESTUDIO,The Studio,The Studio,The Studio
+BATTLEHUD_MUSIC_SPOOKYBLUES,Spooky Blues,Spooky Blues,Spooky Blues
+ENEMY_K_GummyDummy,Gummy Dummy,Gummy Dummy,Gummy Dummy
+ENEMY_U_GummyDummy,Angered Gelatinous Creature,Feisty Jelly Bear,Walkin' Gummy Bear
+ENEMY_K_GelatinGangster,Gelatin Gangster,Gelatin Gangster,Gelatin Gangster
+ENEMY_U_GelatinGangster,Boss of the Gelatin Crime Syndicate,Swashbucklin' Jelly Bear,Gelatinous Godfather
+ENEMY_K_TWrecks,T. Wrecks,T. Wrecks,T. Wrecks
+ENEMY_U_TWrecks,Destructive Dinosaur of Doom,Cannonball Saurus,RAWR ECKS DEE!!!
+ENEMY_K_PuppyMache,Puppy Mâché,Puppy Mâché,Puppy Mâché
+ENEMY_U_PuppyMache,Papery Puppy,Papery Poochie,Papery Pooch
+ENEMY_K_PuppierMache,Puppier Mâché,Puppier Mâché,Puppier Mâché
+ENEMY_U_PuppierMache,Even Paperier Puppy,Even Paperier Poochie,Even Paperier Pooch
+ENEMY_K_BigDawgMache,Big Dawg Mâché,Big Dawg Mâché,Big Dawg Mâché
+ENEMY_U_BigDawgMache,Super-sticky Guard Dog,Hound o' th' Gluey Paper,Heckin' Guard Doggo
+ENEMY_K_Porkalo1,Porkalo,Porkalo,Porkalo
+ENEMY_U_Porkalo1,Prideful Walking Bacon Strip,Swiney Lil' Fella,OH... MY... PORK!!!!
+ENEMY_K_Porkalo2,Porkalicious,Porkalicious,Porkalicious
+ENEMY_U_Porkalo2,Prideful Walking Ham Sandwich,Swiney Snack,Piggeh piggeh piggeh
+ENEMY_K_PorkaloP,Pirate Porkalo,Pirate Porkalo,Pirate Porkalo
+ENEMY_U_PorkaloP,Cold-cut Captain of the Seas,Swiney Crewmate,Winthrus's Missing Lunch
+ENEMY_K_ANonnyMouse,A Nonny Mouse,A Nonny Mouse,A Nonny Mouse
+ENEMY_U_ANonnyMouse,Rebellious Rodent,Bilge Rat,1337 Hackerman's Rodent
+ENEMY_K_MrEman,Mr. Eman,Mr. Eman,Mr. Eman
+ENEMY_U_MrEman,Calm Sneakin' Suburbanite,Sneaky Landlubber,Dr. Christian Nalvian Emanstralodus II
+ENEMY_K_SirTinperson,Sir Tinperson,Sir Tinperson,Sir Tinperson
+ENEMY_U_SirTinperson,Clammy Knight,Sneaky Knight,Clammy Knight
+ENEMY_K_USurname,U. Surname,U. Surname,U. Surname
+ENEMY_U_USurname,History-Clearing Mind Hacker,Unforeseen Matey,1337 Hackerman
+ENEMY_K_ArbitraryMarooner,Arrr-bitrary Marooner,Arrr-bitrary Marooner,Arrr-bitrary Marooner
+ENEMY_U_ArbitraryMarooner,Sailer of the Seven Seas of the Internet,Swashbucklin' Swindler,Average Movie Torrenter
+ENEMY_K_IncognitoInsurgent,Incognito Insurgent,Incognito Insurgent,Incognito Insurgent
+ENEMY_U_IncognitoInsurgent,Question Marked Orchestrator of Terror,Anonymous Anarchist,Headless Weirdo
+ENEMY_K_UniDentified,Uni-Dentified,Uni-Dentified,Uni-Dentified
+ENEMY_U_UniDentified,One-horned Wonder,Pure Maiden's Masked Mare,PWETTY UNICORNS AND RAINBOWS :3 :3 :3
+ENEMY_K_CopperCrow,Copper Crow,Copper Crow,Copper Crow
+ENEMY_U_CopperCrow,Shiny Bird of the Daylight,Shiny Squawker o' th' Sun,Mookbird
+ENEMY_K_GoldenGoose,Golden Goose,Golden Goose,Golden Goose
+ENEMY_U_GoldenGoose,Gilded Mythical Bird of the Night,Treasure-borne Treasure-layin' Squawker o' th' Moonlight,Goosey Goose
+ENEMY_K_RubyRobin,Ruby Robin,Ruby Robin,Ruby Robin
+ENEMY_U_RubyRobin,Sharp Crystal-feathered Songbird,Pointy Red Squawker o' th' Sunrise,Robbie Robin
+ENEMY_K_CarbonCardinal,Carbon Cardinal,Carbon Cardinal,Carbon Cardinal
+ENEMY_U_CarbonCardinal,Pitch Black Firebird of the Dusk,Pitch Black Flamin' Squawker o' th' Dusk,Big Mad Birb
+ENEMY_K_PlatinumParrot,Platinum Parrot,Platinum Parrot,Platinum Parrot
+ENEMY_U_PlatinumParrot,Prismatic Parrot of the High Seas,Yarrrr Glistenin' Polly o' th' High Seas,Winthrus's Childhood Pet
+ENEMY_K_TanzaniteTesia,Tanzanite Tesia,Tanzanite Tesia,Tanzanite Tesia
+ENEMY_U_TanzaniteTesia,Telepathic Indigo Terror,Frightful Lil' Squawker o' Telepathy,PK Birb
+ENEMY_K_Pigeonado,Pigeonado,Pigeonado,Pigeonado
+ENEMY_U_Pigeonado,Urban Skyline Diamondbird,Tarred and Feathered Fury o' th' Skies,Slimefun Player
+ENEMY_K_SapphireSparrow,Sapphire Sparrow,Sapphire Sparrow,Sapphire Sparrow
+ENEMY_U_SapphireSparrow,Bluebird of the Mines,Lazhwardish Squawker o' th' Rockies,Strange-Looking Bat
+ENEMY_K_EmeraldEagle,Emerald Eagle,Emerald Eagle,Emerald Eagle
+ENEMY_U_EmeraldEagle,Green Guardian of the Elven Forest,Kraken o' th' Elves,Mr. Hawk T. Uwah
+ENEMY_K_DiamondDuck,Diamond Duck,Diamond Duck,Diamond Duck
+ENEMY_U_DiamondDuck,Precious Waterfowl,Shiny Ducky,Ducc
+ENEMY_K_IridescentIbis,Iridescent Ibis,Iridescent Ibis,Iridescent Ibis
+ENEMY_U_IridescentIbis,Bubbly Wading Wetland Bird,Glistenin' Ibis o' th' Swamp,Bubble Birb
+ENEMY_K_RadioactiveRaven,Radioactive Raven,Radioactive Raven,Radioactive Raven
+ENEMY_U_RadioactiveRaven,Harbinger of Blight,Blackbird o' th' Apocalypse,Lil' Poe
+ENEMY_K_CarbonKitten,Carbon Kitten,Carbon Kitten,Carbon Kitten
+ENEMY_U_CarbonKitten,Lil' Carbon Copycat,Lil' Carbon Copycat,Lil' Copycat
+ENEMY_K_CarbonCat,Carbon Cat,Carbon Cat,Carbon Cat
+ENEMY_U_CarbonCat,Carbon Copycat,Carbon Copycat,Copycat
+ENEMY_K_DrumBunny,Drum Bunny,Drum Bunny,Drum Bunny
+ENEMY_U_DrumBunny,Drummin' Rabbit,Drummin' Rabbit,Drummin' Rabbit
+ENEMY_K_2WattWilly,2-Watt Willy,2-Watt Willy,2-Watt Willy
+ENEMY_U_2WattWilly,Rogue Cheap Electronic Toy,Wicked Young-un's Toy,Rogue Toy
+ENEMY_K_LowAmpPhibian,Low Amp-phibian,Low Amp-phibian,Low Amp-phibian
+ENEMY_U_LowAmpPhibian,Zapper of the Swamp,Zapper o' th' Swamp,Swamp Zapper
+ENEMY_K_ShortCircuitZap,Short Circuit Zap,Short Circuit Zap,Short Circuit Zap
+ENEMY_U_ShortCircuitZap,Thunderbolt Spirit,Wisp o' th' Storms,Thunderbolt Spirit
+ENEMY_K_HighAmpPhibian,High Amp-phibian,High Amp-phibian,High Amp-phibian
+ENEMY_U_HighAmpPhibian,Electrocutioner of the Swamp,Electrocutioner o' th' Swamp,Swamp Electrocutioner
+ENEMY_K_Snoozer,Snoozer,Snoozer,Snoozer
+ENEMY_U_Snoozer,Restless Sleeper,Restless Napper,Unusual Pillow
+ENEMY_K_Shleep,Shleep,Shleep,Shleep
+ENEMY_U_Shleep,Uneasy Sheep of Slumber,Rough-actin' Woolface,Eepy Sheepy
+ENEMY_K_Dozer,Dozer,Dozer,Dozer
+ENEMY_U_Dozer,"""Heavy"" Sleeper","""Heavy"" Napper","""Heavy"" Sleeper"
+ENEMY_K_KickMeNote,Kick Me Note,Kick Me Note,Kick Me Note
+ENEMY_U_KickMeNote,Unoriginal Prank,Unoriginal Prank,Unoriginal Prank
+ENEMY_K_LostHat,Lost Hat,Lost Hat,Lost Hat
+ENEMY_U_LostHat,Mad Hat,Angered Ol' Tricorn,Mad Hat
+ENEMY_K_LostRibbon,Lost Ribbon,Lost Ribbon,Lost Ribbon
+ENEMY_U_LostRibbon,Old Gold Bow,Spinnin' Gal's Wonder,Mad Bow
+ENEMY_K_LostRocket,Lost Rocket,Lost Rocket,Lost Rocket
+ENEMY_U_LostRocket,Abandoned Explosives,Ol' Matey's Dynamite,Pipe Bomb!!!!
+ENEMY_K_FloatinFez,Floatin' Fez,Floatin' Fez,Floatin' Fez
+ENEMY_U_FloatinFez,Psychokinetic Hat,Floatin' Hat,Floatin' Hat
+ENEMY_K_ShoeSnake,Shoe Snake,Shoe Snake,Shoe Snake
+ENEMY_U_ShoeSnake,Lost Slitherin' Shoe,Serpent-like Sneaker,Snek
+ENEMY_K_PrincessRainboots,Princess Rainboots,Princess Rainboots,Princess Rainboots
+ENEMY_U_PrincessRainboots,Magical Pink Rainboots,Magical Pink Rainboots,Magical Pink Rainboots
+ENEMY_K_ThiefKicks,Thief Kicks,Thief Kicks,Thief Kicks
+ENEMY_U_ThiefKicks,Worn-out Shoes,Ol' Plunderer's Peglegs,Worn-out Shoes
+ENEMY_K_EnforcerBoots,Enforcer's Boots,Enforcer's Boots,Enforcer's Boots
+ENEMY_U_EnforcerBoots,Vengeful Combat Boots,Ol' Captain's Boots,Vengeful Combat Boots
+ENEMY_K_ScaldingCup,Scalding Cup of Java,Scalding Cup o' Java,Scalding Cup of Java
+ENEMY_U_ScaldingCup,Piping-Hot Drink,Pipin'-Hot Drink,Hot Drink of 3 Billion Devices
+ENEMY_K_DepressoEspresso,Depresso Espresso,Depresso Espresso,Depresso Espresso
+ENEMY_U_DepressoEspresso,Brew of Morning Despair,Unpleasant Brews o' Mornin' Blues,Displeasing Brew
+ENEMY_K_Chicksanthemum,Chicksanthemum,Chicksanthemum,Chicksanthemum
+ENEMY_U_Chicksanthemum,Feathered Flower,Cluckin' Flower,Feathered Flower
+ENEMY_K_Goatenrod,Goat'enrod,Goat'enrod,Goat'enrod
+ENEMY_U_Goatenrod,Lucifer's Gruff Goldenrod,Goldenrod o' th' Underworld,Gruff Goldenrod
+ENEMY_K_Pigtunia,Pigtunia,Pigtunia,Pigtunia
+ENEMY_U_Pigtunia,Particularly Piggy Plant,Swiney Pollen Pistol,Particularly Piggy Plant
+ENEMY_K_SheepstaDaisy,Sheepsta Daisy,Sheepsta Daisy,Sheepsta Daisy
+ENEMY_U_SheepstaDaisy,Explosive Floofy Flower,Kaboomin' Flower o' Fluffballs,Huggable Floofy Flower
+ENEMY_K_TrackinTroll,Trackin' Troll,Trackin' Troll,Trackin' Troll
+ENEMY_U_TrackinTroll,Stalker of the Internet,Stalkin' Troll,Corporate Cyberstalker
+ENEMY_K_SpywareWarrior,Spyware Warrior,Spyware Warrior,Spyware Warrior
+ENEMY_U_SpywareWarrior,Warmonger of Localhost,Mutineer o' th' Home Seas,Cookie Enjoyer
+ENEMY_K_TrajectoryTracer,Trajectory Tracer,Trajectory Tracer,Trajectory Tracer
+ENEMY_U_TrajectoryTracer,Cybernetic Sniper,Cybernetic Musketeer,Aimbot Cheater
+ENEMY_K_XLR8,XLR-8,XLR-8,XLR-8
+ENEMY_U_XLR8,XLR-8,XLR-8,XLR-8
+ENEMY_K_XLR16,XLR-16,XLR-16,XLR-16
+ENEMY_U_XLR16,XLR-16,XLR-16,XLR-16
+ENEMY_K_XLR32,XLR-32,XLR-32,XLR-32
+ENEMY_U_XLR32,XLR-32,XLR-32,XLR-32
+ENEMY_K_XLR64,XLR-64,XLR-64,XLR-64
+ENEMY_U_XLR64,XLR-64,XLR-64,XLR-64
+ENEMY_K_XLR128,XLR-128,XLR-128,XLR-128
+ENEMY_U_XLR128,XLR-128,XLR-128,XLR-128
+ENEMY_K_XLR256,XLR-256,XLR-256,XLR-256
+ENEMY_U_XLR256,XLR-256,XLR-256,XLR-256
+ENEMY_K_XLR512,XLR-512,XLR-512,XLR-512
+ENEMY_U_XLR512,XLR-512,XLR-512,XLR-512
+ENEMY_K_RocketRaccoon,The Rocket Raccoon,The Rocket Raccoon,The Rocket Raccoon
+ENEMY_U_RocketRaccoon,Launcher-Wielding Raccoon,Cannon-Wieldin' Raccoon,Spicy Boi
+ENEMY_K_SuspiciousFish,Suspicious Fish,Suspicious Fish,Suspicious Fish
+ENEMY_U_SuspiciousFish,Fish of the Vents,Fishy o' th' Ducts,Sussy Fish
+ENEMY_K_RedCloakedSpirit,Red Cloaked Spirit,Red Cloaked Spirit,Red Cloaked Spirit
+ENEMY_U_RedCloakedSpirit,Toilet Paper Spirit,Flyin' Dutchman o' th' Restroom,Skibidi Spirit
+ENEMY_K_DeusVolt,Deus Volt,Deus Volt,Deus Volt
+ENEMY_U_DeusVolt,Crusader of Storms,Crusader o' Storms,Deus Volt
+ENEMY_K_XLRAndo,XLR-Ando,XLR-Ando,XLR-Ando
+ENEMY_U_XLRAndo,XLR-Ando,XLR-Ando,XLR-Ando
+ENEMY_K_CameronMann,Cameron Mann,Cameron Mann,Cameron Mann
+ENEMY_U_CameronMann,Cameron Mann,Cameron Mann,Cameron Mann
+ENEMY_K_MichaelRophone,Michael Rophone,Michael Rophone,Michael Rophone
+ENEMY_U_MichaelRophone,Michael Rophone,Michael Rophone,Michael Rophone
+ENEMY_K_CommanderPeuter,Commander Peuter,Commander Peuter,Commander Peuter
+ENEMY_U_CommanderPeuter,Commander Peuter,Commander Peuter,Commander Peuter
+ENEMY_K_MonikaETorrh,Monika E. Torrh,Monika E. Torrh,Monika E. Torrh
+ENEMY_U_MonikaETorrh,Monika E. Torrh,Monika E. Torrh,Monika E. Torrh
+ENEMY_K_TheBoogieMan,The Boogie Man,The Boogie Man,The Boogie Man
+ENEMY_U_TheBoogieMan,Dancing Studio Ghost,Dancin' Studio Spirit,The Boogie Man
+ENEMY_K_RumbleSerpent,Rumble's Serpent,Rumble's Serpent,Rumble's Serpent
+ENEMY_U_RumbleSerpent,Rumble's Mechanical Monstrosity,Rumble's Steel Kraken,Rumble's Snek
+DG_SPK_UNKNOWN,???,???,???
+DG_SPK_RODRICK,"Rodrick Sign Co.","Rodrick Sign Co.","Your Mom!!!!!!!! (real)"
+DG_SPK_CASCADE,Agent Cascade,Purple Gal,Cascade
+DG_SPK_MOM,Mom,Mom,Mom
+DG_SPK_DAD,Dad,Pops,Dad
+DG_SPK_JUNIPER,Juniper,Lady Juniper,Juniper
+DG_SPK_CLAY,Clay,Cap'n Clay,Clay
+DG_SPK_MR_TULIVAE,Mr. Tulivae,Cap'n Tulivae,Mr. Tulivae
+DG_SPK_MRS_TULIVAE,Mrs. Tulivae,Mrs. Tulivae,Mrs. Tulivae
+DG_CHECK_CRATE,It's just a crate. Doesn't look like anything good is inside.,"It be just a crate, matey. Nothin' to plunder here.",It's just a crate.
+DG_CHECK_CRATES,It's just a bunch of crates. Doesn't look like they have anything useful.,"'Tis just a bunch o' crates. Nothin' to plunder here, matey.",It's just a bunch of crates.
+DG_CHECK_TRASH,Nothing useful there. Are you that desperate?,Nothin' useful there. Are ye that desperate?,You found... a whole lotta trash! Nicely done!
+DG_RODRICK1_SOYOURE,"So... you're reading a sign, eh? Well...","So... ye be readin' a sign, eh? Well...","So... you're reading a sign, eh? Well..."
+DG_RODRICK1_AREYOUSMART,Are you smart?,Be ye wise?,Are you smart?
+DG_RODRICK1_NOPE,Nope.,Nay.,Nope.
+DG_RODRICK1_DEFNOT,Definitely not.,Definitely naht.,Definitely not.
+DG_RODRICK1_DIDNT,"Yeah, I didn't think so.","Aye, I didn't think so.","Yeah, I didn't think so."
+DG_RODRICK1_DEFDIDNT,"Yeah, I definitely didn't think so.","Aye, I definitely didn't think so.","Yeah, I definitely didn't think so."
+DG_RODRICK1_COMEBACK,Come back when you're smart.,Come back when ye be wiser.,Come back when you're smart.
+DG_INTRO1_COMEUNPACK,"Hey, [ETHAN], we're unpacking your stuff! Come help!","Ahoy, [ETHAN], we be unpackin' yer stuff! Come help!","Hey, [ETHAN], we're unpacking your stuff! Come help!"
+DG_INTRO1_OVER_HERE,Over here! This is your new room!,Over here! This be yer new room!,Over here! This is your new room!
+DG_INTRO1_WDYT,What do you think?,What be yer thoughts?,What do you think?
+DG_INTRO1_GREAT,It's great!,Rather grand!,"Wow, sooooo comfy..."
+DG_INTRO1_ALRIGHT,It's alright...,It be alright...,It's alright...
+DG_INTRO1_GREAT_MOM,"Well, I'm glad you like it! I hope you'll be comfortable here.","Well, I be glad ye like it! I hope ye be comfortable here.",...
+DG_INTRO1_ALRIGHT_MOM,"I know it's not much, but I hope you'll be comfortable here.","I know it's nah much, but ye do with what ye got, right?","I know it's not much, but I hope you'll be comfortable here."
+DG_INTRO1_ITS_YOURS,"Well, it's all yours. Do you have a specific blanket color in mind?","Well, it's all yours, captain. What color flag does yer ship fly?","Well, it's all yours. Do you have a specific blanket color in mind?"
+DG_INTRO1_LOOKS_BETTER,"Wow, it looks even better already!","Arrr, fine choice!","That's so basic. Whatever, I guess."
+DG_INTRO1_ILL_BE_DOWNSTAIRS,"Alright, I'll be downstairs if you need me.","Alright, yer mama be downstairs if ye need her.","I'll be downstairs if you need me."
+DG_INTRO1_BRING_FUZZY,"Go bring out Fuzzy from the car, okay?","Go fetch Fuzzy from the car, aye?","Go bring out Fuzzy from the car, okay?"
+DG_INTRO1_MEET_NEIGHBORS,"Here he is! Hey, [ETHAN], come meet the neighbors!","Thar she blows! Hey, [ETHAN], come meet th' neighbors!","Took him long enough. Hey, [ETHAN], come meet the neighbors!"
+DG_INTRO1_MR_T,"This is Mr. Tulivae. He lives next door.","This be Cap'n Tulivae. He lives next door.","This is Mr. Tulivae. He lives next door."
+DG_INTRO1_HI_THERE,"Hi there, [ETHAN]. Pleasure meeting you.","Ahoy, [ETHAN]. Pleasure meetin' ya.","Hi there, [ETHAN]. Pleasure meeting you."
+DG_INTRO1_HE_SEEMS_NICE,He seems pretty nice. Maybe you should go say hi later.,He seems pretty nice. Maybe ye should go say hi later.,He seems pretty nice... but does he pay his taxes?
+DG_BECKY_MEET_HI,"Hey, there! I'm Secky the Bec-- I mean, Becky the Secretarybird!","Ahoy! I'm Secky th' Bec-- Errrr, Becky th' Secretarybird!","Hey, there! I'm Secky the Bec-- I mean, Becky the Secretarybird!"
+DG_BECKY_MEET_HOSTILES,"You may have noticed there are a certain class of hostile birds around this area.","Ye may have noticed there be a certain class o' dragons 'round these seas.","You may have noticed some spicy birbs around this area."
+DG_BECKY_MEET_DONT_WORRY,"Don't worry; I'm not one of them.","Don't ye worry yer lil' head; I be nah one o' those bilge rats.","Don't worry; I'm not one of them."
+DG_BECKY_MEET_STUDY,"I'm running a study on what may be causing this sudden outbreak.","I be runnin' a survey on th' lands, findin' out what may be causin' this sudden storm.","I'm running a study on what may be causing this sudden outbreak."
+DG_BECKY_MEET_HELP,"Would you mind helping me discover more species of this diverse population?","Would ye mind helpin' me discover more squawkers o' this diverse population?","Would you mind helping me discover more species of this diverse population?"
+DG_BECKY_MEET_LOGGING,"I need you to log the species you encounter in your travels.","I need ye to log th' squawkers ye encounter in yer travels.","I need you to log the species you encounter in your travels."
+DG_BECKY_MEET_OTHER_ENEMIES,"Feel free to log other oddities you encounter as well. It'll be your own logbook, after all.", "Feel free to log other oddities ye encounter as well. It'll be yer own logbook, after all.","Feel free to log other oddities you encounter as well. It'll be your own logbook, after all."
+DG_BECKY_MEET_MILESTONES,"I'll even give you a little something for each milestone you hit.","I'll even give ye a lil' treasure fer each milestone ye hit.","What? Yeah, there will be rewards, too, I guess."
+DG_BECKY_MEET_OFFER,"So, what do you say?","So, whadda ye say?","So...?"
+DG_BECKY_MEET_ACCEPT,"Sure!","Aye!","Sure!"
+DG_BECKY_MEET_DECLINE,"I'm busy.","Nay, matey.","Nah."

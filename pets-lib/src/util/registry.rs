@@ -40,16 +40,14 @@ where
     godot_print!("Reading modded {} registries.", registry_name);
 
     // make the folder in case it doesn't exist yet
-    DirAccess::open("user://".into())
-        .unwrap()
-        .make_dir("modded".into());
+    DirAccess::open("user://").unwrap().make_dir("modded");
 
-    DirAccess::open("user://modded".into())
+    DirAccess::open("user://modded")
         .unwrap()
-        .make_dir(registry_name.into());
+        .make_dir(registry_name);
 
     let Some(mut dir) =
-        DirAccess::open(format!("user://modded/{}", registry_name).into())
+        DirAccess::open(&format!("user://modded/{registry_name}"))
     else {
         godot_warn!(
             "Could not open `/modded/{0}`, no modded {0} were loaded.",
@@ -75,15 +73,15 @@ where
     T: DeserializeOwned + Serialize,
 {
     godot_print!("Reading vanilla `{}`.", folder_name);
-    let folder_path = format!("res://assets/{}", folder_name);
+    let folder_path = format!("res://assets/{folder_name}");
 
-    let res = DirAccess::open(folder_path.clone().into())
+    let res = DirAccess::open(&folder_path)
         .unwrap()
         .get_files()
         .to_vec()
         .into_iter()
-        .map(|fname| {
-            let path = format!("{}/{}", folder_path, fname);
+        .flat_map(|fname| {
+            let path = format!("{folder_path}/{fname}");
             godot_print!("Reading vanilla registry: {}", path);
             let content = read_registry(&path).expect(
                 "Error loading vanilla registry. THIS IS A BUG, please report!",
@@ -92,7 +90,6 @@ where
             godot_print!("Vanilla registry {} read!", path);
             content
         })
-        .flatten()
         .collect::<HashMap<_, _>>();
 
     godot_print!("Successfully read vanilla `{}`!\n\n", folder_name);

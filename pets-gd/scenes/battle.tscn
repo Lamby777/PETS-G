@@ -1,16 +1,16 @@
 [gd_scene load_steps=26 format=3 uid="uid://kgl5788x405y"]
 
-[ext_resource type="Shader" path="res://themes/opacity.gdshader" id="1_3pmac"]
-[ext_resource type="Script" path="res://classes/tactics/enemies/A_NONNY_MOUSE.gd" id="1_vrl6q"]
-[ext_resource type="Shader" path="res://themes/vdrugs/rainbow.gdshader" id="2_0m4jp"]
+[ext_resource type="Shader" uid="uid://cakivekftxu5d" path="res://themes/opacity.gdshader" id="1_3pmac"]
+[ext_resource type="Script" uid="uid://c3btsjsnjtghu" path="res://classes/tactics/enemies/ANonnyMouse.gd" id="1_vrl6q"]
+[ext_resource type="Shader" uid="uid://bkmn6vpcv6d25" path="res://themes/vdrugs/rainbow.gdshader" id="2_0m4jp"]
 [ext_resource type="PackedScene" uid="uid://dd2ecg5hgyxv2" path="res://scenes/bullets/mouse1.tscn" id="2_n0w8q"]
 [ext_resource type="Texture2D" uid="uid://he44mug8lejt" path="res://assets/textures/misc/BattleIcons.png" id="3_k3xai"]
 [ext_resource type="AudioStream" uid="uid://ck0eoifj1plwe" path="res://assets/sounds/click1.wav" id="4_icqrr"]
 [ext_resource type="AudioStream" uid="uid://bobf56v1g63p4" path="res://assets/music/battle/alright.ogg" id="4_l6m5j"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="5_hcsfj"]
-[ext_resource type="Texture2D" uid="uid://cx24dyfnh30ag" path="res://assets/textures/portraits/ETHAN.png" id="6_abown"]
+[ext_resource type="Texture2D" uid="uid://cx24dyfnh30ag" path="res://assets/textures/portraits/Ethan.png" id="6_abown"]
 [ext_resource type="PackedScene" uid="uid://ywn8h01im5gx" path="res://scenes/enemy_sprite.tscn" id="6_dgpl5"]
-[ext_resource type="Script" path="res://scenes/hpbar.gd" id="9_r25ik"]
+[ext_resource type="Script" uid="uid://dygfeopjs60l3" path="res://classes/hpbar.gd" id="9_r25ik"]
 [ext_resource type="PackedScene" uid="uid://b2m4ghg2jf166" path="res://scenes/skills-menu.tscn" id="12_546eg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w1wwc"]
@@ -85,8 +85,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_khfqk"]
 _data = {
-"RESET": SubResource("Animation_fe50h"),
-"margin_slide_up": SubResource("Animation_7bvmr")
+&"RESET": SubResource("Animation_fe50h"),
+&"margin_slide_up": SubResource("Animation_7bvmr")
 }
 
 [sub_resource type="Animation" id="Animation_lk11u"]
@@ -153,7 +153,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1024, -604), Vector2(400, -604)]
+"values": [Vector2(1088, -604), Vector2(528, -604)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -170,8 +170,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_730bq"]
 _data = {
-"RESET": SubResource("Animation_lk11u"),
-"dualmenu_open": SubResource("Animation_0hj2l")
+&"RESET": SubResource("Animation_lk11u"),
+&"dualmenu_open": SubResource("Animation_0hj2l")
 }
 
 [sub_resource type="Animation" id="Animation_fgiup"]
@@ -207,8 +207,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cwld1"]
 _data = {
-"RESET": SubResource("Animation_fgiup"),
-"fade_in": SubResource("Animation_16138")
+&"RESET": SubResource("Animation_fgiup"),
+&"fade_in": SubResource("Animation_16138")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lgbmi"]
@@ -222,15 +222,15 @@ right_panel_destination = NodePath("Menu/DualMenu/RightPanel/Margins")
 [node name="Tactics" type="Node" parent="."]
 process_mode = 4
 
-[node name="A_NONNY_MOUSE" type="Node" parent="Tactics"]
+[node name="ANonnyMouse" type="Node" parent="Tactics"]
 script = ExtResource("1_vrl6q")
 bullet_scene = ExtResource("2_n0w8q")
 
+[node name="ClickSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_icqrr")
+
 [node name="BattleMusic" type="BattleMusic" parent="."]
 stream = ExtResource("4_l6m5j")
-
-[node name="ClickSFX" type="AudioStreamPlayer" parent="BattleMusic"]
-stream = ExtResource("4_icqrr")
 
 [node name="RhythmTimer" type="Timer" parent="BattleMusic"]
 one_shot = true
@@ -286,6 +286,17 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("5_hcsfj")
+
+[node name="ClickStatus" type="RichTextLabel" parent="Menu"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 576.0
+offset_bottom = 128.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+text = "Ready?"
 
 [node name="InfoBars" type="VBoxContainer" parent="Menu"]
 unique_name_in_owner = true
@@ -388,14 +399,14 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -1600.0
 offset_top = -604.0
-offset_right = -1088.0
-offset_bottom = 304.0
+offset_right = -1152.0
+offset_bottom = 92.0
 grow_horizontal = 0
 grow_vertical = 2
 
 [node name="Margins" type="MarginContainer" parent="Menu/DualMenu/LeftPanel"]
 layout_mode = 2
-theme_override_constants/margin_left = 80
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 80
@@ -406,7 +417,7 @@ theme_override_constants/separation = 40
 
 [node name="Portrait" type="PanelContainer" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
 z_index = 1
-custom_minimum_size = Vector2(368, 200)
+custom_minimum_size = Vector2(0, 192)
 layout_mode = 2
 theme_type_variation = &"FramePanelContainer"
 
@@ -418,14 +429,14 @@ layout_mode = 2
 unique_name_in_owner = true
 z_index = -1
 layout_mode = 2
-offset_right = 370.0
-offset_bottom = 185.0
+offset_right = 354.0
+offset_bottom = 177.0
 texture = ExtResource("6_abown")
 expand_mode = 2
 
 [node name="BattleChoices" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 400)
+custom_minimum_size = Vector2(0, 256)
 layout_mode = 2
 
 [node name="ChoiceAgent" type="ChoiceAgent" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
@@ -433,10 +444,9 @@ layout_mode = 2
 [node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 clip_contents = false
 layout_mode = 2
-offset_right = 432.0
-offset_bottom = 94.0
+offset_right = 400.0
+offset_bottom = 60.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Skills"
 fit_content = true
@@ -444,11 +454,10 @@ fit_content = true
 [node name="Items" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 clip_contents = false
 layout_mode = 2
-offset_top = 104.0
-offset_right = 432.0
-offset_bottom = 198.0
+offset_top = 64.0
+offset_right = 400.0
+offset_bottom = 124.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Items"
 fit_content = true
@@ -456,11 +465,10 @@ fit_content = true
 [node name="Swap" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 clip_contents = false
 layout_mode = 2
-offset_top = 208.0
-offset_right = 432.0
-offset_bottom = 302.0
+offset_top = 128.0
+offset_right = 400.0
+offset_bottom = 188.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Swap"
 fit_content = true
@@ -468,11 +476,10 @@ fit_content = true
 [node name="Run" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
 clip_contents = false
 layout_mode = 2
-offset_top = 312.0
-offset_right = 432.0
-offset_bottom = 406.0
+offset_top = 192.0
+offset_right = 400.0
+offset_bottom = 252.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "Run"
 fit_content = true
@@ -486,8 +493,8 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = 1024.0
 offset_top = -604.0
-offset_right = 1600.0
-offset_bottom = 304.0
+offset_right = 1472.0
+offset_bottom = 612.0
 grow_horizontal = 0
 grow_vertical = 2
 
@@ -503,18 +510,18 @@ layout_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/DualMenu/RightPanel"]
 libraries = {
-"": SubResource("AnimationLibrary_khfqk")
+&"": SubResource("AnimationLibrary_khfqk")
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/DualMenu"]
 root_node = NodePath("../../..")
 libraries = {
-"": SubResource("AnimationLibrary_730bq")
+&"": SubResource("AnimationLibrary_730bq")
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_cwld1")
+&"": SubResource("AnimationLibrary_cwld1")
 }
 
 [node name="IntroBlack" type="ColorRect" parent="."]

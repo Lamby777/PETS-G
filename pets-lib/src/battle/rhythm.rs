@@ -1,17 +1,23 @@
 //!
 //! Data structures related to rhythm in battle
 //!
+//! For the purposes of battle rhythm...
+//! - "Hit" means you clicked at the right time
+//! - "Flop" means you click at the wrong time
+//! - "Miss" means you didn't click at all
+//!
 
-use godot::classes::{InputEvent, Timer};
+use godot::classes::{
+    AudioStreamPlayer, IAudioStreamPlayer, InputEvent, Timer,
+};
 use godot::prelude::*;
 
 use super::midi::{BattleTrack, MidiReceiver};
-use super::AttackFlopReason;
 use crate::common::*;
 
 /// How long before/after a beat to still consider clicks valid
-const LENIENCY_PRE: f64 = 0.08;
-const LENIENCY_POST: f64 = 0.02;
+const LENIENCY_PRE: f64 = 0.1;
+const LENIENCY_POST: f64 = 0.04;
 
 #[derive(Clone, Copy, Debug)]
 /// The game's MIDI files have a special code for what each
@@ -75,25 +81,36 @@ pub struct BattleMusic {
     /// timer that gets fired a little bit after the note off event
     #[init(node = "RhythmTimer")]
     note_off_timer: OnReady<Gd<Timer>>,
-
-    /// Metronome-like thingy
-    #[init(node = "ClickSFX")]
-    clicksfx: OnReady<Gd<AudioStreamPlayer>>,
 }
 
 #[godot_api]
 impl BattleMusic {
+    #[signal]
+    fn note_hit();
+
+    #[signal]
+    fn note_flop();
+
+    #[signal]
+    fn note_miss();
+
     /// Called when the player successfully hits a note
     fn on_attack_hit(&mut self) {
         self.rhythm.reset();
+        self.base_mut().emit_signal("note_hit", &[]);
     }
 
-    fn on_attack_flop(&mut self, reason: AttackFlopReason) {
-        // we'll use it later for telling the user why
-        // the attack failed, but for now it's just a debug print
-        // godot_print!("Flop reason: {:?}", reason);
-        let _ = reason;
+    fn on_attack_flop(&mut self) {
+        self.on_attack_flop_or_miss();
+        self.base_mut().emit_signal("note_flop", &[]);
+    }
 
+    fn on_attack_miss(&mut self) {
+        self.on_attack_flop_or_miss();
+        self.base_mut().emit_signal("note_miss", &[]);
+    }
+
+    fn on_attack_flop_or_miss(&mut self) {
         self.rhythm.player_clicked = false;
     }
 
@@ -105,12 +122,6 @@ impl BattleMusic {
             self.on_attack_hit();
         }
 
-        // let mut stream = AudioStream::new_gd();
-        // stream.set_path("res://assets/sounds/click1.wav".into());
-        // self.clicksfx.set_stream(stream);
-
-        self.clicksfx.play();
-
         let timer = &mut self.note_off_timer;
         timer.set_wait_time(LENIENCY_POST);
         timer.start();
@@ -120,7 +131,7 @@ impl BattleMusic {
     pub fn close_beat(&mut self) {
         // If there was an unclicked note, it's a flop
         if self.rhythm.note.take().is_some() {
-            self.on_attack_flop(AttackFlopReason::Skipped);
+            self.on_attack_miss();
         }
     }
 
@@ -129,7 +140,7 @@ impl BattleMusic {
         // If the player clicked early and there was no note
         // shortly after it, it's a flop
         if self.rhythm.player_clicked {
-            self.on_attack_flop(AttackFlopReason::PoorTiming);
+            self.on_attack_flop();
         }
 
         self.rhythm.player_clicked = false;
@@ -138,6 +149,9 @@ impl BattleMusic {
     #[func]
     pub fn on_player_clicked(&mut self) {
         if self.rhythm.player_clicked {
+            // prevent the cheat strategy of spamming clicks to always get hits
+            // by only allowing one click per note
+            self.on_attack_flop();
             return;
         };
 
@@ -198,7 +212,7 @@ impl IAudioStreamPlayer for BattleMusic {
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
-        if event.is_action_pressed("ui_accept".into()) {
+        if event.is_action_pressed("ui_accept") {
             self.on_player_clicked();
         }
     }

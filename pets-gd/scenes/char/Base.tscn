@@ -20,7 +20,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ga1w3"]
 _data = {
-"RESET": SubResource("Animation_nyypu")
+&"RESET": SubResource("Animation_nyypu")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r24ka"]
@@ -250,8 +250,8 @@ frame = 38
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ga1w3"),
-"PCharNode": ExtResource("2_misv4")
+&"": SubResource("AnimationLibrary_ga1w3"),
+&"PCharNode": ExtResource("2_misv4")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]

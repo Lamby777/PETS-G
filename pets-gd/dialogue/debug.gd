@@ -16,7 +16,7 @@ func _start() -> void:
 
     match choice["value"]:
         "Battle": 
-            World.start_battle("A_NONNY_MOUSE")
+            World.start_battle("ANonnyMouse")
 
         "Item":
             choice = await dbox().say_as_with_choices(
@@ -24,15 +24,19 @@ func _start() -> void:
                     "What do you need?",
                 ], [
                     "Rusty x1",
-                    "Rusty x5",
+                    "Stick x1",
+                    "Bundle",
                 ]
             )
 
             match choice["index"]:
                 0:
-                    DialogueScriptBase.debug_item("trusty_rusty_pistol", 1)
+                    DialogueScript.debug_item("trusty_rusty_pistol", 1)
                 1:
-                    DialogueScriptBase.debug_item("trusty_rusty_pistol", 5)
+                    DialogueScript.debug_item("cool_stick", 1)
+                2:
+                    DialogueScript.debug_item("trusty_rusty_pistol", 5)
+                    DialogueScript.debug_item("cool_stick", 5)
 
             await dbox().say_as("[CASCADE]", [
                 "Here you go!"
@@ -43,14 +47,14 @@ func _start() -> void:
                 "[CASCADE]", [
                     "Who do you want to add?",
                 ], [
-                    "ETHAN",
-                    "SIVA",
-                    "TERRA",
-                    "MIRA",
-                    "LYEMBO",
-                    "QUOLO",
-                    "LEO",
-                    "DYLAN"
+                    "Ethan",
+                    "Siva",
+                    "Terra",
+                    "Mira",
+                    "Lyembo",
+                    "Quolo",
+                    "Leo",
+                    "Dylan"
                 ]
             )
 

@@ -10,7 +10,7 @@ use godot::classes::{
 use godot::prelude::*;
 
 use crate::common::*;
-use crate::dialogue::DialogueScriptBase;
+use crate::dialogue::DialogueScript;
 
 use super::inv_node::InventoryNode;
 
@@ -42,7 +42,7 @@ impl WorldMenu {
 
         self.base()
             .get_node_as::<RichTextLabel>("%DatePanel/RichTextLabel")
-            .set_text(txt.into());
+            .set_text(&txt);
     }
 
     fn open_or_close(&mut self, open: bool) {
@@ -88,13 +88,15 @@ impl WorldMenu {
             "Inventory" => self.open_inventory(),
             "DebugQuit" => godot_tree().quit(),
             "DebugMenu" => {
-                DialogueScriptBase::new(
+                let mut ds = DialogueScript::new(
                     self.debug_menu_script
                         .as_ref()
                         .expect("no debug script exported")
                         .clone(),
-                )
-                .call("_start".into(), &[]);
+                );
+
+                self.base_mut().add_child(&ds);
+                ds.call("_start", &[]);
             }
 
             _ => unreachable!(),
@@ -106,13 +108,13 @@ impl WorldMenu {
 impl IPanel for WorldMenu {
     fn ready(&mut self) {
         let callable = self.base().callable("on_choice_picked");
-        self.choices.connect("selection_confirmed".into(), callable);
+        self.choices.connect("selection_confirmed", &callable);
 
         self.choices.bind_mut().disable();
     }
 
     fn input(&mut self, event: Gd<InputEvent>) {
-        if event.is_action_pressed("menu".into()) {
+        if event.is_action_pressed("menu") {
             if !pcb().bind().can_move() {
                 return; // you can only open the menu if you can walk
             }

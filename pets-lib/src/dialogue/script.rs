@@ -4,16 +4,16 @@ use godot::prelude::*;
 
 #[derive(GodotClass)]
 #[class(init, base=Node)]
-pub struct DialogueScriptBase {
+pub struct DialogueScript {
     base: Base<Node>,
 }
 
 #[godot_api]
-impl DialogueScriptBase {
+impl DialogueScript {
     #[func]
     pub fn new(script: Gd<GDScript>) -> Gd<Self> {
-        let mut executor = DialogueScriptBase::new_alloc();
-        executor.set_script(script.to_variant());
+        let mut executor = DialogueScript::new_alloc();
+        executor.set_script(&script.to_variant());
         executor
     }
 
@@ -29,13 +29,8 @@ impl DialogueScriptBase {
     }
 
     #[func]
-    fn pcb(&self) -> Gd<PlayerCB> {
+    fn pcb(&self) -> Gd<PartyCB> {
         pcb()
-    }
-
-    #[func]
-    fn end() {
-        DialogBox::singleton().bind_mut().end();
     }
 
     // -----------------------------------------------------------------
@@ -44,7 +39,7 @@ impl DialogueScriptBase {
     // -----------------------------------------------------------------
 
     #[func]
-    fn debug_item(item_id: String, quantity: u32) {
+    fn debug_item(item_id: String, quantity: i32) {
         Inventory::get().borrow_mut().give_item(item_id, quantity);
     }
 }

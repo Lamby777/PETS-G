@@ -55,7 +55,7 @@ impl Connection for GdW<MidiReceiver> {
 impl MidiReceiver {
     pub fn on_note_event(&mut self, on: bool, note: u8) {
         let signal = if on { "note_on" } else { "note_off" };
-        self.base_mut().call_deferred("emit_signal".into(), &[
+        self.base_mut().call_deferred("emit_signal", &[
             signal.to_variant(),
             note.to_variant(),
         ]);
@@ -65,10 +65,10 @@ impl MidiReceiver {
 #[godot_api]
 impl MidiReceiver {
     #[signal]
-    fn note_on(note: u8) {}
+    fn note_on(note: u8);
 
     #[signal]
-    fn note_off(note: u8) {}
+    fn note_off(note: u8);
 }
 
 #[godot_api]
@@ -84,9 +84,9 @@ impl BattleTrack {
     /// Just pass in the name of the track. No file extension.
     ///
     /// # Memory Leak
-    /// See [`from_godot_path`] docs for more information.
-    pub fn new_from_name<'a>(track_name: &str) -> BattleTrack {
-        let path = format!("res://assets/music/battle/{}.mid", track_name);
+    /// See [`BattleTrack::from_godot_path`] docs for more information.
+    pub fn new_from_name(track_name: &str) -> BattleTrack {
+        let path = format!("res://assets/music/battle/{track_name}.mid");
         let Smf { header, tracks } = Self::from_godot_path(&path);
 
         let midly::Timing::Metrical(ticks) = header.timing else {

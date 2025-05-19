@@ -12,7 +12,7 @@ use super::scrapbook::Scrapbook;
 use crate::common::*;
 
 fn save_path(slot: u8) -> String {
-    format!("user://save{}.json", slot)
+    format!("user://save{slot}.json")
 }
 
 /// All the data saved to one of the save file slots
@@ -39,7 +39,7 @@ impl SaveFile {
             inventory: Rc::new(RefCell::new(Inventory::new())),
             scrapbook: Scrapbook::empty(),
             quests: HashMap::new(),
-            date: NaiveDate::from_ymd_opt(2037, 09, 01).unwrap(),
+            date: NaiveDate::from_ymd_opt(2037, 9, 1).unwrap(),
             bed_color: "red".to_string(),
         }
     }
@@ -48,7 +48,7 @@ impl SaveFile {
         let new_save = Self::fresh();
         new_save.write_to(save_slot);
 
-        return Ok(new_save);
+        Ok(new_save)
         // SKIP THIS SHIT FOR DEBUG PURPOSES
 
         // let path = save_path(save_slot);
@@ -69,9 +69,9 @@ impl SaveFile {
 
     pub fn write_to(&self, save_slot: u8) {
         let path = save_path(save_slot);
-        let mut file = GFile::open(path, ModeFlags::WRITE).unwrap();
+        let mut file = GFile::open(&path, ModeFlags::WRITE).unwrap();
 
         let content = serde_json::to_string(self).unwrap();
-        write!(file, "{}", content).unwrap();
+        write!(file, "{content}").unwrap();
     }
 }

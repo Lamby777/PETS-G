@@ -11,7 +11,7 @@ animations = [{
 "texture": ExtResource("1_ef2js")
 }],
 "loop": true,
-"name": &"A_NONNY_MOUSE-Idle",
+"name": &"ANonnyMouse-Idle",
 "speed": 0.0
 }, {
 "frames": [{
@@ -22,11 +22,11 @@ animations = [{
 "texture": ExtResource("3_u8ffr")
 }],
 "loop": true,
-"name": &"A_NONNY_MOUSE-Run",
+"name": &"ANonnyMouse-Run",
 "speed": 6.0
 }]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D"]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_hs7pi")
-animation = &"A_NONNY_MOUSE-Idle"
+animation = &"ANonnyMouse-Idle"

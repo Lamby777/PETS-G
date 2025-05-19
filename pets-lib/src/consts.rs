@@ -25,6 +25,9 @@ pub mod battle {
     /// are the ones that you get to use in battle.
     pub const BATTLE_PARTY_SIZE: usize = 4;
 
+    /// Number of accessory slots per character
+    pub const ACCESSORY_SLOTS: usize = 3;
+
     pub const INTRO_FADE_PREDELAY: f64 = 0.5;
     pub const INTRO_COUNTDOWN_SEC: f64 = 3.0;
 
@@ -35,7 +38,7 @@ pub mod battle {
     pub const KARMA_STEP: f64 = 0.1; // `some whole number * this = 1` must be true
 }
 
-pub mod playercb {
+pub mod partycb {
     use super::*;
 
     // Movement physics stuff
@@ -61,7 +64,7 @@ pub mod dialogue {
     pub const DEFAULT_VOX: &str = "_";
 
     pub const TEXT_VISIBILITY_DELAY: f64 = 0.015;
-    pub const PAUSE_CHAR: char = '​';
+    pub const PAUSE_CHAR: char = '\u{200B}'; // ​
     pub const PAUSE_CHAR_DELAY: f64 = 0.1;
     pub const PUNCT_DELAY: f64 = 0.1;
     pub const WHITESPACE_DELAY: f64 = 0.03;

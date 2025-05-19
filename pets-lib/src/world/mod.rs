@@ -6,7 +6,9 @@ use crate::common::*;
 use crate::consts::battle::*;
 
 use enemy_node::WalkingEnemy;
-use godot::classes::{AnimationPlayer, AudioServer, AudioStream, CanvasLayer};
+use godot::classes::{
+    AnimationPlayer, AudioServer, AudioStream, AudioStreamPlayer, CanvasLayer,
+};
 use godot::global::randf_range;
 use godot::prelude::*;
 
@@ -14,16 +16,16 @@ mod enemy_node;
 mod interaction;
 mod inv_node;
 mod menu; // mod menu?? are you hacking?!!! ban ban report >:3
+mod partycb;
 mod pchar_node;
-mod playercb;
 
 mod music_zone;
 mod water_zone;
 use music_zone::MusicZone;
 use water_zone::WaterZone;
 
-pub use interaction::{InteractionManager, InteractionZone};
-pub use playercb::PlayerCB;
+pub use interaction::InteractionZone;
+pub use partycb::PartyCB;
 
 // just for testing
 // use a value provided by the mz later on...
@@ -34,7 +36,7 @@ fn set_or_stop_audio(
     mut audio: Gd<AudioStreamPlayer>,
 ) {
     match src {
-        Some(src) => audio.set_stream(src),
+        Some(ref src) => audio.set_stream(src),
         None => audio.stop(),
     }
 }
@@ -47,12 +49,12 @@ fn generate_random_mod() -> Vector2 {
 
 fn cue_battle_intro_fx() {
     // start the cool shader rectangle thing
-    let mut rect = PlayerCB::fx_rect();
-    let mut mat = PlayerCB::fx_material();
-    rect.call("reset_shader_timer".into(), &[]);
+    let mut rect = PartyCB::fx_rect();
+    let mut mat = PartyCB::fx_material();
+    rect.call("reset_shader_timer", &[]);
 
     let rand_mod = generate_random_mod().to_variant();
-    mat.set_shader_parameter("rand_mod".into(), rand_mod);
+    mat.set_shader_parameter("rand_mod", &rand_mod);
 
     rect.set_visible(true);
 }
@@ -102,21 +104,21 @@ impl World {
         let mut old_room = Self::room();
 
         for mut child in old_room.get_children().iter_shared() {
-            old_room.remove_child(child.clone());
+            old_room.remove_child(&child);
             child.queue_free();
         }
 
         old_room.replace_by(&new_room);
 
         let mut world = self.base_mut();
-        world.call_deferred("reconnect_musiczones".into(), &[]);
-        world.call_deferred("reconnect_waterzones".into(), &[]);
+        world.call_deferred("reconnect_musiczones", &[]);
+        world.call_deferred("reconnect_waterzones", &[]);
     }
 
     // ---------------------------------------- Battle stuff
 
     #[signal]
-    fn battle_intro_done(eid: GString) {}
+    fn battle_intro_done(eid: GString);
 
     fn mute_audio_bus(mute_world: bool) {
         let (muted, unmuted) = if mute_world { (1, 2) } else { (2, 1) };
@@ -129,21 +131,19 @@ impl World {
     #[func]
     pub fn start_battle(eid: GString) {
         let eid = EnemyID::from_godot(eid);
-        let enemy_data = EnemyData::from_id(eid);
+        let enemy_data = EnemyData::new_from_eid(eid);
         pcb()
             .bind_mut()
             .battling
             .push(Rc::new(RefCell::new(enemy_data)));
         let world = World::singleton();
 
-        let mat = PlayerCB::fx_material();
-        let fade_len = mat.get_shader_parameter("LENGTH".into()).to::<f64>();
+        let mat = PartyCB::fx_material();
+        let fade_len = mat.get_shader_parameter("LENGTH").to::<f64>();
 
         set_timeout(INTRO_FADE_PREDELAY, cue_battle_intro_fx);
 
-        let cue_scene = world
-            .callable("cue_battle_scene")
-            .bindv((&[eid.to_variant()]).into());
+        let cue_scene = world.callable("cue_battle_scene").bindv(&varray![eid]);
         set_timeout_callable(INTRO_FADE_PREDELAY + fade_len, cue_scene);
     }
 
@@ -158,7 +158,7 @@ impl World {
     fn cue_battle_scene(&mut self, _eid: GString) {
         // emit a signal for other nodes if they need to do something
         self.base_mut()
-            .emit_signal("battle_intro_done".into(), &[_eid.to_variant()]);
+            .emit_signal("battle_intro_done", &[_eid.to_variant()]);
 
         let mut layer = self.base().get_node_as::<CanvasLayer>(LAYER_NAME);
 
@@ -205,8 +205,7 @@ impl World {
         self.fade_animator.set_speed_scale(AUDIO_FADE_TIME);
         self.fade_animator.stop();
 
-        self.fade_animator
-            .set_assigned_animation("crossfade".into());
+        self.fade_animator.set_assigned_animation("crossfade");
         self.fade_animator.play();
 
         // play the stuff
@@ -250,13 +249,11 @@ impl World {
             disconnect_signal(&mut zone, "body_exited");
 
             let on_mz_exit = self.base().callable("on_mz_exit");
-            let on_mz_enter = self
-                .base()
-                .callable("on_mz_enter")
-                .bindv((&[zone.to_variant()]).into());
+            let on_mz_enter =
+                self.base().callable("on_mz_enter").bindv(&varray![zone]);
 
-            zone.connect("body_entered".into(), on_mz_enter);
-            zone.connect("body_exited".into(), on_mz_exit);
+            zone.connect("body_entered", &on_mz_enter);
+            zone.connect("body_exited", &on_mz_exit);
         }
     }
 
@@ -270,13 +267,11 @@ impl World {
             disconnect_signal(&mut zone, "body_exited");
 
             let on_water_exit = self.base().callable("on_water_exit");
-            let on_water_enter = self
-                .base()
-                .callable("on_water_enter")
-                .bindv((&[zone.to_variant()]).into());
+            let on_water_enter =
+                self.base().callable("on_water_enter").bindv(&varray![zone]);
 
-            zone.connect("body_entered".into(), on_water_enter);
-            zone.connect("body_exited".into(), on_water_exit);
+            zone.connect("body_entered", &on_water_enter);
+            zone.connect("body_exited", &on_water_exit);
         }
     }
 }
