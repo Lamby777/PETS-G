@@ -17,6 +17,48 @@ a warning anyway.
 
 ---
 
+## Intro Disclaimers, Worldbuilding Context, etc.
+
+---
+
+A lot of this stuff WILL change. It's not "retconning," it's just revising a plot that happens to be public because I like letting people see the process. Don't judge me for any of this being "cringe" until 1.0 release, the same way you wouldn't judge someone for sus tweets they posted 15 years ago (unless you're stupid or something and think that's a reasonable thing to judge people for idk).
+
+---
+
+The game is very unashamedly [20 Minutes Into The Future](https://tvtropes.org/pmwiki/pmwiki.php/Main/TwentyMinutesIntoTheFuture) at times. It is a deliberate choice not to care about realistic timeframes if it compromises familiarity and the "Rule of Cool."
+
+In reality, it probably doesn't take place in exactly 2037, either, but can you really disagree with picking a cool-sounding number?
+Oh, almost forgot: I originally came up with 2037 because it was a year right before 2038, the year of the 32-bit Unix times overflow bug. People living their lives as usual when everything's falling apart. Very symbolic, right?
+
+For the most part, the timeline diverged with ours somewhere in the 1500-1950 range, but this isn't a hard and fast rule; things from our current timeline WILL exist in this world whenever practical for familiarity. These guys, for the most part, use the same style of vehicles, weapons, electronics, etc. that we have today, just with different brands and slightly cooler sci-fi features.
+
+---
+
+The geography and countries of this world do not at all resemble ours. Corr Valley roughly represents US tech cities (Silicon Valley, D.C. area, etc.), but is in a pretty unique spot, geography-wise. Melpine is a slightly more rural warmer version of Ontario, inspired by a trip I went on early in the game's development. Same inspiration for Constchar, but it's inspired both by the mountainy areas of Iran and part of Turkiye. Everything else in the game is mostly made-up. For example, Constchar Outskirts isn't inspired by any particular place-- mostly just how it felt to listen to the song "A Horse With No Name" by America, which was stuck in my head during that time. That's how abstract it gets, so don't try to overthink it or try to look for an allegory for real geopolitics or anything-- it's not there and anything you come up with will just be your personal beliefs speaking.
+
+---
+
+Similarly, culture and language is not at all developed the same way as our timeline. They speak English for the same convenience reasons mentioned before. However, many names might seem unusual (Mylo, Taine, Cassander) or modified, (Raine, Yusamira, Jolainne, Juliess) or even not like any of our names at all (Winthrus, Quolo, Neoxylin).
+
+- This is because I wanted names that would be fairly unique, but still easily memorable. The same way language evolved over time until now, I wanted names to evolve that way into the future. Sure, the internet will likely have slowed down this process of change, but that's no fun. Rule of Cool, remember?
+- Do not assume pronunciations will work the same way. People mispronounce stuff all the time. Some of these mispronunciations became popular enough to be the new "correct" pronunciation. Sorry for this next part, I'm not an expert in linguistics and will probably use some wrong terms.
+  - If you see an L with an apostrophe, the apostrophe isn't a dropped vowel like in French. Instead, it's pretty much just pronounced together as L by its own as a syllable. For example, Winthrus's last name "L'aur" would sound something like loh-ARE or lew-ARE, as two separate syllables.
+  - Double Ls ("ll") are pronounced as Y, similarly to Spanish. Not formally-- only when convenient. Think of it like a contraction, or one of those phrases that sounds different when you say it fast.
+  - Any "ae" suffix has become pronounced to rhyme with "day" or "say."
+  - Accent marks are far more common. Don't worry, they still work as usual-- the stress is put on whatever syllable contains them. Sometimes I may have overdone it, putting redundant accent marks, but they'll probably be taken out. Yusamira used to have one on the "u," and I'm thinking of removing the one in Ethan's last name as well.
+- And forget about race. I'm not opening that can of worms if I don't have to. The skin tone of a character has nothing to do with any ethnicity recognizable from our world.
+
+---
+
+- On top of that, the companies are mostly fictional and not based around any single real company. Goober is NOT specifically a parody of Google, but rather a parody of all "big tech" companies in general. This isn't a legal disclaimer thing-- I'm serious. Goober mails packages just like Amazon. Goober has many many many world-famous social platforms and (more sci-fi versions of) VR products just like Meta. Goober squeezes almost the entire digital music market like Spotify. Goober built the OS all the laypeople's computers run on, and they own the 2037 version of GitHub where everyone dumps their code, just like Microsoft does. Goober's biggest products are their AI models that the entire world makes requests to, bajillions and gazillions of times per second, like OpenAI. Goober has a ride-sharing and food delivery service just like Uber. Goober owns all the big dating apps just like Match Group. Goober owns all the big crypto exchanges, and all the investment apps, though crypto is seen as less of an "investment" in this world and more like cash. Goober bought out all the payment processors and essentially told them to piss off, so they could launch their own convenient Prokaryo exchange with no competition from traditional payment methods. THEY. DO. IT. ALL. Goober is the company Elon Musk WISHES he could turn X into, if he didn't get sidetracked with trying to become Trump's favorite house pet or whatever. It is THE megacorporation, so don't compare it to "just Google," or I'm telling Mylo to send one of his hitmen after you for being so disrespectful.
+  - Shitter IS a complete parody of Twitter, though. That's the exception. And I came up with that looooong before the Twitter Blue crap and the X rebranding, when everybody started calling it that (you can see some blue billboard with a white poop emoji icon named `gshitter` in the git history). The parody is more about the social impact of such a service, and not anything specific the company did after 2021.
+
+---
+
+- Prokaryo is a cryptocurrency used in the game, which has mostly replaced physical currency. It's pretty much just a "movie magic" version of Monero. They figured out a way to have near instant transactions, completely stop centralization in pools, and no longer rely on Proof of Work so there's no energy issue. It's COMPLETELY untraceable without having access to the owner's private keys. No quantum uber-super-duper-computers, no brute forcing, no BS. Don't question it. Movie magic. All you need to know is that it's virtual money, and you can't trace transactions at all unless you own the wallet they're sent from.
+
+---
+
 ## Main Characters
 
 ---
@@ -41,7 +83,7 @@ a warning anyway.
 - Trino "Terra" Requiem: 21 year old man, rockstar from Melpine Town. He's the lead singer of his band "The Naturals" and is known for his love for nature. He finds taking hikes calming, and it has been a habit for him ever since he lost his best friend while serving in the Melpine Defense Force (MDF). That's also where he got his nickname.
 - Leo "Yoyo" Quaint: 17 year old member of The Naturals who does all the audio engineer work for the band, but also plays guitar in his own time as well. He's a huge tech nerd who can hack anything with or without a computer. He's also known for his insatiable love for food, having been the one who decided their band's hideout should be on the second floor of a restaurant they frequent.
 - Yusamira "Mira" L'yasu: 19 year old trans girl playing the keyboard/synth for The Naturals. She doesn't actually belong to the game, and was placed there after the fact to watch over the other characters and make sure nothing goes awry. She is almost as good at hacking as Leo, but still has much to learn. She's known for her long curly purple hair and eccentric style. She's also the only one who can speak with the player, not counting any comedic fourth wall breaks.
-- Robert "Tables" Sequiella: 19 year old drummer for The Naturals. He's always bored with the "simple" rhythms everyone wants him to play, and loves to experiment with new beats. He's Terra's closest friend, and will do anything to keep him safe. He's also the one who teaches Ethan how to haggle for good prices at shops. His name is a reference to an XKCD comic.
+- Robert "Tables" Sequiella: 19 year old drummer for The Naturals. He's always bored with the "simple" rhythms everyone wants him to play, and loves to experiment with new beats. He's Terra's closest friend, and will do anything to keep him safe. He's also the one who teaches Ethan how to haggle for good prices at shops. He's also good at cheering people up, and helps Leo communicate when he's feeling overwhelmed. His name is a reference to an XKCD comic.
 - Dylan "Dubs" Spamboni: 20 year old bassist for The Naturals. He's the most laid-back member of the band, and is always the one to calm everyone down when things get too heated. He has long curly brown hair, and is the only member of the band wearing a # instead of a natural sign on his shirt because he always "looks sharp." His favorite morning activity is plogging, because it helps him wake up while also doing good.
 
 ---
@@ -50,10 +92,10 @@ a warning anyway.
 
 - L'yembo Richter: 17 year old boy who has a crush on Siva. He's a bit of a troublemaker, but he's not a bad person. He's just been very lonely, and Quolo was the only one who acknowledged his existence and offered to be his friend. They're like 2 peas in a pod. Known for always wearing a white hoodie with the hood up.
 - Quolo Torviní: 17 year old boy who is the biggest troublemaker in Corr Valley. He is very cynical and thinks everyone is out to get him, and he's also a bully in school. The only person he trusts is L'yembo because he was willing to be friends with him despite his bad reputation. Known for always wearing a black hoodie with the hood up.
-- The Justicians: A group of people who believe Ethan is a scumbag and want to protest against Corr Valley's immigration policy. They're especially furious that Ethan "took along" Siva with him, because the very next day, someone broke into her basement and lots of critical infrastructure almost went down if it weren't for Neoxylin's quick reaction. The main leaders are L'yembo and Quolo, because they want to "prove" themselves to the world and boost their ego by taking down the "biggest threat" to their society.
+- The Justicians (kinda placeholder name btw): A group of people who believe Ethan is a scumbag and want to protest against Corr Valley's immigration policy. They're especially furious that Ethan "took along" Siva with him, because the very next day, someone broke into her basement and lots of critical infrastructure almost went down if it weren't for Neoxylin's quick reaction. The main leaders are L'yembo and Quolo, because they want to "prove" themselves to the world and boost their ego by taking down the "biggest threat" to their society.
 - Cassander Distantó: ~30 year old detective in Melpine Town. Heavily corrupt, and willing to take bribes to change the outcome of a case. Melpine has very few laws restricting what counts as evidence, and ultimately, Cassander is the one who decides who goes to prison and who doesn't.
 - The Pirate Cabal: A secret organized group of pirates which are sworn enemies against Winthrus and his crew. They receive a lot of hate due to their malware-infested cracks and general lack of morals. They're always flat broke, so they're envious of people who do cracks for "fun" or anti-copyright ideology as opposed to doing it to rat people and make a quick buck. They are known for their brutal tactics and are feared by many.
-- Calyx: A robot that looks exactly like Siva. It is capable of using all of Siva's abilities. Developed by an extremely bored employee at Goober Labs, it is capable of learning and adapting to any situation.
+- Calyx: A robot that looks exactly like Siva. It is capable of using all of Siva's abilities. Developed by an extremely bored employee at Goober Labs as a prototype for the Univirus. It is capable of learning and adapting to any situation.
 
 ---
 
@@ -69,7 +111,7 @@ a warning anyway.
 ### The Pirates
 
 - Captain Winthrus L'aur: ~25 year old male pirate. He has a pirate hat and a peg-leg, but he also pirates software, too. He runs a business selling cracked software and movies for cheap to people on the internet, promising none of his cracks contain malware. He's a very chill dude overall, and believes it is his duty to share content he has access to with anyone who wants it.
-- Juno "Julies" Jan: ~21 year old enby pirate who works for Winthrus. A friend of Winthrus who lives in Constchar. He's a very good cook. He's also a good friend of Nyx, and is always willing to help her out with anything she needs.
+- Juliess "Juno" Jan: ~21 year old enby pirate who works for Winthrus. A friend of Winthrus who lives in Constchar. He's a very good cook. He's also a good friend of Nyx, and is always willing to help her out with anything she needs.
 
 ---
 
@@ -77,7 +119,7 @@ a warning anyway.
 
 - Rumble and Esther: A couple of moles who live in the underground. They're both very friendly and are always willing to help out anyone who needs it. They're also very good at digging, and have a network of tunnels that span the entire continent.
 - Colt "Clancy" Cohan: A cowboy who travels the world, selling top quality weapons and armor. Good friends with Terra.
-- Empress Neoxylin ("Nyx"): 14 year old mayor of Corr Valley. She's very intelligent and has a good heart, but she's also very naive. She gets scammed out of a lot of money by Goober Labs in inventing the first human-android hybrid when Goober Labs employees steal her work and run off, leaving no trace. She does what's right for the people of her city, even if some of the people may hate her for it.
+- Empress Neoxylin "Nyx" Cereze: 14 year old mayor of Corr Valley. She's very intelligent and has a good heart, but she's also very naive. She gets scammed out of a lot of money by Goober Labs in inventing the first human-android hybrid when Goober Labs employees steal her work and run off, leaving no trace. She does what's right for the people of her city, even if some of the people may hate her for it. Also referred to as Princess instead of Empress. Interchangeable. Who chares?
 
 ---
 
