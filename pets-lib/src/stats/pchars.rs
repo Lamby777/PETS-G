@@ -38,9 +38,9 @@ pub enum PChar {
     Devon,
     Fuzzy,
     Lyembo,
+    Quolo,
     // Bobby,
     // Neoxylin,
-    Quolo,
 
     // Silly billies
     // Rumble,
