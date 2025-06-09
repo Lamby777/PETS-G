@@ -17,7 +17,7 @@ godot = { git = "https://github.com/godot-rust/gdext", rev = "4d2251b", features
 # godot = { git = "https://github.com/godot-rust/gdext", features = ["api-4-3", "experimental-threads", "experimental-godot-api"] }
 indoc = "2.0.4"
 libdx = "2.1.1"
-nodi = "1.0.0"
+nodi = "1.0.3"
 # llm = { git = "https://github.com/rustformers/llm" , branch = "main" }
 rand = "0.9.0"
 ribbons = "0.1.0"
