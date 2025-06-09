@@ -6,9 +6,6 @@
 
 use crate::common::*;
 
-mod accurate_timer;
-use accurate_timer::AccurateTimer;
-
 use std::io::Read;
 
 use godot::classes::file_access::ModeFlags;
@@ -76,7 +73,7 @@ impl INode for MidiReceiver {}
 
 pub struct BattleTrack {
     pub sheet: Sheet,
-    pub ticker: AccurateTimer<Ticker>,
+    pub ticker: Ticker,
     pub receiver: GdW<MidiReceiver>,
 }
 
@@ -94,7 +91,7 @@ impl BattleTrack {
         };
 
         let sheet = Sheet::parallel(&tracks);
-        let ticker = AccurateTimer::new(Ticker::new(ticks.into()));
+        let ticker = Ticker::new(ticks.into());
         // let ticker = Ticker::try_from(header.timing).unwrap();
         let receiver = GdW(MidiReceiver::new_alloc());
 
