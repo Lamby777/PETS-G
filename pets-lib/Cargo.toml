@@ -13,7 +13,7 @@ concat-idents = "1.1.5"
 derive_more = { version = "2.0.1", features = ["sum"] }
 derived-deref = "2.1.0"
 # godot = { version = "0.2.2", features = ["api-4-3", "experimental-threads", "experimental-godot-api"] }
-godot = { git = "https://github.com/godot-rust/gdext", rev = "4d2251b", features = ["api-4-3", "experimental-threads", "experimental-godot-api"] }
+godot = { git = "https://github.com/godot-rust/gdext", rev = "9ae2d36", features = ["api-4-3", "experimental-threads", "experimental-godot-api"] }
 # godot = { git = "https://github.com/godot-rust/gdext", features = ["api-4-3", "experimental-threads", "experimental-godot-api"] }
 indoc = "2.0.4"
 libdx = "2.1.1"
