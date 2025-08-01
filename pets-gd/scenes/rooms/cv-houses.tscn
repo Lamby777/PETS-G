@@ -14,7 +14,6 @@ script = ExtResource("2_dkgsg")
 room_id = "CV_Houses"
 
 [node name="TilemapLayers" type="Node2D" parent="." index="0"]
-scale = Vector2(4, 4)
 
 [node name="Cliffs" type="TileMapLayer" parent="TilemapLayers" index="0"]
 y_sort_enabled = true
