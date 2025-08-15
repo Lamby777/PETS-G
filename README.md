@@ -2,6 +2,8 @@
 
 [JUST LET ME PLAY THE DAMN GAME!](/just-start-the-damn-game.md)
 
+![Readme Header. Leo says "Wake up, Mira!! We got a game to code!!](docs/readme-header.png)
+
 Rewriting my game I started back in 2019, except actually finishing it this time
 because I picked a good game engine that doesn't make basic programming and
 control of your own hardware overly complicated... and is also open-source! <3
