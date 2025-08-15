@@ -8,15 +8,7 @@ control of your own hardware overly complicated... and is also open-source! <3
 
 ---
 
-## Somewhat Useful Links
-
-- [Soundtrack](https://www.youtube.com/playlist?list=PLxLRTqK8yZMO14zFG12650hGkPOZYV_2p)
-- [Promo page](https://sparklet.org/pets)
-- [Discord server](https://discord.gg/xEWa6Kwcad)
-
----
-
-On Godot version 4.3
+On Godot version 4.4.1 (updating soon)
 
 Using [godot-rust/gdext](https://github.com/godot-rust/gdextension) for most of
 the stuff, because of the type system. Prefer GDScript for things that probably
