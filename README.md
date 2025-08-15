@@ -10,6 +10,17 @@ control of your own hardware overly complicated... and is also open-source! <3
 
 ---
 
+## A Note About The Soundtrack...
+
+Took down the old YT playlist link, but it's still in git history if you really care.
+That's because a lot of the tracks were outdated, as I was too lazy to keep reuploading
+them to YouTube after every single minor edit. Someday, I'll be releasing tracks officially
+through DistroKid, so they'll show up on YouTube, Spotify, Apple Music, blah blah blah etc.
+alongside all my other stuff. Until then, the most recent publicly available music will be
+whatever I felt like pushing to this repo for testing purposes. Sorry to the 0 people who care.
+
+---
+
 On Godot version 4.4.1 (updating soon)
 
 Using [godot-rust/gdext](https://github.com/godot-rust/gdextension) for most of
