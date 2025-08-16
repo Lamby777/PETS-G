@@ -1,9 +1,6 @@
 {
     "cool_stick": {
-        "attributes": [
-            "Cheap",
-            "Melee"
-        ],
+        "attributes": ["Cheap", "Melee"],
         "category": {
             "Equipment": {
                 "category": "Weapon",
@@ -19,17 +16,12 @@
                     "lambda": 0,
                     "max_mana": 0
                 },
-                "equippable_by": [
-                    "Ethan"
-                ]
+                "equippable_by": ["Ethan"]
             }
         }
     },
     "trusty_rusty_pistol": {
-        "attributes": [
-            "Cheap",
-            "Ranged"
-        ],
+        "attributes": ["Cheap", "Ranged"],
         "category": {
             "Equipment": {
                 "category": "Weapon",
@@ -45,9 +37,7 @@
                     "lambda": 0,
                     "max_mana": 0
                 },
-                "equippable_by": [
-                    "Terra"
-                ]
+                "equippable_by": ["Terra"]
             }
         }
     }
