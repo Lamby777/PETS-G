@@ -25,8 +25,6 @@ use godot::classes::DirAccess;
 use godot::prelude::*;
 use serde::de::DeserializeOwned;
 
-type Registry<T> = HashMap<String, T>;
-
 // A static instance of the collection
 pub static REGISTRIES: LazyLock<Registries> = LazyLock::new(|| Registries {
     items: find_vanilla_registries("items"),
@@ -34,11 +32,11 @@ pub static REGISTRIES: LazyLock<Registries> = LazyLock::new(|| Registries {
 });
 
 pub struct Registries {
-    pub items: Registry<Item>,
-    pub skills: Registry<Box<dyn Skill>>,
+    pub items: HashMap<String, Item>,
+    pub skills: HashMap<String, Box<dyn Skill>>,
 }
 
-pub fn read_registry_file<T>(path: &str) -> Option<Registry<T>>
+pub fn read_registry_file<T>(path: &str) -> Option<HashMap<String, T>>
 where
     T: DeserializeOwned + Serialize,
 {
@@ -48,7 +46,7 @@ where
     file.read_to_end(&mut content).ok()?;
 
     let content = String::from_utf8(content).ok()?;
-    let res: Registry<T> = unwrap_fmt!(
+    let res: HashMap<String, T> = unwrap_fmt!(
         serde_json::from_str(&content),
         "registry {path} failed to parse",
     );
@@ -56,7 +54,7 @@ where
     Some(res)
 }
 
-pub fn find_vanilla_registries<T>(folder_name: &str) -> Registry<T>
+pub fn find_vanilla_registries<T>(folder_name: &str) -> HashMap<String, T>
 where
     T: DeserializeOwned + Serialize,
 {
