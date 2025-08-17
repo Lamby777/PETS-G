@@ -26,7 +26,6 @@ mod registry;
 mod stats;
 mod title_screen;
 mod world;
-// mod llm;
 
 /// Module for all common stuff used throughout the codebase.
 /// You'll often see `use crate::common::*;` at the top of most files.

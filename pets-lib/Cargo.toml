@@ -18,7 +18,6 @@ godot = { git = "https://github.com/godot-rust/gdext", rev = "9ae2d36", features
 indoc = "2.0.4"
 libdx = "2.1.1"
 nodi = "1.0.3"
-# llm = { git = "https://github.com/rustformers/llm" , branch = "main" }
 rand = "0.9.0"
 ribbons = "0.1.0"
 serde = { version = "1.0.188", features = ["derive", "rc"] }
