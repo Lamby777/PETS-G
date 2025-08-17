@@ -255,7 +255,7 @@ impl BattleEngine {
     pub fn cast_skill(&mut self, skill_id: String) {
         godot_print!("Casting skill: {}", skill_id);
         let skill = unwrap_fmt!(
-            SKILL_REGISTRY.get(&skill_id),
+            REGISTRIES.skills.get(&skill_id),
             "skill not found: {skill_id}",
         );
 
@@ -270,7 +270,7 @@ impl BattleEngine {
     #[func]
     pub fn describe_skill(&self, skill_id: String) -> String {
         let skill = unwrap_fmt!(
-            SKILL_REGISTRY.get(&skill_id),
+            REGISTRIES.skills.get(&skill_id),
             "skill not found: {skill_id}",
         );
 

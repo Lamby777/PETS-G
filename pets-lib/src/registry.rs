@@ -27,12 +27,18 @@ use serde::de::DeserializeOwned;
 
 type Registry<T> = HashMap<String, T>;
 
-pub static ITEM_REGISTRY: LazyLock<HashMap<String, Item>> =
-    LazyLock::new(|| find_vanilla_registries("items"));
-pub static SKILL_REGISTRY: LazyLock<HashMap<String, Box<dyn Skill>>> =
-    LazyLock::new(|| find_vanilla_registries("skills"));
+// A static instance of the collection
+pub static REGISTRIES: LazyLock<Registries> = LazyLock::new(|| Registries {
+    items: find_vanilla_registries("items"),
+    skills: find_vanilla_registries("skills"),
+});
 
-pub fn read_registry<T>(path: &str) -> Option<Registry<T>>
+pub struct Registries {
+    pub items: Registry<Item>,
+    pub skills: Registry<Box<dyn Skill>>,
+}
+
+pub fn read_registry_file<T>(path: &str) -> Option<Registry<T>>
 where
     T: DeserializeOwned + Serialize,
 {
@@ -65,7 +71,7 @@ where
         .flat_map(|fname| {
             let path = format!("{folder_path}/{fname}");
             godot_print!("Reading vanilla registry: {}", path);
-            let content = read_registry(&path).expect(
+            let content = read_registry_file(&path).expect(
                 "Error loading a vanilla registry. THIS IS A BUG!! Please report!",
             );
 

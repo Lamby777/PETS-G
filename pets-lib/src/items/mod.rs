@@ -66,7 +66,7 @@ pub enum AmmoCat {
 
 impl Item {
     pub fn from_registry(id: &str) -> &Item {
-        unwrap_fmt!(ITEM_REGISTRY.get(id), "Item ID not found: {}", id)
+        unwrap_fmt!(REGISTRIES.items.get(id), "Item ID not found: {}", id)
     }
 }
 

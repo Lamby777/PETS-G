@@ -2,6 +2,8 @@
 //! Singleton for accessing player stats in GDScript.
 //!
 
+use std::sync::LazyLock;
+
 use godot::classes::{Sprite2D, Texture2D};
 use godot::global::randomize;
 use godot::prelude::*;
@@ -64,9 +66,7 @@ impl IObject for StatsInterface {
         let save = SaveFile::fresh();
 
         // load registries, cuz they're `LazyLock`s
-        // TODO: use `LazyLock::force()` in an exported fn in registry.rs
-        &ITEM_REGISTRY;
-        &SKILL_REGISTRY;
+        LazyLock::force(&REGISTRIES);
 
         // randomize seed for godot
         randomize();
