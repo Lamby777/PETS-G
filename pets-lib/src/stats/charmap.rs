@@ -4,7 +4,7 @@ use std::io::Read as _;
 
 use crate::common::*;
 
-const CHARMAP_PATH: &str = "res://assets/charmap.json";
+const CHARMAP_PATH: &str = "res://registries/charmap.json";
 
 #[derive(Deref, DerefMut, Serialize, Deserialize)]
 pub struct CharMap(pub Vec<Rc<RefCell<CharData>>>);

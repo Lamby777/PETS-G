@@ -58,7 +58,7 @@ pub fn find_vanilla_registries<T>(folder_name: &str) -> HashMap<String, T>
 where
     T: DeserializeOwned + Serialize,
 {
-    let folder_path = format!("res://assets/{folder_name}");
+    let folder_path = format!("res://registries/{folder_name}");
     godot_print!("Reading vanilla registries at `{}`.", folder_path);
 
     let res = DirAccess::open(&folder_path)
