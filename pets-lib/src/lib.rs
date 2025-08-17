@@ -4,7 +4,7 @@
 //! Patiently awaiting the spaghetti-code horrors
 //! that await me in this file in the future...
 //!
-//! - Cherry 9/2/2023 | <3
+//! - Cherry, 2023-09-02 | <3
 //!
 
 // This is 80 characters, just for reference for setting IDE zoom and formatting
@@ -22,6 +22,7 @@ mod util;
 mod battle;
 mod dialogue;
 mod items;
+mod registry;
 mod stats;
 mod title_screen;
 mod world;
@@ -34,6 +35,7 @@ mod common {
 
     pub use crate::items::*;
     pub use crate::limiq::*;
+    pub use crate::registry::*;
     pub use crate::stats::*;
     pub use crate::util::*;
 
@@ -53,7 +55,6 @@ mod common {
     // pub use indoc::indoc;
     pub use ribbons::unwrap_fmt;
     // pub use rand::Rng;
-    pub use serde::de::DeserializeOwned;
     pub use serde::{Deserialize, Serialize};
 
     pub use std::cell::RefCell;
@@ -61,7 +62,7 @@ mod common {
     pub use std::fmt::{self, Debug, Display};
     // pub use std::path::{Path, PathBuf};
     pub use std::rc::Rc;
-    pub use std::{io, thread};
+    pub use std::thread;
 }
 
 /// The GDExtension library struct

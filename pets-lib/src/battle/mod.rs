@@ -10,7 +10,6 @@ use godot::classes::{
     PanelContainer, ProgressBar, RichTextLabel, Texture2D, TextureRect, Timer,
 };
 use godot::prelude::*;
-use skills::SKILL_REGISTRY;
 
 use crate::common::*;
 use crate::consts::battle::*;
@@ -256,7 +255,7 @@ impl BattleEngine {
     pub fn cast_skill(&mut self, skill_id: String) {
         godot_print!("Casting skill: {}", skill_id);
         let skill = unwrap_fmt!(
-            SKILL_REGISTRY.get().unwrap().get(&skill_id),
+            SKILL_REGISTRY.get(&skill_id),
             "skill not found: {skill_id}",
         );
 
@@ -271,7 +270,7 @@ impl BattleEngine {
     #[func]
     pub fn describe_skill(&self, skill_id: String) -> String {
         let skill = unwrap_fmt!(
-            SKILL_REGISTRY.get().unwrap().get(&skill_id),
+            SKILL_REGISTRY.get(&skill_id),
             "skill not found: {skill_id}",
         );
 

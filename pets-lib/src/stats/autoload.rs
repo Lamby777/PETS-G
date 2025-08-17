@@ -6,7 +6,6 @@ use godot::classes::{Sprite2D, Texture2D};
 use godot::global::randomize;
 use godot::prelude::*;
 
-use crate::battle::skills::load_skill_registry;
 use crate::common::*;
 
 #[derive(GodotClass)]
@@ -64,8 +63,10 @@ impl IObject for StatsInterface {
         // picks a save file instead of "new"
         let save = SaveFile::fresh();
 
-        load_item_registry();
-        load_skill_registry();
+        // load registries, cuz they're `LazyLock`s
+        // TODO: use `LazyLock::force()` in an exported fn in registry.rs
+        &ITEM_REGISTRY;
+        &SKILL_REGISTRY;
 
         // randomize seed for godot
         randomize();

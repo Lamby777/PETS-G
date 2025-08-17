@@ -2,7 +2,7 @@
 //! This file is for saving/loading the game.
 //!
 
-use io::Write;
+use std::io::Write;
 
 use godot::classes::file_access::ModeFlags;
 use godot::prelude::*;
@@ -44,7 +44,7 @@ impl SaveFile {
         }
     }
 
-    pub fn load_from(save_slot: u8) -> io::Result<Self> {
+    pub fn load_from(save_slot: u8) -> std::io::Result<Self> {
         let new_save = Self::fresh();
         new_save.write_to(save_slot);
 

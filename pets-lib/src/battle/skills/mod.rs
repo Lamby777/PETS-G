@@ -7,8 +7,6 @@ use godot::prelude::*;
 use godot::tools::tr;
 use strum::{EnumIter, IntoEnumIterator as _};
 
-mod registry;
-pub(crate) use registry::{load_skill_registry, SKILL_REGISTRY};
 mod status_effects;
 use status_effects::*;
 

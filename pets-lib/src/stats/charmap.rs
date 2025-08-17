@@ -1,6 +1,6 @@
 use godot::classes::file_access::ModeFlags;
 use godot::prelude::*;
-use io::Read as _;
+use std::io::Read as _;
 
 use crate::common::*;
 

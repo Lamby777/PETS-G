@@ -4,22 +4,9 @@
 //!
 
 use crate::common::*;
-use crate::util::registry::*;
-
-use std::sync::OnceLock;
 
 mod inv;
 pub use inv::{Equipment, Inventory};
-
-pub static ITEM_REGISTRY: OnceLock<HashMap<String, Item>> = OnceLock::new();
-
-/// Initializes `ITEM_REGISTRY` by scanning for vanilla and
-/// modded item registries and combining the list of items.
-pub fn load_item_registry() {
-    let mut items = find_vanilla("itemregistries");
-    items.extend(find_modded("items"));
-    ITEM_REGISTRY.set(items).unwrap();
-}
 
 /// A single item definition, stored in a vector for lookup.
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -79,11 +66,7 @@ pub enum AmmoCat {
 
 impl Item {
     pub fn from_registry(id: &str) -> &Item {
-        unwrap_fmt!(
-            ITEM_REGISTRY.get().unwrap().get(id),
-            "Item ID not found: {}",
-            id
-        )
+        unwrap_fmt!(ITEM_REGISTRY.get(id), "Item ID not found: {}", id)
     }
 }
 

@@ -4,7 +4,7 @@ use godot::classes::file_access::ModeFlags;
 use godot::classes::{DirAccess, GFile};
 use godot::prelude::*;
 
-use io::Write;
+use std::io::Write;
 
 use llm::models::Bloom;
 use llm::{InferenceFeedback, InferenceResponse, Model as _, Prompt};
