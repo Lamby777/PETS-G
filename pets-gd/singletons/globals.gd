@@ -16,9 +16,9 @@ func discord_rich_presence():
     discord_sdk.details = "Epic Gaming"
     discord_sdk.state = "@ Corr Valley"
     
-    discord_sdk.large_image = "siva-aurora"
+    discord_sdk.large_image = "mira-what"
     discord_sdk.large_image_text = "Epic Gaming, indeed."
-    discord_sdk.small_image = "siva-sleeping"
+    discord_sdk.small_image = "mira-what"
     discord_sdk.small_image_text = "Catchin' Zs."
 
     discord_sdk.start_timestamp = int(Time.get_unix_time_from_system()) # "02:46 elapsed"
