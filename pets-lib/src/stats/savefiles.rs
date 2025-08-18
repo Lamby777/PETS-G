@@ -17,7 +17,12 @@ fn save_path(slot: u8) -> String {
 /// All the data saved to one of the save file slots
 #[derive(Serialize, Deserialize)]
 pub struct SaveFile {
-    pub chars: CharMap,
+    // TODO: keep track of ONLY stat changes aka offsets (linear + constant)
+    // absolute base stats will be handled by the registry
+    pub chars: (),
+
+    /// PChars (IDs) of every character currently in the party.
+    pub party: Vec<PChar>,
 
     /// Mapping: item ID -> quantity
     pub inventory: Rc<RefCell<Inventory>>,
@@ -31,7 +36,7 @@ pub struct SaveFile {
 
 impl SaveFile {
     pub fn fresh() -> Self {
-        let chars = default_charmap();
+        let chars = ();
 
         Self {
             chars,

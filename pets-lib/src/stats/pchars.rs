@@ -1,9 +1,12 @@
 //!
 //! This module is like a registry of characters.
 //!
-//! "Playable Character"
-//! This term might not make much sense, but it was used all over
-//! the old code, and I'm already used to calling them that.
+//! # "Playable Character"
+//!
+//! This term might not make much sense anymore, because not all PChars
+//! represent playable characters, but it was used all over the old code,
+//! and I'm already used to calling them that.
+//!
 //! tl;dr get used to it.
 
 use crate::common::*;
@@ -17,6 +20,7 @@ use strum::EnumIter;
 //   ////////                                          ////////
 // //////////////////////////////////////////////////////////
 
+/// ID of any playable (or in rare cases non-playable) character
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
 #[derive(Serialize, Deserialize, EnumIter)]
 #[derive(GodotConvert, Var, Export)]
@@ -67,7 +71,7 @@ pub enum PChar {
     // Taine, // GLUE arc
 
     // Shopkeepers
-    // Cherry,      // Cherry's Cherries
+    // Cherie,      // Cherie's Cherries
     // Richard,     // Big Richard's Big Ripoffs
     // Chairperson, // Chair Chairperson of the Gaming Chair Committee
 }

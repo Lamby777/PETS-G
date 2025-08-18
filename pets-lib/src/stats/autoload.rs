@@ -15,7 +15,6 @@ use crate::common::*;
 pub struct StatsInterface {
     base: Base<Object>,
 
-    /// Hash map of info on all the different characters in the game.
     pub save: SaveFile,
 }
 

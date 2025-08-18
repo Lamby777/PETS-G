@@ -252,7 +252,7 @@ impl PartyCB {
         self.party_chardata()
             .into_iter()
             .take(BATTLE_PARTY_SIZE)
-            .map(|cd| cd.borrow().battler.clone())
+            .map(|cd| cd.battler.clone())
             .collect()
     }
 
