@@ -7,7 +7,6 @@ use crate::common::*;
 // stat-related submodules
 mod autoload;
 mod battler;
-mod charmap;
 mod enemy;
 mod pchars;
 mod quests;

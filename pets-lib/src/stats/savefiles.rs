@@ -7,7 +7,6 @@ use std::io::Write;
 use godot::classes::file_access::ModeFlags;
 use godot::prelude::*;
 
-use super::charmap::default_charmap;
 use super::scrapbook::Scrapbook;
 use crate::common::*;
 
