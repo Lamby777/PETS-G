@@ -6,6 +6,11 @@ edition = "2021"
 [lib]
 crate-type = ["cdylib"]
 
+[build-dependencies]
+jsonnet-rs = "0.17.0"
+glob = "0.3.0"
+walkdir = "2.5.0"
+
 [dependencies]
 anyhow = "1.0.80"
 chrono = { version = "0.4.38", features = ["serde"] }

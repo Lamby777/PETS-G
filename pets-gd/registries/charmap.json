@@ -1,497 +1,557 @@
 [
-    {
-        "id": "Devon",
-        "display_name": "Devon",
-        "level": 1,
-        "battler": {
-            "battle_stats": {
-                "hp": 30,
-                "mana": null,
-                "energy": 1,
-                "buffs": []
-            },
-            "status_effects": [],
-            "buffs_list": [],
-            "inherent_stats": {
-                "max_hp": 30,
-                "max_energy": 1,
-                "attack": 1,
-                "defense": 1,
-                "speed": 1,
-                "stability": 1,
-                "delta": 1,
-                "epsilon": 1,
-                "lambda": null,
-                "max_mana": null
-            },
-            "equipment": {
-                "head": null,
-                "body": null,
-                "weapon": null,
-                "accessories": [null, null, null]
-            }
-        }
-    },
-    {
-        "id": "Porky",
-        "display_name": "Porky",
-        "level": 1,
-        "battler": {
-            "battle_stats": {
-                "hp": 30,
-                "mana": null,
-                "energy": 1,
-                "buffs": []
-            },
-            "status_effects": [],
-            "buffs_list": [],
-            "inherent_stats": {
-                "max_hp": 30,
-                "max_energy": 1,
-                "attack": 1,
-                "defense": 1,
-                "speed": 1,
-                "stability": 1,
-                "delta": 1,
-                "epsilon": 1,
-                "lambda": null,
-                "max_mana": null
-            },
-            "equipment": {
-                "head": null,
-                "body": null,
-                "weapon": null,
-                "accessories": [null, null, null]
-            }
-        }
-    },
-    {
-        "id": "Ethan",
-        "display_name": "Ethan",
-        "level": 1,
-        "battler": {
-            "battle_stats": {
-                "hp": 30,
-                "mana": null,
-                "energy": 1,
-                "buffs": []
-            },
-            "status_effects": [],
-            "buffs_list": [],
-            "inherent_stats": {
-                "max_hp": 30,
-                "max_energy": 1,
-                "attack": 1,
-                "defense": 1,
-                "speed": 1,
-                "stability": 1,
-                "delta": 1,
-                "epsilon": 1,
-                "lambda": null,
-                "max_mana": null
-            },
-            "equipment": {
-                "head": null,
-                "body": null,
-                "weapon": "cool_stick",
-                "accessories": [null, null, null]
-            }
-        }
-    },
-    {
-        "id": "Terra",
-        "display_name": "Terra",
-        "level": 1,
-        "battler": {
-            "battle_stats": {
-                "hp": 30,
-                "mana": null,
-                "energy": 1,
-                "buffs": []
-            },
-            "status_effects": [],
-            "buffs_list": [],
-            "inherent_stats": {
-                "max_hp": 30,
-                "max_energy": 1,
-                "attack": 1,
-                "defense": 1,
-                "speed": 1,
-                "stability": 1,
-                "delta": 1,
-                "epsilon": 1,
-                "lambda": null,
-                "max_mana": null
-            },
-            "equipment": {
-                "head": null,
-                "body": null,
-                "weapon": null,
-                "accessories": [null, null, null]
-            }
-        }
-    },
-    {
-        "id": "Siva",
-        "display_name": "Siva",
-        "level": 1,
-        "battler": {
-            "battle_stats": {
-                "hp": 30,
-                "mana": null,
-                "energy": 1,
-                "buffs": []
-            },
-            "status_effects": [],
-            "buffs_list": [],
-            "inherent_stats": {
-                "max_hp": 30,
-                "max_energy": 1,
-                "attack": 1,
-                "defense": 1,
-                "speed": 1,
-                "stability": 1,
-                "delta": 1,
-                "epsilon": 1,
-                "lambda": null,
-                "max_mana": null
-            },
-            "equipment": {
-                "head": null,
-                "body": null,
-                "weapon": null,
-                "accessories": [null, null, null]
-            }
-        }
-    },
-    {
-        "id": "Dylan",
-        "display_name": "Dylan",
-        "level": 1,
-        "battler": {
-            "battle_stats": {
-                "hp": 30,
-                "mana": null,
-                "energy": 1,
-                "buffs": []
-            },
-            "status_effects": [],
-            "buffs_list": [],
-            "inherent_stats": {
-                "max_hp": 30,
-                "max_energy": 1,
-                "attack": 1,
-                "defense": 1,
-                "speed": 1,
-                "stability": 1,
-                "delta": 1,
-                "epsilon": 1,
-                "lambda": null,
-                "max_mana": null
-            },
-            "equipment": {
-                "head": null,
-                "body": null,
-                "weapon": null,
-                "accessories": [null, null, null]
-            }
-        }
-    },
-    {
-        "id": "Mira",
-        "display_name": "Mira",
-        "level": 1,
-        "battler": {
-            "battle_stats": {
-                "hp": 30,
-                "mana": null,
-                "energy": 1,
-                "buffs": []
-            },
-            "status_effects": [],
-            "buffs_list": [],
-            "inherent_stats": {
-                "max_hp": 30,
-                "max_energy": 1,
-                "attack": 1,
-                "defense": 1,
-                "speed": 1,
-                "stability": 1,
-                "delta": 1,
-                "epsilon": 1,
-                "lambda": null,
-                "max_mana": null
-            },
-            "equipment": {
-                "head": null,
-                "body": null,
-                "weapon": null,
-                "accessories": [null, null, null]
-            }
-        }
-    },
-    {
-        "id": "Leo",
-        "display_name": "Leo",
-        "level": 1,
-        "battler": {
-            "battle_stats": {
-                "hp": 30,
-                "mana": null,
-                "energy": 1,
-                "buffs": []
-            },
-            "status_effects": [],
-            "buffs_list": [],
-            "inherent_stats": {
-                "max_hp": 30,
-                "max_energy": 1,
-                "attack": 1,
-                "defense": 1,
-                "speed": 1,
-                "stability": 1,
-                "delta": 1,
-                "epsilon": 1,
-                "lambda": null,
-                "max_mana": null
-            },
-            "equipment": {
-                "head": null,
-                "body": null,
-                "weapon": null,
-                "accessories": [null, null, null]
-            }
-        }
-    },
-    {
-        "id": "Fuzzy",
-        "display_name": "Fuzzy",
-        "level": 1,
-        "battler": {
-            "battle_stats": {
-                "hp": 30,
-                "mana": null,
-                "energy": 1,
-                "buffs": []
-            },
-            "status_effects": [],
-            "buffs_list": [],
-            "inherent_stats": {
-                "max_hp": 30,
-                "max_energy": 1,
-                "attack": 1,
-                "defense": 1,
-                "speed": 1,
-                "stability": 1,
-                "delta": 1,
-                "epsilon": 1,
-                "lambda": null,
-                "max_mana": null
-            },
-            "equipment": {
-                "head": null,
-                "body": null,
-                "weapon": null,
-                "accessories": [null, null, null]
-            }
-        }
-    },
-    {
-        "id": "Lyembo",
-        "display_name": "L'yembo",
-        "level": 1,
-        "battler": {
-            "battle_stats": {
-                "hp": 30,
-                "mana": null,
-                "energy": 1,
-                "buffs": []
-            },
-            "status_effects": [],
-            "buffs_list": [],
-            "inherent_stats": {
-                "max_hp": 30,
-                "max_energy": 1,
-                "attack": 1,
-                "defense": 1,
-                "speed": 1,
-                "stability": 1,
-                "delta": 1,
-                "epsilon": 1,
-                "lambda": null,
-                "max_mana": null
-            },
-            "equipment": {
-                "head": null,
-                "body": null,
-                "weapon": null,
-                "accessories": [null, null, null]
-            }
-        }
-    },
-    {
-        "id": "Quolo",
-        "display_name": "Quolo",
-        "level": 1,
-        "battler": {
-            "battle_stats": {
-                "hp": 30,
-                "mana": null,
-                "energy": 1,
-                "buffs": []
-            },
-            "status_effects": [],
-            "buffs_list": [],
-            "inherent_stats": {
-                "max_hp": 30,
-                "max_energy": 1,
-                "attack": 1,
-                "defense": 1,
-                "speed": 1,
-                "stability": 1,
-                "delta": 1,
-                "epsilon": 1,
-                "lambda": null,
-                "max_mana": null
-            },
-            "equipment": {
-                "head": null,
-                "body": null,
-                "weapon": null,
-                "accessories": [null, null, null]
-            }
-        }
-    },
-    {
-        "id": "Clay",
-        "display_name": "Clay",
-        "level": 1,
-        "battler": {
-            "battle_stats": {
-                "hp": 30,
-                "mana": null,
-                "energy": 1,
-                "buffs": []
-            },
-            "status_effects": [],
-            "buffs_list": [],
-            "inherent_stats": {
-                "max_hp": 30,
-                "max_energy": 1,
-                "attack": 1,
-                "defense": 1,
-                "speed": 1,
-                "stability": 1,
-                "delta": 1,
-                "epsilon": 1,
-                "lambda": null,
-                "max_mana": null
-            },
-            "equipment": {
-                "head": null,
-                "body": null,
-                "weapon": null,
-                "accessories": [null, null, null]
-            }
-        }
-    },
-    {
-        "id": "Juniper",
-        "display_name": "Juniper",
-        "level": 1,
-        "battler": {
-            "battle_stats": {
-                "hp": 30,
-                "mana": null,
-                "energy": 1,
-                "buffs": []
-            },
-            "status_effects": [],
-            "buffs_list": [],
-            "inherent_stats": {
-                "max_hp": 30,
-                "max_energy": 1,
-                "attack": 1,
-                "defense": 1,
-                "speed": 1,
-                "stability": 1,
-                "delta": 1,
-                "epsilon": 1,
-                "lambda": null,
-                "max_mana": null
-            },
-            "equipment": {
-                "head": null,
-                "body": null,
-                "weapon": null,
-                "accessories": [null, null, null]
-            }
-        }
-    },
-    {
-        "id": "MrTulivae",
-        "display_name": "Mr. Tulivae",
-        "level": 1,
-        "battler": {
-            "battle_stats": {
-                "hp": 30,
-                "mana": null,
-                "energy": 1,
-                "buffs": []
-            },
-            "status_effects": [],
-            "buffs_list": [],
-            "inherent_stats": {
-                "max_hp": 30,
-                "max_energy": 1,
-                "attack": 1,
-                "defense": 1,
-                "speed": 1,
-                "stability": 1,
-                "delta": 1,
-                "epsilon": 1,
-                "lambda": null,
-                "max_mana": null
-            },
-            "equipment": {
-                "head": null,
-                "body": null,
-                "weapon": null,
-                "accessories": [null, null, null]
-            }
-        }
-    },
-    {
-        "id": "MsTulivae",
-        "display_name": "Ms. Tulivae",
-        "level": 1,
-        "battler": {
-            "battle_stats": {
-                "hp": 30,
-                "mana": null,
-                "energy": 1,
-                "buffs": []
-            },
-            "status_effects": [],
-            "buffs_list": [],
-            "inherent_stats": {
-                "max_hp": 30,
-                "max_energy": 1,
-                "attack": 1,
-                "defense": 1,
-                "speed": 1,
-                "stability": 1,
-                "delta": 1,
-                "epsilon": 1,
-                "lambda": null,
-                "max_mana": null
-            },
-            "equipment": {
-                "head": null,
-                "body": null,
-                "weapon": null,
-                "accessories": [null, null, null]
-            }
-        }
-    }
+   {
+      "battler": {
+         "battle_stats": {
+            "buffs": [ ],
+            "energy": 1,
+            "hp": 30,
+            "mana": null
+         },
+         "buffs_list": [ ],
+         "equipment": {
+            "accessories": [
+               null,
+               null,
+               null
+            ],
+            "body": null,
+            "head": null,
+            "weapon": null
+         },
+         "inherent_stats": {
+            "attack": 1,
+            "defense": 1,
+            "delta": 1,
+            "epsilon": 1,
+            "lambda": null,
+            "max_energy": 1,
+            "max_hp": 30,
+            "max_mana": null,
+            "speed": 1,
+            "stability": 1
+         },
+         "status_effects": [ ]
+      },
+      "display_name": "Devon",
+      "id": "Devon",
+      "level": 1
+   },
+   {
+      "battler": {
+         "battle_stats": {
+            "buffs": [ ],
+            "energy": 1,
+            "hp": 30,
+            "mana": null
+         },
+         "buffs_list": [ ],
+         "equipment": {
+            "accessories": [
+               null,
+               null,
+               null
+            ],
+            "body": null,
+            "head": null,
+            "weapon": null
+         },
+         "inherent_stats": {
+            "attack": 1,
+            "defense": 1,
+            "delta": 1,
+            "epsilon": 1,
+            "lambda": null,
+            "max_energy": 1,
+            "max_hp": 30,
+            "max_mana": null,
+            "speed": 1,
+            "stability": 1
+         },
+         "status_effects": [ ]
+      },
+      "display_name": "Porky",
+      "id": "Porky",
+      "level": 1
+   },
+   {
+      "battler": {
+         "battle_stats": {
+            "buffs": [ ],
+            "energy": 1,
+            "hp": 30,
+            "mana": null
+         },
+         "buffs_list": [ ],
+         "equipment": {
+            "accessories": [
+               null,
+               null,
+               null
+            ],
+            "body": null,
+            "head": null,
+            "weapon": "cool_stick"
+         },
+         "inherent_stats": {
+            "attack": 1,
+            "defense": 1,
+            "delta": 1,
+            "epsilon": 1,
+            "lambda": null,
+            "max_energy": 1,
+            "max_hp": 30,
+            "max_mana": null,
+            "speed": 1,
+            "stability": 1
+         },
+         "status_effects": [ ]
+      },
+      "display_name": "Ethan",
+      "id": "Ethan",
+      "level": 1
+   },
+   {
+      "battler": {
+         "battle_stats": {
+            "buffs": [ ],
+            "energy": 1,
+            "hp": 30,
+            "mana": null
+         },
+         "buffs_list": [ ],
+         "equipment": {
+            "accessories": [
+               null,
+               null,
+               null
+            ],
+            "body": null,
+            "head": null,
+            "weapon": null
+         },
+         "inherent_stats": {
+            "attack": 1,
+            "defense": 1,
+            "delta": 1,
+            "epsilon": 1,
+            "lambda": null,
+            "max_energy": 1,
+            "max_hp": 30,
+            "max_mana": null,
+            "speed": 1,
+            "stability": 1
+         },
+         "status_effects": [ ]
+      },
+      "display_name": "Terra",
+      "id": "Terra",
+      "level": 1
+   },
+   {
+      "battler": {
+         "battle_stats": {
+            "buffs": [ ],
+            "energy": 1,
+            "hp": 30,
+            "mana": null
+         },
+         "buffs_list": [ ],
+         "equipment": {
+            "accessories": [
+               null,
+               null,
+               null
+            ],
+            "body": null,
+            "head": null,
+            "weapon": null
+         },
+         "inherent_stats": {
+            "attack": 1,
+            "defense": 1,
+            "delta": 1,
+            "epsilon": 1,
+            "lambda": null,
+            "max_energy": 1,
+            "max_hp": 30,
+            "max_mana": null,
+            "speed": 1,
+            "stability": 1
+         },
+         "status_effects": [ ]
+      },
+      "display_name": "Siva",
+      "id": "Siva",
+      "level": 1
+   },
+   {
+      "battler": {
+         "battle_stats": {
+            "buffs": [ ],
+            "energy": 1,
+            "hp": 30,
+            "mana": null
+         },
+         "buffs_list": [ ],
+         "equipment": {
+            "accessories": [
+               null,
+               null,
+               null
+            ],
+            "body": null,
+            "head": null,
+            "weapon": null
+         },
+         "inherent_stats": {
+            "attack": 1,
+            "defense": 1,
+            "delta": 1,
+            "epsilon": 1,
+            "lambda": null,
+            "max_energy": 1,
+            "max_hp": 30,
+            "max_mana": null,
+            "speed": 1,
+            "stability": 1
+         },
+         "status_effects": [ ]
+      },
+      "display_name": "Dylan",
+      "id": "Dylan",
+      "level": 1
+   },
+   {
+      "battler": {
+         "battle_stats": {
+            "buffs": [ ],
+            "energy": 1,
+            "hp": 30,
+            "mana": null
+         },
+         "buffs_list": [ ],
+         "equipment": {
+            "accessories": [
+               null,
+               null,
+               null
+            ],
+            "body": null,
+            "head": null,
+            "weapon": null
+         },
+         "inherent_stats": {
+            "attack": 1,
+            "defense": 1,
+            "delta": 1,
+            "epsilon": 1,
+            "lambda": null,
+            "max_energy": 1,
+            "max_hp": 30,
+            "max_mana": null,
+            "speed": 1,
+            "stability": 1
+         },
+         "status_effects": [ ]
+      },
+      "display_name": "Mira",
+      "id": "Mira",
+      "level": 1
+   },
+   {
+      "battler": {
+         "battle_stats": {
+            "buffs": [ ],
+            "energy": 1,
+            "hp": 30,
+            "mana": null
+         },
+         "buffs_list": [ ],
+         "equipment": {
+            "accessories": [
+               null,
+               null,
+               null
+            ],
+            "body": null,
+            "head": null,
+            "weapon": null
+         },
+         "inherent_stats": {
+            "attack": 1,
+            "defense": 1,
+            "delta": 1,
+            "epsilon": 1,
+            "lambda": null,
+            "max_energy": 1,
+            "max_hp": 30,
+            "max_mana": null,
+            "speed": 1,
+            "stability": 1
+         },
+         "status_effects": [ ]
+      },
+      "display_name": "Leo",
+      "id": "Leo",
+      "level": 1
+   },
+   {
+      "battler": {
+         "battle_stats": {
+            "buffs": [ ],
+            "energy": 1,
+            "hp": 30,
+            "mana": null
+         },
+         "buffs_list": [ ],
+         "equipment": {
+            "accessories": [
+               null,
+               null,
+               null
+            ],
+            "body": null,
+            "head": null,
+            "weapon": null
+         },
+         "inherent_stats": {
+            "attack": 1,
+            "defense": 1,
+            "delta": 1,
+            "epsilon": 1,
+            "lambda": null,
+            "max_energy": 1,
+            "max_hp": 30,
+            "max_mana": null,
+            "speed": 1,
+            "stability": 1
+         },
+         "status_effects": [ ]
+      },
+      "display_name": "Fuzzy",
+      "id": "Fuzzy",
+      "level": 1
+   },
+   {
+      "battler": {
+         "battle_stats": {
+            "buffs": [ ],
+            "energy": 1,
+            "hp": 30,
+            "mana": null
+         },
+         "buffs_list": [ ],
+         "equipment": {
+            "accessories": [
+               null,
+               null,
+               null
+            ],
+            "body": null,
+            "head": null,
+            "weapon": null
+         },
+         "inherent_stats": {
+            "attack": 1,
+            "defense": 1,
+            "delta": 1,
+            "epsilon": 1,
+            "lambda": null,
+            "max_energy": 1,
+            "max_hp": 30,
+            "max_mana": null,
+            "speed": 1,
+            "stability": 1
+         },
+         "status_effects": [ ]
+      },
+      "display_name": "L'yembo",
+      "id": "Lyembo",
+      "level": 1
+   },
+   {
+      "battler": {
+         "battle_stats": {
+            "buffs": [ ],
+            "energy": 1,
+            "hp": 30,
+            "mana": null
+         },
+         "buffs_list": [ ],
+         "equipment": {
+            "accessories": [
+               null,
+               null,
+               null
+            ],
+            "body": null,
+            "head": null,
+            "weapon": null
+         },
+         "inherent_stats": {
+            "attack": 1,
+            "defense": 1,
+            "delta": 1,
+            "epsilon": 1,
+            "lambda": null,
+            "max_energy": 1,
+            "max_hp": 30,
+            "max_mana": null,
+            "speed": 1,
+            "stability": 1
+         },
+         "status_effects": [ ]
+      },
+      "display_name": "Quolo",
+      "id": "Quolo",
+      "level": 1
+   },
+   {
+      "battler": {
+         "battle_stats": {
+            "buffs": [ ],
+            "energy": 1,
+            "hp": 30,
+            "mana": null
+         },
+         "buffs_list": [ ],
+         "equipment": {
+            "accessories": [
+               null,
+               null,
+               null
+            ],
+            "body": null,
+            "head": null,
+            "weapon": null
+         },
+         "inherent_stats": {
+            "attack": 1,
+            "defense": 1,
+            "delta": 1,
+            "epsilon": 1,
+            "lambda": null,
+            "max_energy": 1,
+            "max_hp": 30,
+            "max_mana": null,
+            "speed": 1,
+            "stability": 1
+         },
+         "status_effects": [ ]
+      },
+      "display_name": "Clay",
+      "id": "Clay",
+      "level": 1
+   },
+   {
+      "battler": {
+         "battle_stats": {
+            "buffs": [ ],
+            "energy": 1,
+            "hp": 30,
+            "mana": null
+         },
+         "buffs_list": [ ],
+         "equipment": {
+            "accessories": [
+               null,
+               null,
+               null
+            ],
+            "body": null,
+            "head": null,
+            "weapon": null
+         },
+         "inherent_stats": {
+            "attack": 1,
+            "defense": 1,
+            "delta": 1,
+            "epsilon": 1,
+            "lambda": null,
+            "max_energy": 1,
+            "max_hp": 30,
+            "max_mana": null,
+            "speed": 1,
+            "stability": 1
+         },
+         "status_effects": [ ]
+      },
+      "display_name": "Juniper",
+      "id": "Juniper",
+      "level": 1
+   },
+   {
+      "battler": {
+         "battle_stats": {
+            "buffs": [ ],
+            "energy": 1,
+            "hp": 30,
+            "mana": null
+         },
+         "buffs_list": [ ],
+         "equipment": {
+            "accessories": [
+               null,
+               null,
+               null
+            ],
+            "body": null,
+            "head": null,
+            "weapon": null
+         },
+         "inherent_stats": {
+            "attack": 1,
+            "defense": 1,
+            "delta": 1,
+            "epsilon": 1,
+            "lambda": null,
+            "max_energy": 1,
+            "max_hp": 30,
+            "max_mana": null,
+            "speed": 1,
+            "stability": 1
+         },
+         "status_effects": [ ]
+      },
+      "display_name": "Mr. Tulivae",
+      "id": "MrTulivae",
+      "level": 1
+   },
+   {
+      "battler": {
+         "battle_stats": {
+            "buffs": [ ],
+            "energy": 1,
+            "hp": 30,
+            "mana": null
+         },
+         "buffs_list": [ ],
+         "equipment": {
+            "accessories": [
+               null,
+               null,
+               null
+            ],
+            "body": null,
+            "head": null,
+            "weapon": null
+         },
+         "inherent_stats": {
+            "attack": 1,
+            "defense": 1,
+            "delta": 1,
+            "epsilon": 1,
+            "lambda": null,
+            "max_energy": 1,
+            "max_hp": 30,
+            "max_mana": null,
+            "speed": 1,
+            "stability": 1
+         },
+         "status_effects": [ ]
+      },
+      "display_name": "Ms. Tulivae",
+      "id": "MsTulivae",
+      "level": 1
+   }
 ]
