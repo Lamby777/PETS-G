@@ -1,3 +1,4 @@
+use glob::glob;
 use jsonnet::JsonnetVm;
 use std::fs;
 use std::path::Path;
@@ -6,7 +7,12 @@ use walkdir::WalkDir;
 // this is pretty much only here for jsonnet stuff
 
 fn main() {
-    println!("cargo:rerun-if-changed=../pets-gd/registries");
+    let pattern = "../pets-gd/registries/**/*.jsonnet";
+    for entry in glob(pattern).unwrap() {
+        if let Ok(path) = entry {
+            println!("cargo:rerun-if-changed={}", path.display());
+        }
+    }
 
     let mut vm = JsonnetVm::new();
 

@@ -71,17 +71,6 @@ impl IObject for StatsInterface {
         // randomize seed for godot
         randomize();
 
-        print_debug_crap();
-
         Self { base, save }
     }
-}
-
-/// put stuff like serialization testing in here temporarily to mess around
-/// it'll run when the game starts
-fn print_debug_crap() {
-    // let ser = crate::stats::charmap::default_charmap();
-    // let ser = CharMap::_debugging_charmap();
-    // let ser = serde_json::to_string(&ser).unwrap();
-    // godot_print!("{}", ser);
 }

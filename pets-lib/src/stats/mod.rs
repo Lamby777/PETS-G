@@ -18,7 +18,6 @@ mod statcalc;
 // re-export some crap from ^^^
 pub use autoload::StatsInterface;
 pub use battler::{Battler, Battlers};
-pub use charmap::CharMap;
 pub use enemy::EnemyData;
 pub use pchars::{EnemyID, PChar};
 pub use quests::QuestPhase;
@@ -55,7 +54,7 @@ pub struct CharData {
     pub display_name: String,
     pub level: IntegralStat,
 
-    pub battler: Rc<RefCell<Battler>>,
+    pub battler: Battler,
 }
 
 /// Stats that are inherent to a character or enemy type.

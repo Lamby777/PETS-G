@@ -18,7 +18,7 @@ use crate::common::*;
 
 use std::collections::HashMap;
 use std::io::Read as _;
-use std::sync::LazyLock;
+use std::sync::{LazyLock, Mutex};
 
 use godot::classes::file_access::ModeFlags;
 use godot::classes::DirAccess;
@@ -29,11 +29,13 @@ use serde::de::DeserializeOwned;
 pub static REGISTRIES: LazyLock<Registries> = LazyLock::new(|| Registries {
     items: find_vanilla_registries("items"),
     skills: find_vanilla_registries("skills"),
+    chars: find_vanilla_registries("chars"),
 });
 
 pub struct Registries {
     pub items: HashMap<String, Item>,
     pub skills: HashMap<String, Box<dyn Skill>>,
+    pub chars: HashMap<String, Mutex<CharData>>,
 }
 
 pub fn read_registry_file<T>(path: &str) -> Option<HashMap<String, T>>

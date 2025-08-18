@@ -1,6 +1,3 @@
-# ignore compiled registries jsonnet output
-pets-gd/registries/**/*.json
-
 # Krita backup files
 *.kra~
 *.png~
