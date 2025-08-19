@@ -3,17 +3,15 @@
 //!
 
 use crate::common::*;
+use godot::prelude::*;
 
-pub fn party_leader() -> String {
+pub fn party_leader_id() -> StringName {
     *pcb().bind().party_pchars().first().unwrap()
 }
 
 pub fn pchar_display_name(pchar: &str) -> String {
-    si().bind()
-        .get_character(pchar)
-        .borrow()
-        .display_name
-        .clone()
+    let sn = StringName::from(pchar);
+    REGISTRIES.chars.get(&sn).unwrap().display_tr_key.clone()
 }
 
 type PlaceholderMapping = (&'static str, fn() -> String);
@@ -30,28 +28,28 @@ const PLACEHOLDERS: &[PlaceholderMapping] = &[
     ("[LYEMBO]", || pchar_display_name(&PChar::Lyembo)),
     ("[QUOLO]", || pchar_display_name(&PChar::Quolo)),
     ("[JUNIPER]", || {
-        match party_leader() {
+        match party_leader_id() {
             PChar::Ethan => "DG_SPK_MOM",
             _ => "DG_SPK_JUNIPER",
         }
         .to_owned()
     }),
     ("[CLAY]", || {
-        match party_leader() {
+        match party_leader_id() {
             PChar::Ethan => "DG_SPK_DAD",
             _ => "DG_SPK_CLAY",
         }
         .to_owned()
     }),
     ("[MR_TULIVAE]", || {
-        match party_leader() {
+        match party_leader_id() {
             PChar::Siva => "DG_SPK_DAD",
             _ => "DG_SPK_MR_TULIVAE",
         }
         .to_owned()
     }),
     ("[MRS_TULIVAE]", || {
-        match party_leader() {
+        match party_leader_id() {
             PChar::Siva => "DG_SPK_MOM",
             _ => "DG_SPK_MRS_TULIVAE",
         }

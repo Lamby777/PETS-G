@@ -52,8 +52,8 @@ impl BattleIcon {
         self.engine.clone().expect("BattleIcon::engine is None")
     }
 
-    fn pchar_to_frame(pchar: &str) -> i32 {
-        match pchar {
+    fn pchar_to_frame(pchar: &StringName) -> i32 {
+        match pchar.to_string().as_str() {
             "Ethan" => 0,
             "Terra" => 1,
             "Siva" => 2,
@@ -68,9 +68,9 @@ impl BattleIcon {
         }
     }
 
-    pub fn set_icon(&mut self, pchar: &str) {
+    pub fn set_icon(&mut self, pchar: &StringName) {
         let mut sprite = self.base().get_node_as::<Sprite2D>("Sprite2D");
-        sprite.set_frame(Self::pchar_to_frame(pchar));
+        sprite.set_frame(Self::pchar_to_frame(&pchar));
     }
 
     fn process_movement(&mut self, delta: f64) {

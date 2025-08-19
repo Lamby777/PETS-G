@@ -236,8 +236,7 @@ impl BattleEngine {
 
     pub fn swap_party_member(&mut self, new_index: usize) {
         self.current_party_member = new_index;
-        // TODO: pchar
-        let pchar = pcb().bind_mut().party_pchars()[new_index];
+        let pchar = &pcb().bind_mut().party_pchars()[new_index];
         godot_print!("Swapped to party member `{}`", pchar);
 
         // set battle icon sprite
@@ -253,7 +252,7 @@ impl BattleEngine {
     }
 
     #[func]
-    pub fn cast_skill(&mut self, skill_id: String) {
+    pub fn cast_skill(&mut self, skill_id: StringName) {
         godot_print!("Casting skill: {}", skill_id);
         let skill = unwrap_fmt!(
             REGISTRIES.skills.get(&skill_id),
@@ -269,7 +268,7 @@ impl BattleEngine {
     }
 
     #[func]
-    pub fn describe_skill(&self, skill_id: String) -> String {
+    pub fn describe_skill(&self, skill_id: StringName) -> String {
         let skill = unwrap_fmt!(
             REGISTRIES.skills.get(&skill_id),
             "skill not found: {skill_id}",

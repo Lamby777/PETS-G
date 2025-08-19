@@ -21,7 +21,6 @@ mod util;
 
 mod battle;
 mod dialogue;
-mod interner;
 mod items;
 mod registry;
 mod stats;
@@ -32,7 +31,6 @@ mod world;
 /// You'll often see `use crate::common::*;` at the top of most files.
 mod common {
     pub use crate::consts::type_aliases::*;
-    pub use crate::interner::INTERNER;
 
     pub use crate::items::*;
     pub use crate::limiq::*;

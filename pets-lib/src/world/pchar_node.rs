@@ -15,7 +15,7 @@ pub struct PCharNode {
 
     #[export]
     #[init(val = "Devon".into())]
-    pub pchar: GString,
+    pub pchar: StringName,
 
     #[init(node = "Sprite2D")]
     sprite: OnReady<Gd<Sprite2D>>,
