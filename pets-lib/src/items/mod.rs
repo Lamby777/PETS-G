@@ -4,6 +4,7 @@
 //!
 
 use crate::common::*;
+use godot::prelude::*;
 
 mod inv;
 pub use inv::{Equipment, Inventory};
@@ -61,12 +62,13 @@ pub enum AmmoCat {
     Large,
     Bolts,
     Shells,
-    Comp,
+    Comp, // i forgot what this was for tbh lol
 }
 
 impl Item {
-    pub fn from_registry(id: &str) -> &Item {
-        unwrap_fmt!(REGISTRIES.items.get(id), "Item ID not found: {}", id)
+    pub fn from_registry(id: impl Into<StringName>) -> &'static Item {
+        let sn = id.into();
+        unwrap_fmt!(REGISTRIES.items.get(&sn), "Item ID not found: {}", sn)
     }
 }
 

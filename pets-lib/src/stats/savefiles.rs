@@ -21,8 +21,8 @@ pub struct SaveFile {
     // absolute base stats will be handled by the registry
     pub chars: (),
 
-    /// PChars (IDs) of every character currently in the party.
-    pub party: Vec<PChar>,
+    /// IDs of every character currently in the party.
+    pub party: Vec<StringName>,
 
     /// Mapping: item ID -> quantity
     pub inventory: Rc<RefCell<Inventory>>,
@@ -40,6 +40,7 @@ impl SaveFile {
 
         Self {
             chars,
+            party: vec![StringName::from("Ethan")],
             inventory: Rc::new(RefCell::new(Inventory::new())),
             scrapbook: Scrapbook::empty(),
             quests: HashMap::new(),

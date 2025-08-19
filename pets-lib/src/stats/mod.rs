@@ -8,7 +8,6 @@ use crate::common::*;
 mod autoload;
 mod battler;
 mod enemy;
-mod pchars;
 mod quests;
 mod savefiles;
 pub mod scrapbook;

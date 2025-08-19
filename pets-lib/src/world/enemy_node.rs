@@ -18,8 +18,8 @@ pub struct WalkingEnemy {
     base: Base<CharacterBody2D>,
 
     #[export]
-    #[init(val = EnemyID::ANonnyMouse)]
-    enemy_id: EnemyID,
+    #[init(val = "ANonnyMouse".into())]
+    enemy_id: StringName,
 
     #[export]
     sight_range: real,

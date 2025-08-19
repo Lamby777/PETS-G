@@ -5,8 +5,8 @@
 use crate::common::*;
 use godot::prelude::*;
 
-pub fn party_leader_id() -> StringName {
-    *pcb().bind().party_pchars().first().unwrap()
+pub fn party_leader_id() -> String {
+    pcb().bind().party_pchars().first().unwrap().to_string()
 }
 
 pub fn pchar_display_name(pchar: &str) -> String {
@@ -14,6 +14,8 @@ pub fn pchar_display_name(pchar: &str) -> String {
     REGISTRIES.chars.get(&sn).unwrap().display_tr_key.clone()
 }
 
+// TODO: this shouldn't be hard-coded. use the Fn trait and
+// allow registering new placeholders. Not a big concern rn tho
 type PlaceholderMapping = (&'static str, fn() -> String);
 const PLACEHOLDERS: &[PlaceholderMapping] = &[
     ("[PLAYER]", || "Cherry".to_owned()),
@@ -24,33 +26,33 @@ const PLACEHOLDERS: &[PlaceholderMapping] = &[
     // character names
     ("[CASCADE]", || "DG_SPK_CASCADE".to_owned()),
     ("[RODRICK]", || "DG_SPK_RODRICK".to_owned()),
-    ("[ETHAN]", || pchar_display_name(&PChar::Ethan)),
-    ("[LYEMBO]", || pchar_display_name(&PChar::Lyembo)),
-    ("[QUOLO]", || pchar_display_name(&PChar::Quolo)),
+    ("[ETHAN]", || pchar_display_name("Ethan")),
+    ("[LYEMBO]", || pchar_display_name("Lyembo")),
+    ("[QUOLO]", || pchar_display_name("Quolo")),
     ("[JUNIPER]", || {
-        match party_leader_id() {
-            PChar::Ethan => "DG_SPK_MOM",
+        match party_leader_id().as_str() {
+            "Ethan" => "DG_SPK_MOM",
             _ => "DG_SPK_JUNIPER",
         }
         .to_owned()
     }),
     ("[CLAY]", || {
-        match party_leader_id() {
-            PChar::Ethan => "DG_SPK_DAD",
+        match party_leader_id().as_str() {
+            "Ethan" => "DG_SPK_DAD",
             _ => "DG_SPK_CLAY",
         }
         .to_owned()
     }),
     ("[MR_TULIVAE]", || {
-        match party_leader_id() {
-            PChar::Siva => "DG_SPK_DAD",
+        match party_leader_id().as_str() {
+            "Siva" => "DG_SPK_DAD",
             _ => "DG_SPK_MR_TULIVAE",
         }
         .to_owned()
     }),
     ("[MRS_TULIVAE]", || {
-        match party_leader_id() {
-            PChar::Siva => "DG_SPK_MOM",
+        match party_leader_id().as_str() {
+            "Siva" => "DG_SPK_MOM",
             _ => "DG_SPK_MRS_TULIVAE",
         }
         .to_owned()
