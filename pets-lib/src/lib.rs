@@ -21,6 +21,7 @@ mod util;
 
 mod battle;
 mod dialogue;
+mod interner;
 mod items;
 mod registry;
 mod stats;
@@ -31,6 +32,7 @@ mod world;
 /// You'll often see `use crate::common::*;` at the top of most files.
 mod common {
     pub use crate::consts::type_aliases::*;
+    pub use crate::interner::INTERNER;
 
     pub use crate::items::*;
     pub use crate::limiq::*;
@@ -50,11 +52,12 @@ mod common {
 
     pub use anyhow::Result;
     pub use chrono::{Datelike, NaiveDate};
+    #[allow(unused_imports)]
     pub use derived_deref::{Deref, DerefMut};
-    // pub use indoc::indoc;
     pub use ribbons::unwrap_fmt;
-    // pub use rand::Rng;
     pub use serde::{Deserialize, Serialize};
+    // pub use indoc::indoc;
+    // pub use rand::Rng;
 
     pub use std::cell::RefCell;
     pub use std::collections::{HashMap, HashSet};

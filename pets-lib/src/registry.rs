@@ -24,6 +24,35 @@ use godot::classes::file_access::ModeFlags;
 use godot::classes::DirAccess;
 use godot::prelude::*;
 use serde::de::DeserializeOwned;
+use string_interner::symbol::SymbolU32;
+
+trait Registry {
+    type Value;
+
+    /// Add a new item to the registry. This should never error.
+    /// NOTE: might need to rm `mut` and use interior mutability later...
+    fn append(&mut self, key: impl AsRef<str>, value: Self::Value);
+
+    /// Convert the registry into a serializable format.
+    /// This should "undo" any string interning. `Symbol`s become `String`s.
+    fn pre_serialize() -> HashMap<String, Self::Value>;
+}
+
+impl<T> Registry for HashMap<SymbolU32, T> {
+    type Value = T;
+
+    fn append(&mut self, key: impl AsRef<str>, value: Self::Value) {
+        let symbol = INTERNER.get_or_intern(key);
+
+        if let Some(_) = self.insert(symbol, value) {
+            panic!();
+        }
+    }
+
+    fn pre_serialize() -> HashMap<String, Self::Value> {
+        todo!()
+    }
+}
 
 // A static instance of the collection
 pub static REGISTRIES: LazyLock<Registries> = LazyLock::new(|| Registries {
@@ -33,12 +62,12 @@ pub static REGISTRIES: LazyLock<Registries> = LazyLock::new(|| Registries {
 });
 
 pub struct Registries {
-    pub items: HashMap<String, Item>,
-    pub skills: HashMap<String, Box<dyn Skill>>,
-    pub chars: HashMap<String, Mutex<CharData>>,
+    pub items: HashMap<SymbolU32, Item>,
+    pub skills: HashMap<SymbolU32, Box<dyn Skill>>,
+    pub chars: HashMap<SymbolU32, Mutex<CharData>>,
 }
 
-pub fn read_registry_file<T>(path: &str) -> Option<HashMap<String, T>>
+pub fn read_registry_file<T>(path: &str) -> Option<HashMap<SymbolU32, T>>
 where
     T: DeserializeOwned + Serialize,
 {
@@ -48,7 +77,7 @@ where
     file.read_to_end(&mut content).ok()?;
 
     let content = String::from_utf8(content).ok()?;
-    let res: HashMap<String, T> = unwrap_fmt!(
+    let res: HashMap<SymbolU32, T> = unwrap_fmt!(
         serde_json::from_str(&content),
         "registry {path} failed to parse",
     );
@@ -56,7 +85,7 @@ where
     Some(res)
 }
 
-pub fn find_vanilla_registries<T>(folder_name: &str) -> HashMap<String, T>
+pub fn find_vanilla_registries<T>(folder_name: &str) -> HashMap<SymbolU32, T>
 where
     T: DeserializeOwned + Serialize,
 {

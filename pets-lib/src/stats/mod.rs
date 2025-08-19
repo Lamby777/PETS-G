@@ -18,7 +18,6 @@ mod statcalc;
 pub use autoload::StatsInterface;
 pub use battler::{Battler, Battlers};
 pub use enemy::EnemyData;
-pub use pchars::{EnemyID, PChar};
 pub use quests::QuestPhase;
 pub use savefiles::SaveFile;
 
@@ -46,11 +45,9 @@ impl Default for BattleStats {
 /// All the information the game needs to know about a character
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct CharData {
-    pub id: PChar,
-
     /// Name of the character, as picked by the user
     /// ⚠️⚠️⚠️ See <https://github.com/Lamby777/PETS-G/issues/23>
-    pub display_name: String,
+    pub display_tr_key: String,
     pub level: IntegralStat,
 
     pub battler: Battler,
@@ -247,7 +244,7 @@ impl Default for CharData {
     fn default() -> Self {
         CharData {
             id: PChar::Devon,
-            display_name: "Chicken Nugget".to_owned(),
+            display_tr_key: "Chicken Nugget".to_owned(),
             level: 1,
 
             // i seriously can't `..Default::default()` because

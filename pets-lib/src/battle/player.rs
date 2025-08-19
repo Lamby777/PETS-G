@@ -52,14 +52,14 @@ impl BattleIcon {
         self.engine.clone().expect("BattleIcon::engine is None")
     }
 
-    fn pchar_to_frame(pchar: PChar) -> i32 {
+    fn pchar_to_frame(pchar: &str) -> i32 {
         match pchar {
-            PChar::Ethan => 0,
-            PChar::Terra => 1,
-            PChar::Siva => 2,
-            PChar::Porky => 3,
+            "Ethan" => 0,
+            "Terra" => 1,
+            "Siva" => 2,
+            "Porky" => 3,
 
-            PChar::Fuzzy => 8,
+            "Fuzzy" => 8,
 
             _ => {
                 godot_warn!("PChar {} doesn't have a battle icon (yet). Defaulting to Ethan's icon.", pchar);
@@ -68,7 +68,7 @@ impl BattleIcon {
         }
     }
 
-    pub fn set_icon(&mut self, pchar: PChar) {
+    pub fn set_icon(&mut self, pchar: &str) {
         let mut sprite = self.base().get_node_as::<Sprite2D>("Sprite2D");
         sprite.set_frame(Self::pchar_to_frame(pchar));
     }

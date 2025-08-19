@@ -236,11 +236,12 @@ impl BattleEngine {
 
     pub fn swap_party_member(&mut self, new_index: usize) {
         self.current_party_member = new_index;
-        let pchar: PChar = pcb().bind_mut().party_pchars()[new_index];
+        // TODO: pchar
+        let pchar = pcb().bind_mut().party_pchars()[new_index];
         godot_print!("Swapped to party member `{}`", pchar);
 
         // set battle icon sprite
-        self.icon.bind_mut().set_icon(pchar);
+        self.icon.bind_mut().set_icon(&pchar);
 
         // set battle portrait texture
         let mut portrait =

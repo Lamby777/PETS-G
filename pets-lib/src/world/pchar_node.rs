@@ -4,7 +4,6 @@ use godot::classes::{
 };
 use godot::prelude::*;
 
-use crate::common::*;
 use crate::consts::partycb::MAX_SPEED;
 
 use super::partycb::{Inputs, CUTSCENE_MOTION_CLOSE_ENOUGH};
@@ -15,8 +14,8 @@ pub struct PCharNode {
     base: Base<Node2D>,
 
     #[export]
-    #[init(val = PChar::Devon)]
-    pub pchar: PChar,
+    #[init(val = "Devon".into())]
+    pub pchar: GString,
 
     #[init(node = "Sprite2D")]
     sprite: OnReady<Gd<Sprite2D>>,

@@ -4,11 +4,11 @@
 
 use crate::common::*;
 
-pub fn party_leader() -> PChar {
+pub fn party_leader() -> String {
     *pcb().bind().party_pchars().first().unwrap()
 }
 
-pub fn pchar_display_name(pchar: &PChar) -> String {
+pub fn pchar_display_name(pchar: &str) -> String {
     si().bind()
         .get_character(pchar)
         .borrow()

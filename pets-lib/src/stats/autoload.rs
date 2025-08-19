@@ -25,8 +25,10 @@ impl StatsInterface {
     }
 
     // #[func]
-    pub fn get_character(&self, ch: &PChar) -> Rc<RefCell<CharData>> {
-        self.save.chars.character(ch)
+    /// Get the stats of any character, combined
+    pub fn compute_character_stats(&self, ch: &str) -> CharData {
+        todo!()
+        // self.save.chars.character(ch)
     }
 
     #[func]

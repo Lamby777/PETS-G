@@ -33,7 +33,7 @@ pub enum ItemCat {
         offsets: InherentStats,
 
         /// Only characters in this list can equip this
-        equippable_by: Vec<PChar>,
+        equippable_by: Option<Vec<String>>,
     },
     AmmoBox {
         category: AmmoCat,
