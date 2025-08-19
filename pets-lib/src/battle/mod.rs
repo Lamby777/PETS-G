@@ -285,7 +285,7 @@ impl BattleEngine {
         self.menu_section = Some(MenuSection::Skill);
 
         // clear right panel children
-        // TODO animate them out first
+        // TODO: animate them out first
         let mut cont = self
             .right_panel_destination
             .clone()
@@ -334,10 +334,10 @@ impl BattleEngine {
             }
 
             "Run" => {
-                // TODO implement running mechanic described earlier
+                // TODO: implement running mechanic described earlier
                 pcb().bind_mut().battling.clear();
 
-                // TODO don't change scenes, just remove the battle
+                // TODO: don't change scenes, just remove the battle
                 // stuff since it's all overlayed on top of the world
                 change_scene!("world");
             }

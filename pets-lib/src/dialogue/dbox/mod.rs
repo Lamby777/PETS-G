@@ -169,7 +169,7 @@ impl DialogBox {
 
     #[func]
     pub fn on_choice_picked(&mut self, choice: Gd<Control>) {
-        // NOTE convention is that the agent is BEFORE the labels
+        // NOTE: convention is that the agent is BEFORE the labels
         let picked_i = (choice.get_index() - 1) as u64;
         self.tween_choices_wave(false);
 

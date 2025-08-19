@@ -26,7 +26,7 @@ pub fn level_to_stats(lvl: IntegralStat) -> InherentStats {
 
 /// floor(    ( (log(x) + x^3) / 16 )   + x )
 pub fn _xp_requirement(lvl: IntegralStat) -> IntegralStat {
-    // NOTE x is the level which reaching this amount of xp
+    // NOTE: x is the level which reaching this amount of xp
     // will get you to, and NOT the level you're currently at
     let p1 = (lvl as FloatStat).log10() + (lvl.pow(3) as FloatStat);
 
@@ -81,7 +81,7 @@ pub fn delta(lvl: IntegralStat) -> IntegralStat {
 }
 
 pub fn epsilon(_lvl: IntegralStat) -> IntegralStat {
-    // NOTE this one is mostly upgraded manually,
+    // NOTE: this one is mostly upgraded manually,
     // but should still improve somewhat with levels...
     1
 }
@@ -95,7 +95,7 @@ pub fn lambda(_lvl: IntegralStat) -> Option<IntegralStat> {
 }
 
 pub fn max_mana(_lvl: IntegralStat) -> Option<IntegralStat> {
-    // NOTE use floor( (z/12)^2.5 ) to calculate for characters
+    // NOTE: use floor( (z/12)^2.5 ) to calculate for characters
     // that DO have PK abilities... but this is the default so nah
     None
 }

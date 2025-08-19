@@ -198,7 +198,7 @@ impl World {
         set_or_stop_audio(old_stream, self.fading_audio.clone());
         set_or_stop_audio(src, self.active_audio.clone());
 
-        // TODO maybe if there's a way to "reverse" the
+        // TODO: maybe if there's a way to "reverse" the
         // animation from the current point...? that would
         // easily solve <https://github.com/Lamby777/PETS-G/issues/9>
         self.fade_animator.set_speed_scale(AUDIO_FADE_TIME);
@@ -217,7 +217,7 @@ impl World {
     pub fn crossfade_audio_to_null(&mut self) {
         self.crossfade_audio_into(None);
         self.current_mz = None;
-        // TODO set current_mz once again once the battle is over
+        // TODO: set current_mz once again once the battle is over
     }
 
     // ---------------------------------------- WaterZone stuff
