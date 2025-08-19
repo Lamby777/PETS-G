@@ -247,10 +247,11 @@ impl PartyCB {
     }
 
     pub fn bad_guys_battlers(&self) -> Vec<Rc<RefCell<Battler>>> {
-        self.battling
-            .iter()
-            .map(|v| v.borrow().battler.clone())
-            .collect()
+        todo!()
+        // self.battling
+        //     .iter()
+        //     .map(|v| v.borrow().battler.clone())
+        //     .collect()
     }
 
     pub fn new_battlers(&self) -> Battlers {

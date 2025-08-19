@@ -14,10 +14,11 @@ pub struct _ItemDrops {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct EnemyData {
     pub id: StringName,
-    pub battler: Rc<RefCell<Battler>>,
+    pub battler: Battler,
 }
 
 impl EnemyData {
+    #[deprecated]
     pub fn new_from_eid(id: &StringName) -> Self {
         // TODO: this should load from the registry, add an enemy registry
         // when i'm finally done with character shit
@@ -25,5 +26,10 @@ impl EnemyData {
             id: id.clone(),
             battler: Default::default(),
         }
+    }
+
+    pub fn from_registry(id: impl Into<StringName>) -> &'static Self {
+        let sn = id.into();
+        unwrap_fmt!(REGISTRIES.enemies.get(&sn), "Item ID not found: {}", sn)
     }
 }

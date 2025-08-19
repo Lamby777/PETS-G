@@ -66,7 +66,7 @@ pub enum AmmoCat {
 }
 
 impl Item {
-    pub fn from_registry(id: impl Into<StringName>) -> &'static Item {
+    pub fn from_registry(id: impl Into<StringName>) -> &'static Self {
         let sn = id.into();
         unwrap_fmt!(REGISTRIES.items.get(&sn), "Item ID not found: {}", sn)
     }

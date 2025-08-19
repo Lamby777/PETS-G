@@ -47,6 +47,9 @@ impl Default for BattleStats {
 /// You may be looking for [CharData]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct ConstCharData {
+    // TODO: remove this. store custom names in savefile, and otherwise
+    // default to tr key like this: CHAR_DISPLAYNAME_Ethan
+    //
     /// Name of the character, as picked by the user
     /// ⚠️⚠️⚠️ See <https://github.com/Lamby777/PETS-G/issues/23>
     pub display_tr_key: String,
