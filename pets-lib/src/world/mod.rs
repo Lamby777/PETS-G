@@ -130,7 +130,9 @@ impl World {
 
     #[func]
     pub fn start_battle(eid: StringName) {
-        let enemy_data = EnemyData::new_from_eid(&eid);
+        let enemy_data = EnemyData::from_registry(eid);
+
+        // TODO: THIS BELONGS IN STATSINTERFACE!!!!!!!! WTF
         pcb()
             .bind_mut()
             .battling

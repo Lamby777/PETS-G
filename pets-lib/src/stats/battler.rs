@@ -1,6 +1,6 @@
 use super::*;
 
-#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Battler {
     pub battle_stats: BattleStats,
     pub status_effects: HashSet<StatusEffect>,

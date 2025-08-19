@@ -99,25 +99,17 @@ pub struct InherentStats {
     pub max_mana: Option<IntegralStat>,
 }
 
-impl Default for InherentStats {
-    fn default() -> Self {
+impl InherentStats {
+    pub fn zero_capable() -> Self {
         InherentStats {
-            max_hp: 30,
-            max_energy: 1,
-            attack: 1,
-            defense: 1,
-            speed: 1,
-            stability: 1,
-            delta: 1,
-            epsilon: 1,
             lambda: None,
             max_mana: None,
+
+            ..Self::zero_incapable()
         }
     }
-}
 
-impl InherentStats {
-    pub fn zero() -> Self {
+    pub fn zero_incapable() -> Self {
         InherentStats {
             max_hp: 0,
             max_energy: 0,
