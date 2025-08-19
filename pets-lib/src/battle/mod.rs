@@ -244,7 +244,7 @@ impl BattleEngine {
         godot_print!("Swapped to party member `{}`", pchar);
 
         // set battle icon sprite
-        self.icon.bind_mut().set_icon(&pchar);
+        self.icon.bind_mut().set_icon(pchar);
 
         // set battle portrait texture
         let mut portrait =

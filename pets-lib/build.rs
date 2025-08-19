@@ -8,10 +8,8 @@ use walkdir::WalkDir;
 
 fn main() {
     let pattern = "../pets-gd/registries/**/*.jsonnet";
-    for entry in glob(pattern).unwrap() {
-        if let Ok(path) = entry {
-            println!("cargo:rerun-if-changed={}", path.display());
-        }
+    for path in glob(pattern).unwrap().flatten() {
+        println!("cargo:rerun-if-changed={}", path.display());
     }
 
     let mut vm = JsonnetVm::new();
@@ -38,7 +36,7 @@ fn main() {
             let output_path = output_dir.join(format!("{}.json", file_name));
 
             // read and compile jsonnet
-            let json_result = match vm.evaluate_file(&path) {
+            let json_result = match vm.evaluate_file(path) {
                 Ok(json) => json,
                 Err(e) => {
                     eprintln!("error compiling {}: {}", path.display(), e);

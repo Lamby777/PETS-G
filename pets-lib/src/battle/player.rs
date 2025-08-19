@@ -70,7 +70,7 @@ impl BattleIcon {
 
     pub fn set_icon(&mut self, pchar: &StringName) {
         let mut sprite = self.base().get_node_as::<Sprite2D>("Sprite2D");
-        sprite.set_frame(Self::pchar_to_frame(&pchar));
+        sprite.set_frame(Self::pchar_to_frame(pchar));
     }
 
     fn process_movement(&mut self, delta: f64) {
