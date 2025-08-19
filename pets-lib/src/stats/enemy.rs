@@ -5,7 +5,7 @@ use battler::Battler;
 use godot::prelude::*;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct ItemDrops {
+pub struct _ItemDrops {
     pub item_id: StringName,
     pub odds: u8,
 }

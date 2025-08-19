@@ -25,13 +25,13 @@ impl StatsInterface {
     }
 
     /// Get a copy of the computed stats of the entire party, as a `Vec`.
-    pub fn compute_stats_for_party() -> Vec<CharData> {
+    pub fn _compute_stats_for_party(&self) -> Vec<CharData> {
         todo!()
     }
 
     // #[func]
     /// Get the stats of any character, combined
-    pub fn compute_stats_for(&self, ch: &str) -> CharData {
+    pub fn compute_stats_for(&self, _ch: impl Into<StringName>) -> CharData {
         todo!()
         // self.save.chars.character(ch)
     }

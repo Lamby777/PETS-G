@@ -121,7 +121,6 @@ impl ICharacterBody2D for BattleIcon {
             .bind()
             .compute_stats_for("Ethan")
             .battler
-            .borrow()
             .practical_stats()
             .speed;
 

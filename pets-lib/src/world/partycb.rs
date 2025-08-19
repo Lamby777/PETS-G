@@ -10,7 +10,7 @@ use crate::consts::partycb::*;
 
 use super::inv_node::InventoryNode;
 use super::pchar_node::PCharNode;
-use super::BATTLE_PARTY_SIZE;
+// use super::BATTLE_PARTY_SIZE;
 
 /// The player will stop being controlled once it reaches this
 /// distance from the cutscene target.
@@ -238,11 +238,12 @@ impl PartyCB {
     }
 
     pub fn good_guys_battlers(&self) -> Vec<Rc<RefCell<Battler>>> {
-        self.party_chardata()
-            .into_iter()
-            .take(BATTLE_PARTY_SIZE)
-            .map(|cd| cd.battler.clone())
-            .collect()
+        todo!()
+        // self.party_chardata()
+        //     .into_iter()
+        //     .take(BATTLE_PARTY_SIZE)
+        //     .map(|cd| cd.battler.clone())
+        //     .collect()
     }
 
     pub fn bad_guys_battlers(&self) -> Vec<Rc<RefCell<Battler>>> {
