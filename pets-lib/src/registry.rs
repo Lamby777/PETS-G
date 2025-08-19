@@ -38,7 +38,7 @@ pub static REGISTRIES: LazyLock<Registries> = LazyLock::new(|| Registries {
 pub struct Registries {
     pub items: HashMap<StringName, Item>,
     pub skills: HashMap<StringName, Box<dyn Skill>>,
-    pub chars: HashMap<StringName, CharData>,
+    pub chars: HashMap<StringName, ConstCharData>,
 }
 
 pub fn read_registry_file<T>(path: &str) -> Option<HashMap<StringName, T>>

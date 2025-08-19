@@ -119,8 +119,7 @@ impl ICharacterBody2D for BattleIcon {
     fn ready(&mut self) {
         let ch_speed = si()
             .bind()
-            .get_character(&PChar::Ethan)
-            .borrow()
+            .compute_stats_for("Ethan")
             .battler
             .borrow()
             .practical_stats()

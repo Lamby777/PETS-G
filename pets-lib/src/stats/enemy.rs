@@ -18,11 +18,11 @@ pub struct EnemyData {
 }
 
 impl EnemyData {
-    pub fn new_from_eid(id: StringName) -> Self {
+    pub fn new_from_eid(id: &StringName) -> Self {
         // TODO: this should load from the registry, add an enemy registry
         // when i'm finally done with character shit
         Self {
-            id,
+            id: id.clone(),
             battler: Default::default(),
         }
     }

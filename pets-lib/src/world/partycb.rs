@@ -118,19 +118,6 @@ impl PartyCB {
         self.cutscene_motion = Some(total);
     }
 
-    pub fn party_pchars(&self) -> Vec<StringName> {
-        // TODO: THIS SHOULD NOT BE PARTYCB'S RESPONSIBILITY!!
-        // Keep track of this info in SaveFile and access it via si()
-        self.party.iter_shared().map(|v| v.bind().pchar).collect()
-    }
-
-    pub fn party_chardata(&self) -> Vec<Rc<RefCell<CharData>>> {
-        self.party_pchars()
-            .into_iter()
-            .map(|id| si().bind().get_character(&id))
-            .collect()
-    }
-
     /// Get the fx rectangle that follows the player
     pub fn fx_rect() -> Gd<ColorRect> {
         Self::singleton().get_node_as("BattleIntroRect")

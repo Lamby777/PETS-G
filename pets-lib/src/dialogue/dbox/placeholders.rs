@@ -5,8 +5,9 @@
 use crate::common::*;
 use godot::prelude::*;
 
-pub fn party_leader_id() -> String {
-    pcb().bind().party_pchars().first().unwrap().to_string()
+// get party leader id as a `String` (helper fn to reduce boilerplate)
+pub fn leader() -> String {
+    si().bind().save.party[0].to_string()
 }
 
 pub fn pchar_display_name(pchar: &str) -> String {
@@ -30,28 +31,28 @@ const PLACEHOLDERS: &[PlaceholderMapping] = &[
     ("[LYEMBO]", || pchar_display_name("Lyembo")),
     ("[QUOLO]", || pchar_display_name("Quolo")),
     ("[JUNIPER]", || {
-        match party_leader_id().as_str() {
+        match leader().as_str() {
             "Ethan" => "DG_SPK_MOM",
             _ => "DG_SPK_JUNIPER",
         }
         .to_owned()
     }),
     ("[CLAY]", || {
-        match party_leader_id().as_str() {
+        match leader().as_str() {
             "Ethan" => "DG_SPK_DAD",
             _ => "DG_SPK_CLAY",
         }
         .to_owned()
     }),
     ("[MR_TULIVAE]", || {
-        match party_leader_id().as_str() {
+        match leader().as_str() {
             "Siva" => "DG_SPK_DAD",
             _ => "DG_SPK_MR_TULIVAE",
         }
         .to_owned()
     }),
     ("[MRS_TULIVAE]", || {
-        match party_leader_id().as_str() {
+        match leader().as_str() {
             "Siva" => "DG_SPK_MOM",
             _ => "DG_SPK_MRS_TULIVAE",
         }
