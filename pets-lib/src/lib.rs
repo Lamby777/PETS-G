@@ -38,7 +38,7 @@ mod common {
     pub use crate::stats::*;
     pub use crate::util::*;
 
-    pub use crate::battle::{Affinities, BattleEngine};
+    pub use crate::battle::{Affinities, BattleEngine, BattleInterface};
     pub use crate::dialogue::DialogBox;
     pub use crate::world::{InteractionZone, PartyCB, World};
 
@@ -78,6 +78,7 @@ unsafe impl ExtensionLibrary for PetsLib {
         libdx::foreach_static!(
             [
                 StatsInterface,
+                BattleInterface,
             ] => GodotAutoload, register
         );
     }
@@ -90,6 +91,7 @@ unsafe impl ExtensionLibrary for PetsLib {
         libdx::foreach_static!(
             [
                 StatsInterface,
+                BattleInterface,
             ] => GodotAutoload, unregister
         );
     }
