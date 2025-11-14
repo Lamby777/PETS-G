@@ -14,8 +14,10 @@ use crate::common::*;
 #[class(base=Object)]
 pub struct StatsInterface {
     base: Base<Object>,
-
     pub save: SaveFile,
+
+    /// The enemies that are currently in battle with you
+    pub battling: Vec<EnemyData>,
 }
 
 #[godot_api]
@@ -65,6 +67,10 @@ impl IObject for StatsInterface {
         // randomize seed for godot
         randomize();
 
-        Self { base, save }
+        Self {
+            base,
+            save,
+            battling: vec![],
+        }
     }
 }

@@ -79,9 +79,6 @@ pub struct PartyCB {
     #[init(val = LimiQ::new(2000))]
     past_rotations: LimiQ<Vector2>,
 
-    /// The enemies that are currently in battle with you
-    pub battling: Vec<Rc<RefCell<EnemyData>>>,
-
     pub tpbeacon_debounce: bool,
     pub in_water: bool,
 
@@ -148,7 +145,7 @@ impl PartyCB {
     }
 
     pub fn is_in_battle(&self) -> bool {
-        !self.battling.is_empty()
+        !si().bind().battling.is_empty()
     }
 
     /// Set character positions based on past pos/rot

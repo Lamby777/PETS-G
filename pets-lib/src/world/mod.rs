@@ -134,10 +134,7 @@ impl World {
         let enemy_data = EnemyData::from_registry(eid.clone());
 
         // TODO: THIS BELONGS IN STATSINTERFACE!!!!!!!! WTF
-        pcb()
-            .bind_mut()
-            .battling
-            .push(Rc::new(RefCell::new(enemy_data.clone())));
+        si().bind_mut().battling.push(enemy_data.clone());
         let world = World::singleton();
 
         let mat = PartyCB::fx_material();
