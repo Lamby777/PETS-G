@@ -120,6 +120,7 @@ impl World {
     #[signal]
     fn battle_intro_done(eid: GString);
 
+    /// TODO: this needs comments whenever i once again understand what it's for
     fn mute_audio_bus(mute_world: bool) {
         let (muted, unmuted) = if mute_world { (1, 2) } else { (2, 1) };
 
@@ -173,7 +174,7 @@ impl World {
 
         // it's a performance thing
         pcb().set_process(false);
-        children_of_type::<WalkingEnemy, _>(&self.to_gd());
+        children_of_type::<WalkingEnemy, _>(&self.to_gd()); // ... what? isn't this a noop?
     }
 
     // ---------------------------------------- MusicZone stuff
