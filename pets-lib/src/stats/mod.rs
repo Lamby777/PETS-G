@@ -15,7 +15,7 @@ mod statcalc;
 
 // re-export some crap from ^^^
 pub use autoload::StatsInterface;
-pub use battler::{Battler, Battlers};
+pub use battler::Battler;
 pub use enemy::EnemyData;
 pub use quests::QuestPhase;
 pub use savefiles::SaveFile;

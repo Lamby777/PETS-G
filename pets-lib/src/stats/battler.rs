@@ -118,8 +118,3 @@ impl Battler {
         }
     }
 }
-
-pub struct Battlers {
-    pub good_guys: Vec<Rc<RefCell<Battler>>>,
-    pub bad_guys: Vec<Rc<RefCell<Battler>>>,
-}

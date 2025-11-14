@@ -67,8 +67,7 @@ pub struct BattleEngine {
     #[export]
     right_panel_destination: Option<Gd<Control>>,
 
-    #[init(val = OnReady::manual())]
-    battlers: OnReady<Battlers>,
+    battlers: Vec<Battler>,
     current_party_member: usize,
 
     #[init(node = "BattleMusic")]
@@ -181,7 +180,7 @@ impl BattleEngine {
     }
 
     fn current_battler(&self) -> Rc<RefCell<Battler>> {
-        self.battlers.good_guys[self.current_party_member].clone()
+        todo!()
     }
 
     /// slowly fade out the black rectangle over the battle scene
@@ -270,10 +269,10 @@ impl BattleEngine {
         );
 
         skill.cast(
-            self.current_battler().clone(),
-            self.battlers.bad_guys[0].clone(),
-            self.battlers.good_guys.clone(),
-            self.battlers.bad_guys.clone(),
+            &mut self, // self.current_battler().clone(),
+                      // self.battlers.bad_guys[0].clone(),
+                      // self.battlers.good_guys.clone(),
+                      // self.battlers.bad_guys.clone(),
         );
     }
 

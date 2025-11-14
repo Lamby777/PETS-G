@@ -237,28 +237,12 @@ impl PartyCB {
             .unwrap_or(Vector2::ZERO)
     }
 
-    pub fn good_guys_battlers(&self) -> Vec<Rc<RefCell<Battler>>> {
-        todo!()
-        // self.party_chardata()
-        //     .into_iter()
-        //     .take(BATTLE_PARTY_SIZE)
-        //     .map(|cd| cd.battler.clone())
-        //     .collect()
-    }
-
     pub fn bad_guys_battlers(&self) -> Vec<Rc<RefCell<Battler>>> {
         todo!()
         // self.battling
         //     .iter()
         //     .map(|v| v.borrow().battler.clone())
         //     .collect()
-    }
-
-    pub fn new_battlers(&self) -> Battlers {
-        Battlers {
-            good_guys: self.good_guys_battlers(),
-            bad_guys: self.bad_guys_battlers(),
-        }
     }
 
     #[func]
