@@ -30,7 +30,7 @@ pub enum NoteType {
 }
 
 impl NoteType {
-    /// Convert a `u8` from MIDI to its equivalent `NoteType`
+    /// Convert a `u8` from MIDI to its equivalent [NoteType]
     ///
     /// Panics if the note is invalid, for ergonomics.
     /// Use `try_from_note` if you want to handle the error.

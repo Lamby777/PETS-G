@@ -71,7 +71,7 @@ where
     set_timeout_callable(time_sec, callable)
 }
 
-/// Like `set_timeout`, but accepts a `Callable` instead of a closure.
+/// Like [set_timeout], but accepts a [Callable] instead of a closure.
 pub fn set_timeout_callable(
     time_sec: f64,
     callable: Callable,

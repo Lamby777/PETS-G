@@ -118,20 +118,20 @@ where
         .done();
 }
 
-/// Returns the singleton instance of `PartyCB`.
+/// Returns the singleton instance of [PartyCB].
 /// So common that I might as well abbreviate it. :P
 pub fn pcb() -> Gd<PartyCB> {
     PartyCB::singleton()
 }
 
-/// Returns the singleton instance `StatsInterface`.
+/// Returns the singleton instance [StatsInterface].
 /// So common that I might as well abbreviate it. :P
 pub fn si() -> Gd<StatsInterface> {
     StatsInterface::singleton()
 }
 
 #[derive(Deref, DerefMut)]
-/// Wrapper around `Gd<T>` so I can implement external traits on godot stuff
+/// Wrapper around [Gd<T>] so I can implement external traits on godot stuff
 pub struct GdW<T: GodotClass>(pub Gd<T>);
 
 /// takes a bbcode string and prepends or removes it from the label text

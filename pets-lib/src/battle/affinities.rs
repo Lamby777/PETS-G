@@ -38,13 +38,12 @@ impl AffinityPower {
 #[derive(Default)]
 pub struct Affinities(HashMap<Element, AffinityPower>);
 
-
 impl Affinities {
     pub fn _new(affinities: HashMap<Element, AffinityPower>) -> Self {
         Self(affinities)
     }
 
-    /// Check an affinity. Returns `None` if the affinity is neutral.
+    /// Check an affinity. Returns [None] if the affinity is neutral.
     pub fn _get(&self, element: Element) -> Option<AffinityPower> {
         self.0.get(&element).copied()
     }

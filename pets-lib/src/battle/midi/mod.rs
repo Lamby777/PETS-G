@@ -21,8 +21,8 @@ use nodi::{Connection, MidiEvent, Sheet};
 /// Acts like a MIDI player but instead of playing stuff,
 /// it sends note events to the battle engine.
 ///
-/// It is implemented as a Godot `Node` so that it can send
-/// signals n stuff, and be a child of the `BattleEngine`.
+/// It is implemented as a Godot [Node] so that it can send
+/// signals n stuff, and be a child of the [BattleEngine].
 #[derive(GodotClass)]
 #[class(init, base=Node)]
 pub struct MidiReceiver {
@@ -81,7 +81,7 @@ impl BattleTrack {
     /// Just pass in the name of the track. No file extension.
     ///
     /// # Memory Leak
-    /// See [`BattleTrack::from_godot_path`] docs for more information.
+    /// See [BattleTrack::from_godot_path] docs for more information.
     pub fn new_from_name(track_name: &str) -> BattleTrack {
         let path = format!("res://assets/music/battle/{track_name}.mid");
         let Smf { header, tracks } = Self::from_godot_path(&path);

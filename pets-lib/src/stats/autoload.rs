@@ -24,7 +24,7 @@ impl StatsInterface {
         self.save = save;
     }
 
-    /// Get a copy of the computed stats of the entire party, as a `Vec`.
+    /// Get a copy of the computed stats of the entire party, as a [Vec].
     pub fn _compute_stats_for_party(&self) -> Vec<CharData> {
         todo!()
     }
