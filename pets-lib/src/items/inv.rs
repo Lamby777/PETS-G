@@ -20,15 +20,16 @@ impl Equipment {
     }
 
     pub fn offsets(&self) -> LeveledStats {
-        self.iter().fold(LeveledStats::zero_capable(), |acc, item| {
-            let ItemCat::Equipment { ref offsets, .. } =
-                Item::from_registry(item).category
-            else {
-                panic!("item {item} not equippable")
-            };
+        self.iter()
+            .fold(LeveledStats::zero_all_capable(), |acc, item| {
+                let ItemCat::Equipment { ref offsets, .. } =
+                    Item::from_registry(item).category
+                else {
+                    panic!("item {item} not equippable")
+                };
 
-            acc + offsets.clone()
-        })
+                acc + offsets.clone()
+            })
     }
 }
 

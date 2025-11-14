@@ -97,16 +97,18 @@ pub struct LeveledStats {
 }
 
 impl LeveledStats {
-    pub fn zero_capable() -> Self {
+    /// Init with all stats set to zero, including all ability-exclusive stats
+    pub fn zero_all_capable() -> Self {
         LeveledStats {
-            lambda: None,
-            max_mana: None,
+            lambda: Some(0),
+            max_mana: Some(0),
 
-            ..Self::zero_incapable()
+            ..Self::zero_all_incapable()
         }
     }
 
-    pub fn zero_incapable() -> Self {
+    /// Init with all stats set to zero, and [None] for all ability-exclusive stats
+    pub fn zero_all_incapable() -> Self {
         LeveledStats {
             max_hp: 0,
             max_energy: 0,
