@@ -11,7 +11,7 @@ pub struct Battler {
 
     pub inherent_stats: LeveledStats,
 
-    /// The IDs of all equipped items
+    /// The IDs of all of the battler's equipped items
     pub equipment: Equipment,
 }
 

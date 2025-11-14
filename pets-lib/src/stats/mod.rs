@@ -48,7 +48,11 @@ impl Default for BattleStats {
 /// Loaded at the beginning of the game and never modified!!!
 /// You may be looking for [CharData]
 #[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct ConstCharData {}
+pub struct ConstCharData {
+    /// the [Battler] that this character starts out with, before
+    /// the story or player actions affect it in any way
+    init_battler: Battler,
+}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct CharData {

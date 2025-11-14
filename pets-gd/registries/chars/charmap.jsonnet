@@ -3,7 +3,7 @@ local BaseBattler = import '../battler.libsonnet';
 // this jsonnet file is for the char registry, so ONLY `ConstCharData`!!!!!!
 
 local Base = {
-  battler: BaseBattler,
+  init_battler: BaseBattler,
 };
 
 
