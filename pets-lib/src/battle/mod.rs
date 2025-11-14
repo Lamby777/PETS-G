@@ -134,7 +134,7 @@ impl BattleEngine {
             self.base().get_node_as::<ProgressBar>("%InfoBars/ManaBar");
         mana_bar.set("bar_value", &mana.unwrap_or(0).to_variant());
 
-        let max_mana = battler.inherent_stats.max_mana;
+        let max_mana = battler.leveled_stat_offsets.max_mana;
         mana_bar.set_max(max_mana.unwrap_or(1).into());
     }
 
@@ -158,7 +158,7 @@ impl BattleEngine {
         // update hp bar
         hp_bar.set("bar_value", &hp_bar_value.to_variant());
 
-        let max_hp = battler.inherent_stats.max_hp;
+        let max_hp = battler.leveled_stat_offsets.max_hp;
         hp_bar.set_max(max_hp.into());
 
         // if both the hp bar and the actual hp are zero, die

@@ -22,7 +22,5 @@ local Base = {
   Juniper: Base,
   MrTulivae: Base,
   MsTulivae: Base,
-  Ethan: Base {
-
-  },
+  Ethan: Base,
 }

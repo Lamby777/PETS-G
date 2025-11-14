@@ -5,7 +5,7 @@ use battler::Battler;
 use godot::prelude::*;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct ItemDrops {
+pub struct ItemDrop {
     pub item_id: StringName,
     pub odds: u8,
 }
@@ -13,8 +13,8 @@ pub struct ItemDrops {
 /// All the information the game needs to know about an enemy
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct EnemyData {
-    pub battler: Battler,
-    pub drops: ItemDrops,
+    pub init_battler: Battler,
+    pub drops: Vec<ItemDrop>,
 }
 
 impl EnemyData {
