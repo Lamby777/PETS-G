@@ -50,7 +50,6 @@ impl Battler {
     }
 
     /// Add back HP to the character
-    ///
     /// Saturated at the character's max HP
     pub fn heal(&mut self, amount: IntegralStat) {
         let max_hp = self.practical_stats().max_hp;
@@ -58,21 +57,23 @@ impl Battler {
         *hp = max_hp.min(*hp + amount);
     }
 
-    fn recover_mana(&mut self, amount: IntegralStat) {
+    fn _recover_mana(&mut self, amount: IntegralStat) {
         let Some(max_mana) = self.practical_stats().max_mana else {
             return; // nothing to do
         };
 
-        // WARN: this will silently continue, recovering up from 0 if the
+        // WARN: this will silently continue, recovering mana up from 0 if the
         // character has a `max_mana` but their `mana` is somehow `None`.
         let mana = &mut self.battle_stats.mana.unwrap_or(0);
         *mana = max_mana.min(*mana + amount);
     }
 
-    /// This should take armor, weapons, etc. into account for players.
-    /// It should NOT consider in-battle buffs/debuffs.
-    fn armored_stats(&self) -> LeveledStats {
-        self.leveled_stats_raw() + self.equipment.offsets()
+    /// This should take armor, weapons, perm buffs consumables, etc. into account.
+    /// It should NOT consider temporary crap like in-battle buffs/debuffs.
+    fn augmented_stats(&self) -> LeveledStats {
+        self.leveled_stats_raw()
+            + self.equipment.offsets()
+            + self.perm_buffs.clone()
     }
 
     /// The final "in practice" stats of the character. No more processing.
@@ -81,16 +82,16 @@ impl Battler {
     ///
     /// Takes into account the...
     /// * Stats from leveling up
-    /// * Equipment
+    /// * Equipment like armor and weapons
     /// * Permanent buffs
-    /// * Temporary battle-related buffs
+    /// * Temporary (aka in-battle) buffs
     pub fn practical_stats(&self) -> LeveledStats {
-        let armored = self.armored_stats();
+        let armored = self.augmented_stats();
 
         // don't forget to thank the buffs driver
         let battle_buffs = self.battle_stats.buffs.iter().cloned();
 
-        armored + battle_buffs.sum() + self.perm_buffs.clone()
+        armored + battle_buffs.sum()
     }
 
     pub fn apply_status_effect(&mut self, effect: StatusEffect) {
