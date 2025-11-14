@@ -58,6 +58,17 @@ impl Battler {
         *hp = max_hp.min(*hp + amount);
     }
 
+    fn recover_mana(&mut self, amount: IntegralStat) {
+        let Some(max_mana) = self.practical_stats().max_mana else {
+            return; // nothing to do
+        };
+
+        // WARN: this will silently continue, recovering up from 0 if the
+        // character has a `max_mana` but their `mana` is somehow `None`.
+        let mana = &mut self.battle_stats.mana.unwrap_or(0);
+        *mana = max_mana.min(*mana + amount);
+    }
+
     /// This should take armor, weapons, etc. into account for players.
     /// It should NOT consider in-battle buffs/debuffs.
     fn armored_stats(&self) -> LeveledStats {
@@ -107,19 +118,3 @@ pub struct Battlers {
     pub good_guys: Vec<Rc<RefCell<Battler>>>,
     pub bad_guys: Vec<Rc<RefCell<Battler>>>,
 }
-
-// Trait for stuff that both party members and enemies
-// have. For example, an enemy doesn't need to have a
-// "level," but it does need to have HP and status effects.
-// pub trait _Battler {
-//
-//     fn recover_mana(&mut self, amount: IntegralStat) {
-//         let max_mana = self.max_mana();
-//         if let Some(max_mana) = max_mana {
-//             let new_mana = max_mana.min(self.mana().unwrap_or(0) + amount);
-//             *self.mana_mut().unwrap() = new_mana;
-//         }
-//     }
-//
-//
-// }
