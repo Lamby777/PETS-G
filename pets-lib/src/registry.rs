@@ -73,6 +73,8 @@ where
         .get_files()
         .to_vec()
         .into_iter()
+        // TODO: remove logging if it works
+        .filter(|fname| {dbg!(&fname); !dbg!(should_ignore_registry(fname))})
         .flat_map(|fname| {
             let path = format!("{folder_path}/{fname}");
             godot_print!("Reading vanilla registry: {}", path);
@@ -87,4 +89,13 @@ where
 
     godot_print!("Success!\n\n");
     res
+}
+
+/// Predicate for a registry being ignored.
+/// This list of conditions is like a gitignore for registries pretty much.
+///
+/// Document each step well so it's obvious what's a bug and what's intended.
+fn should_ignore_registry(fname: &GString) -> bool {
+    // No *.jsonnet files, they get transpiled to *.json
+    fname.ends_with(".jsonnet")
 }

@@ -43,6 +43,8 @@ pub enum ItemCat {
     Consumable {
         func: String,
         uses: u32,
+        in_overworld: bool,
+        in_battle: bool,
     },
     Key,
 }

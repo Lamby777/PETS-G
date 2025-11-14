@@ -100,8 +100,10 @@ impl BattleIcon {
     #[func]
     fn on_hit(&mut self, mut bullet: Gd<Node2D>) {
         let dmg_ratio = bullet.get("damage_ratio").to::<f64>();
-        let base_dmg =
-            pcb().bind().battling[0].battler.practical_stats().attack;
+        // let base_dmg =
+        //     pcb().bind().battling[0].battler.practical_stats().attack;
+        // TODO: COMMENTED TO COMPILE
+        let base_dmg = 10;
         let damage = (base_dmg as f64 * dmg_ratio).ceil();
 
         self.engine().bind_mut().take_damage(damage as i32);

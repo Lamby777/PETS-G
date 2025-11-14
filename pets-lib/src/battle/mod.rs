@@ -375,8 +375,9 @@ impl BattleEngine {
         self.music.bind_mut().play_battle_music();
 
         // start attacking
-        let enemy_data = pcb().bind().battling[0].clone();
-        let enemy_id = &enemy_data.borrow().id;
+        // let enemy_data = pcb().bind().battling[0].clone();
+        // let enemy_id = &enemy_data.borrow().id; // TODO: COMMENTED TO COMPILE
+        let enemy_id = "A_NONNY_MOUSE";
 
         self.base()
             .get_node_as::<Node>(&format!("Tactics/{enemy_id}"))
