@@ -13,6 +13,18 @@ IZ_INTERACT_OPEN,Open,Open,Open
 IZ_INTERACT_READ,Read,Read,Read
 IZ_INTERACT_TAKE,Take,Plunder,Steal
 IZ_INTERACT_DEBUG,Debug,Remove barnacles,Defeature
+MONTH_SHORTENED_1,Jan,Jan,Jan
+MONTH_SHORTENED_2,Feb,Feb,Feb
+MONTH_SHORTENED_3,Mar,Mar,Mar
+MONTH_SHORTENED_4,Apr,Apr,Apr
+MONTH_SHORTENED_5,May,May,May
+MONTH_SHORTENED_6,Jun,Jun,Jun
+MONTH_SHORTENED_7,Jul,Jul,Jul
+MONTH_SHORTENED_8,Aug,Aug,Aug
+MONTH_SHORTENED_9,Sep,Sep,Sep
+MONTH_SHORTENED_10,Oct,Oct,Oct
+MONTH_SHORTENED_11,Nov,Nov,Nov
+MONTH_SHORTENED_12,Dec,Dec,Dec
 ITEM_NAME_cool_stick,Stick,Cane,Stick
 ITEM_DESC_cool_stick,"Some stick you found off the sidewalk. Looks cool. ""Put ya stick away, Waltuh.""",Some stick ye plundered off th' lands. Lookin' dandy.,THIS is the best weapon you could find?
 ITEM_NAME_trusty_rusty_pistol,Trusty Rusty Pistol,Miniature Musket (Rusty),Ol' Reliable Rusty

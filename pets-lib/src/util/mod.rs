@@ -17,21 +17,11 @@ use godot::classes::{Engine, SceneTreeTimer};
 use godot::meta::AsArg;
 use godot::prelude::*;
 
-pub fn month_string_3letter(month: u32) -> &'static str {
+/// Parameter `month` is the month number (1 = Jan, 2 = Feb, etc.)
+pub fn shortened_month_string(month: u32) -> GString {
     match month {
-        1 => "Jan",
-        2 => "Feb",
-        3 => "Mar",
-        4 => "Apr",
-        5 => "May",
-        6 => "Jun",
-        7 => "Jul",
-        8 => "Aug",
-        9 => "Sep",
-        10 => "Oct",
-        11 => "Nov",
-        12 => "Dec",
-        _ => panic!("Invalid month"),
+        1..=12 => tr(&format!("MONTH_SHORTENED_{}", month)),
+        _ => panic!("invalid month, outside of 1-12 range: {}", month),
     }
 }
 
@@ -40,7 +30,9 @@ pub fn tr(text: impl AsArg<StringName>) -> GString {
 }
 
 pub use crate::tr_replace;
-/// Macro to call tr! and format the result.
+/// Macro to call tr! and format the **result**.
+///
+/// To format the input, just use `tr()` with `format!()`. That's not what this is for.
 ///
 /// Usage:
 /// ```

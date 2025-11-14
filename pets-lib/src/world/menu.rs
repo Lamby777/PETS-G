@@ -35,7 +35,7 @@ impl WorldMenu {
     fn set_date_txt(&self, date: NaiveDate) {
         let txt = format!(
             "{} {}, {}",
-            month_string_3letter(date.month()),
+            shortened_month_string(date.month()),
             date.day(),
             date.year()
         );
