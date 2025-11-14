@@ -45,11 +45,9 @@ where
         .cast::<ShaderMaterial>();
     let material_id = material.instance_id();
 
-    let callable = Callable::from_local_fn("set_shader_value", move |args| {
+    let callable = Callable::from_fn("set_shader_value", move |args| {
         let mut material = Gd::<ShaderMaterial>::from_instance_id(material_id);
         material.set_shader_parameter("opacity", args[0]);
-
-        Ok(Variant::nil())
     });
 
     let start_value = material.get_shader_parameter("opacity");
@@ -113,9 +111,7 @@ where
     T: Inherits<Object>,
 {
     node.upcast_mut()
-        .connect_ex(signal, &callable)
-        .flags(ConnectFlags::DEFERRED.ord() as u32)
-        .done();
+        .connect_flags(signal, &callable, ConnectFlags::DEFERRED);
 }
 
 /// Returns the singleton instance of [PartyCB].

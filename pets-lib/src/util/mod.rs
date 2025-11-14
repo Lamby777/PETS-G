@@ -63,12 +63,12 @@ pub fn set_timeout<F>(time_sec: f64, mut func: F) -> Gd<SceneTreeTimer>
 where
     F: FnMut() + Sync + Send + 'static,
 {
-    let callable = Callable::from_local_fn("timeout", move |_| {
-        func();
-        Ok(Variant::nil())
-    });
-
-    set_timeout_callable(time_sec, callable)
+    set_timeout_callable(
+        time_sec,
+        Callable::from_fn("timeout_callable", move |_| {
+            func();
+        }),
+    )
 }
 
 /// Like [set_timeout], but accepts a [Callable] instead of a closure.

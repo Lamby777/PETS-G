@@ -22,7 +22,7 @@ impl EffectAndChance {
 impl Describe for EffectAndChance {
     fn describe(&self) -> GString {
         let fx = self.effect.to_string();
-        tr_replace! { &self.chance.description_tr_template(); fx }.into()
+        tr_replace! { &self.chance.description_tr_template(); fx }.to_godot()
     }
 }
 

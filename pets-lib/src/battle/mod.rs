@@ -415,10 +415,7 @@ impl INode2D for BattleEngine {
             timer.set_wait_time(INTRO_COUNTDOWN_SEC);
             timer.start();
             let callable = self.base().callable("intro_over");
-            timer
-                .connect_ex("timeout", &callable)
-                .flags(ConnectFlags::ONE_SHOT.ord() as u32)
-                .done();
+            timer.connect_flags("timeout", &callable, ConnectFlags::ONE_SHOT);
         }
 
         connect! {

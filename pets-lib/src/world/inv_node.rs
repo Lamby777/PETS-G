@@ -122,10 +122,11 @@ impl InventoryNode {
 
         // update icons once anim is over
         let callable = self.base().callable("on_cycle_done");
-        self.anim
-            .connect_ex("animation_finished", &callable)
-            .flags(ConnectFlags::ONE_SHOT.ord() as u32)
-            .done();
+        self.anim.connect_flags(
+            "animation_finished",
+            &callable,
+            ConnectFlags::ONE_SHOT,
+        );
     }
 
     pub fn open(&mut self, open: bool) {

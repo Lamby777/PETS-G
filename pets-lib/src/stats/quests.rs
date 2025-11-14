@@ -40,7 +40,7 @@ impl Quest {
     }
 
     #[func]
-    pub fn quest_name(&self) -> GString {
-        self.base().get_name().into()
+    pub fn quest_name(&self) -> StringName {
+        self.base().get_name()
     }
 }

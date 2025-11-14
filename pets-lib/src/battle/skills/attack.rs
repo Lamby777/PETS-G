@@ -83,10 +83,10 @@ impl Skill for AttackSkill {
                 "SKILL_ATTACK_DESCRIBE_COMBINED";
                 dmg, fx
             }
-            .into(),
+            .to_godot(),
 
             // Use whichever is present
-            (Some(dmg), None) => dmg.into(),
+            (Some(dmg), None) => dmg.to_godot(),
             (None, Some(fx)) => fx,
 
             // Can't have an attack that does 0 damage and no effect

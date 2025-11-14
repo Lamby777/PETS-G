@@ -139,7 +139,7 @@ impl DialogBox {
         let content = self.message.clone();
         let content = tr(&content).to_string();
 
-        placeholders::process_placeholders(&content).into()
+        placeholders::process_placeholders(&content).to_godot()
     }
 
     #[func]

@@ -1,5 +1,5 @@
 use crate::common::*;
-use godot::classes::GDScript;
+use godot::classes::{GDScript, Script};
 use godot::prelude::*;
 
 #[derive(GodotClass)]
@@ -13,7 +13,7 @@ impl DialogueScript {
     #[func]
     pub fn new(script: Gd<GDScript>) -> Gd<Self> {
         let mut executor = DialogueScript::new_alloc();
-        executor.set_script(&script.to_variant());
+        executor.set_script(&script.upcast::<Script>());
         executor
     }
 

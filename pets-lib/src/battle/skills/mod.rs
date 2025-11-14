@@ -30,7 +30,7 @@ fn power_to_letter_pl(power: u8, plural: bool) -> GString {
     let power = power_to_letter(power);
 
     match plural {
-        true => tr_replace!("SKILL_POWER_PLURAL"; power).into(),
+        true => tr_replace!("SKILL_POWER_PLURAL"; power).to_godot(),
         false => power,
     }
 }
