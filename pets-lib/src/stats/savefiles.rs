@@ -17,9 +17,7 @@ fn save_path(slot: u8) -> String {
 /// All the data saved to one of the save file slots
 #[derive(Serialize, Deserialize)]
 pub struct SaveFile {
-    // TODO: keep track of ONLY stat changes aka offsets (linear + constant)
-    // absolute base stats will be handled by the registry
-    pub chars: (),
+    pub chars: HashMap<StringName, CharData>,
 
     /// IDs of every character currently in the party.
     pub party: Vec<StringName>,
@@ -36,7 +34,20 @@ pub struct SaveFile {
 
 impl SaveFile {
     pub fn fresh() -> Self {
-        let chars = ();
+        // copy over the default data from the char registry
+        let chars = REGISTRIES
+            .chars
+            .clone()
+            .into_iter()
+            .map(|(id, init_data)| {
+                let chardata = CharData {
+                    display_name: None,
+                    battler: init_data.init_battler,
+                };
+
+                (id, chardata)
+            })
+            .collect();
 
         Self {
             chars,
@@ -67,8 +78,7 @@ impl SaveFile {
         // file.read_to_end(&mut content);
         // let content = String::from_utf8(content).unwrap();
         //
-        // // TODO: load save file
-        // // todo!()
+        // // todo!("loading save files")
         //
         // Ok(serde_json::from_str(&content).unwrap())
     }

@@ -115,12 +115,9 @@ impl BattleIcon {
 #[godot_api]
 impl ICharacterBody2D for BattleIcon {
     fn ready(&mut self) {
-        let ch_speed = si()
-            .bind()
-            .compute_stats_for("Ethan")
-            .battler
-            .practical_stats()
-            .speed;
+        // let ch_speed = si().bind().practical_stats("Ethan").speed;
+        // TODO: commented out to compile
+        let ch_speed = 10;
 
         self.speed = stat_translation::speed(ch_speed);
     }

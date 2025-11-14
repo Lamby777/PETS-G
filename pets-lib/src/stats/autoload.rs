@@ -24,18 +24,6 @@ impl StatsInterface {
         self.save = save;
     }
 
-    /// Get a copy of the computed stats of the entire party, as a [Vec].
-    pub fn _compute_stats_for_party(&self) -> Vec<CharData> {
-        todo!()
-    }
-
-    // #[func]
-    /// Get the stats of any character, combined
-    pub fn compute_stats_for(&self, _ch: impl Into<StringName>) -> CharData {
-        todo!()
-        // self.save.chars.character(ch)
-    }
-
     #[func]
     pub fn get_quest_phase(&self, quest_id: GString) -> QuestPhase {
         *self.save.quests.get(&quest_id.to_string()).unwrap_or(&-1)

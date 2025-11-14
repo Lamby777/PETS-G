@@ -1,6 +1,3 @@
-// #![allow(unused)]
-// ^^ SHUT THE FUCK UPPPPPPP
-
 // (warning: link may be outdated)
 // <https://www.desmos.com/calculator/2lpxhqyj7l>
 //

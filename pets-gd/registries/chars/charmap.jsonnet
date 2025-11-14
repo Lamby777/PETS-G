@@ -1,6 +1,6 @@
 local BaseBattler = import '../battler.libsonnet';
 
-// this jsonnet file is for the char registry, so ONLY `ConstCharData`!!!!!!
+// this jsonnet file is for the char registry, so ONLY init data!!!!!!
 
 local Base = {
   init_battler: BaseBattler,
