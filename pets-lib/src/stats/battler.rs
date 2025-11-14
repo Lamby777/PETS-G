@@ -7,9 +7,24 @@ use super::*;
 /// this struct will be used exactly the same way for enemies as well.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Battler {
+    /// current hp/mana/energy, in-battle buffs, status fx, etc.
+    ///
+    /// this stuff is still useful outside of battles, but the point is
+    /// it's not "inherent" to the character. when you go someplace to
+    /// heal up, all this stuff should be maxed out or cleared.
     pub battle_stats: BattleStats,
 
-    pub inherent_stats: LeveledStats,
+    /// atk/def, hp caps, and that sort of stuff
+    pub lt_stats: LongTermStats,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct LongTermStats {
+    /// this one's overwritten every time you level up
+    pub leveled: LeveledStats,
+
+    /// this is updated every time you get a permanent stat buff or something
+    pub perm_buffs: LeveledStats,
 
     /// The IDs of all of the battler's equipped items
     pub equipment: Equipment,
@@ -31,13 +46,13 @@ impl Battler {
         // let max_hp = self.inherent_stats().max_hp;
         // *self.hp_mut() = max_hp.min(self.hp() + amount);
         let hp = &mut self.battle_stats.hp;
-        *hp = self.inherent_stats.max_hp.min(*hp + amount);
+        *hp = self.lt_stats.leveled.max_hp.min(*hp + amount);
     }
 
     /// This should take armor, weapons, etc. into account for players.
     /// It should NOT consider in-battle buffs/debuffs.
     fn armored_stats(&self) -> LeveledStats {
-        self.inherent_stats.clone() + self.equipment.offsets()
+        self.lt_stats.leveled.clone() + self.lt_stats.equipment.offsets()
     }
 
     /// The final "in practice" stats of the character.
