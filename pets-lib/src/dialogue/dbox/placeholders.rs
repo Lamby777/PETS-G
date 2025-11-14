@@ -26,7 +26,7 @@ pub fn fmt_possibly_custom_name(pchar: impl Into<StringName>) -> String {
     }
 
     // else default to localized name
-    format!("DG_SPK_{pchar}")
+    tr(&format!("DG_SPK_{pchar}")).to_string()
 }
 
 // TODO: this shouldn't be hard-coded. use the Fn trait and
