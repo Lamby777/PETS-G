@@ -56,7 +56,6 @@ pub struct ConstCharData {
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct CharData {
-    pub level: IntegralStat,
     pub display_name: Option<String>,
     pub battler: Battler,
 }

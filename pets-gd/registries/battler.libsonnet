@@ -1,23 +1,30 @@
+// pub struct Battler {
+//     pub level: Option<IntegralStat>,
+//     pub battle_stats: BattleStats,
+//     pub perm_buffs: LeveledStats,
+//     pub equipment: Equipment,
+// }
+
 {
+  level: null,
   battle_stats: {
     hp: 30,
     mana: null,
     energy: 1,
     buffs: [],
+    status_effects: [],
   },
-  status_effects: [],
-  buffs_list: [],
-  inherent_stats: {
-    max_hp: 30,
-    max_energy: 1,
-    attack: 1,
-    defense: 1,
-    speed: 1,
-    stability: 1,
-    delta: 1,
-    epsilon: 1,
-    lambda: null,
-    max_mana: null,
+  perm_buffs: {
+    max_hp: 0,
+    max_energy: 0,
+    attack: 0,
+    defense: 0,
+    speed: 0,
+    stability: 0,
+    delta: 0,
+    epsilon: 0,
+    lambda: 0,
+    max_mana: 0,
   },
   equipment: {
     head: null,

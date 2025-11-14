@@ -23,6 +23,10 @@ pub struct Battler {
     pub battle_stats: BattleStats,
 
     /// this is updated every time you get a permanent stat buff or something
+    ///
+    /// WARN: what about ability-locked stats? make a separate "add" fn that doesn't
+    /// convert incapables to capables, so perm buffs can be safely added without
+    /// giving everyone every skill
     pub perm_buffs: LeveledStats,
 
     /// The IDs of all of the battler's equipped items
