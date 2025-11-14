@@ -1,4 +1,4 @@
-#![allow(unused)]
+// #![allow(unused)]
 // ^^ SHUT THE FUCK UPPPPPPP
 
 // (warning: link may be outdated)

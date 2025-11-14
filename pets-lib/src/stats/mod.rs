@@ -122,6 +122,10 @@ impl LeveledStats {
             max_mana: None,
         }
     }
+
+    pub fn from_level(lvl: IntegralStat) -> Self {
+        statcalc::level_to_stats(lvl)
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]

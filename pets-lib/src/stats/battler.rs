@@ -7,21 +7,20 @@ use super::*;
 /// this struct will be used exactly the same way for enemies as well.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Battler {
+    /// All PChars have a level. This should ONLY EVER BE [None] FOR ENEMIES.
+    ///
+    /// Enemies don't need a level, because it's easier to tweak
+    /// stats that way if I don't have to worry about offsets.
+    pub level: Option<IntegralStat>,
+
     /// current hp/mana/energy, in-battle buffs, status fx, etc.
     ///
     /// this stuff is still useful outside of battles, but the point is
-    /// it's not "inherent" to the character. when you go someplace to
-    /// heal up, all this stuff should be maxed out or cleared.
+    /// it's not "inherent" to the character. when you go somewhere and
+    /// heal up, all this stuff should be maxed out or cleared. it's NOT
+    /// "improved" when you level up (besides like hp being bumped up a
+    /// few points to match the increased max_hp).
     pub battle_stats: BattleStats,
-
-    /// atk/def, hp caps, and that sort of stuff
-    pub lt_stats: LongTermStats,
-}
-
-#[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct LongTermStats {
-    /// this one's overwritten every time you level up
-    pub leveled: LeveledStats,
 
     /// this is updated every time you get a permanent stat buff or something
     pub perm_buffs: LeveledStats,
@@ -31,6 +30,17 @@ pub struct LongTermStats {
 }
 
 impl Battler {
+    /// Helper function to get the stats for a certain level.
+    ///
+    /// Returns incapable stats, so make sure you add it with capable ones
+    /// or somehow process it if you need capable stats.
+    fn leveled_stats_raw(&self) -> LeveledStats {
+        match self.level {
+            Some(lvl) => LeveledStats::from_level(lvl),
+            None => LeveledStats::zero_all_incapable(),
+        }
+    }
+
     /// Subtract damage count from the character's HP, stopping at 0.
     /// Returns the new HP.
     pub fn take_damage(&mut self, damage: IntegralStat) -> IntegralStat {
@@ -43,29 +53,33 @@ impl Battler {
     ///
     /// Saturated at the character's max HP
     pub fn heal(&mut self, amount: IntegralStat) {
-        // let max_hp = self.inherent_stats().max_hp;
-        // *self.hp_mut() = max_hp.min(self.hp() + amount);
+        let max_hp = self.practical_stats().max_hp;
         let hp = &mut self.battle_stats.hp;
-        *hp = self.lt_stats.leveled.max_hp.min(*hp + amount);
+        *hp = max_hp.min(*hp + amount);
     }
 
     /// This should take armor, weapons, etc. into account for players.
     /// It should NOT consider in-battle buffs/debuffs.
     fn armored_stats(&self) -> LeveledStats {
-        self.lt_stats.leveled.clone() + self.lt_stats.equipment.offsets()
+        self.leveled_stats_raw() + self.equipment.offsets()
     }
 
-    /// The final "in practice" stats of the character.
+    /// The final "in practice" stats of the character. No more processing.
+    /// For almost all intents and purposes, these are the actual stats that
+    /// should be used for applying damage and stuff.
     ///
     /// Takes into account the...
-    /// * Inherent stats
+    /// * Stats from leveling up
     /// * Equipment
-    /// * Buffs
+    /// * Permanent buffs
+    /// * Temporary battle-related buffs
     pub fn practical_stats(&self) -> LeveledStats {
         let armored = self.armored_stats();
-        let buffs = self.battle_stats.buffs.iter().cloned();
 
-        armored + buffs.sum()
+        // don't forget to thank the buffs driver
+        let battle_buffs = self.battle_stats.buffs.iter().cloned();
+
+        armored + battle_buffs.sum() + self.perm_buffs.clone()
     }
 
     pub fn apply_status_effect(&mut self, effect: StatusEffect) {
