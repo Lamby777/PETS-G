@@ -41,7 +41,7 @@ impl SaveFile {
             .into_iter()
             .map(|(id, init_data)| {
                 let chardata = CharData {
-                    display_name: None,
+                    custom_name: None,
                     battler: init_data.init_battler,
                 };
 

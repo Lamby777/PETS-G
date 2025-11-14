@@ -56,7 +56,7 @@ pub struct CharInitData {
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct CharData {
-    pub display_name: Option<String>,
+    pub custom_name: Option<String>,
     pub battler: Battler,
 }
 

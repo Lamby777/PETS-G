@@ -10,8 +10,20 @@ pub fn leader() -> String {
     si().bind().save.party[0].to_string()
 }
 
-pub fn fmt_possibly_custom_display_name(pchar: &str) -> String {
-    // TODO: if pchar was given a custom name by the player, use it
+pub fn fmt_possibly_custom_name(pchar: impl Into<StringName>) -> String {
+    let si = si();
+    let pchar = pchar.into();
+
+    // if pchar was given a custom name by the player, use it
+    {
+        let si = si.bind();
+        let entry = si.save.chars.get(&pchar);
+        if let Some(chardata) = entry {
+            if let Some(custom_name) = &chardata.custom_name {
+                return custom_name.clone();
+            }
+        }
+    }
 
     // else default to localized name
     format!("DG_SPK_{pchar}")
@@ -29,12 +41,12 @@ const PLACEHOLDERS: &[PlaceholderMapping] = &[
     // character names
     ("[CASCADE]", || "DG_SPK_CASCADE".to_owned()),
     ("[RODRICK]", || "DG_SPK_RODRICK".to_owned()),
-    ("[PORKY]", || fmt_possibly_custom_display_name("Porky")),
-    ("[ETHAN]", || fmt_possibly_custom_display_name("Ethan")),
-    ("[TERRA]", || fmt_possibly_custom_display_name("Terra")),
-    ("[SIVA]", || fmt_possibly_custom_display_name("Siva")),
-    ("[LYEMBO]", || fmt_possibly_custom_display_name("Lyembo")),
-    ("[QUOLO]", || fmt_possibly_custom_display_name("Quolo")),
+    ("[PORKY]", || fmt_possibly_custom_name("Porky")),
+    ("[ETHAN]", || fmt_possibly_custom_name("Ethan")),
+    ("[TERRA]", || fmt_possibly_custom_name("Terra")),
+    ("[SIVA]", || fmt_possibly_custom_name("Siva")),
+    ("[LYEMBO]", || fmt_possibly_custom_name("Lyembo")),
+    ("[QUOLO]", || fmt_possibly_custom_name("Quolo")),
     ("[JUNIPER]", || {
         match leader().as_str() {
             "Ethan" => "DG_SPK_MOM",
