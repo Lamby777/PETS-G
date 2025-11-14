@@ -237,14 +237,6 @@ impl PartyCB {
             .unwrap_or(Vector2::ZERO)
     }
 
-    pub fn bad_guys_battlers(&self) -> Vec<Rc<RefCell<Battler>>> {
-        todo!()
-        // self.battling
-        //     .iter()
-        //     .map(|v| v.borrow().battler.clone())
-        //     .collect()
-    }
-
     #[func]
     fn push_pchar_gd(&mut self, name: GString) -> Gd<PCharNode> {
         // because godot can't understand `impl Trait`

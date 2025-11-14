@@ -41,14 +41,7 @@ pub trait Skill: Debug + Sync + Send {
     fn base_cost(&self) -> IntegralStat;
     fn description(&self) -> String;
 
-    /// Code that runs when the skill is casted
-    ///
-    /// # Arguments
-    /// `caster`  - The battler that is casting the skill
-    /// `target`  - The battler that is the target of the skill.
-    ///            Ignored for plural skills.
-    /// `allies`  - The caster's allies
-    /// `enemies` - The caster's enemies
+    /// Code that runs when the skill is cast
     fn cast(&self, engine: &mut BattleEngine);
 }
 
@@ -69,7 +62,8 @@ pub trait Skill: Debug + Sync + Send {
 pub enum Element {
     // Physical
     Blade,   // swords, claws, etc.
-    Kinetic, // punches, guns, etc.
+    Kinetic, // punches, kicks, etc.
+    Pierce,  // bows, guns, etc.
 
     // Elemental
     Fire,
@@ -112,7 +106,7 @@ impl Element {
 
     pub fn is_physical(&self) -> bool {
         use Element::*;
-        matches!(self, Blade | Kinetic)
+        matches!(self, Blade | Kinetic | Pierce)
     }
 
     pub fn is_magical(&self) -> bool {

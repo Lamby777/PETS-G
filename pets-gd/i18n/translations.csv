@@ -35,6 +35,7 @@ ITEM_NAME_terra_precision_shotgun,Precision Shotgun,Precision Blunderbuss,Precis
 ITEM_DESC_terra_precision_shotgun,A weapon for Terra. Massive damage at the cost of reload time.,A weapon fer Terra. Massive blast o' hurtin' at th' expense o' reloadin' speed.,"A weapon for Terra. Red Ryder over here probably does enough damage to scare away a squirrel, I guess."
 ELEMENT_NAME_Blade,Blade,Cutlass,Blade
 ELEMENT_NAME_Kinetic,Kinetic,Cannonball,Kinetic
+ELEMENT_NAME_Pierce,Pierce,Blunderbuss,Pierce
 ELEMENT_NAME_Fire,Fire,Flames,Fire
 ELEMENT_NAME_Ice,Ice,Iceberg,Ice
 ELEMENT_NAME_Electric,Electric,Lightnin',Zap
@@ -45,7 +46,8 @@ ELEMENT_NAME_Spirit,Spirit,Flyin' Dutchman,Ghost
 ELEMENT_NAME_Fuzz,Fuzz,Rum,Fuzz
 ELEMENT_NAME_Whip,Whip,Keelhaulin',Tickle
 ELEMENT_ADJ_Blade,Slash,Slash,Edgy
-ELEMENT_ADJ_Kinetic,Kinetic,Kinetic,Kinetic
+ELEMENT_ADJ_Kinetic,Kinetic,Kaboomin',Kinetic
+ELEMENT_ADJ_Pierce,Piercing,Piercin',Piercing
 ELEMENT_ADJ_Fire,Fire-based,Flamin' hot,Fire-based
 ELEMENT_ADJ_Ice,Ice-based,Frigid,Ice-based
 ELEMENT_ADJ_Electric,Electric,Thundrous,Zappy

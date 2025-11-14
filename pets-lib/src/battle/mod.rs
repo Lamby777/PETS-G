@@ -15,7 +15,6 @@ use crate::common::*;
 use crate::consts::battle::*;
 
 mod affinities;
-mod autoload;
 mod midi;
 mod player;
 mod rhythm;
@@ -24,7 +23,6 @@ pub mod skills;
 mod stat_translation;
 
 pub use affinities::Affinities;
-pub use autoload::BattleInterface;
 use player::BattleIcon;
 use rhythm::BattleMusic;
 
@@ -67,7 +65,6 @@ pub struct BattleEngine {
     #[export]
     right_panel_destination: Option<Gd<Control>>,
 
-    bad_guys: Vec<Battler>,
     current_party_member: usize,
 
     #[init(node = "BattleMusic")]
