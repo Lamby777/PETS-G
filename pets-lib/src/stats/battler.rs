@@ -8,8 +8,6 @@ use super::*;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Battler {
     pub battle_stats: BattleStats,
-    pub status_effects: HashSet<StatusEffect>,
-    pub buffs_list: Vec<LeveledStats>,
 
     pub inherent_stats: LeveledStats,
 
@@ -50,25 +48,25 @@ impl Battler {
     /// * Buffs
     pub fn practical_stats(&self) -> LeveledStats {
         let armored = self.armored_stats();
-        let buffs = self.buffs_list.iter().cloned();
+        let buffs = self.battle_stats.buffs.iter().cloned();
 
         armored + buffs.sum()
     }
 
     pub fn apply_status_effect(&mut self, effect: StatusEffect) {
-        self.status_effects.insert(effect);
+        self.battle_stats.status_effects.insert(effect);
     }
 
     pub fn remove_status_effect(&mut self, effect: StatusEffect) {
-        self.status_effects.remove(&effect);
+        self.battle_stats.status_effects.remove(&effect);
     }
 
     pub fn has_status_effect(&self, effect: StatusEffect) -> bool {
-        self.status_effects.contains(&effect)
+        self.battle_stats.status_effects.contains(&effect)
     }
 
     pub fn recover_status(&mut self, rating: u8) {
-        for effect in self.status_effects.clone() {
+        for effect in self.battle_stats.status_effects.clone() {
             if effect.rating() == rating {
                 self.remove_status_effect(effect);
             }

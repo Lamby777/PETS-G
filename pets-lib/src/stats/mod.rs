@@ -28,6 +28,7 @@ pub struct BattleStats {
     pub mana: Option<IntegralStat>,
     pub energy: IntegralStat,
     pub buffs: Vec<LeveledStats>,
+    pub status_effects: HashSet<StatusEffect>,
 }
 
 impl Default for BattleStats {
@@ -37,6 +38,7 @@ impl Default for BattleStats {
             mana: None,
             energy: 1,
             buffs: vec![],
+            status_effects: HashSet::new(),
         }
     }
 }
@@ -46,12 +48,7 @@ impl Default for BattleStats {
 /// Loaded at the beginning of the game and never modified!!!
 /// You may be looking for [CharData]
 #[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct ConstCharData {
-    // TODO: default to tr key like this: CHAR_DISPLAYNAME_Ethan
-    //
-    /// Name of the character, as picked by the user
-    /// ⚠️⚠️⚠️ See <https://github.com/Lamby777/PETS-G/issues/23>
-}
+pub struct ConstCharData {}
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct CharData {

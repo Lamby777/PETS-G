@@ -11,8 +11,9 @@ pub fn leader() -> String {
 }
 
 pub fn pchar_display_name(pchar: &str) -> String {
-    let sn = StringName::from(pchar);
-    REGISTRIES.chars.get(&sn).unwrap().display_tr_key.clone()
+    let _sn = StringName::from(pchar);
+    todo!("pchar_display_name")
+    // REGISTRIES.chars.get(&sn).unwrap().display_tr_key.clone()
 }
 
 // TODO: this shouldn't be hard-coded. use the Fn trait and

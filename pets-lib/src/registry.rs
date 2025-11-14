@@ -32,14 +32,14 @@ use serde::de::DeserializeOwned;
 pub static REGISTRIES: LazyLock<Registries> = LazyLock::new(|| Registries {
     items: find_vanilla_registries("items"),
     skills: find_vanilla_registries("skills"),
-    chars: find_vanilla_registries("chars"),
+    _chars: find_vanilla_registries("chars"),
     enemies: find_vanilla_registries("enemies"),
 });
 
 pub struct Registries {
     pub items: HashMap<StringName, Item>,
     pub skills: HashMap<StringName, Box<dyn Skill>>,
-    pub chars: HashMap<StringName, ConstCharData>,
+    pub _chars: HashMap<StringName, ConstCharData>,
     pub enemies: HashMap<StringName, EnemyData>,
 }
 
