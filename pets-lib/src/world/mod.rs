@@ -133,7 +133,6 @@ impl World {
     pub fn start_battle(eid: StringName) {
         let enemy_data = EnemyData::from_registry(eid.clone());
 
-        // TODO: THIS BELONGS IN STATSINTERFACE!!!!!!!! WTF
         si().bind_mut().battling.push(enemy_data.clone());
         let world = World::singleton();
 
