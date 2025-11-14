@@ -130,13 +130,13 @@ impl World {
 
     #[func]
     pub fn start_battle(eid: StringName) {
-        let enemy_data = EnemyData::from_registry(eid);
+        let enemy_data = EnemyData::from_registry(eid.clone());
 
         // TODO: THIS BELONGS IN STATSINTERFACE!!!!!!!! WTF
         pcb()
             .bind_mut()
             .battling
-            .push(Rc::new(RefCell::new(enemy_data)));
+            .push(Rc::new(RefCell::new(enemy_data.clone())));
         let world = World::singleton();
 
         let mat = PartyCB::fx_material();
