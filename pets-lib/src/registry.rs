@@ -73,8 +73,7 @@ where
         .get_files()
         .to_vec()
         .into_iter()
-        // TODO: remove logging if it works
-        .filter(|fname| {dbg!(&fname); !dbg!(should_ignore_registry(fname))})
+        .filter(|fname| !(should_ignore_registry(fname)))
         .flat_map(|fname| {
             let path = format!("{folder_path}/{fname}");
             godot_print!("Reading vanilla registry: {}", path);
