@@ -9,8 +9,8 @@
 // the variable `lvl` in our code.
 use crate::common::*;
 
-pub fn level_to_stats(lvl: IntegralStat) -> InherentStats {
-    InherentStats {
+pub fn level_to_stats(lvl: IntegralStat) -> LeveledStats {
+    LeveledStats {
         max_hp: max_hp(lvl),
         max_energy: max_energy(lvl),
         attack: attack(lvl),

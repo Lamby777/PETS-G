@@ -19,17 +19,16 @@ impl Equipment {
             .map(|s| s.as_str())
     }
 
-    pub fn offsets(&self) -> InherentStats {
-        self.iter()
-            .fold(InherentStats::zero_capable(), |acc, item| {
-                let ItemCat::Equipment { ref offsets, .. } =
-                    Item::from_registry(item).category
-                else {
-                    panic!("item {item} not equippable")
-                };
+    pub fn offsets(&self) -> LeveledStats {
+        self.iter().fold(LeveledStats::zero_capable(), |acc, item| {
+            let ItemCat::Equipment { ref offsets, .. } =
+                Item::from_registry(item).category
+            else {
+                panic!("item {item} not equippable")
+            };
 
-                acc + offsets.clone()
-            })
+            acc + offsets.clone()
+        })
     }
 }
 

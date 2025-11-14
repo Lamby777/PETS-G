@@ -3,7 +3,7 @@ use super::*;
 #[derive(Debug, Serialize, Deserialize)]
 pub struct BuffSkill {
     pub name: String,
-    pub offsets: InherentStats,
+    pub offsets: LeveledStats,
     pub turns: u8,
 }
 

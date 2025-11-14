@@ -1,12 +1,17 @@
 use super::*;
 
+/// Any state related to health, equipment, battling, skills, etc. that
+/// should be known about a character or enemy.
+///
+/// This is neutral ground. Do not write player-centered code here, as
+/// this struct will be used exactly the same way for enemies as well.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Battler {
     pub battle_stats: BattleStats,
     pub status_effects: HashSet<StatusEffect>,
-    pub buffs_list: Vec<InherentStats>,
+    pub buffs_list: Vec<LeveledStats>,
 
-    pub inherent_stats: InherentStats,
+    pub inherent_stats: LeveledStats,
 
     /// The IDs of all equipped items
     pub equipment: Equipment,
@@ -33,7 +38,7 @@ impl Battler {
 
     /// This should take armor, weapons, etc. into account for players.
     /// It should NOT consider in-battle buffs/debuffs.
-    fn armored_stats(&self) -> InherentStats {
+    fn armored_stats(&self) -> LeveledStats {
         self.inherent_stats.clone() + self.equipment.offsets()
     }
 
@@ -43,7 +48,7 @@ impl Battler {
     /// * Inherent stats
     /// * Equipment
     /// * Buffs
-    pub fn practical_stats(&self) -> InherentStats {
+    pub fn practical_stats(&self) -> LeveledStats {
         let armored = self.armored_stats();
         let buffs = self.buffs_list.iter().cloned();
 

@@ -31,7 +31,7 @@ pub enum ItemCat {
         category: EquipmentCat,
 
         /// Stat offsets that the item applies when equipped
-        offsets: InherentStats,
+        offsets: LeveledStats,
 
         /// Only characters in this list can equip this
         equippable_by: Option<Vec<String>>,
