@@ -52,32 +52,27 @@ impl Skill for RecoverySkill {
         todo!()
     }
 
-    fn cast(
-        &self,
-        caster: Rc<RefCell<Battler>>,
-        _target: Rc<RefCell<Battler>>,
-        allies: Vec<Rc<RefCell<Battler>>>,
-        _enemies: Vec<Rc<RefCell<Battler>>>,
-    ) {
-        // let targets = if self.plural { _allies } else { vec![_target] };
-        let targets = if self.plural { allies } else { vec![caster] };
-
-        for target in targets {
-            match self.recovery {
-                RecoveryType::HPAmount { amount } => {
-                    RefCell::borrow_mut(&target).heal(amount.into());
-                }
-
-                RecoveryType::HPPercent { percent } => {
-                    let max_hp = target.borrow().practical_stats().max_hp;
-                    let amount = (max_hp as f64 * percent).round() as u8;
-                    RefCell::borrow_mut(&target).heal(amount.into());
-                }
-
-                RecoveryType::Status { rating } => {
-                    RefCell::borrow_mut(&target).recover_status(rating);
-                }
-            }
-        }
+    fn cast(&self, engine: &mut BattleEngine) {
+        todo!("recovery skill casting");
+        // // let targets = if self.plural { _allies } else { vec![_target] };
+        // let targets = if self.plural { allies } else { vec![caster] };
+        //
+        // for target in targets {
+        //     match self.recovery {
+        //         RecoveryType::HPAmount { amount } => {
+        //             RefCell::borrow_mut(&target).heal(amount.into());
+        //         }
+        //
+        //         RecoveryType::HPPercent { percent } => {
+        //             let max_hp = target.borrow().practical_stats().max_hp;
+        //             let amount = (max_hp as f64 * percent).round() as u8;
+        //             RefCell::borrow_mut(&target).heal(amount.into());
+        //         }
+        //
+        //         RecoveryType::Status { rating } => {
+        //             RefCell::borrow_mut(&target).recover_status(rating);
+        //         }
+        //     }
+        // }
     }
 }

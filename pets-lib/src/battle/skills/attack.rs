@@ -107,39 +107,34 @@ impl Skill for AttackSkill {
         1
     }
 
-    fn cast(
-        &self,
-        caster: Rc<RefCell<Battler>>,
-        target: Rc<RefCell<Battler>>,
-        _allies: Vec<Rc<RefCell<Battler>>>,
-        _enemies: Vec<Rc<RefCell<Battler>>>,
-    ) {
-        let caster = RefCell::borrow(&caster);
-        let mut target = RefCell::borrow_mut(&target);
-
-        let attack = caster.practical_stats().attack;
-
-        if let Some(power) = self.power {
-            let damage = attack * power as IntegralStat;
-            godot_print!(
-                "Dealing {} damage, from {} attack * {} power",
-                damage,
-                attack,
-                power
-            );
-            target.take_damage(damage);
-
-            godot_print!("Target HP after damage: {}", target.battle_stats.hp);
-        }
-
-        if let Some(effect) = &self.status_effect {
-            if !effect.chance.roll() {
-                godot_print!("Status effect rolled false.");
-                return;
-            }
-
-            godot_print!("Applying status effect: {:?}", effect.effect);
-            target.apply_status_effect(effect.effect);
-        }
+    fn cast(&self, engine: &mut BattleEngine) {
+        todo!("attack skill casting")
+        // let caster = RefCell::borrow(&caster);
+        // let mut target = RefCell::borrow_mut(&target);
+        //
+        // let attack = caster.practical_stats().attack;
+        //
+        // if let Some(power) = self.power {
+        //     let damage = attack * power as IntegralStat;
+        //     godot_print!(
+        //         "Dealing {} damage, from {} attack * {} power",
+        //         damage,
+        //         attack,
+        //         power
+        //     );
+        //     target.take_damage(damage);
+        //
+        //     godot_print!("Target HP after damage: {}", target.battle_stats.hp);
+        // }
+        //
+        // if let Some(effect) = &self.status_effect {
+        //     if !effect.chance.roll() {
+        //         godot_print!("Status effect rolled false.");
+        //         return;
+        //     }
+        //
+        //     godot_print!("Applying status effect: {:?}", effect.effect);
+        //     target.apply_status_effect(effect.effect);
+        // }
     }
 }

@@ -67,7 +67,7 @@ pub struct BattleEngine {
     #[export]
     right_panel_destination: Option<Gd<Control>>,
 
-    battlers: Vec<Battler>,
+    bad_guys: Vec<Battler>,
     current_party_member: usize,
 
     #[init(node = "BattleMusic")]
@@ -268,12 +268,15 @@ impl BattleEngine {
             "skill not found: {skill_id}",
         );
 
-        skill.cast(
-            &mut self, // self.current_battler().clone(),
-                      // self.battlers.bad_guys[0].clone(),
-                      // self.battlers.good_guys.clone(),
-                      // self.battlers.bad_guys.clone(),
-        );
+        skill.cast(self);
+
+        // old arguments, in order:
+        // caster, target, allies, enemies
+        //
+        // self.current_battler().clone(),
+        // self.battlers.bad_guys[0].clone(),
+        // self.battlers.good_guys.clone(),
+        // self.battlers.bad_guys.clone(),
     }
 
     #[func]
@@ -392,7 +395,6 @@ impl BattleEngine {
 impl INode2D for BattleEngine {
     fn ready(&mut self) {
         self.choices.bind_mut().disable();
-        self.battlers.init(pcb().bind().new_battlers());
         self.update_mana_bar();
         self.clear_right_panel();
 

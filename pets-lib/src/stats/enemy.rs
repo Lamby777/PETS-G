@@ -13,7 +13,7 @@ pub struct ItemDrop {
 /// All the information the game needs to know about an enemy
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct EnemyData {
-    pub init_battler: Battler,
+    pub battler: Battler,
     pub drops: Vec<ItemDrop>,
 }
 

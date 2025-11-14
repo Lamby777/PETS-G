@@ -1,7 +1,7 @@
 local BaseBattler = import '../battler.libsonnet';
 
 local Base = {
-  init_battler: BaseBattler,
+  battler: BaseBattler,
   drops: [],
 };
 

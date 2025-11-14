@@ -21,13 +21,7 @@ impl Skill for BuffSkill {
         todo!()
     }
 
-    fn cast(
-        &self,
-        _caster: Rc<RefCell<Battler>>,
-        _target: Rc<RefCell<Battler>>,
-        _allies: Vec<Rc<RefCell<Battler>>>,
-        _enemies: Vec<Rc<RefCell<Battler>>>,
-    ) {
+    fn cast(&self, engine: &mut BattleEngine) {
         todo!()
     }
 }

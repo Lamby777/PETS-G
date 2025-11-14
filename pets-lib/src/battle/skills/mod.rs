@@ -49,13 +49,7 @@ pub trait Skill: Debug + Sync + Send {
     ///            Ignored for plural skills.
     /// `allies`  - The caster's allies
     /// `enemies` - The caster's enemies
-    fn cast(
-        &self,
-        _caster: Rc<RefCell<Battler>>,
-        _target: Rc<RefCell<Battler>>,
-        _allies: Vec<Rc<RefCell<Battler>>>,
-        _enemies: Vec<Rc<RefCell<Battler>>>,
-    );
+    fn cast(&self, engine: &mut BattleEngine);
 }
 
 // not this "derive everything" crap again... ughhhhhh
