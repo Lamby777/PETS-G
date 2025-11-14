@@ -36,8 +36,9 @@ impl Equipment {
 /// The player's inventory. Keys are item IDs, values are the count of that item.
 ///
 /// # Invariants
-/// - All item counts are non-negative
-/// - Items with a count of 0 are not present in the map
+///
+/// All item counts should be above zero. No negatives either.
+/// Items that aren't owned should be removed, not set to zero.
 #[derive(Serialize, Deserialize)]
 pub struct Inventory {
     items: HashMap<String, u32>,
