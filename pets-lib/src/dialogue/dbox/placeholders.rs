@@ -10,10 +10,11 @@ pub fn leader() -> String {
     si().bind().save.party[0].to_string()
 }
 
-pub fn pchar_display_name(pchar: &str) -> String {
-    let _sn = StringName::from(pchar);
-    todo!("pchar_display_name")
-    // REGISTRIES.chars.get(&sn).unwrap().display_tr_key.clone()
+pub fn fmt_possibly_custom_display_name(pchar: &str) -> String {
+    // TODO: if pchar was given a custom name by the player, use it
+
+    // else default to localized name
+    format!("DG_SPK_{pchar}")
 }
 
 // TODO: this shouldn't be hard-coded. use the Fn trait and
@@ -28,9 +29,12 @@ const PLACEHOLDERS: &[PlaceholderMapping] = &[
     // character names
     ("[CASCADE]", || "DG_SPK_CASCADE".to_owned()),
     ("[RODRICK]", || "DG_SPK_RODRICK".to_owned()),
-    ("[ETHAN]", || pchar_display_name("Ethan")),
-    ("[LYEMBO]", || pchar_display_name("Lyembo")),
-    ("[QUOLO]", || pchar_display_name("Quolo")),
+    ("[PORKY]", || fmt_possibly_custom_display_name("Porky")),
+    ("[ETHAN]", || fmt_possibly_custom_display_name("Ethan")),
+    ("[TERRA]", || fmt_possibly_custom_display_name("Terra")),
+    ("[SIVA]", || fmt_possibly_custom_display_name("Siva")),
+    ("[LYEMBO]", || fmt_possibly_custom_display_name("Lyembo")),
+    ("[QUOLO]", || fmt_possibly_custom_display_name("Quolo")),
     ("[JUNIPER]", || {
         match leader().as_str() {
             "Ethan" => "DG_SPK_MOM",

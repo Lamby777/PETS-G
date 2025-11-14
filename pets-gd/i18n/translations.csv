@@ -43,7 +43,7 @@ ELEMENT_NAME_Earth,Earth,Earth,Rock
 ELEMENT_NAME_Psi,Psychic,Magic,Oddball
 ELEMENT_NAME_Spirit,Spirit,Flyin' Dutchman,Ghost
 ELEMENT_NAME_Fuzz,Fuzz,Rum,Fuzz
-ELEMENT_NAME_Whip,Whip,Keelhaul,Tickle
+ELEMENT_NAME_Whip,Whip,Keelhaulin',Tickle
 ELEMENT_ADJ_Blade,Slash,Slash,Edgy
 ELEMENT_ADJ_Kinetic,Kinetic,Kinetic,Kinetic
 ELEMENT_ADJ_Fire,Fire-based,Flamin' hot,Fire-based
@@ -79,7 +79,7 @@ SKILL_ATTACK_PSI_FX_NAME,Brainjack,Brainjack,Brainjack
 SKILL_ATTACK_SPIRIT_DMG_NAME,Vex,Doom,Vex
 SKILL_ATTACK_SPIRIT_FX_NAME,Curse,Curse,Spook
 SKILL_ATTACK_FUZZ_NAME,PK Fuzz,PK Rum,PK Fuzz
-SKILL_ATTACK_WHIP_NAME,PK Whip,Keelhaul,PK Whip
+SKILL_ATTACK_WHIP_NAME,PK Whip,Keelhaulin',PK Whip
 SKILL_TIER_1,A,A,A
 SKILL_TIER_2,B,B,B
 SKILL_TIER_3,C,C,C
@@ -220,7 +220,7 @@ ENEMY_U_CarbonCat,Carbon Copycat,Carbon Copycat,Copycat
 ENEMY_K_DrumBunny,Drum Bunny,Drum Bunny,Drum Bunny
 ENEMY_U_DrumBunny,Drummin' Rabbit,Drummin' Rabbit,Drummin' Rabbit
 ENEMY_K_2WattWilly,2-Watt Willy,2-Watt Willy,2-Watt Willy
-ENEMY_U_2WattWilly,Rogue Cheap Electronic Toy,Wicked Young-un's Toy,Rogue Toy
+ENEMY_U_2WattWilly,Rogue Cheap Electronic Toy,Wicked Young-'un's Toy,Rogue Toy
 ENEMY_K_LowAmpPhibian,Low Amp-phibian,Low Amp-phibian,Low Amp-phibian
 ENEMY_U_LowAmpPhibian,Zapper of the Swamp,Zapper o' th' Swamp,Swamp Zapper
 ENEMY_K_ShortCircuitZap,Short Circuit Zap,Short Circuit Zap,Short Circuit Zap
@@ -314,9 +314,15 @@ DG_SPK_JUNIPER,Juniper,Lady Juniper,Juniper
 DG_SPK_CLAY,Clay,Cap'n Clay,Clay
 DG_SPK_MR_TULIVAE,Mr. Tulivae,Cap'n Tulivae,Mr. Tulivae
 DG_SPK_MRS_TULIVAE,Mrs. Tulivae,Mrs. Tulivae,Mrs. Tulivae
+DG_SPK_Porky,Porky,Porky,Porky
+DG_SPK_Ethan,Ethan,Ethan,Ethan
+DG_SPK_Terra,Terra,Terra,Terra
+DG_SPK_Siva,Siva,Siva,Siva
+DG_SPK_Lyembo,L'yembo,Jimbo,L'yembo
+DG_SPK_Quolo,Quolo,Kolo,Koala
 DG_CHECK_CRATE,It's just a crate. Doesn't look like anything good is inside.,"It be just a crate, matey. Nothin' to plunder here.",It's just a crate.
 DG_CHECK_CRATES,It's just a bunch of crates. Doesn't look like they have anything useful.,"'Tis just a bunch o' crates. Nothin' to plunder here, matey.",It's just a bunch of crates.
-DG_CHECK_TRASH,Nothing useful there. Are you that desperate?,Nothin' useful there. Are ye that desperate?,You found... a whole lotta trash! Nicely done!
+DG_CHECK_TRASH,Nothing useful here. Are you that desperate?,Nothin' useful 'ere. Are ye that desperate?,You found... a whole lotta trash! Nicely done!
 DG_RODRICK1_SOYOURE,"So... you're reading a sign, eh? Well...","So... ye be readin' a sign, eh? Well...","So... you're reading a sign, eh? Well..."
 DG_RODRICK1_AREYOUSMART,Are you smart?,Be ye wise?,Are you smart?
 DG_RODRICK1_NOPE,Nope.,Nay.,Nope.
