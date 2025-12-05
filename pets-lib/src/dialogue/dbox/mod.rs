@@ -31,7 +31,7 @@ pub struct DialogBox {
 
     /// Choices to be shown at the next `do_draw` call
     #[var]
-    queued_choices: VariantArray,
+    queued_choices: VarArray,
 
     #[init(val = DEFAULT_VOX.to_owned())]
     _vox: String, // TODO
