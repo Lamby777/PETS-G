@@ -62,6 +62,7 @@ impl TitleScreen {
 
     #[func]
     fn on_save_file_picked(&mut self, choice: Gd<Control>) {
+        self.save_choices.bind_mut().set_disabled(true);
         let slot = choice.get_name().to_string().parse::<usize>().unwrap();
 
         let save = SaveFile::load_from(slot as u8).unwrap();

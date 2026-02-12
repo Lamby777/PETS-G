@@ -37,6 +37,7 @@ pub struct ChoiceAgent {
     #[init(val = CHOICE_WAVE_BBCODE.into())]
     bbcode: GString,
 
+    /// Whether or not the choices can currently be focused or picked
     #[export]
     #[var(get, set = set_disabled)]
     disabled: bool,
