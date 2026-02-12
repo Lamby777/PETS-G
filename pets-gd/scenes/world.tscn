@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://p2uymvf88jt7"]
+[gd_scene format=3 uid="uid://p2uymvf88jt7"]
 
 [ext_resource type="PackedScene" uid="uid://kgl5788x405y" path="res://scenes/battle.tscn" id="1_37bcu"]
 [ext_resource type="PackedScene" uid="uid://c8hhg8v5ls70u" path="res://scenes/world_menu.tscn" id="2_6orff"]
@@ -86,32 +86,30 @@ shader_parameter/rand_mod = Vector2(1, 1)
 shader = ExtResource("2_6uro0")
 shader_parameter/opacity = 0.0
 
-[node name="Overworld" type="World"]
+[node name="Overworld" type="World" unique_id=833187654]
 battle_scene = ExtResource("1_37bcu")
 
-[node name="ZoneAudio" type="Node" parent="."]
+[node name="ZoneAudio" type="Node" parent="." unique_id=885422991]
 
-[node name="FadeOut" type="AudioStreamPlayer" parent="ZoneAudio"]
+[node name="FadeOut" type="AudioStreamPlayer" parent="ZoneAudio" unique_id=1496277405]
 autoplay = true
 bus = &"ZoneMusic"
 
-[node name="Active" type="AudioStreamPlayer" parent="ZoneAudio"]
+[node name="Active" type="AudioStreamPlayer" parent="ZoneAudio" unique_id=1848009781]
 bus = &"ZoneMusic"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ZoneAudio"]
-libraries = {
-&"": SubResource("AnimationLibrary_fv7du")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ZoneAudio" unique_id=986631357]
+libraries/ = SubResource("AnimationLibrary_fv7du")
 
-[node name="BattleLayer" type="CanvasLayer" parent="."]
+[node name="BattleLayer" type="CanvasLayer" parent="." unique_id=1211046264]
 
-[node name="YSort" type="Node2D" parent="."]
+[node name="YSort" type="Node2D" parent="." unique_id=533369481]
 y_sort_enabled = true
 
-[node name="PartyCB" parent="YSort" groups=["partycb"] instance=ExtResource("2_r6tgb")]
+[node name="PartyCB" parent="YSort" unique_id=111507039 groups=["partycb"] instance=ExtResource("2_r6tgb")]
 unique_name_in_owner = true
 
-[node name="BattleIntroRect" type="ColorRect" parent="YSort/PartyCB"]
+[node name="BattleIntroRect" type="ColorRect" parent="YSort/PartyCB" unique_id=1529642039]
 visible = false
 z_index = 5
 material = SubResource("ShaderMaterial_3xdh0")
@@ -121,23 +119,23 @@ offset_right = 960.0
 offset_bottom = 540.0
 script = ExtResource("4_jple0")
 
-[node name="Room" parent="YSort" instance=ExtResource("10_kug7e")]
+[node name="Room" parent="YSort" unique_id=423912160 instance=ExtResource("10_kug7e")]
 
-[node name="InteractionManager" parent="." instance=ExtResource("2_uh12s")]
+[node name="InteractionManager" parent="." unique_id=1588499331 instance=ExtResource("2_uh12s")]
 unique_name_in_owner = true
 
-[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=830078303]
 
-[node name="Inventory" parent="UILayer" instance=ExtResource("3_jwkdy")]
+[node name="Inventory" parent="UILayer" unique_id=1827652567 instance=ExtResource("3_jwkdy")]
 unique_name_in_owner = true
 visible = false
 
-[node name="DialogBox" parent="UILayer" instance=ExtResource("2_lgtmm")]
+[node name="DialogBox" parent="UILayer" unique_id=1625056643 instance=ExtResource("2_lgtmm")]
 
-[node name="WorldMenu" parent="UILayer" instance=ExtResource("2_6orff")]
+[node name="WorldMenu" parent="UILayer" unique_id=122979645 instance=ExtResource("2_6orff")]
 debug_menu_script = ExtResource("10_egidj")
 
-[node name="BeaconFade" type="ColorRect" parent="UILayer"]
+[node name="BeaconFade" type="ColorRect" parent="UILayer" unique_id=956344231]
 unique_name_in_owner = true
 top_level = true
 material = SubResource("ShaderMaterial_uyk0u")
@@ -146,9 +144,9 @@ offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="Quests" type="Node" parent="."]
+[node name="Quests" type="Node" parent="." unique_id=1998488651]
 process_mode = 4
 
-[node name="Intro1" type="Quest" parent="Quests"]
+[node name="Intro1" type="Quest" parent="Quests" unique_id=1021927075]
 process_mode = 3
 script = ExtResource("13_w40m0")

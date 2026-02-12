@@ -8,11 +8,15 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="P/E/T/S"
 run/main_scene="res://scenes/title_screen.tscn"
-config/features=PackedStringArray("4.5", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://icon.png"
 config/icon="res://icon.png"
@@ -20,7 +24,7 @@ config/icon="res://icon.png"
 [autoload]
 
 World="*res://singletons/globals.gd"
-DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
+DiscordSDKLoader="*uid://bas7o16c17w82"
 
 [display]
 

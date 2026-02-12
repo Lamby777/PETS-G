@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://b4to5dpqntd2r"]
+[gd_resource type="Theme" format=3 uid="uid://b4to5dpqntd2r"]
 
 [ext_resource type="StyleBox" uid="uid://d0gx7x3tj2b01" path="res://themes/container_stylebox.tres" id="1_7au1f"]
 [ext_resource type="FontFile" uid="uid://0vkr7mnpb6tm" path="res://assets/fonts/Renogare-Regular.otf" id="1_buwdt"]
