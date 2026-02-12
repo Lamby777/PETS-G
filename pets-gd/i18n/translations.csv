@@ -26,7 +26,7 @@ MONTH_SHORTENED_10,Oct,Oct,Oct
 MONTH_SHORTENED_11,Nov,Nov,Nov
 MONTH_SHORTENED_12,Dec,Dec,Dec
 ITEM_NAME_cool_stick,Stick,Cane,Stick
-ITEM_DESC_cool_stick,"Some stick you found off the sidewalk. Looks cool. ""Put ya stick away, Waltuh.""",Some stick ye plundered off th' lands. Lookin' dandy.,THIS is the best weapon you could find?
+ITEM_DESC_cool_stick,"Some stick you found off the sidewalk.\nLooks cool.\n""Put ya stick away, Waltuh.""",Some stick ye plundered off th' lands.\nLookin' dandy.,THIS is the best weapon you could find?
 ITEM_NAME_trusty_rusty_pistol,Trusty Rusty Pistol,Miniature Musket (Rusty),Ol' Reliable Rusty
 ITEM_DESC_trusty_rusty_pistol,Pretty unsafe! Deals poor damage.,What kind o' pirate would be caught dead or alive with this?,You're better off throwing this at the enemy. Weirdo.
 ITEM_NAME_ts_slick7,TS Slick7,TS Slick7,TS Slick7
@@ -341,7 +341,7 @@ DG_INTRO1_GREAT_MOM,"Well, I'm glad you like it! I hope you'll be comfortable he
 DG_INTRO1_ALRIGHT_MOM,"I know it's not much, but I hope you'll be comfortable here.","I know it's nah much, but ye do with what ye got, right?","I know it's not much, but I hope you'll be comfortable here."
 DG_INTRO1_ITS_YOURS,"Well, it's all yours. Do you have a specific blanket color in mind?","Well, it's all yours, captain. What color flag does yer ship fly?","Well, it's all yours. Do you have a specific blanket color in mind?"
 DG_INTRO1_LOOKS_BETTER,"Wow, it looks even better already!","Arrr, fine choice!","That's so basic. Whatever, I guess."
-DG_INTRO1_ILL_BE_DOWNSTAIRS,"Alright, I'll be downstairs if you need me.","Alright, yer mama be downstairs if ye need her.","I'll be downstairs if you need me."
+DG_INTRO1_ILL_BE_DOWNSTAIRS,"Alright, I'll be downstairs if you need me.","Alright, yer mama be downstairs if ye need 'er.","I'll be downstairs if you need me."
 DG_INTRO1_BRING_FUZZY,"Go bring out Fuzzy from the car, okay?","Go fetch Fuzzy from the car, aye?","Go bring out Fuzzy from the car, okay?"
 DG_INTRO1_MEET_NEIGHBORS,"Here he is! Hey, [ETHAN], come meet the neighbors!","Thar she blows! Hey, [ETHAN], come meet th' neighbors!","Took him long enough. Hey, [ETHAN], come meet the neighbors!"
 DG_INTRO1_MR_T,"This is Mr. Tulivae. He lives next door.","This be Cap'n Tulivae. He lives next door.","This is Mr. Tulivae. He lives next door."
