@@ -1,17 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0jehwow4ein4"]
+[gd_scene format=3 uid="uid://c0jehwow4ein4"]
 
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_ftgx8"]
 [ext_resource type="Texture2D" uid="uid://bvo6u7sgk2qe4" path="res://icon.png" id="1_jju8u"]
 
-[node name="InteractionManager" type="InteractionManager"]
+[node name="InteractionManager" type="InteractionManager" unique_id=1859080562]
 
-[node name="Prompt" type="Control" parent="."]
+[node name="Prompt" type="Control" parent="." unique_id=2053684670]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(0.8, 0.8)
 
-[node name="PanelContainer" type="PanelContainer" parent="Prompt"]
+[node name="PanelContainer" type="PanelContainer" parent="Prompt" unique_id=1009591782]
 layout_mode = 1
 anchors_preset = -1
 offset_left = -160.0
@@ -22,19 +23,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ftgx8")
 
-[node name="BoxContainer" type="BoxContainer" parent="Prompt/PanelContainer"]
+[node name="BoxContainer" type="BoxContainer" parent="Prompt/PanelContainer" unique_id=734002547]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Prompt/PanelContainer/BoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Prompt/PanelContainer/BoxContainer" unique_id=864405909]
 layout_mode = 2
 texture = ExtResource("1_jju8u")
 expand_mode = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="Prompt/PanelContainer/BoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="Prompt/PanelContainer/BoxContainer" unique_id=464566117]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Action" type="RichTextLabel" parent="Prompt/PanelContainer/BoxContainer/CenterContainer"]
+[node name="Action" type="RichTextLabel" parent="Prompt/PanelContainer/BoxContainer/CenterContainer" unique_id=654618057]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)

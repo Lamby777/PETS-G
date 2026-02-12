@@ -59,7 +59,7 @@ pub mod dialogue {
     use super::*;
 
     /// Height above an interaction zone to display the prompt by default
-    pub const INTERACT_PROMPT_HEIGHT_OFFSET: real = 240.0;
+    pub const INTERACT_PROMPT_HEIGHT_OFFSET: real = 120.0;
 
     pub const DEFAULT_VOX: &str = "_";
 
