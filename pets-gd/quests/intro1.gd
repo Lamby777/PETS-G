@@ -42,7 +42,7 @@ func on_house_tp(target):
 
         var picked_bedcolor_x = await dbox().say_as_with_choices(
             "[JUNIPER]",
-            [picked_thoughts["value"] + "_MOM", "DG_INTRO1_ITS_YOURS"],
+            [picked_thoughts["value"] + "_MOMREPLY", "DG_INTRO1_ITS_YOURS"],
             [
                 "[color=#BD0000]X[/color]",
                 "[color=#FF7200]X[/color]",
