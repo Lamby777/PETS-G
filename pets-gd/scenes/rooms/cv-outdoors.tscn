@@ -252,7 +252,7 @@ position = Vector2(112, 144)
 
 [node name="InteractionZone" parent="EthanHouse/TrashCan" index="2" unique_id=1577778140 instance=ExtResource("4_vwc65")]
 interaction_script = ExtResource("14_h4mky")
-prompt_translation_key = "CHECK"
+prompt_translation_key = "Check"
 position = Vector2(0, 8)
 scale = Vector2(1.02, 0.5)
 
@@ -264,7 +264,7 @@ position = Vector2(-264, -536)
 
 [node name="InteractionZone" parent="Lyembo" index="4" unique_id=556781064 instance=ExtResource("4_vwc65")]
 interaction_script = ExtResource("17_5lkkw")
-prompt_translation_key = "TALK"
+prompt_translation_key = "Talk"
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="Lyembo/InteractionZone" index="1" unique_id=785104119]
 position = Vector2(0, 32)
@@ -281,7 +281,7 @@ hframes = 2
 
 [node name="InteractionZone" parent="BeckyContainer" index="1" unique_id=1297144494 instance=ExtResource("4_vwc65")]
 interaction_script = ExtResource("17_5lkkw")
-prompt_translation_key = "TALK"
+prompt_translation_key = "Talk"
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="BeckyContainer/InteractionZone" index="1" unique_id=1020753202]
 position = Vector2(0, 32)

@@ -3,16 +3,16 @@ MAINMENU_OPTION_PLAY,Play,Set Sail,Play
 MAINMENU_OPTION_OPTIONS,Options,Fiddle 'round,Options
 MAINMENU_OPTION_CREDITS,Credits,Th' Crew,Credits
 MAINMENU_OPTION_QUIT,Quit,Avast!,Touch Grass
-IZ_INTERACT_INTERACT,Interact,Interact,Interact
-IZ_INTERACT_CHECK,Check,Peer,Critique
-IZ_INTERACT_PRESS,Press,Push,Press
-IZ_INTERACT_ENTER,Enter,Enter,Enter
-IZ_INTERACT_EXIT,Exit,Exit,Exit
-IZ_INTERACT_TALK,Talk,Chatter,Yap
-IZ_INTERACT_OPEN,Open,Open,Open
-IZ_INTERACT_READ,Read,Read,Read
-IZ_INTERACT_TAKE,Take,Plunder,Steal
-IZ_INTERACT_DEBUG,Debug,Remove barnacles,Defeature
+IZ_INTERACT_Interact,Interact,Interact,Interact
+IZ_INTERACT_Check,Check,Peer,Critique
+IZ_INTERACT_Press,Press,Push,Press
+IZ_INTERACT_Enter,Enter,Enter,Enter
+IZ_INTERACT_Exit,Exit,Exit,Exit
+IZ_INTERACT_Talk,Talk,Chatter,Yap
+IZ_INTERACT_Open,Open,Open,Open
+IZ_INTERACT_Read,Read,Read,Read
+IZ_INTERACT_Take,Take,Plunder,Steal
+IZ_INTERACT_Debug,Debug,Remove barnacles,Defeature
 MONTH_SHORTENED_1,Jan,Jan,Jan
 MONTH_SHORTENED_2,Feb,Feb,Feb
 MONTH_SHORTENED_3,Mar,Mar,Mar

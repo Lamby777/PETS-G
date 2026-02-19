@@ -12,6 +12,21 @@ use crate::dialogue::DialogueScript;
 
 use super::InteractionManager;
 
+#[derive(GodotConvert, Var, Export, Clone)]
+#[godot(via = GString)]
+pub enum InteractionZonePromptType {
+    Interact,
+    Check,
+    Press,
+    Enter,
+    Exit,
+    Talk,
+    Open,
+    Read,
+    Take,
+    Debug,
+}
+
 #[derive(GodotClass)]
 #[class(init, base=Area2D)]
 pub struct InteractionZone {
@@ -33,8 +48,8 @@ pub struct InteractionZone {
     auto_interact: bool,
 
     #[export]
-    #[init(val = "INTERACT".into())]
-    prompt_translation_key: GString,
+    #[init(val = InteractionZonePromptType::Interact)]
+    prompt_translation_key: InteractionZonePromptType,
 
     #[export]
     prompt_location: NodePath,
