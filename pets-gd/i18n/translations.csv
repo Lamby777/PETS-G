@@ -310,6 +310,7 @@ ENEMY_U_RumbleSerpent,Rumble's Mechanical Monstrosity,Rumble's Steel Kraken,Rumb
 DG_SPK_UNKNOWN,???,???,???
 DG_SPK_RODRICK,"Rodrick Sign Co.","Rodrick Sign Co.","Your Mom!!!!!!!! (real)"
 DG_SPK_CASCADE,Agent Cascade,Purple Gal,Cascade
+DG_SPK_BECKY,Becky,Becky,Becky
 DG_SPK_MOM,Mom,Mom,Mom
 DG_SPK_DAD,Dad,Pops,Dad
 DG_SPK_JUNIPER,Juniper,Lady Juniper,Juniper
@@ -347,14 +348,16 @@ DG_INTRO1_MEET_NEIGHBORS,"Here he is! Hey, [ETHAN], come meet the neighbors!","T
 DG_INTRO1_MR_T,"This is Mr. Tulivae. He lives next door.","This be Cap'n Tulivae. He lives next door.","This is Mr. Tulivae. He lives next door."
 DG_INTRO1_HI_THERE,"Hi there, [ETHAN]. Pleasure meeting you.","Ahoy, [ETHAN]. Pleasure meetin' ya.","Hi there, [ETHAN]. Pleasure meeting you."
 DG_INTRO1_HE_SEEMS_NICE,He seems pretty nice. Maybe you should go say hi later.,He seems pretty nice. Maybe ye should go say hi later.,He seems pretty nice... but does he pay his taxes?
-DG_BECKY_MEET_HI,"Hey, there! I'm Secky the Bec-- I mean, Becky the Secretarybird!","Ahoy! I'm Secky th' Bec-- Errrr, Becky th' Secretarybird!","Hey, there! I'm Secky the Bec-- I mean, Becky the Secretarybird!"
-DG_BECKY_MEET_HOSTILES,"You may have noticed there are a certain class of hostile birds around this area.","Ye may have noticed there be a certain class o' dragons 'round these seas.","You may have noticed some spicy birbs around this area."
-DG_BECKY_MEET_DONT_WORRY,"Don't worry; I'm not one of them.","Don't ye worry yer lil' head; I be nah one o' those bilge rats.","Don't worry; I'm not one of them."
-DG_BECKY_MEET_STUDY,"I'm running a study on what may be causing this sudden outbreak.","I be runnin' a survey on th' lands, findin' out what may be causin' this sudden storm.","I'm running a study on what may be causing this sudden outbreak."
-DG_BECKY_MEET_HELP,"Would you mind helping me discover more species of this diverse population?","Would ye mind helpin' me discover more squawkers o' this diverse population?","Would you mind helping me discover more species of this diverse population?"
-DG_BECKY_MEET_LOGGING,"I need you to log the species you encounter in your travels.","I need ye to log th' squawkers ye encounter in yer travels.","I need you to log the species you encounter in your travels."
-DG_BECKY_MEET_OTHER_ENEMIES,"Feel free to log other oddities you encounter as well. It'll be your own logbook, after all.", "Feel free to log other oddities ye encounter as well. It'll be yer own logbook, after all.","Feel free to log other oddities you encounter as well. It'll be your own logbook, after all."
-DG_BECKY_MEET_MILESTONES,"I'll even give you a little something for each milestone you hit.","I'll even give ye a lil' treasure fer each milestone ye hit.","What? Yeah, there will be rewards, too, I guess."
-DG_BECKY_MEET_OFFER,"So, what do you say?","So, whadda ye say?","So...?"
-DG_BECKY_MEET_ACCEPT,"Sure!","Aye!","Sure!"
-DG_BECKY_MEET_DECLINE,"I'm busy.","Nay, matey.","Nah."
+DG_BECKY_INTRO_HI,"Hey, there! I'm Secky the Bec-- I mean, Becky the Secretarybird!","Ahoy! I'm Secky th' Bec-- Errrr, Becky th' Secretarybird!","Hey, there! I'm Secky the Bec-- I mean, Becky the Secretarybird!"
+DG_BECKY_INTRO_HOSTILES,"You may have noticed there are a certain class of hostile birds around this area.","Ye may have noticed there be a certain class o' dragons 'round these seas.","You may have noticed some spicy birbs around this area."
+DG_BECKY_INTRO_DONT_WORRY,"Don't worry; I'm not one of them.","Don't ye worry yer lil' head; I be nah one o' those bilge rats.","Don't worry; I'm not one of them."
+DG_BECKY_INTRO_STUDY,"I'm running a study on what may be causing this sudden outbreak.","I be runnin' a survey on th' lands, findin' out what may be causin' this sudden storm.","I'm running a study on what may be causing this sudden outbreak."
+DG_BECKY_INTRO_HELP,"Would you mind helping me discover more species of this diverse population?","Would ye mind helpin' me discover more squawkers o' this diverse population?","Would you mind helping me discover more species of this diverse population?"
+DG_BECKY_INTRO_LOGGING,"I need you to log the species you encounter in your travels in this logbook.","I need ye to log th' squawkers ye encounter in yer travels in me logbook.","I need you to log the species you encounter in your travels in this logbook."
+DG_BECKY_INTRO_OTHER_ENEMIES,"Feel free to log other oddities you encounter as well. It'll be your own logbook, after all.", "Feel free to log other oddities ye encounter as well. It'll be yer own logbook, after all.","Feel free to log other oddities you encounter as well. It'll be your own logbook, after all."
+DG_BECKY_INTRO_MILESTONES,"I'll even give you a little something for each milestone you hit.","I'll even give ye a lil' treasure fer each milestone ye hit.","What? Yeah, there will be rewards, too, I guess."
+DG_BECKY_INTRO_OFFER,"So, what do you say?","So, whadda ye say?","So...?"
+DG_BECKY_INTRO_ACCEPT,"Sure!","Aye!","Sure!"
+DG_BECKY_INTRO_DECLINE,"I'm busy.","Nay, matey.","Nah."
+DG_BECKY_INTRO_GREAT_HERES_YOUR,"Great! Here's your logbook, then.","Aye, I knew you'd be up for adventure.","Think fast!"
+DG_BECKY_INTRO_OH_WELL,"Oh... Well, that's alright. You know where to find me if you ever change your mind!","Yarrrgh. If y'ever turn yer ship around, I'll still be waitin' for ya here, matey. No worries.","Lazy bones... LMAO"

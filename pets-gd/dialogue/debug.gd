@@ -62,7 +62,7 @@ func _start() -> void:
 
             await dbox().say_as("[CASCADE]", [
                 "Welcome to the team" + 
-                (", ... me!" if picked["value"] == "MIRA" else "!")
+                (", ... me!" if picked["value"] == "Mira" else "!")
             ])
                
 

@@ -22,9 +22,14 @@ func say_as_with_choices(speaker, msgs, dchoices, do_open = true, do_close = tru
     if do_close:
         close()
     
+    # TODO: bruh wtf are you doing, `value` is locale-dependant
     return { "index": index, "value": dchoices[index] if dchoices.size() > 0 else null }
        
 func say_as(speaker, msgs, do_open = true, do_close = true):
+    # allow passing a single string without brackets around it
+    if typeof(msgs) == TYPE_STRING:
+        msgs = [msgs]
+
     await say_as_with_choices(speaker, msgs, [], do_open, do_close)
 
 func say(msgs):
