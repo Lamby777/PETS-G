@@ -49,7 +49,7 @@ pub mod partycb {
     pub const SPRINT_COEFFICIENT: real = 1.5;
 
     // Distance between party members
-    pub const PERSONAL_SPACE: usize = 15;
+    pub const PERSONAL_SPACE: usize = 20;
 
     pub const TP_BEACON_BLACK_IN: f64 = 0.2;
     pub const TP_BEACON_BLACK_HOLD: f64 = 0.3;
