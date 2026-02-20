@@ -15,7 +15,6 @@ script = ExtResource("2_dkgsg")
 room_id = "CV_Houses"
 
 [node name="TilemapLayers" type="Node2D" parent="." index="0" unique_id=1817753876]
-scale = Vector2(4, 4)
 metadata/_edit_lock_ = true
 
 [node name="Cliffs" type="TileMapLayer" parent="TilemapLayers" index="0" unique_id=1670631701]

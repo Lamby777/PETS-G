@@ -1,7 +1,6 @@
-[gd_scene load_steps=38 format=3 uid="uid://bixe2r406kurm"]
+[gd_scene format=3 uid="uid://bixe2r406kurm"]
 
 [ext_resource type="PackedScene" uid="uid://c0rycajg7lpiw" path="res://scenes/char/Base.tscn" id="1_mdh08"]
-[ext_resource type="Texture2D" uid="uid://ciurawgpv2g88" path="res://assets/textures/char/main/Siva.png" id="2_yvaiy"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r24ka"]
 animation = &"PCharNode/IdleL"
@@ -146,7 +145,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4a04c"]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4htcc"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_relyt"]
 resource_local_to_scene = true
 states/End/position = Vector2(856, 117.6)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_p4qdk")
@@ -159,13 +158,8 @@ states/Wade/position = Vector2(433, 247)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji4br"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_q0w5r"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_hpdl1"), "Idle", "Wade", SubResource("AnimationNodeStateMachineTransition_xnsgn"), "Wade", "Idle", SubResource("AnimationNodeStateMachineTransition_6f020"), "Wade", "Run", SubResource("AnimationNodeStateMachineTransition_gx0ab"), "Run", "Wade", SubResource("AnimationNodeStateMachineTransition_4a04c")]
 graph_offset = Vector2(-79, 13)
 
-[node name="Siva" instance=ExtResource("1_mdh08")]
+[node name="Siva" unique_id=595534397 instance=ExtResource("1_mdh08")]
 pchar = "Siva"
 
-[node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2_yvaiy")
-hframes = 9
-vframes = 7
-
-[node name="AnimationTree" parent="." index="2"]
-tree_root = SubResource("AnimationNodeStateMachine_4htcc")
+[node name="AnimationTree" parent="." index="2" unique_id=310453219]
+tree_root = SubResource("AnimationNodeStateMachine_relyt")

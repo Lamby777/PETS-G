@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://ciuc7ec2ot20i"]
+[gd_scene format=3 uid="uid://ciuc7ec2ot20i"]
 
 [ext_resource type="PackedScene" uid="uid://c0rycajg7lpiw" path="res://scenes/char/Base.tscn" id="1_lxcyf"]
 [ext_resource type="Texture2D" uid="uid://ryxdm3f63fhv" path="res://assets/textures/char/Neoxylin.png" id="2_aqpos"]
@@ -146,7 +146,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4a04c"]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4htcc"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_cdmwv"]
 resource_local_to_scene = true
 states/End/position = Vector2(856, 117.6)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_p4qdk")
@@ -159,13 +159,12 @@ states/Wade/position = Vector2(433, 247)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji4br"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_q0w5r"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_hpdl1"), "Idle", "Wade", SubResource("AnimationNodeStateMachineTransition_xnsgn"), "Wade", "Idle", SubResource("AnimationNodeStateMachineTransition_6f020"), "Wade", "Run", SubResource("AnimationNodeStateMachineTransition_gx0ab"), "Run", "Wade", SubResource("AnimationNodeStateMachineTransition_4a04c")]
 graph_offset = Vector2(-79, 13)
 
-[node name="Neoxylin" instance=ExtResource("1_lxcyf")]
+[node name="Neoxylin" unique_id=1794879140 instance=ExtResource("1_lxcyf")]
 pchar = "Neoxylin"
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="0" unique_id=2134180221]
 texture = ExtResource("2_aqpos")
-hframes = 9
 vframes = 6
 
-[node name="AnimationTree" parent="." index="2"]
-tree_root = SubResource("AnimationNodeStateMachine_4htcc")
+[node name="AnimationTree" parent="." index="2" unique_id=310453219]
+tree_root = SubResource("AnimationNodeStateMachine_cdmwv")

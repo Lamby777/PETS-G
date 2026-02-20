@@ -23,12 +23,11 @@
 radius = 24.0
 height = 64.0
 
-[node name="Room" unique_id=778970384 instance=ExtResource("1_ls6vf")]
+[node name="Room2" unique_id=778970384 instance=ExtResource("1_ls6vf")]
 script = ExtResource("2_t8063")
 room_id = "CV_Outdoors"
 
 [node name="TilemapLayers" type="Node2D" parent="." index="0" unique_id=1571792968]
-scale = Vector2(4, 4)
 metadata/_edit_lock_ = true
 
 [node name="Cliffs" type="TileMapLayer" parent="TilemapLayers" index="0" unique_id=400204098]
