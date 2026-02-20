@@ -377,7 +377,7 @@ _data = {
 }
 
 [node name="TitleScreen" type="TitleScreen" unique_id=1010433788]
-scale = Vector2(0.125, 0.125)
+scale = Vector2(0.188, 0.188)
 
 [node name="TitleScreenMusic" type="AudioStreamPlayer" parent="." unique_id=1360366194]
 stream = ExtResource("1_06t4m")
