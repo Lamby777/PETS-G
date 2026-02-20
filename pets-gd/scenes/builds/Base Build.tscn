@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://h1du5kblkv2o"]
 
-[node name="Build" type="StaticBody2D"]
-position = Vector2(0, -16)
+[node name="Build" type="StaticBody2D" unique_id=607918548]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(8, 8)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1045355536]

@@ -1,11 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://2i16xk27wro6"]
+[gd_scene format=3 uid="uid://2i16xk27wro6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vib8o"]
-size = Vector2(256, 256)
+size = Vector2(64, 64)
 
-[node name="InteractionZone" type="InteractionZone"]
+[node name="InteractionZone" type="InteractionZone" unique_id=713554362]
 collision_layer = 4
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2069910386]
 shape = SubResource("RectangleShape2D_vib8o")

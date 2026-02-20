@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://wkelk3y4bkcj"]
+[gd_scene format=3 uid="uid://wkelk3y4bkcj"]
 
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_jbfs2"]
 [ext_resource type="Script" uid="uid://bm3e2r0bgc7u2" path="res://classes/dbox.gd" id="2_jmx8e"]
@@ -40,41 +40,41 @@ _data = {
 &"open": SubResource("Animation_acqou")
 }
 
-[node name="DialogBox" type="DialogBox"]
+[node name="DialogBox" type="DialogBox" unique_id=385510822]
 clip_contents = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -704.0
+offset_left = 136.0
 offset_top = 1200.0
-offset_right = 704.0
+offset_right = 1544.0
 offset_bottom = 1646.0
 grow_horizontal = 2
 pivot_offset = Vector2(704, 220)
 theme = ExtResource("1_jbfs2")
 script = ExtResource("2_jmx8e")
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1916309578]
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 16
 
-[node name="SpeakerName" type="RichTextLabel" parent="VBox"]
+[node name="SpeakerName" type="RichTextLabel" parent="VBox" unique_id=1537423726]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 56
 bbcode_enabled = true
 text = "Cap'n Winthrus"
 
-[node name="Content" type="RichTextLabel" parent="VBox"]
+[node name="Content" type="RichTextLabel" parent="VBox" unique_id=1427257424]
 custom_minimum_size = Vector2(0, 220)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 44
+theme_override_font_sizes/normal_font_size = 52
 bbcode_enabled = true
 text = "sussy gussy straight outta ohio weebux fortnite livvy dunne rizzed up baby gronk gaming skibidi toilet gyatt sigma coquette floofy ahoy matey ;-; can i get a meow meow in the chat >w< ^w^ :3 :3 :3 :3"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBox"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBox" unique_id=2079792908]
 clip_contents = false
 layout_mode = 2
 size_flags_vertical = 2
@@ -82,19 +82,17 @@ follow_focus = true
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 0
 
-[node name="Choices" type="HBoxContainer" parent="VBox/ScrollContainer"]
+[node name="Choices" type="HBoxContainer" parent="VBox/ScrollContainer" unique_id=1769436680]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_constants/separation = 60
 
-[node name="ChoiceAgent" type="ChoiceAgent" parent="VBox/ScrollContainer/Choices"]
+[node name="ChoiceAgent" type="ChoiceAgent" parent="VBox/ScrollContainer/Choices" unique_id=1168897692]
 tween_property = "position:y"
 tween_focused_value = -16.0
 unique_name_in_owner = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ujmhv")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=411585724]
+libraries/ = SubResource("AnimationLibrary_ujmhv")

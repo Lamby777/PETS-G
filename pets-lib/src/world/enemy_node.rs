@@ -4,6 +4,7 @@ use godot::classes::{
 use godot::prelude::*;
 
 use crate::common::*;
+use crate::world::partycb::CUTSCENE_MOTION_CLOSE_ENOUGH;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 struct AnimOptions {
@@ -85,9 +86,12 @@ impl WalkingEnemy {
         let own_pos = base.get_position();
 
         let target_pos = (pcb_pos - own_pos).normalized_or_zero();
-        if own_pos.distance_to(pcb_pos) < 10.0 {
+        // TODO: update all uses of `distance_to` to be the squared version (perf+)
+        if own_pos.distance_to(pcb_pos) < CUTSCENE_MOTION_CLOSE_ENOUGH {
             return;
         }
+
+        dbg!(&target_pos);
 
         base.set_velocity(target_pos * spd);
         base.move_and_slide();

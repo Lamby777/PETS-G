@@ -37,8 +37,7 @@ pub struct BattleIcon {
     #[init(val = 0.96)]
     friction: FloatStat,
 
-    /// Current velocity of player icon
-    /// NOT normalized, but still limited by speed.
+    /// Current velocity of player icon. Limited by speed.
     #[init(val = Vector2::ZERO)]
     velocity: Vector2,
 
@@ -89,7 +88,8 @@ impl BattleIcon {
         self.velocity += self.acceleration * input_vector;
 
         if self.velocity.length() > self.speed {
-            self.velocity = (self.velocity).normalized_or_zero() * self.speed;
+            // NOTE: normalization is okay for battle icons, at least for now. DO NOT REMOVE THIS.
+            self.velocity = self.velocity.normalized_or_zero() * self.speed;
         }
 
         let change = self.velocity * real::from_f64(delta);

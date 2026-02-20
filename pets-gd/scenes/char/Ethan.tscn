@@ -1,6 +1,7 @@
-[gd_scene load_steps=37 format=3 uid="uid://lmultox3utsh"]
+[gd_scene format=3 uid="uid://lmultox3utsh"]
 
 [ext_resource type="PackedScene" uid="uid://c0rycajg7lpiw" path="res://scenes/char/Base.tscn" id="1_4disj"]
+[ext_resource type="Texture2D" uid="uid://d1qa5s3jx5afw" path="res://assets/textures/__dumps/Ethan.png" id="2_kjtir"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r24ka"]
 animation = &"PCharNode/IdleL"
@@ -145,7 +146,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4a04c"]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4htcc"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_5iigf"]
 resource_local_to_scene = true
 states/End/position = Vector2(856, 117.6)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_p4qdk")
@@ -158,11 +159,14 @@ states/Wade/position = Vector2(433, 247)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ji4br"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_q0w5r"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_hpdl1"), "Idle", "Wade", SubResource("AnimationNodeStateMachineTransition_xnsgn"), "Wade", "Idle", SubResource("AnimationNodeStateMachineTransition_6f020"), "Wade", "Run", SubResource("AnimationNodeStateMachineTransition_gx0ab"), "Run", "Wade", SubResource("AnimationNodeStateMachineTransition_4a04c")]
 graph_offset = Vector2(-79, 13)
 
-[node name="Ethan" instance=ExtResource("1_4disj")]
+[node name="Ethan" unique_id=315563513 instance=ExtResource("1_4disj")]
 pchar = "Ethan"
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="0" unique_id=2134180221]
+texture = ExtResource("2_kjtir")
 offset = Vector2(0, 1)
+hframes = 8
+vframes = 8
 
-[node name="AnimationTree" parent="." index="2"]
-tree_root = SubResource("AnimationNodeStateMachine_4htcc")
+[node name="AnimationTree" parent="." index="2" unique_id=310453219]
+tree_root = SubResource("AnimationNodeStateMachine_5iigf")

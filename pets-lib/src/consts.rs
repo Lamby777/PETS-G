@@ -42,13 +42,14 @@ pub mod partycb {
     use super::*;
 
     // Movement physics stuff
-    pub const ACCELERATION: real = 3000.0;
-    pub const FRICTION: real = 2500.0;
-    pub const MAX_SPEED: real = 320.0;
+    pub const ACCELERATION: real = 750.0;
+    pub const FRICTION: real = 1200.0;
+    // TODO: set this absurdly high (800) and see if cutscene movements break or not
+    pub const MAX_SPEED: real = 80.0;
     pub const SPRINT_COEFFICIENT: real = 1.5;
 
     // Distance between party members
-    pub const PERSONAL_SPACE: usize = 15;
+    pub const PERSONAL_SPACE: usize = 20;
 
     pub const TP_BEACON_BLACK_IN: f64 = 0.2;
     pub const TP_BEACON_BLACK_HOLD: f64 = 0.3;
@@ -59,7 +60,7 @@ pub mod dialogue {
     use super::*;
 
     /// Height above an interaction zone to display the prompt by default
-    pub const INTERACT_PROMPT_HEIGHT_OFFSET: real = 120.0;
+    pub const INTERACT_PROMPT_HEIGHT_OFFSET: real = 30.0;
 
     pub const DEFAULT_VOX: &str = "_";
 

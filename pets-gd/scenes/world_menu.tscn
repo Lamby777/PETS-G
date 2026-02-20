@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8hhg8v5ls70u"]
+[gd_scene format=3 uid="uid://c8hhg8v5ls70u"]
 
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_pvxl0"]
 [ext_resource type="FontFile" uid="uid://bjo6y15l70nnu" path="res://assets/fonts/aAccountantSignature.otf" id="2_iwgvb"]
@@ -40,66 +40,63 @@ _data = {
 &"open": SubResource("Animation_acqou")
 }
 
-[node name="WorldMenu" type="WorldMenu"]
+[node name="WorldMenu" type="WorldMenu" unique_id=1331878088]
 offset_left = -400.0
 offset_top = 256.0
 offset_right = -64.0
 offset_bottom = 832.0
 theme = ExtResource("1_pvxl0")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ujmhv")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=930585560]
+libraries/ = SubResource("AnimationLibrary_ujmhv")
 
-[node name="Choices" type="Control" parent="."]
+[node name="Choices" type="Control" parent="." unique_id=1200655206]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 400)
-layout_mode = 3
 anchors_preset = 0
 offset_left = 32.0
 offset_top = 64.0
 offset_right = 32.0
 offset_bottom = 464.0
 
-[node name="ChoiceAgent" type="ChoiceAgent" parent="Choices"]
+[node name="ChoiceAgent" type="ChoiceAgent" parent="Choices" unique_id=1964408428]
 
-[node name="Inventory" type="RichTextLabel" parent="Choices"]
+[node name="Inventory" type="RichTextLabel" parent="Choices" unique_id=235188402]
 clip_contents = false
-layout_mode = 2
+layout_mode = 0
 offset_right = 288.0
 offset_bottom = 64.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 48
+theme_override_font_sizes/normal_font_size = 52
 bbcode_enabled = true
 text = "Inventory"
 fit_content = true
 
-[node name="DebugMenu" type="RichTextLabel" parent="Choices"]
+[node name="DebugMenu" type="RichTextLabel" parent="Choices" unique_id=455182993]
 clip_contents = false
 layout_mode = 0
 offset_top = 64.0
 offset_right = 288.0
 offset_bottom = 128.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 48
+theme_override_font_sizes/normal_font_size = 52
 bbcode_enabled = true
 text = "Debug"
 fit_content = true
 
-[node name="DebugQuit" type="RichTextLabel" parent="Choices"]
+[node name="DebugQuit" type="RichTextLabel" parent="Choices" unique_id=520973721]
 clip_contents = false
-layout_mode = 2
+layout_mode = 0
 offset_top = 128.0
 offset_right = 288.0
 offset_bottom = 192.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 48
+theme_override_font_sizes/normal_font_size = 52
 bbcode_enabled = true
 text = "Quit"
 fit_content = true
 
-[node name="DatePanel" type="Panel" parent="."]
+[node name="DatePanel" type="Panel" parent="." unique_id=1542075769]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = -16.0
@@ -107,7 +104,7 @@ offset_top = -272.0
 offset_right = 336.0
 offset_bottom = -120.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="DatePanel"]
+[node name="RichTextLabel" type="RichTextLabel" parent="DatePanel" unique_id=2031440081]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 40.0
