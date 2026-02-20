@@ -21,7 +21,7 @@ whatever I felt like pushing to this repo for testing purposes. Sorry to the 0 p
 
 ---
 
-On Godot version 4.5.1
+On Godot version 4.6.1
 
 Using [godot-rust/gdext](https://github.com/godot-rust/gdextension) for most of
 the stuff, because of the type system. Prefer GDScript for things that probably
