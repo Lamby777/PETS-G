@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://ccq7dpc1svvrh" path="res://dialogue/crates.gd" id="4_cj4nk"]
 [ext_resource type="PackedScene" uid="uid://dkxcjrnsor4et" path="res://scenes/builds/furniture/crates/crate_wood.tscn" id="5_dgprv"]
 [ext_resource type="PackedScene" uid="uid://desphmjvj0i4t" path="res://scenes/builds/furniture/crates/crate_wood_trio.tscn" id="6_4wjmx"]
+[ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="9_jkwkm"]
 
 [node name="Room" unique_id=154986745 instance=ExtResource("1_t4iqd")]
 script = ExtResource("2_dkgsg")
@@ -88,3 +89,14 @@ position = Vector2(-176, -88)
 
 [node name="WoodenCrateTrio" parent="." index="7" unique_id=655786007 instance=ExtResource("6_4wjmx")]
 position = Vector2(-56, -88)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." index="8" unique_id=1567875317]
+offset_left = -320.0
+offset_top = 128.0
+offset_right = 320.0
+offset_bottom = 192.0
+theme = ExtResource("9_jkwkm")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[wave amp=100 freq=-5][shake level=20]welcome to the hotdog room!!!!1!!1!"
+vertical_alignment = 1
