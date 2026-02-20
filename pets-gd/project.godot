@@ -16,6 +16,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="P/E/T/S"
 run/main_scene="res://scenes/title_screen.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="PETS_2037"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://icon.png"
