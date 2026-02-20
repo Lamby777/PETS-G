@@ -244,7 +244,6 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(-552, 80)
 
 [node name="House" parent="EthanHouse" index="2" unique_id=678311653 instance=ExtResource("9_pvh7r")]
-position = Vector2(0, 0)
 
 [node name="TrashCan" parent="EthanHouse" index="3" unique_id=267077485 instance=ExtResource("12_skh3g")]
 position = Vector2(112, 144)
