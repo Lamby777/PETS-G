@@ -47,6 +47,7 @@ func _start() -> void:
                 "[CASCADE]", [
                     "Who do you want to add?",
                 ], [
+                    "...",
                     "Ethan",
                     "Siva",
                     "Terra",
@@ -58,12 +59,17 @@ func _start() -> void:
                 ]
             )
 
-            pcb().push_pchar_gd(picked["value"])
-
-            await dbox().say_as("[CASCADE]", [
-                "Welcome to the team" + 
-                (", ... me!" if picked["value"] == "Mira" else "!")
-            ])
+            if picked["value"] == "...":
+                pcb().push_pchar_gd("Siva")
+                pcb().push_pchar_gd("Terra")
+                pcb().push_pchar_gd("Leo")
+                pcb().push_pchar_gd("Lyembo")
+                pcb().push_pchar_gd("Quolo")
+                await dbox().say_as("[CASCADE]", "Well, here's a bunch of people.")
+            else:
+                pcb().push_pchar_gd(picked["value"])
+                await dbox().say_as("[CASCADE]", "Welcome to the team" +
+                    (", ... me!" if picked["value"] == "Mira" else "!"))
                
 
         "Pauses":

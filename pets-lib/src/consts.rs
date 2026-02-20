@@ -43,7 +43,7 @@ pub mod partycb {
 
     // Movement physics stuff
     pub const ACCELERATION: real = 750.0;
-    pub const FRICTION: real = 720.0;
+    pub const FRICTION: real = 1200.0;
     pub const MAX_SPEED: real = 80.0;
     pub const SPRINT_COEFFICIENT: real = 1.5;
 

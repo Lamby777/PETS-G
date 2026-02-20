@@ -103,25 +103,13 @@ libraries/ = SubResource("AnimationLibrary_fv7du")
 
 [node name="BattleLayer" type="CanvasLayer" parent="." unique_id=1211046264]
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=63718755]
-custom_minimum_size = Vector2(240, 135)
-offset_right = 40.0
-offset_bottom = 40.0
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1698291866]
-handle_input_locally = false
-canvas_item_default_texture_filter = 0
-size = Vector2i(240, 135)
-render_target_update_mode = 4
-
-[node name="YSort" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=533369481]
+[node name="YSort" type="Node2D" parent="." unique_id=533369481]
 y_sort_enabled = true
 
-[node name="PartyCB" parent="SubViewportContainer/SubViewport/YSort" unique_id=111507039 groups=["partycb"] instance=ExtResource("2_r6tgb")]
+[node name="PartyCB" parent="YSort" unique_id=111507039 groups=["partycb"] instance=ExtResource("2_r6tgb")]
 unique_name_in_owner = true
 
-[node name="BattleIntroRect" type="ColorRect" parent="SubViewportContainer/SubViewport/YSort/PartyCB" unique_id=1529642039]
+[node name="BattleIntroRect" type="ColorRect" parent="YSort/PartyCB" unique_id=1529642039]
 visible = false
 z_index = 5
 material = SubResource("ShaderMaterial_3xdh0")
@@ -131,7 +119,7 @@ offset_right = 960.0
 offset_bottom = 540.0
 script = ExtResource("4_jple0")
 
-[node name="Room" parent="SubViewportContainer/SubViewport/YSort" unique_id=423912160 instance=ExtResource("10_kug7e")]
+[node name="Room" parent="YSort" unique_id=423912160 instance=ExtResource("10_kug7e")]
 
 [node name="InteractionManager" parent="." unique_id=1588499331 instance=ExtResource("2_uh12s")]
 unique_name_in_owner = true
