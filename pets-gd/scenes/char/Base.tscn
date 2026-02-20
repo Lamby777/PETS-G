@@ -236,7 +236,7 @@ func _ready():
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iqy0m"]
-size = Vector2(12, 6)
+size = Vector2(11, 6)
 
 [node name="PCharNode" type="PCharNode" unique_id=1505378563]
 

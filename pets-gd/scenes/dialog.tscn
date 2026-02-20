@@ -70,7 +70,7 @@ text = "Cap'n Winthrus"
 [node name="Content" type="RichTextLabel" parent="VBox" unique_id=1427257424]
 custom_minimum_size = Vector2(0, 220)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 44
+theme_override_font_sizes/normal_font_size = 52
 bbcode_enabled = true
 text = "sussy gussy straight outta ohio weebux fortnite livvy dunne rizzed up baby gronk gaming skibidi toilet gyatt sigma coquette floofy ahoy matey ;-; can i get a meow meow in the chat >w< ^w^ :3 :3 :3 :3"
 

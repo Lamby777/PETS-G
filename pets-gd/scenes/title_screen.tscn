@@ -481,9 +481,10 @@ offset_top = 24.0
 offset_right = 170.0
 offset_bottom = 170.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 120
+theme_override_font_sizes/normal_font_size = 117
 bbcode_enabled = true
 text = "[center]-"
+vertical_alignment = 1
 
 [node name="1" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer" unique_id=1123992023]
 custom_minimum_size = Vector2(194, 194)
@@ -499,9 +500,10 @@ offset_top = 24.0
 offset_right = 170.0
 offset_bottom = 170.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 120
+theme_override_font_sizes/normal_font_size = 117
 bbcode_enabled = true
 text = "[center]1"
+vertical_alignment = 1
 
 [node name="2" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer" unique_id=738413263]
 custom_minimum_size = Vector2(194, 194)
@@ -517,9 +519,10 @@ offset_top = 24.0
 offset_right = 170.0
 offset_bottom = 170.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 120
+theme_override_font_sizes/normal_font_size = 117
 bbcode_enabled = true
 text = "[center]2"
+vertical_alignment = 1
 
 [node name="3" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer" unique_id=210111800]
 custom_minimum_size = Vector2(194, 194)
@@ -535,9 +538,10 @@ offset_top = 24.0
 offset_right = 170.0
 offset_bottom = 170.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 120
+theme_override_font_sizes/normal_font_size = 117
 bbcode_enabled = true
 text = "[center]3"
+vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MoveRight/SaveFilesPanel" unique_id=608967877]
 libraries/ = SubResource("AnimationLibrary_i3drf")
@@ -579,7 +583,7 @@ focus_next = NodePath("../Options")
 focus_previous = NodePath("../Quit")
 focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 68
+theme_override_font_sizes/normal_font_size = 65
 bbcode_enabled = true
 text = "MAINMENU_OPTION_PLAY"
 
@@ -595,7 +599,7 @@ focus_next = NodePath("../Credits")
 focus_previous = NodePath("../Play")
 focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 68
+theme_override_font_sizes/normal_font_size = 65
 bbcode_enabled = true
 text = "MAINMENU_OPTION_OPTIONS"
 
@@ -611,7 +615,7 @@ focus_next = NodePath("../Quit")
 focus_previous = NodePath("../Options")
 focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 68
+theme_override_font_sizes/normal_font_size = 65
 bbcode_enabled = true
 text = "MAINMENU_OPTION_CREDITS"
 
@@ -627,7 +631,7 @@ focus_next = NodePath("../Play")
 focus_previous = NodePath("../Credits")
 focus_mode = 2
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
-theme_override_font_sizes/normal_font_size = 68
+theme_override_font_sizes/normal_font_size = 65
 bbcode_enabled = true
 text = "MAINMENU_OPTION_QUIT"
 
