@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://ywn8h01im5gx"]
+[gd_scene format=3 uid="uid://ywn8h01im5gx"]
 
 [ext_resource type="Texture2D" uid="uid://ced0gmuos2khr" path="res://assets/textures/enemies/anonm2.png" id="1_ef2js"]
 [ext_resource type="Texture2D" uid="uid://bo13i8l87s648" path="res://assets/textures/enemies/anonm2-run1.png" id="2_wlkn7"]
@@ -26,7 +26,6 @@ animations = [{
 "speed": 6.0
 }]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
-scale = Vector2(4, 4)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=870825535]
 sprite_frames = SubResource("SpriteFrames_hs7pi")
 animation = &"ANonnyMouse-Idle"

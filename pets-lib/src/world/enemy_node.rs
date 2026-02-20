@@ -4,6 +4,7 @@ use godot::classes::{
 use godot::prelude::*;
 
 use crate::common::*;
+use crate::world::partycb::CUTSCENE_MOTION_CLOSE_ENOUGH;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 struct AnimOptions {
@@ -84,11 +85,16 @@ impl WalkingEnemy {
         let pcb_pos = pcb().get_position();
         let own_pos = base.get_position();
 
-        // WARN: this is vector not normalized. this is intentional, but is technically "wrong."
-        let target_pos = pcb_pos - own_pos;
-        if own_pos.distance_to(pcb_pos) < 10.0 {
+        const NEG1: Vector2 = Vector2 { x: -1.0, y: -1.0 };
+        const POS1: Vector2 = Vector2 { x: 1.0, y: 1.0 };
+        // WARN: this vector is intentionally clamped rather than normalized.
+        let target_pos = (pcb_pos - own_pos).clamp(NEG1, POS1);
+        // TODO: update all uses of `distance_to` to be the squared version (perf+)
+        if own_pos.distance_to(pcb_pos) < CUTSCENE_MOTION_CLOSE_ENOUGH {
             return;
         }
+
+        dbg!(&target_pos);
 
         base.set_velocity(target_pos * spd);
         base.move_and_slide();
