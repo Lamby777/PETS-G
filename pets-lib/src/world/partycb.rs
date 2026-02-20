@@ -14,7 +14,7 @@ use super::pchar_node::PCharNode;
 
 /// The player will stop being controlled once it reaches this
 /// distance from the cutscene target.
-pub const CUTSCENE_MOTION_CLOSE_ENOUGH: f32 = 10.0;
+pub const CUTSCENE_MOTION_CLOSE_ENOUGH: f32 = 1.0;
 
 pub struct Inputs {
     pub input_vector: Vector2,
@@ -85,7 +85,9 @@ pub struct PartyCB {
     #[init(val = 1.0)]
     pub water_speed_mod: real,
 
-    pub cutscene_motion: Option<Vector2>,
+    /// pos1: target (global) position
+    /// pos2: "old" (original) position before the motion
+    pub cutscene_motion: Option<(Vector2, Vector2)>,
 }
 
 #[godot_api]
@@ -103,16 +105,22 @@ impl PartyCB {
 
     #[func]
     pub fn move_to_absolute(&mut self, x: real, y: real) {
+        let start = self.base().get_global_position();
         let end = Vector2::new(x, y);
-        self.cutscene_motion = Some(end);
+        self.cutscene_motion = Some((end, start));
     }
 
+    /// Calculates the target position relative to the current position
     #[func]
     pub fn move_to_relative(&mut self, x: real, y: real) {
-        let end = Vector2::new(x, y);
+        // TODO: this and `move_to_absolute` MUST check if cutscene_motion is
+        // `Some` and if so, immediately jump to its target before overwriting it
+        // Additionally, `move_to_relative` should teleport BEFORE getting the
+        // starting position (aka above this comment, not below it)
         let start = self.base().get_global_position();
+        let end = Vector2::new(x, y);
         let total = start + end;
-        self.cutscene_motion = Some(total);
+        self.cutscene_motion = Some((total, start));
     }
 
     /// Get the fx rectangle that follows the player
@@ -258,7 +266,7 @@ impl ICharacterBody2D for PartyCB {
         if self.can_move() {
             let inputs = Inputs::from_player_input();
             moving = self.calc_movements(inputs, delta);
-        } else if let Some(target) = self.cutscene_motion {
+        } else if let Some((target, old_pos)) = self.cutscene_motion {
             let own_pos = self.base().get_global_position();
             let input_vector = Inputs::iv_from_to(own_pos, target);
 
