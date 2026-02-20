@@ -162,10 +162,10 @@ graph_offset = Vector2(-79, 13)
 [node name="Leo" unique_id=2039243624 instance=ExtResource("1_qudgq")]
 pchar = "Leo"
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="0" unique_id=2134180221]
 texture = ExtResource("2_k3v3c")
 hframes = 15
 vframes = 4
 
-[node name="AnimationTree" parent="." index="2"]
+[node name="AnimationTree" parent="." index="2" unique_id=310453219]
 tree_root = SubResource("AnimationNodeStateMachine_bpthh")

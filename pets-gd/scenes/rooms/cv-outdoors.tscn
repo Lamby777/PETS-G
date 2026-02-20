@@ -83,34 +83,33 @@ position = Vector2(56, 232)
 position = Vector2(48, 32)
 shape = SubResource("RectangleShape2D_5lkkw")
 
-[node name="TeleporterDemo" type="Node2D" parent="." index="3" unique_id=509368976]
+[node name="TeleporterDemo" type="Node2D" parent="." index="3" unique_id=82541451]
 y_sort_enabled = true
-position = Vector2(-1216, 864)
 
 [node name="TPRightIn" parent="TeleporterDemo" index="0" unique_id=598833320 instance=ExtResource("4_vwc65")]
 beacon_target = "TeleporterDemo/TPRightOut"
 auto_interact = true
-position = Vector2(216, 0)
+position = Vector2(-264, 216)
 scale = Vector2(0.5, 0.5)
 
 [node name="TPRightOut" parent="TeleporterDemo" index="1" unique_id=1136254267 instance=ExtResource("4_vwc65")]
 beacon_target = "TeleporterDemo/TPRightIn"
 auto_interact = true
-position = Vector2(344, 0)
+position = Vector2(-200, 216)
 scale = Vector2(0.5, 0.5)
 
 [node name="RightBush" parent="TeleporterDemo" index="2" unique_id=1190807667 instance=ExtResource("5_txn6p")]
-position = Vector2(408, -80)
+position = Vector2(-212, 197)
 collision_mask = 9
 
 [node name="TPLeftOut" parent="TeleporterDemo" index="3" unique_id=1817103323 instance=ExtResource("4_vwc65")]
 beacon_target = "TeleporterDemo/TPLeftIn"
-position = Vector2(-344, 0)
+position = Vector2(-408, 216)
 scale = Vector2(0.5, 0.5)
 
 [node name="TPLeftIn" parent="TeleporterDemo" index="4" unique_id=917621580 instance=ExtResource("4_vwc65")]
 beacon_target = "TeleporterDemo/TPLeftOut"
-position = Vector2(-216, 0)
+position = Vector2(-344, 216)
 scale = Vector2(0.5, 0.5)
 
 [node name="DecoBushes" type="Node2D" parent="." index="4" unique_id=1742214770]
@@ -124,7 +123,7 @@ position = Vector2(0, 128)
 collision_mask = 9
 
 [node name="RodrickSign" parent="." index="5" unique_id=1848543960 instance=ExtResource("6_eminc")]
-position = Vector2(-240, -240)
+position = Vector2(-60, -60)
 collision_mask = 9
 
 [node name="InteractionZone" parent="RodrickSign" index="2" unique_id=1867054137 instance=ExtResource("4_vwc65")]
@@ -142,30 +141,29 @@ y_sort_enabled = true
 [node name="TreeDec1_0" parent="TreeBarrier" index="0" unique_id=1056077758 instance=ExtResource("7_b7alc")]
 position = Vector2(-84, 34)
 
-[node name="EthanHouse" type="Node2D" parent="." index="9" unique_id=2056801796]
+[node name="EthanHouse" type="Node2D" parent="." index="9" unique_id=717346492]
 y_sort_enabled = true
-position = Vector2(520, -888)
 
-[node name="EthanHouseEntrance" parent="EthanHouse" index="0" unique_id=1797946713 instance=ExtResource("4_vwc65")]
+[node name="InteractionZone" parent="EthanHouse" index="0" unique_id=1797946713 instance=ExtResource("4_vwc65")]
 beacon_room_name = "cv-houses"
 beacon_target = "EthanHouseExit"
 prompt_translation_key = "Enter"
-position = Vector2(-96, 88)
+position = Vector2(142, -186)
 scale = Vector2(0.5, 0.5)
 
 [node name="TreeCon1_0" parent="EthanHouse" index="1" unique_id=82463971 instance=ExtResource("8_obhwm")]
-position = Vector2(-552, 80)
+position = Vector2(78, -164)
 
 [node name="House" parent="EthanHouse" index="2" unique_id=678311653 instance=ExtResource("9_pvh7r")]
+position = Vector2(154, -190)
 
 [node name="TrashCan" parent="EthanHouse" index="3" unique_id=267077485 instance=ExtResource("12_skh3g")]
-position = Vector2(112, 144)
+position = Vector2(173, -171)
 
 [node name="InteractionZone" parent="EthanHouse/TrashCan" index="2" unique_id=1577778140 instance=ExtResource("4_vwc65")]
 interaction_script = ExtResource("14_h4mky")
 prompt_translation_key = "Check"
-position = Vector2(0, 8)
-scale = Vector2(1.02, 0.5)
+scale = Vector2(0.39999998, 0.39999998)
 
 [node name="WoodenCrateTrio" parent="." index="10" unique_id=1350856245 instance=ExtResource("11_8dx4e")]
 position = Vector2(64, -544)

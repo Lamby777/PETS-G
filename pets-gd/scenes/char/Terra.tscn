@@ -164,6 +164,7 @@ pchar = "Terra"
 
 [node name="Sprite2D" parent="." index="0" unique_id=2134180221]
 texture = ExtResource("1_s1oxq")
+hframes = 9
 
 [node name="AnimationTree" parent="." index="2" unique_id=310453219]
 tree_root = SubResource("AnimationNodeStateMachine_62vck")

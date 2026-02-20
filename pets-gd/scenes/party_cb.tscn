@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://b0rlrppekv4vg"]
 
-[ext_resource type="PackedScene" uid="uid://lmultox3utsh" path="res://scenes/char/Ethan.tscn" id="1_i1nri"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubtmb"]
 size = Vector2(12, 6)
 
@@ -15,5 +13,3 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_ubtmb")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=350855433]
-
-[node name="Ethan" parent="." unique_id=315563513 instance=ExtResource("1_i1nri")]

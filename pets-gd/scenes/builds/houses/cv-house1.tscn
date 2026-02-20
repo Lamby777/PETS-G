@@ -1,16 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmark6m5rmra3"]
+[gd_scene format=3 uid="uid://dmark6m5rmra3"]
 
 [ext_resource type="PackedScene" uid="uid://h1du5kblkv2o" path="res://scenes/builds/Base Build.tscn" id="1_ghgfl"]
 [ext_resource type="Texture2D" uid="uid://ijttyl3h184k" path="res://assets/textures/builds/residential/house_cv_1.png" id="2_vh8qi"]
 
-[node name="Build" instance=ExtResource("1_ghgfl")]
+[node name="Build" unique_id=1491317545 instance=ExtResource("1_ghgfl")]
 
-[node name="Sprite2D" parent="." index="0"]
-position = Vector2(8, -344)
+[node name="Sprite2D" parent="." index="0" unique_id=1045355536]
 texture = ExtResource("2_vh8qi")
+offset = Vector2(0, -51)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
-position = Vector2(8, 72)
-scale = Vector2(2, 2)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1" unique_id=188144425]
 build_mode = 1
-polygon = PackedVector2Array(-220, 8, 140, 8, 220, -72, -120, -72)
+polygon = PackedVector2Array(-55, 2, 35, 2, 55, -18, -30, -18)

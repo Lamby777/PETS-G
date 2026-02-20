@@ -164,6 +164,7 @@ pchar = "Dylan"
 
 [node name="Sprite2D" parent="." index="0" unique_id=2134180221]
 texture = ExtResource("1_ie6hi")
+hframes = 9
 vframes = 6
 
 [node name="AnimationTree" parent="." index="2" unique_id=310453219]
