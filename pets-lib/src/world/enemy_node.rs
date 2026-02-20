@@ -85,10 +85,7 @@ impl WalkingEnemy {
         let pcb_pos = pcb().get_position();
         let own_pos = base.get_position();
 
-        const NEG1: Vector2 = Vector2 { x: -1.0, y: -1.0 };
-        const POS1: Vector2 = Vector2 { x: 1.0, y: 1.0 };
-        // WARN: this vector is intentionally clamped rather than normalized.
-        let target_pos = (pcb_pos - own_pos).clamp(NEG1, POS1);
+        let target_pos = (pcb_pos - own_pos).normalized_or_zero();
         // TODO: update all uses of `distance_to` to be the squared version (perf+)
         if own_pos.distance_to(pcb_pos) < CUTSCENE_MOTION_CLOSE_ENOUGH {
             return;
