@@ -31,6 +31,7 @@ script = ExtResource("2_t8063")
 room_id = "CV_Outdoors"
 
 [node name="TilemapLayers" type="Node2D" parent="." index="0" unique_id=1571792968]
+y_sort_enabled = true
 metadata/_edit_lock_ = true
 
 [node name="Cliffs" type="TileMapLayer" parent="TilemapLayers" index="0" unique_id=400204098]
@@ -74,7 +75,7 @@ y_sort_origin = -11
 metadata/_edit_lock_ = true
 
 [node name="Mouse1" parent="." index="1" unique_id=1846922294 instance=ExtResource("2_2qq46")]
-position = Vector2(208, -80)
+position = Vector2(208, -88)
 
 [node name="WaterZone" parent="." index="2" unique_id=1574052547 instance=ExtResource("3_bqhqn")]
 position = Vector2(56, 232)
