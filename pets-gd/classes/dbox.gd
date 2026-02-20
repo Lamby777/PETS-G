@@ -22,7 +22,9 @@ func say_as_with_choices(speaker, msgs, dchoices, do_open = true, do_close = tru
     if do_close:
         close()
     
-    # TODO: bruh wtf are you doing, `value` is locale-dependant
+    # NOTE: `value` is NOT locale-dependant. it's safe to use as long as you compare
+    # against tr keys and not regular strings. The reason you see regular strings in
+    # debug menus is because adding localization for that is usually a waste of time.
     return { "index": index, "value": dchoices[index] if dchoices.size() > 0 else null }
        
 func say_as(speaker, msgs, do_open = true, do_close = true):
