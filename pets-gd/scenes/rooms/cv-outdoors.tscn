@@ -134,71 +134,11 @@ collision_mask = 9
 position = Vector2(300, 500)
 collision_mask = 9
 
-[node name="BushHeart" type="Node2D" parent="DecoBushes" index="1" unique_id=1339946391]
-y_sort_enabled = true
-
-[node name="Middle" parent="DecoBushes/BushHeart" index="0" unique_id=242947773 instance=ExtResource("5_txn6p")]
-y_sort_enabled = true
-position = Vector2(0, 1800)
-collision_mask = 9
-
-[node name="Bush1" parent="DecoBushes/BushHeart" index="1" unique_id=2144433711 instance=ExtResource("5_txn6p")]
-position = Vector2(150, 1600)
-collision_mask = 9
-
-[node name="Bush2" parent="DecoBushes/BushHeart" index="2" unique_id=1251582433 instance=ExtResource("5_txn6p")]
-position = Vector2(-150, 1600)
-collision_mask = 9
-
-[node name="Bush3" parent="DecoBushes/BushHeart" index="3" unique_id=88309681 instance=ExtResource("5_txn6p")]
-position = Vector2(300, 1460)
-collision_mask = 9
-
-[node name="Bush4" parent="DecoBushes/BushHeart" index="4" unique_id=1083654912 instance=ExtResource("5_txn6p")]
-position = Vector2(-300, 1460)
-collision_mask = 9
-
-[node name="Bush5" parent="DecoBushes/BushHeart" index="5" unique_id=1640309365 instance=ExtResource("5_txn6p")]
-position = Vector2(450, 1600)
-collision_mask = 9
-
-[node name="Bush6" parent="DecoBushes/BushHeart" index="6" unique_id=1969130864 instance=ExtResource("5_txn6p")]
-position = Vector2(-450, 1600)
-collision_mask = 9
-
-[node name="Bush7" parent="DecoBushes/BushHeart" index="7" unique_id=307708064 instance=ExtResource("5_txn6p")]
-position = Vector2(540, 1800)
-collision_mask = 9
-
-[node name="Bush8" parent="DecoBushes/BushHeart" index="8" unique_id=1079016424 instance=ExtResource("5_txn6p")]
-position = Vector2(-540, 1800)
-collision_mask = 9
-
-[node name="Bush9" parent="DecoBushes/BushHeart" index="9" unique_id=76863924 instance=ExtResource("5_txn6p")]
-position = Vector2(450, 2000)
-collision_mask = 9
-
-[node name="Bush10" parent="DecoBushes/BushHeart" index="10" unique_id=775220481 instance=ExtResource("5_txn6p")]
-position = Vector2(-450, 2000)
-collision_mask = 9
-
-[node name="Bush11" parent="DecoBushes/BushHeart" index="11" unique_id=1609959916 instance=ExtResource("5_txn6p")]
-position = Vector2(270, 2200)
-collision_mask = 9
-
-[node name="Bush12" parent="DecoBushes/BushHeart" index="12" unique_id=685999706 instance=ExtResource("5_txn6p")]
-position = Vector2(-270, 2200)
-collision_mask = 9
-
-[node name="Bush18" parent="DecoBushes/BushHeart" index="13" unique_id=829796571 instance=ExtResource("5_txn6p")]
-position = Vector2(0, 2340)
-collision_mask = 9
-
-[node name="BushLong" parent="DecoBushes" index="2" unique_id=1516492662 instance=ExtResource("5_txn6p")]
+[node name="BushLong" parent="DecoBushes" index="1" unique_id=1516492662 instance=ExtResource("5_txn6p")]
 position = Vector2(-900, 1300)
 collision_mask = 9
 
-[node name="BushLong2" parent="DecoBushes" index="3" unique_id=884601468 instance=ExtResource("5_txn6p")]
+[node name="BushLong2" parent="DecoBushes" index="2" unique_id=884601468 instance=ExtResource("5_txn6p")]
 position = Vector2(900, 1300)
 collision_mask = 9
 
