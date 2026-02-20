@@ -37,15 +37,15 @@ impl Inputs {
             Ordering::Greater => 1.0,
         };
 
+        // WARN: this is vector not normalized. this is intentional, but is technically "wrong."
         Vector2::new(x, y)
     }
-}
 
-impl Inputs {
     pub fn from_player_input() -> Self {
         let input = Input::singleton();
-        let input_vector = (input.get_vector("left", "right", "up", "down"))
-            .normalized_or_zero();
+
+        // WARN: this is vector not normalized. this is intentional, but is technically "wrong."
+        let input_vector = input.get_vector("left", "right", "up", "down");
 
         let sprinting = input.is_action_pressed("sprint");
         Inputs {

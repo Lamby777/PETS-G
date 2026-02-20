@@ -44,6 +44,7 @@ pub mod partycb {
     // Movement physics stuff
     pub const ACCELERATION: real = 750.0;
     pub const FRICTION: real = 1200.0;
+    // TODO: set this absurdly high (800) and see if cutscene movements break or not
     pub const MAX_SPEED: real = 80.0;
     pub const SPRINT_COEFFICIENT: real = 1.5;
 
