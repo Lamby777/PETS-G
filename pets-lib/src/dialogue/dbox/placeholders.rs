@@ -39,8 +39,6 @@ const PLACEHOLDERS: &[PlaceholderMapping] = &[
     ("[NARRATOR]", || "".to_owned()),
     ("[???]", || "DG_SPK_UNKNOWN".to_owned()),
     // character names
-    ("[CASCADE]", || "DG_SPK_CASCADE".to_owned()),
-    ("[RODRICK]", || "DG_SPK_RODRICK".to_owned()),
     ("[PORKY]", || fmt_possibly_custom_name("Porky")),
     ("[ETHAN]", || fmt_possibly_custom_name("Ethan")),
     ("[TERRA]", || fmt_possibly_custom_name("Terra")),
