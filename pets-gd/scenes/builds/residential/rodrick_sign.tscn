@@ -6,6 +6,7 @@
 [node name="RodrickSign" unique_id=1298887057 instance=ExtResource("1_kaawg")]
 
 [node name="Sprite2D" parent="." index="0" unique_id=1045355536]
+position = Vector2(15, 7)
 texture = ExtResource("1_vp6q5")
 offset = Vector2(-15, -11)
 

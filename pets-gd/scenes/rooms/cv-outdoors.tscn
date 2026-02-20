@@ -123,7 +123,7 @@ position = Vector2(0, 128)
 collision_mask = 9
 
 [node name="RodrickSign" parent="." index="5" unique_id=1848543960 instance=ExtResource("6_eminc")]
-position = Vector2(-60, -60)
+position = Vector2(-40, -46)
 collision_mask = 9
 
 [node name="InteractionZone" parent="RodrickSign" index="2" unique_id=1867054137 instance=ExtResource("4_vwc65")]
@@ -155,7 +155,7 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(78, -164)
 
 [node name="House" parent="EthanHouse" index="2" unique_id=678311653 instance=ExtResource("9_pvh7r")]
-position = Vector2(154, -190)
+position = Vector2(156, -190)
 
 [node name="TrashCan" parent="EthanHouse" index="3" unique_id=267077485 instance=ExtResource("12_skh3g")]
 position = Vector2(173, -171)

@@ -3,4 +3,3 @@
 [node name="Build" type="StaticBody2D" unique_id=607918548]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1045355536]
-centered = false
