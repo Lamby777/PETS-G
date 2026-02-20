@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://kgl5788x405y"]
+[gd_scene format=3 uid="uid://kgl5788x405y"]
 
 [ext_resource type="Shader" uid="uid://cakivekftxu5d" path="res://themes/opacity.gdshader" id="1_3pmac"]
 [ext_resource type="Script" uid="uid://c3btsjsnjtghu" path="res://classes/tactics/enemies/ANonnyMouse.gd" id="1_vrl6q"]
@@ -215,33 +215,33 @@ _data = {
 shader = ExtResource("1_3pmac")
 shader_parameter/opacity = 0.0
 
-[node name="BattleEngine" type="BattleEngine" node_paths=PackedStringArray("right_panel_destination")]
+[node name="BattleEngine" type="BattleEngine" unique_id=1145522037 node_paths=PackedStringArray("right_panel_destination")]
 skills_menu_scene = ExtResource("12_546eg")
 right_panel_destination = NodePath("Menu/DualMenu/RightPanel/Margins")
 
-[node name="Tactics" type="Node" parent="."]
+[node name="Tactics" type="Node" parent="." unique_id=1769518316]
 process_mode = 4
 
-[node name="ANonnyMouse" type="Node" parent="Tactics"]
+[node name="ANonnyMouse" type="Node" parent="Tactics" unique_id=690533194]
 script = ExtResource("1_vrl6q")
 bullet_scene = ExtResource("2_n0w8q")
 
-[node name="ClickSFX" type="AudioStreamPlayer" parent="."]
+[node name="ClickSFX" type="AudioStreamPlayer" parent="." unique_id=842108577]
 stream = ExtResource("4_icqrr")
 
-[node name="BattleMusic" type="BattleMusic" parent="."]
+[node name="BattleMusic" type="BattleMusic" parent="." unique_id=794580328]
 stream = ExtResource("4_l6m5j")
 
-[node name="RhythmTimer" type="Timer" parent="BattleMusic"]
+[node name="RhythmTimer" type="Timer" parent="BattleMusic" unique_id=831645091]
 one_shot = true
 
-[node name="VideoDrugs" type="Control" parent="."]
+[node name="VideoDrugs" type="Control" parent="." unique_id=1964753647]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Layer1" type="TextureRect" parent="VideoDrugs"]
+[node name="Layer1" type="TextureRect" parent="VideoDrugs" unique_id=333536047]
 material = SubResource("ShaderMaterial_w1wwc")
 layout_mode = 0
 offset_right = 1920.0
@@ -249,7 +249,7 @@ offset_bottom = 1080.0
 stretch_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="Solid" type="ColorRect" parent="VideoDrugs"]
+[node name="Solid" type="ColorRect" parent="VideoDrugs" unique_id=994767590]
 material = SubResource("ShaderMaterial_88ovb")
 layout_mode = 0
 offset_right = 1920.0
@@ -257,37 +257,37 @@ offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="Board" type="Node2D" parent="."]
+[node name="Board" type="Node2D" parent="." unique_id=1693966926]
 unique_name_in_owner = true
 
-[node name="EnemySprite" parent="Board" instance=ExtResource("6_dgpl5")]
+[node name="EnemySprite" parent="Board" unique_id=1277612852 instance=ExtResource("6_dgpl5")]
 unique_name_in_owner = true
 position = Vector2(960, 192)
 scale = Vector2(6, 6)
 
-[node name="BattleIcon" type="BattleIcon" parent="Board" node_paths=PackedStringArray("engine")]
+[node name="BattleIcon" type="BattleIcon" parent="Board" unique_id=1205183124 node_paths=PackedStringArray("engine")]
 engine = NodePath("../..")
 unique_name_in_owner = true
 collision_layer = 256
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Board/BattleIcon"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Board/BattleIcon" unique_id=515894188]
 shape = SubResource("CircleShape2D_pf8ic")
 
-[node name="Sprite2D" type="Sprite2D" parent="Board/BattleIcon"]
+[node name="Sprite2D" type="Sprite2D" parent="Board/BattleIcon" unique_id=416158234]
 scale = Vector2(8, 8)
 texture = ExtResource("3_k3xai")
 hframes = 5
 vframes = 2
 
-[node name="Menu" type="Control" parent="."]
+[node name="Menu" type="Control" parent="." unique_id=2140168308]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("5_hcsfj")
 
-[node name="ClickStatus" type="RichTextLabel" parent="Menu"]
+[node name="ClickStatus" type="RichTextLabel" parent="Menu" unique_id=1107140177]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 64.0
@@ -298,7 +298,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 text = "Ready?"
 
-[node name="InfoBars" type="VBoxContainer" parent="Menu"]
+[node name="InfoBars" type="VBoxContainer" parent="Menu" unique_id=108186667]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 256.0
@@ -307,7 +307,7 @@ offset_right = 1664.0
 offset_bottom = 1048.0
 theme_override_constants/separation = 32
 
-[node name="HPBar" type="ProgressBar" parent="Menu/InfoBars"]
+[node name="HPBar" type="ProgressBar" parent="Menu/InfoBars" unique_id=231970664]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 max_value = 200.0
@@ -317,7 +317,7 @@ script = ExtResource("9_r25ik")
 bar_label_text = "HP"
 bar_value = 192.0
 
-[node name="Label" type="RichTextLabel" parent="Menu/InfoBars/HPBar"]
+[node name="Label" type="RichTextLabel" parent="Menu/InfoBars/HPBar" unique_id=2101309526]
 layout_mode = 0
 offset_left = 40.0
 offset_right = 496.0
@@ -329,7 +329,7 @@ text = "HP"
 fit_content = true
 autowrap_mode = 0
 
-[node name="Value" type="RichTextLabel" parent="Menu/InfoBars/HPBar"]
+[node name="Value" type="RichTextLabel" parent="Menu/InfoBars/HPBar" unique_id=1064166880]
 layout_mode = 0
 offset_left = 1152.0
 offset_right = 1376.0
@@ -342,7 +342,7 @@ text = "[right]192"
 fit_content = true
 autowrap_mode = 0
 
-[node name="ManaBar" type="ProgressBar" parent="Menu/InfoBars"]
+[node name="ManaBar" type="ProgressBar" parent="Menu/InfoBars" unique_id=415939555]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_type_variation = &"TealBar"
@@ -353,7 +353,7 @@ script = ExtResource("9_r25ik")
 bar_label_text = "Mana"
 bar_value = 168.0
 
-[node name="Label" type="RichTextLabel" parent="Menu/InfoBars/ManaBar"]
+[node name="Label" type="RichTextLabel" parent="Menu/InfoBars/ManaBar" unique_id=1459740734]
 layout_mode = 0
 offset_left = 40.0
 offset_right = 496.0
@@ -365,7 +365,7 @@ text = "Mana"
 fit_content = true
 autowrap_mode = 0
 
-[node name="Value" type="RichTextLabel" parent="Menu/InfoBars/ManaBar"]
+[node name="Value" type="RichTextLabel" parent="Menu/InfoBars/ManaBar" unique_id=2094473062]
 layout_mode = 0
 offset_left = 1152.0
 offset_right = 1376.0
@@ -378,7 +378,7 @@ text = "[right]168"
 fit_content = true
 autowrap_mode = 0
 
-[node name="DualMenu" type="Control" parent="Menu"]
+[node name="DualMenu" type="Control" parent="Menu" unique_id=226739823]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -390,7 +390,7 @@ offset_bottom = 500.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LeftPanel" type="PanelContainer" parent="Menu/DualMenu"]
+[node name="LeftPanel" type="PanelContainer" parent="Menu/DualMenu" unique_id=357365003]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -404,46 +404,46 @@ offset_bottom = 92.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Margins" type="MarginContainer" parent="Menu/DualMenu/LeftPanel"]
+[node name="Margins" type="MarginContainer" parent="Menu/DualMenu/LeftPanel" unique_id=689174141]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 80
 
-[node name="VBox" type="VBoxContainer" parent="Menu/DualMenu/LeftPanel/Margins"]
+[node name="VBox" type="VBoxContainer" parent="Menu/DualMenu/LeftPanel/Margins" unique_id=47933406]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="Portrait" type="PanelContainer" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
+[node name="Portrait" type="PanelContainer" parent="Menu/DualMenu/LeftPanel/Margins/VBox" unique_id=41738513]
 z_index = 1
 custom_minimum_size = Vector2(0, 192)
 layout_mode = 2
 theme_type_variation = &"FramePanelContainer"
 
-[node name="Clipper" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Portrait"]
+[node name="Clipper" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Portrait" unique_id=1174443437]
 clip_contents = true
 layout_mode = 2
 
-[node name="PortraitTexture" type="TextureRect" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Portrait/Clipper"]
+[node name="PortraitTexture" type="TextureRect" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Portrait/Clipper" unique_id=1188106071]
 unique_name_in_owner = true
 z_index = -1
-layout_mode = 2
+layout_mode = 0
 offset_right = 354.0
 offset_bottom = 177.0
 texture = ExtResource("6_abown")
 expand_mode = 2
 
-[node name="BattleChoices" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox"]
+[node name="BattleChoices" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox" unique_id=1710942451]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 256)
 layout_mode = 2
 
-[node name="ChoiceAgent" type="ChoiceAgent" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
+[node name="ChoiceAgent" type="ChoiceAgent" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices" unique_id=1735755965]
 
-[node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
+[node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices" unique_id=612079726]
 clip_contents = false
-layout_mode = 2
+layout_mode = 0
 offset_right = 400.0
 offset_bottom = 60.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
@@ -451,9 +451,9 @@ bbcode_enabled = true
 text = "Skills"
 fit_content = true
 
-[node name="Items" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
+[node name="Items" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices" unique_id=88762964]
 clip_contents = false
-layout_mode = 2
+layout_mode = 0
 offset_top = 64.0
 offset_right = 400.0
 offset_bottom = 124.0
@@ -462,9 +462,9 @@ bbcode_enabled = true
 text = "Items"
 fit_content = true
 
-[node name="Swap" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
+[node name="Swap" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices" unique_id=596701945]
 clip_contents = false
-layout_mode = 2
+layout_mode = 0
 offset_top = 128.0
 offset_right = 400.0
 offset_bottom = 188.0
@@ -473,9 +473,9 @@ bbcode_enabled = true
 text = "Swap"
 fit_content = true
 
-[node name="Run" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices"]
+[node name="Run" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices" unique_id=1562156203]
 clip_contents = false
-layout_mode = 2
+layout_mode = 0
 offset_top = 192.0
 offset_right = 400.0
 offset_bottom = 252.0
@@ -484,7 +484,7 @@ bbcode_enabled = true
 text = "Run"
 fit_content = true
 
-[node name="RightPanel" type="PanelContainer" parent="Menu/DualMenu"]
+[node name="RightPanel" type="PanelContainer" parent="Menu/DualMenu" unique_id=1431526270]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -498,33 +498,27 @@ offset_bottom = 612.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Margins" type="MarginContainer" parent="Menu/DualMenu/RightPanel"]
+[node name="Margins" type="MarginContainer" parent="Menu/DualMenu/RightPanel" unique_id=583595351]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 80
 
-[node name="SkillsMenu" parent="Menu/DualMenu/RightPanel/Margins" instance=ExtResource("12_546eg")]
+[node name="SkillsMenu" parent="Menu/DualMenu/RightPanel/Margins" unique_id=812865551 instance=ExtResource("12_546eg")]
 layout_mode = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/DualMenu/RightPanel"]
-libraries = {
-&"": SubResource("AnimationLibrary_khfqk")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/DualMenu/RightPanel" unique_id=1626585516]
+libraries/ = SubResource("AnimationLibrary_khfqk")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/DualMenu"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/DualMenu" unique_id=2018812875]
 root_node = NodePath("../../..")
-libraries = {
-&"": SubResource("AnimationLibrary_730bq")
-}
+libraries/ = SubResource("AnimationLibrary_730bq")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_cwld1")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=804842659]
+libraries/ = SubResource("AnimationLibrary_cwld1")
 
-[node name="IntroBlack" type="ColorRect" parent="."]
+[node name="IntroBlack" type="ColorRect" parent="." unique_id=1945233525]
 top_level = true
 material = SubResource("ShaderMaterial_lgbmi")
 offset_right = 1920.0
