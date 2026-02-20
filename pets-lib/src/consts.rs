@@ -42,9 +42,9 @@ pub mod partycb {
     use super::*;
 
     // Movement physics stuff
-    pub const ACCELERATION: real = 3000.0;
-    pub const FRICTION: real = 2500.0;
-    pub const MAX_SPEED: real = 320.0;
+    pub const ACCELERATION: real = 750.0;
+    pub const FRICTION: real = 720.0;
+    pub const MAX_SPEED: real = 80.0;
     pub const SPRINT_COEFFICIENT: real = 1.5;
 
     // Distance between party members
@@ -59,7 +59,7 @@ pub mod dialogue {
     use super::*;
 
     /// Height above an interaction zone to display the prompt by default
-    pub const INTERACT_PROMPT_HEIGHT_OFFSET: real = 120.0;
+    pub const INTERACT_PROMPT_HEIGHT_OFFSET: real = 30.0;
 
     pub const DEFAULT_VOX: &str = "_";
 

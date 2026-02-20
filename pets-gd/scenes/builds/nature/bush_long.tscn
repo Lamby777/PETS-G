@@ -5,13 +5,14 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v4g8c"]
 radius = 3.9999847
-height = 24.0
+height = 22.0
 
 [node name="BushLong" unique_id=272096470 instance=ExtResource("1_0dd1m")]
 
 [node name="Sprite2D" parent="." index="0" unique_id=1045355536]
-position = Vector2(0, -6)
+position = Vector2(-11, -15)
 texture = ExtResource("2_hv6fc")
+centered = false
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="." index="1" unique_id=842598955]
 position = Vector2(0, -4)

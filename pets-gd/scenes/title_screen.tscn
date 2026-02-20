@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ben252ibtpchc"]
+[gd_scene format=3 uid="uid://ben252ibtpchc"]
 
 [ext_resource type="AudioStream" uid="uid://bu1akc5wvo0wo" path="res://assets/music/menu/titlebreeze.ogg" id="1_06t4m"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="3_gc66u"]
@@ -376,23 +376,24 @@ _data = {
 &"main_menu_outro": SubResource("Animation_m5j65")
 }
 
-[node name="TitleScreen" type="TitleScreen"]
+[node name="TitleScreen" type="TitleScreen" unique_id=1010433788]
+scale = Vector2(0.125, 0.125)
 
-[node name="TitleScreenMusic" type="AudioStreamPlayer" parent="."]
+[node name="TitleScreenMusic" type="AudioStreamPlayer" parent="." unique_id=1360366194]
 stream = ExtResource("1_06t4m")
 autoplay = true
 
-[node name="StartSound" type="AudioStreamPlayer" parent="."]
+[node name="StartSound" type="AudioStreamPlayer" parent="." unique_id=1071109482]
 stream = ExtResource("4_1uee5")
 
-[node name="MoveRight" type="Control" parent="."]
+[node name="MoveRight" type="Control" parent="." unique_id=1183775122]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("3_gc66u")
 
-[node name="Background" type="ColorRect" parent="MoveRight"]
+[node name="Background" type="ColorRect" parent="MoveRight" unique_id=1700401111]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -408,21 +409,21 @@ theme = ExtResource("3_gc66u")
 color = Color(0.0666667, 0.0666667, 0.105882, 1)
 metadata/_edit_lock_ = true
 
-[node name="Credits" type="Control" parent="MoveRight"]
+[node name="Credits" type="Control" parent="MoveRight" unique_id=1813236142]
 anchors_preset = 0
 offset_left = 960.0
 offset_top = 384.0
 offset_right = 1000.0
 offset_bottom = 424.0
 
-[node name="CreditsPanel" type="PanelContainer" parent="MoveRight/Credits"]
+[node name="CreditsPanel" type="PanelContainer" parent="MoveRight/Credits" unique_id=688522267]
 unique_name_in_owner = true
 layout_mode = 0
 offset_top = 768.0
 offset_right = 832.0
 offset_bottom = 1088.0
 
-[node name="BottomSlashPanel" type="Panel" parent="MoveRight"]
+[node name="BottomSlashPanel" type="Panel" parent="MoveRight" unique_id=799295899]
 layout_mode = 0
 offset_left = 1024.0
 offset_top = 1096.0
@@ -430,25 +431,24 @@ offset_right = 2009.99
 offset_bottom = 1394.0
 rotation = -0.261799
 
-[node name="Horizon" type="Control" parent="MoveRight"]
-layout_mode = 3
+[node name="Horizon" type="Control" parent="MoveRight" unique_id=941429939]
 anchors_preset = 0
 
-[node name="TopLine" type="Panel" parent="MoveRight/Horizon"]
+[node name="TopLine" type="Panel" parent="MoveRight/Horizon" unique_id=818577226]
 layout_mode = 0
 offset_left = -64.0
 offset_top = -72.0
 offset_right = 1984.0
 offset_bottom = 56.0
 
-[node name="BottomLine" type="Panel" parent="MoveRight/Horizon"]
+[node name="BottomLine" type="Panel" parent="MoveRight/Horizon" unique_id=1695014454]
 layout_mode = 0
 offset_left = -64.0
 offset_top = 1024.0
 offset_right = 1984.0
 offset_bottom = 1152.0
 
-[node name="SaveFilesPanel" type="PanelContainer" parent="MoveRight"]
+[node name="SaveFilesPanel" type="PanelContainer" parent="MoveRight" unique_id=181712453]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -459,23 +459,23 @@ offset_right = -33.0
 offset_bottom = 480.0
 grow_vertical = 2
 
-[node name="SaveFilesContainer" type="Control" parent="MoveRight/SaveFilesPanel"]
+[node name="SaveFilesContainer" type="Control" parent="MoveRight/SaveFilesPanel" unique_id=1806225204]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ChoiceAgent" type="ChoiceAgent" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
+[node name="ChoiceAgent" type="ChoiceAgent" parent="MoveRight/SaveFilesPanel/SaveFilesContainer" unique_id=193964288]
 tween_property = "position:y"
 disabled = true
 
-[node name="0" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
+[node name="0" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer" unique_id=919433714]
 custom_minimum_size = Vector2(194, 194)
-layout_mode = 2
+layout_mode = 0
 offset_right = 194.0
 offset_bottom = 194.0
 metadata/ChoiceAgentIgnore = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/0"]
-layout_mode = 2
+[node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/0" unique_id=840330147]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 170.0
@@ -485,15 +485,15 @@ theme_override_font_sizes/normal_font_size = 120
 bbcode_enabled = true
 text = "[center]-"
 
-[node name="1" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
+[node name="1" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer" unique_id=1123992023]
 custom_minimum_size = Vector2(194, 194)
-layout_mode = 2
+layout_mode = 0
 offset_left = 198.0
 offset_right = 392.0
 offset_bottom = 194.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/1"]
-layout_mode = 2
+[node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/1" unique_id=794098740]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 170.0
@@ -503,15 +503,15 @@ theme_override_font_sizes/normal_font_size = 120
 bbcode_enabled = true
 text = "[center]1"
 
-[node name="2" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
+[node name="2" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer" unique_id=738413263]
 custom_minimum_size = Vector2(194, 194)
-layout_mode = 2
+layout_mode = 0
 offset_left = 396.0
 offset_right = 590.0
 offset_bottom = 194.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/2"]
-layout_mode = 2
+[node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/2" unique_id=760623558]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 170.0
@@ -521,15 +521,15 @@ theme_override_font_sizes/normal_font_size = 120
 bbcode_enabled = true
 text = "[center]2"
 
-[node name="3" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer"]
+[node name="3" type="Panel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer" unique_id=210111800]
 custom_minimum_size = Vector2(194, 194)
-layout_mode = 2
+layout_mode = 0
 offset_left = 594.0
 offset_right = 788.0
 offset_bottom = 194.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/3"]
-layout_mode = 2
+[node name="RichTextLabel" type="RichTextLabel" parent="MoveRight/SaveFilesPanel/SaveFilesContainer/3" unique_id=558641131]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 170.0
@@ -539,12 +539,10 @@ theme_override_font_sizes/normal_font_size = 120
 bbcode_enabled = true
 text = "[center]3"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MoveRight/SaveFilesPanel"]
-libraries = {
-&"": SubResource("AnimationLibrary_i3drf")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MoveRight/SaveFilesPanel" unique_id=608967877]
+libraries/ = SubResource("AnimationLibrary_i3drf")
 
-[node name="SlashPanel2" type="Panel" parent="MoveRight"]
+[node name="SlashPanel2" type="Panel" parent="MoveRight" unique_id=197346251]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 1736.0
@@ -552,7 +550,7 @@ offset_right = 1286.0
 offset_bottom = 2359.01
 rotation = -2.09439
 
-[node name="SlashPanel" type="Panel" parent="MoveRight"]
+[node name="SlashPanel" type="Panel" parent="MoveRight" unique_id=1738648483]
 layout_mode = 0
 offset_left = -210.0
 offset_top = 1066.0
@@ -560,18 +558,17 @@ offset_right = 1036.0
 offset_bottom = 1689.0
 rotation = -1.39589
 
-[node name="MenuChoices" type="Control" parent="MoveRight"]
+[node name="MenuChoices" type="Control" parent="MoveRight" unique_id=1684808600]
 unique_name_in_owner = true
-layout_mode = 3
 anchors_preset = 0
 offset_left = 64.0
 offset_top = 320.0
 offset_right = 104.0
 offset_bottom = 360.0
 
-[node name="ChoiceAgent" type="ChoiceAgent" parent="MoveRight/MenuChoices"]
+[node name="ChoiceAgent" type="ChoiceAgent" parent="MoveRight/MenuChoices" unique_id=144671535]
 
-[node name="Play" type="RichTextLabel" parent="MoveRight/MenuChoices"]
+[node name="Play" type="RichTextLabel" parent="MoveRight/MenuChoices" unique_id=669816840]
 clip_contents = false
 layout_mode = 0
 offset_right = 720.0
@@ -586,7 +583,7 @@ theme_override_font_sizes/normal_font_size = 68
 bbcode_enabled = true
 text = "MAINMENU_OPTION_PLAY"
 
-[node name="Options" type="RichTextLabel" parent="MoveRight/MenuChoices"]
+[node name="Options" type="RichTextLabel" parent="MoveRight/MenuChoices" unique_id=692580095]
 clip_contents = false
 layout_mode = 0
 offset_top = 128.0
@@ -602,7 +599,7 @@ theme_override_font_sizes/normal_font_size = 68
 bbcode_enabled = true
 text = "MAINMENU_OPTION_OPTIONS"
 
-[node name="Credits" type="RichTextLabel" parent="MoveRight/MenuChoices"]
+[node name="Credits" type="RichTextLabel" parent="MoveRight/MenuChoices" unique_id=1194052786]
 clip_contents = false
 layout_mode = 0
 offset_top = 256.0
@@ -618,7 +615,7 @@ theme_override_font_sizes/normal_font_size = 68
 bbcode_enabled = true
 text = "MAINMENU_OPTION_CREDITS"
 
-[node name="Quit" type="RichTextLabel" parent="MoveRight/MenuChoices"]
+[node name="Quit" type="RichTextLabel" parent="MoveRight/MenuChoices" unique_id=1567849897]
 clip_contents = false
 layout_mode = 0
 offset_top = 384.0
@@ -634,7 +631,7 @@ theme_override_font_sizes/normal_font_size = 68
 bbcode_enabled = true
 text = "MAINMENU_OPTION_QUIT"
 
-[node name="BlackFade" type="ColorRect" parent="MoveRight"]
+[node name="BlackFade" type="ColorRect" parent="MoveRight" unique_id=1845055361]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_tovj7")
 layout_mode = 1
@@ -652,8 +649,6 @@ theme = ExtResource("3_gc66u")
 color = Color(0.0666667, 0.0666667, 0.105882, 1)
 metadata/_edit_lock_ = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MoveRight"]
-libraries = {
-&"": SubResource("AnimationLibrary_qpnwk")
-}
-autoplay = "main_menu_intro"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MoveRight" unique_id=1891241809]
+libraries/ = SubResource("AnimationLibrary_qpnwk")
+autoplay = &"main_menu_intro"
