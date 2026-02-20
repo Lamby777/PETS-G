@@ -33,7 +33,7 @@ window/size/viewport_height=135
 window/size/mode=3
 window/size/resizable=false
 window/size/borderless=true
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
 [dotnet]

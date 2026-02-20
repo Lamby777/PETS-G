@@ -19,9 +19,12 @@
 [ext_resource type="Script" uid="uid://bhcli7lkiytgt" path="res://dialogue/becky_intro.gd" id="17_5lkkw"]
 [ext_resource type="Texture2D" uid="uid://biqp4hkij62ga" path="res://assets/textures/char/Becky.png" id="18_5lkkw"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5lkkw"]
+size = Vector2(96, 64)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dljt4"]
-radius = 24.0
-height = 64.0
+radius = 3.9999967
+height = 16.0
 
 [node name="Room2" unique_id=778970384 instance=ExtResource("1_ls6vf")]
 script = ExtResource("2_t8063")
@@ -74,8 +77,11 @@ metadata/_edit_lock_ = true
 position = Vector2(1176, 136)
 
 [node name="WaterZone" parent="." index="2" unique_id=1574052547 instance=ExtResource("3_bqhqn")]
-position = Vector2(416, 1056)
-scale = Vector2(3, -2)
+position = Vector2(56, 232)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterZone" index="0" unique_id=286297960]
+position = Vector2(48, 32)
+shape = SubResource("RectangleShape2D_5lkkw")
 
 [node name="TeleporterDemo" type="Node2D" parent="." index="3" unique_id=509368976]
 y_sort_enabled = true
@@ -134,16 +140,7 @@ position = Vector2(336, 352)
 y_sort_enabled = true
 
 [node name="TreeDec1_0" parent="TreeBarrier" index="0" unique_id=1056077758 instance=ExtResource("7_b7alc")]
-position = Vector2(-688, 104)
-
-[node name="TreeDec1_1" parent="TreeBarrier" index="1" unique_id=1377542954 instance=ExtResource("7_b7alc")]
-position = Vector2(-576, 104)
-
-[node name="TreeDec1_2" parent="TreeBarrier" index="2" unique_id=2085245832 instance=ExtResource("7_b7alc")]
-position = Vector2(-464, 104)
-
-[node name="TreeDec1_3" parent="TreeBarrier" index="3" unique_id=1364824073 instance=ExtResource("7_b7alc")]
-position = Vector2(-352, 104)
+position = Vector2(-84, 34)
 
 [node name="EthanHouse" type="Node2D" parent="." index="9" unique_id=2056801796]
 y_sort_enabled = true
@@ -186,10 +183,9 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_dljt4")
 
 [node name="BeckyContainer" type="Node2D" parent="." index="12" unique_id=2008613247]
-position = Vector2(-1216, 752)
+position = Vector2(140, -66)
 
 [node name="Becky" type="Sprite2D" parent="BeckyContainer" index="0" unique_id=1569214727]
-scale = Vector2(4, 4)
 texture = ExtResource("18_5lkkw")
 hframes = 2
 
@@ -198,6 +194,6 @@ interaction_script = ExtResource("17_5lkkw")
 prompt_translation_key = "Talk"
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="BeckyContainer/InteractionZone" index="1" unique_id=1020753202]
-position = Vector2(0, 32)
+position = Vector2(0, 8)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_dljt4")

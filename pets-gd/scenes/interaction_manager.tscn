@@ -10,7 +10,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.1, 0.1)
 
 [node name="PanelContainer" type="PanelContainer" parent="Prompt" unique_id=1009591782]
 layout_mode = 1

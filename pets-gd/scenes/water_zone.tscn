@@ -1,9 +1,5 @@
 [gd_scene format=3 uid="uid://xena0e3suwve"]
 
-[node name="WaterZone" type="WaterZone" groups=["water"]]
+[node name="WaterZone" type="WaterZone" unique_id=1648142885 groups=["water"]]
 collision_layer = 16
 collision_mask = 2
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-scale = Vector2(26, 26)
-polygon = PackedVector2Array(-2.46154, -2.46154, 2.46154, -2.46154, 2.46154, 2.46154, -2.46154, 2.46154)
