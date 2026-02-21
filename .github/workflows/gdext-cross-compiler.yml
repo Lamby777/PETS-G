@@ -1,0 +1,10 @@
+# GitHub Actions example
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ufoot/godot-rust-cross-compiler
+    steps:
+      - uses: actions/checkout@v4
+      - run: make cross
+      - run: make export
