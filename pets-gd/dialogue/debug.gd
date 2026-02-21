@@ -45,18 +45,18 @@ func _start() -> void:
             var picked = await dbox().say_as_with_choices(
                 "DG_SPK_CASCADE", [
                     "Who do you want to add?",
-                ], [
-                    "...",
-                    "Ethan",
-                    "Siva",
-                    "Terra",
-                    "Mira",
-                    "Lyembo",
-                    "Quolo",
-                    "Leo",
-                    "Dylan",
-                    "Poof!",
-                ]
+                ], {
+                    "...": "...",
+                    "E": "Ethan",
+                    "S": "Siva",
+                    "T": "Terra",
+                    "AC": "Mira",
+                    "L": "Lyembo",
+                    "Q": "Quolo",
+                    "Leo": "Leo",
+                    "Dylan": "Dylan",
+                    "Poof!": "Poof!",
+                }
             )
 
             match picked["value"]:
