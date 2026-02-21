@@ -17,5 +17,6 @@ jobs:
             image: ufoot/godot-rust-cross-compiler
         steps:
             - uses: actions/checkout@v4
+            - uses: dtolnay/rust-toolchain@nightly
             - run: make cross
             - run: make export
