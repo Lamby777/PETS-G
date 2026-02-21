@@ -135,10 +135,10 @@ collision_mask = 9
 interaction_script = ExtResource("8_28v1w")
 
 [node name="TreeCon1_0" parent="." index="6" unique_id=161318453 instance=ExtResource("8_obhwm")]
-position = Vector2(168, 400)
+position = Vector2(-42, 192)
 
 [node name="TreeCon1_1" parent="." index="7" unique_id=1325805775 instance=ExtResource("8_obhwm")]
-position = Vector2(336, 352)
+position = Vector2(139, 62)
 
 [node name="TreeBarrier" type="Node2D" parent="." index="8" unique_id=628575460]
 y_sort_enabled = true

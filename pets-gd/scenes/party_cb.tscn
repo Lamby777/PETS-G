@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b0rlrppekv4vg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubtmb"]
-size = Vector2(12, 6)
+size = Vector2(11, 5)
 
 [node name="PartyCB" type="PartyCB" unique_id=1894713709]
 y_sort_enabled = true
@@ -9,7 +9,8 @@ collision_layer = 2
 motion_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=114191905]
-position = Vector2(0, 1)
+position = Vector2(0.5, -2.5)
 shape = SubResource("RectangleShape2D_ubtmb")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=350855433]
+position = Vector2(0, -8)

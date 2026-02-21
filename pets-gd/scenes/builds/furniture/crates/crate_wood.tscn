@@ -1,17 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkxcjrnsor4et"]
+[gd_scene format=3 uid="uid://dkxcjrnsor4et"]
 
 [ext_resource type="PackedScene" uid="uid://h1du5kblkv2o" path="res://scenes/builds/Base Build.tscn" id="1_8gles"]
 [ext_resource type="Texture2D" uid="uid://re2at8pi8pb8" path="res://assets/textures/builds/furniture/box_wood.png" id="2_gxbso"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kjyk5"]
-size = Vector2(64, 32)
+size = Vector2(9, 7)
 
-[node name="WoodenCrate" instance=ExtResource("1_8gles")]
+[node name="WoodenCrate" unique_id=1201838380 instance=ExtResource("1_8gles")]
+position = Vector2(0, -3)
 
-[node name="Sprite2D" parent="." index="0"]
-position = Vector2(0, 4)
+[node name="Sprite2D" parent="." index="0" unique_id=1045355536]
+position = Vector2(0, -3)
 texture = ExtResource("2_gxbso")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-position = Vector2(0, 32)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1" unique_id=537047517]
+position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_kjyk5")

@@ -235,9 +235,13 @@ func _ready():
     active = true
 "
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyhw3"]
+size = Vector2(11, 5)
+
 [node name="PCharNode" type="PCharNode" unique_id=1505378563]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2134180221]
+position = Vector2(0, -12)
 texture = ExtResource("1_uyhw3")
 offset = Vector2(0, -2)
 hframes = 8
@@ -258,9 +262,10 @@ parameters/Wade/blend_position = Vector2(-0.279323, 0.402834)
 script = SubResource("GDScript_aabm2")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=116477330]
+position = Vector2(0, -12)
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Area2D" unique_id=261962496]
-position = Vector2(0, 7)
-polygon = PackedVector2Array(-5, -2, 6, -2, 6, 3, -5, 3)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=568321097]
+position = Vector2(0.5, 7.5)
+shape = SubResource("RectangleShape2D_uyhw3")

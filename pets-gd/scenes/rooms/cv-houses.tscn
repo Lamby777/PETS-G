@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://desphmjvj0i4t" path="res://scenes/builds/furniture/crates/crate_wood_trio.tscn" id="6_4wjmx"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="9_jkwkm"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jkwkm"]
+size = Vector2(37, 17)
+
 [node name="Room" unique_id=154986745 instance=ExtResource("1_t4iqd")]
 script = ExtResource("2_dkgsg")
 room_id = "CV_Houses"
@@ -59,46 +62,52 @@ beacon_id = "EthanHouseExit"
 target_beacon_room_name = "cv-outdoors"
 target_beacon = "EthanHouseEntrance"
 prompt_translation_key = "Exit"
-position = Vector2(-416, 32)
+position = Vector2(-104, 8)
 scale = Vector2(0.5, 0.5)
 
 [node name="InteractionZone" parent="." index="2" unique_id=2143399470 instance=ExtResource("2_flkym")]
 interaction_script = ExtResource("4_cj4nk")
 prompt_translation_key = "Check"
-position = Vector2(-104, -56)
-scale = Vector2(1.26, 0.5)
+position = Vector2(-20, -20)
+
+[node name="CollisionShape2D" parent="InteractionZone" index="0" unique_id=2069910386]
+position = Vector2(4.5, 2.5)
+shape = SubResource("RectangleShape2D_jkwkm")
 
 [node name="EthanBedroomEntrance" parent="." index="3" unique_id=221730513 instance=ExtResource("2_flkym")]
 beacon_id = "EthanBedroomEntrance"
 target_beacon = "EthanBedroomExit"
 prompt_translation_key = "Enter"
-position = Vector2(416, 32)
+position = Vector2(104, 8)
 scale = Vector2(0.5, 0.5)
 
 [node name="EthanBedroomExit" parent="." index="4" unique_id=115810288 instance=ExtResource("2_flkym")]
 beacon_id = "EthanBedroomExit"
 target_beacon = "EthanBedroomEntrance"
 prompt_translation_key = "Exit"
-position = Vector2(416, 392)
+position = Vector2(104, 240)
 scale = Vector2(0.5, 0.5)
 
 [node name="EthanBed" parent="." index="5" unique_id=640501580 instance=ExtResource("4_3efre")]
 unique_name_in_owner = true
-position = Vector2(664, 416)
+position = Vector2(140, 253)
 
 [node name="WoodenCrate" parent="." index="6" unique_id=994761206 instance=ExtResource("5_dgprv")]
-position = Vector2(-176, -88)
+position = Vector2(-27, -16)
 
 [node name="WoodenCrateTrio" parent="." index="7" unique_id=655786007 instance=ExtResource("6_4wjmx")]
-position = Vector2(-56, -88)
+position = Vector2(-10, -16)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." index="8" unique_id=1567875317]
-offset_left = -320.0
-offset_top = 128.0
-offset_right = 320.0
-offset_bottom = 192.0
+offset_left = -184.0
+offset_top = 56.0
+offset_right = 184.0
+offset_bottom = 120.0
 theme = ExtResource("9_jkwkm")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[wave amp=100 freq=-5][shake level=20]welcome to the hotdog room!!!!1!!1!"
 vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[editable path="InteractionZone"]
