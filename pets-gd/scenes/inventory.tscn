@@ -61,7 +61,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("InventoryText:position")
+tracks/4/path = NodePath("PanelContainer/InventoryTextContainer:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -125,7 +125,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("InventoryText:position")
+tracks/4/path = NodePath("PanelContainer/InventoryTextContainer:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -190,56 +190,48 @@ offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=467307691]
+layout_mode = 0
+offset_top = -216.0
+offset_right = 1920.0
+offset_bottom = -16.0
+
+[node name="InventoryTextContainer" type="BoxContainer" parent="PanelContainer" unique_id=602405121]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+theme_override_constants/separation = 120
+
+[node name="ItemName" type="MarginContainer" parent="PanelContainer/InventoryTextContainer" unique_id=1617539614]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/InventoryTextContainer/ItemName" unique_id=1280420671]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 78
+bbcode_enabled = true
+text = "Item Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemDesc" type="MarginContainer" parent="PanelContainer/InventoryTextContainer" unique_id=816681533]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/InventoryTextContainer/ItemDesc" unique_id=1558246376]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 39
+bbcode_enabled = true
+text = "Item Description Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Ticker" type="Panel" parent="." unique_id=1764272134]
 layout_mode = 0
 offset_left = 928.0
 offset_top = -160.0
 offset_right = 992.0
 offset_bottom = -16.0
-
-[node name="InventoryText" type="BoxContainer" parent="." unique_id=602405121]
-unique_name_in_owner = true
-clip_contents = true
-custom_minimum_size = Vector2(1920, 168)
-layout_mode = 0
-offset_top = -176.0
-offset_right = 1920.0
-offset_bottom = 14.0
-theme_override_constants/separation = 0
-
-[node name="ItemName" type="MarginContainer" parent="InventoryText" unique_id=1617539614]
-custom_minimum_size = Vector2(900, 0)
-layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="RichTextLabel" type="RichTextLabel" parent="InventoryText/ItemName" unique_id=1280420671]
-layout_mode = 2
-bbcode_enabled = true
-text = "Item Name"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MidPadding" type="MarginContainer" parent="InventoryText" unique_id=491883604]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-
-[node name="ItemDesc" type="MarginContainer" parent="InventoryText" unique_id=816681533]
-custom_minimum_size = Vector2(900, 0)
-layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="RichTextLabel" type="RichTextLabel" parent="InventoryText/ItemDesc" unique_id=1558246376]
-layout_mode = 2
-bbcode_enabled = true
-text = "Item Description Words Words Words Words Words Words Words"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Line" type="Panel" parent="." unique_id=1716164917]
 layout_mode = 1

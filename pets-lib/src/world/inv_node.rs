@@ -22,7 +22,7 @@ pub struct InventoryNode {
     #[init(node = "%ItemsRow")]
     row: OnReady<Gd<HBoxContainer>>,
 
-    #[init(node = "%InventoryText")]
+    #[init(node = "%InventoryTextContainer")]
     text_container: OnReady<Gd<BoxContainer>>,
 }
 
