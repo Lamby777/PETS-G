@@ -15,6 +15,8 @@ use super::pchar_node::PCharNode;
 /// The player will stop being controlled once it reaches this
 /// distance from the cutscene target.
 pub const CUTSCENE_MOTION_CLOSE_ENOUGH: f32 = 1.0;
+pub const CUTSCENE_MOTION_CLOSE_ENOUGH_SQUARED: f32 =
+    CUTSCENE_MOTION_CLOSE_ENOUGH * CUTSCENE_MOTION_CLOSE_ENOUGH;
 
 pub struct Inputs {
     pub input_vector: Vector2,

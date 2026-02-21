@@ -4,7 +4,7 @@ use godot::classes::{
 use godot::prelude::*;
 
 use crate::common::*;
-use crate::world::partycb::CUTSCENE_MOTION_CLOSE_ENOUGH;
+use crate::world::partycb::CUTSCENE_MOTION_CLOSE_ENOUGH_SQUARED;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 struct AnimOptions {
@@ -85,13 +85,15 @@ impl WalkingEnemy {
         let pcb_pos = pcb().get_position();
         let own_pos = base.get_position();
 
+        // TODO: instead of measuring and stopping, just prevent running this
+        // function when the enemy reaches the player and a battle is about
+        // to begin
         let target_pos = (pcb_pos - own_pos).normalized_or_zero();
-        // TODO: update all uses of `distance_to` to be the squared version (perf+)
-        if own_pos.distance_to(pcb_pos) < CUTSCENE_MOTION_CLOSE_ENOUGH {
+        if own_pos.distance_squared_to(pcb_pos)
+            < CUTSCENE_MOTION_CLOSE_ENOUGH_SQUARED
+        {
             return;
         }
-
-        dbg!(&target_pos);
 
         base.set_velocity(target_pos * spd);
         base.move_and_slide();
