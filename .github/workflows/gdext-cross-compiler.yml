@@ -1,10 +1,21 @@
 # GitHub Actions example
+name: Godot Cross Compilation
+
+on:
+    push:
+        branches: ["master"]
+    pull_request:
+        branches: ["master"]
+
+env:
+    CARGO_TERM_COLOR: always
+
 jobs:
-  build:
+    build:
     runs-on: ubuntu-latest
     container:
-      image: ufoot/godot-rust-cross-compiler
+        image: ufoot/godot-rust-cross-compiler
     steps:
-      - uses: actions/checkout@v4
-      - run: make cross
-      - run: make export
+        - uses: actions/checkout@v4
+        - run: make cross
+        - run: make export
