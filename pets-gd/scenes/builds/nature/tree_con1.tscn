@@ -10,10 +10,9 @@ height = 10.0
 [node name="TreeCon1" unique_id=1081229674 instance=ExtResource("1_ujyat")]
 
 [node name="Sprite2D" parent="." index="0" unique_id=1045355536]
-position = Vector2(0, -11)
+position = Vector2(0, -13)
 texture = ExtResource("2_facsr")
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="." index="1" unique_id=1361472606]
-position = Vector2(0, 2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_f4yxf")
