@@ -104,6 +104,7 @@ libraries/ = SubResource("AnimationLibrary_fv7du")
 [node name="BattleLayer" type="CanvasLayer" parent="." unique_id=1211046264]
 
 [node name="YSort" type="Node2D" parent="." unique_id=533369481]
+unique_name_in_owner = true
 y_sort_enabled = true
 
 [node name="PartyCB" parent="YSort" unique_id=111507039 groups=["partycb"] instance=ExtResource("2_r6tgb")]

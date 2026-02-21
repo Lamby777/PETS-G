@@ -1,7 +1,7 @@
 extends Quest
 
 func room_id():
-    return $"../../YSort/Room".room_id
+    return %YSort/Room.room_id
 
 func _ready():
     # for pchar in ["Ethan", "Siva", "Terra", "Mira"]:
