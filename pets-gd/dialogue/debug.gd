@@ -8,15 +8,14 @@ func _start() -> void:
         ], [
             "Party",
             "Item",
-            "Battle",
-            "Pauses",
+            # "Battle",
             "Bye",
         ]
     )
 
     match choice["value"]:
-        "Battle": 
-            World.start_battle("ANonnyMouse")
+        # "Battle": 
+        #     World.start_battle("ANonnyMouse")
 
         "Item":
             choice = await dbox().say_as_with_choices(
@@ -75,19 +74,3 @@ func _start() -> void:
                     pcb().push_pchar_gd(picked_value)
                     await dbox().say_as("DG_SPK_CASCADE", "Welcome to the team" +
                         (", ... me!" if picked_value == "Mira" else "!"))
-               
-
-        "Pauses":
-            await dbox().say_as("Isaac", [
-"""Flint...​​​​​​​​​​
-Where did you last see Hinawa?"""
-            ])
-            await dbox().say_as("DG_SPK_CASCADE", [
-"""This next part will print v​e​r​r​r​r​r​y
-s​​​l​​​o​​​o​​​o​​​o​​​o​​​w​​​l​​​y."""
-            ])
-
-        "Bye":
-            await dbox().say_as("DG_SPK_CASCADE", [
-                "See ya!"
-            ])
