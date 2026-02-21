@@ -6,11 +6,10 @@
 [node name="Build" unique_id=1491317545 instance=ExtResource("1_ghgfl")]
 
 [node name="Sprite2D" parent="." index="0" unique_id=1045355536]
-position = Vector2(0, 39)
+position = Vector2(0, 29)
 texture = ExtResource("2_vh8qi")
 offset = Vector2(0, -80)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1" unique_id=188144425]
-position = Vector2(0, 10)
 build_mode = 1
-polygon = PackedVector2Array(-55, 2, 35, 2, 55, -18, -30, -18)
+polygon = PackedVector2Array(-55, 2, 42, 2, 62, -18, -30, -18)
