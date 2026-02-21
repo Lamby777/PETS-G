@@ -64,8 +64,8 @@ impl InventoryNode {
 
         let name = tr!("ITEM_NAME_{a}", a = item_id);
         let desc = tr!("ITEM_DESC_{a}", a = item_id);
-        name_txt.set_text(&format!("[center]{name}[/center]").to_godot());
-        desc_txt.set_text(&format!("[center]{desc}[/center]").to_godot());
+        name_txt.set_text(&format!("{name}").to_godot());
+        desc_txt.set_text(&format!("{desc}").to_godot());
     }
 
     #[func]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://clpj4pxq1ulin"]
+[gd_scene format=3 uid="uid://clpj4pxq1ulin"]
 
 [ext_resource type="Shader" uid="uid://cakivekftxu5d" path="res://themes/opacity.gdshader" id="1_ghbm4"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_yb1iv"]
@@ -177,12 +177,12 @@ _data = {
 &"shift_right": SubResource("Animation_qnask")
 }
 
-[node name="InventoryNode" type="InventoryNode"]
+[node name="InventoryNode" type="InventoryNode" unique_id=699750349]
 offset_right = 1920.0
 offset_bottom = 1080.0
 theme = ExtResource("1_yb1iv")
 
-[node name="BGDarken" type="ColorRect" parent="."]
+[node name="BGDarken" type="ColorRect" parent="." unique_id=2025047578]
 material = SubResource("ShaderMaterial_j36xs")
 layout_mode = 0
 offset_right = 1920.0
@@ -190,24 +190,24 @@ offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="Ticker" type="Panel" parent="."]
+[node name="Ticker" type="Panel" parent="." unique_id=1764272134]
 layout_mode = 0
 offset_left = 928.0
 offset_top = -160.0
 offset_right = 992.0
 offset_bottom = -16.0
 
-[node name="InventoryText" type="BoxContainer" parent="."]
+[node name="InventoryText" type="BoxContainer" parent="." unique_id=602405121]
 unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(1920, 168)
 layout_mode = 0
 offset_top = -176.0
 offset_right = 1920.0
-offset_bottom = -8.0
+offset_bottom = 14.0
 theme_override_constants/separation = 0
 
-[node name="ItemName" type="MarginContainer" parent="InventoryText"]
+[node name="ItemName" type="MarginContainer" parent="InventoryText" unique_id=1617539614]
 custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 32
@@ -215,18 +215,18 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="RichTextLabel" type="RichTextLabel" parent="InventoryText/ItemName"]
+[node name="RichTextLabel" type="RichTextLabel" parent="InventoryText/ItemName" unique_id=1280420671]
 layout_mode = 2
-size_flags_vertical = 4
 bbcode_enabled = true
-text = "[center]Item Name"
-fit_content = true
+text = "Item Name"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="MidPadding" type="MarginContainer" parent="InventoryText"]
+[node name="MidPadding" type="MarginContainer" parent="InventoryText" unique_id=491883604]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 
-[node name="ItemDesc" type="MarginContainer" parent="InventoryText"]
+[node name="ItemDesc" type="MarginContainer" parent="InventoryText" unique_id=816681533]
 custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 32
@@ -234,77 +234,74 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="RichTextLabel" type="RichTextLabel" parent="InventoryText/ItemDesc"]
+[node name="RichTextLabel" type="RichTextLabel" parent="InventoryText/ItemDesc" unique_id=1558246376]
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "[center]Item Description Words Words Words Words Words Words Words"
-fit_content = true
+text = "Item Description Words Words Words Words Words Words Words"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Line" type="Panel" parent="."]
+[node name="Line" type="Panel" parent="." unique_id=1716164917]
 layout_mode = 1
 offset_left = 2072.0
 offset_top = 200.0
 offset_right = 4024.0
 offset_bottom = 256.0
 
-[node name="SlideControl" type="Control" parent="Line"]
+[node name="SlideControl" type="Control" parent="Line" unique_id=330723011]
 anchors_preset = 0
 offset_left = 2400.0
 offset_right = 2440.0
 offset_bottom = 40.0
 
-[node name="ItemsRow" type="HBoxContainer" parent="Line/SlideControl"]
+[node name="ItemsRow" type="HBoxContainer" parent="Line/SlideControl" unique_id=1921336219]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(2272, 160)
-layout_mode = 2
+layout_mode = 0
 offset_left = -160.0
 offset_top = -40.0
 offset_right = 2112.0
 offset_bottom = 120.0
 metadata/_edit_lock_ = true
 
-[node name="ItemContainer1" parent="Line/SlideControl/ItemsRow" instance=ExtResource("3_8obkk")]
+[node name="ItemContainer1" parent="Line/SlideControl/ItemsRow" unique_id=1550541023 instance=ExtResource("3_8obkk")]
 layout_mode = 2
 
-[node name="ItemContainer2" parent="Line/SlideControl/ItemsRow" instance=ExtResource("3_8obkk")]
+[node name="ItemContainer2" parent="Line/SlideControl/ItemsRow" unique_id=1453837398 instance=ExtResource("3_8obkk")]
 layout_mode = 2
 
-[node name="ItemContainer3" parent="Line/SlideControl/ItemsRow" instance=ExtResource("3_8obkk")]
+[node name="ItemContainer3" parent="Line/SlideControl/ItemsRow" unique_id=1060068683 instance=ExtResource("3_8obkk")]
 layout_mode = 2
 
-[node name="ItemContainer4" parent="Line/SlideControl/ItemsRow" instance=ExtResource("3_8obkk")]
+[node name="ItemContainer4" parent="Line/SlideControl/ItemsRow" unique_id=1736929429 instance=ExtResource("3_8obkk")]
 layout_mode = 2
 
-[node name="ItemContainer5" parent="Line/SlideControl/ItemsRow" instance=ExtResource("3_8obkk")]
+[node name="ItemContainer5" parent="Line/SlideControl/ItemsRow" unique_id=286372820 instance=ExtResource("3_8obkk")]
 layout_mode = 2
 
-[node name="ItemContainer6" parent="Line/SlideControl/ItemsRow" instance=ExtResource("3_8obkk")]
+[node name="ItemContainer6" parent="Line/SlideControl/ItemsRow" unique_id=1871629777 instance=ExtResource("3_8obkk")]
 layout_mode = 2
 
-[node name="ItemContainer7" parent="Line/SlideControl/ItemsRow" instance=ExtResource("3_8obkk")]
+[node name="ItemContainer7" parent="Line/SlideControl/ItemsRow" unique_id=2084960371 instance=ExtResource("3_8obkk")]
 layout_mode = 2
 
-[node name="ItemContainer8" parent="Line/SlideControl/ItemsRow" instance=ExtResource("3_8obkk")]
+[node name="ItemContainer8" parent="Line/SlideControl/ItemsRow" unique_id=243416979 instance=ExtResource("3_8obkk")]
 layout_mode = 2
 
-[node name="ItemContainer9" parent="Line/SlideControl/ItemsRow" instance=ExtResource("3_8obkk")]
+[node name="ItemContainer9" parent="Line/SlideControl/ItemsRow" unique_id=962043517 instance=ExtResource("3_8obkk")]
 layout_mode = 2
 
-[node name="ItemContainer10" parent="Line/SlideControl/ItemsRow" instance=ExtResource("3_8obkk")]
+[node name="ItemContainer10" parent="Line/SlideControl/ItemsRow" unique_id=1456838934 instance=ExtResource("3_8obkk")]
 layout_mode = 2
 
-[node name="ItemContainer11" parent="Line/SlideControl/ItemsRow" instance=ExtResource("3_8obkk")]
+[node name="ItemContainer11" parent="Line/SlideControl/ItemsRow" unique_id=2114086081 instance=ExtResource("3_8obkk")]
 layout_mode = 2
 
-[node name="ItemContainer12" parent="Line/SlideControl/ItemsRow" instance=ExtResource("3_8obkk")]
+[node name="ItemContainer12" parent="Line/SlideControl/ItemsRow" unique_id=384756971 instance=ExtResource("3_8obkk")]
 layout_mode = 2
 
-[node name="ItemContainer13" parent="Line/SlideControl/ItemsRow" instance=ExtResource("3_8obkk")]
+[node name="ItemContainer13" parent="Line/SlideControl/ItemsRow" unique_id=1928269106 instance=ExtResource("3_8obkk")]
 layout_mode = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_28ffd")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=109532149]
+libraries/ = SubResource("AnimationLibrary_28ffd")
