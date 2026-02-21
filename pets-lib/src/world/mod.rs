@@ -100,15 +100,27 @@ impl World {
         World::singleton().get_node_as("YSort/Room")
     }
 
-    pub fn change_room(&mut self, new_room: Gd<Node2D>) {
+    pub fn get_beacon(id: impl Into<GString>) -> Gd<InteractionZone> {
+        let id = id.into();
+
+        // get all beacons in the room
+        let all_beacons =
+            children_of_type::<InteractionZone, _>(&World::singleton());
+
+        // find the (first?) one with the matching id
+        all_beacons
+            .into_iter()
+            .find(|v| v.bind().beacon_id == id)
+            .unwrap_or_else(|| panic!("beacon id `{id}` not found"))
+    }
+
+    /// Free the old room and replace it with the new one
+    pub fn change_room(&mut self, mut new_room: Gd<Node2D>) {
         let mut old_room = Self::room();
-
-        for mut child in old_room.get_children().iter_shared() {
-            old_room.remove_child(&child);
-            child.queue_free();
-        }
-
-        old_room.replace_by(&new_room);
+        old_room.set_name("RoomDeleted");
+        new_room.set_name("Room");
+        old_room.add_sibling(&new_room);
+        old_room.queue_free();
 
         let mut world = self.base_mut();
         world.call_deferred("reconnect_musiczones", &[]);

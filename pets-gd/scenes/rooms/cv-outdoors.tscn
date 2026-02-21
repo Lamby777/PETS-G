@@ -26,7 +26,7 @@ size = Vector2(96, 64)
 radius = 3.9999967
 height = 16.0
 
-[node name="Room2" unique_id=778970384 instance=ExtResource("1_ls6vf")]
+[node name="Room" unique_id=778970384 instance=ExtResource("1_ls6vf")]
 script = ExtResource("2_t8063")
 room_id = "CV_Outdoors"
 
@@ -88,13 +88,15 @@ shape = SubResource("RectangleShape2D_5lkkw")
 y_sort_enabled = true
 
 [node name="TPRightIn" parent="TeleporterDemo" index="0" unique_id=598833320 instance=ExtResource("4_vwc65")]
-beacon_target = "TeleporterDemo/TPRightOut"
+beacon_id = "TPRightIn"
+target_beacon = "TPRightOut"
 auto_interact = true
 position = Vector2(-264, 216)
 scale = Vector2(0.5, 0.5)
 
 [node name="TPRightOut" parent="TeleporterDemo" index="1" unique_id=1136254267 instance=ExtResource("4_vwc65")]
-beacon_target = "TeleporterDemo/TPRightIn"
+beacon_id = "TPRightOut"
+target_beacon = "TPRightIn"
 auto_interact = true
 position = Vector2(-200, 216)
 scale = Vector2(0.5, 0.5)
@@ -104,12 +106,14 @@ position = Vector2(-212, 197)
 collision_mask = 9
 
 [node name="TPLeftOut" parent="TeleporterDemo" index="3" unique_id=1817103323 instance=ExtResource("4_vwc65")]
-beacon_target = "TeleporterDemo/TPLeftIn"
+beacon_id = "TPLeftOut"
+target_beacon = "TPLeftIn"
 position = Vector2(-408, 216)
 scale = Vector2(0.5, 0.5)
 
 [node name="TPLeftIn" parent="TeleporterDemo" index="4" unique_id=917621580 instance=ExtResource("4_vwc65")]
-beacon_target = "TeleporterDemo/TPLeftOut"
+beacon_id = "TPLeftIn"
+target_beacon = "TPLeftOut"
 position = Vector2(-344, 216)
 scale = Vector2(0.5, 0.5)
 
@@ -146,8 +150,9 @@ position = Vector2(-84, 34)
 y_sort_enabled = true
 
 [node name="InteractionZone" parent="EthanHouse" index="0" unique_id=1797946713 instance=ExtResource("4_vwc65")]
-beacon_room_name = "cv-houses"
-beacon_target = "EthanHouseExit"
+beacon_id = "EthanHouseEntrance"
+target_beacon_room_name = "cv-houses"
+target_beacon = "EthanHouseExit"
 prompt_translation_key = "Enter"
 position = Vector2(142, -186)
 scale = Vector2(0.5, 0.5)

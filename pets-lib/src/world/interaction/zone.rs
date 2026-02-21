@@ -31,18 +31,20 @@ pub enum InteractionZonePromptType {
 #[class(init, base=Area2D)]
 pub struct InteractionZone {
     base: Base<Area2D>,
+    #[export]
+    pub beacon_id: GString,
 
     #[export]
     interaction_script: Option<Gd<GDScript>>,
 
     #[export]
     /// The scene the beacon belongs to
-    beacon_room_name: GString,
+    target_beacon_room_name: GString,
 
     #[export]
     /// The beacon this one sends you to
     /// Path is relative to `Room/`
-    beacon_target: GString,
+    target_beacon: GString,
 
     #[export]
     auto_interact: bool,
@@ -74,9 +76,9 @@ impl InteractionZone {
 
         self.base_mut().emit_signal("interacted", &[]);
 
-        let target = &self.beacon_target;
+        let target = &self.target_beacon;
         if !target.is_empty() {
-            self.tp_player_to_beacon(target, &self.beacon_room_name);
+            self.tp_player_to_beacon(target, &self.target_beacon_room_name);
         }
     }
 
@@ -103,10 +105,15 @@ impl InteractionZone {
             .unregister_zone(self.to_gd());
     }
 
+    /// Teleport to the beacon with specified ID.
+    ///
+    /// If `target_scene` is specified, it also switches to that room first
     fn tp_player_to_beacon(&self, target: &GString, target_scene: &GString) {
         let target = target.to_string();
-        let target_scene =
-            Some(target_scene.to_string()).filter(|s| !s.is_empty());
+        let target_scene = match target_scene.is_empty() {
+            true => None,
+            false => Some(target_scene.to_string()),
+        };
 
         let black = World::singleton().get_node_as::<ColorRect>("%BeaconFade");
         fade_black(&black, true, TP_BEACON_BLACK_IN);
@@ -137,7 +144,7 @@ impl InteractionZone {
                 World::singleton().bind_mut().change_room(new_room_scene);
             }
 
-            let target_node = World::room().get_node_as::<Node2D>(&target);
+            let target_node = World::get_beacon(&target);
             let target_pos = target_node.get_global_position();
 
             // after the screen is black, teleport the player
