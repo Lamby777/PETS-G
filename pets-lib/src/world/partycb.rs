@@ -245,11 +245,26 @@ impl PartyCB {
     }
 
     #[func]
+    pub fn wipe_party(&mut self, delete_pcharnodes: bool) {
+        if delete_pcharnodes {
+            // queue_free the pcharnodes first, while we still hold references
+            for mut pcharnode in self.party.iter_shared() {
+                pcharnode.queue_free();
+            }
+        }
+
+        self.party.clear();
+    }
+
+    /// Push 1 character to the party.
+    /// Accepts [GString] and is marked with #[func]
+    #[func]
     fn push_pchar_gd(&mut self, name: GString) -> Gd<PCharNode> {
         // because godot can't understand `impl Trait`
         self.push_pchar(name.to_string())
     }
 
+    /// Push 1 character to the party.
     pub fn push_pchar(&mut self, name: impl ToString) -> Gd<PCharNode> {
         let path = format!("res://scenes/char/{}.tscn", name.to_string());
         let packed = load::<PackedScene>(&path);

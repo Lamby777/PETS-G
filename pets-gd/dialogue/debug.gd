@@ -6,9 +6,9 @@ func _start() -> void:
         "DG_SPK_CASCADE", [
             "Hey, what's up?",
         ], [
-            "Battle",
-            "Item",
             "Party",
+            "Item",
+            "Battle",
             "Pauses",
             "Bye",
         ]
@@ -55,21 +55,26 @@ func _start() -> void:
                     "Lyembo",
                     "Quolo",
                     "Leo",
-                    "Dylan"
+                    "Dylan",
+                    "Poof!",
                 ]
             )
 
-            if picked["value"] == "...":
-                pcb().push_pchar_gd("Siva")
-                pcb().push_pchar_gd("Terra")
-                pcb().push_pchar_gd("Leo")
-                pcb().push_pchar_gd("Lyembo")
-                pcb().push_pchar_gd("Quolo")
-                await dbox().say_as("DG_SPK_CASCADE", "Well, here's a bunch of people.")
-            else:
-                pcb().push_pchar_gd(picked["value"])
-                await dbox().say_as("DG_SPK_CASCADE", "Welcome to the team" +
-                    (", ... me!" if picked["value"] == "Mira" else "!"))
+            match picked["value"]:
+                "...":
+                    pcb().push_pchar_gd("Siva")
+                    pcb().push_pchar_gd("Terra")
+                    pcb().push_pchar_gd("Leo")
+                    pcb().push_pchar_gd("Lyembo")
+                    pcb().push_pchar_gd("Quolo")
+                    await dbox().say_as("DG_SPK_CASCADE", "Well, here are a bunch of people.")
+                "Poof!":
+                    pcb().wipe_party(true)
+                    await dbox().say_as("DG_SPK_CASCADE", "Wow, that's so weird! They just disappeared!")
+                var picked_value:
+                    pcb().push_pchar_gd(picked_value)
+                    await dbox().say_as("DG_SPK_CASCADE", "Welcome to the team" +
+                        (", ... me!" if picked_value == "Mira" else "!"))
                
 
         "Pauses":
