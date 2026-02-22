@@ -1,5 +1,11 @@
 # P/E/T/S (Rewritten)
 
+[![Rust CI Badge](https://github.com/Lamby777/PETS-G/actions/workflows/rust.yml/badge.svg)](https://github.com/Lamby777/PETS-G/actions/workflows/rust.yml)
+![Works on My Machine](https://img.shields.io/badge/works%20on-my%20machine-brightgreen)
+![This Is Not On Your Plate](https://img.shields.io/badge/This%20is-NOT%20on%20your%20plate!%20%F0%9F%8D%BD%EF%B8%8F-darkred)
+
+[![Brainmade.org Badge](https://brainmade.org/88x31-light.png)](https://brainmade.org/)
+
 [JUST LET ME PLAY THE DAMN GAME!](/just-start-the-damn-game.md)
 
 ![Readme Header. Leo says "Wake up, Mira!! We got a game to code!!](docs/readme-header.png)
