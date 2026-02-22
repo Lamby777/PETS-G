@@ -2,6 +2,8 @@
 //! Singleton for battle-related data
 //!
 
+use std::borrow::Borrow;
+
 use godot::prelude::*;
 
 use crate::common::*;
@@ -16,12 +18,6 @@ impl Battlefield {
     fn empty() -> Self {
         Self { enemies: vec![] }
     }
-
-    /// Reset the battlefield without granting any rewards
-    pub fn flee(&mut self) {
-        // self.enemies.clear();
-        *self = Self::empty();
-    }
 }
 
 #[derive(GodotClass)]
@@ -35,9 +31,21 @@ pub struct BattleInterface {
 
 #[godot_api]
 impl BattleInterface {
-    #[func]
-    pub fn gyat(&self) -> i32 {
-        67
+    pub fn is_in_battle(&self) -> bool {
+        self.battlefield.is_some()
+    }
+
+    pub fn push_enemy(&mut self, enemy: impl Borrow<EnemyData>) {
+        let Some(ref mut battlefield) = self.battlefield else {
+            panic!("bruh");
+        };
+
+        battlefield.enemies.push(enemy.borrow().clone());
+    }
+
+    /// Reset the battlefield without granting any rewards
+    pub fn flee(&mut self) {
+        self.battlefield = None;
     }
 }
 
@@ -50,7 +58,7 @@ impl IObject for BattleInterface {
     fn init(base: Base<Object>) -> Self {
         Self {
             base,
-            battlefield: Battlefield::empty(),
+            battlefield: None,
         }
     }
 }

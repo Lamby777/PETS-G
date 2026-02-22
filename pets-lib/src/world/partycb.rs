@@ -146,16 +146,12 @@ impl PartyCB {
 
         let cant_move = dbox_is_active
             || InventoryNode::singleton().bind().is_open()
-            || self.is_in_battle()
+            || bi().bind().is_in_battle()
             || self.tpbeacon_debounce
             || self.cutscene_motion.is_some()
             || self.in_cutscene;
 
         !cant_move
-    }
-
-    pub fn is_in_battle(&self) -> bool {
-        si().bind().battlefield.is_some()
     }
 
     /// Set character positions based on past pos/rot

@@ -342,7 +342,7 @@ impl BattleEngine {
 
             "Run" => {
                 // TODO: implement running mechanic described earlier
-                si().bind_mut().battlefield.unwrap().flee();
+                bi().bind_mut().flee();
 
                 // TODO: don't change scenes, just remove the battle
                 // stuff since it's all overlayed on top of the world
