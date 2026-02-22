@@ -70,7 +70,6 @@ theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 52
 bbcode_enabled = true
 text = "Inventory"
-fit_content = true
 
 [node name="DebugMenu" type="RichTextLabel" parent="Choices" unique_id=455182993]
 clip_contents = false
@@ -82,9 +81,8 @@ theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 52
 bbcode_enabled = true
 text = "Debug"
-fit_content = true
 
-[node name="DebugQuit" type="RichTextLabel" parent="Choices" unique_id=520973721]
+[node name="Scrapbook" type="RichTextLabel" parent="Choices" unique_id=520973721]
 clip_contents = false
 layout_mode = 0
 offset_top = 128.0
@@ -93,8 +91,18 @@ offset_bottom = 192.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 52
 bbcode_enabled = true
+text = "Scrapbook"
+
+[node name="DebugQuit" type="RichTextLabel" parent="Choices" unique_id=1220360374]
+clip_contents = false
+layout_mode = 0
+offset_top = 196.0
+offset_right = 288.0
+offset_bottom = 260.0
+theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_font_sizes/normal_font_size = 52
+bbcode_enabled = true
 text = "Quit"
-fit_content = true
 
 [node name="DatePanel" type="Panel" parent="." unique_id=1542075769]
 unique_name_in_owner = true
