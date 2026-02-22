@@ -25,21 +25,6 @@ shadow_size = 16
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_20pka"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64pvq"]
-bg_color = Color(0.376471, 0.694118, 0.921569, 1)
-skew = Vector2(0.5, 0)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(0.52549, 0.772549, 0.956863, 1)
-border_blend = true
-corner_radius_bottom_left = 4
-expand_margin_left = 1.0
-expand_margin_top = 1.0
-expand_margin_right = 1.0
-expand_margin_bottom = 1.0
-
 [resource]
 FramePanelContainer/base_type = &"PanelContainer"
 FramePanelContainer/styles/panel = SubResource("StyleBoxFlat_p8chw")
@@ -47,7 +32,6 @@ Panel/styles/panel = ExtResource("1_7au1f")
 PanelContainer/styles/panel = ExtResource("1_7au1f")
 ProgressBar/colors/font_color = Color(0.95, 0.95, 0.95, 1)
 ProgressBar/colors/font_outline_color = Color(0, 0, 0, 1)
-ProgressBar/constants/outline_size = 16
 ProgressBar/font_sizes/font_size = 48
 ProgressBar/fonts/font = ExtResource("1_buwdt")
 ProgressBar/styles/background = ExtResource("3_wlgti")
@@ -57,5 +41,3 @@ RichTextLabel/colors/font_selected_color = Color(0.87451, 0.556863, 0.113725, 1)
 RichTextLabel/font_sizes/normal_font_size = 52
 RichTextLabel/fonts/normal_font = ExtResource("5_c7q5y")
 RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_20pka")
-TealBar/base_type = &"ProgressBar"
-TealBar/styles/fill = SubResource("StyleBoxFlat_64pvq")

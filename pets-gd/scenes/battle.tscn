@@ -29,6 +29,18 @@ shader_parameter/angle = 47.788
 [sub_resource type="CircleShape2D" id="CircleShape2D_22uqi"]
 radius = 5.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22uqi"]
+bg_color = Color(0.5254902, 0.7764706, 0.9607843, 1)
+skew = Vector2(0.5, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
 [sub_resource type="Animation" id="Animation_fe50h"]
 length = 0.001
 tracks/0/type = "value"
@@ -301,14 +313,14 @@ text = "Ready?"
 [node name="InfoBars" type="VBoxContainer" parent="Menu" unique_id=108186667]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 256.0
-offset_top = 880.0
-offset_right = 1664.0
-offset_bottom = 1048.0
-theme_override_constants/separation = 32
+offset_left = 30.0
+offset_top = 166.0
+offset_right = 330.0
+offset_bottom = 190.0
+theme_override_constants/separation = 8
 
 [node name="HPBar" type="ProgressBar" parent="Menu/InfoBars" unique_id=231970664]
-custom_minimum_size = Vector2(0, 8)
+custom_minimum_size = Vector2(300, 8)
 layout_mode = 2
 max_value = 200.0
 value = 192.0
@@ -319,33 +331,37 @@ bar_value = 192.0
 
 [node name="Label" type="RichTextLabel" parent="Menu/InfoBars/HPBar" unique_id=2101309526]
 layout_mode = 0
-offset_left = 40.0
-offset_right = 496.0
-offset_bottom = 66.0
+offset_left = 8.0
+offset_top = -2.0
+offset_right = 103.0
+offset_bottom = 10.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 7
 text = "HP"
-fit_content = true
 autowrap_mode = 0
+vertical_alignment = 1
 
 [node name="Value" type="RichTextLabel" parent="Menu/InfoBars/HPBar" unique_id=1064166880]
 layout_mode = 0
-offset_left = 1152.0
-offset_right = 1376.0
-offset_bottom = 66.0
+offset_left = 197.0
+offset_top = -2.0
+offset_right = 292.0
+offset_bottom = 10.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 7
 bbcode_enabled = true
-text = "[right]192"
-fit_content = true
+text = "168"
 autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="ManaBar" type="ProgressBar" parent="Menu/InfoBars" unique_id=415939555]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(300, 8)
 layout_mode = 2
 theme_type_variation = &"TealBar"
+theme_override_styles/fill = SubResource("StyleBoxFlat_22uqi")
 max_value = 200.0
 value = 168.0
 show_percentage = false
@@ -355,28 +371,31 @@ bar_value = 168.0
 
 [node name="Label" type="RichTextLabel" parent="Menu/InfoBars/ManaBar" unique_id=1459740734]
 layout_mode = 0
-offset_left = 40.0
-offset_right = 496.0
-offset_bottom = 66.0
+offset_left = 8.0
+offset_top = -2.0
+offset_right = 103.0
+offset_bottom = 10.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 7
 text = "Mana"
-fit_content = true
 autowrap_mode = 0
+vertical_alignment = 1
 
 [node name="Value" type="RichTextLabel" parent="Menu/InfoBars/ManaBar" unique_id=2094473062]
 layout_mode = 0
-offset_left = 1152.0
-offset_right = 1376.0
-offset_bottom = 66.0
+offset_left = 197.0
+offset_top = -2.0
+offset_right = 292.0
+offset_bottom = 10.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/normal_font_size = 56
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 7
 bbcode_enabled = true
-text = "[right]168"
-fit_content = true
+text = "168"
 autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="DualMenu" type="Control" parent="Menu" unique_id=226739823]
 layout_mode = 1

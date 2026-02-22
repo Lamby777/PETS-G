@@ -9,13 +9,11 @@ extends ProgressBar
     get:
         return bar_label.text
     set(val):
-        if bar_label:
-            bar_label.text = val
+        bar_label.text = val
 
 @export var bar_value: float:
     get:
         return value
     set(val):
         value = val
-        if value_label:
-            value_label.text = "[right]" + str(val)
+        value_label.text = str(val)
