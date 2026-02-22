@@ -15,6 +15,7 @@ use crate::common::*;
 use crate::consts::battle::*;
 
 mod affinities;
+mod autoload;
 mod midi;
 mod player;
 mod rhythm;
@@ -23,6 +24,7 @@ pub mod skills;
 mod stat_translation;
 
 pub use affinities::Affinities;
+pub use autoload::BattleInterface;
 use player::BattleIcon;
 use rhythm::BattleMusic;
 
