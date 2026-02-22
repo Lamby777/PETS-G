@@ -10,14 +10,9 @@
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="5_hcsfj"]
 [ext_resource type="Texture2D" uid="uid://cx24dyfnh30ag" path="res://assets/textures/portraits/Ethan.png" id="6_abown"]
 [ext_resource type="PackedScene" uid="uid://ywn8h01im5gx" path="res://scenes/enemy_sprite.tscn" id="6_dgpl5"]
+[ext_resource type="Texture2D" uid="uid://rtksl4itv0f5" path="res://assets/textures/builds/other/susvent_cover.png" id="7_22uqi"]
 [ext_resource type="Script" uid="uid://dygfeopjs60l3" path="res://classes/hpbar.gd" id="9_r25ik"]
 [ext_resource type="PackedScene" uid="uid://b2m4ghg2jf166" path="res://scenes/skills-menu.tscn" id="12_546eg"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w1wwc"]
-shader = ExtResource("2_0m4jp")
-shader_parameter/strength = 1.0
-shader_parameter/speed = 2.0
-shader_parameter/angle = 47.788
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88ovb"]
 shader = ExtResource("2_0m4jp")
@@ -25,8 +20,14 @@ shader_parameter/strength = 0.716
 shader_parameter/speed = 1.7
 shader_parameter/angle = 39.46
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pf8ic"]
-radius = 40.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w1wwc"]
+shader = ExtResource("2_0m4jp")
+shader_parameter/strength = 1.0
+shader_parameter/speed = 2.0
+shader_parameter/angle = 47.788
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_22uqi"]
+radius = 5.0
 
 [sub_resource type="Animation" id="Animation_fe50h"]
 length = 0.001
@@ -235,26 +236,27 @@ stream = ExtResource("4_l6m5j")
 [node name="RhythmTimer" type="Timer" parent="BattleMusic" unique_id=831645091]
 one_shot = true
 
-[node name="VideoDrugs" type="Control" parent="." unique_id=1964753647]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="VideoDrugsLayer" type="CanvasLayer" parent="." unique_id=2144244349]
+layer = -1
 
-[node name="Layer1" type="TextureRect" parent="VideoDrugs" unique_id=333536047]
-material = SubResource("ShaderMaterial_w1wwc")
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-stretch_mode = 1
+[node name="Solid" type="ColorRect" parent="VideoDrugsLayer" unique_id=994767590]
+material = SubResource("ShaderMaterial_88ovb")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="Solid" type="ColorRect" parent="VideoDrugs" unique_id=994767590]
-material = SubResource("ShaderMaterial_88ovb")
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-color = Color(0, 0, 0, 1)
+[node name="Layer1" type="TextureRect" parent="VideoDrugsLayer" unique_id=333536047]
+material = SubResource("ShaderMaterial_w1wwc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_22uqi")
+stretch_mode = 1
 metadata/_edit_lock_ = true
 
 [node name="Board" type="Node2D" parent="." unique_id=1693966926]
@@ -262,8 +264,8 @@ unique_name_in_owner = true
 
 [node name="EnemySprite" parent="Board" unique_id=1277612852 instance=ExtResource("6_dgpl5")]
 unique_name_in_owner = true
-position = Vector2(960, 192)
-scale = Vector2(6, 6)
+position = Vector2(180, 101)
+scale = Vector2(2, 2)
 
 [node name="BattleIcon" type="BattleIcon" parent="Board" unique_id=1205183124 node_paths=PackedStringArray("engine")]
 engine = NodePath("../..")
@@ -272,10 +274,9 @@ collision_layer = 256
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Board/BattleIcon" unique_id=515894188]
-shape = SubResource("CircleShape2D_pf8ic")
+shape = SubResource("CircleShape2D_22uqi")
 
 [node name="Sprite2D" type="Sprite2D" parent="Board/BattleIcon" unique_id=416158234]
-scale = Vector2(8, 8)
 texture = ExtResource("3_k3xai")
 hframes = 5
 vframes = 2
@@ -283,19 +284,18 @@ vframes = 2
 [node name="Menu" type="Control" parent="." unique_id=2140168308]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 theme = ExtResource("5_hcsfj")
 
 [node name="ClickStatus" type="RichTextLabel" parent="Menu" unique_id=1107140177]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 64.0
-offset_top = 64.0
-offset_right = 576.0
-offset_bottom = 128.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 245.0
+offset_bottom = 44.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 26
 text = "Ready?"
 
 [node name="InfoBars" type="VBoxContainer" parent="Menu" unique_id=108186667]
@@ -308,7 +308,7 @@ offset_bottom = 1048.0
 theme_override_constants/separation = 32
 
 [node name="HPBar" type="ProgressBar" parent="Menu/InfoBars" unique_id=231970664]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 max_value = 200.0
 value = 192.0
