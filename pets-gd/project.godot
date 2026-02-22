@@ -26,7 +26,7 @@ config/icon="res://icon.png"
 [autoload]
 
 World="*res://singletons/globals.gd"
-DiscordSDKLoader="*uid://bas7o16c17w82"
+DiscordRPCLoader="*uid://d24b5rx26xyw3"
 
 [display]
 
@@ -44,7 +44,7 @@ project/assembly_name="P-E-T-S"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/discord-sdk-gd/plugin.cfg")
+enabled=PackedStringArray("res://addons/discord-rpc-gd/plugin.cfg")
 
 [file_customization]
 
