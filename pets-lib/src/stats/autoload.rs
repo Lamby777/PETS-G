@@ -10,14 +10,26 @@ use godot::prelude::*;
 
 use crate::common::*;
 
+pub struct Battlefield {
+    /// The enemies that are currently in battle with you
+    pub enemies: Vec<EnemyData>,
+}
+
+impl Battlefield {
+    /// Reset the battlefield without granting any rewards
+    pub fn flee(&mut self) {
+        self.enemies.clear();
+    }
+}
+
 #[derive(GodotClass)]
 #[class(base=Object)]
 pub struct StatsInterface {
     base: Base<Object>,
     pub save: SaveFile,
 
-    /// The enemies that are currently in battle with you
-    pub battling: Vec<EnemyData>,
+    /// Battle-related info. `None` if not in battle.
+    pub battlefield: Option<Battlefield>,
 }
 
 #[godot_api]

@@ -155,7 +155,7 @@ impl PartyCB {
     }
 
     pub fn is_in_battle(&self) -> bool {
-        !si().bind().battling.is_empty()
+        si().bind().battlefield.is_some()
     }
 
     /// Set character positions based on past pos/rot
