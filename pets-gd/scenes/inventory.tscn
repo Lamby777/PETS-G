@@ -68,7 +68,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -176)]
+"values": [Vector2(0, -224)]
 }
 
 [sub_resource type="Animation" id="Animation_bvf1n"]
@@ -132,7 +132,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0.9, 1.2),
 "transitions": PackedFloat32Array(0.420448, 1),
 "update": 0,
-"values": [Vector2(0, -176), Vector2(0, 0)]
+"values": [Vector2(0, -224), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_52u0v"]
@@ -192,9 +192,9 @@ metadata/_edit_lock_ = true
 
 [node name="InventoryTextPanel" type="PanelContainer" parent="." unique_id=467307691]
 layout_mode = 0
-offset_top = -176.0
+offset_top = -224.0
 offset_right = 1920.0
-offset_bottom = 24.0
+offset_bottom = -24.0
 
 [node name="InventoryTextContainer" type="BoxContainer" parent="InventoryTextPanel" unique_id=602405121]
 unique_name_in_owner = true
