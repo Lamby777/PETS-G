@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ywn8h01im5gx" path="res://scenes/enemy_sprite.tscn" id="1_4ne20"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3efs2"]
-size = Vector2(16, 8)
+size = Vector2(32, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yogbq"]
 radius = 16.0
@@ -18,7 +18,6 @@ collision_layer = 8
 animation = &"ANonnyMouse-Run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1387751503]
-position = Vector2(-2.3841858e-07, 4)
 shape = SubResource("RectangleShape2D_3efs2")
 
 [node name="ContactRange" type="Area2D" parent="." unique_id=7371937]

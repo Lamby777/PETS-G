@@ -154,7 +154,7 @@ beacon_id = "EthanHouseEntrance"
 target_beacon_room_name = "cv-houses"
 target_beacon = "EthanHouseExit"
 prompt_translation_key = "Enter"
-position = Vector2(142, -186)
+position = Vector2(141, -183)
 scale = Vector2(0.5, 0.5)
 
 [node name="TreeCon1_0" parent="EthanHouse" index="1" unique_id=82463971 instance=ExtResource("8_obhwm")]
