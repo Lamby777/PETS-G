@@ -1,13 +1,23 @@
 use super::skills::Element;
 use crate::common::*;
 
+/// The "level" of a type affinity
+///
+/// Does not have a "normal" 1.0 multiplier, but feel free to add it later
+/// There's just no need for it now, but it's not something I'm totally against
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub enum AffinityPower {
+    /// The receiver is very weak to this type of damage
+    WeakV,
+
     /// The receiver is weak to this type of damage
     Weak,
 
     /// The receiver is strong against this type of damage
     Strong,
+
+    /// The receiver is very strong against this type of damage
+    StrongV,
 
     /// The receiver nullifies this type of damage
     Nullify,
@@ -23,8 +33,10 @@ impl AffinityPower {
     /// Damage multiplier for enemies receiving damage from this type.
     pub fn _to_damage_multiplier(&self) -> f64 {
         match self {
-            Self::Weak => 2.0,
+            Self::WeakV => 1.5,
+            Self::Weak => 1.25,
             Self::Strong => 0.5,
+            Self::StrongV => 0.25,
             Self::Nullify => 0.0,
             Self::Heal => -0.5,
             Self::Reflect => {
