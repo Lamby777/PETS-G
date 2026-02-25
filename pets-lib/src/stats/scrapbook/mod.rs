@@ -42,10 +42,15 @@ pub struct BattleMemory {
 
 #[derive(Clone, Serialize, Deserialize)]
 pub struct BattleMemoryEntry {
+    /// Whether or not the enemy's front sprite has been seen
     sprite_front: bool,
+
+    /// Whether or not the enemy's back sprite has been seen
     sprite_back: bool,
 
+    inherent_affinities: Affinities,
+
     /// Whether or not Porky has used Sniff on this enemy.
-    /// If true, the player can see the enemy's affinities.
+    /// If true, the player can see more in-depth info.
     sniffed: bool,
 }

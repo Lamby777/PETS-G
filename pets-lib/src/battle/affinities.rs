@@ -34,8 +34,7 @@ impl AffinityPower {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(Clone, Debug, Default, Serialize, Deserialize)]
 pub struct Affinities(HashMap<Element, AffinityPower>);
 
 impl Affinities {
