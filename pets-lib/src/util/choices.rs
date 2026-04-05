@@ -55,7 +55,8 @@ impl ChoiceAgent {
             return;
         }
 
-        let target = node.get_node_as::<Node>(self.tween_target_relative.arg());
+        let target = node
+            .get_node_as::<Node>(&NodePath::from(&self.tween_target_relative));
 
         // either the node itself is a text label OR check if it
         // has a child to tween
@@ -88,8 +89,7 @@ impl ChoiceAgent {
                 target_col,
                 CHOICE_TWEEN_TIME,
                 CHOICE_TWEEN_TRANS,
-            )
-            .unwrap();
+            );
 
             bbcode_toggle(label, CHOICE_WAVE_BBCODE, is_picked, true);
         }
@@ -98,13 +98,12 @@ impl ChoiceAgent {
             // tween the custom param
             tween(
                 &mut target.clone(),
-                self.tween_property.arg(),
+                &NodePath::from(&self.tween_property),
                 None,
                 target_val,
                 CHOICE_TWEEN_TIME,
                 CHOICE_TWEEN_TRANS,
-            )
-            .unwrap();
+            );
         }
     }
 
@@ -202,19 +201,19 @@ impl ChoiceAgent {
         N: Inherits<Node>,
     {
         Self::unbind_callables_for(choice);
-        let choice = &mut choice.clone().upcast();
+        let mut choice = choice.clone().upcast();
 
         let entered = self
             .base()
             .callable("_tween_choice_on")
-            .bindv(&varray![choice]);
+            .bindv(&varray![&choice]);
         let exited = self
             .base()
             .callable("_tween_choice_off")
-            .bindv(&varray![choice]);
+            .bindv(&varray![&choice]);
 
-        connect_deferred(choice, "focus_entered", entered.clone());
-        connect_deferred(choice, "focus_exited", exited.clone());
+        connect_deferred(&mut choice, "focus_entered", entered.clone());
+        connect_deferred(&mut choice, "focus_exited", exited.clone());
     }
 
     pub fn unbind_callables_for<N>(choice: &mut Gd<N>)

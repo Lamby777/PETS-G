@@ -109,8 +109,7 @@ impl TitleScreen {
                     y,
                     CREDITS_TWEEN_TIME,
                     TransitionType::QUAD,
-                )
-                .unwrap();
+                );
             }
 
             "Quit" => {

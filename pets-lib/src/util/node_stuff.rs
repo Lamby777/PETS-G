@@ -145,7 +145,7 @@ pub fn bbcode_toggle(
 ) {
     let mut old_text = node.get_text();
     if autotranslate {
-        old_text = tr(old_text.arg());
+        old_text = tr(&StringName::from(&old_text));
     }
 
     let new_text = prefix_mod(old_text.to_string().as_str(), bbcode, active);

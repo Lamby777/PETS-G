@@ -43,7 +43,7 @@ impl StatsInterface {
 
         let mut bed =
             World::room().get_node_as::<Sprite2D>("%EthanBed/Sprite2D");
-        bed.callv("set_texture", &varray![texture]);
+        bed.callv("set_texture", &varray![&texture]);
     }
 }
 

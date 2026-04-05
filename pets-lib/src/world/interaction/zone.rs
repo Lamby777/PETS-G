@@ -51,10 +51,10 @@ pub struct InteractionZone {
 
     #[export]
     #[init(val = InteractionZonePromptType::Interact)]
-    prompt_translation_key: InteractionZonePromptType,
+    pub prompt_translation_key: InteractionZonePromptType,
 
     #[export]
-    prompt_location: NodePath,
+    pub prompt_location: NodePath,
 }
 
 #[godot_api]

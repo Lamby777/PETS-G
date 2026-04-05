@@ -66,7 +66,7 @@ impl InteractionManager {
     }
 
     fn move_prompt_to_zone(&mut self, zone: Gd<InteractionZone>) {
-        let custom_path = zone.bind().get_prompt_location();
+        let custom_path = zone.bind().prompt_location.clone();
 
         let pos = if custom_path.is_empty() {
             zone.get_global_position()
@@ -97,7 +97,7 @@ impl INode2D for InteractionManager {
         };
 
         // move the prompt to the zone
-        let prompt_tr_key = zone.bind().get_prompt_translation_key();
+        let prompt_tr_key = zone.bind().prompt_translation_key.to_godot();
         self.set_prompt_text(prompt_tr_key);
         self.prompt.show();
         self.move_prompt_to_zone(zone);

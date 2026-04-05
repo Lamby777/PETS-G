@@ -76,7 +76,7 @@ pub fn set_timeout_callable(
     time_sec: f64,
     callable: Callable,
 ) -> Gd<SceneTreeTimer> {
-    let mut timer = godot_tree().create_timer(time_sec).unwrap();
+    let mut timer = godot_tree().create_timer(time_sec);
     timer.connect("timeout", &callable);
 
     timer

@@ -153,7 +153,8 @@ impl World {
 
         set_timeout(INTRO_FADE_PREDELAY, cue_battle_intro_fx);
 
-        let cue_scene = world.callable("cue_battle_scene").bindv(&varray![eid]);
+        let cue_scene =
+            world.callable("cue_battle_scene").bindv(&varray![&eid]);
         set_timeout_callable(INTRO_FADE_PREDELAY + fade_len, cue_scene);
     }
 
@@ -260,7 +261,7 @@ impl World {
 
             let on_mz_exit = self.base().callable("on_mz_exit");
             let on_mz_enter =
-                self.base().callable("on_mz_enter").bindv(&varray![zone]);
+                self.base().callable("on_mz_enter").bindv(&varray![&zone]);
 
             zone.connect("body_entered", &on_mz_enter);
             zone.connect("body_exited", &on_mz_exit);
@@ -277,8 +278,10 @@ impl World {
             disconnect_signal(&mut zone, "body_exited");
 
             let on_water_exit = self.base().callable("on_water_exit");
-            let on_water_enter =
-                self.base().callable("on_water_enter").bindv(&varray![zone]);
+            let on_water_enter = self
+                .base()
+                .callable("on_water_enter")
+                .bindv(&varray![&zone]);
 
             zone.connect("body_entered", &on_water_enter);
             zone.connect("body_exited", &on_water_exit);

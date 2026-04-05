@@ -25,8 +25,8 @@ pub struct DChoice {
 #[godot_api]
 impl DChoice {
     #[func]
-    pub fn set_text_tr(&mut self, text: GString) {
-        self.txt_label.set_text(&tr(text.arg()));
+    pub fn set_text_tr(&mut self, text: StringName) {
+        self.txt_label.set_text(&tr(&text));
     }
 
     /// tween the contained text label in/out of the window
@@ -42,7 +42,6 @@ impl DChoice {
             DBOX_CHOICE_TWEEN_TIME,
             DBOX_CHOICE_TWEEN_TRANS,
         )
-        .unwrap()
     }
 
     pub fn put_label_under(&mut self) {
