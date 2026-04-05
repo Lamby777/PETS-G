@@ -4,7 +4,8 @@ use derived_deref::{Deref, DerefMut};
 use godot::classes::object::ConnectFlags;
 use godot::classes::tween::TransitionType;
 use godot::classes::{
-    ColorRect, Engine, RichTextLabel, ShaderMaterial, Theme, Tween,
+    ColorRect, Engine, MethodTweener, RichTextLabel, ShaderMaterial, Theme,
+    Tween,
 };
 use godot::meta::AsArg;
 use godot::prelude::*;
@@ -58,8 +59,7 @@ where
         visible.to_variant(),
         tween_time,
         TransitionType::QUAD,
-    )
-    .unwrap();
+    );
 }
 
 pub use crate::connect;
@@ -174,26 +174,19 @@ pub fn tween_method<V>(
     end_value: V,
     time: f64,
     trans: TransitionType,
-) -> Result<Gd<Tween>, ()>
+) -> Gd<MethodTweener>
 where
     V: ToGodot,
 {
-    let res: Option<_> = try {
-        let mut tween = godot_tree().create_tween()?;
-
-        tween
-            .tween_method(
-                &callable,
-                &start_value.to_variant(),
-                &end_value.to_variant(),
-                time,
-            )?
-            .set_trans(trans);
-
-        tween
-    };
-
-    res.ok_or(())
+    godot_tree()
+        .create_tween()
+        .tween_method(
+            &callable,
+            &start_value.to_variant(),
+            &end_value.to_variant(),
+            time,
+        )
+        .set_trans(trans)
 }
 
 /// shorthand to do some tweeneroonies :3
@@ -205,27 +198,23 @@ pub fn tween<NP, V, N>(
     end_value: V,
     time: f64,
     trans: TransitionType,
-) -> Result<Gd<Tween>, ()>
+) -> Gd<Tween>
 where
     NP: AsArg<NodePath>,
     V: ToGodot,
     N: Inherits<Node> + Inherits<Object>,
 {
-    let res: Option<_> = try {
-        let mut tween = node.upcast_mut::<Node>().create_tween()?;
+    let mut tween = node.upcast_mut::<Node>().create_tween();
 
-        let mut property = tween
-            .tween_property(&*node, property, &end_value.to_variant(), time)?
-            .set_trans(trans)?;
+    let mut property = tween
+        .tween_property(&*node, property, &end_value.to_variant(), time)
+        .set_trans(trans);
 
-        if let Some(start_value) = start_value {
-            property.from(&start_value.to_variant())?;
-        }
+    if let Some(start_value) = start_value {
+        property.from(&start_value.to_variant());
+    }
 
-        tween
-    };
-
-    res.ok_or(())
+    tween
 }
 
 pub fn default_theme() -> Gd<Theme> {

@@ -39,7 +39,7 @@ pub struct ChoiceAgent {
 
     /// Whether or not the choices can currently be focused or picked
     #[export]
-    #[var(get, set = set_disabled)]
+    #[var(pub, set = set_disabled)]
     disabled: bool,
 
     #[export]
