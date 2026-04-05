@@ -20,6 +20,13 @@ pub struct WorldMenu {
     base: Base<Panel>,
     opened: bool,
 
+    // TODO: update `godot` crate to v0.5.0
+    #[export]
+    scrapbook_node: Option<Gd<Node2D>>,
+
+    #[export]
+    inventory_node: Option<Gd<InventoryNode>>,
+
     #[init(node = "Choices/ChoiceAgent")]
     choices: OnReady<Gd<ChoiceAgent>>,
 
@@ -76,8 +83,12 @@ impl WorldMenu {
         self.open_or_close(!self.opened);
     }
 
+    fn open_scrapbook(&mut self) {
+        // self.scrapbook_node.unwrap().open(true);
+    }
+
     fn open_inventory(&mut self) {
-        InventoryNode::singleton().bind_mut().open(true);
+        self.inventory_node.as_mut().unwrap().bind_mut().open(true);
     }
 
     #[func]
@@ -86,6 +97,7 @@ impl WorldMenu {
 
         match choice.get_name().to_string().as_str() {
             "Inventory" => self.open_inventory(),
+            "Scrapbook" => self.open_scrapbook(),
             "DebugQuit" => godot_tree().quit(),
             "DebugMenu" => {
                 let mut ds = DialogueScript::new(

@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://b2xd3jivalbtu"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_bf7ln"]
+
+[node name="BookUI" type="Control" unique_id=2044309269]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=249490907]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=696249197]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(360, 203)
+render_target_update_mode = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport" unique_id=2053455612]
+transform = Transform3D(0.9235385, 0, -0.38350564, -0.10800983, 0.9595207, -0.2601037, 0.3679816, 0.28163818, 0.8861543, 0, 0, 0)
+mesh = SubResource("PrismMesh_bf7ln")
+skeleton = NodePath("../../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport" unique_id=433090956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.89882994, 1.5622077, 1.6614952)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=372414808]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.829239)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1415489208]
+visible = false
+layout_mode = 0
+offset_left = 48.0
+offset_top = 16.0
+offset_right = 312.0
+offset_bottom = 184.0

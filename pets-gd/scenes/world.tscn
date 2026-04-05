@@ -136,7 +136,8 @@ unique_name_in_owner = true
 offset_left = 76.0
 offset_right = 1484.0
 
-[node name="WorldMenu" parent="UILayer" unique_id=122979645 instance=ExtResource("2_6orff")]
+[node name="WorldMenu" parent="UILayer" unique_id=122979645 node_paths=PackedStringArray("inventory_node") instance=ExtResource("2_6orff")]
+inventory_node = NodePath("../Inventory")
 debug_menu_script = ExtResource("10_egidj")
 
 [node name="BeaconFade" type="ColorRect" parent="UILayer" unique_id=956344231]
