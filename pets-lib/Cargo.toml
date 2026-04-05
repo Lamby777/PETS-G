@@ -8,24 +8,24 @@ crate-type = ["cdylib"]
 
 [build-dependencies]
 jsonnet-rs = "0.17.0"
-glob = "0.3.0"
+glob = "0.3.3"
 walkdir = "2.5.0"
 
 [dependencies]
-anyhow = "1.0.80"
-chrono = { version = "0.4.38", features = ["serde"] }
+anyhow = "1.0.102"
+chrono = { version = "0.4.44", features = ["serde"] }
 concat-idents = "1.1.5"
-derive_more = { version = "2.0.1", features = ["sum"] }
+derive_more = { version = "2.1.1", features = ["sum"] }
 derived-deref = "2.1.0"
 godot = { version = "0.5.0", features = ["api-4-6", "experimental-threads", "experimental-godot-api", "serde"] }
-indoc = "2.0.4"
-libdx = "2.1.1"
+indoc = "2.0.7"
+libdx = "2.1.2"
 nodi = "1.0.3"
-rand = "0.9.0"
-ribbons = "0.1.0"
-serde = { version = "1.0.188", features = ["derive", "rc"] }
-serde_json = "1.0.117"
-strum = { version = "0.27.1", features = ["derive"] }
-toml = "0.8.15"
-typetag = "0.2.15"
+rand = "0.10.0"
+ribbons = "0.1.3"
+serde = { version = "1.0.228", features = ["derive", "rc"] }
+serde_json = "1.0.149"
+strum = { version = "0.28.0", features = ["derive"] }
+toml = "1.1.2"
+typetag = "0.2.21"
 
