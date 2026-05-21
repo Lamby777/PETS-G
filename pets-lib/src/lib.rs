@@ -9,9 +9,7 @@
 
 // This is 80 characters, just for reference for setting IDE zoom and formatting
 
-// TODO: remove this after updating godot crate to 0.5.0
-#![allow(unused)]
-#![feature(try_blocks)]
+// #![feature(try_blocks)]
 // #![warn(clippy::missing_docs_in_private_items)]
 
 use godot::prelude::*;
