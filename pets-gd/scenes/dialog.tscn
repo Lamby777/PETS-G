@@ -15,7 +15,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(256, 1200)]
+"values": [Vector2(64, 280)]
 }
 
 [sub_resource type="Animation" id="Animation_acqou"]
@@ -31,7 +31,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(256, 1200), Vector2(256, 634)]
+"values": [Vector2(64, 280), Vector2(64, 144)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ujmhv"]
@@ -45,12 +45,11 @@ clip_contents = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 136.0
-offset_top = 1200.0
-offset_right = 1544.0
-offset_bottom = 1646.0
+offset_left = -176.0
+offset_top = 280.0
+offset_right = 176.0
+offset_bottom = 406.0
 grow_horizontal = 2
-pivot_offset = Vector2(704, 220)
 theme = ExtResource("1_jbfs2")
 script = ExtResource("2_jmx8e")
 
@@ -58,21 +57,23 @@ script = ExtResource("2_jmx8e")
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_constants/separation = 16
+theme_override_constants/separation = 4
 
 [node name="SpeakerName" type="RichTextLabel" parent="VBox" unique_id=1537423726]
-custom_minimum_size = Vector2(0, 70)
+custom_minimum_size = Vector2(340, 18)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 56
+theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
 text = "Cap'n Winthrus"
+scroll_active = false
 
 [node name="Content" type="RichTextLabel" parent="VBox" unique_id=1427257424]
-custom_minimum_size = Vector2(0, 220)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 52
+theme_override_font_sizes/normal_font_size = 13
 bbcode_enabled = true
-text = "sussy gussy straight outta ohio weebux fortnite livvy dunne rizzed up baby gronk gaming skibidi toilet gyatt sigma coquette floofy ahoy matey ;-; can i get a meow meow in the chat >w< ^w^ :3 :3 :3 :3"
+text = "skibidi toilet skibidi toilet skibidi toilet skibidi toilet skibidi toilet skibidi toilet skibidi toilet skibidi toilet skibidi toilet skibidi toilet skibidi toilet skibidi toilet skibidi toilet skibidi toilet"
+scroll_active = false
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBox" unique_id=2079792908]
 clip_contents = false
@@ -84,10 +85,10 @@ vertical_scroll_mode = 0
 
 [node name="Choices" type="HBoxContainer" parent="VBox/ScrollContainer" unique_id=1769436680]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 70)
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 10
-theme_override_constants/separation = 60
+theme_override_constants/separation = 15
 
 [node name="ChoiceAgent" type="ChoiceAgent" parent="VBox/ScrollContainer/Choices" unique_id=1168897692]
 tween_property = "position:y"

@@ -20,7 +20,6 @@ pub struct WorldMenu {
     base: Base<Panel>,
     opened: bool,
 
-    // TODO: update `godot` crate to v0.5.0
     #[export]
     scrapbook_node: Option<Gd<Node2D>>,
 
@@ -84,7 +83,10 @@ impl WorldMenu {
     }
 
     fn open_scrapbook(&mut self) {
-        // self.scrapbook_node.unwrap().open(true);
+        self.scrapbook_node
+            .as_mut()
+            .unwrap()
+            .call("open", &[true.to_variant()]);
     }
 
     fn open_inventory(&mut self) {

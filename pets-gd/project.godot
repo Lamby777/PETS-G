@@ -30,8 +30,8 @@ DiscordSDKLoader="*uid://bas7o16c17w82"
 
 [display]
 
-window/size/viewport_width=360
-window/size/viewport_height=203
+window/size/viewport_width=480
+window/size/viewport_height=270
 window/size/mode=3
 window/size/resizable=false
 window/size/borderless=true

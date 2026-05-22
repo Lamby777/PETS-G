@@ -7,21 +7,21 @@
 [ext_resource type="FontFile" uid="uid://bk40yyrbk8mji" path="res://assets/fonts/Orange Kid.otf" id="5_c7q5y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p8chw"]
-content_margin_left = 7.0
-content_margin_top = 7.0
-content_margin_right = 7.0
-content_margin_bottom = 7.0
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
 draw_center = false
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 shadow_color = Color(1, 1, 1, 0.239216)
-shadow_size = 16
+shadow_size = 4
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_20pka"]
 

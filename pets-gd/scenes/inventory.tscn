@@ -178,8 +178,8 @@ _data = {
 }
 
 [node name="InventoryNode" type="InventoryNode" unique_id=699750349]
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_right = 360.0
+offset_bottom = 203.0
 theme = ExtResource("1_yb1iv")
 
 [node name="BGDarken" type="ColorRect" parent="." unique_id=2025047578]
