@@ -36,11 +36,11 @@ impl BattleInterface {
     }
 
     pub fn push_enemy(&mut self, enemy: impl Borrow<EnemyData>) {
-        let Some(ref mut battlefield) = self.battlefield else {
-            panic!("bruh");
-        };
-
-        battlefield.enemies.push(enemy.borrow().clone());
+        self.battlefield
+            .as_mut()
+            .unwrap()
+            .enemies
+            .push(enemy.borrow().clone());
     }
 
     /// Reset the battlefield without granting any rewards
