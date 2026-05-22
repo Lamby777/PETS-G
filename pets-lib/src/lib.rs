@@ -48,7 +48,6 @@ mod common {
     // re-exports
     pub use nodi::midly;
 
-    pub use anyhow::Result;
     pub use chrono::{Datelike, NaiveDate};
     #[allow(unused_imports)]
     pub use derived_deref::{Deref, DerefMut};

@@ -1,5 +1,4 @@
 use godot::classes::AnimationPlayer;
-use godot::meta::AsArg;
 use godot::prelude::*;
 
 pub trait AnimationPlayerExt {

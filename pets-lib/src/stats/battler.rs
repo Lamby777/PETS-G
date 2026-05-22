@@ -1,3 +1,5 @@
+#![allow(unused)]
+
 use super::*;
 
 /// Any state related to health, equipment, battling, skills, etc. that

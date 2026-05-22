@@ -279,7 +279,7 @@ impl ICharacterBody2D for PartyCB {
         if self.can_move() {
             let inputs = Inputs::from_player_input();
             moving = self.calc_movements(inputs, delta);
-        } else if let Some((target, old_pos)) = self.cutscene_motion {
+        } else if let Some((target, _old_pos)) = self.cutscene_motion {
             let own_pos = self.base().get_global_position();
             let input_vector = Inputs::iv_from_to(own_pos, target);
 

@@ -15,7 +15,7 @@ pub struct Battlefield {
 
 impl Battlefield {
     /// Constructor to make an empty battlefield
-    fn empty() -> Self {
+    fn _empty() -> Self {
         Self { enemies: vec![] }
     }
 }
