@@ -142,8 +142,8 @@ debug_menu_script = ExtResource("10_egidj")
 unique_name_in_owner = true
 top_level = true
 material = SubResource("ShaderMaterial_uyk0u")
-offset_right = 360.0
-offset_bottom = 203.0
+offset_right = 480.0
+offset_bottom = 270.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
