@@ -33,6 +33,8 @@ impl DChoice {
     pub fn tween_label(&mut self, up: bool) -> Gd<Tween> {
         let label = &mut self.txt_label;
         let tw_end = if up { 0.0 } else { DBOX_CHOICE_HEIGHT };
+        // TODO: maybe enable clip contents for the tween intro and then immediately
+        // disable it so the wave bbcode animations don't look fucked up
 
         tween(
             label,

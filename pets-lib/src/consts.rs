@@ -6,7 +6,8 @@
 use godot::builtin::real;
 use godot::classes::tween::TransitionType;
 
-const WAVE_BBCODE: &str = "[wave amp=100 freq=-6]";
+const WAVE_BBCODE: &str = "[wave amp=30 freq=-6]";
+// const WAVE_BBCODE: &str = "[tornado radius=3 freq=-7]";
 
 #[allow(unused)]
 pub mod type_aliases {
@@ -79,7 +80,7 @@ pub mod dialogue {
 
     pub const DBOX_CHOICE_TWEEN_TIME: f64 = choice_lists::CHOICE_TWEEN_TIME;
     pub const DBOX_CHOICE_TWEEN_TRANS: TransitionType = TransitionType::QUAD;
-    pub const DBOX_CHOICE_HEIGHT: f32 = 70.0;
+    pub const DBOX_CHOICE_HEIGHT: f32 = 15.0;
     pub const DBOX_CHOICE_WAVE_TIME: f64 = 0.1;
 
     pub const _DBOX_SELECTION_BBCODE: &str = WAVE_BBCODE;
