@@ -2,8 +2,6 @@
 //! Singleton for battle-related data
 //!
 
-use std::borrow::Borrow;
-
 use godot::prelude::*;
 
 use crate::common::*;
@@ -17,6 +15,12 @@ impl Battlefield {
     /// Constructor to make an empty battlefield
     fn _empty() -> Self {
         Self { enemies: vec![] }
+    }
+
+    fn from_enemies(enemies: &[EnemyData]) -> Self {
+        Self {
+            enemies: enemies.to_vec(),
+        }
     }
 }
 
@@ -35,12 +39,20 @@ impl BattleInterface {
         self.battlefield.is_some()
     }
 
-    pub fn push_enemy(&mut self, enemy: impl Borrow<EnemyData>) {
+    pub fn start_battle(&mut self, first_enemies: &[EnemyData]) {
+        if self.battlefield.is_some() {
+            panic!("called `start_battle` while one is already taking place");
+        }
+
+        self.battlefield = Some(Battlefield::from_enemies(first_enemies));
+    }
+
+    pub fn _push_enemy(&mut self, enemy: &EnemyData) {
         self.battlefield
             .as_mut()
             .unwrap()
             .enemies
-            .push(enemy.borrow().clone());
+            .push(enemy.clone());
     }
 
     /// Reset the battlefield without granting any rewards

@@ -18,7 +18,11 @@ pub struct EnemyData {
 }
 
 impl EnemyData {
-    pub fn from_registry(id: StringName) -> &'static Self {
+    fn from_registry(id: StringName) -> &'static Self {
         unwrap_fmt!(REGISTRIES.enemies.get(&id), "Enemy ID not found: {}", id)
+    }
+
+    pub fn clone_from_registry(id: StringName) -> Self {
+        Self::from_registry(id).clone()
     }
 }

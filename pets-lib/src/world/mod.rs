@@ -143,9 +143,9 @@ impl World {
 
     #[func]
     pub fn start_battle(eid: StringName) {
-        let enemy_data = EnemyData::from_registry(eid.clone());
+        let enemy_data = EnemyData::clone_from_registry(eid.clone());
 
-        bi().bind_mut().push_enemy(enemy_data);
+        bi().bind_mut().start_battle(&[enemy_data]);
         let world = World::singleton();
 
         let mat = PartyCB::fx_material();
