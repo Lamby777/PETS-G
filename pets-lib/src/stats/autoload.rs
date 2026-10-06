@@ -19,6 +19,10 @@ pub struct StatsInterface {
 
 #[godot_api]
 impl StatsInterface {
+    pub fn get_chardata(&self, pchar: &StringName) -> &CharData {
+        self.save.chars.get(pchar).unwrap()
+    }
+
     pub fn load_save_state(&mut self, save: SaveFile) {
         self.save = save;
     }

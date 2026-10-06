@@ -7,6 +7,10 @@ use godot::prelude::*;
 use crate::common::*;
 
 pub struct Battlefield {
+    // TODO: just access team normally via savefile, not through battlefield
+    // but maybe add methods to battlefield to make it easier to do
+    //
+    // pub team: Vec<Rc<RefCell<CharData>>>,
     /// The enemies that are currently in battle with you
     pub enemies: Vec<EnemyData>,
 }
@@ -14,11 +18,15 @@ pub struct Battlefield {
 impl Battlefield {
     /// Constructor to make an empty battlefield
     fn _empty() -> Self {
-        Self { enemies: vec![] }
+        Self {
+            // team: vec![],
+            enemies: vec![],
+        }
     }
 
     fn from_enemies(enemies: &[EnemyData]) -> Self {
         Self {
+            // team: vec![],
             enemies: enemies.to_vec(),
         }
     }

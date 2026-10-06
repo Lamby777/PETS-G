@@ -11,18 +11,16 @@ pub fn leader() -> String {
 }
 
 pub fn fmt_possibly_custom_name(pchar: impl Into<StringName>) -> String {
-    let si = si();
     let pchar = pchar.into();
 
+    // what the fuck is this slop (compiler errors if i try to combine em)
+    let si = si();
+    let si = si.bind();
+    let chardata = si.get_chardata(&pchar);
+
     // if pchar was given a custom name by the player, use it
-    {
-        let si = si.bind();
-        let entry = si.save.chars.get(&pchar);
-        if let Some(chardata) = entry {
-            if let Some(custom_name) = &chardata.custom_name {
-                return custom_name.clone();
-            }
-        }
+    if let Some(custom_name) = &chardata.custom_name {
+        return custom_name.clone();
     }
 
     // else default to localized name
