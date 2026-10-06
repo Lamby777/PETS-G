@@ -113,18 +113,14 @@ pub struct BattleEngine {
 #[godot_api]
 impl BattleEngine {
     pub fn take_damage(&mut self, damage: i32) {
-        {
-            let battler = self.current_battler();
-            let mut battler = battler.borrow_mut();
-            battler.take_damage(damage.try_into().unwrap());
-        }
+        self.current_battler_mut()
+            .take_damage(damage.try_into().unwrap());
 
         self.update_mana_bar();
     }
 
     fn update_mana_bar(&mut self) {
         let battler = self.current_battler();
-        let battler = battler.borrow();
 
         let mana = battler.battle_stats.mana;
 
@@ -141,7 +137,6 @@ impl BattleEngine {
     #[func]
     fn on_karma(&mut self) {
         let battler = self.current_battler();
-        let battler = battler.borrow();
 
         let hp = battler.battle_stats.hp as f64;
         let mut hp_bar =
@@ -178,7 +173,11 @@ impl BattleEngine {
         godot_print!("You died!");
     }
 
-    fn current_battler(&self) -> Rc<RefCell<Battler>> {
+    fn current_battler_mut(&self) -> &mut Battler {
+        todo!()
+    }
+
+    fn current_battler(&self) -> &Battler {
         todo!()
     }
 
