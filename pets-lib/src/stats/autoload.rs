@@ -23,6 +23,19 @@ impl StatsInterface {
         self.save.chars.get(pchar).unwrap()
     }
 
+    pub fn get_chardata_mut(&mut self, pchar: &StringName) -> &mut CharData {
+        self.save.chars.get_mut(pchar).unwrap()
+    }
+
+    pub fn with_battler_mut<R>(
+        &mut self,
+        pchar: &StringName,
+        func: impl FnOnce(&mut Battler) -> R,
+    ) -> R {
+        let battler = &mut self.get_chardata_mut(pchar).battler;
+        func(battler)
+    }
+
     pub fn load_save_state(&mut self, save: SaveFile) {
         self.save = save;
     }

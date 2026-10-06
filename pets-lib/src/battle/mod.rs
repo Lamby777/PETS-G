@@ -113,14 +113,15 @@ pub struct BattleEngine {
 #[godot_api]
 impl BattleEngine {
     pub fn take_damage(&mut self, damage: i32) {
-        self.current_battler_mut()
-            .take_damage(damage.try_into().unwrap());
+        self.with_current_battler_mut(|b| {
+            b.take_damage(damage.try_into().unwrap());
+        });
 
         self.update_mana_bar();
     }
 
     fn update_mana_bar(&mut self) {
-        let battler = self.current_battler();
+        let battler = self.clone_current_battler();
 
         let mana = battler.battle_stats.mana;
 
@@ -136,7 +137,7 @@ impl BattleEngine {
 
     #[func]
     fn on_karma(&mut self) {
-        let battler = self.current_battler();
+        let battler = self.clone_current_battler();
 
         let hp = battler.battle_stats.hp as f64;
         let mut hp_bar =
@@ -173,12 +174,25 @@ impl BattleEngine {
         godot_print!("You died!");
     }
 
-    fn current_battler_mut(&self) -> &mut Battler {
-        todo!()
+    // fn with_current_battler_mut
+
+    fn clone_current_battler(&self) -> Battler {
+        let si = si();
+        let si = si.bind();
+
+        let pchar = si.save.party[self.current_party_member].clone();
+        si.get_chardata(&pchar).battler.clone()
     }
 
-    fn current_battler(&self) -> &Battler {
-        todo!()
+    fn with_current_battler_mut<R>(
+        &self,
+        func: impl FnOnce(&mut Battler) -> R,
+    ) -> R {
+        let mut si = si();
+        let mut si = si.bind_mut();
+
+        let pchar = si.save.party[self.current_party_member].clone();
+        si.with_battler_mut(&pchar, func)
     }
 
     /// slowly fade out the black rectangle over the battle scene

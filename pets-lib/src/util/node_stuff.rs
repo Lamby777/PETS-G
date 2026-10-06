@@ -120,7 +120,7 @@ pub fn pcb() -> Gd<PartyCB> {
     PartyCB::singleton()
 }
 
-/// Returns the singleton instance [StatsInterface].
+/// Returns the singleton instance [BattleInterface].
 /// So common that I might as well abbreviate it. :P
 pub fn bi() -> Gd<BattleInterface> {
     BattleInterface::singleton()
