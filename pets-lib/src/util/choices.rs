@@ -30,7 +30,7 @@ pub struct ChoiceAgent {
     tween_normal_value: real,
 
     #[export]
-    #[init(val = 64.0)]
+    #[init(val = 16.0)]
     tween_focused_value: real,
 
     #[export]

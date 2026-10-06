@@ -92,7 +92,7 @@ theme_override_constants/separation = 15
 
 [node name="ChoiceAgent" type="ChoiceAgent" parent="VBox/ScrollContainer/Choices" unique_id=1168897692]
 tween_property = "position:y"
-tween_focused_value = -16.0
+tween_focused_value = -4.0
 unique_name_in_owner = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=411585724]

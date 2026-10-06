@@ -54,9 +54,9 @@ libraries/ = SubResource("AnimationLibrary_ujmhv")
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 400)
 anchors_preset = 0
-offset_left = 32.0
+offset_left = 12.0
 offset_top = 64.0
-offset_right = 32.0
+offset_right = 12.0
 offset_bottom = 464.0
 
 [node name="ChoiceAgent" type="ChoiceAgent" parent="Choices" unique_id=1964408428]
@@ -64,9 +64,8 @@ offset_bottom = 464.0
 [node name="Inventory" type="RichTextLabel" parent="Choices" unique_id=235188402]
 clip_contents = false
 layout_mode = 0
-offset_left = -20.0
 offset_top = -16.0
-offset_right = 52.0
+offset_right = 72.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 13
 bbcode_enabled = true
@@ -75,8 +74,7 @@ text = "Inventory"
 [node name="DebugMenu" type="RichTextLabel" parent="Choices" unique_id=455182993]
 clip_contents = false
 layout_mode = 0
-offset_left = -20.0
-offset_right = 52.0
+offset_right = 72.0
 offset_bottom = 16.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 13
@@ -86,9 +84,8 @@ text = "Debug"
 [node name="Scrapbook" type="RichTextLabel" parent="Choices" unique_id=520973721]
 clip_contents = false
 layout_mode = 0
-offset_left = -20.0
 offset_top = 16.0
-offset_right = 52.0
+offset_right = 72.0
 offset_bottom = 32.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 13
@@ -98,9 +95,8 @@ text = "Scrapbook"
 [node name="DebugQuit" type="RichTextLabel" parent="Choices" unique_id=1220360374]
 clip_contents = false
 layout_mode = 0
-offset_left = -20.0
 offset_top = 32.0
-offset_right = 52.0
+offset_right = 72.0
 offset_bottom = 48.0
 theme_override_colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_font_sizes/normal_font_size = 13
