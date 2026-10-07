@@ -16,5 +16,5 @@ func _attack():
         bullet.icon = %BattleIcon
         bullet.position.x = n * viewport_size.x
         bullet.position.y = randi() % int(viewport_size.y)
-        bullet.speed = 300 + (randi() % 200)
+        bullet.speed = 75 + (randi() % 50)
         %Board.add_child(bullet)

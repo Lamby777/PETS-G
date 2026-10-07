@@ -1,7 +1,7 @@
 class_name ForwardBullet
 extends Bullet
 
-@export var speed = 400.0
+@export var speed = 100.0
 
 func _ready():
     super()
