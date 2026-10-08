@@ -25,24 +25,27 @@ static BATTLE_DIRECTIONS: LazyLock<[(StringName, Vector2); 4]> =
 pub struct BattleIcon {
     base: Base<CharacterBody2D>,
 
+    #[export]
+    engine: Option<Gd<BattleEngine>>,
+
     /// Maximum speed of player icon
-    #[init(val = 400.0)]
+    #[export]
+    #[init(val = 50.0)]
     speed: FloatStat,
 
     /// Acceleration amount per tick held
-    #[init(val = 80.0)]
+    #[export]
+    #[init(val = 60.0)]
     acceleration: FloatStat,
 
     /// Coefficient of deceleration
-    #[init(val = 0.96)]
+    #[export]
+    #[init(val = 0.84)]
     friction: FloatStat,
 
     /// Current velocity of player icon. Limited by speed.
     #[init(val = Vector2::ZERO)]
     velocity: Vector2,
-
-    #[export]
-    engine: Option<Gd<BattleEngine>>,
 }
 
 #[godot_api]
@@ -61,7 +64,10 @@ impl BattleIcon {
             "Fuzzy" => 8,
 
             _ => {
-                godot_warn!("PChar {} doesn't have a battle icon (yet). Defaulting to Ethan's icon.", pchar);
+                godot_warn!(
+                    "PChar {} doesn't have a battle icon (yet). Defaulting to Ethan's icon.",
+                    pchar
+                );
                 0
             }
         }

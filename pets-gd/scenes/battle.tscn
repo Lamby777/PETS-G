@@ -29,18 +29,6 @@ shader_parameter/angle = 47.788
 [sub_resource type="CircleShape2D" id="CircleShape2D_22uqi"]
 radius = 5.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22uqi"]
-bg_color = Color(0.5254902, 0.7764706, 0.9607843, 1)
-skew = Vector2(0.5, 0)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-expand_margin_left = 1.0
-expand_margin_top = 1.0
-expand_margin_right = 1.0
-expand_margin_bottom = 1.0
-
 [sub_resource type="Animation" id="Animation_fe50h"]
 length = 0.001
 tracks/0/type = "value"
@@ -107,7 +95,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Menu/DualMenu/LeftPanel:position")
+tracks/0/path = NodePath("BattleContentsLayer/Menu/DualMenu/LeftPanel:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -119,7 +107,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Menu/DualMenu/RightPanel:position")
+tracks/1/path = NodePath("BattleContentsLayer/Menu/DualMenu/RightPanel:position")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -131,7 +119,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Menu/DualMenu/RightPanel/Margins:theme_override_constants/margin_left")
+tracks/2/path = NodePath("BattleContentsLayer/Menu/DualMenu/RightPanel/Margins:theme_override_constants/margin_left")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -147,7 +135,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Menu/DualMenu/LeftPanel:position")
+tracks/0/path = NodePath("BattleContentsLayer/Menu/DualMenu/LeftPanel:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -159,7 +147,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Menu/DualMenu/RightPanel:position")
+tracks/1/path = NodePath("BattleContentsLayer/Menu/DualMenu/RightPanel:position")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -171,7 +159,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Menu/DualMenu/RightPanel/Margins:theme_override_constants/margin_left")
+tracks/2/path = NodePath("BattleContentsLayer/Menu/DualMenu/RightPanel/Margins:theme_override_constants/margin_left")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -187,12 +175,24 @@ _data = {
 &"dualmenu_open": SubResource("Animation_0hj2l")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22uqi"]
+bg_color = Color(0.5254902, 0.7764706, 0.9607843, 1)
+skew = Vector2(0.5, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
 [sub_resource type="Animation" id="Animation_fgiup"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("IntroBlack:material:shader_parameter/opacity")
+tracks/0/path = NodePath("BattleContentsLayer/IntroBlack:material:shader_parameter/opacity")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -208,7 +208,7 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("IntroBlack:material:shader_parameter/opacity")
+tracks/0/path = NodePath("BattleContentsLayer/IntroBlack:material:shader_parameter/opacity")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -230,7 +230,7 @@ shader_parameter/opacity = 0.0
 
 [node name="BattleEngine" type="BattleEngine" unique_id=1145522037 node_paths=PackedStringArray("right_panel_destination")]
 skills_menu_scene = ExtResource("12_546eg")
-right_panel_destination = NodePath("Menu/DualMenu/RightPanel/Margins")
+right_panel_destination = NodePath("BattleContentsLayer/Menu/DualMenu/RightPanel/Margins")
 
 [node name="Tactics" type="Node" parent="." unique_id=1769518316]
 process_mode = 4
@@ -249,7 +249,6 @@ stream = ExtResource("4_l6m5j")
 one_shot = true
 
 [node name="VideoDrugsLayer" type="CanvasLayer" parent="." unique_id=2144244349]
-layer = -1
 
 [node name="Solid" type="ColorRect" parent="VideoDrugsLayer" unique_id=994767590]
 material = SubResource("ShaderMaterial_88ovb")
@@ -271,34 +270,36 @@ texture = ExtResource("7_22uqi")
 stretch_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="Board" type="Node2D" parent="." unique_id=1693966926]
+[node name="BattleContentsLayer" type="CanvasLayer" parent="." unique_id=96716116]
+
+[node name="Board" type="Node2D" parent="BattleContentsLayer" unique_id=1693966926]
 unique_name_in_owner = true
 
-[node name="EnemySprite" parent="Board" unique_id=1277612852 instance=ExtResource("6_dgpl5")]
+[node name="EnemySprite" parent="BattleContentsLayer/Board" unique_id=1277612852 instance=ExtResource("6_dgpl5")]
 unique_name_in_owner = true
-position = Vector2(180, 101)
+position = Vector2(240, 64)
 scale = Vector2(2, 2)
 
-[node name="BattleIcon" type="BattleIcon" parent="Board" unique_id=1205183124 node_paths=PackedStringArray("engine")]
-engine = NodePath("../..")
+[node name="BattleIcon" type="BattleIcon" parent="BattleContentsLayer/Board" unique_id=1205183124 node_paths=PackedStringArray("engine")]
+engine = NodePath("../../..")
 unique_name_in_owner = true
 collision_layer = 256
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Board/BattleIcon" unique_id=515894188]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleContentsLayer/Board/BattleIcon" unique_id=515894188]
 shape = SubResource("CircleShape2D_22uqi")
 
-[node name="Sprite2D" type="Sprite2D" parent="Board/BattleIcon" unique_id=416158234]
+[node name="Sprite2D" type="Sprite2D" parent="BattleContentsLayer/Board/BattleIcon" unique_id=416158234]
 texture = ExtResource("3_k3xai")
 hframes = 5
 vframes = 2
 
-[node name="Menu" type="Control" parent="." unique_id=2140168308]
+[node name="Menu" type="Control" parent="BattleContentsLayer" unique_id=2140168308]
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("5_hcsfj")
 
-[node name="ClickStatus" type="RichTextLabel" parent="Menu" unique_id=1107140177]
+[node name="ClickStatus" type="RichTextLabel" parent="BattleContentsLayer/Menu" unique_id=1107140177]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 8.0
@@ -310,94 +311,7 @@ theme_override_constants/outline_size = 6
 theme_override_font_sizes/normal_font_size = 26
 text = "Ready?"
 
-[node name="InfoBars" type="VBoxContainer" parent="Menu" unique_id=108186667]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 30.0
-offset_top = 166.0
-offset_right = 330.0
-offset_bottom = 190.0
-theme_override_constants/separation = 8
-
-[node name="HPBar" type="ProgressBar" parent="Menu/InfoBars" unique_id=231970664]
-custom_minimum_size = Vector2(300, 8)
-layout_mode = 2
-max_value = 200.0
-value = 192.0
-show_percentage = false
-script = ExtResource("9_r25ik")
-bar_label_text = "HP"
-bar_value = 192.0
-
-[node name="Label" type="RichTextLabel" parent="Menu/InfoBars/HPBar" unique_id=2101309526]
-layout_mode = 0
-offset_left = 8.0
-offset_top = -2.0
-offset_right = 103.0
-offset_bottom = 10.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/normal_font_size = 7
-text = "HP"
-autowrap_mode = 0
-vertical_alignment = 1
-
-[node name="Value" type="RichTextLabel" parent="Menu/InfoBars/HPBar" unique_id=1064166880]
-layout_mode = 0
-offset_left = 197.0
-offset_top = -2.0
-offset_right = 292.0
-offset_bottom = 10.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/normal_font_size = 7
-bbcode_enabled = true
-text = "168"
-autowrap_mode = 0
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="ManaBar" type="ProgressBar" parent="Menu/InfoBars" unique_id=415939555]
-custom_minimum_size = Vector2(300, 8)
-layout_mode = 2
-theme_type_variation = &"TealBar"
-theme_override_styles/fill = SubResource("StyleBoxFlat_22uqi")
-max_value = 200.0
-value = 168.0
-show_percentage = false
-script = ExtResource("9_r25ik")
-bar_label_text = "Mana"
-bar_value = 168.0
-
-[node name="Label" type="RichTextLabel" parent="Menu/InfoBars/ManaBar" unique_id=1459740734]
-layout_mode = 0
-offset_left = 8.0
-offset_top = -2.0
-offset_right = 103.0
-offset_bottom = 10.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/normal_font_size = 7
-text = "Mana"
-autowrap_mode = 0
-vertical_alignment = 1
-
-[node name="Value" type="RichTextLabel" parent="Menu/InfoBars/ManaBar" unique_id=2094473062]
-layout_mode = 0
-offset_left = 197.0
-offset_top = -2.0
-offset_right = 292.0
-offset_bottom = 10.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/normal_font_size = 7
-bbcode_enabled = true
-text = "168"
-autowrap_mode = 0
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="DualMenu" type="Control" parent="Menu" unique_id=226739823]
+[node name="DualMenu" type="Control" parent="BattleContentsLayer/Menu" unique_id=226739823]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -409,7 +323,7 @@ offset_bottom = 500.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LeftPanel" type="PanelContainer" parent="Menu/DualMenu" unique_id=357365003]
+[node name="LeftPanel" type="PanelContainer" parent="BattleContentsLayer/Menu/DualMenu" unique_id=357365003]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -423,28 +337,28 @@ offset_bottom = 92.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Margins" type="MarginContainer" parent="Menu/DualMenu/LeftPanel" unique_id=689174141]
+[node name="Margins" type="MarginContainer" parent="BattleContentsLayer/Menu/DualMenu/LeftPanel" unique_id=689174141]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 80
 
-[node name="VBox" type="VBoxContainer" parent="Menu/DualMenu/LeftPanel/Margins" unique_id=47933406]
+[node name="VBox" type="VBoxContainer" parent="BattleContentsLayer/Menu/DualMenu/LeftPanel/Margins" unique_id=47933406]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="Portrait" type="PanelContainer" parent="Menu/DualMenu/LeftPanel/Margins/VBox" unique_id=41738513]
+[node name="Portrait" type="PanelContainer" parent="BattleContentsLayer/Menu/DualMenu/LeftPanel/Margins/VBox" unique_id=41738513]
 z_index = 1
 custom_minimum_size = Vector2(0, 192)
 layout_mode = 2
 theme_type_variation = &"FramePanelContainer"
 
-[node name="Clipper" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Portrait" unique_id=1174443437]
+[node name="Clipper" type="Control" parent="BattleContentsLayer/Menu/DualMenu/LeftPanel/Margins/VBox/Portrait" unique_id=1174443437]
 clip_contents = true
 layout_mode = 2
 
-[node name="PortraitTexture" type="TextureRect" parent="Menu/DualMenu/LeftPanel/Margins/VBox/Portrait/Clipper" unique_id=1188106071]
+[node name="PortraitTexture" type="TextureRect" parent="BattleContentsLayer/Menu/DualMenu/LeftPanel/Margins/VBox/Portrait/Clipper" unique_id=1188106071]
 unique_name_in_owner = true
 z_index = -1
 layout_mode = 0
@@ -453,14 +367,14 @@ offset_bottom = 177.0
 texture = ExtResource("6_abown")
 expand_mode = 2
 
-[node name="BattleChoices" type="Control" parent="Menu/DualMenu/LeftPanel/Margins/VBox" unique_id=1710942451]
+[node name="BattleChoices" type="Control" parent="BattleContentsLayer/Menu/DualMenu/LeftPanel/Margins/VBox" unique_id=1710942451]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 256)
 layout_mode = 2
 
-[node name="ChoiceAgent" type="ChoiceAgent" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices" unique_id=1735755965]
+[node name="ChoiceAgent" type="ChoiceAgent" parent="BattleContentsLayer/Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices" unique_id=1735755965]
 
-[node name="Skills" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices" unique_id=612079726]
+[node name="Skills" type="RichTextLabel" parent="BattleContentsLayer/Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices" unique_id=612079726]
 clip_contents = false
 layout_mode = 0
 offset_right = 400.0
@@ -470,7 +384,7 @@ bbcode_enabled = true
 text = "Skills"
 fit_content = true
 
-[node name="Items" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices" unique_id=88762964]
+[node name="Items" type="RichTextLabel" parent="BattleContentsLayer/Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices" unique_id=88762964]
 clip_contents = false
 layout_mode = 0
 offset_top = 64.0
@@ -481,7 +395,7 @@ bbcode_enabled = true
 text = "Items"
 fit_content = true
 
-[node name="Swap" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices" unique_id=596701945]
+[node name="Swap" type="RichTextLabel" parent="BattleContentsLayer/Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices" unique_id=596701945]
 clip_contents = false
 layout_mode = 0
 offset_top = 128.0
@@ -492,7 +406,7 @@ bbcode_enabled = true
 text = "Swap"
 fit_content = true
 
-[node name="Run" type="RichTextLabel" parent="Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices" unique_id=1562156203]
+[node name="Run" type="RichTextLabel" parent="BattleContentsLayer/Menu/DualMenu/LeftPanel/Margins/VBox/BattleChoices" unique_id=1562156203]
 clip_contents = false
 layout_mode = 0
 offset_top = 192.0
@@ -503,7 +417,7 @@ bbcode_enabled = true
 text = "Run"
 fit_content = true
 
-[node name="RightPanel" type="PanelContainer" parent="Menu/DualMenu" unique_id=1431526270]
+[node name="RightPanel" type="PanelContainer" parent="BattleContentsLayer/Menu/DualMenu" unique_id=1431526270]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -517,30 +431,122 @@ offset_bottom = 612.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Margins" type="MarginContainer" parent="Menu/DualMenu/RightPanel" unique_id=583595351]
+[node name="Margins" type="MarginContainer" parent="BattleContentsLayer/Menu/DualMenu/RightPanel" unique_id=583595351]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 80
 
-[node name="SkillsMenu" parent="Menu/DualMenu/RightPanel/Margins" unique_id=812865551 instance=ExtResource("12_546eg")]
+[node name="SkillsMenu" parent="BattleContentsLayer/Menu/DualMenu/RightPanel/Margins" unique_id=812865551 instance=ExtResource("12_546eg")]
 layout_mode = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/DualMenu/RightPanel" unique_id=1626585516]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BattleContentsLayer/Menu/DualMenu/RightPanel" unique_id=1626585516]
 libraries/ = SubResource("AnimationLibrary_khfqk")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/DualMenu" unique_id=2018812875]
-root_node = NodePath("../../..")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BattleContentsLayer/Menu/DualMenu" unique_id=2018812875]
+root_node = NodePath("../../../..")
 libraries/ = SubResource("AnimationLibrary_730bq")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=804842659]
+[node name="InfoBars" type="VBoxContainer" parent="BattleContentsLayer/Menu" unique_id=108186667]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 90.0
+offset_top = 234.0
+offset_right = 390.0
+offset_bottom = 258.0
+theme_override_constants/separation = 8
+
+[node name="HPBar" type="ProgressBar" parent="BattleContentsLayer/Menu/InfoBars" unique_id=231970664]
+custom_minimum_size = Vector2(300, 8)
+layout_mode = 2
+max_value = 200.0
+value = 192.0
+show_percentage = false
+script = ExtResource("9_r25ik")
+bar_label_text = "HP"
+bar_value = 192.0
+
+[node name="Label" type="RichTextLabel" parent="BattleContentsLayer/Menu/InfoBars/HPBar" unique_id=2101309526]
+clip_contents = false
+layout_mode = 0
+offset_left = 8.0
+offset_top = -5.0
+offset_right = 103.0
+offset_bottom = 7.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "HP"
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="Value" type="RichTextLabel" parent="BattleContentsLayer/Menu/InfoBars/HPBar" unique_id=1064166880]
+clip_contents = false
+layout_mode = 0
+offset_left = 197.0
+offset_top = -5.0
+offset_right = 292.0
+offset_bottom = 7.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+bbcode_enabled = true
+text = "168"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ManaBar" type="ProgressBar" parent="BattleContentsLayer/Menu/InfoBars" unique_id=415939555]
+custom_minimum_size = Vector2(300, 8)
+layout_mode = 2
+theme_type_variation = &"TealBar"
+theme_override_styles/fill = SubResource("StyleBoxFlat_22uqi")
+max_value = 200.0
+value = 168.0
+show_percentage = false
+script = ExtResource("9_r25ik")
+bar_label_text = "Mana"
+bar_value = 168.0
+
+[node name="Label" type="RichTextLabel" parent="BattleContentsLayer/Menu/InfoBars/ManaBar" unique_id=1459740734]
+clip_contents = false
+layout_mode = 0
+offset_left = 8.0
+offset_top = -5.0
+offset_right = 103.0
+offset_bottom = 7.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Mana"
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="Value" type="RichTextLabel" parent="BattleContentsLayer/Menu/InfoBars/ManaBar" unique_id=2094473062]
+clip_contents = false
+layout_mode = 0
+offset_left = 197.0
+offset_top = -5.0
+offset_right = 292.0
+offset_bottom = 7.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+bbcode_enabled = true
+text = "168"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BattleContentsLayer" unique_id=804842659]
+root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_cwld1")
 
-[node name="IntroBlack" type="ColorRect" parent="." unique_id=1945233525]
+[node name="IntroBlack" type="ColorRect" parent="BattleContentsLayer" unique_id=1945233525]
 top_level = true
 material = SubResource("ShaderMaterial_lgbmi")
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_right = 480.0
+offset_bottom = 270.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
