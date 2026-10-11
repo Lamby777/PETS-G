@@ -14,6 +14,43 @@
 [ext_resource type="Script" uid="uid://dygfeopjs60l3" path="res://classes/hpbar.gd" id="9_r25ik"]
 [ext_resource type="PackedScene" uid="uid://b2m4ghg2jf166" path="res://scenes/skills-menu.tscn" id="12_546eg"]
 
+[sub_resource type="Animation" id="Animation_fgiup"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BattleContentsLayer/IntroBlack:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_16138"]
+resource_name = "fade_in"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BattleContentsLayer/IntroBlack:material:shader_parameter/opacity")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cwld1"]
+_data = {
+&"RESET": SubResource("Animation_fgiup"),
+&"fade_in": SubResource("Animation_16138")
+}
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88ovb"]
 shader = ExtResource("2_0m4jp")
 shader_parameter/strength = 0.716
@@ -187,43 +224,6 @@ expand_margin_top = 1.0
 expand_margin_right = 1.0
 expand_margin_bottom = 1.0
 
-[sub_resource type="Animation" id="Animation_fgiup"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BattleContentsLayer/IntroBlack:material:shader_parameter/opacity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_16138"]
-resource_name = "fade_in"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BattleContentsLayer/IntroBlack:material:shader_parameter/opacity")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(1, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 0.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_cwld1"]
-_data = {
-&"RESET": SubResource("Animation_fgiup"),
-&"fade_in": SubResource("Animation_16138")
-}
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lgbmi"]
 shader = ExtResource("1_3pmac")
 shader_parameter/opacity = 0.0
@@ -231,6 +231,9 @@ shader_parameter/opacity = 0.0
 [node name="BattleEngine" type="BattleEngine" unique_id=1145522037 node_paths=PackedStringArray("right_panel_destination")]
 skills_menu_scene = ExtResource("12_546eg")
 right_panel_destination = NodePath("BattleContentsLayer/Menu/DualMenu/RightPanel/Margins")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=804842659]
+libraries/ = SubResource("AnimationLibrary_cwld1")
 
 [node name="Tactics" type="Node" parent="." unique_id=1769518316]
 process_mode = 4
@@ -312,6 +315,7 @@ theme_override_font_sizes/normal_font_size = 26
 text = "Ready?"
 
 [node name="DualMenu" type="Control" parent="BattleContentsLayer/Menu" unique_id=226739823]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -538,10 +542,6 @@ scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 2
 vertical_alignment = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BattleContentsLayer" unique_id=804842659]
-root_node = NodePath("../..")
-libraries/ = SubResource("AnimationLibrary_cwld1")
 
 [node name="IntroBlack" type="ColorRect" parent="BattleContentsLayer" unique_id=1945233525]
 top_level = true

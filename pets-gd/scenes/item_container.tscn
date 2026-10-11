@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://btmwdhpxxjkn"]
+[gd_scene format=3 uid="uid://btmwdhpxxjkn"]
 
 [ext_resource type="Texture2D" uid="uid://crxp0fa3kco2o" path="res://assets/textures/items/terra_precision_shotgun.png" id="1_r6rt7"]
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="2_7r2nb"]
@@ -31,37 +31,38 @@ func _process(_delta):
     global_rotation = 0
 "
 
-[node name="ItemContainer" type="MarginContainer"]
+[node name="ItemContainer" type="MarginContainer" unique_id=1887086937]
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 script = SubResource("GDScript_c1aim")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1979123834]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Node2D" type="Node2D" parent="PanelContainer"]
+[node name="Node2D" type="Node2D" parent="PanelContainer" unique_id=707061617]
 script = SubResource("GDScript_yffjx")
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/Node2D"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/Node2D" unique_id=170494042]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(160, 160)
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 152.0
-offset_bottom = 152.0
+custom_minimum_size = Vector2(40, 40)
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 38.0
+offset_bottom = 38.0
 texture = ExtResource("1_r6rt7")
 stretch_mode = 5
 
-[node name="ItemCountLabel" type="RichTextLabel" parent="PanelContainer/Node2D"]
+[node name="ItemCountLabel" type="RichTextLabel" parent="PanelContainer/Node2D" unique_id=595446378]
 unique_name_in_owner = true
-offset_left = 88.0
-offset_top = 88.0
-offset_right = 200.0
-offset_bottom = 160.0
+offset_left = 3.0
+offset_top = 18.0
+offset_right = 31.0
+offset_bottom = 36.0
 theme = ExtResource("2_7r2nb")
-theme_override_constants/outline_size = 12
+theme_override_constants/outline_size = 3
 text = "1"
+horizontal_alignment = 2

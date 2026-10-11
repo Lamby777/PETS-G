@@ -20,7 +20,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2072, 200)]
+"values": [Vector2(518, 50)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -44,7 +44,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2400, 0)]
+"values": [Vector2(600, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -56,7 +56,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(928, -160)]
+"values": [Vector2(232, -40)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -68,7 +68,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -224)]
+"values": [Vector2(0, -56)]
 }
 
 [sub_resource type="Animation" id="Animation_bvf1n"]
@@ -84,7 +84,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(2072, 200), Vector2(-16, 200)]
+"values": [Vector2(518, 50), Vector2(-4, 50)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -108,7 +108,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0.4, 1.1),
 "transitions": PackedFloat32Array(0.392292, 1),
 "update": 0,
-"values": [Vector2(2400, 0), Vector2(0, 0)]
+"values": [Vector2(600, 0), Vector2(0, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -120,7 +120,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0.9, 1.2),
 "transitions": PackedFloat32Array(0.517632, 1),
 "update": 0,
-"values": [Vector2(928, -160), Vector2(928, -24)]
+"values": [Vector2(232, -40), Vector2(232, -6)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -132,7 +132,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0.9, 1.2),
 "transitions": PackedFloat32Array(0.420448, 1),
 "update": 0,
-"values": [Vector2(0, -224), Vector2(0, 0)]
+"values": [Vector2(0, -56), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_52u0v"]
@@ -149,7 +149,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.075, 0.0833333),
 "transitions": PackedFloat32Array(0.554786, 55.7152, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(176, 0), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(44, 0), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_qnask"]
@@ -166,7 +166,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.075, 0.0833333),
 "transitions": PackedFloat32Array(0.554786, 55.7152, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(-176, 0), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(-44, 0), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_28ffd"]
@@ -178,23 +178,28 @@ _data = {
 }
 
 [node name="InventoryNode" type="InventoryNode" unique_id=699750349]
-offset_right = 360.0
-offset_bottom = 203.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_yb1iv")
 
 [node name="BGDarken" type="ColorRect" parent="." unique_id=2025047578]
 material = SubResource("ShaderMaterial_j36xs")
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 1)
-metadata/_edit_lock_ = true
 
 [node name="InventoryTextPanel" type="PanelContainer" parent="." unique_id=467307691]
 layout_mode = 0
-offset_top = -224.0
-offset_right = 1920.0
-offset_bottom = -24.0
+offset_top = -56.0
+offset_right = 480.0
+offset_bottom = -6.0
 
 [node name="InventoryTextContainer" type="BoxContainer" parent="InventoryTextPanel" unique_id=602405121]
 unique_name_in_owner = true
@@ -208,7 +213,7 @@ size_flags_horizontal = 3
 
 [node name="RichTextLabel" type="RichTextLabel" parent="InventoryTextPanel/InventoryTextContainer/ItemName" unique_id=1280420671]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 78
+theme_override_font_sizes/normal_font_size = 19
 bbcode_enabled = true
 text = "Item Name"
 horizontal_alignment = 1
@@ -220,7 +225,7 @@ size_flags_horizontal = 3
 
 [node name="RichTextLabel" type="RichTextLabel" parent="InventoryTextPanel/InventoryTextContainer/ItemDesc" unique_id=1558246376]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 39
+theme_override_font_sizes/normal_font_size = 9
 bbcode_enabled = true
 text = "Item Description Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words"
 horizontal_alignment = 1
@@ -228,32 +233,32 @@ vertical_alignment = 1
 
 [node name="Ticker" type="Panel" parent="." unique_id=1764272134]
 layout_mode = 0
-offset_left = 928.0
-offset_top = -160.0
-offset_right = 992.0
-offset_bottom = -16.0
+offset_left = 232.0
+offset_top = -40.0
+offset_right = 248.0
+offset_bottom = -4.0
 
 [node name="Line" type="Panel" parent="." unique_id=1716164917]
 layout_mode = 1
-offset_left = 2072.0
-offset_top = 200.0
-offset_right = 4024.0
-offset_bottom = 256.0
+offset_left = 518.0
+offset_top = 50.0
+offset_right = 1005.9999
+offset_bottom = 64.0
 
 [node name="SlideControl" type="Control" parent="Line" unique_id=330723011]
 anchors_preset = 0
-offset_left = 2400.0
-offset_right = 2440.0
+offset_left = 600.0
+offset_right = 640.0
 offset_bottom = 40.0
 
 [node name="ItemsRow" type="HBoxContainer" parent="Line/SlideControl" unique_id=1921336219]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(2272, 160)
+custom_minimum_size = Vector2(568, 40)
 layout_mode = 0
-offset_left = -160.0
-offset_top = -40.0
-offset_right = 2112.0
-offset_bottom = 120.0
+offset_left = -40.0
+offset_top = -10.0
+offset_right = 580.0
+offset_bottom = 34.0
 metadata/_edit_lock_ = true
 
 [node name="ItemContainer1" parent="Line/SlideControl/ItemsRow" unique_id=1550541023 instance=ExtResource("3_8obkk")]

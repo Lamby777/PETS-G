@@ -103,10 +103,10 @@ pub struct BattleEngine {
     #[init(val = OnReady::manual())]
     karma_timer: OnReady<Gd<Timer>>,
 
-    #[init(node = "Menu/DualMenu")]
+    #[init(node = "%DualMenu")]
     dualmenu: OnReady<Gd<Control>>,
 
-    #[init(node = "Menu/DualMenu/AnimationPlayer")]
+    #[init(node = "%DualMenu/AnimationPlayer")]
     dualmenu_animator: OnReady<Gd<AnimationPlayer>>,
 }
 

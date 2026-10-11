@@ -30,17 +30,17 @@ pub struct BattleIcon {
 
     /// Maximum speed of player icon
     #[export]
-    #[init(val = 50.0)]
+    #[init(val = 15.0)]
     speed: FloatStat,
 
     /// Acceleration amount per tick held
     #[export]
-    #[init(val = 60.0)]
+    #[init(val = 50.0)]
     acceleration: FloatStat,
 
     /// Coefficient of deceleration
     #[export]
-    #[init(val = 0.84)]
+    #[init(val = 0.88)]
     friction: FloatStat,
 
     /// Current velocity of player icon. Limited by speed.

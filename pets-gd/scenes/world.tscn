@@ -129,8 +129,6 @@ unique_name_in_owner = true
 
 [node name="Inventory" parent="UILayer" unique_id=1827652567 instance=ExtResource("3_jwkdy")]
 unique_name_in_owner = true
-offset_right = 0.0
-offset_bottom = 0.0
 
 [node name="DialogBox" parent="UILayer" unique_id=1625056643 instance=ExtResource("2_lgtmm")]
 
