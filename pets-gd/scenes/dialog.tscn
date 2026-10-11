@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://b4to5dpqntd2r" path="res://themes/theme_deft.tres" id="1_jbfs2"]
 [ext_resource type="Script" uid="uid://bm3e2r0bgc7u2" path="res://classes/dbox.gd" id="2_jmx8e"]
+[ext_resource type="PackedScene" uid="uid://ckyanktf41aox" path="res://scenes/dialogchoice.tscn" id="3_tmfn4"]
 
 [sub_resource type="Animation" id="Animation_3wgbn"]
 length = 0.001
@@ -94,6 +95,9 @@ theme_override_constants/separation = 15
 tween_property = "position:y"
 tween_focused_value = -4.0
 unique_name_in_owner = true
+
+[node name="DChoice" parent="VBox/ScrollContainer/Choices" unique_id=2091250791 instance=ExtResource("3_tmfn4")]
+layout_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=411585724]
 libraries/ = SubResource("AnimationLibrary_ujmhv")
